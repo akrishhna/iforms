@@ -1,0 +1,14 @@
+<h3>Doctors Appointments</h3>
+<table>
+	<tr>
+		<th> Patient Name </th>
+		</tr>
+<% @iforms.each do |i|%>
+<tr>
+<td>	<%= link_to i.lastname %></td>
+
+
+	<td><%= link_to 'show',i %></td>
+	</tr>
+<%end%>
+</table>

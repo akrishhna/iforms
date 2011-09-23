@@ -1,0 +1,11 @@
+<%= form_for @patient do |f| %>
+	
+	<% @doctors = Doctor.all %>
+	<select id = "doctor" name= "doctor">
+		<option value= " " selected="selected">Please select a Doctor</option>
+	<% @doctors.each do |i| %>
+	<option value = "<%= i.id %>" ><%= i.doctorname %></option>
+	<%end%>
+	</select>
+	<%= f.submit 'submit'%>
+<%end%>	  

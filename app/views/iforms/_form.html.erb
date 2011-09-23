@@ -1,0 +1,150 @@
+<%= form_for @iform, :validate => true do |f| %>
+  <% if @iform.errors.any? %>
+    <div id="error_explanation">
+      <!<%= pluralize(@iform.errors.count, "error") %>!><h2> Please check the highlighted fields </h2>
+   <% a = @iform.errors.full_messages.count %>
+   <% if a <= 6 %>
+    <ul>
+      <% @iform.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul> 
+   <% end %>
+    </div> 
+  <% end %>
+
+  <div class="field">
+<%= f.select :prefix, ['MS', 'MR','MRS','DR'] %>	
+  </div>
+
+  <div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :middlename %><br />
+    <%= f.text_field :middlename %>
+  </div>
+  
+ <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :preferredname %><br />
+    <%= f.text_field :preferredname %>
+  </div>
+  <div class="field">
+    <%= f.radio_button :sex, "female" %>
+    <%= f.label :Female %>
+	<%= f.radio_button :sex, "male" %>
+    <%= f.label :Male %>
+  </div>
+ <div class="field">
+    <%= f.label :birthdate %><br />
+    <%= f.date_select :birthdate %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.text_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :ssn %><br />
+    <%= f.text_field :ssn %>
+  </div>
+  <div class="field">
+    <%= f.label :homeadd %><br />
+    <%= f.text_field :homeadd %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>
+  <div class="field">
+    <%= f.label :zip %><br />
+    <%= f.text_field :zip %>
+  </div>
+  <div class="field">
+    <%= f.radio_button :relationshipstatus, "single" %>
+    <%= f.label :Single %>
+	<%= f.radio_button :relationshipstatus, "Married" %>
+    <%= f.label :Married %>
+	<%= f.radio_button :relationshipstatus, "Divorced" %>
+    <%= f.label :Divorced %>
+	<%= f.radio_button :relationshipstatus, "Widowed" %>
+    <%= f.label :Widowed %>
+	<%= f.radio_button :relationshipstatus, "Separated" %>
+    <%= f.label :Separated %>
+  </div>
+  <div class="field">
+    <%= f.label :homeph %><br />
+    <%= f.text_field :homeph %>
+  </div>
+  <div class="field">
+    <%= f.label :pager %><br />
+    <%= f.text_field :pager %>
+  </div>
+  <div class="field">
+    <%= f.label :workph %><br />
+    <%= f.text_field :workph %>
+  </div>
+  <div class="field">
+    <%= f.label :workext %><br />
+    <%= f.text_field :workext %>
+  </div>
+  <div class="field">
+    <%= f.label :license %><br />
+    <%= f.text_field :license %>
+  </div>
+  <div class="field">
+    <%= f.label :employer %><br />
+    <%= f.text_field :employer %>
+  </div>
+  <div class="field">
+    <%= f.label :empadd %><br />
+    <%= f.text_field :empadd %>
+  </div>
+  <div class="field">
+    <%= f.label :empduration %><br />
+    <%= f.text_field :empduration %>
+  </div>
+  <div class="field">
+    <%= f.label :occupation %><br />
+    <%= f.text_field :occupation %>
+  </div>
+  <div class="field">
+    <%= f.label :generaldentist %><br />
+    <%= f.text_field :generaldentist %>
+  </div>
+  <div class="field">
+    <%= f.label :referal %><br />
+    <%= f.text_field :referal %>
+  </div>
+  <div class="field">
+    <%= f.label :familyvisited %><br />
+    <%= f.text_field :familyvisited %>
+  </div>
+  <div class="field">
+    <%= f.label :reachyou %><br />
+    <%= f.text_field :reachyou %>
+  </div>
+  <div class="field">
+    <%= f.label :todaydate %><br />
+    <%= f.date_select :todaydate %>
+  </div>
+  <div class="field">
+    <%= f.label :lastvisitdate %><br />
+    <%= f.date_select :lastvisitdate %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

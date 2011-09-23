@@ -1,0 +1,65 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  email: MyString
+  firstname: MyString
+  lastname: MyString
+  middlename: MyString
+  prefix: MyString
+  preferredname: MyString
+  sex: MyString
+  age: 1
+  ssn: MyString
+  homeadd: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  relationshipstatus: MyString
+  homeph: MyString
+  pager: MyString
+  workph: MyString
+  workext: MyString
+  license: MyString
+  employer: MyString
+  empadd: MyString
+  empduration: MyString
+  occupation: MyString
+  generaldentist: MyString
+  referal: MyString
+  familyvisited: MyString
+  reachyou: MyString
+  todaydate: 2011-09-20
+  birthdate: 2011-09-20
+  lastvisitdate: 2011-09-20
+
+two:
+  email: MyString
+  firstname: MyString
+  lastname: MyString
+  middlename: MyString
+  prefix: MyString
+  preferredname: MyString
+  sex: MyString
+  age: 1
+  ssn: MyString
+  homeadd: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  relationshipstatus: MyString
+  homeph: MyString
+  pager: MyString
+  workph: MyString
+  workext: MyString
+  license: MyString
+  employer: MyString
+  empadd: MyString
+  empduration: MyString
+  occupation: MyString
+  generaldentist: MyString
+  referal: MyString
+  familyvisited: MyString
+  reachyou: MyString
+  todaydate: 2011-09-20
+  birthdate: 2011-09-20
+  lastvisitdate: 2011-09-20
