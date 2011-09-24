@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_filter :authenticate_user!
+  #before_filter :allow_patients
   def index
   end
 

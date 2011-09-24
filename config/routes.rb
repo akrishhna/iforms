@@ -1,4 +1,6 @@
 Iforms::Application.routes.draw do
+  get "admin/index"
+
   devise_for :users
 get "deviseroles/index"
   get "doctors/index"

@@ -40,13 +40,15 @@ class IformsController < ApplicationController
   # POST /iforms
   # POST /iforms.xml
   def create
-    @iform = Iform.new(params[:iform])
-
+    @iform = Iform.new(params[:iform]) 
+            
+   str = @iform.lastname + "_" + @iform.firstname
+   pathx = "/pdffiles/#{str}.pdf"
+    @iform.path = pathx
     respond_to do |format|
       if @iform.save
-        str = @iform.lastname<<"_"<<@iform.firstname
         path = "/Users/ashwinipatlola/railsapps/iforms/public/pdffiles/#{str}.pdf"
-        namestr = @iform.lastname<<"  "<<@iform.firstname<<"  "<<@iform.middlename
+        namestr = @iform.lastname << "  " + @iform.firstname + "  " + @iform.middlename
         @pdftk = PdftkForms::Wrapper.new('/usr/local/bin/pdftk')
         @pfields = @pdftk.fields('/Users/ashwinipatlola/railsapps/iform.pdf')
                #@pfields.each do |pff|

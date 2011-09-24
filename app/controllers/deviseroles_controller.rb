@@ -6,6 +6,8 @@ class DeviserolesController < ApplicationController
             redirect_to :controller=>"patients", :action=>"index"
           when 'doctor'
             redirect_to :controller=>"doctors", :action=>"index"
+          when 'admin'
+            redirect_to :controller=>"admin", :action => "index"
           else
           render :text => "some error"
      end

@@ -1,9 +1,21 @@
 Iforms::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  ActionMailer::Base.delivery_method = :smtp
+   ActionMailer::Base.perform_deliveries = true
+   ActionMailer::Base.raise_delivery_errors = true
+   ActionMailer::Base.smtp_settings = {
+     :enable_starttls_auto => true,  
+     :address            => 'smtpout.secureserver.net',
+     :port               => 80,
+     :domain             => 'unedollar.com', #you can also use google.com
+     :authentication     => :plain,
+     :user_name          => 'ashwini@unedollar.com',
+     :password           => 'onedollar'
+   }
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -45,5 +57,18 @@ Iforms::Application.configure do
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
-  config.active_support.deprecation = :notify
+  #config.active_support.deprecation = :notify
+  
+      config.action_view.debug_rjs             = true
+   
+      config.action_mailer.default_url_options = { :host => '173.255.195.108:8084' }
+      
+      # Don't care if the mailer can't send
+      config.action_mailer.raise_delivery_errors = false
+
+      # Print deprecation notices to the Rails logger
+      config.active_support.deprecation = :log
+
+      # Only use best-standards-support built into browsers
+      config.action_dispatch.best_standards_support = :builtin
 end

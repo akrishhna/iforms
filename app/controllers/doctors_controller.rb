@@ -1,4 +1,5 @@
 class DoctorsController < ApplicationController
+  #before_filter :allow_doctors
   def index
     @iforms = Iform.all
     #@patients=Patient.all(:conditions => "doctor_id = $doctorid")
