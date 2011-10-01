@@ -1,14 +1,14 @@
 set :application, "iforms"
 set :repository,  "git@github.com:apatlola/iforms.git"
-set :domain, '173.255.195.108' #Your Accelerators public IP address
+set :domain, '50.57.138.165' #Your Accelerators public IP address
 
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 
-set :deploy_to, "/home/deployer/iforms/"
+set :deploy_to, "/home/railsapps/iforms/"
 set :user, "root"
-set :scm_passphrase, "startUP"
+set :scm_passphrase, "eagleOr2W6Whl0"
 
 role :web, domain     # Your HTTP server, Apache/etc
 role :app, domain     # This may be the same as your `Web` server

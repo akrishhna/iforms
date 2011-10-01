@@ -6,12 +6,12 @@ Iforms::Application.configure do
  ActionMailer::Base.raise_delivery_errors = true
  ActionMailer::Base.smtp_settings = {
    :enable_starttls_auto => true,  
-   :address            => 'smtpout.secureserver.net',
-   :port               => 80,
-   :domain             => 'unedollar.com', #you can also use google.com
+   :address            => 'smtp.gmail.com',
+   :port               => 587,
+   :domain             => 'google.com.com', #you can also use google.com
    :authentication     => :plain,
-   :user_name          => 'ashwini@unedollar.com',
-   :password           => 'onedollar'
+   :user_name          => 'info.emailsender@gmail.com',
+   :password           => 'admininfo123'
  }
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development

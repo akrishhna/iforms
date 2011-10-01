@@ -47,13 +47,13 @@ class IformsController < ApplicationController
     @iform.path = pathx
     respond_to do |format|
       if @iform.save
-        path = "/Users/ashwinipatlola/railsapps/iforms/public/pdffiles/#{str}.pdf"
+        path = "/home/railsapps/iforms/public/pdffiles/#{str}.pdf"
         namestr = @iform.lastname << "  " + @iform.firstname + "  " + @iform.middlename
-        @pdftk = PdftkForms::Wrapper.new('/usr/local/bin/pdftk')
-        @pfields = @pdftk.fields('/Users/ashwinipatlola/railsapps/iform.pdf')
+        @pdftk = PdftkForms::Wrapper.new('/usr/bin/pdftk')
+        @pfields = @pdftk.fields('/home/railsapps/iforms/public/pdffiles/iform.pdf')
                #@pfields.each do |pff|
                  #puts pff.name
-       @pdftk.fill_form('/Users/ashwinipatlola/railsapps/iforms/iform.pdf', path, {'MS' => @iform.prefix,
+       @pdftk.fill_form('/home/railsapps/iforms/public/pdffiles/iform.pdf', path, {'MS' => @iform.prefix,
          'Name'=>namestr,
          'You Female'=>@iform.sex,
          'Your E-Mail Address'=> @iform.email,
