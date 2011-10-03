@@ -14,7 +14,10 @@ class PdfuploadsController < ApplicationController
      respond_to do |format|
     if @pdfupload.save
       if file_data.respond_to?(:path)
-        @pdftk = PdftkForms::Wrapper.new('/usr/local/bin/pdftk')
+        pdftkpath = "#{Configuration.pdftk_path}"
+        pdffilepath = "#{Configuration.pdffiles_path}"
+        
+        @pdftk = PdftkForms::Wrapper.new(pdftkpath)
         @pfields = @pdftk.fields(file_data.path)
         puts @pfields.length
         @pfields.each do |pff|
