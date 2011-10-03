@@ -10,7 +10,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110923005024) do
+ActiveRecord::Schema.define(:version => 20111002222248) do
+
+  create_table "admins", :force => true do |t|
+    t.string   "email",                             :default => "", :null => false
+    t.string   "encrypted_password", :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                     :default => "", :null => false
+    t.integer  "sign_in_count",                     :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "failed_attempts",                   :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "controls", :force => true do |t|
+    t.string   "name"
+    t.string   "controltype"
+    t.integer  "pdfupload_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "doctors", :force => true do |t|
     t.string   "doctorname"
@@ -66,6 +90,15 @@ ActiveRecord::Schema.define(:version => 20110923005024) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "doctor_id"
+  end
+
+  create_table "pdfuploads", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "users", :force => true do |t|

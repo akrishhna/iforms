@@ -47,13 +47,18 @@ class IformsController < ApplicationController
     @iform.path = pathx
     respond_to do |format|
       if @iform.save
-        path = "/Users/ashwinipatlola/railsapps/iforms/public/pdffiles/#{str}.pdf"
+       
         namestr = @iform.lastname << "  " + @iform.firstname + "  " + @iform.middlename
-        @pdftk = PdftkForms::Wrapper.new('/usr/local/bin/pdftk')
-        @pfields = @pdftk.fields('/Users/ashwinipatlola/railsapps/iform.pdf')
-               #@pfields.each do |pff|
-                 #puts pff.name
-       @pdftk.fill_form('/Users/ashwinipatlola/railsapps/iforms/iform.pdf', path, {'MS' => @iform.prefix,
+        pdftkpath = "#{Configuration.pdftk_path}"
+        pdffilepath = "#{Configuration.pdffiles_path}"
+        path = pdffilepath + "#{str}.pdf"
+        
+        @pdftk = PdftkForms::Wrapper.new(pdftkpath)
+        @pfields = @pdftk.fields(pdffilepath + 'iform.pdf')
+        @pfields.each do |pff|
+            puts pff.name, pff.field_type, pff.flags
+        end
+       @pdftk.fill_form(pdffilepath + 'iform.pdf', path, {'MS' => @iform.prefix,
          'Name'=>namestr,
          'You Female'=>@iform.sex,
          'Your E-Mail Address'=> @iform.email,
@@ -71,6 +76,36 @@ class IformsController < ApplicationController
       end
     end
   end
+  
+  
+  def createFDF(info)
+      data = "%FDF-1.2\x0d%\xe2\xe3\xcf\xd3\x0d\x0a"; # header
+      data += "1 0 obj\x0d<< " # open the Root dictionary
+      data += "\x0d/FDF << " # open the FDF dictionary
+      data += "/Fields [ " # open the form Fields array
+
+        info.each { |key,value|
+            if value.class == Hash
+                value.each { |sub_key,sub_value|
+                    data += '<< /T (' + key + '_' + sub_key + ') /V '
+                    data += '(' + sub_value.to_s.strip + ') /ClrF 2 /ClrFf 1 >> '
+                }
+            else
+                data += '<< /T (' + key + ') /V (' + value.to_s.strip + ') /ClrF 2 /ClrFf 1 >> '
+            end
+        }
+
+      data += "] \x0d" # close the Fields array
+      data += ">> \x0d" # close the FDF dictionary
+      data += ">> \x0dendobj\x0d" # close the Root dictionary
+
+      # trailer note the "1 0 R" reference to "1 0 obj" above
+      data += "trailer\x0d<<\x0d/Root 1 0 R \x0d\x0d>>\x0d" 
+      data += "%%EOF\x0d\x0a" 
+      afile = File.new("/pdffiles/rails_" + rand.to_s, "w") << data
+      afile.close
+      return afile
+    end
 
   # PUT /iforms/1
   # PUT /iforms/1.xml

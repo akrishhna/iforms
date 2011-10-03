@@ -1,0 +1,28 @@
+<% pathx = "/csvfiles/#{@pdfupload.file_file_name}.csv"%>
+
+<%= link_to 'View uploaded file', @pdfupload.file.url%>&nbsp&nbsp
+<%= link_to 'Download csv format', pathx %></br></br>
+<table>
+	<tr>
+		<th><b>ControlName</b>&nbsp&nbsp&nbsp&nbsp</th>
+		<th><b>ControlType</b></th>
+	</tr>
+
+	<% @controls.each do |i| %>
+	<tr>
+	<td><%=h i.name %>&nbsp&nbsp&nbsp&nbsp</td>
+	<td><%=h i.controltype %></td>
+	</tr>
+   <%end%>
+
+</table>
+</br>
+<%= will_paginate @controls %>
+
+<% path = "/users/ashwinipatlola/railsapps/iforms/public/csvfiles/#{@pdfupload.file_file_name}.csv" %>
+<% FasterCSV.open(path, "w") do |csv|%>
+    <% csv << ["ControlName", "ControlType"] %>
+<% @pdfupload.controls.each do |i| %>
+    <% csv << ["#{i.name}","#{i.controltype}"]%>
+   <% end %>
+<% end %>

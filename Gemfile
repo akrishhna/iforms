@@ -9,6 +9,7 @@ gem 'rake', '0.9.2'
 #gem 'sqlite3'
 gem 'devise', '1.1.rc0'
 gem 'dynamic_form'
+gem "will_paginate", "~> 3.0.pre2"
 # Use unicorn as the web server
 # gem 'unicorn'
 gem 'mysql2', '0.2.7'
@@ -17,6 +18,8 @@ gem 'capistrano'
 gem 'pdftk_forms'
 gem 'client_side_validations'
 gem 'jquery-rails' #, '>= 1.0.12'
+gem 'paperclip'
+gem 'fastercsv'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'

@@ -1,0 +1,6 @@
+<h3>Upload PDF file</h3>
+<%= form_for @pdfupload, :html => { :multipart => true } do |f| %>
+<%= f.error_messages %>
+<%= f.file_field :file %><br/><br/>
+<%= f.submit 'upload' %>
+<% end %>

@@ -1,0 +1,18 @@
+<%if @pdfuploads %>
+<h3>List of uploaded files</h3>
+<table>
+	<tr>
+		<th><b>FileName</b></th>
+	</tr>
+<% @pdfuploads.each do |i| %>
+    <tr>
+	    <td><%=h i.file_file_name %>&nbsp&nbsp</td>
+	    <td><%= link_to 'show', i %>&nbsp</td>
+	    <td><%= link_to 'delete',i, :confirm => 'Are you sure', :method => :delete %></td>
+	</tr><br/>
+<%end%>
+</table>
+<% else %>
+<% flash[:notice] = 'No files uploaded'%>
+<%end%>
+

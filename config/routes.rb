@@ -1,4 +1,12 @@
 Iforms::Application.routes.draw do
+  get "pdfuploads/index"
+
+  get "pdfuploads/new"
+
+  get "pdfuploads/show"
+
+  devise_for :admins
+
   get "admin/index"
 
   devise_for :users
@@ -12,7 +20,7 @@ get "deviseroles/index"
   get "patients/index"
 
   get "patients/new"
-
+  resources :pdfuploads
   resources :iforms
   resources :doctors
   resources :forms
