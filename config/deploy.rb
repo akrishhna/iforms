@@ -1,7 +1,6 @@
 set :application, "iforms"
 set :repository, "git@github.com:apatlola/iforms.git"
 set :domain, '50.57.138.165' #Your Accelerators public IP address
-
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
@@ -40,9 +39,10 @@ role :db, domain, :primary => true # This is where Rails migrations will run
 
 # If you are using Passenger mod_rails uncomment this:
 # namespace :deploy do
-# task :start do ; end
-# task :stop do ; end
-# task :restart, :roles => :app, :except => { :no_release => true } do
-# run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+#   task :start do ; end
+#   task :stop do ; end
+#   task :restart, :roles => :app, :except => { :no_release => true } do
+#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+#   end
 # end
-# end
+\

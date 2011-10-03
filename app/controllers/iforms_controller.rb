@@ -47,7 +47,6 @@ class IformsController < ApplicationController
     @iform.path = pathx
     respond_to do |format|
       if @iform.save
-       
         namestr = @iform.lastname << "  " + @iform.firstname + "  " + @iform.middlename
         pdftkpath = "#{Configuration.pdftk_path}"
         pdffilepath = "#{Configuration.pdffiles_path}"
@@ -55,9 +54,9 @@ class IformsController < ApplicationController
         
         @pdftk = PdftkForms::Wrapper.new(pdftkpath)
         @pfields = @pdftk.fields(pdffilepath + 'iform.pdf')
-        @pfields.each do |pff|
-            puts pff.name, pff.field_type, pff.flags
-        end
+       # @pfields.each do |pff|
+       #      puts pff.name, pff.field_type, pff.flags
+       #  end
        @pdftk.fill_form(pdffilepath + 'iform.pdf', path, {'MS' => @iform.prefix,
          'Name'=>namestr,
          'You Female'=>@iform.sex,

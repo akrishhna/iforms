@@ -67,7 +67,7 @@ Iforms::Application.configure do
   
       config.action_view.debug_rjs             = true
    
-      config.action_mailer.default_url_options = { :host => '173.255.195.108:8084' }
+      config.action_mailer.default_url_options = { :host => '50.57.138.165' }
       
       # Don't care if the mailer can't send
       config.action_mailer.raise_delivery_errors = false
