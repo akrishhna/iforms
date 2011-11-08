@@ -1,14 +1,33 @@
-<h3>Doctors Appointments</h3>
-<table>
-	<tr>
-		<th> Patient Name </th>
-		</tr>
-<% @iforms.each do |i|%>
-<tr>
-<td>	<%= link_to i.lastname %></td>
-
-
-	<td><%= link_to 'show',i %></td>
+<div class="index">
+<h3>My Appointments</h3>
+<% if !@appointments.blank? %>
+<table border="0" width="80%" class="mytable">
+	<tr BGCOLOR="grey" >
+		<th>s.no</th>
+		<th>Patient Name</th>
+		<th>Appointment Datetime</th>
+		<th>Form Sent At</th>
+		<th></th>
 	</tr>
+	<% count = 1 %>
+<% @appointments.each do |i|%>
+<tr>
+	<td><%= count %>
+	<% count+=1 %>
+	<% str = i.firstname.capitalize + " " + i.lastname.capitalize %>
+	<td><%= str %></td>
+	<% datetime = i.datetime.strftime("%m-%d-%Y  %H:%M") %>
+	<td><%= datetime %></td>
+	<% timesent = i.timesent.strftime("%m-%d-%Y  %H:%M") %>
+	<td><%= timesent %></td>
+	<td><%= link_to 'View form here', i %></td>
+</tr>	
 <%end%>
 </table>
+<% else %>
+<p>You have no Appointments! </p>
+<%end%>
+</br>
+</br>
+<%= link_to 'New Appointment', new_appointment_path %>
+</div>

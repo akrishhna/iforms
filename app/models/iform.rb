@@ -1,4 +1,41 @@
 class Iform < ActiveRecord::Base
+ belongs_to :appointment
+ attr_writer :current_step
+ 
+ #validates_presence_of :email, :firstname, :if => lambda { |o| o.current_step == "aboutyou" }
+ #validates_presence_of :spousename, :spouse_employer, :if => lambda { |o| o.current_step == "spouseinformation" }
+ 
+ 
+ # def current_step
+#      @current_step || steps.first
+#  end
+#   
+#    def steps
+#      %w[aboutyou spouceinformation orthodonticinsurance medicalhistory dentalhistory]
+#    end
+#    def next_step
+#     self.current_step = steps[steps.index(current_step)+1]
+#    end
+# 
+#    def previous_step
+#      self.current_step = steps[steps.index(current_step)-1]
+#    end
+#    def first_step?
+#      current_step == steps.first
+#    end
+# 
+#    def last_step?
+#      current_step == steps.last
+#    end
+# 
+#    def all_valid?
+#      steps.all? do |step|
+#        self.current_step = step
+#        valid?
+#      end
+#      
+#    end
+  
  
   # validates_presence_of :email, :firstname, :lastname, :middlename, :prefix, :sex, :ssn, :homeadd, :state, :zip, :birthdate
   #   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i

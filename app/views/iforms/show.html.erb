@@ -1,6 +1,9 @@
-<%= link_to 'Home',doctors_path %>&nbsp
+<% if current_user.role == 'doctor'%>
+<%= link_to 'Home',doctors_path %> |
 <%= link_to 'Download as PDF file', @iform.path %>
+<% end %>
 <p id="notice"><%= notice %></p>
+
 
 <p>
   <b>Email:</b>
@@ -44,7 +47,7 @@
 
 <p>
   <b>Ssn:</b>
-  <%= @iform.ssn %>
+  <%= @iform.SSN %>
 </p>
 
 <p>
@@ -94,7 +97,7 @@
 
 <p>
   <b>License:</b>
-  <%= @iform.license %>
+  <%= @iform.DL %>
 </p>
 
 <p>
@@ -123,8 +126,7 @@
 </p>
 
 <p>
-  <b>Referal:</b>
-  <%= @iform.referal %>
+  
 </p>
 
 <p>
@@ -134,7 +136,7 @@
 
 <p>
   <b>Reachyou:</b>
-  <%= @iform.reachyou %>
+
 </p>
 
 <p>
@@ -151,7 +153,25 @@
   <b>Lastvisitdate:</b>
   <%= @iform.lastvisitdate %>
 </p>
+<p>
+  <b>Insurance company:</b>
+  <%= @iform.insurancecompany %>
+</p>
+<p>
+  <b>physicians name:</b>
+  <%= @iform.physicians_name %>
+</p>
+<p>
+  <b>SpouseName:</b>
+  <%= @iform.spousename %>
+</p>
+<p>
+  <b>spouse employer:</b>
+  <%= @iform.spouse_employer %>
+</p>
 
-
+<% if current_user.role == 'patient'%>
+<%= link_to 'Home', patients_path %> |
 <%= link_to 'Edit', edit_iform_path(@iform) %> |
-<%= link_to 'Back', iforms_path %>
+<%= link_to 'Back', patients_path %>
+<% end %>

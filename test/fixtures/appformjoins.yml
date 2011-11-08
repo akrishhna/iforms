@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  appointment_id: 1
+  form_id: 1
+  formname: MyString
+  formsubmittedtime: 2011-11-06 15:41:24
+
+two:
+  appointment_id: 1
+  form_id: 1
+  formname: MyString
+  formsubmittedtime: 2011-11-06 15:41:24

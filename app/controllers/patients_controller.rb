@@ -1,17 +1,29 @@
 class PatientsController < ApplicationController
   #before_filter :allow_patients
   def index
+    @appointments = Appointment.all(:conditions => ['email = ?', current_user.email])
   end
 
   def new
     @patient = Patient.new
   end
   def create
-    #@patient =Patient.new(params[:patient])
-    @doctor = Doctor.find(params[:doctor])
-    Patient.create(:doctor_id=>@doctor.id)
-    if params[:doctor].present?
-      redirect_to(@doctor)
+    @patient = Patient.new(params[:patient])
+    @patient.user_id = current_user.id
+    @appointments = Appointment.all(:conditions => ['email = ?', current_user.email])
+    @appointments.each do |i|
+      if !i.patient_id
+      i.patient_id = @patient.id
+      end
+    end
+    respond_to do |format|
+    if @patient.save
+      format.html { redirect_to(patients_path, :id => nil, :notice => 'Profile saved successfully.') }
+      format.xml  { render :xml => @patient, :status => :created, :location => @patient }
+    else
+      format.html { render :action => "new" }
+      format.xml  { render :xml => @patient.errors, :status => :unprocessable_entity }
+    end
     end
   end
   def show

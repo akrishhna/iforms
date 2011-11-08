@@ -1,0 +1,63 @@
+
+
+<% @appformjoins = Appformjoin.where("appointment_id = ?", @appointment.id)%>
+<% if current_user.role == 'patient'%>
+<div class = "formslist_show">
+<table border="0" width="80%" class="mytable">
+	<tr>
+		<th>Formname</th>
+		<th>Status</th>
+		<th>Submitted At</th>
+	</tr>
+	<% @appformjoins.each do |i| %>
+	<tr>
+	<% if i.status == "submitted" %>
+	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :id => i.iform_id %></td>
+	<td><%= i.status.capitalize %></td>
+	<% formsubmittedtime = i.formsubmittedtime.strftime("%m-%d-%Y  %H:%M") %>
+	<td><%= formsubmittedtime %></td>
+	<% else %>
+	<td><%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %></td>
+	<td>Pending</td>
+	<td>Not yet submitted </td>
+	<% end %>
+	</tr>
+	<% end %>
+</table>
+</br>
+</br>
+<%= link_to 'Back', :back %>
+</div>
+<% end %>
+
+
+
+<% if current_user.role == 'doctor'%>
+<div class = "formslist_show">
+<table border="0" width="80%" class="mytable">
+	<tr>
+		<th>Formname</th>
+		<th>Status</th>
+		<th>Recieved At</th>
+	</tr>
+	<% @appformjoins.each do |i| %>
+	<tr>
+	<% if i.status == "submitted" %>
+	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :id =>i.iform_id  %></td>
+	<td>Received</td>
+	<% formsubmittedtime = i.formsubmittedtime.strftime("%m-%d-%Y  %H:%M") %>
+	<td><%= formsubmittedtime %></td>
+	<% else %>
+	<td><%= i.formname %></td>
+	<td>Pending</td>
+	<td>Pending</td>
+	<% end %>
+	</tr>
+	<% end %>
+</table>
+</br>
+</br>
+<%= link_to 'Back', :back %>
+</div>
+<% end %>
+

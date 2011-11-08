@@ -1,0 +1,118 @@
+<h3> Orthodontic Insurance </h3>
+<p>Primary</p>
+<div class="field">
+    <%= f.radio_button :orthocoverage, "y" %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :orthocoverage, "n" %>
+    <%= f.label :No %>
+</div>
+<div class="field">
+    <%= f.radio_button :dentalcoverage, "y" %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :dentalcoverage, "n" %>
+    <%= f.label :No %>
+</div>
+  <div class="field">
+    <%= f.label :InsuranceCompanyName %><br />
+    <%= f.text_field :insurancecompany %>
+  </div>
+  <div class="field">
+    <%= f.label :Address %><br />
+    <%= f.text_field :insurancecompany_add %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :insurancecompany_ph %>
+  </div>
+  <div class="field">
+    <%= f.label :GroupPlan %><br />
+    <%= f.text_field :group %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsName %><br />
+    <%= f.text_field :insureds_name %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsRelation %><br />
+    <%= f.date_select :insureds_relation %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsBirthdate %><br />
+    <%= f.date_select :insureds_birthdate %>
+  </div>
+ <div class="field">
+    <%= f.label :InsuredsSSN %><br />
+    <%= f.text_field :insureds_SSN %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsEmployer %><br />
+    <%= f.text_field :insureds_employer %>
+  </div>
+<p>Secondary</p>
+<div class="field">
+    <%= f.radio_button :orthocoverage, "y" %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :orthocoverage_sec, "n" %>
+    <%= f.label :No %>
+</div>
+<div class="field">
+    <%= f.radio_button :dentalcoverage, "y" %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :dentalcoverage_sec, "n" %>
+    <%= f.label :No %>
+</div>
+  <div class="field">
+    <%= f.label :InsuranceCompanyName %><br />
+    <%= f.text_field :insurancecompany_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :Address %><br />
+    <%= f.text_field :insurancecompany_add_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :insurancecompany_ph_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :GroupPlan %><br />
+    <%= f.text_field :group_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsName %><br />
+    <%= f.text_field :insureds_name_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsRelation %><br />
+    <%= f.date_select :insureds_relation_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsBirthdate %><br />
+    <%= f.date_select :insureds_birthdate_sec %>
+  </div>
+ <div class="field">
+    <%= f.label :InsuredsSSN %><br />
+    <%= f.text_field :insureds_SSN_sec %>
+  </div>
+  <div class="field">
+    <%= f.label :InsuredsEmployer %><br />
+    <%= f.text_field :insureds_employer_sec %>
+  </div>
+<p>In the event of an emergency, is there someone
+who lives near you that we should contact?</p>
+<div class="field">
+    <%= f.label :Name %><br />
+    <%= f.date_select :emergencyperson_name %>
+  </div>
+ <div class="field">
+    <%= f.label :Relation %><br />
+    <%= f.text_field :emergencyperson_relation %>
+  </div>
+  <div class="field">
+    <%= f.label :Workphone %><br />
+    <%= f.text_field :emergencyperson_wkph %>
+  </div>
+<div class="field">
+    <%= f.label :Homephone %><br />
+    <%= f.text_field :emergencyperson_hmph %>
+  </div>
+

@@ -19,10 +19,10 @@
 </br>
 <%= will_paginate @controls %>
 
-<% path = "/home/railsapps/iforms/public/csvfiles/#{@pdfupload.file_file_name}.csv" %>
-<% FasterCSV.open(path, "w") do |csv|%>
+<% filepath = @pdfupload.file %>
+<% FasterCSV.open(filepath.path, "w") do |csv|%>
     <% csv << ["ControlName", "ControlType"] %>
 <% @pdfupload.controls.each do |i| %>
-    <% csv << ["#{i.name}","#{i.controltype}"]%>
+    <% csv << ["#{i.name}","#{i.controltype}"] %>
    <% end %>
 <% end %>

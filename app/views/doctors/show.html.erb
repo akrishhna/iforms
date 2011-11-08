@@ -1,3 +1,8 @@
-<% @doctor.forms.each do |i|%>
+<%= @doctor.firstname %>
+<%= @doctor.lastname %>
+
+<!-- <% @doctor.forms.each do |i|%>
 	<%= link_to i.formname, :controller =>"iforms", :action => "new" %>
-<%end%>
+<%end%> -->
+
+<%= link_to 'view appointments', doctors_path %>

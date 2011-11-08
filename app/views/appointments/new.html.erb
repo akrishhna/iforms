@@ -1,0 +1,56 @@
+<div class = "form_container">
+<%= form_for @appointment do |f| %>
+  <% if @appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2> Please check the highlighted fields </h2>
+   <% a = @appointment.errors.full_messages.count %>
+   <% if a <= 6 %>
+    <ul>
+      <% @appointment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul> 
+   <% end %>
+    </div> 
+  <% end %>
+
+  <div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </div>
+  
+ <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+ </div>
+ <div class="field">
+    <%= f.label :datetime %><br />
+    <%= f.datetime_select :datetime %>
+ </div>
+	
+	<% @doctor = Doctor.first%>
+	<% a=[]%>
+	<% @forms = @doctor.forms %>
+	<% @forms.each do |i|%>
+	<%a<< i.formname %>
+	<%end %>
+
+
+<div class = "field">
+<% for form in @forms %>
+		<%= check_box_tag "form_ids[]", form.id %>
+		<%= label_tag form.formname %>
+<% end%>
+</div>
+
+<div class="actions">
+    <%= f.submit %>
+</div>
+<% end %>
+</br>
+<%= link_to 'Back', :back %>
+</div>

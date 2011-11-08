@@ -1,4 +1,10 @@
 Iforms::Application.routes.draw do
+  get "appointments/new"
+
+  get "appointments/index"
+
+  get "appointments/show"
+
   get "pdfuploads/index"
 
   get "pdfuploads/new"
@@ -21,10 +27,19 @@ get "deviseroles/index"
 
   get "patients/new"
   resources :pdfuploads
-  resources :iforms
   resources :doctors
   resources :forms
   resources :patients
+  resources :appointments
+  resources :deviseroles
+  resources :iforms do 
+  # collection do
+#   post 'submit'
+#   end
+  end
+  
+
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
