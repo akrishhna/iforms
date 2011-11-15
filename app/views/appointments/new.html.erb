@@ -43,7 +43,7 @@
 <div class = "field">
 <% for form in @forms %>
 		<%= check_box_tag "form_ids[]", form.id %>
-		<%= label_tag form.formname %>
+		<%= form.formname %>
 <% end%>
 </div>
 

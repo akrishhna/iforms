@@ -1,19 +1,15 @@
 class DoctorsController < ApplicationController
   #before_filter :allow_doctors
-  def index
-    
+  def index    
     @iforms = Iform.all
-    @doctors = Doctor.all(:conditions => ['user_id = ?', current_user.id])
-    @doctors.each do |i|
-      $value = i.id
-    end 
-    puts $value
-    @appointments = Appointment.all(:conditions => ['doctor_id = ?', $value])
+    @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
+    @appointments = Appointment.all(:conditions => ['doctor_id = ?', @doctor.id])
   end
 
   def new
     @doctor = Doctor.new
   end
+  
   def create
     @doctor = Doctor.new(params[:doctor])
     @doctor.user_id = current_user.id
@@ -28,6 +24,7 @@ class DoctorsController < ApplicationController
     end
     end
   end
+  
   def show
     @doctor = Doctor.find(params[:id])
   end

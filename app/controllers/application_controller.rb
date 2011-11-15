@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :admin?
 
  protected
-  def allow_doctors
+  def is_doctor?
     unless current_user.role=="doctor"
       flash[:notice]="unauthorized access"
       redirect_to :controller=> "deviseroles", :action=>"index"
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
   end
  protected 
-  def allow_patients
+  def is_patient?
     unless current_user.role=="patient"
       flash[:notice]="unauthorized access"
       redirect_to :controller=> "deviseroles", :action=>"index"

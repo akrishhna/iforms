@@ -23,137 +23,183 @@
 
 <fieldset>   
 <legend>About you</legend>
+
   <div class="field">
-<%= f.select :prefix, ['MS', 'MR','MRS','DR'] %>	
+  <%= f.select :Self_Prefix, ['MS', 'MR','MRS','DR'] %>	
   </div>
 
   <div class="field">
     <%= f.label :Firstname %><br />
-    <%= f.text_field :firstname %>
+    <%= f.text_field :Self_Name_First %>
   </div>
+
   <div class="field">
     <%= f.label :Lastname %><br />
-    <%= f.text_field :lastname %>
+    <%= f.text_field :Self_Name_Honorific %>
   </div>
+
   <div class="field">
     <%= f.label :Middlename %><br />
-    <%= f.text_field :middlename %>
+    <%= f.text_field :Self_Name_Middle %>
   </div>
   
  <div class="field">
     <%= f.label :Email %><br />
-    <%= f.text_field :email %>
+    <%= f.text_field :Self_Email_Address %>
   </div>
+
   <div class="field">
     <%= f.label :Preferredname %><br />
-    <%= f.text_field :preferredname %>
+    <%= f.text_field :Self_Name_Preferred %>
   </div>
+
   <div class="field">
-    <%= f.radio_button :sex, "female" %>
+    <%= f.radio_button :Self_Sex, "female" %>
     <%= f.label :Female %>
-	<%= f.radio_button :sex, "male" %>
+	<%= f.radio_button :Self_Sex, "male" %>
     <%= f.label :Male %>
-  </div>
- <div class="field">
+  </div> 
+
+  <div class="field">
     <%= f.label :Birthdate %><br />
-    <%= f.date_select :birthdate %>
+    <%= f.date_select :Self_Birthdate %>
   </div>
+  
   <div class="field">
-    <%= f.label :Age %><br />
-    <%= f.text_field :age %>
+    Social Security Number<br />
+    <%= f.text_field :Self_Social_Security_Number %>
   </div>
+
   <div class="field">
-    <%= f.label :SSN %><br />
-    <%= f.text_field :SSN %>
+    Home Address1<br />
+    <%= f.text_field :Self_Home_Address1 %>
   </div>
+
   <div class="field">
-  Home address<br />
-    <%= f.text_field :homeadd %>
+    Home Address2<br />
+    <%= f.text_field :Self_Home_Address2 %>
   </div>
+
   <div class="field">
     <%= f.label :City %><br />
-    <%= f.text_field :city %>
+    <%= f.text_field :Self_Home_City %>
   </div>
+
   <div class="field">
     <%= f.label :State %><br />
-    <%= f.text_field :state %>
+    <%= f.text_field :Self_Home_State %>
   </div>
+
   <div class="field">
     <%= f.label :Zip %><br />
-    <%= f.text_field :zip %>
+    <%= f.text_field :Self_Home_Postal_Code %>
   </div>
+
   <div class="field">
-  Relationship status
-    <%= f.radio_button :relationshipstatus, "single" %>
+    Marital Status
+    <%= f.radio_button :Self_Marital_Status, "single" %>
     <%= f.label :Single %>
-	<%= f.radio_button :relationshipstatus, "Married" %>
+	<%= f.radio_button :Self_Marital_Status, "Married" %>
     <%= f.label :Married %>
-	<%= f.radio_button :relationshipstatus, "Divorced" %>
+	<%= f.radio_button :Self_Marital_Status, "Divorced" %>
     <%= f.label :Divorced %>
-	<%= f.radio_button :relationshipstatus, "Widowed" %>
+	<%= f.radio_button :Self_Marital_Status, "Widowed" %>
     <%= f.label :Widowed %>
-	<%= f.radio_button :relationshipstatus, "Separated" %>
+	<%= f.radio_button :Self_Marital_Status, "Separated" %>
     <%= f.label :Separated %>
   </div>
+
   <div class="field">
     <%= f.label :Homephone %><br />
-    <%= f.text_field :homeph %>
+    <%= f.text_field :Self_Phone_Home %>
   </div>
+
   <div class="field">
-    <%= f.label :Pager %><br />
-    <%= f.text_field :pager %>
+    <%= f.label :Mobilephone %><br />
+    <%= f.text_field :Self_Phone_Mobile %>
   </div>
+
   <div class="field">
     <%= f.label :Workphone %><br />
-    <%= f.text_field :workph %>
+    <%= f.text_field :Self_Phone_Work %>
   </div>
+
   <div class="field">
-    <%= f.label :WorkEXT %><br />
-    <%= f.text_field :workext %>
+    Workphone Ext <br />
+    <%= f.text_field :Self_Phone_Work_Extension %>
   </div>
+
   <div class="field">
     <%= f.label :DriversLicense %><br />
-    <%= f.text_field :DL %>
+    <%= f.text_field :Self_Driver_License_Number %>
   </div>
+
   <div class="field">
-    <%= f.label :Employer %><br />
-    <%= f.text_field :employer %>
+    <%= f.label :Employername %><br />
+    <%= f.text_field :Self_Employer_Name %>
   </div>
+
   <div class="field">
-    Employer address<br />
-    <%= f.text_field :empadd %>
+    Employer Address1<br />
+    <%= f.text_field :Self_Employer_Address1 %>
   </div>
+
+  <div class="field">
+    Employer Address2<br />
+    <%= f.text_field :Self_Employer_Address2 %>
+  </div>
+
+  <div class="field">
+    City<br />
+    <%= f.text_field :Self_Employer_City %>
+  </div>
+
+  <div class="field">
+    State<br />
+    <%= f.text_field :Self_Employer_State %>
+  </div>
+
+  <div class="field">
+    zip<br />
+    <%= f.text_field :Self_Employer_Postal_Code %>
+  </div>
+
   <div class="field">
    How long there?<br />
-    <%= f.text_field :empduration %>
+    <%= f.text_field :Self_Length_Of_Employment %>
   </div>
+
   <div class="field">
     <%= f.label :Occupation %><br />
-    <%= f.text_field :occupation %>
+    <%= f.text_field :Self_Occupation %>
   </div>
+
   <div class="field">
-   General dentist<br />
-    <%= f.text_field :generaldentist %>
+   General Dentist<br />
+    <%= f.text_field :Self_General_Dentist_Name %>
   </div>
+
   <div class="field">
     Whom may we Thank for referring you?<br />
-    <%= f.text_field :personreferredyou %>
+    <%= f.text_field :Self_Referred_By %>
   </div>
+
   <div class="field">
     Other family members seen by us:<br />
-    <%= f.text_field :familyvisited %>
+    <%= f.text_field :Self_Other_Family_Members%>
   </div>
+
   <div class="field">
     Where & when are best times to reach you?<br />
-    <%= f.text_field :besttime_reachyou %>
+    <%= f.text_field :Self_Best_Contact_Method %>
   </div>
   <div class="field">
-    <%= f.label :Lastvisitdate %><br />
-    <%= f.date_select :lastvisitdate %>
+    <%= f.time_select :Self_Best_Contact_Time %>
   </div>
-<div class="field">
-    <%= f.label :todaydate %><br />
-    <%= f.date_select :todaydate %>
+
+  <div class="field">
+    <%= f.label :Lastvisitdate %><br />
+    <%= f.date_select :Self_General_Dentist_Date_Last_Appointment %>
   </div>
   
 </fieldset>
@@ -161,618 +207,882 @@
 <fieldset>
 <legend>Spouce Information</legend>
 
-<div class="field">
-    His / Her Name<br />
-    <%= f.text_field :spousename %>
-  </div>
   <div class="field">
-    <%= f.label :Employer %><br />
-    <%= f.text_field :spouse_employer %>
+    His / Her Firstname<br />
+    <%= f.text_field :Spouse_Name_First %>
   </div>
-   <div class="field">
-    <%= f.label :Birthdate %><br />
-    <%= f.text_field :spouse_birthdate %>
-  </div>
-  <div class="field">
-    <%= f.label :Workphone %><br />
-    <%= f.text_field :spouse_wkphone %>
-  </div>
-  <div class="field">
-    <%= f.label :SSN %><br />
-    <%= f.text_field :spouse_SSN %>
-  </div>
-  <div class="field">
-    <%= f.label :WorkEXT %><br />
-    <%= f.text_field :spouse_wkext %>
-  </div>
- 
 
   <div class="field">
-   Person Responsible for Account<br />
-    <%= f.text_field :responsibleperson_name %>
+    His / Her Lastname<br />
+    <%= f.text_field :Spouse_Name_Last %>
   </div>
+
+  <div class="field">
+    <%= f.label :Birthdate %><br />
+    <%= f.text_field :Spouse_Birthdate %>
+  </div>
+
   <div class="field">
     <%= f.label :Workphone %><br />
-    <%= f.text_field :responsibleperson_wkph %>
+    <%= f.text_field :Spouse_Phone_Work %>
   </div>
- <div class="field">
-    <%= f.label :Homephone %><br />
-    <%= f.text_field :responsibleperson_hmph %>
+  
+  <div class="field">
+    Workphone Ext<br />
+    <%= f.text_field :Spouse_Phone_Work_Extension %>
   </div>
+
+  <div class="field">
+    Social Security Number<br />
+    <%= f.text_field :Spouse_Social_Security_Number %>
+  </div>
+
   <div class="field">
     <%= f.label :Employer %><br />
-    <%= f.text_field :responsibleperson_employer %>
+    <%= f.text_field :Spouse_Employer_Name %>
   </div>
+ 
+ <p>Person Responsible for Account</p>
   <div class="field">
-    <%= f.label :SSN %><br />
-    <%= f.text_field :responsibleperson_SSN %>
+    Firstname<br />
+    <%= f.text_field :Person_Responsible_For_Account_Name_First %>
   </div>
+
   <div class="field">
-    <%= f.label :Billingaddress %><br />
-    <%= f.text_field :responsibleperson_billingadd %>
+    Lastname<br />
+    <%= f.text_field :Person_Responsible_For_Account_Name_Last %>
   </div>
-<div class="field">
+
+  <div class="field">
+    <%= f.label :Workphone %><br />
+    <%= f.text_field :Person_Responsible_For_Account_Phone_Work %>
+  </div>
+
+  <div class="field">
+    Workphone Ext<br />
+    <%= f.text_field :Person_Responsible_For_Account_Phone_Work_Extension %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Homephone %><br />
+    <%= f.text_field :Person_Responsible_For_Account_Phone_Home %>
+  </div>
+
+  <div class="field">
+    Billing Address1<br />
+    <%= f.text_field :Person_Responsible_For_Account_Address1 %>
+  </div>
+
+  <div class="field">
+    Billing Address2<br />
+    <%= f.text_field :Person_Responsible_For_Account_Address2 %>
+  </div>
+
+  <div class="field">
+    City<br />
+    <%= f.text_field :Person_Responsible_For_Account_City %>
+  </div>
+
+  <div class="field">
+    State<br />
+    <%= f.text_field :Person_Responsible_For_Account_State %>
+  </div>
+
+  <div class="field">
+    Zip<br />
+    <%= f.text_field :Person_Responsible_For_Account_Postal_Code %>
+  </div>
+
+  <div class="field">
     <%= f.label :Relation %><br />
-    <%= f.text_field :responsibleperson_relation %>
+    <%= f.text_field :Person_Responsible_For_Account_Relationship %>
   </div>
+
+  <div class="field">
+    Social Security Number<br />
+    <%= f.text_field :Person_Responsible_For_Account_Social_Security_Number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Employer %><br />
+    <%= f.text_field :Person_Responsible_For_Account_Employer_Name %>
+  </div>
+
   <div class="field">
     <%= f.label :DriversLicense %><br />
-    <%= f.text_field :responsibleperson_DL %>
+    <%= f.text_field :Person_Responsible_For_Account_Drivers_License %>
   </div>
+
 </fieldset>
 
 <fieldset>
 <legend>Orthodontic Insurance</legend>
+
 <h3>Primary</h3>
-<div class="field">
-Orthodontic coverage 
-    <%= f.radio_button :orthocoverage, "y" %>
+
+  <div class="field">
+    Orthodontic coverage 
+    <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :orthocoverage, "n" %>
+	<%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
- Dental coverage
-    <%= f.radio_button :dentalcoverage, "y" %>
+  </div>
+
+  <div class="field">
+    Dental coverage
+    <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :dentalcoverage, "n" %>
+	<%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, false %>
     <%= f.label :No %>
-</div>
-  <div class="field">
-    Insurance company name <br />
-    <%= f.text_field :insurancecompany %>
   </div>
+
   <div class="field">
-    Insurance company address <br />
-    <%= f.text_field :insurancecompany_add %>
+    Insurance Company Name <br />
+    <%= f.text_field :Insurance_Company_Primary_Name %>
   </div>
+
   <div class="field">
-    Insurance company phone<br />
-    <%= f.text_field :insurancecompany_ph %>
+    Insurance Company Address1 <br />
+    <%= f.text_field :Insurance_Company_Primary_Address1 %>
   </div>
+ 
   <div class="field">
-    Group # (Plan, Local or Policy #)<br />
-    <%= f.text_field :group %>
+    Insurance Company Address2 <br />
+    <%= f.text_field :Insurance_Company_Primary_Address2 %>
   </div>
+
   <div class="field">
-   Insured’s Name<br />
-    <%= f.text_field :insureds_name %>
+    City <br />
+    <%= f.text_field :Insurance_Company_Primary_City %>
   </div>
+
   <div class="field">
-    Insured’s Birthdate<br />
-    <%= f.date_select :insureds_birthdate %>
+    State <br />
+    <%= f.text_field :Insurance_Company_Primary_State %>
   </div>
+
   <div class="field">
-    <%= f.label :Relation %><br />
-    <%= f.text_field :insureds_relation %>
-  </div>
-  
- <div class="field">
-    <%= f.label :InsuredsSSN %><br />
-    <%= f.text_field :insureds_SSN %>
-  </div>
-  <div class="field">
-    <%= f.label :InsuredsEmployer %><br />
-    <%= f.text_field :insureds_employer %>
-  </div>
-<h3>Secondary</h3>
-<div class="field">
-Orthodontic coverage 
-    <%= f.radio_button :orthocoverage, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :orthocoverage_sec, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-Dental coverage
-    <%= f.radio_button :dentalcoverage, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :dentalcoverage_sec, "n" %>
-    <%= f.label :No %>
-</div>
-  <div class="field">
-    Insurance Company Name<br />
-    <%= f.text_field :insurancecompany_sec %>
-  </div>
-  <div class="field">
-    Insurance Company Address<br />
-    <%= f.text_field :insurancecompany_add_sec %>
+    Zip <br />
+    <%= f.text_field :Insurance_Company_Primary_Postal_Code %>
   </div>
 
   <div class="field">
     Insurance Company Phone<br />
-    <%= f.text_field :insurancecompany_ph_sec %>
+    <%= f.text_field :Insurance_Company_Primary_Phone %>
   </div>
+
   <div class="field">
     Group # (Plan, Local or Policy #)<br />
-    <%= f.text_field :group_sec %>
+    <%= f.text_field :Insurance_Company_Primary_Group_Plan_Local_Policy_Number %>
   </div>
+
   <div class="field">
-   Insureds Name<br />
-    <%= f.text_field :insureds_name_sec %>
+   Insured’s Firstname<br />
+    <%= f.text_field :Insurance_Company_Primary_Insured_Name_First %>
   </div>
+
   <div class="field">
-   Insureds Birthdate<br />
-    <%= f.date_select :insureds_birthdate_sec %>
+   Insured’s Lastname<br />
+    <%= f.text_field :Insurance_Company_Primary_Insured_Name_Last %>
   </div>
+
   <div class="field">
-    <%= f.label :Relation %><br />
-    <%= f.text_field :insureds_relation_sec %>
+    Insured’s Birthdate<br />
+    <%= f.date_select :Insurance_Company_Primary_Insured_Birthdate%>
+  </div>
+
+  <div class="field">
+    Insured’s Relation <br />
+    <%= f.text_field :Insurance_Company_Primary_Insured_Relationship %>
   </div>
   
- <div class="field">
-    <%= f.label :InsuredsSSN %> <br />
-    <%= f.text_field :insureds_SSN_sec %>
-  </div>
   <div class="field">
-    <%= f.label :InsuredsEmployer %><br />
-    <%= f.text_field :insureds_employer_sec %>
+    Insured's Social Security Number <br />
+    <%= f.text_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
   </div>
-<p>In the event of an emergency, is there someone
-who lives near you that we should contact?</p>
-<div class="field">
-    <%= f.label :Name %><br />
-    <%= f.text_field :emergencyperson_name %>
-  </div>
- <div class="field">
-    <%= f.label :Relation %><br />
-    <%= f.text_field :emergencyperson_relation %>
-  </div>
+
   <div class="field">
-    <%= f.label :Workphone %><br />
-    <%= f.text_field :emergencyperson_wkph %>
+    Insured's Employer <br />
+    <%= f.text_field :Insurance_Company_Primary_Insured_Employer_Name %>
   </div>
-<div class="field">
-    <%= f.label :Homephone %><br />
-    <%= f.text_field :emergencyperson_hmph %>
-</div>
+
+<h3>Secondary</h3>
+
+ <div class="field">
+    Orthodontic coverage 
+    <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+    Dental coverage
+    <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+    Insurance Company Name <br />
+    <%= f.text_field :Insurance_Company_Secondary_Name %>
+  </div>
+
+  <div class="field">
+    Insurance Company Address1 <br />
+    <%= f.text_field :Insurance_Company_Secondary_Address1 %>
+  </div>
+
+  <div class="field">
+    Insurance Company Address2 <br />
+    <%= f.text_field :Insurance_Company_Secondary_Address2 %>
+  </div>
+
+  <div class="field">
+    City <br />
+    <%= f.text_field :Insurance_Company_Secondary_City %>
+  </div>
+
+  <div class="field">
+    State <br />
+    <%= f.text_field :Insurance_Company_Secondary_State %>
+  </div>
+
+  <div class="field">
+    Zip <br />
+    <%= f.text_field :Insurance_Company_Secondary_Postal_Code %>
+  </div>
+
+  <div class="field">
+    Insurance Company Phone<br />
+    <%= f.text_field :Insurance_Company_Secondary_Phone %>
+  </div>
+
+  <div class="field">
+    Group # (Plan, Local or Policy #)<br />
+    <%= f.text_field :Insurance_Company_Secondary_Group_Plan_Local_Policy_Number %>
+  </div>
+
+  <div class="field">
+   Insured’s Firstname<br />
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Name_First %>
+  </div>
+
+  <div class="field">
+   Insured’s Lastname<br />
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Name_Last %>
+  </div>
+
+  <div class="field">
+    Insured’s Birthdate<br />
+    <%= f.date_select :Insurance_Company_Secondary_Insured_Birthdate%>
+  </div>
+
+  <div class="field">
+    Insured’s Relation <br />
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Relationship %>
+  </div>
+
+  <div class="field">
+    Insured's Social Security Number <br />
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
+  </div>
+
+  <div class="field">
+    Insured's Employer <br />
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Employer_Name %>
+  </div>
+
 </fieldset>
 
 <fieldset>
 <legend>Medical History</legend>
+
 <p>Primary</p>
-<div class="field">
-    <%= f.radio_button :personalphysician, "y" %>
+ 
+  <div class="field">
+	Do you have a personal physician?
+    <%= f.radio_button :Medical_History_Do_You_Have_Personal_Physician, "y" %>
     <%= f.label :Yes %>
-	<%= f.radio_button :personalphysician, "n" %>
+	<%= f.radio_button :Medical_History_Do_You_Have_Personal_Physician, "n" %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :physiciansName %><br />
-    <%= f.text_field :physicians_name %>
-</div>
-<div class="field">
-    <%= f.label :physiciansph %><br />
-    <%= f.text_field :physicians_ph %>
-</div>
-<div class="field">
-    <%= f.label :Lastvisitdate %><br />
-    <%= f.date_select :physician_lastvisitdate %>
-</div>
+  </div>
 
-<div class="field">
-    <%= f.radio_button :current_physicalhealth, "good" %>
+  <div class="field">
+    Physician's Firstname <br />
+    <%= f.text_field :Medical_History_Personal_Physician_Name_First %>
+  </div>
+
+  <div class="field">
+    Physician's Lastname <br />
+    <%= f.text_field :Medical_History_Personal_Physician_Name_Last %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Phone %><br />
+    <%= f.text_field :Medical_History_Personal_Physician_Phone %>
+  </div>
+
+  <div class="field">
+    Date of last visit <br />
+    <%= f.date_select :Medical_History_Personal_Physician_Date_Of_Last_Visit %>
+  </div>
+ 
+  <div class="field">
+	Your current physical health is:
+    <%= f.radio_button :Medical_History_Current_Physical_Health, "good" %>
     <%= f.label :Good %>
-	<%= f.radio_button :current_physicalhealth, "fair" %>
+	<%= f.radio_button :Medical_History_Current_Physical_Health, "fair" %>
     <%= f.label :Fair %>
-	<%= f.radio_button :current_physicalhealth, "poor" %>
+	<%= f.radio_button :Medical_History_Current_Physical_Health, "poor" %>
     <%= f.label :Poor %>
-</div>
-<div class="field">
-    <%= f.radio_button :currently_underphysician, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :currently_underphysician, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :whyphysician %><br />
-    <%= f.text_area :why_underphysician %>
-</div>
-<div class="field">
-    <%= f.radio_button :currently_underprescription, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :currently_underprescription, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :prescriptionlistCompanyName %><br />
-    <%= f.text_field :prescriptionlist %>
-</div>
-<div class="field">
-    <%= f.radio_button :birthcontrolpills, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :birthcontrolpills, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :pregnant, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :pregnant, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :pregnancyweek %><br />
-    <%= f.text_field :pregnancyweek %>
-</div>
-<div class="field">
-    <%= f.radio_button :nursing, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :nursing, "n" %>
-    <%= f.label :No %>
-</div>
-<p>Have you ever had any of the following
-diseases or medical problems?</p>
-<div class="field">
-    <%= f.radio_button :abnormalbleeding, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :abnormalbleeding, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :artificialbones_or_joints_or_valves, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :artificialbones_or_joints_or_valves, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :asthama_or_arthritis, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :asthama_or_arthritis, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :bloodtransfusion, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :bloodtransfusion, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :cancer_or_chemotherepy, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :cancer_or_chemotherepy, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :congenital_heartdefect, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :congenital_heartdefect, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :diabetes, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :diabetes, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :difficultybreathing, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :difficultybreathing, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :drug_or_alcoholabuse, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :drug_or_alcoholabuse, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :emphysema, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :emphysema, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :epilepsy_or_seizures_or_fainting, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :epilepsy_or_seizures_or_fainting, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :feverblisters_or_herpes, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :feverblisters_or_herpes, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :glaucoma, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :glaucoma, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :heartattack_or_stroke, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :heartattack_or_stroke, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :heartmurmur, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :heartmurmur, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :heartsurgery_or_pacemaker, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :heartsurgery_or_pacemaker, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :hemophilia, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :hemophilia, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :hepatitis, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :hepatitis, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :high_or_lowbloodpressure, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :high_or_lowbloodpressure, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :HIV_or_AIDS, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :HIV_or_AIDS, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :hospitalized_reason, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :hospitalized_reason, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :kidneyproblems, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :kidneyproblems, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :mitralvalveprolapse, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :mitralvalveprolapse, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :psychiatricproblems, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :psychiatricproblems, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :radiationtreatment, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :radiationtreatment, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :rheumatic_or_scarletfever, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :rheumatic_or_scarletfever, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :severe_or_frequentheadaches, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :severe_or_frequentheadaches, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :shingles, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :shingles, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :sicklecelldisease_or_traits, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :sicklecelldisease_or_traits, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :sinusproblems, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :sinusproblems, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :tuberculosis, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :tuberculosis, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :ulcers_or_colitis, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :ulcers_or_colitis, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :venerealdisease, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :venerealdisease, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :seriousmedicalconditions %><br />
-    <%= f.text_field :serious_medicalconditions %>
-</div>
-<p>Are you allergic to any of the following?</p>
-<div class="field">
-    <%= f.radio_button :aspirin, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :aspirin, "n" %>
-    <%= f.label :No %>
-</div>
+  </div>
 
-<div class="field">
-    <%= f.radio_button :anymetals_or_plastics, "y" %>
+  <div class="field">
+	Are you currently under the care of a physician?
+    <%= f.radio_button :Medical_History_Currently_Under_The_Care_Of_A_Physician, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :anymetals_or_plastics, "n" %>
+	<%= f.radio_button :Medical_History_Currently_Under_The_Care_Of_A_Physician, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :codeine, "y" %>
+  </div>
+
+  <div class="field">
+    Please Explain:<br />
+    <%= f.text_area :Medical_History_Currently_Under_The_Care_Of_A_Physician_Description %>
+  </div>
+
+  <div class="field">
+	Are you taking any prescription / over-the-counter drugs?
+    <%= f.radio_button :Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :codeine, "n" %>
+	<%= f.radio_button :Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :dentalanesthetics, "y" %>
+  </div>
+
+  <div class="field">
+    Please list each one:<br />
+    <%= f.text_area :Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs_List %> 
+  </div>
+  
+  <p>For Women: </p>
+  <div class="field">
+	Are you taking birth control pills?
+    <%= f.radio_button :Medical_History_Currently_Taking_Birth_Control_Pills, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :dentalanesthetics, "n" %>
+	<%= f.radio_button :Medical_History_Currently_Taking_Birth_Control_Pills, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :erythromycin, "y" %>
+  </div>
+
+  <div class="field">
+	Are you pregnant?
+    <%= f.radio_button :Medical_History_Currently_Pregnant, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :erythromycin, "n" %>
+	<%= f.radio_button :Medical_History_Currently_Pregnant, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :latex, "y" %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :Pregnancyweek %><br />
+    <%= f.text_field :Medical_History_Weeks_Pregnant %>
+  </div>
+
+  <div class="field">
+	Are you nursing?
+    <%= f.radio_button :Medical_History_Currently_Nursing, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :latex, "n" %>
+	<%= f.radio_button :Medical_History_Currently_Nursing, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :penicillin, "y" %>
+  </div>
+
+  <p>Have you ever had any of the following
+  diseases or medical problems?</p>
+
+  <div class="field">
+	Abnormal Bleeding
+    <%= f.radio_button :Medical_History_Abnormal_Bleeding, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :penicillin, "n" %>
+	<%= f.radio_button :Medical_History_Abnormal_Bleeding, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :tetracycline, "y" %>
+  </div>
+
+  <div class="field">
+	Anemia
+    <%= f.radio_button :Medical_History_Anemia, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :tetracycline, "n" %>
+	<%= f.radio_button :Medical_History_Anemia, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :other, "y" %>
+  </div>
+
+  <div class="field">
+	Artificial Bones / Joints / Valves
+    <%= f.radio_button :Medical_History_Artificial_Bones_Joints_Valves, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :other, "n" %>
+	<%= f.radio_button :Medical_History_Artificial_Bones_Joints_Valves, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :drugslist_allergicto %><br />
-    <%= f.text_field :drugslist_allergicto %>
-</div>
+  </div>
+
+  <div class="field">
+	Asthma /Arthritis
+    <%= f.radio_button :Medical_History_Asthma, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Asthma, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Blood Transfusion
+    <%= f.radio_button :Medical_History_Blood_Transfusion, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Blood_Transfusion, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Cancer / Chemotherapy
+    <%= f.radio_button :Medical_History_Cancer, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Cancer, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Congenital Heart Defect
+    <%= f.radio_button :Medical_History_Congenital_Heart_Defect, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Congenital_Heart_Defect, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Diabetes
+    <%= f.radio_button :Medical_History_Diabetes, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Diabetes, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Difficulty Breathing
+    <%= f.radio_button :Medical_History_Difficulty_Breathing, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Difficulty_Breathing, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Drug / Alcohol Abuse
+    <%= f.radio_button :Medical_History_Drug_Abuse, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Drug_Abuse, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Emphysema
+    <%= f.radio_button :Medical_History_Emphysema, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Emphysema, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Epilepsy / Seizures / Fainting
+    <%= f.radio_button :Medical_History_Epilepsy, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Epilepsy, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Fever Blisters / Herpes
+    <%= f.radio_button :Medical_History_Fever_Blisters, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Fever_Blisters, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Glaucoma
+    <%= f.radio_button :Medical_History_Glaucoma, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Glaucoma, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Heart Attack / Stroke
+    <%= f.radio_button :Medical_History_Heart_Attack_Or_Stroke, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Heart_Attack_Or_Stroke, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Heart Murmur
+    <%= f.radio_button :Medical_History_Heart_Murmur, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Heart_Murmur, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Heart Surgery / Pacemaker
+    <%= f.radio_button :Medical_History_Heart_Surgery_Or_Pacemaker, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Heart_Surgery_Or_Pacemaker, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Hemophilia
+    <%= f.radio_button :Medical_History_Hemophilia, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Hemophilia, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Hepatitis
+    <%= f.radio_button :Medical_History_Hepatitis, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Hepatitis, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	High / Low Blood Pressure
+    <%= f.radio_button :Medical_History_High_Or_Low_Blood_Pressure, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_High_Or_Low_Blood_Pressure, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	HIV+ / AIDS
+    <%= f.radio_button :Medical_History_AIDS, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_AIDS, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Hospitalized for Any Reason
+    <%= f.radio_button :Medical_History_Hospitalized_For_Any_Reason, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Hospitalized_For_Any_Reason, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Kidney Problems
+    <%= f.radio_button :Medical_History_Kidney_Problems, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Kidney_Problems, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Mitral Valve Prolapse
+    <%= f.radio_button :Medical_History_Mitral_Valve_Prolapse, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Mitral_Valve_Prolapse, false %>
+    <%= f.label :No %>
+  </div>
+ 
+  <div class="field">
+	Psychiatric Problems
+    <%= f.radio_button :Medical_History_Psychiatric_Problems, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Psychiatric_Problems, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Radiation Treatment
+    <%= f.radio_button :Medical_History_Radiation_Treatment, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Radiation_Treatment, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Rheumatic / Scarlet Fever
+    <%= f.radio_button :Medical_History_Rheumatic_Fever_Or_Scarletfever, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Rheumatic_Fever_Or_Scarletfever, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Severe / Frequent Headaches
+    <%= f.radio_button :Medical_History_Frequent_Headaches, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Frequent_Headaches, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Shingles
+    <%= f.radio_button :Medical_History_Shingles, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Shingles, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Sickle Cell Disease / Traits
+    <%= f.radio_button :Medical_History_Sickle_Cell_Disease_Or_Traits, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Sickle_Cell_Disease_Or_Traits, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Sinus Problems
+    <%= f.radio_button :Medical_History_Sinus_Problems, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Sinus_Problems, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Tuberculosis (TB)
+    <%= f.radio_button :Medical_History_Tuberculosis, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Tuberculosis, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Ulcers / Colitis
+    <%= f.radio_button :Medical_History_Ulcers, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Ulcers, false %>
+    <%= f.label :No %>
+  </div>
+ 
+  <div class="field">
+	Venereal Disease
+    <%= f.radio_button :Medical_History_Venereal_Disease, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Medical_History_Venereal_Disease, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+    Please list any serious medical condition(s) that you have ever had:<br />
+    <%= f.text_area :Medical_History_Serious_Medical_Issues %>
+  </div>
+
+<p>Are you allergic to any of the following?</p>
+
+  <div class="field">
+	Aspirin
+    <%= f.radio_button :Allergic_To_Aspirin, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Aspirin, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Any Metals/Plastics
+    <%= f.radio_button :Allergic_To_Metals_Or_Plastics, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Metals_Or_Plastics, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Codeine
+    <%= f.radio_button :Allergic_To_Codeine, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Codeine, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Dental Anesthetics
+    <%= f.radio_button :Allergic_To_Dental_Anesthetics, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Dental_Anesthetics, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Erythromycin
+    <%= f.radio_button :Allergic_To_Erythromycin, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Erythromycin, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Latex
+    <%= f.radio_button :Allergic_To_Latex, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Latex, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Penicillin
+    <%= f.radio_button :Allergic_To_Penicillin, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Penicillin, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Tetracycline
+    <%= f.radio_button :Allergic_To_Tetracycline, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Tetracycline, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Other
+    <%= f.radio_button :Allergic_To_Other, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Allergic_To_Other, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+    Please list any other drugs/materials that you are allergic to:<br />
+    <%= f.text_area :Allergic_To_Other_Detail %>
+  </div>
 
 </fieldset>
 
 <fieldset>
 <legend>Dental History</legend>
-<div class="field">
-    <%= f.label :concerns_accomplished_byorthodontics %><br />
-    <%= f.text_field :concerns_accomplished_byorthodontics %>
-</div>
-<div class="field">
-    <%= f.radio_button :undogone_orthodontictreatment, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :undogone_orthodontictreatment, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :problemwith_previousdentalwork, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :problemwith_previousdentalwork, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :pain_jawjoint, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :pain_jawjoint, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :current_dentalhealth, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :current_dentalhealth, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :likeyoursmile, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :likeyoursmile, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :gumsbleed, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :gumsbleed, "n" %>
-    <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :speechproblems, "y" %>
-    <%= f.label :Yes %>
-	<%= f.radio_button :speechproblems, "n" %>
-    <%= f.label :No %>
-</div>
 
-<div class="field">
-    <%= f.radio_button :breaththrumouth, "y" %>
+  <div class="field">
+    What are the main concerns that you would like orthodontics to accomplish?<br />
+    <%= f.text_area :Dental_History_Concerns_Tobe_Accomplished_By_Orthodontics %>
+  </div>
+
+  <div class="field">
+	Have you ever had or been evaluated for orthodontic treatment?
+    <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :breaththrumouth, "n" %>
+	<%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :speechproblem, "y" %>
+  </div>
+
+  <p>Have you ever had a serious / difficult problem associated
+     with any previous dental work?
+  <div class="field">
+    <%= f.radio_button :Dental_History_Previous_Dental_Work_Issues, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :speechproblem, "n" %>
+	<%= f.radio_button :Dental_History_Previous_Dental_Work_Issues, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :missing_or_extra_permanantteeth, "y" %>
+  </div></p>
+
+  <p>Do you now or have you ever experienced pain /
+     discomfort in your jaw joint (TMJ / TMD)?
+  <div class="field">
+    <%= f.radio_button :Dental_History_TMJ_TMD_Issues, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :missing_or_extra_permanantteeth, "n" %>
+	<%= f.radio_button :Dental_History_TMJ_TMD_Issues, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.radio_button :evertaken_phenfen, "y" %>
+  </div></p>
+
+  <p>Your current dental health is:
+  <div class="field">
+    <%= f.radio_button :Dental_History_Current_Dental_Health, "good" %>
+    <%= f.label :Good %>
+	<%= f.radio_button :Dental_History_Current_Dental_Health, "fair" %>
+    <%= f.label :Fair %>
+	<%= f.radio_button :Dental_History_Current_Dental_Health, "Poor" %>
+    <%= f.label :Poor %>
+  </div></p>
+
+  <div class="field">
+	Do you like your smile?
+    <%= f.radio_button :Dental_History_Like_Smile, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :evertaken_phenfen, "n" %>
+	<%= f.radio_button :Dental_History_Like_Smile, false %>
     <%= f.label :No %>
-</div>
-<div class="field">
-    <%= f.label :when_phenfen %><br />
-    <%= f.text_field :when_phenfen %>
-</div>
-<div class="field">
-    <%= f.radio_button :smoke_or_usetobacco, "y" %>
+  </div>
+
+  <div class="field">
+	Gums ever bleed?
+    <%= f.radio_button :Dental_History_Bleeding_Gums, true %>
     <%= f.label :Yes %>
-	<%= f.radio_button :smoke_or_usetobacco, "n" %>
+	<%= f.radio_button :Dental_History_Bleeding_Gums, false %>
     <%= f.label :No %>
-</div>
-<div class="actions">
+  </div>
+
+  <div class="field">
+	Have you ever had an injury to your:
+    <%= check_box_tag "injury_mouth", "mouth" %>
+    Mouth
+	<%= check_box_tag "injury_teeth", "teeth" %>
+    Teeth
+	<%= check_box_tag "injury_chin", "chin" %>
+    Chin    
+  </div>
+
+  <div class="field">
+	Do you have any speech problems?
+    <%= f.radio_button :Dental_History_Currently_Have_Speech_Problems, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Dental_History_Currently_Have_Speech_Problems, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="field">
+	Do you generally breathe through your mouth?
+    <%= f.radio_button :Dental_History_Breath_Through_Mouth, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Dental_History_Breath_Through_Mouth, false %>
+    <%= f.label :No %>
+  </div>
+
+  <% a = ["while_awake", "while_sleep"] %>  
+  <div class="field">
+  	If yes, please check:
+      <%= check_box_tag "while_awake", a[0] %>
+      While Awake
+  	<%= check_box_tag "while_sleep", a[1] %>
+      While Sleep
+   </div>
+
+  <div class="field">
+	Do you have any missing or extra permanent teeth?
+    <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, false %>
+    <%= f.label :No %>
+  </div>
+
+ <p>Have you ever taken Phen-Fen? (Also known as Redux or Pondimin)
+  <div class="field">
+    <%= f.radio_button :Dental_History_Ever_Taken_PhenFen_Redux_Pondimin, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Dental_History_Ever_Taken_PhenFen_Redux_Pondimin, false %>
+    <%= f.label :No %>
+  </div></p>
+
+  <div class="field">
+    If yes, when?<br />
+    <%= f.text_field :Dental_History_When_Taken_PhenFen_Redux_Pondimin %>
+  </div>
+
+  <div class="field">
+	Do you smoke or use tobacco in any form?
+    <%= f.radio_button :Dental_History_Tobacco_Smoke, true %>
+    <%= f.label :Yes %>
+	<%= f.radio_button :Dental_History_Tobacco_Smoke, false %>
+    <%= f.label :No %>
+  </div>
+
+  <div class="actions">
     <%= f.submit  %>
-</div>
+  </div>
 
 </fieldset>
 
