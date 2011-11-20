@@ -12,7 +12,9 @@ class PatientsController < ApplicationController
     @patient = Patient.new(params[:patient])
     @patient.user_id = current_user.id
     @appointment = Appointment.all(:conditions => ['email = ?', current_user.email]).first
+    if @appointment
     @appointment.patient_id = @patient.id
+    end
     respond_to do |format|
     if @patient.save
       format.html { redirect_to(patients_path, :id => nil, :notice => 'Profile saved successfully.') }

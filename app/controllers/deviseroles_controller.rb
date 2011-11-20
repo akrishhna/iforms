@@ -2,13 +2,10 @@ class DeviserolesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @@patientname = nil
-    @@doctorname = nil
      case current_user.role
        when 'patient'
        @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]).first
-       @@patientname = @patient.firstname
-       if @@patientname.blank?
+       if @patient.blank?
          redirect_to :controller=>"patients", :action=>"new"
        else
          redirect_to :controller=>"patients", :action=>"index"
@@ -16,8 +13,7 @@ class DeviserolesController < ApplicationController
        
        when 'doctor'
        @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
-       @@doctorname = @doctor.firstname
-       if @@doctorname.blank?
+       if @doctor.blank?
          redirect_to :controller=>"doctors", :action=>"new"
        else
          redirect_to :controller=>"doctors", :action=>"index"

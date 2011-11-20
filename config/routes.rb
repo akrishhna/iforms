@@ -3,7 +3,7 @@ Iforms::Application.routes.draw do
 
   get "appointments/index"
 
-  get "appointments/show"
+ # get "appointments/show"
 
   get "pdfuploads/index"
 
@@ -17,13 +17,16 @@ Iforms::Application.routes.draw do
 
   devise_for :users
 get "deviseroles/index"
-  get "doctors/index"
+  #get "doctors/index"
 
   get "doctors/new"
 
   get "doctors/show"
 
-  get "patients/index"
+ # get "patients/index"
+  match "patient/appointments" => 'patients#index'#, :as =>"patients/appointments"
+  match "appointments/show" => 'appointments#show', :via => :post
+  match "doctor/appointments" => 'doctors#index'
 
   get "patients/new"
   resources :pdfuploads

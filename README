@@ -151,7 +151,7 @@ to the development database. Passing an argument will connect you to a different
 database, like <tt>rails dbconsole production</tt>. Currently works for MySQL,
 PostgreSQL and SQLite 3.
 
-== Description of Contents
+== Desc of Contents
 
 The default directory structure of a generated Ruby on Rails application:
 

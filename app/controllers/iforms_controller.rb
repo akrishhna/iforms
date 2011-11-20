@@ -69,13 +69,15 @@ class IformsController < ApplicationController
   #     end
     
   @iform = Iform.new(params[:iform])
+  @age = Date.today.year - @iform.Self_Birthdate.year
+  @age -= 1 if Date.today < @iform.Self_Birthdate + age.years and birthdate.month > now.month #and birthdate.day > now.day
   str = @iform.Self_Name_Honorific + "_" + @iform.Self_Name_First
   pathx = "/pdffiles/#{str}.pdf"
   @iform.path = pathx
   
   respond_to do |format|
             
-      if @iform.save
+      if @iform.save!
          @iform.appointment_id = session[:appointment_id]
          @while_awake = params[:while_awake]
          @while_sleep = params[:while_sleep]
@@ -193,27 +195,27 @@ class IformsController < ApplicationController
           "InsuredBday_" => @iform.Insurance_Company_Secondary_Insured_Birthdate,
           "Insured&#8217;s SS_2" => @iform.Insurance_Company_Secondary_Insured_Social_Security_Number,
           "Insured&#8217;s Employer_2" => @iform.Insurance_Company_Secondary_Insured_Employer_Name,
-          # "His  Her Name_2" => @iform.Emergency_Contact_Name_First+ " " + @iforms.Emergency_Contact_Name_Last,
-          # "Relation_4" => @iform.Emergency_Contact_Relationship,
-          # "Wk_areacode" => @iform.Emergency_Contact_Phone_Work.slice(0,3),
-          # "emergency_phone_wk" => @iform.Emergency_Contact_Phone_Work.slice(3,9),
-          # "Hm_areacode" => @iform.Emergency_Contact_Phone_Home.slice(0,3),
-          # "emergency_phone_hm" => @iform.Emergency_Contact_Phone_Home.slice(3,9),
+          "His  Her Name_2" => @iform.Emergency_Contact_Name_First+" "+ @iforms.Emergency_Contact_Name_Last,
+          "Relation_4" => @iform.Emergency_Contact_Relationship,
+          "Wk_areacode" => @iform.Emergency_Contact_Phone_Work.slice(0,3),
+          "emergency_phone_wk" => @iform.Emergency_Contact_Phone_Work.slice(3,9),
+          "Hm_areacode" => @iform.Emergency_Contact_Phone_Home.slice(0,3),
+          "emergency_phone_hm" => @iform.Emergency_Contact_Phone_Home.slice(3,9),
           #medical history
           #"Physician_yes" =>
 
-          "Physician&#8217;s Name" => @iform.Medical_History_Personal_Physician_Name_First+" "+@iform.Medical_History_Personal_Physician_Name_Last,
-          "Physician_areacode" => @iform.Medical_History_Personal_Physician_Phone.slice(0,3),
-          "Physician_phone" => @iform.Medical_History_Personal_Physician_Phone.slice(3,9),
-          "Date of last visit" => @iform.Medical_History_Personal_Physician_Date_Of_Last_Visit,
+          "Physician&#8217;s Name" => @iform.Med_His_Personal_Physician_Name_First+" "+@iform.Med_His_Personal_Physician_Name_Last,
+          "Physician_areacode" => @iform.Med_His_Personal_Physician_Phone.slice(0,3),
+          "Physician_phone" => @iform.Med_His_Personal_Physician_Phone.slice(3,9),
+          "Date of last visit" => @iform.Med_His_Personal_Physician_Date_Of_Last_Visit,
           "Health_#{@current_physical_health}" => "Yes",
           "Physician_#{@currently_under_physician}" => "Yes",
-          "Please explain" => @iform.Medical_History_Currently_Under_The_Care_Of_A_Physician_Description,
+          "Please explain" => @iform.Med_His_Currently_Under_The_Care_Of_A_Physician_Desc,
           "Drugs_#{@currently_under_prescription}" => "Yes",
-          "Are you taking any prescription  over-the-counter drugs" => @iform.Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs_List,
+          "Are you taking any prescription  over-the-counter drugs" => @iform.Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs_List,
           "Pills_#{@Currently_Taking_Birth_Control_Pills}" => "Yes",
           "Pregnant_#{@Currently_Pregnant}" => "Yes",
-          "Week#" => @iform.Medical_History_Weeks_Pregnant,
+          "Week#" => @iform.Med_His_Weeks_Pregnant,
           "Nursing_#{@Currently_Nursing}" =>  "Yes",
           "Bleeding #{@Abnormal_Bleeding}" => "Yes",
           "Anemia #{@Anemia}" => "Yes",
@@ -249,7 +251,7 @@ class IformsController < ApplicationController
           "TB #{@Tuberculosis}" => "Yes",
           "Ulcer #{@Ulcers}" => "Yes",
           "Venereal Disease #{@Venereal_Disease}" => "Yes",
-          "Any serious medical conditions" => @iform.Medical_History_Serious_Medical_Issues,
+          "Any serious medical conditions" => @iform.Med_His_Serious_Medical_Issues,
           "Aspirin #{@Aspirin}" => "Yes",
           "Metals #{@Metals_Or_Plastics}" => "Yes",
           "Codeine #{@Codeine}" => "Yes",
@@ -393,61 +395,61 @@ class IformsController < ApplicationController
 
     current_physical_health = ["good", "fair","poor"]
     current_physical_health.each do |i|
-      if @iform.Medical_History_Current_Physical_Health == i
+      if @iform.Med_His_Current_Physical_Health == i
         @current_physical_health = i
       end
     end
 
-    case @iform.Medical_History_Currently_Under_The_Care_Of_A_Physician
+    case @iform.Med_His_Currently_Under_The_Care_Of_A_Physician
     when true
       @currently_under_physician = "yes"
     when false
       @currently_under_physician = "no"
     end
 
-    case @iform.Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs
+    case @iform.Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs
     when true
       @currently_under_prescription = "yes"
     when false
       @currently_under_prescription = "no"
     end
 
-    case @iform.Medical_History_Currently_Taking_Birth_Control_Pills
+    case @iform.Med_His_Currently_Taking_Birth_Control_Pills
     when true
       @Currently_Taking_Birth_Control_Pills = "yes"
     when false
       @Currently_Taking_Birth_Control_Pills = "no"
     end
 
-    case @iform.Medical_History_Currently_Pregnant
+    case @iform.Med_His_Currently_Pregnant
     when true
       @Currently_Pregnant = "yes"
     when false
       @Currently_Pregnant = "no"
     end
 
-    case @iform.Medical_History_Currently_Nursing
+    case @iform.Med_His_Currently_Nursing
     when true
       @Currently_Nursing = "yes"
     when false
       @Currently_Nursing = "no"
     end
 
-    case @iform.Medical_History_Abnormal_Bleeding
+    case @iform.Med_His_Abnormal_Bleeding
     when true
       @Abnormal_Bleeding = "Y"
     when false
       @Abnormal_Bleeding = "N"
     end
 
-    case @iform.Medical_History_Anemia
+    case @iform.Med_His_Anemia
     when true
       @Anemia = "Y"
     when false
       @Anemia = "N"
     end
 
-    case @iform.Medical_History_Artificial_Bones_Joints_Valves
+    case @iform.Med_His_Artificial_Bones_Joints_Valves
     when true
       @Bones_Joints_Valves = "Y"
     when false
@@ -455,217 +457,217 @@ class IformsController < ApplicationController
       @Bones_Joints_Valves = "N"
     end
 
-    case @iform.Medical_History_Asthma
+    case @iform.Med_His_Asthma
     when true
       @Asthma = "Y"
     when false
       @Asthma = "N"
     end
 
-    case @iform.Medical_History_Blood_Transfusion
+    case @iform.Med_His_Blood_Transfusion
     when true
       @Blood_Transfusion = "Y"
     when false
       @Blood_Transfusion = "N"
     end
 
-    case @iform.Medical_History_Cancer
+    case @iform.Med_His_Cancer
     when true
       @Cancer = "Y"
     when false
       @Cancer = "N"
     end
 
-    case @iform.Medical_History_Congenital_Heart_Defect
+    case @iform.Med_His_Congenital_Heart_Defect
     when true
       @Congenital_Heart_Defect = "Y"
     when false
       @Congenital_Heart_Defect = "N"
     end
 
-    case @iform.Medical_History_Diabetes
+    case @iform.Med_His_Diabetes
     when true
       @Diabetes = "Y"
     when false
       @Diabetes = "N"
     end
 
-    case @iform.Medical_History_Difficulty_Breathing
+    case @iform.Med_His_Difficulty_Breathing
     when true
       @Difficulty_Breathing = "Y"
     when false
       @Difficulty_Breathing = "N"
     end
 
-    case @iform.Medical_History_Drug_Abuse
+    case @iform.Med_His_Drug_Abuse
     when true
       @Drug_Abuse = "Y"
     when false
       @Drug_Abuse = "N"
     end
 
-    case @iform.Medical_History_Emphysema
+    case @iform.Med_His_Emphysema
     when true
       @Emphysema = "Y"
     when false
       @Emphysema = "N"
     end
 
-    case @iform.Medical_History_Epilepsy
+    case @iform.Med_His_Epilepsy
     when true
       @Epilepsy = "Y"
     when false
       @Epilepsy = "N"
     end
 
-    case @iform.Medical_History_Fever_Blisters
+    case @iform.Med_His_Fever_Blisters
     when true
       @Fever_Blisters = "Y"
     when false
       @Fever_Blisters = "N"
     end
 
-    case @iform.Medical_History_Glaucoma
+    case @iform.Med_His_Glaucoma
     when true
       @Glaucoma = "Y"
     when false
       @Glaucoma = "N"
     end
 
-    case @iform.Medical_History_Heart_Attack_Or_Stroke
+    case @iform.Med_His_Heart_Attack_Or_Stroke
     when true
       @Heart_Attack_Or_Stroke = "Y"
     when false
       @Heart_Attack_Or_Stroke = "N"
     end
 
-    case @iform.Medical_History_Heart_Murmur
+    case @iform.Med_His_Heart_Murmur
     when true
       @Heart_Murmur = "Y"
     when false
       @Heart_Murmur = "N"
     end
 
-    case @iform.Medical_History_Heart_Surgery_Or_Pacemaker
+    case @iform.Med_His_Heart_Surgery_Or_Pacemaker
     when true
       @Heart_Surgery_Or_Pacemaker = "Y"
     when false
       @Heart_Surgery_Or_Pacemaker = "N"
     end
 
-    case @iform.Medical_History_Hemophilia
+    case @iform.Med_His_Hemophilia
     when true
       @Hemophilia = "Y"
     when false
       @Hemophilia = "N"
     end
 
-    case @iform.Medical_History_Hepatitis
+    case @iform.Med_His_Hepatitis
     when true
       @Hepatitis = "Y"
     when false
       @Hepatitis = "N"
     end
 
-    case @iform.Medical_History_High_Or_Low_Blood_Pressure
+    case @iform.Med_His_High_Or_Low_Blood_Pressure
     when true
       @High_Or_Low_Blood_Pressure = "Y"
     when false
       @High_Or_Low_Blood_Pressure = "N"
     end
 
-    case @iform.Medical_History_AIDS
+    case @iform.Med_His_AIDS
     when true
       @HIV_or_AIDS = "Y"
     when false
       @HIV_or_AIDS = "N"
     end
 
-    case @iform.Medical_History_Hospitalized_For_Any_Reason
+    case @iform.Med_His_Hospitalized_For_Any_Reason
     when true
       @Hospitalized_For_Any_Reason = "Y"
     when false
       @Hospitalized_For_Any_Reason = "N"
     end
 
-    case @iform.Medical_History_Kidney_Problems
+    case @iform.Med_His_Kidney_Problems
     when true
       @Kidney_Problems = "Y"
     when false
       @Kidney_Problems = "N"
     end
 
-    case @iform.Medical_History_Mitral_Valve_Prolapse
+    case @iform.Med_His_Mitral_Valve_Prolapse
     when true
       @Mitral_Valve_Prolapse = "Y"
     when false
       @Mitral_Valve_Prolapse = "N"
     end
 
-    case @iform.Medical_History_Psychiatric_Problems
+    case @iform.Med_His_Psychiatric_Problems
     when true
       @Psychiatric_Problems = "Y"
     when false
       @Psychiatric_Problems = "N"
     end
 
-    case @iform.Medical_History_Radiation_Treatment
+    case @iform.Med_His_Radiation_Treatment
     when true
       @Radiation_Treatment = "Y"
     when false
       @Radiation_Treatment = "N"
     end
 
-    case @iform.Medical_History_Rheumatic_Fever_Or_Scarletfever
+    case @iform.Med_His_Rheumatic_Fever_Or_Scarletfever
     when true
       @Rheumatic_Fever_Or_Scarletfever = "Y"
     when false
       @rheumatic_or_scarletfever = "N"
     end
 
-    case @iform.Medical_History_Frequent_Headaches
+    case @iform.Med_His_Frequent_Headaches
     when true
       @Frequent_Headaches = "Y"
     when false
       @Frequent_Headaches = "N"
     end
 
-    case @iform.Medical_History_Shingles
+    case @iform.Med_His_Shingles
     when true
       @Shingles = "Y"
     when false
       @Shingles = "N"
     end
 
-    case @iform.Medical_History_Sickle_Cell_Disease_Or_Traits
+    case @iform.Med_His_Sickle_Cell_Disease_Or_Traits
     when true
       @Sickle_Cell_Disease_Or_Traits = "yes"
     when false
       @Sickle_Cell_Disease_Or_Traits = "no"
     end
 
-    case @iform.Medical_History_Sinus_Problems
+    case @iform.Med_His_Sinus_Problems
     when true
       @Sinus_Problems = "Y"
     when false
       @Sinus_Problems = "N"
     end
 
-    case @iform.Medical_History_Tuberculosis
+    case @iform.Med_His_Tuberculosis
     when true
       @Tuberculosis = "Y"
     when false
       @Tuberculosis = "N"
     end
 
-    case @iform.Medical_History_Ulcers
+    case @iform.Med_His_Ulcers
     when true
       @Ulcers = "Y"
     when false
       @Ulcers = "N"
     end
 
-    case @iform.Medical_History_Venereal_Disease
+    case @iform.Med_His_Venereal_Disease
     when true
       @Venereal_Disease = "Y"
     when false

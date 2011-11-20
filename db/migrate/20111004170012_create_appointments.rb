@@ -4,7 +4,10 @@ class CreateAppointments < ActiveRecord::Migration
       t.string :firstname
       t.string :lastname
       t.string :email
-      t.datetime :datetime
+      t.date :date
+      t.string :time_hrs
+      t.string :time_min
+      t.string :AM_PM
       t.string :doctorname
       t.string :formname
       t.datetime :timesent

@@ -1,5 +1,5 @@
 <p><%= @appointment.lastname.capitalize %>,</p>
 <p>Your appointment has been confirmed </p>
-<p>Your appointment is on <%= @appointment.datetime.strftime("%m-%d-%Y  %H:%M") %></p>
+<p>Your appointment is on <%= @appointment.date%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %></p>
 <p>Please signup to Iforms using <%= @appointment.email %>
 and you would be able to fill the form online by <%= link_to 'Clicking here', "http://localhost:3000/" %></p>

@@ -4,8 +4,8 @@
   <title>Iforms</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
   <%= yield :javascript %>
-  <%= stylesheet_link_tag :all %>
-   <%= javascript_include_tag :defaults, "application", "formToWizard" %> 
+  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css","scaffold" %>
+   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application", "formToWizard" %> 
   <%= csrf_meta_tag %>
   
 </head>

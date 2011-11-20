@@ -1,6 +1,6 @@
 class Iform < ActiveRecord::Base
  belongs_to :appointment
- attr_writer :current_step
+ #attr_writer :current_step
  
  #validates_presence_of :email, :firstname, :if => lambda { |o| o.current_step == "aboutyou" }
  #validates_presence_of :spousename, :spouse_employer, :if => lambda { |o| o.current_step == "spouseinformation" }
@@ -43,7 +43,7 @@ class Iform < ActiveRecord::Base
   # validates_format_of :zip, :with => /^\d{5}(-?\d{4})?$/ 
   # validates_format_of :homeph, :workph, :with => /^\d{10}(-?\d{9})?$/
   # validates_format_of :workext, :with => /^\d{4}(-?\d{3})?$/
-  # validate :validate_birthdate
+   #validate :Self_Birthdate
   # validate :validate_lastvisitdate
   # validate :validate_todaydate
   # validate :validate_age
@@ -63,9 +63,18 @@ class Iform < ActiveRecord::Base
   #     errors.add(:lastvisitdate, "please enter valid date")
   #   end 
   # end
-  # def validate_birthdate
-  #   if birthdate > Date.today
-  #     errors.add(:birthdate, "please enter valid date")
-  #   end 
-  # end
+  # def selfbirthdate
+  #       if selfbirthdate >= Date.today
+  #         errors.add(:Self_Birthdate, "please enter valid date")
+  #       end 
+  #   end
+  
+  validates_presence_of :Self_Name_First, :Self_Name_Honorific
+  validates_format_of :Self_Name_First, :Self_Name_Honorific, :with => /^[A-Za-z]+$/ , :unless => "Self_Name_First.blank? or Self_Name_Honorific.blank?"
+  validate :validate_Self_Birthdate
+      def validate_Self_Birthdate
+        if !Self_Birthdate.blank? and Self_Birthdate >= Date.today
+          errors.add(:Self_Birthdate)
+        end
+      end
 end

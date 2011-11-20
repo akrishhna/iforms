@@ -1,10 +1,12 @@
+
+
 <div class = "form_container">
 <%= form_for @appointment do |f| %>
   <% if @appointment.errors.any? %>
     <div id="error_explanation">
       <h2> Please check the highlighted fields </h2>
    <% a = @appointment.errors.full_messages.count %>
-   <% if a <= 6 %>
+   <% if a <= 10 %>
     <ul>
       <% @appointment.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -28,8 +30,20 @@
     <%= f.text_field :email %>
  </div>
  <div class="field">
-    <%= f.label :datetime %><br />
-    <%= f.datetime_select :datetime %>
+    Appointment Date<br />
+    <%= f.text_field :date %>
+ </div>
+
+ <div class="field">
+    Appointment Time<br />
+    <%= f.select :time_hrs, ["00",1,2,3,4,5,6,7,8,9,10,11] %>
+    <%= f.select :time_min, ["00",5,10,15,20,25,30,35,40,45,50,55] %>
+    <%= f.select :AM_PM, ["AM","PM"]%>
+ </div>
+
+ <div class="field">
+
+    
  </div>
 	
 	<% @doctor = Doctor.first%>
@@ -52,5 +66,9 @@
 </div>
 <% end %>
 </br>
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', doctors_path %>
 </div>
+
+
+
+

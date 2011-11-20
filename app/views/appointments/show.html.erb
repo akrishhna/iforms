@@ -14,8 +14,7 @@
 	<% if i.status == "submitted" %>
 	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :id => i.iform_id %></td>
 	<td><%= i.status.capitalize %></td>
-	<% formsubmittedtime = i.formsubmittedtime.strftime("%m-%d-%Y  %H:%M") %>
-	<td><%= formsubmittedtime %></td>
+	<td><%= @formsubmittedtime %></td>
 	<% else %>
 	<td><%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %></td>
 	<td>Pending</td>
@@ -45,8 +44,7 @@
 	<% if i.status == "submitted" %>
 	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :id =>i.iform_id  %></td>
 	<td>Received</td>
-	<% formsubmittedtime = i.formsubmittedtime.strftime("%m-%d-%Y  %H:%M") %>
-	<td><%= formsubmittedtime %></td>
+	<td><%= @formsubmittedtime %></td>
 	<% else %>
 	<td><%= i.formname %></td>
 	<td>Pending</td>
@@ -60,4 +58,6 @@
 <%= link_to 'Back', :back %>
 </div>
 <% end %>
+
+
 

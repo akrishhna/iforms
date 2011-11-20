@@ -6,13 +6,13 @@ gem 'rake', '0.9.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'devise', '1.1.rc0'
 gem 'dynamic_form'
 gem "will_paginate", "~> 3.0.pre2"
 # Use unicorn as the web server
 # gem 'unicorn'
-#gem 'mysql2', '0.2.7'
+gem 'mysql2','~> 0.2.11'
 # Deploy with Capistrano
 gem 'capistrano'
 gem 'pdftk_forms'

@@ -4,7 +4,7 @@ class CreatePatients < ActiveRecord::Migration
       t.string :firstname
       t.string :lastname
       t.references :user
-
+      t.references :doctor
       t.timestamps
     end
   end

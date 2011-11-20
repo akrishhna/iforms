@@ -33,7 +33,7 @@ class CreateIforms < ActiveRecord::Migration
       t.string :Self_Referred_By, :limit => 50
       t.string :Self_Other_Family_Members, :limit => 50
       t.string :Self_Best_Contact_Method, :limit => 50
-      t.time :Self_Best_Contact_Time
+      t.string :Self_Best_Contact_Time
       t.date :Todays_Date
       t.date :Self_Birthdate
       t.date :Self_General_Dentist_Date_Last_Appointment
@@ -98,55 +98,55 @@ class CreateIforms < ActiveRecord::Migration
       t.string :Emergency_Contact_Phone_Work, :limit => 15
       t.string :Emergency_Contact_Phone_Home, :limit => 15
      # Medical history 
-      t.boolean :Medical_History_Do_You_Have_Personal_Physician
-      t.string :Medical_History_Personal_Physician_Name_First, :limit => 50
-      t.string :Medical_History_Personal_Physician_Name_Last, :limit => 50
-      t.string :Medical_History_Personal_Physician_Phone, :limit => 15
-      t.date :Medical_History_Personal_Physician_Date_Of_Last_Visit
-      t.string :Medical_History_Current_Physical_Health, :limit => 5
-      t.boolean :Medical_History_Currently_Under_The_Care_Of_A_Physician
-      t.string :Medical_History_Currently_Under_The_Care_Of_A_Physician_Description
-      t.boolean :Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs
-      t.string :Medical_History_Currently_Taking_Prescription_Or_Over_The_Counter_Drugs_List
-      t.boolean :Medical_History_Currently_Taking_Birth_Control_Pills
-      t.boolean :Medical_History_Currently_Pregnant
-      t.string :Medical_History_Weeks_Pregnant, :limit => 20
-      t.boolean :Medical_History_Currently_Nursing
-      t.boolean :Medical_History_Abnormal_Bleeding
-      t.boolean :Medical_History_Anemia
-      t.boolean :Medical_History_Artificial_Bones_Joints_Valves
-      t.boolean :Medical_History_Asthma
-      t.boolean :Medical_History_Blood_Transfusion
-      t.boolean :Medical_History_Cancer
-      t.boolean :Medical_History_Congenital_Heart_Defect
-      t.boolean :Medical_History_Diabetes
-      t.boolean :Medical_History_Difficulty_Breathing
-      t.boolean :Medical_History_Drug_Abuse
-      t.boolean :Medical_History_Emphysema
-      t.boolean :Medical_History_Epilepsy
-      t.boolean :Medical_History_Fever_Blisters
-      t.boolean :Medical_History_Glaucoma
-      t.boolean :Medical_History_Heart_Attack_Or_Stroke
-      t.boolean :Medical_History_Heart_Murmur
-      t.boolean :Medical_History_Heart_Surgery_Or_Pacemaker
-      t.boolean :Medical_History_Hemophilia
-      t.boolean :Medical_History_Hepatitis
-      t.boolean :Medical_History_High_Or_Low_Blood_Pressure
-      t.boolean :Medical_History_AIDS
-      t.boolean :Medical_History_Hospitalized_For_Any_Reason
-      t.boolean :Medical_History_Kidney_Problems
-      t.boolean :Medical_History_Mitral_Valve_Prolapse
-      t.boolean :Medical_History_Psychiatric_Problems
-      t.boolean :Medical_History_Radiation_Treatment
-      t.boolean :Medical_History_Rheumatic_Fever_Or_Scarletfever
-      t.boolean :Medical_History_Frequent_Headaches
-      t.boolean :Medical_History_Shingles
-      t.boolean :Medical_History_Sickle_Cell_Disease_Or_Traits
-      t.boolean :Medical_History_Sinus_Problems
-      t.boolean :Medical_History_Tuberculosis
-      t.boolean :Medical_History_Ulcers
-      t.boolean :Medical_History_Venereal_Disease
-      t.string :Medical_History_Serious_Medical_Issues
+      t.boolean :Med_His_Do_You_Have_Personal_Physician
+      t.string :Med_His_Personal_Physician_Name_First, :limit => 50
+      t.string :Med_His_Personal_Physician_Name_Last, :limit => 50
+      t.string :Med_His_Personal_Physician_Phone, :limit => 15
+      t.date :Med_His_Personal_Physician_Date_Of_Last_Visit
+      t.string :Med_His_Current_Physical_Health, :limit => 5
+      t.boolean :Med_His_Currently_Under_The_Care_Of_A_Physician
+      t.string :Med_His_Currently_Under_The_Care_Of_A_Physician_Desc
+      t.boolean :Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs
+      t.string :Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs_List
+      t.boolean :Med_His_Currently_Taking_Birth_Control_Pills
+      t.boolean :Med_His_Currently_Pregnant
+      t.string :Med_His_Weeks_Pregnant, :limit => 20
+      t.boolean :Med_His_Currently_Nursing
+      t.boolean :Med_His_Abnormal_Bleeding
+      t.boolean :Med_His_Anemia
+      t.boolean :Med_His_Artificial_Bones_Joints_Valves
+      t.boolean :Med_His_Asthma
+      t.boolean :Med_His_Blood_Transfusion
+      t.boolean :Med_His_Cancer
+      t.boolean :Med_His_Congenital_Heart_Defect
+      t.boolean :Med_His_Diabetes
+      t.boolean :Med_His_Difficulty_Breathing
+      t.boolean :Med_His_Drug_Abuse
+      t.boolean :Med_His_Emphysema
+      t.boolean :Med_His_Epilepsy
+      t.boolean :Med_His_Fever_Blisters
+      t.boolean :Med_His_Glaucoma
+      t.boolean :Med_His_Heart_Attack_Or_Stroke
+      t.boolean :Med_His_Heart_Murmur
+      t.boolean :Med_His_Heart_Surgery_Or_Pacemaker
+      t.boolean :Med_His_Hemophilia
+      t.boolean :Med_His_Hepatitis
+      t.boolean :Med_His_High_Or_Low_Blood_Pressure
+      t.boolean :Med_His_AIDS
+      t.boolean :Med_His_Hospitalized_For_Any_Reason
+      t.boolean :Med_His_Kidney_Problems
+      t.boolean :Med_His_Mitral_Valve_Prolapse
+      t.boolean :Med_His_Psychiatric_Problems
+      t.boolean :Med_His_Radiation_Treatment
+      t.boolean :Med_His_Rheumatic_Fever_Or_Scarletfever
+      t.boolean :Med_His_Frequent_Headaches
+      t.boolean :Med_His_Shingles
+      t.boolean :Med_His_Sickle_Cell_Disease_Or_Traits
+      t.boolean :Med_His_Sinus_Problems
+      t.boolean :Med_His_Tuberculosis
+      t.boolean :Med_His_Ulcers
+      t.boolean :Med_His_Venereal_Disease
+      t.string :Med_His_Serious_Medical_Issues
       t.boolean :Allergic_To_Aspirin
       t.boolean :Allergic_To_Metals_Or_Plastics
       t.boolean :Allergic_To_Codeine

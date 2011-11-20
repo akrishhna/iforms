@@ -1,12 +1,8 @@
 <h1>Editing iform</h1>
 
-<% if session[:formname] == "testform" %>
 <%= render 'form' %>
-<% elsif session[:formname] == "testform1" %>
-<%= render 'form1' %>
-<% else %>
-<%= render 'form2' %>
-<%end %>
+
+
 
 <%= link_to 'Show', @iform %> |
-<%= link_to 'Back', iforms_path %>
+<%= link_to 'Back', patients_path %>
