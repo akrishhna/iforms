@@ -68,13 +68,13 @@ class Iform < ActiveRecord::Base
   #         errors.add(:Self_Birthdate, "please enter valid date")
   #       end 
   #   end
-  
-  validates_presence_of :Self_Name_First, :Self_Name_Honorific
-  validates_format_of :Self_Name_First, :Self_Name_Honorific, :with => /^[A-Za-z]+$/ , :unless => "Self_Name_First.blank? or Self_Name_Honorific.blank?"
-  validate :validate_Self_Birthdate
-      def validate_Self_Birthdate
-        if !Self_Birthdate.blank? and Self_Birthdate >= Date.today
-          errors.add(:Self_Birthdate)
-        end
-      end
+  # 
+   #validates_presence_of :Self_Name_First, :Self_Name_Honorific
+  # validates_format_of :Self_Name_First, :Self_Name_Honorific, :with => /^[A-Za-z]+$/ , :unless => "Self_Name_First.blank? or Self_Name_Honorific.blank?"
+  # validate :validate_Self_Birthdate
+  #     def validate_Self_Birthdate
+  #       if !Self_Birthdate.blank? and Self_Birthdate >= Date.today
+  #         errors.add(:Self_Birthdate)
+  #       end
+  #     end
 end

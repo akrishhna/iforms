@@ -6,6 +6,8 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(params[:appointment])
+    @formids = params[:form_ids]
+    @appointment.formname = @formids
      respond_to do |format|
        @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
        @appointment.doctor_id = @doctor.id
@@ -23,24 +25,29 @@ class AppointmentsController < ApplicationController
        @i.doctorname
        @appointment.doctorname = @i.doctorname
        @appointment.timesent = Time.now
-       @formids = params[:form_ids]
+       if @formids
        @formids.each do |i|
        @form = Form.find(i)
        Appformjoin.create(:appointment_id => @appointment.id, :form_id => i, :formname => @form.formname)
-       end   
+       end 
+       end  
        @appointment.save
        Notifier.appointment_confirmation(@appointment).deliver
-       format.html { redirect_to(doctors_path, :id => nil, :notice => "appointment mail sent successfully to #{@appointment.firstname}") }
+       format.html { redirect_to(doctors_path, :id => nil, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}") }
        format.xml  { render :xml => @appointment, :status => :created, :location => @appointment }
       else
-      format.html { render :action => "new" }
+      format.html { render "new" }
       format.xml  { render :xml => @appointment.errors, :status => :unprocessable_entity }
      end
       end
   end
       
   def index
-   @appointments = Appointment.all 
+   @appointments = Appointment.all
+   respond_to do |format|
+       format.html { redirect_to new_appointment_path }
+       format.xml  { head :ok }
+    end 
   end
 
   def show

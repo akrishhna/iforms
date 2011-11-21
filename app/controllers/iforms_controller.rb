@@ -5,10 +5,10 @@ class IformsController < ApplicationController
   # GET /iforms.xml
   def index
     # @iforms = Iform.all
-    #     respond_to do |format|
-    #       format.html # index.html.erb
-    #       format.xml  { render :xml => @iforms }
-    #     end
+      respond_to do |format|
+          format.html { redirect_to patients_path }
+          format.xml  { head :ok }
+      end
   end
 
   # GET /iforms/1
@@ -69,9 +69,10 @@ class IformsController < ApplicationController
   #     end
     
   @iform = Iform.new(params[:iform])
-  @age = Date.today.year - @iform.Self_Birthdate.year
-  @age -= 1 if Date.today < @iform.Self_Birthdate + age.years and birthdate.month > now.month #and birthdate.day > now.day
-  str = @iform.Self_Name_Honorific + "_" + @iform.Self_Name_First
+  #@age = Date.today.year - @iform.Self_Birthdate.year
+  #@age -= 1 if Date.today < @iform.Self_Birthdate + age.years and birthdate.month > now.month #and birthdate.day > now.day
+  time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
+  str = time_now+"_"+@iform.Self_Name_Honorific + "_" + @iform.Self_Name_First
   pathx = "/pdffiles/#{str}.pdf"
   @iform.path = pathx
   
@@ -109,180 +110,8 @@ class IformsController < ApplicationController
           @appformjoin.iform_id = @iform.id
           @appformjoin.save
         
-        pdftkpath = "#{Configuration.pdftk_path}"
-        pdffilepath = "#{Configuration.pdffiles_path}"
-        path = pdffilepath + "#{str}.pdf"        
-        @pdftk = PdftkForms::Wrapper.new(pdftkpath)
-        
-        # @pfields = @pdftk.fields(pdffilepath + 'iform.pdf')
-        #   @pfields.each do |pff|
-        #     #if pff.name == 'You Female' 
-        #     #You Female check_box 0 nil Off Yes
-        #     # print pff.name, pff.field_type, pff.flags, pff.value, pff.options
-        #     #end 
-        #   end
-      
-   
- 
-        @yes = "yes"
-        @no = "no"  
-        @self_home_address = @iform.Self_Home_Address1+ " "+@iform.Self_Home_Address2
-        @self_employer_address = @iform.Self_Employer_Address1+ " "+@iform.Self_Employer_Address2+" "+@iform.Self_Employer_City+" "+@iform.Self_Employer_State+" "+@iform.Self_Employer_Postal_Code
-        @spouse_name = @iform.Spouse_Name_First+" "+@iform.Spouse_Name_Last
-        @insurance_company_primary_address = @iform.Insurance_Company_Primary_Address1+" "+ @iform.Insurance_Company_Primary_Address2+" "+ @iform.Insurance_Company_Primary_City+" "+@iform.Insurance_Company_Primary_State+" "+@iform.Insurance_Company_Primary_Postal_Code
-        @insurance_company_secondary_address = @iform.Insurance_Company_Secondary_Address1+" "+@iform.Insurance_Company_Secondary_Address2+" "+@iform.Insurance_Company_Secondary_City+" "+@iform.Insurance_Company_Secondary_State+" "+@iform.Insurance_Company_Secondary_Postal_Code
-        pdf_form = session[:formname]
-  
-        @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
-          "Your E-Mail Address" => @iform.Self_Email_Address,
-          'Name'=> @iform.Self_Name_Honorific+ "  " + @iform.Self_Name_First+ "  " + @iform.Self_Name_Middle,
-          'MS' => @iform.Self_Prefix,
-          "You #{@sex}"=> "Yes",
-          "You Age" => @iform.Self_Age,
-          "You SS" => @iform.Self_Social_Security_Number,       
-          "You Home Address" => @self_home_address,
-          "You State" => @iform.Self_Home_State,
-          "You Zip" => @iform.Self_Home_Postal_Code,
-          "You #{@marital_status}" => "Yes",
-          "You Hm Area Code" => @iform.Self_Phone_Home.slice(0,3),
-          "You Hm" => @iform.Self_Phone_Home.slice(3,9),
-          "You Wk Area Code" => @iform.Self_Phone_Work.slice(0,3),
-          "You Wk" => @iform.Self_Phone_Work.slice(3,9),
-          "You Ext" => @iform.Self_Phone_Work_Extension,
-          "You Pager Other" => @iform.Self_Phone_Mobile,
-          "You Drivers License" => @iform.Self_Driver_License_Number,
-          "You Employer" => @iform.Self_Employer_Name,
-          "You Employer&#8217;s Address" => @self_employer_address,
-          "You Birthdate" => @iform.Self_Birthdate,
-          #spouse information
-          "Spouse Name" => @spouse_name,
-          "Spouse Employer" => @iform.Spouse_Employer_Name,
-          "Spouse Wk Phone" => @iform.Spouse_Phone_Work.slice(3,9),
-          "SpouseSS" => @iform.Spouse_Social_Security_Number,
-          "Spouse Wk Ext" => @iform.Spouse_Phone_Work_Extension,
-          "Spouse Birthdate" => @iform.Spouse_Birthdate,
-          "RespPersonWk_areacode" => @iform.Person_Responsible_For_Account_Phone_Work.slice(0,3),
-          "Spouse Wk Area Code" => @iform.Spouse_Phone_Work.slice(0,3),
-          "RespPersonWk" => @iform.Person_Responsible_For_Account_Phone_Work.slice(3,9),
-          "RespPersonHmAreacode" => @iform.Person_Responsible_For_Account_Phone_Home.slice(0,3),
-          "RespPersonHm" => @iform.Person_Responsible_For_Account_Phone_Home.slice(3,9),
-          "RespPerson_Employer" => @iform.Person_Responsible_For_Account_Employer_Name,
-          "RespPerson_SS" => @iform.Person_Responsible_For_Account_Social_Security_Number,
-          "RespPerson_DL" => @iform.Person_Responsible_For_Account_Drivers_License,
-          #orthodontic insurance
-          "Orthocoverage_#{@orthocoverage_primary}" => "Yes",
-          "Dentalcoverage_#{@dentalcoverage_primary}" => "Yes",
-          "Insurance Co Name" => @iform.Insurance_Company_Primary_Name,
-          "Insurance Co Address" =>@insurance_company_primary_address,
-          "Insurance Co AreaCode" => @iform.Insurance_Company_Primary_Phone.slice(0,3),
-          "Insurance Co. Phone" => @iform.Insurance_Company_Primary_Phone.slice(3,9),
-          "Group #  Plan, Local or Policy" => @iform.Insurance_Company_Primary_Group_Plan_Local_Policy_Number,
-          "Insured&#8217;s Name" => @iform.Insurance_Company_Primary_Insured_Name_First+ " " + @iform.Insurance_Company_Primary_Insured_Name_Last,
-          "Ins_Relation_2" => @iform.Insurance_Company_Primary_Insured_Relationship,
-          "InsBday_1" => @iform.Insurance_Company_Primary_Insured_Birthdate,
-          "Insured&#8217;s SS" => @iform.Insurance_Company_Primary_Insured_Social_Security_Number,
-          "Insured&#8217;s Employer" => @iform.Insurance_Company_Primary_Insured_Employer_Name,
-          #secondary
-          "OrthoCoverage_#{@orthocoverage_secondary}2" => "Yes",
-          "DentalCoverage_#{@dentalcoverage_secondary}2" => "Yes",
-          "Insurance Co Name_2" => @iform.Insurance_Company_Secondary_Name,
-          "Insurance Co Address_2" => @insurance_company_secondary_address,
-          "Insurance Co Areacode_2" => @iform.Insurance_Company_Secondary_Phone.slice(0,3),
-          "Insurance Co. Phone2" => @iform.Insurance_Company_Secondary_Phone.slice(3,9),
-          "Group # Plan, Local or Policy2" => @iform.Insurance_Company_Secondary_Group_Plan_Local_Policy_Number,
-          "Insured&#8217;s Name_2" => @iform.Insurance_Company_Secondary_Insured_Name_First+ " " + @iform.Insurance_Company_Secondary_Insured_Name_Last,
-          "Relation_3" => @iform.Insurance_Company_Secondary_Insured_Relationship,
-          "InsuredBday_" => @iform.Insurance_Company_Secondary_Insured_Birthdate,
-          "Insured&#8217;s SS_2" => @iform.Insurance_Company_Secondary_Insured_Social_Security_Number,
-          "Insured&#8217;s Employer_2" => @iform.Insurance_Company_Secondary_Insured_Employer_Name,
-          "His  Her Name_2" => @iform.Emergency_Contact_Name_First+" "+ @iforms.Emergency_Contact_Name_Last,
-          "Relation_4" => @iform.Emergency_Contact_Relationship,
-          "Wk_areacode" => @iform.Emergency_Contact_Phone_Work.slice(0,3),
-          "emergency_phone_wk" => @iform.Emergency_Contact_Phone_Work.slice(3,9),
-          "Hm_areacode" => @iform.Emergency_Contact_Phone_Home.slice(0,3),
-          "emergency_phone_hm" => @iform.Emergency_Contact_Phone_Home.slice(3,9),
-          #medical history
-          #"Physician_yes" =>
-
-          "Physician&#8217;s Name" => @iform.Med_His_Personal_Physician_Name_First+" "+@iform.Med_His_Personal_Physician_Name_Last,
-          "Physician_areacode" => @iform.Med_His_Personal_Physician_Phone.slice(0,3),
-          "Physician_phone" => @iform.Med_His_Personal_Physician_Phone.slice(3,9),
-          "Date of last visit" => @iform.Med_His_Personal_Physician_Date_Of_Last_Visit,
-          "Health_#{@current_physical_health}" => "Yes",
-          "Physician_#{@currently_under_physician}" => "Yes",
-          "Please explain" => @iform.Med_His_Currently_Under_The_Care_Of_A_Physician_Desc,
-          "Drugs_#{@currently_under_prescription}" => "Yes",
-          "Are you taking any prescription  over-the-counter drugs" => @iform.Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs_List,
-          "Pills_#{@Currently_Taking_Birth_Control_Pills}" => "Yes",
-          "Pregnant_#{@Currently_Pregnant}" => "Yes",
-          "Week#" => @iform.Med_His_Weeks_Pregnant,
-          "Nursing_#{@Currently_Nursing}" =>  "Yes",
-          "Bleeding #{@Abnormal_Bleeding}" => "Yes",
-          "Anemia #{@Anemia}" => "Yes",
-          "Bones #{@Bones_Joints_Valves}" => "Yes",
-          "Asthma #{@Asthma}" => "Yes",
-          "Transfusion #{@Blood_Transfusion}" => "Yes",
-          "Cancer #{@Cancer}" => "Yes",
-          "Congenital Heart Deffect #{@Congenital_Heart_Defect}" => "Yes",
-          "Diabetes #{@Diabetes}" => "Yes",
-          "Difficulty Breathing #{@Difficulty_Breathing}" => "Yes",
-          "Drug Abuse #{@Drug_Abuse}" => "Yes",
-          "Emphysema #{@Emphysema}" => "Yes",
-          "Epilepsy #{@Epilepsy}" => "Yes",
-          "Fever Blisters #{@Fever_Blisters}" => "Yes",
-          "Glaucoma #{@Glaucoma}" => "Yes",
-          "Heart Attack #{@Heart_Attack_Or_Stroke}" => "Yes",
-          "Heart Murmur #{@Heart_Murmur}" => "Yes",
-          "Heart Surgery #{@Heart_Surgery_Or_Pacemaker}" => "Yes",
-          "Hemophilia #{@Hemophilia}" => "Yes",
-          "Hepatitis #{@Hepatitis}" => "Yes",
-          "Blood Pressure #{@High_Or_Low_Blood_Pressure}" => "Yes",
-          "HIV #{@HIV_or_AIDS}" => "Yes",
-          "Hospitalization #{@Hospitalized_For_Any_Reason}" => "Yes",
-          "Kidney #{@Kidney_Problems}" => "Yes",
-          "MVP #{@Mitral_Valve_Prolapse}" => "Yes",
-          "Phychiatric #{@Psychiatric_Problems}" => "Yes",
-          "Radiation #{@Radiation_Treatment}" => "Yes",
-          "Rheumatic Fever #{@Rheumatic_Fever_Or_Scarletfever}" => "Yes",
-          "Headaches #{@Frequent_Headaches}" => "Yes",
-          "Shingles #{@Shingles}" => "Yes",
-          "Sickle Cell #{@Sickle_Cell_Disease_Or_Traits}" => "Yes",
-          "Sinus #{@Sinus_Problems}" => "Yes",
-          "TB #{@Tuberculosis}" => "Yes",
-          "Ulcer #{@Ulcers}" => "Yes",
-          "Venereal Disease #{@Venereal_Disease}" => "Yes",
-          "Any serious medical conditions" => @iform.Med_His_Serious_Medical_Issues,
-          "Aspirin #{@Aspirin}" => "Yes",
-          "Metals #{@Metals_Or_Plastics}" => "Yes",
-          "Codeine #{@Codeine}" => "Yes",
-          "Anesthetics #{@Dental_Anesthetics}" => "Yes",
-          "Erythromycin #{@Erythromycin}" => "Yes",
-          "Latex #{@Latex}" => "Yes",
-          "Penicillin #{@Penicillin}" =>"Yes",
-          "Tetracycline #{@Tetracycline}" => "Yes",
-          "Other #{@Other}" => "Yes",
-          "Allergic" => @iform.Allergic_To_Other_Detail,
-          #dental history
-          "What do you want" => @iform.Dental_History_Concerns_Tobe_Accomplished_By_Orthodontics,
-          "Evaluated_#{@Orthodontic_Evaluation}" => "Yes",
-          "Previous problems_#{@Previous_Dental_Work_Issues}" => "Yes",
-          "TMJ_#{@TMJ_TMD_Issues}" => "Yes",
-          "Dental Health_#{@current_dental_health}" => "Yes",
-          "Smile_#{@Like_Smile}" => "Yes",
-          "Gums bleed_#{@Bleeding_Gums}" => "Yes",
-          "Mouth" => @mouth,
-          "Teeth" => @teeth,
-          "Chin" => @chin,
-          "Any speech problems" => @iform.Dental_History_Currently_Have_Speech_Problems,
-          "Mouth breather_#{@Breath_Through_Mouth}" => "Yes",
-          "While #{@Mouth_While_Awake_Or_Sleep}" => "Yes",
-          "Teeth_#{@Extra_Permanent_Teeth}" => "Yes",
-          "Phen-Fen_#{@Ever_Taken_PhenFen}" => "Yes",
-          "When taken Phen-Fen" => @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin,
-          "Tobacco_#{@Tobacco_Smoke}" => "Yes"
-          # "Relation" => @iform.responsibleperson_relation,
-
-})
+          form_controls_mapping(@iform, str)
+         
        
         format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
         format.xml  { render :xml => @iform, :status => :created, :location => @iform }
@@ -301,7 +130,14 @@ class IformsController < ApplicationController
 
     respond_to do |format|
       if @iform.update_attributes(params[:iform])
-        format.html { redirect_to(@iform, :notice => 'Iform was successfully updated.') }
+        time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
+         str = time_now+"_"+@iform.Self_Name_Honorific + "_" + @iform.Self_Name_First
+         pathx = "/pdffiles/#{str}.pdf"
+         @iform.path = pathx
+         @iform.save
+         form_control_conditions(@iform)
+         form_controls_mapping(@iform, str)
+        format.html { redirect_to(@iform, :notice => 'Form was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -351,6 +187,23 @@ class IformsController < ApplicationController
   # method below -- to check conditions to assign to form controls
   def form_control_conditions(iform)
     @iform = iform
+    @yes = "yes"
+    @no = "no"  
+    @self_home_address = @iform.Self_Home_Address1+ " "+@iform.Self_Home_Address2
+    @self_employer_address = @iform.Self_Employer_Address1+ " "+@iform.Self_Employer_Address2+" "+@iform.Self_Employer_City+" "+@iform.Self_Employer_State+" "+@iform.Self_Employer_Postal_Code
+    @spouse_name = @iform.Spouse_Name_First+" "+@iform.Spouse_Name_Last
+    @insurance_company_primary_address = @iform.Insurance_Company_Primary_Address1+" "+ @iform.Insurance_Company_Primary_Address2+" "+ @iform.Insurance_Company_Primary_City+" "+@iform.Insurance_Company_Primary_State+" "+@iform.Insurance_Company_Primary_Postal_Code
+    @insurance_company_secondary_address = @iform.Insurance_Company_Secondary_Address1+" "+@iform.Insurance_Company_Secondary_Address2+" "+@iform.Insurance_Company_Secondary_City+" "+@iform.Insurance_Company_Secondary_State+" "+@iform.Insurance_Company_Secondary_Postal_Code
+    @emergency_contact_name = @iform.Emergency_Contact_Name_First+" "+@iform.Emergency_Contact_Name_Last if @iform.Emergency_Contact_Name_First and @iform.Emergency_Contact_Name_Last
+    if @iform.Emergency_Contact_Phone_Work
+    @emergency_contact_phone_work_areacode = @iform.Emergency_Contact_Phone_Work.slice(0,3) 
+    @emergency_contact_phone_work = @iform.Emergency_Contact_Phone_Work.slice(3,9)
+    end
+    if @iform.Emergency_Contact_Phone_Home
+    @emergency_contact_phone_home_areacode = @iform.Emergency_Contact_Phone_Home.slice(0,3)  
+    @emergency_contact_phone_home = @iform.Emergency_Contact_Phone_Home.slice(3,9)
+    end
+    
     if @iform.Self_Sex == 'female'
       @sex = 'Female'
     end
@@ -823,6 +676,179 @@ class IformsController < ApplicationController
     when false
       @Tobacco_Smoke = "no"
     end
+  end
+  
+   def form_controls_mapping(iform, str)
+      @iform = iform
+      
+  pdftkpath = "#{Configuration.pdftk_path}"
+  pdffilepath = "#{Configuration.pdffiles_path}"
+  path = pdffilepath + "#{str}.pdf"        
+  @pdftk = PdftkForms::Wrapper.new(pdftkpath)
+  
+  # @pfields = @pdftk.fields(pdffilepath + 'iform.pdf')
+  #   @pfields.each do |pff|
+  #     #if pff.name == 'You Female' 
+  #     #You Female check_box 0 nil Off Yes
+  #     # print pff.name, pff.field_type, pff.flags, pff.value, pff.options
+  #     #end 
+  #   end
+
+
+
+  
+  pdf_form = session[:formname]
+
+  @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
+    "Your E-Mail Address" => @iform.Self_Email_Address,
+    'Name'=> @iform.Self_Name_Honorific+ "  " + @iform.Self_Name_First+"  "+ @iform.Self_Name_Middle,
+    'MS' => @iform.Self_Prefix,
+    "You #{@sex}"=> "Yes",
+    "You Age" => @iform.Self_Age,
+    "You SS" => @iform.Self_Social_Security_Number,       
+    "You Home Address" => @self_home_address,
+    "You State" => @iform.Self_Home_State,
+    "You Zip" => @iform.Self_Home_Postal_Code,
+    "You #{@marital_status}" => "Yes",
+    "You Hm Area Code" => @iform.Self_Phone_Home.slice(0,3),
+    "You Hm" => @iform.Self_Phone_Home.slice(3,9),
+    "You Wk Area Code" => @iform.Self_Phone_Work.slice(0,3),
+    "You Wk" => @iform.Self_Phone_Work.slice(3,9),
+    "You Ext" => @iform.Self_Phone_Work_Extension,
+    "You Pager Other" => @iform.Self_Phone_Mobile,
+    "You Drivers License" => @iform.Self_Driver_License_Number,
+    "You Employer" => @iform.Self_Employer_Name,
+    "You Employer&#8217;s Address" => @self_employer_address,
+    "You Birthdate" => @iform.Self_Birthdate,
+    #spouse information
+    "Spouse Name" => @spouse_name,
+    "Spouse Employer" => @iform.Spouse_Employer_Name,
+    "Spouse Wk Phone" => @iform.Spouse_Phone_Work.slice(3,9),
+    "SpouseSS" => @iform.Spouse_Social_Security_Number,
+    "Spouse Wk Ext" => @iform.Spouse_Phone_Work_Extension,
+    "Spouse Birthdate" => @iform.Spouse_Birthdate,
+    "RespPersonWk_areacode" => @iform.Person_Responsible_For_Account_Phone_Work.slice(0,3),
+    "Spouse Wk Area Code" => @iform.Spouse_Phone_Work.slice(0,3),
+    "RespPersonWk" => @iform.Person_Responsible_For_Account_Phone_Work.slice(3,9),
+    "RespPersonHmAreacode" => @iform.Person_Responsible_For_Account_Phone_Home.slice(0,3),
+    "RespPersonHm" => @iform.Person_Responsible_For_Account_Phone_Home.slice(3,9),
+    "RespPerson_Employer" => @iform.Person_Responsible_For_Account_Employer_Name,
+    "RespPerson_SS" => @iform.Person_Responsible_For_Account_Social_Security_Number,
+    "RespPerson_DL" => @iform.Person_Responsible_For_Account_Drivers_License,
+    #orthodontic insurance
+    "Orthocoverage_#{@orthocoverage_primary}" => "Yes",
+    "Dentalcoverage_#{@dentalcoverage_primary}" => "Yes",
+    "Insurance Co Name" => @iform.Insurance_Company_Primary_Name,
+    "Insurance Co Address" =>@insurance_company_primary_address,
+    "Insurance Co AreaCode" => @iform.Insurance_Company_Primary_Phone.slice(0,3),
+    "Insurance Co. Phone" => @iform.Insurance_Company_Primary_Phone.slice(3,9),
+    "Group #  Plan, Local or Policy" => @iform.Insurance_Company_Primary_Group_Plan_Local_Policy_Number,
+    "Insured&#8217;s Name" => @iform.Insurance_Company_Primary_Insured_Name_First+ " " +@iform.Insurance_Company_Primary_Insured_Name_Last,
+    "Ins_Relation_2" => @iform.Insurance_Company_Primary_Insured_Relationship,
+    "InsBday_1" => @iform.Insurance_Company_Primary_Insured_Birthdate,
+    "Insured&#8217;s SS" => @iform.Insurance_Company_Primary_Insured_Social_Security_Number,
+    "Insured&#8217;s Employer" => @iform.Insurance_Company_Primary_Insured_Employer_Name,
+    #secondary
+    "OrthoCoverage_#{@orthocoverage_secondary}2" => "Yes",
+    "DentalCoverage_#{@dentalcoverage_secondary}2" => "Yes",
+    "Insurance Co Name_2" => @iform.Insurance_Company_Secondary_Name,
+    "Insurance Co Address_2" => @insurance_company_secondary_address,
+    "Insurance Co Areacode_2" => @iform.Insurance_Company_Secondary_Phone.slice(0,3),
+    "Insurance Co. Phone2" => @iform.Insurance_Company_Secondary_Phone.slice(3,9),
+    "Group # Plan, Local or Policy2" => @iform.Insurance_Company_Secondary_Group_Plan_Local_Policy_Number,
+    "Insured&#8217;s Name_2" => @iform.Insurance_Company_Secondary_Insured_Name_First+ " " + @iform.Insurance_Company_Secondary_Insured_Name_Last,
+    "Relation_3" => @iform.Insurance_Company_Secondary_Insured_Relationship,
+    "InsuredBday_" => @iform.Insurance_Company_Secondary_Insured_Birthdate,
+    "Insured&#8217;s SS_2" => @iform.Insurance_Company_Secondary_Insured_Social_Security_Number,
+    "Insured&#8217;s Employer_2" => @iform.Insurance_Company_Secondary_Insured_Employer_Name,
+    "His  Her Name_2" => @emergency_contact_name,
+    "Relation_4" => @iform.Emergency_Contact_Relationship,
+    "Wk_areacode" => @emergency_contact_phone_work,
+    "emergency_phone_wk" => @emergency_contact_phone_work_areacode,
+    "Hm_areacode" =>  @emergency_contact_phone_home_areacode,
+    "emergency_phone_hm" => @emergency_contact_phone_home,
+    #medical history
+    #"Physician_yes" =>
+
+    "Physician&#8217;s Name" => @iform.Med_His_Personal_Physician_Name_First+" "+@iform.Med_His_Personal_Physician_Name_Last,
+    "Physician_areacode" => @iform.Med_His_Personal_Physician_Phone.slice(0,3),
+    "Physician_phone" => @iform.Med_His_Personal_Physician_Phone.slice(3,9),
+    "Date of last visit" => @iform.Med_His_Personal_Physician_Date_Of_Last_Visit,
+    "Health_#{@current_physical_health}" => "Yes",
+    "Physician_#{@currently_under_physician}" => "Yes",
+    "Please explain" => @iform.Med_His_Currently_Under_The_Care_Of_A_Physician_Desc,
+    "Drugs_#{@currently_under_prescription}" => "Yes",
+    "Are you taking any prescription  over-the-counter drugs" => @iform.Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs_List,
+    "Pills_#{@Currently_Taking_Birth_Control_Pills}" => "Yes",
+    "Pregnant_#{@Currently_Pregnant}" => "Yes",
+    "Week#" => @iform.Med_His_Weeks_Pregnant,
+    "Nursing_#{@Currently_Nursing}" =>  "Yes",
+    "Bleeding #{@Abnormal_Bleeding}" => "Yes",
+    "Anemia #{@Anemia}" => "Yes",
+    "Bones #{@Bones_Joints_Valves}" => "Yes",
+    "Asthma #{@Asthma}" => "Yes",
+    "Transfusion #{@Blood_Transfusion}" => "Yes",
+    "Cancer #{@Cancer}" => "Yes",
+    "Congenital Heart Deffect #{@Congenital_Heart_Defect}" => "Yes",
+    "Diabetes #{@Diabetes}" => "Yes",
+    "Difficulty Breathing #{@Difficulty_Breathing}" => "Yes",
+    "Drug Abuse #{@Drug_Abuse}" => "Yes",
+    "Emphysema #{@Emphysema}" => "Yes",
+    "Epilepsy #{@Epilepsy}" => "Yes",
+    "Fever Blisters #{@Fever_Blisters}" => "Yes",
+    "Glaucoma #{@Glaucoma}" => "Yes",
+    "Heart Attack #{@Heart_Attack_Or_Stroke}" => "Yes",
+    "Heart Murmur #{@Heart_Murmur}" => "Yes",
+    "Heart Surgery #{@Heart_Surgery_Or_Pacemaker}" => "Yes",
+    "Hemophilia #{@Hemophilia}" => "Yes",
+    "Hepatitis #{@Hepatitis}" => "Yes",
+    "Blood Pressure #{@High_Or_Low_Blood_Pressure}" => "Yes",
+    "HIV #{@HIV_or_AIDS}" => "Yes",
+    "Hospitalization #{@Hospitalized_For_Any_Reason}" => "Yes",
+    "Kidney #{@Kidney_Problems}" => "Yes",
+    "MVP #{@Mitral_Valve_Prolapse}" => "Yes",
+    "Phychiatric #{@Psychiatric_Problems}" => "Yes",
+    "Radiation #{@Radiation_Treatment}" => "Yes",
+    "Rheumatic Fever #{@Rheumatic_Fever_Or_Scarletfever}" => "Yes",
+    "Headaches #{@Frequent_Headaches}" => "Yes",
+    "Shingles #{@Shingles}" => "Yes",
+    "Sickle Cell #{@Sickle_Cell_Disease_Or_Traits}" => "Yes",
+    "Sinus #{@Sinus_Problems}" => "Yes",
+    "TB #{@Tuberculosis}" => "Yes",
+    "Ulcer #{@Ulcers}" => "Yes",
+    "Venereal Disease #{@Venereal_Disease}" => "Yes",
+    "Any serious medical conditions" => @iform.Med_His_Serious_Medical_Issues,
+    "Aspirin #{@Aspirin}" => "Yes",
+    "Metals #{@Metals_Or_Plastics}" => "Yes",
+    "Codeine #{@Codeine}" => "Yes",
+    "Anesthetics #{@Dental_Anesthetics}" => "Yes",
+    "Erythromycin #{@Erythromycin}" => "Yes",
+    "Latex #{@Latex}" => "Yes",
+    "Penicillin #{@Penicillin}" =>"Yes",
+    "Tetracycline #{@Tetracycline}" => "Yes",
+    "Other #{@Other}" => "Yes",
+    "Allergic" => @iform.Allergic_To_Other_Detail,
+    #dental history
+    "What do you want" => @iform.Dental_History_Concerns_Tobe_Accomplished_By_Orthodontics,
+    "Evaluated_#{@Orthodontic_Evaluation}" => "Yes",
+    "Previous problems_#{@Previous_Dental_Work_Issues}" => "Yes",
+    "TMJ_#{@TMJ_TMD_Issues}" => "Yes",
+    "Dental Health_#{@current_dental_health}" => "Yes",
+    "Smile_#{@Like_Smile}" => "Yes",
+    "Gums bleed_#{@Bleeding_Gums}" => "Yes",
+    "Mouth" => @mouth,
+    "Teeth" => @teeth,
+    "Chin" => @chin,
+    "Any speech problems" => @iform.Dental_History_Currently_Have_Speech_Problems,
+    "Mouth breather_#{@Breath_Through_Mouth}" => "Yes",
+    "While #{@Mouth_While_Awake_Or_Sleep}" => "Yes",
+    "Teeth_#{@Extra_Permanent_Teeth}" => "Yes",
+    "Phen-Fen_#{@Ever_Taken_PhenFen}" => "Yes",
+    "When taken Phen-Fen" => @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin,
+    "Tobacco_#{@Tobacco_Smoke}" => "Yes"
+    # "Relation" => @iform.responsibleperson_relation,
+
+})
   end
     
 end

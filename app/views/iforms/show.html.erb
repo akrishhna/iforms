@@ -2,10 +2,9 @@
 <%= link_to 'Home',doctors_path %> |
 <%= link_to 'Download as PDF file', @iform.path %>
 <% end %>
-<p id="notice"><%= notice %></p>
 
-
-
+</br>
+</br>
 
 <% if current_user.role == 'patient'%>
 <%= link_to 'Home', patients_path %> |

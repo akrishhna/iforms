@@ -25,6 +25,23 @@ class DoctorsController < ApplicationController
     end
   end
   
+  def edit
+    @doctor = Doctor.find(params[:id])
+  end
+  
+  def update
+   @doctor = Doctor.find(params[:id])
+   respond_to do |format|
+   if @doctor.update_attributes(params[:doctor])
+     format.html { redirect_to(edit_user_registration_path, :notice => 'Profile Updated successfully.') }
+     format.xml  { head :ok }
+   else
+     format.html { render :action => "edit" }
+     format.xml  { render :xml => @doctor.errors, :status => :unprocessable_entity }
+   end
+   end 
+  end
+  
   def show
     @doctor = Doctor.find(params[:id])
   end

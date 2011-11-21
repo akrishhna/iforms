@@ -18,10 +18,19 @@
 
   <p><%= f.submit "Update" %></p>
 <% end %>
+<% if current_user.role == "patient" %>
+<% @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]) %>
+<p><%= link_to'Update Profile Information', edit_patient_path(@patient) %></br></br>
+<%= link_to "Back", patients_path %>
+<% end %>
+<% if current_user.role == "doctor" %>
+<% @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]) %>
+<p><%= link_to'Update Profile Information', edit_doctor_path(@doctor) %></br></br>
+<%= link_to "Back", doctors_path %>
+<% end %>
+<!-- <h3>Cancel my account</h3>
 
-<h3>Cancel my account</h3>
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p> -->
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
 
-<%= link_to "Back", :back %>
 </div>
