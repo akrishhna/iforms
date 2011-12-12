@@ -1,5 +1,15 @@
 <%= form_for(@patient) do |f| %>
-<%= f.error_messages %>
+<% if @patient.errors.any? %>
+<div id="error_explanation">
+  <h2> Please check the highlighted fields </h2>
+	<ul>
+    <% @patient.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul> 
+  </div> 
+<% end %>
+
   <div class="field">
     <%= f.label :firstname %><br />
     <%= f.text_field :firstname %>

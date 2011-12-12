@@ -1,4 +1,5 @@
 class PdfuploadsController < ApplicationController
+   before_filter :is_admin?
   require 'fastercsv'
  
   def index
@@ -11,13 +12,13 @@ class PdfuploadsController < ApplicationController
   
   def create
     @pdfupload = Pdfupload.new(params[:pdfupload])
-    file_data = @pdfupload.file
+    p file_data = @pdfupload.file
     respond_to do |format|
-    if @pdfupload.save
+    if @pdfupload.save!
       if file_data.respond_to?(:path)
-        pdftkpath = "#{Configuration.pdftk_path}"
-        pdffilepath = "#{Configuration.pdffiles_path}"       
+        pdftkpath = "#{Configuration.pdftk_path}"       
         @pdftk = PdftkForms::Wrapper.new(pdftkpath)
+        p "path = #{file_data.path}"
         @pfields = @pdftk.fields(file_data.path)
         puts @pfields.length
         @pfields.each do |pff|

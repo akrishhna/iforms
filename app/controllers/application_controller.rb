@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :admin?
-
+  helper_method :is_admin?
+ #helper_method :patient_profile_exists
  protected
   def is_doctor?
     unless current_user.role=="doctor"
@@ -18,11 +18,31 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-  
-  def admin?
-    current_user.admin?
-    #email == "ashwini.patlola@gmail.com" and current_user.role == "admin"
+protected  
+  def is_admin?
+    unless current_user.role=="admin"
+      flash[:notice]="unauthorized access"
+      redirect_to :controller=> "deviseroles", :action=>"index"
+      false
+    end
   end
  
+ protected
+ def patient_profile_exists?
+   @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]).first
+   if @patient.blank?
+     redirect_to :controller => "patients", :action => "new"
+     false
+   end
+ end
+ 
+ protected
+  def doctor_profile_exists?
+    @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
+    if @doctor.blank?
+      redirect_to :controller => "doctors", :action => "new"
+      false
+    end
+  end
 
 end

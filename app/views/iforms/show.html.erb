@@ -1,13 +1,30 @@
 <% if current_user.role == 'doctor'%>
+<% @doctor = Doctor.find(@appointment.doctor_id) %>
+<% if current_user.id == @doctor.user_id %>
 <%= link_to 'Home',doctors_path %> |
 <%= link_to 'Download as PDF file', @iform.path %>
-<% end %>
-
 </br>
+</br>
+FirstName:
+<%= @iform.Self_Name_First%></br>
+Lastname:
+<%= @iform.Self_Name_Last%>
+<% end %>
+<% end %>
 </br>
 
 <% if current_user.role == 'patient'%>
+<% @patient = Patient.find(@appointment.patient_id) %>
+<% if current_user.id == @patient.user_id %>
 <%= link_to 'Home', patients_path %> |
 <%= link_to 'Edit', edit_iform_path(@iform) %> |
 <%= link_to 'Back', patients_path %>
+</br>
+</br>
+FirstName:
+<%= @iform.Self_Name_First%></br>
+Lastname:
+<%= @iform.Self_Name_Last%>
 <% end %>
+<% end %>
+

@@ -1,8 +1,15 @@
-<h1>Editing iform</h1>
+<h2>Editing Form</h2>
+<% if @iform.formname.include?("Adult") %>
+<% session[:formname]= @iform.formname %>
+<%= render 'adultform' %>
+<% session[:formname]=nil%>
+<% end %>
 
-<%= render 'form' %>
+<% if @iform.formname.include?("Child") %>
+<% session[:formname]= @iform.formname %>
+<%= render 'childform' %>
+<% session[:formname]=nil%>
+<% end %>
 
 
 
-<%= link_to 'Show', @iform %> |
-<%= link_to 'Back', patients_path %>

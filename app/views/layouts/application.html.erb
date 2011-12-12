@@ -18,8 +18,10 @@ Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 <%= link_to 'Sign in', new_user_session_path %>
 <%end%>
 </div>
+<div class ="container_layout">
 <%= alert %>
 <%= notice %>
 <%= yield %>
+</div>
 </body>
 </html>

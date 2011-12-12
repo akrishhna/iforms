@@ -10,9 +10,10 @@ class CreateAppointments < ActiveRecord::Migration
       t.string :AM_PM
       t.string :doctorname
       t.string :formname
-      t.datetime :timesent
-      t.datetime :timereceived
+      t.string :timesent
+      t.string :timereceived
       t.string :status
+      t.string :appointment_time
       t.references :patient
       t.references :doctor
       t.timestamps

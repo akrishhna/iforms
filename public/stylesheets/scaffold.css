@@ -17,6 +17,12 @@ pre {
 a:visited { color: #000; }
 a:hover {color: #000;}
 
+.container_layout {
+  width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
 .container {
  width: 20%;
   margin: 0 auto;
@@ -28,7 +34,8 @@ a:hover {color: #000;}
 .index {
 	margin-left: auto;
 	margin-right: auto;
- width: 1200px;
+	padding: 20px 40px;
+ width: 1080px;
  border: solid 1px #fff;
   margin-top: 50px;
   background-color: #fff;
@@ -97,10 +104,10 @@ div.field, div.actions {
         body { font-family:verdana, Arial, Helvetica, Sans-Serif; font-size:13px; margin:20px;}
         #main { width:960px; margin: 0px auto; border:solid 1px #b2b3b5; -moz-border-radius:10px; padding:20px; background-color:#f6f6f6;}
         #header { text-align:center; border-bottom:solid 1px #b2b3b5; margin: 0 0 20px 0; }
-        fieldset { border:none; width:550px;}
+        fieldset { border:none; width:570px;}
         legend { font-size:18px; margin:0px; padding:10px 0px; color:#b0232a; font-weight:bold;}
         label {font-size:14px; margin:15px 0 5px;}
-        input[type=text], input[type=password] { width:220px; padding:5px; border:solid 1px #000;}
+        input[type=text], input[type=password] { width:220px; padding:5px; border:solid 1px #000;font-size:13px;color:#404040;}
         .prev, .next { background-color:#3399ff; padding:5px 10px; color:#fff; text-decoration:none;}
         .prev:hover, .next:hover { background-color:#3399ff; text-decoration:none;}
         .prev { float:left;}

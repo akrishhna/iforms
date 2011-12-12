@@ -1,7 +1,6 @@
 
-
-<% @appformjoins = Appformjoin.where("appointment_id = ?", @appointment.id)%>
 <% if current_user.role == 'patient'%>
+<% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", @appointment.id, current_user.id)%>
 <div class = "formslist_show">
 <table border="0" width="80%" class="mytable">
 	<tr>
@@ -10,17 +9,29 @@
 		<th>Submitted At</th>
 	</tr>
 	<% @appformjoins.each do |i| %>
-	<tr>
+	<% if i.formname.include?("Adult") %>
+	<% @controller_name = "iforms" %>
+	<% @id = i.iform_id %>
+	<% end %>
+	<% if i.formname.include?("Child") %>
+	<% @controller_name = "childforms" %>
+	<% @id = i.childform_id %>
+	<% end %>
+    <tr>
 	<% if i.status == "submitted" %>
-	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :id => i.iform_id %></td>
+	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :appointment_id => @appointment.id, :id =>i.iform_id %></td>
 	<td><%= i.status.capitalize %></td>
 	<td><%= @formsubmittedtime %></td>
+	<% elsif i.status == nil %>
+	<td><%= i.formname %></td>
+	<td></td>
+	<td></td>
 	<% else %>
 	<td><%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %></td>
-	<td>Pending</td>
+	<td> Pending</td>
 	<td>Not yet submitted </td>
-	<% end %>
 	</tr>
+	<% end %>
 	<% end %>
 </table>
 </br>
@@ -32,6 +43,7 @@
 
 
 <% if current_user.role == 'doctor'%>
+<% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", @appointment.id, current_user.id)%>
 <div class = "formslist_show">
 <table border="0" width="80%" class="mytable">
 	<tr>
@@ -40,15 +52,28 @@
 		<th>Recieved At</th>
 	</tr>
 	<% @appformjoins.each do |i| %>
+	<% if i.formname.include?("Adult") %>
+	<% @controller_name = "iforms" %>
+	<% @id = i.iform_id %>
+	<% end %>
+	<% if i.formname.include?("Child") %>
+	<% @controller_name = "childforms" %>
+	<% @id = i.childform_id %>
+	<% end %>
 	<tr>
 	<% if i.status == "submitted" %>
-	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :id =>i.iform_id  %></td>
+	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :appointment_id => @appointment.id, :id =>i.iform_id  %></td>
 	<td>Received</td>
 	<td><%= @formsubmittedtime %></td>
+	<% elsif i.status == nil %>
+	<td><%= i.formname %></td>
+	<td></td>
+	<td></td>
 	<% else %>
 	<td><%= i.formname %></td>
-	<td>Pending</td>
-	<td>Pending</td>
+	<td> Pending</td>
+	<td>Not yet submitted </td>
+	</tr>
 	<% end %>
 	</tr>
 	<% end %>

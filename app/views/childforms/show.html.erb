@@ -1,0 +1,30 @@
+<% if current_user.role == 'doctor'%>
+<% @doctor = Doctor.find(@appointment.doctor_id) %>
+<% if current_user.id == @doctor.user_id %>
+<%= link_to 'Home',doctors_path %> |
+<%= link_to 'Download as PDF file', @childform.path %>
+</br>
+</br>
+FirstName:
+<%= @childform.Self_Name_First%></br>
+Lastname:
+<%= @childform.Self_Name_Last%>
+<% end %>
+<% end %>
+</br>
+
+<% if current_user.role == 'patient'%>
+<% @patient = Patient.find(@appointment.patient_id) %>
+<% if current_user.id == @patient.user_id %>
+<%= link_to 'Home', patients_path %> |
+<%= link_to 'Edit', edit_childform_path(@childform) %> |
+<%= link_to 'Back', :back %>
+</br>
+</br>
+FirstName:
+<%= @childform.Self_Name_First%></br>
+Lastname:
+<%= @childform.Self_Name_Last%>
+<% end %>
+<% end %>
+

@@ -1,28 +1,38 @@
 class IformsController < ApplicationController
+  
  before_filter :authenticate_user!, :except => [:index]
+ before_filter :is_patient?, :except => [:show]
+# before_filter :is_doctor?, :only => [:show]
 
-  # GET /iforms
-  # GET /iforms.xml
+  # GET /iform
+  # GET /iform.xml
   def index
-    # @iforms = Iform.all
+    # @iform = Iform.all
       respond_to do |format|
           format.html { redirect_to patients_path }
           format.xml  { head :ok }
       end
   end
 
-  # GET /iforms/1
-  # GET /iforms/1.xml
+  # GET /iform/1
+  # GET /iform/1.xml
   def show
+    session[:appointment_id_show] = params[:appointment_id]
+    if session[:appointment_id_show]
+    @appointment = Appointment.find(session[:appointment_id_show])
+    @iform = @appointment.iform
+    else
     @iform = Iform.find(params[:id])
+    @appointment = Appointment.find(@iform.appointment_id)
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @iform }
     end
   end
 
-  # GET /iforms/new
-  # GET /iforms/new.xml
+  # GET /iform/new
+  # GET /iform/new.xml
   def new
     @iform = Iform.new
     session[:formname] = params[:name]
@@ -37,15 +47,19 @@ class IformsController < ApplicationController
   end
 
 
-  # GET /iforms/1/edit
+  # GET /iform/1/edit
   def edit
-    @iform = Iform.find(params[:id])
+    @iform_id = Iform.find(params[:id])
+    @appointment = Appointment.find(@iform_id.appointment_id)
+    @iform = @appointment.iform
   end
 
-  # POST /iforms
-  # POST /iforms.xml
+  # POST /iform
+  # POST /iform.xml
   def create
-  #submit_form()
+  if session[:formname].include?("Child")  
+  submit_childform()
+  end
      
   # session[:iform_params].deep_merge!(params[:iform]) if params[:iform]
   #   @iform = Iform.new(session[:iform_params])
@@ -67,32 +81,35 @@ class IformsController < ApplicationController
   #       flash[:notice] = "iform saved!"
   #       redirect_to @iform
   #     end
-    
+  if session[:formname].include?("Adult")
+  @iformcheck = Iform.where("appointment_id = ? and formname = ?",session[:appointment_id], session[:formname]).first
+  if !@iformcheck  
   @iform = Iform.new(params[:iform])
   #@age = Date.today.year - @iform.Self_Birthdate.year
-  #@age -= 1 if Date.today < @iform.Self_Birthdate + age.years and birthdate.month > now.month #and birthdate.day > now.day
+  #@age -= 1 if Date.today < @iform.Self_Birthdate + age.years and birthdate.month > now.month and birthdate.day > now.day
+  age_calculator(@iform)  
   time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
-  str = time_now+"_"+@iform.Self_Name_Honorific + "_" + @iform.Self_Name_First
+  str = time_now+"_"+@iform.Self_Name_Last + "_" + @iform.Self_Name_First
   pathx = "/pdffiles/#{str}.pdf"
   @iform.path = pathx
-  
+  @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
+  @iform.formname = session[:formname]
   respond_to do |format|
             
       if @iform.save!
          @iform.appointment_id = session[:appointment_id]
-         @while_awake = params[:while_awake]
-         @while_sleep = params[:while_sleep]
-         @iform.Dental_History_Breath_Through_Mouth_While_Awake = @while_awake
-         @iform.Dental_History_Breath_Through_Mouth_While_Sleep = @while_sleep
-         @injury_mouth = params[:injury_mouth]
-         @injury_teeth = params[:injury_teeth]
-         @injury_chin = params[:injury_chin]
-         @iform.Dental_History_Injury_To_Mouth = @injury_mouth
-         @iform.Dental_History_Injury_To_Teeth = @injury_teeth
-         @iform.Dental_History_Injury_To_Chin = @injury_chin
+         p "000000000000params"
+         print params[:while_awake], params[:injury_teeth], params[:injury_chin]
+         p @iform.Dental_History_Breathe_Through_Mouth_While_Awake = params[:while_awake]
+         @iform.Dental_History_Breathe_Through_Mouth_While_Asleep = params[:while_sleep]
+         @iform.Dental_History_Injury_To_Mouth = params[:injury_mouth]
+         p @iform.Dental_History_Injury_To_Teeth = params[:injury_teeth]
+         @iform.Dental_History_Injury_To_Chin = params[:injury_chin]
+         age_calculator(@iform)
+         @iform.Self_Age = @age
          @iform.save
          #------------------------------------------------------------------ 
-            form_control_conditions(@iform)                                
+            adultform_control_conditions(@iform)                                
             
          #--------------------------------------------------------------------------------
           
@@ -101,16 +118,15 @@ class IformsController < ApplicationController
           @appointment.status = "Received"
           @appointment.save
           @form = Form.where("formname = ?", session[:formname]).first
-          @form_id = @form.id
-          @appformjoin = Appformjoin.where("appointment_id = ? and form_id = ?", session[:appointment_id], @form_id ).first  
-          @appformjoin_id = @appformjoin.id
-          @appformjoin = Appformjoin.find(@appformjoin_id)
+          p "00000000000000000000"
+          p @form.id
+          @appformjoin = Appformjoin.where("appointment_id = ? and form_id = ?", session[:appointment_id], @form.id ).first  
+          @appformjoin = Appformjoin.find(@appformjoin.id)
           @appformjoin.status = "submitted"
-          @appformjoin.formsubmittedtime = Time.now
+          p @appformjoin.formsubmittedtime = Time.now
           @appformjoin.iform_id = @iform.id
           @appformjoin.save
-        
-          form_controls_mapping(@iform, str)
+          adultform_controls_mapping(str, @iform)
          
        
         format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
@@ -120,23 +136,53 @@ class IformsController < ApplicationController
         format.xml  { render :xml => @iform.errors, :status => :unprocessable_entity }
       end
   end
+  # p @appformjoin.status
+  #   Iform.update_appformjoin(@appformjoin)
+  @appformjoin = Appformjoin.where("appointment_id = ?", session[:appointment_id])
+  @appformjoin.each do |i|
+    if i.status == "pending"
+      i.status = nil
+      i.save
+    end
+  end
+  else
+    render :text => "You have already filled the form"
+  end
+  end
+  session[:formname]=nil
+  session[:appointment_id]=nil
   end
   
-
-  # PUT /iforms/1
-  # PUT /iforms/1.xml
+ 
+  # PUT /iform/1
+  # PUT /iform/1.xml
   def update
     @iform = Iform.find(params[:id])
-
     respond_to do |format|
       if @iform.update_attributes(params[:iform])
         time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
-         str = time_now+"_"+@iform.Self_Name_Honorific + "_" + @iform.Self_Name_First
+         str = time_now+"_"+@iform.Self_Name_Last + "_" + @iform.Self_Name_First
+          @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
+          age_calculator(@iform)
+           @iform.Self_Age = @age
          pathx = "/pdffiles/#{str}.pdf"
          @iform.path = pathx
          @iform.save
-         form_control_conditions(@iform)
-         form_controls_mapping(@iform, str)
+         if @iform.formname.include?("Adult")
+          print params[:while_awake], params[:injury_teeth], params[:injury_chin]
+          p @iform.Dental_History_Breathe_Through_Mouth_While_Awake = params[:while_awake]
+          @iform.Dental_History_Breathe_Through_Mouth_While_Asleep = params[:while_sleep]
+          @iform.Dental_History_Injury_To_Mouth = params[:injury_mouth]
+          p @iform.Dental_History_Injury_To_Teeth = params[:injury_teeth]
+          @iform.Dental_History_Injury_To_Chin = params[:injury_chin]
+         @iform.save
+         adultform_control_conditions(@iform)
+         adultform_controls_mapping(str, @iform)
+         end
+         if @iform.formname.include?("Child")
+          childform_control_conditions(@iform)
+          childform_controls_mapping(str, @iform)
+         end 
         format.html { redirect_to(@iform, :notice => 'Form was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -146,540 +192,632 @@ class IformsController < ApplicationController
     end
   end
 
-  # DELETE /iforms/1
-  # DELETE /iforms/1.xml
+  # DELETE /iform/1
+  # DELETE /iform/1.xml
   def destroy
     @iform = Iform.find(params[:id])
     @iform.destroy
 
     respond_to do |format|
-      format.html { redirect_to(iforms_url) }
+      format.html { redirect_to(iform_url) }
       format.xml  { head :ok }
     end
   end
   
   protected
-  def submit_form
-    if session[:formname] == "testform1"
+  def submit_childform
+      @iformcheck = Iform.where("appointment_id = ? and formname = ?",session[:appointment_id], session[:formname]).first
+      if !@iformcheck  
       @iform = Iform.new(params[:iform])
-      @iform.appointment_id = session[:appointment_id]
-      if @iform.save
-        @forms = Form.where("formname = ?", session[:formname])
-        @forms.each do |i|
-          @form_id = i.id
-        end
-        @appformjoins = Appformjoin.where("appointment_id = ? and form_id = ?", session[:appointment_id], @form_id )
-        @appformjoins.each do |i|  
-          @appformjoin_id = i.id
-        end
-        @appformjoin = Appformjoin.find(@appformjoin_id)
-        @appformjoin.status = "submitted"
-        @appformjoin.formsubmittedtime = Time.now
-        @appformjoin.iform_id = @iform.id
-        @appformjoin.save
-        redirect_to(@iform)
-      else
-        render "new"
+      time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
+      str = time_now+"_"+@iform.Self_Name_Last+"_"+@iform.Self_Name_First
+      pathx = "/pdffiles/#{str}.pdf"
+      @iform.path = pathx
+      @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
+      age_calculator(@iform)
+       @iform.Self_Age = @age
+      @iform.formname = session[:formname]
+      respond_to do |format|
+
+          if @iform.save!
+             @iform.appointment_id = session[:appointment_id]
+             @iform.save
+             childform_control_conditions(@iform)
+             @appointment = Appointment.find(session[:appointment_id])
+             @appointment.timereceived = Time.now
+             @appointment.status = "Received"
+             @appointment.save
+             @form = Form.where("formname = ?", session[:formname]).first
+             p "00000000000000000000"
+             p @form.id
+             @appformjoin = Appformjoin.where("appointment_id = ? and form_id = ?", session[:appointment_id], @form.id ).first  
+             @appformjoin = Appformjoin.find(@appformjoin.id)
+             @appformjoin.status = "submitted"
+             p @appformjoin.formsubmittedtime = Time.now
+             @appformjoin.iform_id = @iform.id
+             @appformjoin.save
+             childform_controls_mapping(str, @iform)
+             format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
+             format.xml  { render :xml => @iform, :status => :created, :location => @iform }
+           else
+             format.html { render :action => "new" }
+             format.xml  { render :xml => @iform.errors, :status => :unprocessable_entity }
+           end
+       end
+       @appformjoin = Appformjoin.where("appointment_id = ?", session[:appointment_id])
+       @appformjoin.each do |i|
+         if i.status == "pending"
+           i.status = nil
+           i.save
+         end
+       end
+       else
+         render :text => "You have already filled the form"
       end
-    end
+  end
+
+  def age_calculator(iform)
+     @iform = iform
+     if @iform.Self_Birthdate
+     @age = Date.today.year - @iform.Self_Birthdate.year
+     if Date.today.month > @iform.Self_Birthdate.month
+       @age = @age - 1
+     end
+       if Date.today.month == @iform.Self_Birthdate.month and Date.today.day < @iform.Self_Birthdate.day
+         @age = @age - 1
+       end
+     end
   end
 
   # method below -- to check conditions to assign to form controls
-  def form_control_conditions(iform)
+  def adultform_control_conditions(iform)
     @iform = iform
-    @yes = "yes"
-    @no = "no"  
-    @self_home_address = @iform.Self_Home_Address1+ " "+@iform.Self_Home_Address2
-    @self_employer_address = @iform.Self_Employer_Address1+ " "+@iform.Self_Employer_Address2+" "+@iform.Self_Employer_City+" "+@iform.Self_Employer_State+" "+@iform.Self_Employer_Postal_Code
-    @spouse_name = @iform.Spouse_Name_First+" "+@iform.Spouse_Name_Last
-    @insurance_company_primary_address = @iform.Insurance_Company_Primary_Address1+" "+ @iform.Insurance_Company_Primary_Address2+" "+ @iform.Insurance_Company_Primary_City+" "+@iform.Insurance_Company_Primary_State+" "+@iform.Insurance_Company_Primary_Postal_Code
-    @insurance_company_secondary_address = @iform.Insurance_Company_Secondary_Address1+" "+@iform.Insurance_Company_Secondary_Address2+" "+@iform.Insurance_Company_Secondary_City+" "+@iform.Insurance_Company_Secondary_State+" "+@iform.Insurance_Company_Secondary_Postal_Code
-    @emergency_contact_name = @iform.Emergency_Contact_Name_First+" "+@iform.Emergency_Contact_Name_Last if @iform.Emergency_Contact_Name_First and @iform.Emergency_Contact_Name_Last
-    if @iform.Emergency_Contact_Phone_Work
-    @emergency_contact_phone_work_areacode = @iform.Emergency_Contact_Phone_Work.slice(0,3) 
-    @emergency_contact_phone_work = @iform.Emergency_Contact_Phone_Work.slice(3,9)
+    @yes = "Yes"
+    @Allergic = @iform.Allergic_To_Any_Drugs
+    @Any_serious_medical_conditions = @iform.Med_His_Serious_Medical_Issues
+    @Any_speech_problems = @iform.Dental_History_Habits_Speech_Problems
+    p @Are_you_taking_any_Prescription_over_the_counter_drugs = @iform.Med_His_Currently_Taking_Presc_Drugs_List+" "+@iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List
+    @Billing_Address = @iform.Person_Responsible_For_Account_Address1+" "+@iform.Person_Responsible_For_Account_Address2+" "+ @iform.Person_Responsible_For_Account_City+" "+ @iform.Person_Responsible_For_Account_State+" "+@iform.Person_Responsible_For_Account_Postal_Code
+    @Date_of_last_visit = @iform.Med_His_Personal_Physician_Date_Of_Last_Visit
+    if !@iform.Emergency_Contact_Phone_Home.blank? and @iform.Emergency_Contact_Phone_Home.length == 10
+    @emergency_phone_hm = @iform.Emergency_Contact_Phone_Home.slice(3,3) + "-" + @iform.Emergency_Contact_Phone_Home.slice(6,4)
+    @Hm_areacode = @iform.Emergency_Contact_Phone_Home.slice(0,3)
     end
-    if @iform.Emergency_Contact_Phone_Home
-    @emergency_contact_phone_home_areacode = @iform.Emergency_Contact_Phone_Home.slice(0,3)  
-    @emergency_contact_phone_home = @iform.Emergency_Contact_Phone_Home.slice(3,9)
+    if !@iform.Emergency_Contact_Phone_Work.blank? and @iform.Emergency_Contact_Phone_Work.length == 10
+    @emergency_phone_wk = @iform.Emergency_Contact_Phone_Work.slice(3,3) + "-" + @iform.Emergency_Contact_Phone_Work.slice(6,4)
+    @Wk_areacode = @iform.Emergency_Contact_Phone_Work.slice(0,3)
     end
-    
-    if @iform.Self_Sex == 'female'
-      @sex = 'Female'
+    @General_Dentist = @iform.Self_General_Dentist_Name
+    @Group_Plan_Local_or_Policy = @iform.Insurance_Company_Primary_Group_Plan_Local_Policy_Number
+    @Group_Plan_Local_or_Policy2 = @iform.Insurance_Company_Secondary_Group_Plan_Local_Policy_Number
+    @His_Her_Name_2 = @iform.Emergency_Contact_Name_First+" "+@iform.Emergency_Contact_Name_Last
+    @How_long_there = @iform.Self_Length_Of_Employment
+    @I_prefer_to_be_called = @iform.Self_Name_Preferred
+    @Ins_Relation_2 = @iform.Insurance_Company_Primary_Insured_Relationship
+    @InsBday_1 = @iform.Insurance_Company_Primary_Insured_Birthdate
+    @Insurance_Co_Address = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
+    @Insurance_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
+    if !@iform.Insurance_Company_Primary_Phone.blank? and @iform.Insurance_Company_Primary_Phone.length == 10 
+    @Insurance_Co_AreaCode = @iform.Insurance_Company_Primary_Phone.slice(0,3)
+    @Insurance_Co_Phone = @iform.Insurance_Company_Primary_Phone.slice(3,3)+"-"+@iform.Insurance_Company_Primary_Phone.slice(6,4)
     end
-    if @iform.Self_Sex == 'male'
-      @sex = 'mail'
+    if !@iform.Insurance_Company_Secondary_Phone.blank? and @iform.Insurance_Company_Secondary_Phone.length == 10
+    @Insurance_Co_Areacode_2 = @iform.Insurance_Company_Secondary_Phone.slice(0,3)
+    @Insurance_Co_Phone2 = @iform.Insurance_Company_Secondary_Phone.slice(3,3)+"-"+@iform.Insurance_Company_Secondary_Phone.slice(6,4)
     end
-
-    marital_status = ["single", "married", "divorced", "widowed", "seperated"]
-    marital_status.each do |i|
-      if @iform.Self_Marital_Status == i
-        @marital_stauts = i.capitalize
-      end
+    @Insurance_Co_Name = @iform.Insurance_Company_Primary_Name
+    @Insurance_Co_Name_2 = @iform.Insurance_Company_Secondary_Name    
+    p @Insured_8217_s_Employer = @iform.Insurance_Company_Primary_Insured_Employer_Name
+    p @Insured_8217_s_Employer_2 = @iform.Insurance_Company_Secondary_Insured_Employer_Name
+    p "insurance"
+    p @Insured_8217_s_Name = @iform.Insurance_Company_Primary_Insured_Name_First+" "+@iform.Insurance_Company_Primary_Insured_Name_Last
+    p @Insured_8217_s_Name_2 = @iform.Insurance_Company_Secondary_Insured_Name_First+" "+@iform.Insurance_Company_Secondary_Insured_Name_Last
+    if !@iform.Insurance_Company_Primary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Primary_Insured_Social_Security_Number.length == 9
+    p @Insured_8217_s_SS = @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(0,3)+"-"+@iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(5,4)
     end
-
-    case @iform.Insurance_Company_Primary_Orthodontic_Coverage
-    when true 
-      @orthocoverage_primary = "yes"
-    when false
-      @orthocoverage_primary = "no"
+    if !@iform.Insurance_Company_Secondary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.length == 9
+    p @Insured_8217_s_SS_2 = @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(0,3)+"-"+@iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(5,4)
     end
-
-    case @iform.Insurance_Company_Primary_Dental_Coverage
-    when true
-      @dentalcoverage_primary = "yes"
-    when false
-      @dentalcoverage_primary = "no"
+    @InsuredBday_2 = @iform.Insurance_Company_Secondary_Insured_Birthdate
+    @Last_Visit_Date = @iform.Self_General_Dentist_Date_Last_Appointment
+    @Name = @iform.Self_Name_Last + ", " + @iform.Self_Name_First + " " + @iform.Self_Name_Middle
+    @Occupation = @iform.Self_Occupation
+    @Other_family_members_seen_by_us = @iform.Self_Other_Family_Members
+    @Person_Responsible_for_Account = @iform.Person_Responsible_For_Account_Name_First + " " + @iform.Person_Responsible_For_Account_Name_Last
+    if !@iform.Med_His_Personal_Physician_Phone.blank? and @iform.Med_His_Personal_Physician_Phone.length == 10
+    @Physician_areacode = @iform.Med_His_Personal_Physician_Phone.slice(0,3)
+    @Physician_phone = @iform.Med_His_Personal_Physician_Phone.slice(3,3) + "-" + @iform.Med_His_Personal_Physician_Phone.slice(6,4)
     end
-
-    case @iform.Insurance_Company_Secondary_Orthodontic_Coverage
-    when true
-      @orthocoverage_secondary = "Yes"
-    when false
-      @orthocoverage_secondary = "No"
+    p @Physician_8217_s_Name = @iform.Med_His_Personal_Physician_Name_First+ " " +@iform.Med_His_Personal_Physician_Name_Last
+    @Please_explain = @iform.Med_His_Currently_Under_The_Care_Of_A_Physician_Desc
+    @Relation = @iform.Person_Responsible_For_Account_Relationship
+    @Relation_3 = @iform.Insurance_Company_Secondary_Insured_Relationship
+    @Relation_4 = @iform.Emergency_Contact_Relationship
+    @RespPerson_DL = @iform.Person_Responsible_For_Account_Drivers_License_State + " " + @iform.Person_Responsible_For_Account_Drivers_License_Number
+    @RespPerson_Employer = @iform.Person_Responsible_For_Account_Employer_Name
+    if !@iform.Person_Responsible_For_Account_Social_Security_Number.blank? and @iform.Person_Responsible_For_Account_Social_Security_Number.length == 9
+    @RespPerson_SS = @iform.Person_Responsible_For_Account_Social_Security_Number.slice(0,3) + "-" + @iform.Person_Responsible_For_Account_Social_Security_Number.slice(3,2) + "-" +  @iform.Person_Responsible_For_Account_Social_Security_Number.slice(5,4)
     end
-
-    case @iform.Insurance_Company_Secondary_Dental_Coverage
-    when true
-      @dentalcoverage_secondary = "Yes"
-    when false
-      @dentalcoverage_secondary = "No"
+    if !@iform.Person_Responsible_For_Account_Phone_Home.blank? and @iform.Person_Responsible_For_Account_Phone_Home.length == 10
+    @RespPersonHm = @iform.Person_Responsible_For_Account_Phone_Home.slice(3,3) + "-" + @iform.Person_Responsible_For_Account_Phone_Home.slice(6,4)
+    @RespPersonHmAreacode = @iform.Person_Responsible_For_Account_Phone_Home.slice(0,3)
     end
-
-    current_physical_health = ["good", "fair","poor"]
-    current_physical_health.each do |i|
-      if @iform.Med_His_Current_Physical_Health == i
-        @current_physical_health = i
-      end
+    if !@iform.Person_Responsible_For_Account_Phone_Work.blank? and @iform.Person_Responsible_For_Account_Phone_Work.length == 10
+    @RespPersonWk = @iform.Person_Responsible_For_Account_Phone_Work.slice(3,3) + "-" + @iform.Person_Responsible_For_Account_Phone_Work.slice(6,4)
+    @RespPersonWk_areacode = @iform.Person_Responsible_For_Account_Phone_Work.slice(0,3)
     end
-
-    case @iform.Med_His_Currently_Under_The_Care_Of_A_Physician
-    when true
-      @currently_under_physician = "yes"
-    when false
-      @currently_under_physician = "no"
+    @RespPersonWkExt = @iform.Person_Responsible_For_Account_Phone_Work_Extension
+    @Spouse_Birthdate = @iform.Spouse_Birthdate
+    @Spouse_Employer = @iform.Spouse_Employer_Name
+    @Spouse_Name = @iform.Spouse_Name_First + " " + @iform.Spouse_Name_Middle + " " + @iform.Spouse_Name_Last
+    if !@iform.Spouse_Phone_Work.blank? and @iform.Spouse_Phone_Work.length == 10
+    @Spouse_Wk_Area_Code = @iform.Spouse_Phone_Work.slice(0,3)
+    @Spouse_Wk_Phone = @iform.Spouse_Phone_Work.slice(3,3) + "-" + @iform.Spouse_Phone_Work.slice(6,4)
     end
-
-    case @iform.Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs
-    when true
-      @currently_under_prescription = "yes"
-    when false
-      @currently_under_prescription = "no"
+    @Spouse_Wk_Ext = @iform.Spouse_Phone_Work_Extension
+    if !@iform.Spouse_Social_Security_Number.blank? and @iform.Spouse_Social_Security_Number.length == 9
+    @SpouseSS = @iform.Spouse_Social_Security_Number.slice(0,3) + "-" + @iform.Spouse_Social_Security_Number.slice(3,2) + "-" + @iform.Spouse_Social_Security_Number.slice(5,4)
     end
-
-    case @iform.Med_His_Currently_Taking_Birth_Control_Pills
-    when true
-      @Currently_Taking_Birth_Control_Pills = "yes"
-    when false
-      @Currently_Taking_Birth_Control_Pills = "no"
+    @Today_8217_s_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider
+    @Week = @iform.Med_His_Weeks_Pregnant
+    @What_do_you_want = @iform.Dental_History_Orthodontic_Goals
+    @When_taken_Phen_Fen = @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin
+    p @Where_amp_when_are_best_times_to_reach_you = @iform.Self_Best_Contact_Method + ": " + @iform.Self_Best_Contact_Time
+    @Whom_may_we_Thank_for_referring_you = @iform.Self_Referred_By
+    if @iform.Self_Birthdate.blank?
+    #@You_Age = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider - @iform.Self_Birthdate
     end
-
-    case @iform.Med_His_Currently_Pregnant
-    when true
-      @Currently_Pregnant = "yes"
-    when false
-      @Currently_Pregnant = "no"
+    @You_Birthdate = @iform.Self_Birthdate
+    @You_City = @iform.Self_Home_City
+    @You_Drivers_License = @iform.Self_Driver_License_State + ": " + @iform.Self_Driver_License_Number
+    @You_Employer = @iform.Self_Employer_Name
+    p @You_Employer_8217_s_Address = @iform.Self_Employer_Address1 + " " + @iform.Self_Employer_Address2 + " " + @iform.Self_Employer_City + " " + @iform.Self_Employer_State + " " + @iform.Self_Employer_Postal_Code
+    @You_Ext = @iform.Self_Phone_Work_Extension
+    if !@iform.Self_Phone_Home.blank? and @iform.Self_Phone_Home.length == 10
+    @You_Hm = @iform.Self_Phone_Home.slice(3,3) + "-" + @iform.Self_Phone_Home.slice(6,4)
+    @You_Hm_Area_Code = @iform.Self_Phone_Home.slice(0,3)
     end
-
-    case @iform.Med_His_Currently_Nursing
-    when true
-      @Currently_Nursing = "yes"
-    when false
-      @Currently_Nursing = "no"
+    @You_Home_Address = @iform.Self_Home_Address1 + " " + @iform.Self_Home_Address2
+    if !@iform.Self_Phone_Mobile.blank? and @iform.Self_Phone_Mobile.length == 10
+    @You_Pager_Other = @iform.Self_Phone_Mobile.slice(0,3) + "-" + @iform.Self_Phone_Mobile.slice(3,3) + "-" + @iform.Self_Phone_Mobile.slice(6,4)
     end
-
-    case @iform.Med_His_Abnormal_Bleeding
-    when true
-      @Abnormal_Bleeding = "Y"
-    when false
-      @Abnormal_Bleeding = "N"
+    if !@iform.Self_Social_Security_Number.blank? and @iform.Self_Social_Security_Number.length == 9
+    @You_SS = @iform.Self_Social_Security_Number.slice(0,3) + "-" + @iform.Self_Social_Security_Number.slice(3,2) + "-" + @iform.Self_Social_Security_Number.slice(5,4)
     end
-
-    case @iform.Med_His_Anemia
-    when true
-      @Anemia = "Y"
-    when false
-      @Anemia = "N"
+    @You_State = @iform.Self_Home_State
+    if !@iform.Self_Phone_Work.blank? and @iform.Self_Phone_Work.length == 10
+    @You_Wk = @iform.Self_Phone_Work.slice(3,3) + "-" + @iform.Self_Phone_Work.slice(6,4)
+    @You_Wk_Area_Code = @iform.Self_Phone_Work.slice(0,3)
     end
-
-    case @iform.Med_His_Artificial_Bones_Joints_Valves
-    when true
-      @Bones_Joints_Valves = "Y"
-    when false
-      p "bones false"
-      @Bones_Joints_Valves = "N"
-    end
-
-    case @iform.Med_His_Asthma
-    when true
-      @Asthma = "Y"
-    when false
-      @Asthma = "N"
-    end
-
-    case @iform.Med_His_Blood_Transfusion
-    when true
-      @Blood_Transfusion = "Y"
-    when false
-      @Blood_Transfusion = "N"
-    end
-
-    case @iform.Med_His_Cancer
-    when true
-      @Cancer = "Y"
-    when false
-      @Cancer = "N"
-    end
-
-    case @iform.Med_His_Congenital_Heart_Defect
-    when true
-      @Congenital_Heart_Defect = "Y"
-    when false
-      @Congenital_Heart_Defect = "N"
-    end
-
-    case @iform.Med_His_Diabetes
-    when true
-      @Diabetes = "Y"
-    when false
-      @Diabetes = "N"
-    end
-
-    case @iform.Med_His_Difficulty_Breathing
-    when true
-      @Difficulty_Breathing = "Y"
-    when false
-      @Difficulty_Breathing = "N"
-    end
-
-    case @iform.Med_His_Drug_Abuse
-    when true
-      @Drug_Abuse = "Y"
-    when false
-      @Drug_Abuse = "N"
-    end
-
-    case @iform.Med_His_Emphysema
-    when true
-      @Emphysema = "Y"
-    when false
-      @Emphysema = "N"
-    end
-
-    case @iform.Med_His_Epilepsy
-    when true
-      @Epilepsy = "Y"
-    when false
-      @Epilepsy = "N"
-    end
-
-    case @iform.Med_His_Fever_Blisters
-    when true
-      @Fever_Blisters = "Y"
-    when false
-      @Fever_Blisters = "N"
-    end
-
-    case @iform.Med_His_Glaucoma
-    when true
-      @Glaucoma = "Y"
-    when false
-      @Glaucoma = "N"
-    end
-
-    case @iform.Med_His_Heart_Attack_Or_Stroke
-    when true
-      @Heart_Attack_Or_Stroke = "Y"
-    when false
-      @Heart_Attack_Or_Stroke = "N"
-    end
-
-    case @iform.Med_His_Heart_Murmur
-    when true
-      @Heart_Murmur = "Y"
-    when false
-      @Heart_Murmur = "N"
-    end
-
-    case @iform.Med_His_Heart_Surgery_Or_Pacemaker
-    when true
-      @Heart_Surgery_Or_Pacemaker = "Y"
-    when false
-      @Heart_Surgery_Or_Pacemaker = "N"
-    end
-
-    case @iform.Med_His_Hemophilia
-    when true
-      @Hemophilia = "Y"
-    when false
-      @Hemophilia = "N"
-    end
-
-    case @iform.Med_His_Hepatitis
-    when true
-      @Hepatitis = "Y"
-    when false
-      @Hepatitis = "N"
-    end
-
-    case @iform.Med_His_High_Or_Low_Blood_Pressure
-    when true
-      @High_Or_Low_Blood_Pressure = "Y"
-    when false
-      @High_Or_Low_Blood_Pressure = "N"
-    end
-
-    case @iform.Med_His_AIDS
-    when true
-      @HIV_or_AIDS = "Y"
-    when false
-      @HIV_or_AIDS = "N"
-    end
-
-    case @iform.Med_His_Hospitalized_For_Any_Reason
-    when true
-      @Hospitalized_For_Any_Reason = "Y"
-    when false
-      @Hospitalized_For_Any_Reason = "N"
-    end
-
-    case @iform.Med_His_Kidney_Problems
-    when true
-      @Kidney_Problems = "Y"
-    when false
-      @Kidney_Problems = "N"
-    end
-
-    case @iform.Med_His_Mitral_Valve_Prolapse
-    when true
-      @Mitral_Valve_Prolapse = "Y"
-    when false
-      @Mitral_Valve_Prolapse = "N"
-    end
-
-    case @iform.Med_His_Psychiatric_Problems
-    when true
-      @Psychiatric_Problems = "Y"
-    when false
-      @Psychiatric_Problems = "N"
-    end
-
-    case @iform.Med_His_Radiation_Treatment
-    when true
-      @Radiation_Treatment = "Y"
-    when false
-      @Radiation_Treatment = "N"
-    end
-
-    case @iform.Med_His_Rheumatic_Fever_Or_Scarletfever
-    when true
-      @Rheumatic_Fever_Or_Scarletfever = "Y"
-    when false
-      @rheumatic_or_scarletfever = "N"
-    end
-
-    case @iform.Med_His_Frequent_Headaches
-    when true
-      @Frequent_Headaches = "Y"
-    when false
-      @Frequent_Headaches = "N"
-    end
-
-    case @iform.Med_His_Shingles
-    when true
-      @Shingles = "Y"
-    when false
-      @Shingles = "N"
-    end
-
-    case @iform.Med_His_Sickle_Cell_Disease_Or_Traits
-    when true
-      @Sickle_Cell_Disease_Or_Traits = "yes"
-    when false
-      @Sickle_Cell_Disease_Or_Traits = "no"
-    end
-
-    case @iform.Med_His_Sinus_Problems
-    when true
-      @Sinus_Problems = "Y"
-    when false
-      @Sinus_Problems = "N"
-    end
-
-    case @iform.Med_His_Tuberculosis
-    when true
-      @Tuberculosis = "Y"
-    when false
-      @Tuberculosis = "N"
-    end
-
-    case @iform.Med_His_Ulcers
-    when true
-      @Ulcers = "Y"
-    when false
-      @Ulcers = "N"
-    end
-
-    case @iform.Med_His_Venereal_Disease
-    when true
-      @Venereal_Disease = "Y"
-    when false
-      @Venereal_Disease = "N"
-    end
-
+    @You_Zip = @iform.Self_Home_Postal_Code
+    @Your_EMail_Address = @iform.Self_Email_Address
+    p @Honorific = @iform.Self_Name_Honorific
     case @iform.Allergic_To_Aspirin
     when true
-      @Aspirin = "Y"
+      @Aspirin_Y = @yes
     when false
-      @Aspirin = "N"
+      @Aspirin_N = @yes
     end
-
-    case @iform.Allergic_To_Metals_Or_Plastics
-    when true
-      @Metals_Or_Plastics = "Y"
-    when false
-      @Metals_Or_Plastics = "N"
-    end
-
     case @iform.Allergic_To_Codeine
     when true
-      @Codeine = "Y"
+      @Codeine_Y = @yes
     when false
-      @Codeine = "N"
+      @Codeine_N = @yes
     end
-
     case @iform.Allergic_To_Dental_Anesthetics
     when true
-      @Dental_Anesthetics = "Y"
+      @Anesthetics_Y = @yes
     when false
-      @Dental_Anesthetics = "N"
+      @Anesthetics_N = @yes
     end
-
     case @iform.Allergic_To_Erythromycin
     when true
-      @Erythromycin = "Y"
+      @Erythromycin_Y = @yes
     when false
-      @Erythromycin = "N"
+      @Erythromycin_N = @yes
     end
-
     case @iform.Allergic_To_Latex
     when true
-      @Latex = "Y"
+      @Latex_Y = @yes
     when false
-      @Latex = "N"
+      @Latex_N = @yes
     end
-
-    case @iform.Allergic_To_Penicillin
+    case @iform.Allergic_To_Metals or @iform.Allergic_To_Plastics
     when true
-      @Penicillin = "Y"
+      @Metals_Y = @yes
     when false
-      @Penicillin = "N"
+      @Metals_N = @yes
     end
-
-    case @iform.Allergic_To_Tetracycline
-    when true
-      @Tetracycline = "Y"
-    when false
-      @Tetracycline = "N"
-    end
-
     case @iform.Allergic_To_Other
     when true
-      @Other = "Y"
+      @Other_Y = @yes
     when false
-      @Other = "N"
+      @Other_N = @yes
     end
-
-    case @iform.Dental_History_Previous_Orthodontic_Evaluation
+    case @iform.Allergic_To_Penicillin
     when true
-      @Orthodontic_Evaluation = "yes"
+      @Penicillin_Y = @yes
     when false
-      @Orthodontic_Evaluation = "no"
+      @Penicillin_N = @yes
     end
-
-    case @iform.Dental_History_Previous_Dental_Work_Issues
+    case @iform.Allergic_To_Tetracycline
     when true
-      @Previous_Dental_Work_Issues = "yes"
+      @Tetracycline_Y = @yes
     when false
-      @Previous_Dental_Work_Issues = "no"
+      @Tetracycline_N = @yes
     end
-
-    case @iform.Dental_History_TMJ_TMD_Issues
+    case @iform.Dental_History_Any_Missing_Teeth or @iform.Dental_History_Any_Extra_Permanent_Teeth
     when true
-      @TMJ_TMD_Issues = "yes"
+      @Teeth_yes = @yes
     when false
-      @TMJ_TMD_Issues = "no"
+      @Teeth_no = @yes
     end
-
-    current_dental_health = ["good", "fair","poor"]
-    current_dental_health.each do |i|
-      if @iform.Dental_History_Current_Dental_Health == i
-        @current_dental_health = i
-      end
-    end
-
-    case @iform.Dental_History_Like_Smile
-    when true
-      @Like_Smile = "yes"
-    when false
-      @Like_Smile = "no"
-    end
-
     case @iform.Dental_History_Bleeding_Gums
     when true
-      @Bleeding_Gums = "yes"
+      @Gums_bleed_yes = @yes
     when false
-      @Bleeding_Gums = "no"
+      @Gums_bleed_no = @yes
     end
-
-    if @iform.Dental_History_Injury_To_Mouth == "mouth"
-      @mouth = "Yes"
+    case @iform.Dental_History_Current_Dental_Health
+    when "fair"
+      @Dental_Health_fair = @yes
+    when "good"
+      @Dental_Health_good = @yes
+    when "poor"
+      @Dental_Health_Poor = @yes
     end
-    if @iform.Dental_History_Injury_To_Teeth == "teeth"
-      @teeth = "Yes"
-    end
-    if @iform.Dental_History_Injury_To_Chin == "chin"
-      @chin = "Yes"
-    end
-
-    case @iform.Dental_History_Breath_Through_Mouth
+    case @iform.Dental_History_Like_Smile
     when true
-      @Breath_Through_Mouth = "yes"
+      @Smile_yes = @yes
     when false
-      @Breath_Through_Mouth = "no"
+      @Smile_no = @yes
     end
-
-    if @iform.Dental_History_Breath_Through_Mouth_While_Awake == "while_awake"
-      @Mouth_While_Awake_Or_Sleep = "Awake"
-    end
-    if @iform.Dental_History_Breath_Through_Mouth_While_Sleep == "while_sleep"
-      @Mouth_While_Awake_Or_Sleep = "Asleep"
-    end
-
-    case @iform.Dental_History_Any_Extra_Permanent_Teeth
+    case @iform.Dental_History_Previous_Dental_Work_Issues
     when true
-      @Extra_Permanent_Teeth = "yes"
+      @Previous_problems_yes = @yes
     when false
-      @Extra_Permanent_Teeth = "no"
+      @Previous_problems_no = @yes
     end
-
+    case @iform.Dental_History_Previous_Orthodontic_Evaluation
+    when true
+      @Evaluated_yes = @yes
+    when false
+      @Evaluated_no = @yes
+    end
+    case @iform.Dental_History_TMJ_TMD_Issues_Current or @iform.Dental_History_TMJ_TMD_Issues_Previous
+    when true
+      @TMJ_yes = @yes
+    when false
+      @TMJ_no = @yes
+    end
+    case @iform.Dental_History_Tobacco_Smoke or @iform.Dental_History_Tobacco_Smokeless
+    when true
+      @Tobacco_yes = @yes
+    when false
+      @Tobacco_no = @yes
+    end
     case @iform.Dental_History_Ever_Taken_PhenFen_Redux_Pondimin
     when true
-      @Ever_Taken_PhenFen = "yes"
+    @Phen_Fen_yes = @yes
     when false
-      @Ever_Taken_PhenFen = "no"
+    @Phen_Fen_no = @yes
     end
-
-    case @iform.Dental_History_Tobacco_Smoke
+    case @iform.Dental_History_Habits_Mouth_Breather
     when true
-      @Tobacco_Smoke = "yes"
+      @Mouth_breather_yes = @yes
     when false
-      @Tobacco_Smoke = "no"
+      @Mouth_breather_no = @yes
+    end
+    case @iform.Insurance_Company_Primary_Dental_Coverage
+    when true
+      @Dentalcoverage_yes = @yes
+    when false
+      @Dentalcoverage_no = @yes
+    end
+    case @iform.Insurance_Company_Primary_Orthodontic_Coverage
+    when true
+      @Orthocoverage_yes = @yes
+    when false
+      @Orthocoverage_no = @yes
+    end
+    case @iform.Insurance_Company_Secondary_Dental_Coverage
+    when true
+      @DentalCoverage_Yes2 = @yes
+    when false
+      @DentalCoverage_No2 = @yes
+    end
+    case @iform.Insurance_Company_Secondary_Orthodontic_Coverage
+    when true
+      @OrthoCoverage_Yes2 = @yes
+    when false
+      @OrthoCoverage_No2 = @yes
+    end
+    case @iform.Med_His_Anemia
+    when true
+      @Anemia_Y = @yes
+    when false
+      @Anemia_N = @yes
+    end
+    case @iform.Med_His_Current_Physical_Health
+    when "fair"
+      @Health_fair = @yes
+    when "good"
+      @Health_good = @yes
+    when "poor"
+      @Health_poor = @yes
+    end
+    case @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs or @iform.Med_His_Currently_Taking_Presc_Drugs
+    when true
+      @Drugs_yes = @yes
+    when false
+      @Drugs_no = @yes
+    end
+    case @iform.Med_His_Personal_Physician
+    when true
+      @Persdoc_yes = @yes
+    when false
+      @Persdoc_no = @yes
+    end
+    case @iform.Med_His_Abnormal_Bleeding
+    when true
+      @Bleeding_Y = @yes
+    when false
+      @Bleeding_N = @yes
+    end
+    case @iform.Med_His_AIDS or @iform.Med_His_HIV_Positive
+    when true
+      @HIV_Y = @yes
+    when false
+      @HIV_N = @yes
+    end
+    case @iform.Med_His_Artificial_Bones_Joints_Valves
+    when true
+      @Bones_Y = @yes
+    when false
+      @Bones_N = @yes
+    end
+    case @iform.Med_His_Asthma
+    when true
+      @Asthma_Y = @yes
+    when false
+      @Asthma_N = @yes
+    end
+    case @iform.Med_His_Blood_Transfusion
+    when true
+      @Transfusion_Y = @yes
+    when false
+      @Transfusion_N = @yes
+    end
+    case @iform.Med_His_Cancer
+    when true
+      @Cancer_Y = @yes
+    when false
+      @Cancer_N = @yes
+    end
+    case @iform.Med_His_Congenital_Heart_Defect
+    when true
+      @Congenital_Heart_Deffect_N = @yes
+    when false
+      @Congenital_Heart_Defect_Y = @yes
+    end
+    case @iform.Med_His_Currently_Nursing
+    when true
+      @Nursing_yes = @yes
+    when false
+      @Nursing_no = @yes
+    end
+    case @iform.Med_His_Currently_Pregnant
+    when true
+      @Pregnant_yes = @yes
+    when false
+      @Pregnant_no = @yes
+    end
+    case @iform.Med_His_Currently_Taking_Birth_Control_Pills
+    when true
+      @Pills_yes = @yes
+    when false
+      @Pills_no = @yes
+    end
+    case @iform.Med_His_Currently_Under_The_Care_Of_A_Physician
+    when true
+      @Physician_yes = @yes
+    when false
+      @Physician_no = @yes
+    end
+    case @iform.Med_His_Diabetes
+    when true
+      @Diabetes_Y = @yes
+    when false
+      @Diabetes_N = @yes
+    end
+    case @iform.Med_His_Difficulty_Breathing
+    when true
+      @Difficulty_Breathing_Y = @yes
+    when false
+      @Difficulty_Breathing_N = @yes
+    end
+    case @iform.Med_His_Drug_Abuse
+    when true
+      @Drug_Abuse_Y = @yes
+    when false
+      @Drug_Abuse_N = @yes
+    end
+    case @iform.Med_His_Emphysema
+    when true
+      @Emphysema_Y = @yes
+    when false
+      @Emphysema_N = @yes
+    end
+    case @iform.Med_His_Epilepsy
+    when true
+      @Epilepsy_Y = @yes
+    when false
+      @Epilepsy_N = @yes
+    end
+    case @iform.Med_His_Fever_Blisters
+    when true
+      @Fever_Blisters_Y = @yes
+    when false
+      @Fever_Blisters_N = @yes
+    end
+    case @iform.Med_His_Frequent_Headaches
+    when true
+      @Headaches_Y = @yes
+    when false
+      @Headaches_N = @yes
+    end
+    case @iform.Med_His_Glaucoma
+    when true
+      @Glaucoma_Y = @yes
+    when false
+      @Glaucoma_N = @yes
+    end
+    case @iform.Med_His_Heart_Attack or @iform.Med_His_Stroke
+    when true
+      @Heart_Attack_Y = @yes
+    when false
+      @Heart_Attack_N = @yes
+    end
+    case @iform.Med_His_Heart_Murmur
+    when true
+      @Heart_Murmur_Y = @yes
+    when false
+      @Heart_Murmur_N = @yes
+    end
+    case @iform.Med_His_Heart_Surgery or @iform.Med_His_Pacemaker
+    when true
+      @Heart_Surgery_Y = @yes
+    when false
+      @Heart_Surgery_N = @yes
+    end
+    case @iform.Med_His_Hemophilia
+    when true
+      @Hemophilia_Y = @yes
+    when false
+      @Hemophilia_N = @yes
+    end
+    case @iform.Med_His_Hepatitis
+    when true
+      @Hepatitis_Y = @yes
+    when false
+      @Hepatitis_N = @yes
+    end
+    case @iform.Med_His_High_Blood_Pressure or @iform.Med_His_Low_Blood_Pressure
+    when true
+      @Blood_Pressure_Y = @yes
+    when false
+      @Blood_Pressure_N = @yes
+    end
+    case @iform.Med_His_Hospitalized_For_Any_Reason
+    when true
+      @Hospitalization_Y = @yes
+    when false
+      @Hospitalization_N = @yes
+    end
+    case @iform.Med_His_Kidney_Problems
+    when true
+      @Kidney_Y = @yes
+    when false
+      @Kidney_N = @yes
+    end
+    case @iform.Med_His_Mitral_Valve_Prolapse
+    when true
+      @MVP_Y = @yes
+    when false
+      @MVP_N = @yes
+    end
+    case @iform.Med_His_Psychiatric_Problems
+    when true
+      @Phychiatric_Y = @yes
+    when false
+      @Phychiatric_N = @yes
+    end
+    case @iform.Med_His_Radiation_Treatment
+    when true
+      @Radiation_Y = @yes
+    when false
+      @Radiation_N = @yes
+    end
+    case @iform.Med_His_Rheumatic_Fever or @iform.Med_His_Scarlet_Fever
+    when true
+      @Rheumatic_Fever_Y = @yes
+    when false
+      @Rheumatic_Fever_N = @yes
+    end
+    case @iform.Med_His_Shingles
+    when true
+      @Shingles_Y = @yes
+    when false
+      @Shingles_N = @yes
+    end
+    case @iform.Med_His_Sickle_Cell_Disease or @iform.Med_His_Sickle_Cell_Disease_Traits
+    when true
+      @Sickle_Cell_Y = @yes
+    when false
+      @Sickle_Cell_N = @yes
+    end
+    case @iform.Med_His_Sinus_Problems
+    when true
+      @Sinus_Y = @yes
+    when false
+      @Sinus_N = @yes
+    end
+    case @iform.Med_His_Tuberculosis
+    when true
+      @TB_Y = @yes
+    when false
+      @TB_N = @yes
+    end
+    case @iform.Med_His_Ulcers
+    when true
+      @Ulcers_N = @yes
+    when false
+      @Ulcer_Y = @yes
+    end
+    case @iform.Med_His_Venereal_Disease
+    when true
+      @Venereal_Disease_Y = @yes
+    when false
+      @Venereal_Disease_N = @yes
+    end
+    p "0000000000000000",@iform.Self_Marital_Status
+    case @iform.Self_Marital_Status
+    when "divorced"
+      @You_Divorced = @yes
+      when "married"
+      p @You_Married = @yes
+    when "separated"
+      @You_Separated = @yes
+    when "single"
+      @You_Single = @yes
+    when "widowed"
+      @You_Widowed = @yes
+    end
+    case @iform.Self_Sex
+    when "female"
+      @You_Female = @yes
+    when "male"
+      @You_mail = @yes
+    end
+    if @iform.Dental_History_Breathe_Through_Mouth_While_Asleep
+      @While_Asleep = @yes
+    end
+    if @iform.Dental_History_Breathe_Through_Mouth_While_Awake
+      @While_Awake = @yes
+    end
+    if @iform.Dental_History_Injury_To_Chin
+      @Chin = @yes
+    end
+    if @iform.Dental_History_Injury_To_Mouth
+      @Mouth = @yes
+    end
+    if @iform.Dental_History_Injury_To_Teeth
+      @Teeth = @yes
     end
   end
   
-   def form_controls_mapping(iform, str)
-      @iform = iform
+  protected
+   def adultform_controls_mapping(str, iform)
       
   pdftkpath = "#{Configuration.pdftk_path}"
   pdffilepath = "#{Configuration.pdffiles_path}"
@@ -697,158 +835,1003 @@ class IformsController < ApplicationController
 
 
   
-  pdf_form = session[:formname]
+  pdf_form = iform.formname
 
   @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
-    "Your E-Mail Address" => @iform.Self_Email_Address,
-    'Name'=> @iform.Self_Name_Honorific+ "  " + @iform.Self_Name_First+"  "+ @iform.Self_Name_Middle,
-    'MS' => @iform.Self_Prefix,
-    "You #{@sex}"=> "Yes",
-    "You Age" => @iform.Self_Age,
-    "You SS" => @iform.Self_Social_Security_Number,       
-    "You Home Address" => @self_home_address,
-    "You State" => @iform.Self_Home_State,
-    "You Zip" => @iform.Self_Home_Postal_Code,
-    "You #{@marital_status}" => "Yes",
-    "You Hm Area Code" => @iform.Self_Phone_Home.slice(0,3),
-    "You Hm" => @iform.Self_Phone_Home.slice(3,9),
-    "You Wk Area Code" => @iform.Self_Phone_Work.slice(0,3),
-    "You Wk" => @iform.Self_Phone_Work.slice(3,9),
-    "You Ext" => @iform.Self_Phone_Work_Extension,
-    "You Pager Other" => @iform.Self_Phone_Mobile,
-    "You Drivers License" => @iform.Self_Driver_License_Number,
-    "You Employer" => @iform.Self_Employer_Name,
-    "You Employer&#8217;s Address" => @self_employer_address,
-    "You Birthdate" => @iform.Self_Birthdate,
-    #spouse information
-    "Spouse Name" => @spouse_name,
-    "Spouse Employer" => @iform.Spouse_Employer_Name,
-    "Spouse Wk Phone" => @iform.Spouse_Phone_Work.slice(3,9),
-    "SpouseSS" => @iform.Spouse_Social_Security_Number,
-    "Spouse Wk Ext" => @iform.Spouse_Phone_Work_Extension,
-    "Spouse Birthdate" => @iform.Spouse_Birthdate,
-    "RespPersonWk_areacode" => @iform.Person_Responsible_For_Account_Phone_Work.slice(0,3),
-    "Spouse Wk Area Code" => @iform.Spouse_Phone_Work.slice(0,3),
-    "RespPersonWk" => @iform.Person_Responsible_For_Account_Phone_Work.slice(3,9),
-    "RespPersonHmAreacode" => @iform.Person_Responsible_For_Account_Phone_Home.slice(0,3),
-    "RespPersonHm" => @iform.Person_Responsible_For_Account_Phone_Home.slice(3,9),
-    "RespPerson_Employer" => @iform.Person_Responsible_For_Account_Employer_Name,
-    "RespPerson_SS" => @iform.Person_Responsible_For_Account_Social_Security_Number,
-    "RespPerson_DL" => @iform.Person_Responsible_For_Account_Drivers_License,
-    #orthodontic insurance
-    "Orthocoverage_#{@orthocoverage_primary}" => "Yes",
-    "Dentalcoverage_#{@dentalcoverage_primary}" => "Yes",
-    "Insurance Co Name" => @iform.Insurance_Company_Primary_Name,
-    "Insurance Co Address" =>@insurance_company_primary_address,
-    "Insurance Co AreaCode" => @iform.Insurance_Company_Primary_Phone.slice(0,3),
-    "Insurance Co. Phone" => @iform.Insurance_Company_Primary_Phone.slice(3,9),
-    "Group #  Plan, Local or Policy" => @iform.Insurance_Company_Primary_Group_Plan_Local_Policy_Number,
-    "Insured&#8217;s Name" => @iform.Insurance_Company_Primary_Insured_Name_First+ " " +@iform.Insurance_Company_Primary_Insured_Name_Last,
-    "Ins_Relation_2" => @iform.Insurance_Company_Primary_Insured_Relationship,
-    "InsBday_1" => @iform.Insurance_Company_Primary_Insured_Birthdate,
-    "Insured&#8217;s SS" => @iform.Insurance_Company_Primary_Insured_Social_Security_Number,
-    "Insured&#8217;s Employer" => @iform.Insurance_Company_Primary_Insured_Employer_Name,
-    #secondary
-    "OrthoCoverage_#{@orthocoverage_secondary}2" => "Yes",
-    "DentalCoverage_#{@dentalcoverage_secondary}2" => "Yes",
-    "Insurance Co Name_2" => @iform.Insurance_Company_Secondary_Name,
-    "Insurance Co Address_2" => @insurance_company_secondary_address,
-    "Insurance Co Areacode_2" => @iform.Insurance_Company_Secondary_Phone.slice(0,3),
-    "Insurance Co. Phone2" => @iform.Insurance_Company_Secondary_Phone.slice(3,9),
-    "Group # Plan, Local or Policy2" => @iform.Insurance_Company_Secondary_Group_Plan_Local_Policy_Number,
-    "Insured&#8217;s Name_2" => @iform.Insurance_Company_Secondary_Insured_Name_First+ " " + @iform.Insurance_Company_Secondary_Insured_Name_Last,
-    "Relation_3" => @iform.Insurance_Company_Secondary_Insured_Relationship,
-    "InsuredBday_" => @iform.Insurance_Company_Secondary_Insured_Birthdate,
-    "Insured&#8217;s SS_2" => @iform.Insurance_Company_Secondary_Insured_Social_Security_Number,
-    "Insured&#8217;s Employer_2" => @iform.Insurance_Company_Secondary_Insured_Employer_Name,
-    "His  Her Name_2" => @emergency_contact_name,
-    "Relation_4" => @iform.Emergency_Contact_Relationship,
-    "Wk_areacode" => @emergency_contact_phone_work,
-    "emergency_phone_wk" => @emergency_contact_phone_work_areacode,
-    "Hm_areacode" =>  @emergency_contact_phone_home_areacode,
-    "emergency_phone_hm" => @emergency_contact_phone_home,
-    #medical history
-    #"Physician_yes" =>
-
-    "Physician&#8217;s Name" => @iform.Med_His_Personal_Physician_Name_First+" "+@iform.Med_His_Personal_Physician_Name_Last,
-    "Physician_areacode" => @iform.Med_His_Personal_Physician_Phone.slice(0,3),
-    "Physician_phone" => @iform.Med_His_Personal_Physician_Phone.slice(3,9),
-    "Date of last visit" => @iform.Med_His_Personal_Physician_Date_Of_Last_Visit,
-    "Health_#{@current_physical_health}" => "Yes",
-    "Physician_#{@currently_under_physician}" => "Yes",
-    "Please explain" => @iform.Med_His_Currently_Under_The_Care_Of_A_Physician_Desc,
-    "Drugs_#{@currently_under_prescription}" => "Yes",
-    "Are you taking any prescription  over-the-counter drugs" => @iform.Med_His_Currently_Taking_Presc_Or_Over_The_Counter_Drugs_List,
-    "Pills_#{@Currently_Taking_Birth_Control_Pills}" => "Yes",
-    "Pregnant_#{@Currently_Pregnant}" => "Yes",
-    "Week#" => @iform.Med_His_Weeks_Pregnant,
-    "Nursing_#{@Currently_Nursing}" =>  "Yes",
-    "Bleeding #{@Abnormal_Bleeding}" => "Yes",
-    "Anemia #{@Anemia}" => "Yes",
-    "Bones #{@Bones_Joints_Valves}" => "Yes",
-    "Asthma #{@Asthma}" => "Yes",
-    "Transfusion #{@Blood_Transfusion}" => "Yes",
-    "Cancer #{@Cancer}" => "Yes",
-    "Congenital Heart Deffect #{@Congenital_Heart_Defect}" => "Yes",
-    "Diabetes #{@Diabetes}" => "Yes",
-    "Difficulty Breathing #{@Difficulty_Breathing}" => "Yes",
-    "Drug Abuse #{@Drug_Abuse}" => "Yes",
-    "Emphysema #{@Emphysema}" => "Yes",
-    "Epilepsy #{@Epilepsy}" => "Yes",
-    "Fever Blisters #{@Fever_Blisters}" => "Yes",
-    "Glaucoma #{@Glaucoma}" => "Yes",
-    "Heart Attack #{@Heart_Attack_Or_Stroke}" => "Yes",
-    "Heart Murmur #{@Heart_Murmur}" => "Yes",
-    "Heart Surgery #{@Heart_Surgery_Or_Pacemaker}" => "Yes",
-    "Hemophilia #{@Hemophilia}" => "Yes",
-    "Hepatitis #{@Hepatitis}" => "Yes",
-    "Blood Pressure #{@High_Or_Low_Blood_Pressure}" => "Yes",
-    "HIV #{@HIV_or_AIDS}" => "Yes",
-    "Hospitalization #{@Hospitalized_For_Any_Reason}" => "Yes",
-    "Kidney #{@Kidney_Problems}" => "Yes",
-    "MVP #{@Mitral_Valve_Prolapse}" => "Yes",
-    "Phychiatric #{@Psychiatric_Problems}" => "Yes",
-    "Radiation #{@Radiation_Treatment}" => "Yes",
-    "Rheumatic Fever #{@Rheumatic_Fever_Or_Scarletfever}" => "Yes",
-    "Headaches #{@Frequent_Headaches}" => "Yes",
-    "Shingles #{@Shingles}" => "Yes",
-    "Sickle Cell #{@Sickle_Cell_Disease_Or_Traits}" => "Yes",
-    "Sinus #{@Sinus_Problems}" => "Yes",
-    "TB #{@Tuberculosis}" => "Yes",
-    "Ulcer #{@Ulcers}" => "Yes",
-    "Venereal Disease #{@Venereal_Disease}" => "Yes",
-    "Any serious medical conditions" => @iform.Med_His_Serious_Medical_Issues,
-    "Aspirin #{@Aspirin}" => "Yes",
-    "Metals #{@Metals_Or_Plastics}" => "Yes",
-    "Codeine #{@Codeine}" => "Yes",
-    "Anesthetics #{@Dental_Anesthetics}" => "Yes",
-    "Erythromycin #{@Erythromycin}" => "Yes",
-    "Latex #{@Latex}" => "Yes",
-    "Penicillin #{@Penicillin}" =>"Yes",
-    "Tetracycline #{@Tetracycline}" => "Yes",
-    "Other #{@Other}" => "Yes",
-    "Allergic" => @iform.Allergic_To_Other_Detail,
-    #dental history
-    "What do you want" => @iform.Dental_History_Concerns_Tobe_Accomplished_By_Orthodontics,
-    "Evaluated_#{@Orthodontic_Evaluation}" => "Yes",
-    "Previous problems_#{@Previous_Dental_Work_Issues}" => "Yes",
-    "TMJ_#{@TMJ_TMD_Issues}" => "Yes",
-    "Dental Health_#{@current_dental_health}" => "Yes",
-    "Smile_#{@Like_Smile}" => "Yes",
-    "Gums bleed_#{@Bleeding_Gums}" => "Yes",
-    "Mouth" => @mouth,
-    "Teeth" => @teeth,
-    "Chin" => @chin,
-    "Any speech problems" => @iform.Dental_History_Currently_Have_Speech_Problems,
-    "Mouth breather_#{@Breath_Through_Mouth}" => "Yes",
-    "While #{@Mouth_While_Awake_Or_Sleep}" => "Yes",
-    "Teeth_#{@Extra_Permanent_Teeth}" => "Yes",
-    "Phen-Fen_#{@Ever_Taken_PhenFen}" => "Yes",
-    "When taken Phen-Fen" => @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin,
-    "Tobacco_#{@Tobacco_Smoke}" => "Yes"
-    # "Relation" => @iform.responsibleperson_relation,
-
+    "Anemia N" => @Anemia_N,
+    "Anemia Y" => @Anemia_Y,
+    "Anesthetics N" => @Anesthetics_N,
+    "Anesthetics Y" => @Anesthetics_Y,
+    "Aspirin N" => @Aspirin_N,
+    "Aspirin Y" => @Aspirin_Y,
+    "Asthma N" => @Asthma_N,
+    "Asthma Y" => @Asthma_Y,
+    "Bleeding N" => @Bleeding_N,
+    "Bleeding Y" => @Bleeding_Y,
+    "Blood Pressure N" => @Blood_Pressure_N,
+    "Blood Pressure Y" => @Blood_Pressure_Y,
+    "Bones N" => @Bones_N,
+    "Bones Y" => @Bones_Y,
+    "Cancer N" => @Cancer_N,
+    "Cancer Y" => @Cancer_Y,
+    "Chin" => @Chin,
+    "Codeine N" => @Codeine_N,
+    "Codeine Y" => @Codeine_Y,
+    "Congenital Heart Defect Y" => @Congenital_Heart_Defect_Y,
+    "Congenital Heart Deffect N" => @Congenital_Heart_Deffect_N,
+    "Dentalcoverage_no" => @Dentalcoverage_no,
+    "DentalCoverage_No2" => @DentalCoverage_No2,
+    "Dentalcoverage_yes" => @Dentalcoverage_yes,
+    "DentalCoverage_Yes2" => @DentalCoverage_Yes2,
+    "Diabetes N" => @Diabetes_N,
+    "Diabetes Y" => @Diabetes_Y,
+    "Difficulty Breathing N" => @Difficulty_Breathing_N,
+    "Difficulty Breathing Y" => @Difficulty_Breathing_Y,
+    "Drug Abuse N" => @Drug_Abuse_N,
+    "Drug Abuse Y" => @Drug_Abuse_Y,
+    "Drugs_no" => @Drugs_no,
+    "Drugs_yes" => @Drugs_yes,
+    "Emphysema N" => @Emphysema_N,
+    "Emphysema Y" => @Emphysema_Y,
+    "Epilepsy N" => @Epilepsy_N,
+    "Epilepsy Y" => @Epilepsy_Y,
+    "Erythromycin N" => @Erythromycin_N,
+    "Erythromycin Y" => @Erythromycin_Y,
+    "Evaluated_no" => @Evaluated_no,
+    "Evaluated_yes" => @Evaluated_yes,
+    "Fever Blisters N" => @Fever_Blisters_N,
+    "Fever Blisters Y" => @Fever_Blisters_Y,
+    "Glaucoma N" => @Glaucoma_N,
+    "Glaucoma Y" => @Glaucoma_Y,
+    "Gums bleed_no" => @Gums_bleed_no,
+    "Gums bleed_yes" => @Gums_bleed_yes,
+    "Headaches N" => @Headaches_N,
+    "Headaches Y" => @Headaches_Y,
+    "Heart Attack N" => @Heart_Attack_N,
+    "Heart Attack Y" => @Heart_Attack_Y,
+    "Heart Murmur N" => @Heart_Murmur_N,
+    "Heart Murmur Y" => @Heart_Murmur_Y,
+    "Heart Surgery N" => @Heart_Surgery_N,
+    "Heart Surgery Y" => @Heart_Surgery_Y,
+    "Hemophilia N" => @Hemophilia_N,
+    "Hemophilia Y" => @Hemophilia_Y,
+    "Hepatitis N" => @Hepatitis_N,
+    "Hepatitis Y" => @Hepatitis_Y,
+    "HIV N" => @HIV_N,
+    "HIV Y" => @HIV_Y,
+    "Hospitalization N" => @Hospitalization_N,
+    "Hospitalization Y" => @Hospitalization_Y,
+    "Kidney N" => @Kidney_N,
+    "Kidney Y" => @Kidney_Y,
+    "Latex N" => @Latex_N,
+    "Latex Y" => @Latex_Y,
+    "Metals N" => @Metals_N,
+    "Metals Y" => @Metals_Y,
+    "Mouth breather_no" => @Mouth_breather_no,
+    "Mouth breather_yes" => @Mouth_breather_yes,
+    "Mouth" => @Mouth,
+    "MVP N" => @MVP_N,
+    "MVP Y" => @MVP_Y,
+    "Nursing_no" => @Nursing_no,
+    "Nursing_yes" => @Nursing_yes,
+    "Orthocoverage_no" => @Orthocoverage_no,
+    "OrthoCoverage_No2" => @OrthoCoverage_No2,
+    "Orthocoverage_yes" => @Orthocoverage_yes,
+    "OrthoCoverage_Yes2" => @OrthoCoverage_Yes2,
+    "Other N" => @Other_N,
+    "Other Y" => @Other_Y,
+    "Penicillin N" => @Penicillin_N,
+    "Penicillin Y" => @Penicillin_Y,
+    "Persdoc_no" => @Persdoc_no,
+    "Persdoc_yes" => @Persdoc_yes,
+    "Phen-Fen_no" => @Phen_Fen_no,
+    "Phen-Fen_yes" => @Phen_Fen_yes,
+    "Phychiatric N" => @Phychiatric_N,
+    "Phychiatric Y" => @Phychiatric_Y,
+    "Physician_no" => @Physician_no,
+    "Physician_yes" => @Physician_yes,
+    "Pills_no" => @Pills_no,
+    "Pills_yes" => @Pills_yes,
+    "Pregnant_no" => @Pregnant_no,
+    "Pregnant_yes" => @Pregnant_yes,
+    "Previous problems_no" => @Previous_problems_no,
+    "Teeth" => @Teeth,
+    "While Asleep" => @While_Asleep,
+    "While Awake" => @While_Awake,
+    "Previous problems_yes" => @Previous_problems_yes,
+    "Radiation N" => @Radiation_N,
+    "Radiation Y" => @Radiation_Y,
+    "Rheumatic Fever N" => @Rheumatic_Fever_N,
+    "Rheumatic Fever Y" => @Rheumatic_Fever_Y,
+    "Shingles N" => @Shingles_N,
+    "Shingles Y" => @Shingles_Y,
+    "Sickle Cell N" => @Sickle_Cell_N,
+    "Sickle Cell Y" => @Sickle_Cell_Y,
+    "Sinus N" => @Sinus_N,
+    "Sinus Y" => @Sinus_Y,
+    "Smile_no" => @Smile_no,
+    "Smile_yes" => @Smile_yes,
+    "TB N" => @TB_N,
+    "TB Y" => @TB_Y,
+    "Teeth_no" => @Teeth_no,
+    "Teeth_yes" => @Teeth_yes,
+    "Tetracycline N" => @Tetracycline_N,
+    "Tetracycline Y" => @Tetracycline_Y,
+    "TMJ_no" => @TMJ_no,
+    "TMJ_yes" => @TMJ_yes,
+    "Tobacco_no" => @Tobacco_no,
+    "Tobacco_yes" => @Tobacco_yes,
+    "Transfusion N" => @Transfusion_N,
+    "Transfusion Y" => @Transfusion_Y,
+    "Ulcer Y" => @Ulcer_Y,
+    "Ulcers N" => @Ulcers_N,
+    "Venereal Disease N" => @Venereal_Disease_N,
+    "Venereal Disease Y" => @Venereal_Disease_Y,
+    "You Female" => @You_Female,
+    "You mail" => @You_mail,
+    "Dental Health_fair" => @Dental_Health_fair,
+    "Dental Health_good" => @Dental_Health_good,
+    "Dental Health_Poor" => @Dental_Health_Poor,
+    "Health_fair" => @Health_fair,
+    "Health_good" => @Health_good,
+    "Health_poor" => @Health_poor,
+    "You Divorced" => @You_Divorced,
+    "You Married" => @You_Married,
+    "You Separated" => @You_Separated,
+    "You Single" => @You_Single,
+    "You Widowed" => @You_Widowed,
+    "Allergic" => @Allergic,
+    "Any serious medical conditions" => @Any_serious_medical_conditions,
+    "Any speech problems" => @Any_speech_problems,
+    "Are you taking any prescription over-the-counter drugs" => @Are_you_taking_any_prescription_over_the_counter_drugs,
+    "Billing Address" => @Billing_Address,
+    "Date of last visit" => @Date_of_last_visit,
+    "emergency_phone_hm" => @emergency_phone_hm,
+    "emergency_phone_wk" => @emergency_phone_wk,
+    "General Dentist" => @General_Dentist,
+    "Group #  Plan, Local or Policy" => @Group_Plan_Local_or_Policy,
+    "Group # Plan, Local or Policy2" => @Group_Plan_Local_or_Policy2,
+    "His  Her Name_2" => @His_Her_Name_2,
+    "Hm_areacode" => @Hm_areacode,
+    "How long there" => @How_long_there,
+    "I prefer to be called" => @I_prefer_to_be_called,
+    "Ins_Relation_2" => @Ins_Relation_2,
+    "InsBday_1" => @InsBday_1,
+    "Insurance Co Address" => @Insurance_Co_Address,
+    "Insurance Co Address_2" => @Insurance_Co_Address_2,
+    "Insurance Co AreaCode" => @Insurance_Co_AreaCode,
+    "Insurance Co Areacode_2" => @Insurance_Co_Areacode_2,
+    "Insurance Co Name" => @Insurance_Co_Name,
+    "Insurance Co Name_2" => @Insurance_Co_Name_2,
+    "Insurance Co. Phone" => @Insurance_Co_Phone,
+    "Insurance Co. Phone2" => @Insurance_Co_Phone2,
+    "Insured&#8217;s Employer" => @Insured_8217_s_Employer,
+    "Insured&#8217;s Employer_2" => @Insured_8217_s_Employer_2,
+    "Insured&#8217;s Name" => @Insured_8217_s_Name,
+    "Insured&#8217;s Name_2" => @Insured_8217_s_Name_2,
+    "Insured&#8217;s SS" => @Insured_8217_s_SS,
+    "Insured&#8217;s SS_2" => @Insured_8217_s_SS_2,
+    "InsuredBday_" => @InsuredBday_2,
+    "Last Visit Date" => @Last_Visit_Date,
+    "Name" => @Name,
+    "Occupation" => @Occupation,
+    "Other family members seen by us" => @Other_family_members_seen_by_us,
+    "Person Responsible for Account" => @Person_Responsible_for_Account,
+    "Physician_areacode" => @Physician_areacode,
+    "Physician_phone" => @Physician_phone,
+    "Physician&#8217;s Name" => @Physician_8217_s_Name,
+    "Please explain" => @Please_explain,
+    "Relation" => @Relation,
+    "Relation_3" => @Relation_3,
+    "Relation_4" => @Relation_4,
+    "RespPerson_DL" => @RespPerson_DL,
+    "RespPerson_Employer" => @RespPerson_Employer,
+    "RespPerson_SS" => @RespPerson_SS,
+    "RespPersonHm" => @RespPersonHm,
+    "RespPersonHmAreacode" => @RespPersonHmAreacode,
+    "RespPersonWk" => @RespPersonWk,
+    "RespPersonWk_areacode" => @RespPersonWk_areacode,
+    "RespPersonWkExt" => @RespPersonWkExt,
+    "Spouse Birthdate" => @Spouse_Birthdate,
+    "Spouse Employer" => @Spouse_Employer,
+    "Spouse Name" => @Spouse_Name,
+    "Spouse Wk Area Code" => @Spouse_Wk_Area_Code,
+    "Spouse Wk Ext" => @Spouse_Wk_Ext,
+    "Spouse Wk Phone" => @Spouse_Wk_Phone,
+    "SpouseSS" => @SpouseSS,
+    "Today&#8217;s Date" => @Today_8217_s_Date,
+    "Week#" => @Week,
+    "What do you want" => @What_do_you_want,
+    "When taken Phen-Fen" => @When_taken_Phen_Fen,
+    "Where &amp; when are best times to reach you" => @Where_amp_when_are_best_times_to_reach_you,
+    "Whom may we Thank for referring you" => @Whom_may_we_Thank_for_referring_you,
+    "Wk_areacode" => @Wk_areacode,
+    "MS" => @Honorific,
+    "You Age" => @You_Age,
+    "You Birthdate" => @You_Birthdate,
+    "You City" => @You_City,
+    "You Drivers License" => @You_Drivers_License,
+    "You Employer" => @You_Employer,
+    "You Employer&#8217;s Address" => @You_Employer_8217_s_Address,
+    "You Ext" => @You_Ext,
+    "You Hm" => @You_Hm,
+    "You Hm Area Code" => @You_Hm_Area_Code,
+    "You Home Address" => @You_Home_Address,
+    "You Pager Other" => @You_Pager_Other,
+    "You SS" => @You_SS,
+    "You State" => @You_State,
+    "You Wk" => @You_Wk,
+    "You Wk Area Code" => @You_Wk_Area_Code,
+    "You Zip" => @You_Zip,
+    "Your E-Mail Address" => @Your_EMail_Address
 })
+  end
+  
+  protected
+  def childform_control_conditions(iform)
+    @iform = iform
+    @yes = "Yes"
+    
+    @Appt_ext = @iform.Person_Responsible_For_Making_Appointments_Phone_Work_Extension
+    if !@iform.Person_Responsible_For_Making_Appointments_Phone_Work.blank? and @iform.Person_Responsible_For_Making_Appointments_Phone_Work.length == 10
+    @Appt_phone = @iform.Person_Responsible_For_Making_Appointments_Phone_Work.slice(3,3) + "-" + @iform.Person_Responsible_For_Making_Appointments_Phone_Work.slice(6,4)
+    @Appt_area_code = @iform.Person_Responsible_For_Making_Appointments_Phone_Work.slice(0,3)
+    end
+    if !@iform.Person_Responsible_For_Making_Appointments_Phone_Home.blank? and @iform.Person_Responsible_For_Making_Appointments_Phone_Home.length == 10
+    @Appt_phone_2 = @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(3,3) + "-" + @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(6,4)
+    @Appt_area_code_2 = @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(0,3)
+    end
+    @Billing_Address_1 = @iform.Person_Responsible_For_Account_Address1 + ", " + @iform.Person_Responsible_For_Account_Address2
+    @Billing_City_2 = @iform.Person_Responsible_For_Account_City
+    @Billing_State_2 = @iform.Person_Responsible_For_Account_State
+    @Billing_Zipcode_2 = @iform.Person_Responsible_For_Account_Postal_Code
+    @Child_Address = @iform.Self_Home_Address1 + ", " + @iform.Self_Home_Address2
+    @Child_Bday = @iform.Self_Birthdate
+    @Child_CITY = @iform.Self_Home_City
+    @Child_EMail_Address = @iform.Self_Email_Address
+    @CHILD_FIRST = @iform.Self_Name_First + " " + @iform.Self_Name_Middle + " " + @iform.Self_Name_Last
+    @Child_Grade = @iform.Self_Grade
+    @Child_Hobbies = @iform.Self_Hobbies
+    @Child_Nickname = @iform.Self_Name_Preferred
+    if !@iform.Self_Phone_Home.blank? and @iform.Self_Phone_Home.length == 10
+    @Child_phone = @iform.Self_Phone_Home.slice(3,3)+"-"+@iform.Self_Phone_Home.slice(6,4)
+    @Child_area_code = @iform.Self_Phone_Home.slice(0,3)
+    end
+    @Child_School = @iform.Self_School
+    if !@iform.Self_Social_Security_Number.blank? and @iform.Self_Social_Security_Number.length == 9
+    @Child_SS = @iform.Self_Social_Security_Number.slice(0,3)+"-"+@iform.Self_Social_Security_Number.slice(3,2)+" "+@iform.Self_Social_Security_Number.slice(5,4)
+    end
+    @Child_STATE = @iform.Self_Home_State
+    @Child_Zip = @iform.Self_Home_Postal_Code
+    @Childs_Physician = @iform.Med_His_Personal_Physician_Name_First+" "+@iform.Med_His_Personal_Physician_Name_Last
+    if !@iform.Med_His_Personal_Physician_Phone.blank? and @iform.Med_His_Personal_Physician_Phone.length == 10
+    @Childs_Physician_phone = @iform.Med_His_Personal_Physician_Phone.slice(3,3)+"-"+@iform.Med_His_Personal_Physician_Phone.slice(6,4)
+    @Childs_Physician_area_code = @iform.Med_His_Personal_Physician_Phone.slice(0,3)
+    end
+    #@Childs_Age = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider - @iform.Self_Birthdate
+    if !@iform.Father_Phone_Work.blank? and @iform.Father_Phone_Work.length == 10
+    @Dad_area_code_1 = @iform.Father_Phone_Work.slice(0,3)
+    @Dad_phone_1 = @iform.Father_Phone_Work.slice(3,3) + @iform.Father_Phone_Work.slice(6,4)
+    end
+    @Dad_Bday = @iform.Father_Birthdate
+    @Dad_DL_2 = @iform.Father_Drivers_License_State+" "+@iform.Father_Drivers_License_Number
+    @Dad_employer = @iform.Father_Employer_Name
+    @Dad_ext = @iform.Father_Phone_Work_Extension
+    @Dad_How_Long_at_Current_Job_2 = @iform.Father_Length_Of_Employment
+    @Dad_Job_Title_2 = @iform.Father_Job_Title
+    @Dad_Name_3 = @iform.Father_Name_First+" "+@iform.Father_Name_Middle+" "+@iform.Father_Name_Last
+    if !@iform.Father_Phone_Home.blank? and @iform.Father_Phone_Home.length == 10
+    @Dad_area_code_2 = @iform.Father_Phone_Home.slice(0,3)
+    @Dad_phone_2 = @iform.Father_Phone_Home.slice(3,3) + @iform.Father_Phone_Home.slice(6,4)
+    end
+    @Dad_SS_3 = @iform.Father_Social_Security_Number
+    @Date_of_last_visit = @iform.Med_His_Personal_Physician_Date_Of_Last_Visit
+    @Friend_Address = @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1+ ", " +@iform.Neighbor_Or_Relative_Not_Living_With_You_Address2
+    @Friend_City = @iform.Neighbor_Or_Relative_Not_Living_With_You_City
+    @Friend_Name = @iform.Neighbor_Or_Relative_Not_Living_With_You_Name_First+ " " +@iform.Neighbor_Or_Relative_Not_Living_With_You_Name_Middle + " " + @iform.Neighbor_Or_Relative_Not_Living_With_You_Name_Last
+    if !@iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.blank? and @iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.length == 10
+    @Friend_area_code = @iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.slice(0,3)
+    @Friend_phone = @iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.slice(3,3) + "-" + @iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.slice(6,4)
+    end
+    @Friend_State = @iform.Neighbor_Or_Relative_Not_Living_With_You_State
+    @Friend_Zip = @iform.Neighbor_Or_Relative_Not_Living_With_You_Postal_Code
+    @General_Dentist = @iform.Self_General_Dentist_Name
+    @Ins_Co_1 = @iform.Insurance_Company_Primary_Name
+    @Ins_Co_1_Group = @iform.Insurance_Company_Primary_Group_Plan_Local_Policy_Number
+    @Ins_Co_1_Name = @iform.Insurance_Company_Primary_Insured_Name_First + " " + @iform.Insurance_Company_Primary_Insured_Name_Last
+    if !@iform.Insurance_Company_Primary_Phone.blank? and @iform.Insurance_Company_Primary_Phone.length == 10
+    @Ins_Co_1_area_code = @iform.Insurance_Company_Primary_Phone.slice(0,3)
+    @Ins_Co_1_phone = @iform.Insurance_Company_Primary_Phone.slice(3,3) + "-" + @iform.Insurance_Company_Primary_Phone.slice(6,4)
+    end
+    @Ins_Co_1_Relationship = @iform.Insurance_Company_Primary_Insured_Relationship
+    @Ins_Co_2 = @iform.Insurance_Company_Secondary_Name
+    @Ins_Co_Address_1 = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
+    @Ins_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
+    if !@iform.Insurance_Company_Secondary_Phone.blank? and @iform.Insurance_Company_Secondary_Phone.length == 10
+    @Ins_Co_2__area_code = @iform.Insurance_Company_Secondary_Phone.slice(0,3)
+    @Ins_Co_Phone_2 = @iform.Insurance_Company_Secondary_Phone.slice(3,3) + "-" + @iform.Insurance_Company_Secondary_Phone.slice(6,4)
+    end
+    @Instruments_played = @iform.Dental_History_Play_Musical_Instruments
+    @Insured_1_Bday = @iform.Insurance_Company_Primary_Insured_Birthdate
+    @Last_Dental_Date = @iform.Self_General_Dentist_Date_Last_Appointment
+    @List_brothers__sisters_with_age_2 = @iform.Accompanying_Your_Child_Today_Siblings_And_Ages
+    @Main_concerns = @iform.Dental_History_Orthodontic_Goals
+    if !@iform.Mother_Phone_Work.blank? and @iform.Mother_Phone_Work.length == 10
+    @Mom_area_code_1 = @iform.Mother_Phone_Work.slice(0,3)
+    @Mom_phone_1 = @iform.Mother_Phone_Work.slice(3,3) + @iform.Mother_Phone_Work.slice(6,4)
+    end
+    if !@iform.Mother_Phone_Home.blank? and @iform.Mother_Phone_Home.length == 10
+    @Mom_area_code_2 = @iform.Mother_Phone_Home.slice(0,3)
+    @Mom_phone_2 = @iform.Mother_Phone_Home.slice(3,3) + @iform.Mother_Phone_Home.slice(6,4)
+    end
+    @Mom_DL = @iform.Mother_Drivers_License_State + " " + @iform.Mother_Drivers_License_Number
+    @Mom_employer = @iform.Mother_Employer_Name
+    @Mom_ext = @iform.Mother_Phone_Work_Extension
+    @Mom_How_Long_at_Current_Job = @iform.Mother_Length_Of_Employment
+    @Mom_Job_Title = @iform.Mother_Job_Title
+    @Mom_SS_2 = @iform.Mother_Social_Security_Number
+    @Mother_BDay = @iform.Mother_Birthdate
+    @Mother_Name_2 = @iform.Mother_Name_First + " " + @iform.Mother_Name_Middle + " " + @iform.Mother_Name_Last
+    @My_method_of_payment_will_be = @iform.Person_Responsible_For_Account_Payment_Method
+    @Please_discuss_any_medical_problems_that_your_child_has_had_3 = @iform.Med_His_Medical_Problems
+    @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List+", "+@iform.Med_His_Currently_Taking_Presc_Drugs_List
+    @Please_list_all_drugsthings_that_your_child_is_allergic_to = @iform.Allergic_To_Any_Drugs
+    if !@iform.Insurance_Company_Primary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Primary_Insured_Social_Security_Number.length == 9
+    @Policy_1_SS = @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(0,3) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(5,4)
+    end
+    @Primary_Ins_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
+    @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1 + ", " + @iform.Person_Responsible_For_Account_Previous_Address2
+    @Previous_Address_State = @iform.Person_Responsible_For_Account_Previous_State
+    @Previous_City = @iform.Person_Responsible_For_Account_Previous_City
+    @Previous_Zip = @iform.Person_Responsible_For_Account_Previous_Postal_Code
+    @Relation = @iform.Accompanying_Your_Child_Today_Relationship
+    @Relation_Name = @iform.Accompanying_Your_Child_Today_Name_First+" "+@iform.Accompanying_Your_Child_Today_Name_Last
+    @Relationsip_to_Patient_2 = @iform.Insurance_Company_Secondary_Insured_Relationship
+    @Responsible_DL = @iform.Person_Responsible_For_Account_Drivers_License_State + " " + @iform.Person_Responsible_For_Account_Drivers_License_Number
+    @Responsible_Employer = @iform.Person_Responsible_For_Account_Employer_Name
+    @Responsible_ext = @iform.Person_Responsible_For_Account_Phone_Work_Extension
+    @Responsible_Name = @iform.Person_Responsible_For_Account_Name_First + " " + @iform.Person_Responsible_For_Account_Name_Middle + " " + @iform.Person_Responsible_For_Account_Name_Last
+    @Responsible_Person_to_make_Appointments = @iform.Person_Responsible_For_Making_Appointments_Name_First + " " + @iform.Person_Responsible_For_Making_Appointments_Name_Middle + " " + @iform.Person_Responsible_For_Making_Appointments_Name_Last
+    if !@iform.Person_Responsible_For_Account_Phone_Home.blank? and @iform.Person_Responsible_For_Account_Phone_Home.length == 10
+    @Responsible_area_code = @iform.Person_Responsible_For_Account_Phone_Home.slice(0,3)
+    @Responsible_phone = @iform.Person_Responsible_For_Account_Phone_Home.slice(3,3) + "-" + @iform.Person_Responsible_For_Account_Phone_Home.slice(6,4)
+    end
+    if !@iform.Person_Responsible_For_Account_Phone_Work.blank? and @iform.Person_Responsible_For_Account_Phone_Work.length == 10
+    @Responsible_area_code_work = @iform.Person_Responsible_For_Account_Phone_Work.slice(0,3)
+    @Responsible_phone_work = @iform.Person_Responsible_For_Account_Phone_Work.slice(3,3) + "-" + @iform.Person_Responsible_For_Account_Phone_Work.slice(6,4)
+    end
+    @Responsible_Relation = @iform.Person_Responsible_For_Account_Relationship
+    if !@iform.Person_Responsible_For_Account_Social_Security_Number.blank? and @iform.Person_Responsible_For_Account_Social_Security_Number.length == 9
+    @Responsible_SS = @iform.Person_Responsible_For_Account_Social_Security_Number.slice(0,3) + "-" + @iform.Person_Responsible_For_Account_Social_Security_Number.slice(3,2) + "-" + @iform.Person_Responsible_For_Account_Social_Security_Number.slice(5,4)
+    end
+    @Secondary_Ins_Birthdate = @iform.Insurance_Company_Secondary_Insured_Birthdate
+    @Secondary_Ins_Employer_2 = @iform.Insurance_Company_Secondary_Insured_Employer_Name
+    @Secondary_Ins_Group__2 = @iform.Insurance_Company_Secondary_Group_Plan_Local_Policy_Number
+    @Secondary_Ins_Name_2 = @iform.Insurance_Company_Secondary_Insured_Name_First + " " + @iform.Insurance_Company_Secondary_Insured_Name_Last
+    if !@iform.Insurance_Company_Secondary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.length == 9
+    @Secondary_Ins_SS = @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(0,3) + "-" + @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(5,4)
+    end
+    @Todays_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider
+    @Whom_may_we_Thank_for_referring_you = @iform.Self_Referred_By
+
+    case @iform.Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child
+    when true
+      @Custody_Yes = @yes
+    when false
+      @Custody_No = @yes
+    end
+
+    case @iform.Allergic_To_Any_Drugs
+    when true
+      @Drug_Allergies_Y = @yes
+    when false
+      @Drug_Allergies_N = @yes
+    end
+
+    case @iform.Allergic_To_Latex or @iform.Allergic_To_Metals
+    when true
+      @Latex_Allergies_Y = @yes
+    when false
+      @Latex_Allergies_N = @yes
+    end
+
+    case @iform.Allergic_To_Plastics
+    when true
+      @Plastic_Allergies_Y = @yes
+    when false
+      @Plastic_Allergies_N = @yes
+    end
+
+    case @iform.Dental_History_Any_Extra_Permanent_Teeth or @iform.Dental_History_Any_Missing_Teeth
+    when true
+      @Teeth__Yes = @yes
+    when false
+      @Teeth__No = @yes
+    end
+
+    case @iform.Dental_History_Brush_Teeth_Daily
+    when true
+      @Brush__Yes = @yes
+    when false
+      @Brush__No = @yes
+    end
+
+    case @iform.Dental_History_Floss_Teeth_Daily
+    when true
+      @Floss__Yes = @yes
+    when false
+      @Floss__No = @yes
+    end
+
+    case @iform.Dental_History_Injury_To_Chin or @iform.Dental_History_Injury_To_Face or @iform.Dental_History_Injury_To_Mouth or @iform.Dental_History_Injury_To_Teeth
+    when true
+      @Injuries__Yes = @yes
+    when false
+      @Injuries__No = @yes
+    end
+
+    case @iform.Dental_History_Previous_Orthodontic_Evaluation or @iform.Dental_History_Previous_Orthodontic_Treatment
+    when true
+      @Treated_before__Yes = @yes
+    when false
+      @Treated_before__No = @yes
+    end
+
+    case @iform.Dental_History_TMJ_TMD_Issues_Current or @iform.Dental_History_TMJ_TMD_Issues_Previous
+    when true
+      @TMJ__Yes = @yes
+    when false
+      @TMJ__No = @yes
+    end
+
+    case @iform.Dental_History_Tonsils_Removed
+    when true
+      @Tonsils__Yes = @yes
+    when false
+      @Tonsils__No = @yes
+    end
+
+    case @iform.Father_Stepfather_Or_Gaurdian
+    when "guardian"
+      @Guardian = @yes
+    when "stepfather"
+      @Step_Father = @yes
+    end
+
+    case @iform.Habits_Bottle or @iform.Habits_Nursing
+    when true
+      @Bottle_Y = @yes
+    when false
+      @Bottle_N = @yes
+    end
+
+    case @iform.Habits_Breast_Fed
+    when true
+      @Breast_Fed_Y = @yes
+    when false
+      @Breast_Fed_N = @yes
+    end
+
+    case @iform.Habits_Clenching_Or_Grinding_Teeth
+    when true
+      @Grinding_Y = @yes
+    when false
+      @Grinding_N = @yes
+    end
+
+    case @iform.Habits_Lip_Sucking_Or_Biting
+    when true
+      @Lip_Y = @yes
+    when false
+      @Lip_N = @yes
+    end
+
+    case @iform.Habits_Mouth_Breather
+    when true
+      @Mouth_Breather_Y = @yes
+    when false
+      @Mouth_Breather_N = @yes
+    end
+
+    case @iform.Habits_Nail_Biting
+    when true
+      @Nail_Biting_Y = @yes
+    when false
+      @Nail_Biting_N = @yes
+    end
+
+    case @iform.Habits_Speech_Problems
+    when true
+      @Speech_Y = @yes
+    when false
+      @Speech_N = @yes
+    end
+
+    case @iform.Habits_Thumb_Or_Finger_Sucking
+    when true
+      @Thumb_Y = @yes
+    when false
+      @THumb_N = @yes
+    end
+
+    case @iform.Habits_Tongue_Thrust
+    when true
+      @Tongue_Thrust_Y = @yes
+    when false
+      @Tongue_Thrust_N = @yes
+    end
+
+    case @iform.Insurance_Company_Primary_Dental_Coverage
+    when true
+      @Dentalcoverage_yes = @yes
+    when false
+      @Dentalcoverage_no = @yes
+    end
+
+    case @iform.Insurance_Company_Primary_Orthodontic_Coverage
+    when true
+      @Orthocoverage_yes = @yes
+    when false
+      @Orthocoverage_no = @yes
+    end
+
+    case @iform.Insurance_Company_Secondary_Dental_Coverage
+    when true
+      @Dental_2_Yes = @yes
+    when false
+      @Dental_2_No = @yes
+    end
+
+    case @iform.Insurance_Company_Secondary_Orthodontic_Coverage
+    when true
+      @Ortho_2_Yes = @yes
+    when false
+      @Ortho_2_No = @yes
+    end
+
+    case @iform.Med_His_Abnormal_Bleeding
+    when true
+      @Bleeding_Y = @yes
+    when false
+      @Bleeding_N = @yes
+    end
+
+    case @iform.Med_His_ADD or @iform.Med_His_ADHD
+    when true
+      @ADHD_Y = @yes
+    when false
+      @ADHD_N = @yes
+    end
+
+    case @iform.Med_His_AIDS or @iform.Med_His_HIV_Positive
+    when true
+      @HIV_Y = @yes
+    when false
+      @HIV_N = @yes
+    end
+
+    case @iform.Med_His_Any_Operations
+    when true
+      @Operations_Y = @yes
+    when false
+      @Operations_N = @yes
+    end
+
+    case @iform.Med_His_Artificial_Bones_Joints_Valves
+    when true
+      @Bones_Y = @yes
+    when false
+      @Bones_N = @yes
+    end
+
+    case @iform.Med_His_Asthma
+    when true
+      @Asthma_Y = @yes
+    when false
+      @Asthma_N = @yes
+    end
+
+    case @iform.Med_His_Cancer
+    when true
+      @Cancer_Y = @yes
+    when false
+      @Cancer_N = @yes
+    end
+
+    case @iform.Med_His_Congenital_Heart_Defect
+    when true
+      @Congenital_Heart_Deffect_N = @yes
+    when false
+      @Congenital_Heart_Defect_Y = @yes
+    end
+
+    case @iform.Med_His_Current_Physical_Health
+    when "fair"
+      @Health_Fair = @yes
+    when "good"
+      @Health_Good = @yes
+    when "poor"
+      @Health_Poor = @yes
+    end
+
+    case @iform.Med_His_Currently_Under_The_Care_Of_A_Physician
+    when true
+      @Dr__Yes = @yes
+    when false
+      @Dr__No = @yes
+    end
+
+    case @iform.Med_His_Diabetes
+    when true
+      @Diabetes_Y = @yes
+    when false
+      @Diabetes_N = @yes
+    end
+
+    case @iform.Med_His_Epilepsy
+    when true
+      @Epilepsy_Y = @yes
+    when false
+      @Epilepsy_N = @yes
+    end
+
+    case @iform.Med_His_Handicaps_Or_Disabilities
+    when true
+      @Handicaps_Y = @yes
+    when false
+      @Handicaps_N = @yes
+    end
+
+    case @iform.Med_His_Hearing_Impairment
+    when true
+      @Hearing_Y = @yes
+    when false
+      @Hearing_N = @yes
+    end
+
+    case @iform.Med_His_Heart_Murmur
+    when true
+      @Heart_Murmur_Y = @yes
+    when false
+      @Heart_Murmur_N = @yes
+    end
+
+    case @iform.Med_His_Hemophilia
+    when true
+      @Hemophilia_Y = @yes
+    when false
+      @Hemophilia_N = @yes
+    end
+
+    case @iform.Med_His_Hepatitis
+    when true
+      @Hepatitis_Y = @yes
+    when false
+      @Hepatitis_N = @yes
+    end
+
+    case @iform.Med_His_Hospitalized_For_Any_Reason
+    when true
+      @Hospital_Y = @yes
+    when false
+      @Hospital_N = @yes
+    end
+
+    case @iform.Med_His_Kidney_Problems
+    when true
+      @Kidney_Y = @yes
+    when false
+      @Kidney_N = @yes
+    end
+
+    case @iform.Med_His_Liver_Problems
+    when true
+      @Liver_Y = @yes
+    when false
+      @Liver_N = @yes
+    end
+
+    case @iform.Med_His_Lupus
+    when true
+      @Lupus_Y = @yes
+    when false
+      @Lupus_N = @yes
+    end
+
+    case @iform.Med_His_Menstruation_Begun
+    when true
+      @Menstruation__Yes = @yes
+    when false
+      @Menstruation__No = @yes
+    end
+
+    case @iform.Med_His_Puberty_Begun
+    when true
+      @Puberty_No = @yes
+    when false
+      @Puberty__Yes = @yes
+    end
+
+    case @iform.Med_His_Rheumatic_Fever or @iform.Med_His_Scarlet_Fever
+    when true
+      @Rheumatic_Fever_Y = @yes
+    when false
+      @Rheumatic_Fever_N = @yes
+    end
+
+    case @iform.Med_His_Sickle_Cell_Disease or @iform.Med_His_Sickle_Cell_Disease_Traits
+    when true
+      @Sickle_Cell_Y = @yes
+    when false
+      @Sickle_Cell_N = @yes
+    end
+
+    case @iform.Med_His_Tuberculosis
+    when true
+      @TB_Y = @yes
+    when false
+      @TB_N = @yes
+    end
+
+    case @iform.Mother_Stepmother_Or_Gaurdian
+    when "guardian"
+      @Guaradian = @yes
+    when "stepmother"
+      @Step_Mother = @yes
+    end
+
+    case @iform.Self_Marital_Status
+    when "divorced"
+      @Divorced = @yes
+    when "married"
+      @Married = @yes
+    when "separated"
+      @Separated = @yes
+    when "single"
+      @Single = @yes
+    when "widowed"
+      @Widowed = @yes
+    end
+
+    case @iform.Self_Sex
+    when "male"
+      @Child_Male = @yes
+    when "female"
+      @Child_Female = @yes
+    end
+  end
+  
+  protected
+  def childform_controls_mapping(str, iform)
+    pdftkpath = "#{Configuration.pdftk_path}"
+    pdffilepath = "#{Configuration.pdffiles_path}"
+    path = pdffilepath + "#{str}.pdf"        
+    @pdftk = PdftkForms::Wrapper.new(pdftkpath)
+
+    pdf_form = iform.formname
+
+    @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
+                "ADHD N" => @ADHD_N,
+                "ADHD Y" => @ADHD_Y,
+                "Appt area code 2" => @Appt_area_code_2,
+                "Appt area code" => @Appt_area_code,
+                "Appt ext" => @Appt_ext,
+                "Appt phone 2" => @Appt_phone_2,
+                "Appt phone" => @Appt_phone,
+                "Asthma N" => @Asthma_N,
+                "Asthma Y" => @Asthma_Y,
+                "Billing Address 1" => @Billing_Address_1,
+                "Billing City 2" => @Billing_City_2,
+                "Billing State 2" => @Billing_State_2,
+                "Billing Zipcode 2" => @Billing_Zipcode_2,
+                "Bleeding N" => @Bleeding_N,
+                "Bleeding Y" => @Bleeding_Y,
+                "Bones N" => @Bones_N,
+                "Bones Y" => @Bones_Y,
+                "Bottle N" => @Bottle_N,
+                "Bottle Y" => @Bottle_Y,
+                "Breast Fed N" => @Breast_Fed_N,
+                "Breast Fed Y" => @Breast_Fed_Y,
+                "Brush - No" => @Brush__No,
+                "Brush - Yes" => @Brush__Yes,
+                "Cancer N" => @Cancer_N,
+                "Cancer Y" => @Cancer_Y,
+                "Child Address" => @Child_Address,
+                "Child area code" => @Child_area_code,
+                "Child Bday" => @Child_Bday,
+                "Child CITY" => @Child_CITY,
+                "Child E-Mail Address" => @Child_EMail_Address,
+                "Child Female" => @Child_Female,
+                "CHILD FIRST" => @CHILD_FIRST,
+                "Child Grade" => @Child_Grade,
+                "Child Hobbies" => @Child_Hobbies,
+                "Child Male" => @Child_Male,
+                "Child Nickname" => @Child_Nickname,
+                "Child phone" => @Child_phone,
+                "Child School" => @Child_School,
+                "Child SS" => @Child_SS,
+                "Child STATE" => @Child_STATE,
+                "Child Zip" => @Child_Zip,
+                "Child's Physician phone" => @Childs_Physician_phone,
+                "Child's Physician" => @Childs_Physician,
+                "Childs Age" => @Childs_Age,
+                "Childs Physician area code" => @Childs_Physician_area_code,
+                "Congenital Heart Defect Y" => @Congenital_Heart_Defect_Y,
+                "Congenital Heart Deffect N" => @Congenital_Heart_Deffect_N,
+                "Custody No" => @Custody_No,
+                "Custody Yes" => @Custody_Yes,
+                "Dad area code 1" => @Dad_area_code_1,
+                "Dad area code 2" => @Dad_area_code_2,
+                "Dad Bday" => @Dad_Bday,
+                "Dad DL_2" => @Dad_DL_2,
+                "Dad employer" => @Dad_employer,
+                "Dad ext" => @Dad_ext,
+                "Dad How Long at Current Job_2" => @Dad_How_Long_at_Current_Job_2,
+                "Dad Job Title_2" => @Dad_Job_Title_2,
+                "Dad Name_3" => @Dad_Name_3,
+                "Dad phone 1" => @Dad_phone_1,
+                "Dad phone 2" => @Dad_phone_2,
+                "Dad SS_3" => @Dad_SS_3,
+                "Date of last visit" => @Date_of_last_visit,
+                "Dental_2 No" => @Dental_2_No,
+                "Dental_2 Yes" => @Dental_2_Yes,
+                "Dentalcoverage_no" => @Dentalcoverage_no,
+                "Dentalcoverage_yes" => @Dentalcoverage_yes,
+                "Diabetes N" => @Diabetes_N,
+                "Diabetes Y" => @Diabetes_Y,
+                "Divorced" => @Divorced,
+                "Dr - No" => @Dr__No,
+                "Dr - Yes" => @Dr__Yes,
+                "Drug Allergies N" => @Drug_Allergies_N,
+                "Drug Allergies Y" => @Drug_Allergies_Y,
+                "Epilepsy N" => @Epilepsy_N,
+                "Epilepsy Y" => @Epilepsy_Y,
+                "Floss - No" => @Floss__No,
+                "Floss - Yes" => @Floss__Yes,
+                "Friend Address" => @Friend_Address,
+                "Friend area code" => @Friend_area_code,
+                "Friend City" => @Friend_City,
+                "Friend Name" => @Friend_Name,
+                "Friend phone" => @Friend_phone,
+                "Friend State" => @Friend_State,
+                "Friend Zip" => @Friend_Zip,
+                "General Dentist" => @General_Dentist,
+                "Grinding N" => @Grinding_N,
+                "Grinding Y" => @Grinding_Y,
+                "Guaradian" => @Guaradian,
+                "Guardian" => @Guardian,
+                "Handicaps N" => @Handicaps_N,
+                "Handicaps Y" => @Handicaps_Y,
+                "Health Fair" => @Health_Fair,
+                "Health Good" => @Health_Good,
+                "Health Poor" => @Health_Poor,
+                "Hearing N" => @Hearing_N,
+                "Hearing Y" => @Hearing_Y,
+                "Heart Murmur N" => @Heart_Murmur_N,
+                "Heart Murmur Y" => @Heart_Murmur_Y,
+                "Hemophilia N" => @Hemophilia_N,
+                "Hemophilia Y" => @Hemophilia_Y,
+                "Hepatitis N" => @Hepatitis_N,
+                "Hepatitis Y" => @Hepatitis_Y,
+                "HIV N" => @HIV_N,
+                "HIV Y" => @HIV_Y,
+                "Hospital N" => @Hospital_N,
+                "Hospital Y" => @Hospital_Y,
+                "Injuries - No" => @Injuries__No,
+                "Injuries - Yes" => @Injuries__Yes,
+                "Ins Co Address_1" => @Ins_Co_Address_1,
+                "Ins Co Address_2" => @Ins_Co_Address_2,
+                "Ins Co Phone_2" => @Ins_Co_Phone_2,
+                "Ins Co_1 area code" => @Ins_Co_1_area_code,
+                "Ins Co_1 Group #" => @Ins_Co_1_Group,
+                "Ins Co_1 Name" => @Ins_Co_1_Name,
+                "Ins Co_1 phone" => @Ins_Co_1_phone,
+                "Ins Co_1 Relationship" => @Ins_Co_1_Relationship,
+                "Ins Co_1" => @Ins_Co_1,
+                "Ins Co_2  area code" => @Ins_Co_2__area_code,
+                "Ins Co_2" => @Ins_Co_2,
+                "Instruments played" => @Instruments_played,
+                "Insured_1 Bday" => @Insured_1_Bday,
+                "Kidney N" => @Kidney_N,
+                "Kidney Y" => @Kidney_Y,
+                "Last Dental Date" => @Last_Dental_Date,
+                "Latex Allergies N" => @Latex_Allergies_N,
+                "Latex Allergies Y" => @Latex_Allergies_Y,
+                "Lip N" => @Lip_N,
+                "Lip Y" => @Lip_Y,
+                "List brothers sisters with age 2" => @List_brothers__sisters_with_age_2,
+                "Liver N" => @Liver_N,
+                "Liver Y" => @Liver_Y,
+                "Lupus N" => @Lupus_N,
+                "Lupus Y" => @Lupus_Y,
+                "Main_concerns" => @Main_concerns,
+                "Married" => @Married,
+                "Menstruation - No" => @Menstruation__No,
+                "Menstruation - Yes" => @Menstruation__Yes,
+                "Mom area code 1" => @Mom_area_code_1,
+                "Mom area code 2" => @Mom_area_code_2,
+                "Mom DL" => @Mom_DL,
+                "Mom employer" => @Mom_employer,
+                "Mom ext" => @Mom_ext,
+                "Mom How Long at Current Job" => @Mom_How_Long_at_Current_Job,
+                "Mom Job Title" => @Mom_Job_Title,
+                "Mom phone 1" => @Mom_phone_1,
+                "Mom phone 2" => @Mom_phone_2,
+                "Mom SS_2" => @Mom_SS_2,
+                "Mother BDay" => @Mother_BDay,
+                "Mother Name_2" => @Mother_Name_2,
+                "Mouth Breather N" => @Mouth_Breather_N,
+                "Mouth Breather Y" => @Mouth_Breather_Y,
+                "My method of payment will be" => @My_method_of_payment_will_be,
+                "Nail Biting N" => @Nail_Biting_N,
+                "Nail Biting Y" => @Nail_Biting_Y,
+                "Operations N" => @Operations_N,
+                "Operations Y" => @Operations_Y,
+                "Ortho_2 No" => @Ortho_2_No,
+                "Ortho_2 Yes" => @Ortho_2_Yes,
+                "Orthocoverage_no" => @Orthocoverage_no,
+                "Orthocoverage_yes" => @Orthocoverage_yes,
+                "Plastic Allergies N" => @Plastic_Allergies_N,
+                "Plastic Allergies Y" => @Plastic_Allergies_Y,
+                "Please discuss any medical problems that your child has had 3" => @Please_discuss_any_medical_problems_that_your_child_has_had_3,
+                "Please list all drugs that your child is currently taking" => @Please_list_all_drugs_that_your_child_is_currently_taking,
+                "Please list all drugsthings that your child is allergic to" => @Please_list_all_drugsthings_that_your_child_is_allergic_to,
+                "Policy Owner&#8217;s Employer_1" => @Primary_Ins_Employer_1,
+                "Policy_1 SS" => @Policy_1_SS,
+                "Previous Address 1" => @Previous_Address_1,
+                "Previous Address State" => @Previous_Address_State,
+                "Previous City" => @Previous_City,
+                "Previous Zip" => @Previous_Zip,
+                "Puberty - Yes" => @Puberty__Yes,
+                "Puberty- No" => @Puberty_No,
+                "Relation Name" => @Relation_Name,
+                "Relation" => @Relation,
+                "Relationsip to Patient 2" => @Relationsip_to_Patient_2,
+                "Responsible area code work" => @Responsible_area_code_work,
+                "Responsible area code" => @Responsible_area_code,
+                "Responsible DL" => @Responsible_DL,
+                "Responsible Employer" => @Responsible_Employer,
+                "Responsible ext" => @Responsible_ext,
+                "Responsible Name" => @Responsible_Name,
+                "Responsible Person to make Appointments" => @Responsible_Person_to_make_Appointments,
+                "Responsible phone_work" => @Responsible_phone_work,
+                "Responsible phone" => @Responsible_phone,
+                "Responsible Relation" => @Responsible_Relation,
+                "Responsible SS" => @Responsible_SS,
+                "Rheumatic Fever N" => @Rheumatic_Fever_N,
+                "Rheumatic Fever Y" => @Rheumatic_Fever_Y,
+                "Secondary Ins Birthdate" => @Secondary_Ins_Birthdate,
+                "Secondary Ins Employer_2" => @Secondary_Ins_Employer_2,
+                "Secondary Ins Group #_2" => @Secondary_Ins_Group__2,
+                "Secondary Ins Name_2" => @Secondary_Ins_Name_2,
+                "Secondary Ins SS" => @Secondary_Ins_SS,
+                "Separated" => @Separated,
+                "Sickle Cell N" => @Sickle_Cell_N,
+                "Sickle Cell Y" => @Sickle_Cell_Y,
+                "Single" => @Single,
+                "Speech N" => @Speech_N,
+                "Speech Y" => @Speech_Y,
+                "Step Father" => @Step_Father,
+                "Step Mother" => @Step_Mother,
+                "TB N" => @TB_N,
+                "TB Y" => @TB_Y,
+                "Teeth - No" => @Teeth__No,
+                "Teeth - Yes" => @Teeth__Yes,
+                "THumb N" => @THumb_N,
+                "Thumb Y" => @Thumb_Y,
+                "TMJ - No" => @TMJ__No,
+                "TMJ - Yes" => @TMJ__Yes,
+                "Todays Date" => @Todays_Date,
+                "Tongue Thrust N" => @Tongue_Thrust_N,
+                "Tongue Thrust Y" => @Tongue_Thrust_Y,
+                "Tonsils - No" => @Tonsils__No,
+                "Tonsils - Yes" => @Tonsils__Yes,
+                "Treated before - No" => @Treated_before__No,
+                "Treated before - Yes" => @Treated_before__Yes,
+                "Whom may we Thank for referring you" => @Whom_may_we_Thank_for_referring_you,
+                "Widowed" => @Widowed
+
+    })
   end
     
 end

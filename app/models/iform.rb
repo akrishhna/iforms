@@ -1,5 +1,17 @@
 class Iform < ActiveRecord::Base
  belongs_to :appointment
+ # after_save :update_appformjoin
+ #  
+ # def self.update_appformjoin(appformjoin)
+ #  @appformjoin = appformjoin 
+ # end
+ # 
+ # def update_appformjoin
+ # if @appformjoin.status == "pending"
+ #    @appformjoin.status = ""
+ #    @appformjoin.save
+ # end
+ # end
  #attr_writer :current_step
  
  #validates_presence_of :email, :firstname, :if => lambda { |o| o.current_step == "aboutyou" }

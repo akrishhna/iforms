@@ -1,5 +1,6 @@
 class PatientsController < ApplicationController
-  #before_filter :allow_patients
+  before_filter :is_patient?
+  before_filter :patient_profile_exists?, :except => [:new,:create]
   def index
     @appointments = Appointment.all(:conditions => ['email = ?', current_user.email])
   end
@@ -11,12 +12,19 @@ class PatientsController < ApplicationController
   def create
     @patient = Patient.new(params[:patient])
     @patient.user_id = current_user.id
-    @appointment = Appointment.all(:conditions => ['email = ?', current_user.email]).first
-    if @appointment
-    @appointment.patient_id = @patient.id
-    end
+    
     respond_to do |format|
-    if @patient.save!
+    if @patient.save
+      @appointments = Appointment.all(:conditions => ['email = ?', current_user.email])
+      @appointments.each do |i|
+      i.patient_id = @patient.id
+      i.save
+      @appformjoins = Appformjoin.where("appointment_id = ?", i.id)
+      @appformjoins.each do |appformjoin|
+      appformjoin.patient_user_id = current_user.id
+      appformjoin.save
+      end
+      end
       format.html { redirect_to(patients_path, :id => nil, :notice => 'Profile saved successfully.') }
       format.xml  { render :xml => @patient, :status => :created, :location => @patient }
     else
@@ -27,7 +35,7 @@ class PatientsController < ApplicationController
   end
   
   def edit
-    @patient = Patient.find(params[:id])
+    @patient = current_user.patients.find(params[:id])
   end
   
   def update
@@ -44,7 +52,7 @@ class PatientsController < ApplicationController
   end
   
   def show
-    @patient = Patient.find(params[:id])
+    @patient = current_user.patients.find(params[:id])
   end
 
 end

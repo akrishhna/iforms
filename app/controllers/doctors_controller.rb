@@ -1,5 +1,6 @@
 class DoctorsController < ApplicationController
-  #before_filter :allow_doctors
+  before_filter :is_doctor?
+  before_filter :doctor_profile_exists?, :except => [:new,:create]
   def index    
     @iforms = Iform.all
     @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
@@ -26,7 +27,7 @@ class DoctorsController < ApplicationController
   end
   
   def edit
-    @doctor = Doctor.find(params[:id])
+    @doctor = current_user.doctors.find(params[:id])
   end
   
   def update
@@ -43,7 +44,7 @@ class DoctorsController < ApplicationController
   end
   
   def show
-    @doctor = Doctor.find(params[:id])
+    @doctor = current_user.doctors.find(params[:id])
   end
 
 end

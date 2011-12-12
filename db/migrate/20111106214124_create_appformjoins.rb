@@ -4,6 +4,9 @@ class CreateAppformjoins < ActiveRecord::Migration
       t.integer :appointment_id
       t.integer :form_id
       t.integer :iform_id
+      t.integer :childform_id
+      t.integer :patient_user_id
+      t.integer :doctor_user_id
       t.string :formname
       t.string :status
       t.datetime :formsubmittedtime

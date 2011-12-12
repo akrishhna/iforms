@@ -1,4 +1,10 @@
 Iforms::Application.routes.draw do
+  get "childforms/new"
+
+  get "childforms/show"
+
+  get "childforms/edit"
+
   get "appointments/new"
 
   get "appointments/index"
@@ -35,6 +41,7 @@ get "deviseroles/index"
   resources :patients
   resources :appointments
   resources :deviseroles
+  resources :childforms
   resources :iforms do 
   # collection do
 #   post 'submit'

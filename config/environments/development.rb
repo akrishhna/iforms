@@ -21,6 +21,7 @@ Iforms::Application.configure do
   config.after_initialize do 
     Configuration.pdftk_path = '/usr/local/bin/pdftk'
     Configuration.pdffiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/pdffiles/'
+    Configuration.csvfiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
   end 
  
   # Log error messages when you accidentally call methods on nil.

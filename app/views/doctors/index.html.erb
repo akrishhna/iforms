@@ -12,6 +12,7 @@
 	<% count = 1 %>
 <% @appointments.each do |i|%>
 <% if i.timesent %>
+<% i.timesent = i.timesent.to_datetime %>
 <% timesent_date = i. timesent.strftime("%Y-%m-%d") %>
 <% timesent_hrs = i.timesent.strftime("%H") %>
 <% timesent_min = i.timesent.strftime("%M") %>
@@ -34,7 +35,6 @@
 	<td><%= i.date %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
 	<td><%= link_to 'View form here', i %></td>
-
 </tr>	
 <%end%>
 </table>

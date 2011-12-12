@@ -2,6 +2,17 @@
 <h2>Sign in</h2>
 
 <%= form_for(resource_name, resource, :url => session_path(resource_name)) do |f| %>
+<% if resource.errors.any? %>
+<div id="error_explanation">
+  <h2> Please check the highlighted fields </h2>
+	<ul>
+    <% resource.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul> 
+  </div> 
+<% end %>
+
   <p><%= f.label :email %></br>
   <%= f.text_field :email %></p>
 

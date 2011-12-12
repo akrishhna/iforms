@@ -1,4 +1,8 @@
-<% pathx = "/csvfiles/#{@pdfupload.file_file_name}.csv"%>
+<% time_now = Time.now.strftime("%Y-%m-%d_%H-%M-%S")%>
+<% path = Configuration.csvfiles_path+time_now+"_"+@pdfupload.file_file_name %>
+<% path1 = time_now+"_"+@pdfupload.file_file_name %>
+<% p Configuration.csvfiles_path %>
+<% pathx = "/csvfiles/#{path1}.csv"%>
 
 <%= link_to 'View uploaded file', @pdfupload.file.url%>&nbsp&nbsp
 <%= link_to 'Download csv format', pathx %></br></br>
@@ -19,8 +23,7 @@
 </br>
 <%= will_paginate @controls %>
 
-<% filepath = @pdfupload.file %>
-<% FasterCSV.open(filepath.path, "w") do |csv|%>
+<% FasterCSV.open("#{path}.csv", "w") do |csv|%>
     <% csv << ["ControlName", "ControlType"] %>
 <% @pdfupload.controls.each do |i| %>
     <% csv << ["#{i.name}","#{i.controltype}"] %>

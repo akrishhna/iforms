@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  before_filter :is_doctor?, :only =>["new"]
   def new
     @appointment = Appointment.new
     #Form.create(:formname => "Steiner_Ranch_Adult", :doctor_id => 1, :formpath => "http://localhost:3000/iforms/new")
@@ -6,11 +7,21 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(params[:appointment])
-    @formids = params[:form_ids]
-    @appointment.formname = @formids
      respond_to do |format|
        @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
        @appointment.doctor_id = @doctor.id
+       a=""
+       @formids = params[:form_ids]
+       if @formids
+       @formids.each do |i|
+         @form = Form.find(i) 
+         a<<@form.formname+","
+       end
+       end
+        @appointment.formname = a
+        if !@appointment.time_hrs.empty? and !@appointment.AM_PM.empty? and !@appointment.time_min.empty?
+           @appointment.appointment_time = @appointment.time_hrs+@appointment.AM_PM+@appointment.time_min
+        end
       if @appointment.save 
        @user = User.all(:conditions => ['email = ?', @appointment.email]).first
        if @user
@@ -24,22 +35,27 @@ class AppointmentsController < ApplicationController
        @i = @appointment.doctor
        @i.doctorname
        @appointment.doctorname = @i.doctorname
-       @appointment.timesent = Time.now
+       p "appointment timesent below"
+       p @appointment.timesent = Time.now
+       @appointment.save
        if @formids
        @formids.each do |i|
        @form = Form.find(i)
-       Appformjoin.create(:appointment_id => @appointment.id, :form_id => i, :formname => @form.formname)
+       @appformjoin = Appformjoin.create(:appointment_id => @appointment.id, :form_id => i, :formname => @form.formname, :status => "pending", :doctor_user_id => current_user.id)
+       if @user
+       @appformjoin.patient_user_id = @user.id
+       @appformjoin.save
+       end
        end 
        end  
-       @appointment.save
        Notifier.appointment_confirmation(@appointment).deliver
        format.html { redirect_to(doctors_path, :id => nil, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}") }
        format.xml  { render :xml => @appointment, :status => :created, :location => @appointment }
       else
-      format.html { render "new" }
+      format.html { render :action => "new" }
       format.xml  { render :xml => @appointment.errors, :status => :unprocessable_entity }
      end
-      end
+  end
   end
       
   def index
@@ -58,6 +74,14 @@ class AppointmentsController < ApplicationController
     end
   end
   
+  def edit
+    
+  end
+  
+  def update
+    
+  end
+  
   def destroy
    @appointment = Appointment.find(params[:id])
    @appointment.destroy
@@ -69,18 +93,19 @@ class AppointmentsController < ApplicationController
   
   def time_conversion(i) 
    if i.formsubmittedtime
-   formsubmittedtime_date = i. formsubmittedtime.strftime("%Y-%m-%d")
-   formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H")
+   i.formsubmittedtime = i.formsubmittedtime.to_datetime 
+   formsubmittedtime_date = i.formsubmittedtime.strftime("%Y-%m-%d")
+   p formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H")
    formsubmittedtime_min = i.formsubmittedtime.strftime("%M")
    formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i 
    var = 12
    if var<=formsubmittedtime_hrs_int
    formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s
    am_pm = "PM"
-   formsubmittedtime = formsubmittedtime_date+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
+   p formsubmittedtime = formsubmittedtime_date+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
    else 
    am_pm = "AM" 
-   formsubmittedtime = formsubmittedtime_date+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
+   p formsubmittedtime = formsubmittedtime_date+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
    end 
    end 
    return formsubmittedtime 
