@@ -1,6 +1,6 @@
 class PdfuploadsController < ApplicationController
    before_filter :is_admin?
-  require 'fastercsv'
+  require 'csv'
  
   def index
     @pdfuploads = Pdfupload.all
