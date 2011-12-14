@@ -26,8 +26,8 @@ Iforms::Application.configure do
   #file paths
   config.after_initialize do 
     Configuration.pdftk_path = '/usr/bin/pdftk'
-    Configuration.pdffiles_path = '/home/railsapps/userfiles/pdffiles/'
-    Configuration.csvfiles_path = '/home/railsapps/userfiles/csvfiles/'
+    Configuration.pdffiles_path = '/home/railsapps/iforms/current/public/pdffiles/'
+    Configuration.csvfiles_path = '/home/railsapps/iforms/current/public/csvfiles/'
   end 
 
   
