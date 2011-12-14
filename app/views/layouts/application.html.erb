@@ -12,6 +12,7 @@
 <body>
 <div class = "header">
 <% if current_user %>
+<%= link_to 'Home', deviseroles_path %> |
 Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 <%= link_to 'Sign out', destroy_user_session_path %>
 <% else %>

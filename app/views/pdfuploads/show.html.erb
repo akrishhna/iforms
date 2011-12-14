@@ -24,7 +24,7 @@
 </br>
 <%= will_paginate @controls %>
 
-<% FasterCSV.open("#{path}.csv", "w") do |csv|%>
+<% CSV.open("#{path}.csv", "w") do |csv|%>
     <% csv << ["ControlName", "ControlType"] %>
 <% @pdfupload.controls.each do |i| %>
     <% csv << ["#{i.name}","#{i.controltype}"] %>

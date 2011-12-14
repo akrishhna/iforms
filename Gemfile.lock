@@ -43,7 +43,6 @@ GEM
     dynamic_form (1.1.4)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    fastercsv (1.5.4)
     highline (1.6.5)
     i18n (0.5.0)
     jquery-rails (1.0.17)
@@ -111,7 +110,6 @@ DEPENDENCIES
   client_side_validations
   devise (= 1.1.rc0)
   dynamic_form
-  fastercsv
   jquery-rails
   mysql2 (~> 0.2.11)
   paperclip
