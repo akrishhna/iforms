@@ -4,7 +4,8 @@
 <% p Configuration.csvfiles_path %>
 <% pathx = "/csvfiles/#{path1}.csv"%>
 
-<%= link_to 'View uploaded file', @pdfupload.file.url%>&nbsp&nbsp
+<%= link_to 'Home', :controller => "admin", :action => "index"%> |
+<%= link_to 'View uploaded file', @pdfupload.file.url%> |
 <%= link_to 'Download csv format', pathx %></br></br>
 <table>
 	<tr>

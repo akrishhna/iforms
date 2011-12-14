@@ -2,7 +2,8 @@ class AppointmentsController < ApplicationController
   before_filter :is_doctor?, :only =>["new"]
   def new
     @appointment = Appointment.new
-    #Form.create(:formname => "Steiner_Ranch_Adult", :doctor_id => 1, :formpath => "http://localhost:3000/iforms/new")
+    #Form.create(:formname => "Bastrop_Child", :doctor_id => 2, :formpath => "http://50.57.138.165/iforms/new")
+    #Form.create(:formname => "Steiner_Ranch_Adult", :doctor_id => 2, :formpath => "http://localhost:3000/iforms/new")
   end
 
   def create

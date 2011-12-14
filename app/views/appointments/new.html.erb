@@ -31,30 +31,22 @@
     <%= f.text_field :date %>
  </div>
 
- <div class="field">
+ <div class="field", id = "tasks">
     <label> Appointment Time</label><br />
     <%= f.select :time_hrs, ["00",1,2,3,4,5,6,7,8,9,10,11], :include_blank => true %>
     <%= f.select :time_min, ["00",5,10,15,20,25,30,35,40,45,50,55], :include_blank => true %>
     <%= f.select :AM_PM, ["AM","PM"], :include_blank => true %>
  </div>
 
-	
-	<% @doctor = Doctor.first%>
-	<% a=[]%>
-	<% @forms = @doctor.forms %>
-	<% @forms.each do |i|%>
-	<%a<< i.formname %>
-	<%end %>
+<%= link_to_function "Adult forms" do |page| 
+page.insert_html :bottom, :tasks, :partial => 'adultform_checkboxes' 
+end %> |
 
+<%= link_to_function "Child forms" do |page| 
+page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes' 
+end %>
 
-<div class = "field">
-<% for form in @forms %>
-		<%= check_box_tag "form_ids[]", form.id %>
-	<label>	<%= form.formname %><% if form.id ==3%></br><%end%></label>
-<% end%>
-</div>
-
-
+</br></br>	
 <div class="actions">
     <%= f.submit %>
 </div>
@@ -63,6 +55,12 @@
 <%= link_to 'Back', doctors_path %>
 </div>
 
+<script type="text/javascript">
+$('.addCheckbox').click(function(){
+ $(this).append("<%= render :partial => 'adultform_checkboxes'%>");
+});
 
+</script>
+</head>
 
 

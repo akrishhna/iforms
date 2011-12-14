@@ -111,6 +111,11 @@
   <%= f.label :Email %><br />
   <%= f.text_field :Self_Email_Address %>
 </div>
+
+<div class="actions">
+  <%= f.submit  %>
+</div>
+
 </fieldset>
 
 <fieldset>
@@ -171,6 +176,10 @@
   <%= f.label :Widowed %>
 	<%= f.radio_button :Self_Marital_Status, "separated" %>
   <%= f.label :Separated %>
+</div>
+
+<div class="actions">
+  <%= f.submit  %>
 </div>
 
 </fieldset>
@@ -323,6 +332,10 @@
 <div class="field">
   <label> Drivers License State</label><br />
   <%= f.text_field :Father_Drivers_License_State %>
+</div>
+
+<div class="actions">
+  <%= f.submit  %>
 </div>
 
 </fieldset>
@@ -512,6 +525,10 @@
    <label>Zip</label><br />
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Postal_Code %>
  </div>
+
+<div class="actions">
+  <%= f.submit  %>
+</div>
 
 </fieldset>
 
@@ -705,6 +722,11 @@
     <label>Insured's Employer </label><br />
     <%= f.text_field :Insurance_Company_Secondary_Insured_Employer_Name %>
   </div>
+
+  <div class="actions">
+  <%= f.submit  %>
+  </div>
+
 </fieldset>
 
 <fieldset>
@@ -935,6 +957,10 @@
 	<div class="field">
 	    <label>Please list all drugs/things that your child is allergic to: </label><br />
 	    <%= f.text_area :Allergic_To_Drugs_List, :cols => 60, :rows => 5 %>
+	</div>
+	
+	<div class="actions">
+	  <%= f.submit  %>
 	</div>
 
 </fieldset>
@@ -1251,6 +1277,11 @@ following medical problems?</h4>
     <label>Please discuss any medical problems that your child has had: </label><br />
     <%= f.text_area :Med_His_Medical_Problems, :cols => 60, :rows => 5 %>
   </div>
+
+  <div class="actions">
+  <%= f.submit  %>
+  </div>
+
 </fieldset>
 
 <fieldset>
@@ -1352,6 +1383,7 @@ habits?</h4>
 <div class="actions">
   <%= f.submit  %>
 </div>
+
 </fieldset>
 
 <% end %>

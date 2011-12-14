@@ -169,7 +169,7 @@ class CreateIforms < ActiveRecord::Migration
       t.boolean :Allergic_To_Penicillin
       t.boolean :Allergic_To_Tetracycline
       t.boolean :Allergic_To_Other
-      t.string :Allergic_To_Any_Drugs, :limit => 100
+      #t.string :Allergic_To_Drugs_List, :limit => 100
     # Dental history
       t.string :Dental_History_Orthodontic_Goals
       t.boolean :Dental_History_Previous_Orthodontic_Evaluation

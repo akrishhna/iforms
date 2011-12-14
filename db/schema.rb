@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208034639) do
+ActiveRecord::Schema.define(:version => 20111212194937) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -562,6 +562,7 @@ ActiveRecord::Schema.define(:version => 20111208034639) do
     t.string   "Self_Grade",                                                      :limit => 20
     t.string   "Self_Hobbies",                                                    :limit => 100
     t.string   "Self_School",                                                     :limit => 50
+    t.string   "Allergic_To_Drugs_List"
   end
 
   create_table "patients", :force => true do |t|
