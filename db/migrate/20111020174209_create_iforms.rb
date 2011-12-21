@@ -19,7 +19,7 @@ class CreateIforms < ActiveRecord::Migration
       t.string :Self_Phone_Home, :limit => 10
       t.string :Self_Phone_Mobile, :limit => 10
       t.string :Self_Phone_Work, :limit => 10
-      t.integer :Self_Phone_Work_Extension
+      t.string :Self_Phone_Work_Extension
       t.string :Self_Driver_License_State, :limit => 15
       t.string :Self_Driver_License_Number, :limit => 15
       t.string :Self_Employer_Name, :limit => 25
@@ -45,13 +45,13 @@ class CreateIforms < ActiveRecord::Migration
       t.string :Spouse_Employer_Name, :limit => 50
       t.string :Spouse_Phone_Work, :limit => 10
       t.string :Spouse_Social_Security_Number, :limit => 10
-      t.integer :Spouse_Phone_Work_Extension
+      t.string :Spouse_Phone_Work_Extension
       t.date :Spouse_Birthdate
       t.string :Person_Responsible_For_Account_Name_First, :limit => 50
       t.string :Person_Responsible_For_Account_Name_Last, :limit => 50
       t.string :Person_Responsible_For_Account_Name_Middle, :limit => 50
       t.string :Person_Responsible_For_Account_Phone_Work, :limit => 10
-      t.integer :Person_Responsible_For_Account_Phone_Work_Extension
+      t.string :Person_Responsible_For_Account_Phone_Work_Extension
       t.string :Person_Responsible_For_Account_Phone_Home, :limit => 10
       t.string :Person_Responsible_For_Account_Employer_Name, :limit => 15
       t.string :Person_Responsible_For_Account_Social_Security_Number, :limit => 10
@@ -220,7 +220,7 @@ class CreateIforms < ActiveRecord::Migration
       t.string :Father_Phone_Home, :limit => 10
       t.date :Father_Birthdate
       t.string :Father_Phone_Work, :limit => 10
-      t.integer :Father_Phone_Work_Extension
+      t.string :Father_Phone_Work_Extension
       t.string :Father_Social_Security_Number, :limit => 10
       t.string :Father_Stepfather_Or_Gaurdian, :limit => 10
       t.boolean :Habits_Bottle
@@ -277,7 +277,7 @@ class CreateIforms < ActiveRecord::Migration
       t.string :Person_Responsible_For_Making_Appointments_Name_Middle, :limit => 50
       t.string :Person_Responsible_For_Making_Appointments_Phone_Home, :limit => 10
       t.string :Person_Responsible_For_Making_Appointments_Phone_Work, :limit => 10
-      t.integer :Person_Responsible_For_Making_Appointments_Phone_Work_Extension      
+      t.string :Person_Responsible_For_Making_Appointments_Phone_Work_Extension      
       t.string :Self_Email_Address, :limit => 100      
       t.string :Self_Grade, :limit => 20
       t.string :Self_Hobbies, :limit => 100

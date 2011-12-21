@@ -305,7 +305,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Self_Phone_Home",                                                 :limit => 10
     t.string   "Self_Phone_Mobile",                                               :limit => 10
     t.string   "Self_Phone_Work",                                                 :limit => 10
-    t.integer  "Self_Phone_Work_Extension"
+    t.string   "Self_Phone_Work_Extension"
     t.string   "Self_Driver_License_State",                                       :limit => 15
     t.string   "Self_Driver_License_Number",                                      :limit => 15
     t.string   "Self_Employer_Name",                                              :limit => 25
@@ -330,13 +330,13 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Spouse_Employer_Name",                                            :limit => 50
     t.string   "Spouse_Phone_Work",                                               :limit => 10
     t.string   "Spouse_Social_Security_Number",                                   :limit => 10
-    t.integer  "Spouse_Phone_Work_Extension"
+    t.string   "Spouse_Phone_Work_Extension"
     t.date     "Spouse_Birthdate"
     t.string   "Person_Responsible_For_Account_Name_First",                       :limit => 50
     t.string   "Person_Responsible_For_Account_Name_Last",                        :limit => 50
     t.string   "Person_Responsible_For_Account_Name_Middle",                      :limit => 50
     t.string   "Person_Responsible_For_Account_Phone_Work",                       :limit => 10
-    t.integer  "Person_Responsible_For_Account_Phone_Work_Extension"
+    t.string   "Person_Responsible_For_Account_Phone_Work_Extension"
     t.string   "Person_Responsible_For_Account_Phone_Home",                       :limit => 10
     t.string   "Person_Responsible_For_Account_Employer_Name",                    :limit => 15
     t.string   "Person_Responsible_For_Account_Social_Security_Number",           :limit => 10
@@ -452,7 +452,6 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.boolean  "Allergic_To_Penicillin"
     t.boolean  "Allergic_To_Tetracycline"
     t.boolean  "Allergic_To_Other"
-    t.string   "Allergic_To_Any_Drugs",                                           :limit => 1
     t.string   "Dental_History_Orthodontic_Goals"
     t.boolean  "Dental_History_Previous_Orthodontic_Evaluation"
     t.boolean  "Dental_History_Previous_Dental_Work_Issues"
@@ -484,6 +483,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Accompanying_Your_Child_Today_Siblings_And_Ages",                 :limit => 100
     t.string   "Accompanying_Your_Child_Today_Name_First",                        :limit => 50
     t.string   "Accompanying_Your_Child_Today_Name_Last",                         :limit => 50
+    t.boolean  "Allergic_To_Any_Drugs"
     t.boolean  "Dental_History_Brush_Teeth_Daily"
     t.boolean  "Dental_History_Floss_Teeth_Daily"
     t.string   "Dental_History_Injury_To_Face",                                   :limit => 6
@@ -501,7 +501,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Father_Phone_Home",                                               :limit => 10
     t.date     "Father_Birthdate"
     t.string   "Father_Phone_Work",                                               :limit => 10
-    t.integer  "Father_Phone_Work_Extension"
+    t.string   "Father_Phone_Work_Extension"
     t.string   "Father_Social_Security_Number",                                   :limit => 10
     t.string   "Father_Stepfather_Or_Gaurdian",                                   :limit => 10
     t.boolean  "Habits_Bottle"
@@ -558,7 +558,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Person_Responsible_For_Making_Appointments_Name_Middle",          :limit => 50
     t.string   "Person_Responsible_For_Making_Appointments_Phone_Home",           :limit => 10
     t.string   "Person_Responsible_For_Making_Appointments_Phone_Work",           :limit => 10
-    t.integer  "Person_Responsible_For_Making_Appointments_Phone_Work_Extension"
+    t.string   "Person_Responsible_For_Making_Appointments_Phone_Work_Extension"
     t.string   "Self_Grade",                                                      :limit => 20
     t.string   "Self_Hobbies",                                                    :limit => 100
     t.string   "Self_School",                                                     :limit => 50
