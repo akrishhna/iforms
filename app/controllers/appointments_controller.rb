@@ -103,10 +103,10 @@ class AppointmentsController < ApplicationController
    if var<=formsubmittedtime_hrs_int
    formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s
    am_pm = "PM"
-   p formsubmittedtime = formsubmittedtime_date+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
+   p formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
    else 
    am_pm = "AM" 
-   p formsubmittedtime = formsubmittedtime_date+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
+   p formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
    end 
    end 
    return formsubmittedtime 

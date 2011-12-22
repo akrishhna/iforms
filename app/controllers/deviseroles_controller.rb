@@ -1,5 +1,5 @@
 class DeviserolesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => ["new"]
 
   def index
      case current_user.role

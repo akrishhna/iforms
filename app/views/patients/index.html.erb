@@ -24,14 +24,14 @@
 <% p @timesent = timesent_date+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% else %>
 <% am_pm = "AM" %>
-<%p @timesent = timesent_date+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+<%p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% end %>
 <% end %>
 <tr>
 	<td><%= count %>
 	<% count+=1 %>
 	<td><%= i.doctorname.capitalize %></td>
-	<td><%= i.date %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
 	<td><%= link_to 'Fill form here', i %></td>
 </tr>	

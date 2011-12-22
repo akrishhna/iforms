@@ -12,17 +12,23 @@
 <body>
 <div class = "header">
 <% if current_user %>
-<%= link_to 'Home', deviseroles_path %> |
 Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 <%= link_to 'Sign out', destroy_user_session_path %>
 <% else %>
 <%= link_to 'Sign in', new_user_session_path %>
 <%end%>
 </div>
+<div class = "logo" onclick="window.location.href='/';">
+</div>
 <div class ="container_layout">
 <%= alert %>
 <%= notice %>
 <%= yield %>
+</div>
+<div class="footer">
+	<%= link_to 'Home', root_url %> |
+	<%= link_to 'About Us'%> |
+	<%= link_to 'Contact'%>
 </div>
 </body>
 </html>

@@ -4,7 +4,6 @@
 <%= form_for @appointment do |f| %>
   <% if @appointment.errors.any? %>
     <div id="error_explanation">
-      <h2> Please check the highlighted fields </h2>
     <ul>
       <% @appointment.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
