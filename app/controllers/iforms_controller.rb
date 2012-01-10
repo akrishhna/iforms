@@ -112,8 +112,6 @@ class IformsController < ApplicationController
           @appointment.status = "Received"
           @appointment.save
           @form = Form.where("formname = ?", session[:formname]).first
-          p "00000000000000000000"
-          p @form.id
           @appformjoin = Appformjoin.where("appointment_id = ? and form_id = ?", session[:appointment_id], @form.id ).first  
           @appformjoin = Appformjoin.find(@appformjoin.id)
           @appformjoin.status = "submitted"
@@ -829,12 +827,10 @@ class IformsController < ApplicationController
   #     # print pff.name, pff.field_type, pff.flags, pff.value, pff.options
   #     #end 
   #   end
-
-
+  formname_split = iform.formname.split(" ")
+  pdf_form = formname_split[0]+"_"+formname_split[1]
 
   
-  pdf_form = iform.formname
-
   @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
     "Anemia N" => @Anemia_N,
     "Anemia Y" => @Anemia_Y,
@@ -1621,8 +1617,8 @@ class IformsController < ApplicationController
     pdffilepath = "#{Configuration.pdffiles_path}"
     path = pdffilepath + "#{str}.pdf"        
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
-
-    pdf_form = iform.formname
+    formname_split = iform.formname.split(" ")
+    pdf_form = formname_split[0]+"_"+formname_split[1]
 
     @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
                 "ADHD N" => @ADHD_N,

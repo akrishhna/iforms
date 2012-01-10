@@ -19,18 +19,21 @@
 <% timesent_min = i.timesent.strftime("%M") %>
 <% timesent_hrs_int = timesent_hrs.to_i %>
 <% var = 12 %>
-<% if var<=timesent_hrs_int %>
+
+<% if var<timesent_hrs_int %>
 <% timesent_hrs = (timesent_hrs_int - var).to_s %>
 <% am_pm = "PM" %>
 <% p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% else %>
+<% timesent_hrs = timesent_hrs_int.to_s %>
 <% am_pm = "AM" %>
 <%p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% end %>
 <% end %>
 <tr>
-	<td><%= i.firstname%> <%= i.lastname%></td>
-	<td><%= i.doctorname.capitalize %></td>
+	<td><%= i.firstname.capitalize%> <%= i.lastname.capitalize%></td>
+	<% p = i.doctorname.split(" ")%>
+	<td><%= p[0].capitalize %> <%= p[1].capitalize%></td>
 	<% if i.formname.blank? %>
 	<td></td>
 	<%else%>

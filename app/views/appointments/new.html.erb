@@ -11,7 +11,6 @@
     </ul> 
     </div> 
   <% end %>
-<br />
   <div class="field">
     <div class = "labelcss">Firstname </div>
     <%= f.text_field :firstname %>
@@ -28,6 +27,7 @@
  <div class="field">
     <div class = "labelcss">Appointment Date</div>
     <%= f.text_field :date %>
+    
  </div>
 
  <div class="field", id = "tasks">
@@ -47,7 +47,7 @@
 		<div class = "labelcss">
 		<% for form in @forms %>	    
 			<%= check_box_tag "form_ids[]", form.id %>
-			<%= form.formname %><%if form.id==3%><br /><%end%>
+			<%= form.formname %><%if form.id==4%><br /><%end%>
 		<% end%>
 	    </div>
 
