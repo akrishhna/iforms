@@ -1,5 +1,9 @@
 <div class="index">
-<h3>My Appointments</h3>
+	<ul class = "breadcrumbs">
+	<li>	<%= link_to 'My Appointments',doctors_path %>></li>
+<li><%= link_to 'New Appointment', new_appointment_path %></li>
+</ul>
+<br />
 <% if !@appointments.blank? %>
 <table border="0" width="80%" class="mytable">
 	<tr BGCOLOR="grey" >
@@ -43,10 +47,10 @@
 </tr>	
 <%end%>
 </table>
+<br />
 <% else %>
 <p>You have no Appointments! </p>
 <%end%>
 </br>
-</br>
-<%= link_to 'New Appointment', new_appointment_path %>
+
 </div>

@@ -12,5 +12,10 @@ class Appointment < ActiveRecord::Base
           errors.add(:date, "can't be in the past")
         end
       end
+      
+      def self.paging(page, id)
+            paginate :per_page => 15, :page => page,
+                    :conditions => ['appointment_id  = ?', id]
+      end
     
 end
