@@ -3,11 +3,12 @@
 <% if !@appointments.blank? %>
 <table border="0" width="80%" class="mytable">
 	<tr BGCOLOR="grey" >
-		<th>s.no</th>
-		<th>Patient Name</th>
-		<th>Appointment Datetime</th>
-		<th>Form Sent At</th>
-		<th></th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Form</th>
+		<th>Appointment</th>
+		<th>Sent</th>
+	
 	</tr>
 	<% count = 1 %>
 <% @appointments.each do |i|%>
@@ -28,13 +29,17 @@
 <% end %>
 <% end %>
 <tr>
-	<td><%= count %>
-	<% count+=1 %>
 	<% str = i.firstname.capitalize + " " + i.lastname.capitalize %>
-	<td><%= str %></td>
+	<td><%= str%></td>
+	<td><%= i.email%></td>
+	<% if i.formname.blank? %>
+	<td></td>
+	<%else%>
+	<td><%= link_to 'Fill form here', i %></td>
+	<%end%>
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
-	<td><%= link_to 'View form here', i %></td>
+	
 </tr>	
 <%end%>
 </table>

@@ -1,0 +1,88 @@
+
+<h2>Contact Us</h2>
+
+<% form_tag(contacts_deviseroles_path,:name =>"form", :method=>'post', :validate => true, :onSubmit => "return validateThis();") do %>
+Name <span style = "color:red">*</span></br>
+<%= text_field_tag "name" ,"", :onblur=>"name_validation();"%>&nbsp<span id="name_errorMsg" style = "color:red"></span><br /><br />
+Email <span style = "color:red">*</span></br>
+<%= text_field_tag "email" ,"", :onblur=>"email_validation();"%>&nbsp<span id="email_errorMsg" style = "color:red"></span><br /><br />
+Subject</br>
+<%= text_field_tag "subject" %><br /><br />
+Message <span style = "color:red">*</span></br>
+<%= text_area_tag "body","", :size=>"35x8", :onblur=>"body_validation();" %>&nbsp<span id="body_errorMsg" style = "color:red"></span><br /><br />
+
+<%= recaptcha_tags %><br />
+<%= submit_tag "submit"%>
+<% end %>
+
+<script type="text/javascript">
+function validateThis()
+{
+	var regex = /^[a-zA-z]/
+	var x=document.forms["form"]["name"].value;
+	if (x==null || x=="")
+	  {
+	  document.getElementById('name_errorMsg').innerHTML = "Name cant be blank";
+	  document.getElementById("name").focus();
+	  return false;
+	  
+	  } 
+	else if (x.length<3 && x != regex )
+	{
+	document.getElementById('name_errorMsg').innerHTML = "Not a valid name";
+	return false;	
+	}
+	else
+	{
+		document.getElementById('name_errorMsg').innerHTML = "";
+	 //	return true;
+	}	
+	
+	
+//}
+//function email_validation()
+//{
+	
+	var y=document.forms["form"]["email"].value;
+	var atpos=y.indexOf("@");
+	var dotpos=y.lastIndexOf(".");
+	if (y==null || y=="")
+	  {
+	  document.getElementById('email_errorMsg').innerHTML = "Email cant be blank";
+	  return false;
+	  } 
+	
+	else if (atpos<1 || dotpos<atpos+2 || dotpos+2>=y.length)
+	  {
+	  document.getElementById('email_errorMsg').innerHTML = "Not a valid e-mail address";
+	  return false;
+	  }
+	else
+	{
+		document.getElementById('email_errorMsg').innerHTML = "";
+		//return true;
+	}
+//}
+//function body_validation()
+//{
+	var z=document.forms["form"]["body"].value;
+	if (z==null || z=="")
+	  {
+	 document.getElementById('body_errorMsg').innerHTML = "Message cant be blank";
+	  return false;
+	  } 
+	else if (z.length<20)
+	{
+		document.getElementById('body_errorMsg').innerHTML = "Short message";
+		return false;
+	}
+	else
+	{
+		document.getElementById('body_errorMsg').innerHTML = "";
+		return true;
+	}
+}
+
+</script>
+
+

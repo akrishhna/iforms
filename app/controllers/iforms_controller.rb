@@ -96,15 +96,9 @@ class IformsController < ApplicationController
   @iform.formname = session[:formname]
   respond_to do |format|
             
-      if @iform.save!
+      if @iform.save! and !@iform.Self_Name_Last.empty? and !@iform.Self_Name_First.empty?
          @iform.appointment_id = session[:appointment_id]
-         p "000000000000params"
-         print params[:while_awake], params[:injury_teeth], params[:injury_chin]
-         p @iform.Dental_History_Breathe_Through_Mouth_While_Awake = params[:while_awake]
-         @iform.Dental_History_Breathe_Through_Mouth_While_Asleep = params[:while_sleep]
-         @iform.Dental_History_Injury_To_Mouth = params[:injury_mouth]
-         p @iform.Dental_History_Injury_To_Teeth = params[:injury_teeth]
-         @iform.Dental_History_Injury_To_Chin = params[:injury_chin]
+         
          age_calculator(@iform)
          @iform.Self_Age = @You_Age
          @iform.save
@@ -127,7 +121,7 @@ class IformsController < ApplicationController
           @appformjoin.iform_id = @iform.id
           @appformjoin.save
           adultform_controls_mapping(str, @iform)
-         
+          Notifier.form_submission_notification(@appointment, session[:formname], @iform).deliver
        
         format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
         format.xml  { render :xml => @iform, :status => :created, :location => @iform }
@@ -169,12 +163,6 @@ class IformsController < ApplicationController
          @iform.path = pathx
          @iform.save
          if @iform.formname.include?("Adult")
-          print params[:while_awake], params[:injury_teeth], params[:injury_chin]
-          p @iform.Dental_History_Breathe_Through_Mouth_While_Awake = params[:while_awake]
-          @iform.Dental_History_Breathe_Through_Mouth_While_Asleep = params[:while_sleep]
-          @iform.Dental_History_Injury_To_Mouth = params[:injury_mouth]
-          p @iform.Dental_History_Injury_To_Teeth = params[:injury_teeth]
-          @iform.Dental_History_Injury_To_Chin = params[:injury_chin]
          @iform.save
          adultform_control_conditions(@iform)
          adultform_controls_mapping(str, @iform)
@@ -182,7 +170,8 @@ class IformsController < ApplicationController
          if @iform.formname.include?("Child")
           childform_control_conditions(@iform)
           childform_controls_mapping(str, @iform)
-         end 
+         end
+         Notifier.edit_form_submission_notification(@iform.appointment, @iform.formname, @iform).deliver 
         format.html { redirect_to(@iform, :notice => 'Form was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -237,6 +226,7 @@ class IformsController < ApplicationController
              @appformjoin.iform_id = @iform.id
              @appformjoin.save
              childform_controls_mapping(str, @iform)
+             Notifier.form_submission_notification(@appointment, session[:formname], @iform).deliver
              format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
              format.xml  { render :xml => @iform, :status => :created, :location => @iform }
            else
@@ -367,7 +357,7 @@ class IformsController < ApplicationController
     if !@iform.Spouse_Social_Security_Number.blank? and @iform.Spouse_Social_Security_Number.length == 9
     @SpouseSS = @iform.Spouse_Social_Security_Number.slice(0,3) + "-" + @iform.Spouse_Social_Security_Number.slice(3,2) + "-" + @iform.Spouse_Social_Security_Number.slice(5,4)
     end
-    @Today_8217_s_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider
+    @Today_8217_s_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider.strftime("%m %d %Y")
     @Week = @iform.Med_His_Weeks_Pregnant
     @What_do_you_want = @iform.Dental_History_Orthodontic_Goals
     @When_taken_Phen_Fen = @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin
@@ -1201,7 +1191,7 @@ class IformsController < ApplicationController
     if !@iform.Insurance_Company_Primary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Primary_Insured_Social_Security_Number.length == 9
     @Policy_1_SS = @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(0,3) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(5,4)
     end
-    @Policy_Owner&#8217;s_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
+    @Policy_Owner8217s_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
     @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1 + ", " + @iform.Person_Responsible_For_Account_Previous_Address2
     @Previous_Address_State = @iform.Person_Responsible_For_Account_Previous_State
     @Previous_City = @iform.Person_Responsible_For_Account_Previous_City
@@ -1235,7 +1225,7 @@ class IformsController < ApplicationController
     if !@iform.Insurance_Company_Secondary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.length == 9
     @Secondary_Ins_SS = @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(0,3) + "-" + @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Secondary_Insured_Social_Security_Number.slice(5,4)
     end
-    @Todays_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider
+    @Todays_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider.strftime("%m-%d-%Y")
     @Whom_may_we_Thank_for_referring_you = @iform.Self_Referred_By
 
     case @iform.Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child
@@ -1696,7 +1686,7 @@ class IformsController < ApplicationController
                 "Dad phone 1" => @Dad_phone_1,
                 "Dad phone 2" => @Dad_phone_2,
                 "Dad SS_3" => @Dad_SS_3,
-                "Date of last visit" => @Date_of_last_visit,
+                "Date of Last Visit" => @Date_of_last_visit,
                 "Dental_2 No" => @Dental_2_No,
                 "Dental_2 Yes" => @Dental_2_Yes,
                 "Dentalcoverage_no" => @Dentalcoverage_no,
@@ -1763,7 +1753,7 @@ class IformsController < ApplicationController
                 "Latex Allergies Y" => @Latex_Allergies_Y,
                 "Lip N" => @Lip_N,
                 "Lip Y" => @Lip_Y,
-                "List brothers sisters with age 2" => @List_brothers__sisters_with_age_2,
+                "List brothers  sisters with age 2" => @List_brothers__sisters_with_age_2,
                 "Liver N" => @Liver_N,
                 "Liver Y" => @Liver_Y,
                 "Lupus N" => @Lupus_N,
@@ -1800,7 +1790,7 @@ class IformsController < ApplicationController
                 "Please discuss any medical problems that your child has had 3" => @Please_discuss_any_medical_problems_that_your_child_has_had_3,
                 "Please list all drugs that your child is currently taking" => @Please_list_all_drugs_that_your_child_is_currently_taking,
                 "Please list all drugsthings that your child is allergic to" => @Please_list_all_drugsthings_that_your_child_is_allergic_to,
-                "Policy Owner&#8217;s Employer_1" => @Policy_Owner8217s_Employer_1,
+                "Policy Owner&#8217;s Employer_1" => @Policy_Owner8217s_Employer_1, 
                 "Policy_1 SS" => @Policy_1_SS,
                 "Previous Address 1" => @Previous_Address_1,
                 "Previous Address State" => @Previous_Address_State,

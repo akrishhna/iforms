@@ -14,7 +14,7 @@ class Iform < ActiveRecord::Base
  # end
  #attr_writer :current_step
  
- #validates_presence_of :email, :firstname, :if => lambda { |o| o.current_step == "aboutyou" }
+ validates_presence_of :Self_Name_First, :Self_Name_Last #:if => lambda { |o| o.current_step == "aboutyou" }
  #validates_presence_of :spousename, :spouse_employer, :if => lambda { |o| o.current_step == "spouseinformation" }
  
  

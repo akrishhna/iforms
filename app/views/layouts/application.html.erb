@@ -5,7 +5,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
   <%= yield :javascript %>
   <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css","scaffold" %>
-   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application", "formToWizard" %> 
+   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "jquery.maskedinput.js",:defaults, "formToWizard", "rails.validations" %> 
   <%= csrf_meta_tag %>
   
 </head>
@@ -21,14 +21,27 @@ Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 <div class = "logo" onclick="window.location.href='/';">
 </div>
 <div class ="container_layout">
+<span style = "color:red;margin-left:200px">
 <%= alert %>
+</span>
+<span style = "color:green">
 <%= notice %>
+</span>
 <%= yield %>
 </div>
 <div class="footer">
+	<% if user_signed_in? and current_user.role =="patient" %>
+	<%= link_to 'Home', patients_path %> |
+	<%elsif user_signed_in? and current_user.role =="doctor"%>
+	<%= link_to 'Home', doctors_path %> |
+	<%elsif user_signed_in? and current_user.role =="admin"%>
+	<%= link_to 'Home', admin_path %> |
+	<%else%>
 	<%= link_to 'Home', root_url %> |
-	<%= link_to 'About Us'%> |
-	<%= link_to 'Contact'%>
+	<%end %>
+	<%= link_to 'About Us', '/about'%> |
+	<%= link_to 'FAQ', '/FAQ'%> |
+	<%= link_to 'Contact', '/contact'%>
 </div>
 </body>
 </html>

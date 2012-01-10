@@ -1,0 +1,32 @@
+<h2>Contact Us</h2>
+
+<% form_for @contactus do |f| %>
+<% if @contactus.errors.any? %>
+<div id="error_explanation">
+	<ul>
+    <% @contactus.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul> 
+  </div> 
+<% end %>
+   
+<div class = "labelcss">Name</div>
+<%= f.text_field :name %>
+<br /> <br /> 
+<div class = "labelcss">Email</div>
+<%= f.text_field :email %>
+<br /><br />
+<div class = "labelcss">Subject</div>
+<%= f.text_field :subject %>
+<br /><br />
+<div class = "labelcss">Body</div>
+<%= f.text_area :body, :cols => 27, :rows => 5 %>
+<br /><br />
+
+<%= recaptcha_tags %><br />
+<%= f.submit%>
+<%end%>
+
+
+

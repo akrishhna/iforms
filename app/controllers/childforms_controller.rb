@@ -87,6 +87,9 @@ class ChildformsController < ApplicationController
         time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
          str = time_now+"_"+@childform.Self_Name_Last+ "_" +@childform.Self_Name_First
          pathx = "/pdffiles/#{str}.pdf"
+         p "Dad_area_code_2 #{Dad_area_code_2}"
+         p "Dad_area_code_2 #{Dad_phone_2}"
+          
          @childform.path = pathx
          @childform.save
          form_control_conditions(@childform)
@@ -153,10 +156,11 @@ class ChildformsController < ApplicationController
     @Dad_Name_3 = @childform.Father_Name_First+" "+@childform.Father_Name_Middle+" "+@childform.Father_Name_Last
     unless @childform.Father_Phone_Home.blank?
     @Dad_area_code_2 = @childform.Father_Phone_Home.slice(0,3)
-    @Dad_phone_2 = @childform.Father_Phone_Home.slice(3,3) + @childform.Father_Phone_Home.slice(6,4)
+    @Dad_phone_2 = @childform.Father_Phone_Home.slice(3,3) + @childform.Father_Phone_Home.slice(6,4) 
     end
     @Dad_SS_3 = @childform.Father_Social_Security_Number
     @Date_of_last_visit = @childform.Med_His_Personal_Physician_Date_Of_Last_Visit
+
     @Friend_Address = @childform.Neighbor_Or_Relative_Not_Living_With_You_Address1+ ", " +@childform.Neighbor_Or_Relative_Not_Living_With_You_Address2
     @Friend_City = @childform.Neighbor_Or_Relative_Not_Living_With_You_City
     @Friend_Name = @childform.Neighbor_Or_Relative_Not_Living_With_You_Name_First+ " " +@childform.Neighbor_Or_Relative_Not_Living_With_You_Name_Middle + " " + @childform.Neighbor_Or_Relative_Not_Living_With_You_Name_Last

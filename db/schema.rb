@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212194937) do
+ActiveRecord::Schema.define(:version => 20120106230744) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -261,6 +261,15 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.datetime "updated_at"
   end
 
+  create_table "contactus", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "controls", :force => true do |t|
     t.string   "name"
     t.string   "controltype"
@@ -313,7 +322,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Self_Employer_Address2",                                          :limit => 50
     t.string   "Self_Employer_City",                                              :limit => 20
     t.string   "Self_Employer_State",                                             :limit => 15
-    t.string   "Self_Employer_Postal_Code",                                       :limit => 5
+    t.string   "Self_Employer_Postal_Code",                                       :limit => 10
     t.string   "Self_Length_Of_Employment",                                       :limit => 25
     t.string   "Self_Occupation",                                                 :limit => 50
     t.string   "Self_General_Dentist_Name",                                       :limit => 50
@@ -344,7 +353,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Person_Responsible_For_Account_Address2",                         :limit => 100
     t.string   "Person_Responsible_For_Account_City",                             :limit => 20
     t.string   "Person_Responsible_For_Account_State",                            :limit => 15
-    t.string   "Person_Responsible_For_Account_Postal_Code",                      :limit => 20
+    t.string   "Person_Responsible_For_Account_Postal_Code",                      :limit => 10
     t.string   "Person_Responsible_For_Account_Relationship",                     :limit => 50
     t.string   "Person_Responsible_For_Account_Drivers_License_State",            :limit => 15
     t.string   "Person_Responsible_For_Account_Drivers_License_Number",           :limit => 15
@@ -355,7 +364,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Insurance_Company_Primary_Address2",                              :limit => 100
     t.string   "Insurance_Company_Primary_City",                                  :limit => 20
     t.string   "Insurance_Company_Primary_State",                                 :limit => 15
-    t.string   "Insurance_Company_Primary_Postal_Code",                           :limit => 5
+    t.string   "Insurance_Company_Primary_Postal_Code",                           :limit => 10
     t.string   "Insurance_Company_Primary_Phone",                                 :limit => 10
     t.string   "Insurance_Company_Primary_Group_Plan_Local_Policy_Number",        :limit => 50
     t.string   "Insurance_Company_Primary_Insured_Name_First",                    :limit => 50
@@ -371,7 +380,7 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Insurance_Company_Secondary_Address2",                            :limit => 100
     t.string   "Insurance_Company_Secondary_City",                                :limit => 20
     t.string   "Insurance_Company_Secondary_State",                               :limit => 15
-    t.string   "Insurance_Company_Secondary_Postal_Code",                         :limit => 5
+    t.string   "Insurance_Company_Secondary_Postal_Code",                         :limit => 10
     t.string   "Insurance_Company_Secondary_Phone",                               :limit => 10
     t.string   "Insurance_Company_Secondary_Group_Plan_Local_Policy_Number",      :limit => 50
     t.string   "Insurance_Company_Secondary_Insured_Name_First",                  :limit => 50
@@ -545,13 +554,13 @@ ActiveRecord::Schema.define(:version => 20111212194937) do
     t.string   "Neighbor_Or_Relative_Not_Living_With_You_Name_Last",              :limit => 50
     t.string   "Neighbor_Or_Relative_Not_Living_With_You_Name_Middle",            :limit => 50
     t.string   "Neighbor_Or_Relative_Not_Living_With_You_Phone",                  :limit => 10
-    t.string   "Neighbor_Or_Relative_Not_Living_With_You_Postal_Code",            :limit => 5
+    t.string   "Neighbor_Or_Relative_Not_Living_With_You_Postal_Code",            :limit => 10
     t.string   "Neighbor_Or_Relative_Not_Living_With_You_State",                  :limit => 15
     t.string   "Person_Responsible_For_Account_Payment_Method",                   :limit => 15
     t.string   "Person_Responsible_For_Account_Previous_Address1",                :limit => 100
     t.string   "Person_Responsible_For_Account_Previous_Address2",                :limit => 100
     t.string   "Person_Responsible_For_Account_Previous_City",                    :limit => 20
-    t.string   "Person_Responsible_For_Account_Previous_Postal_Code",             :limit => 5
+    t.string   "Person_Responsible_For_Account_Previous_Postal_Code",             :limit => 10
     t.string   "Person_Responsible_For_Account_Previous_State",                   :limit => 15
     t.string   "Person_Responsible_For_Making_Appointments_Name_First",           :limit => 50
     t.string   "Person_Responsible_For_Making_Appointments_Name_Last",            :limit => 50

@@ -22,6 +22,7 @@ Iforms::Application.configure do
     Configuration.pdftk_path = '/usr/local/bin/pdftk'
     Configuration.pdffiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/pdffiles/'
     Configuration.csvfiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
+    Configuration.notifier_path = 'http://localhost:3000/'
   end 
  
   # Log error messages when you accidentally call methods on nil.

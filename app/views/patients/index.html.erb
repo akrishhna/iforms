@@ -3,11 +3,12 @@
 <% if !@appointments.blank? %>
 <table border="0" width="80%" class="mytable">
 	<tr BGCOLOR="grey" >
-		<th>s.no</th>
+		<th>Name</th>
 		<th>Service Provider</th>
-		<th>Appointment Datetime</th>
-		<th>Form Received At</th>
-		<th></th>
+		<th>Form</th>
+		<th>Appointment</th>
+		<th>Received</th>
+		
 	</tr>
 	<% count = 1 %>
 <% @appointments.each do |i|%>
@@ -21,19 +22,23 @@
 <% if var<=timesent_hrs_int %>
 <% timesent_hrs = (timesent_hrs_int - var).to_s %>
 <% am_pm = "PM" %>
-<% p @timesent = timesent_date+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+<% p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% else %>
 <% am_pm = "AM" %>
 <%p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% end %>
 <% end %>
 <tr>
-	<td><%= count %>
-	<% count+=1 %>
+	<td><%= i.firstname%> <%= i.lastname%></td>
 	<td><%= i.doctorname.capitalize %></td>
+	<% if i.formname.blank? %>
+	<td></td>
+	<%else%>
+	<td><%= link_to 'Fill form here', i %></td>
+	<%end%>
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
-	<td><%= link_to 'Fill form here', i %></td>
+	
 </tr>	
 <%end%>
 </table>

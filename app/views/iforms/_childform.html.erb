@@ -17,502 +17,511 @@
         <li><%= msg %></li>
       <% end %>
       </ul>
-    </div>
+    </p>
   <% end %>
-<h3 style = "color:#808080">You are filling <%= session[:formname] %> form </h3>
+<h3 style = "color:#808080">&nbsp You are filling <%= session[:formname] %> form </h3>
 
 
 <fieldset>
 <legend>Tell Us About Your Child</legend>
 
-<div class="field">
-<label>Childs Firstname</label></br>
-<%= f.text_field :Self_Name_First %>
-</div>
-
-<div class="field">
-<label>Childs Lastname</label></br>
+<p>
+<label>Childs Lastname</label>
 <%= f.text_field :Self_Name_Last %>
-</div>
+</p>
 
-<div class="field">
-<label>Childs Middlename</label></br>
+<p>
+<label>Childs Firstname</label>
+<%= f.text_field :Self_Name_First %>
+</p>
+
+<p>
+<label>Childs Middlename</label>
 <%= f.text_field :Self_Name_Middle %>
-</div>
+</p>
 
-<div class="field">
-    <%= f.radio_button :Self_Sex, "female" %>
-    <%= f.label :Female %>
-	<%= f.radio_button :Self_Sex, "male" %>
-    <%= f.label :Male %>
-</div>
+<p>
+	<label>Sex</label>
+    <%= f.radio_button :Self_Sex, "f" %>
+    Female
+	<%= f.radio_button :Self_Sex, "m" %>
+    Male
+</p>
 
-<div class="field">
-<label>Childs Nickname</label></br>
+<p>
+<label>Childs Nickname</label>
 <%= f.text_field :Self_Name_Preferred %>
-</div>
+</p>
 
-<div class="field">
-    <%= f.label :Birthdate %><br />
+<p>
+    <%= f.label :Birthdate %>
     <%= f.date_select :Self_Birthdate, :start_year => 1990, :end_year => Date.current.year, :include_blank => true %>
-</div>
+</p>
 
-<div class="field">
-    <label>Social Security Number</label><br />
+<p>
+    <label>Social Security Number</label>
     <%= f.password_field :Self_Social_Security_Number %>
-</div>
+</p>
 
-<div class="field">
-  <label>School</label><br />
+<p>
+  <label>School</label>
   <%= f.text_field :Self_School %>
-</div>
+</p>
 
-<div class="field">
-  <label>Grade</label><br />
+<p>
+  <label>Grade</label>
   <%= f.text_field :Self_Grade %>
-</div>
+</p>
 
-<div class="field">
-  <label>Hobbies/Sports</label><br />
+<p>
+  <label>Hobbies/Sports</label>
   <%= f.text_field :Self_Hobbies %>
-</div>
+</p>
 
-<div class="field">
-  <label>Homephone</label><br />
+<p>
+  <label>Homephone</label>
   <%= f.text_field :Self_Phone_Home %>
-</div>
+</p>
 
-<div class="field">
-  <label>Home Address1</label><br />
+<p>
+  <label>Home Address1</label>
   <%= f.text_field :Self_Home_Address1 %>
-</div>
+</p>
 
-<div class="field">
-  <label>Home Address2</label><br />
+<p>
+  <label>Home Address2</label>
   <%= f.text_field :Self_Home_Address2 %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :City %><br />
+<p>
+  <%= f.label :City %>
   <%= f.text_field :Self_Home_City %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :State %><br />
-  <%= f.text_field :Self_Home_State %>
-</div>
+<p>
+  <%= f.label :State %>
+  <%= f.select :Self_Home_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true  %>
+</p>
 
-<div class="field">
-  <%= f.label :Zip %><br />
+<p>
+  <%= f.label :Zip %>
   <%= f.text_field :Self_Home_Postal_Code %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Email %><br />
+<p>
+  <%= f.label :Email %>
   <%= f.text_field :Self_Email_Address %>
-</div>
+</p>
+<br />
 </fieldset>
 
 <fieldset>
 <legend>Child Accompanied by</legend>
 
-<div class="field">
-  <%= f.label :Firstname %><br />
+<p>
+  <%= f.label :Firstname %>
   <%= f.text_field :Accompanying_Your_Child_Today_Name_First %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Lastname %><br />
+<p>
+  <%= f.label :Lastname %>
   <%= f.text_field :Accompanying_Your_Child_Today_Name_Last %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Relation %><br />
+<p>
+  <%= f.label :Relation %>
   <%= f.text_field :Accompanying_Your_Child_Today_Relationship %>
-</div>
+</p>
 
-<div class="field">
+<p>
 	<label>Do you have legal custody of this child?</label>
     <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, true %>
-    <%= f.label :Yes %>
+    Yes
 	<%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, false %>
-    <%= f.label :No %>
-</div>
+    No
+</p>
 
-<div class="field">
-  <label>List brothers / sisters with age:</label><br />
-  <%= f.text_area :Accompanying_Your_Child_Today_Siblings_And_Ages, :cols => 60, :rows => 5 %>
-</div>
+<p>
+  <label>List brothers/sisters<br /> with age:</label>
+  <%= f.text_area :Accompanying_Your_Child_Today_Siblings_And_Ages, :cols => 27, :rows => 5 %>
+</p>
 
-<div class="field">
-  <label>Whom may we Thank for referring you?</label><br />
+<p>
+  <label>Whom may we Thank for referring you?</label>
   <%= f.text_field :Self_Referred_By %>
-</div>
+</p>
 
-<div class="field">
-  <label>General Dentist</label><br />
+<p>
+  <label>General Dentist</label>
   <%= f.text_field :Self_General_Dentist_Name %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Lastvisitdate %><br />
+<p>
+  <%= f.label :Lastvisitdate %>
   <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
-</div>
+</p>
 
-<div class="field">
+<p>
   <label>Marital Status</label>
   <%= f.radio_button :Self_Marital_Status, "single" %>
-  <%= f.label :Single %>
+  Single
 	<%= f.radio_button :Self_Marital_Status, "married" %>
-  <%= f.label :Married %>
+  Married
 	<%= f.radio_button :Self_Marital_Status, "divorced" %>
-  <%= f.label :Divorced %>
+  Divorced &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
 	<%= f.radio_button :Self_Marital_Status, "widowed" %>
-  <%= f.label :Widowed %>
+  Widowed
 	<%= f.radio_button :Self_Marital_Status, "separated" %>
-  <%= f.label :Separated %>
-</div>
-
+  Separated
+</p>
+<br />
 </fieldset>
 
 <fieldset>
 <legend>Parents Information</legend>
 <h4>Mother’s Information:</h4>
 
-<div class="field">
+<p>
     <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "stepmother" %>
-    <label>Step Mother</label>
+    Step Mother
 	<%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "guardian" %>
-    <%= f.label :Guardian %>
-</div>
+    Guardian
+</p>
 
-<div class="field">
-  <%= f.label :Firstname %><br />
+<p>
+  <%= f.label :Firstname %>
   <%= f.text_field :Mother_Name_First %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Lastname %><br />
+<p>
+  <%= f.label :Lastname %>
   <%= f.text_field :Mother_Name_Last %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Middlename %><br />
+<p>
+  <%= f.label :Middlename %>
   <%= f.text_field :Mother_Name_Middle %>
-</div>
+</p>
 
-<div class="field">
-    <%= f.label :Birthdate %><br />
+<p>
+    <%= f.label :Birthdate %>
     <%= f.date_select :Mother_Birthdate, :start_year => 1950, :end_year => Date.current.year, :include_blank => true %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Homephone %><br />
+<p>
+  <%= f.label :Homephone %>
   <%= f.text_field :Mother_Phone_Home %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Workphone %><br />
+<p>
+  <%= f.label :Workphone %>
   <%= f.text_field :Mother_Phone_Work %>
-</div>
+</p>
 
-<div class="field">
-  <label>Workphone Extension</label> <br />
+<p>
+  <label>Workphone Extension</label> 
   <%= f.text_field :Mother_Phone_Work_Extension %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Employer %><br />
+<p>
+  <%= f.label :Employer %>
   <%= f.text_field :Mother_Employer_Name %>
-</div>
+</p>
 
-<div class="field">
-  <label> How long at current job </label><br />
+<p>
+  <label> How long at current job </label>
   <%= f.text_field :Mother_Length_Of_Employment %>
-</div>
+</p>
 
-<div class="field">
-  <label>Job tile </label><br />
+<p>
+  <label>Job tile </label>
   <%= f.text_field :Mother_Job_Title %>
-</div>
+</p>
 
-<div class="field">
-  <label> Social Security Number</label><br />
+<p>
+  <label> Social Security Number</label>
   <%= f.password_field :Mother_Social_Security_Number %>
-</div>
+</p>
 
-<div class="field">
-  <label> Drivers License Number</label><br />
+<p>
+  <label> Drivers License Number</label>
   <%= f.text_field :Mother_Drivers_License_Number %>
-</div>
+</p>
 
-<div class="field">
-  <label> Drivers License State</label><br />
-  <%= f.text_field :Mother_Drivers_License_State %>
-</div>
+<p>
+  <label> Drivers License State</label>
+  <%= f.select :Mother_Drivers_License_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true%>
+</p>
 
 <h4>Father’s Information:</h4>
 
-<div class="field">
+<p>
     <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "stepfather" %>
-    <label>Step Father</label>
+   Step Father
 	<%= f.radio_button :Father_Stepfather_Or_Gaurdian, "guardian" %>
-    <%= f.label :Guardian %>
-</div>
+    Guardian 
+</p>
 
-<div class="field">
-  <%= f.label :Firstname %><br />
+<p>
+  <%= f.label :Firstname %>
   <%= f.text_field :Father_Name_First %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Lastname %><br />
+<p>
+  <%= f.label :Lastname %>
   <%= f.text_field :Father_Name_Last %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Middlename %><br />
+<p>
+  <%= f.label :Middlename %>
   <%= f.text_field :Father_Name_Middle %>
-</div>
+</p>
 
-<div class="field">
-    <%= f.label :Birthdate %><br />
+<p>
+    <%= f.label :Birthdate %>
     <%= f.date_select :Father_Birthdate, :start_year => 1950, :end_year => Date.current.year, :include_blank => true %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Homephone %><br />
+<p>
+  <%= f.label :Homephone %>
   <%= f.text_field :Father_Phone_Home %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Workphone %><br />
+<p>
+  <%= f.label :Workphone %>
   <%= f.text_field :Father_Phone_Work %>
-</div>
+</p>
 
-<div class="field">
-  <label>Workphone Extension</label> <br />
+<p>
+  <label>Workphone Extension</label>
   <%= f.text_field :Father_Phone_Work_Extension %>
-</div>
+</p>
 
-<div class="field">
-  <%= f.label :Employer %><br />
+<p>
+  <%= f.label :Employer %>
   <%= f.text_field :Father_Employer_Name %>
-</div>
+</p>
 
-<div class="field">
-  <label> How long at current job </label><br />
+<p>
+  <label> How long at current job </label>
   <%= f.text_field :Father_Length_Of_Employment %>
-</div>
+</p>
 
-<div class="field">
-  <label>Job tile </label><br />
+<p>
+  <label>Job tile </label>
   <%= f.text_field :Father_Job_Title %>
-</div>
+</p>
 
-<div class="field">
-  <label> Social Security Number</label><br />
+<p>
+  <label> Social Security Number</label>
   <%= f.password_field :Father_Social_Security_Number %>
-</div>
+</p>
 
-<div class="field">
-  <label> Drivers License Number</label><br />
+<p>
+  <label> Drivers License Number</label>
   <%= f.text_field :Father_Drivers_License_Number %>
-</div>
+</p>
 
-<div class="field">
-  <label> Drivers License State</label><br />
-  <%= f.text_field :Father_Drivers_License_State %>
-</div>
-
+<p>
+  <label> Drivers License State</label>
+  <%= f.select :Father_Drivers_License_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+</p>
+<br />
 </fieldset>
 
 <fieldset>
-<legend>Responsible Persons Information</legend>
+<legend>Responsible Persons<br /> Information</legend>
 
 <h4>Person Responsible for Account</h4>
- <div class="field">
-   <label>Firstname</label><br />
+ <p>
+   <label>Firstname</label>
    <%= f.text_field :Person_Responsible_For_Account_Name_First %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Lastname</label><br />
+ <p>
+   <label>Lastname</label> 
    <%= f.text_field :Person_Responsible_For_Account_Name_Last %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Middlename</label><br />
+ <p>
+   <label>Middlename</label> 
    <%= f.text_field :Person_Responsible_For_Account_Name_Middle %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Workphone %><br />
+ <p>
+   <%= f.label :Workphone %> 
    <%= f.text_field :Person_Responsible_For_Account_Phone_Work %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Workphone Ext</label><br />
+ <p>
+   <label>Workphone Ext</label> 
    <%= f.text_field :Person_Responsible_For_Account_Phone_Work_Extension %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Homephone %><br />
+ <p>
+   <%= f.label :Homephone %> 
    <%= f.text_field :Person_Responsible_For_Account_Phone_Home %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Billing Address1</label><br />
+ <p>
+   <label>Billing Address1</label> 
    <%= f.text_field :Person_Responsible_For_Account_Address1 %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Billing Address2</label><br />
+ <p>
+   <label>Billing Address2</label> 
    <%= f.text_field :Person_Responsible_For_Account_Address2 %>
- </div>
+ </p>
 
- <div class="field">
-   <label>City</label><br />
+ <p>
+   <label>City</label> 
    <%= f.text_field :Person_Responsible_For_Account_City %>
- </div>
+ </p>
 
- <div class="field">
-   <label>State</label><br />
-   <%= f.text_field :Person_Responsible_For_Account_State %>
- </div>
+ <p>
+   <label>State</label> 
+  <%= f.select :Person_Responsible_For_Account_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+ </p>
 
- <div class="field">
-   <label>Zip</label><br />
+ <p>
+   <label>Zip</label> 
    <%= f.text_field :Person_Responsible_For_Account_Postal_Code %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Previous Address1</label><br />
+ <p>
+   <label>Previous Address1</label> 
    <%= f.text_field :Person_Responsible_For_Account_Previous_Address1 %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Previous Address2</label><br />
+ <p>
+   <label>Previous Address2</label> 
    <%= f.text_field :Person_Responsible_For_Account_Previous_Address2 %>
- </div>
+ </p>
 
- <div class="field">
-   <label>City</label><br />
+ <p>
+   <label>City</label> 
    <%= f.text_field :Person_Responsible_For_Account_Previous_City %>
- </div>
+ </p>
 
- <div class="field">
-   <label>State</label><br />
-   <%= f.text_field :Person_Responsible_For_Account_Previous_State %>
- </div>
+ <p>
+   <label>State</label> 
+   <%= f.select :Person_Responsible_For_Account_Previous_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+ </p>
 
- <div class="field">
-   <label>Zip</label><br />
+ <p>
+   <label>Zip</label> 
    <%= f.text_field :Person_Responsible_For_Account_Previous_Postal_Code %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Relation %><br />
+ <p>
+   <%= f.label :Relation %> 
    <%= f.text_field :Person_Responsible_For_Account_Relationship %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Social Security Number</label><br />
+ <p>
+   <label>Social Security Number</label> 
    <%= f.password_field :Person_Responsible_For_Account_Social_Security_Number %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Employer %><br />
+ <p>
+   <%= f.label :Employer %> 
    <%= f.text_field :Person_Responsible_For_Account_Employer_Name %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Drivers License State</label> <br />
-   <%= f.text_field :Person_Responsible_For_Account_Drivers_License_State %>
- </div>
+ <p>
+   <label>Drivers License State</label>  
+   <%= f.select :Person_Responsible_For_Account_Drivers_License_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+ </p>
 
- <div class="field">
-   <label>Drivers License Number</label><br />
+ <p>
+   <label>Drivers License Number</label> 
    <%= f.text_field :Person_Responsible_For_Account_Drivers_License_Number %>
- </div>
+ </p>
 
 <h4>Who is responsible for making appointments?</h4>
-<div class="field">
-   <label>Firstname</label><br />
+<p>
+   <label>Firstname</label> 
    <%= f.text_field :Person_Responsible_For_Making_Appointments_Name_First %>
-</div>
+</p>
 
- <div class="field">
-   <label>Lastname</label><br />
+ <p>
+   <label>Lastname</label> 
    <%= f.text_field :Person_Responsible_For_Making_Appointments_Name_Last %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Middlename</label><br />
+ <p>
+   <label>Middlename</label> 
    <%= f.text_field :Person_Responsible_For_Making_Appointments_Name_Middle %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Workphone %><br />
+ <p>
+   <%= f.label :Workphone %> 
    <%= f.text_field :Person_Responsible_For_Making_Appointments_Phone_Work %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Workphone Ext</label><br />
+ <p>
+   <label>Workphone Ext</label> 
    <%= f.text_field :Person_Responsible_For_Making_Appointments_Phone_Work_Extension %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Homephone %><br />
+ <p>
+   <%= f.label :Homephone %> 
    <%= f.text_field :Person_Responsible_For_Making_Appointments_Phone_Home %>
- </div>
+ </p>
 
 <h4>Neighbor or Relative not living with you</h4>
-<div class="field">
-   <label>Firstname</label><br />
+<p>
+   <label>Firstname</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Name_First %>
-</div>
+</p>
 
- <div class="field">
-   <label>Lastname</label><br />
+ <p>
+   <label>Lastname</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Name_Last %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Middlename</label><br />
+ <p>
+   <label>Middlename</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Name_Middle %>
- </div>
+ </p>
 
- <div class="field">
-   <%= f.label :Phone %><br />
+ <p>
+   <%= f.label :Phone %> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Phone %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Address1</label><br />
+ <p>
+   <label>Address1</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Address1 %>
- </div>
+ </p>
 
- <div class="field">
-   <label>Address2</label><br />
+ <p>
+   <label>Address2</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Address2 %>
- </div>
+ </p>
 
- <div class="field">
-   <label>City</label><br />
+ <p>
+   <label>City</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_City %>
- </div>
+ </p>
 
- <div class="field">
-   <label>State</label><br />
-   <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_State %>
- </div>
+ <p>
+   <label>State</label> 
+   <%= f.select :Neighbor_Or_Relative_Not_Living_With_You_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+	'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+ </p>
 
- <div class="field">
-   <label>Zip</label><br />
+ <p>
+   <label>Zip</label> 
    <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Postal_Code %>
- </div>
-
+ </p>
+<br />
 </fieldset>
 
 <fieldset>
@@ -520,423 +529,381 @@
 
 <h3>Primary Insurance</h3>
 
-<table>
-	<tr>
-		<td><label>Orthodontic coverage </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Orthodontic coverage </label>
+	<%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, true %>
+    Yes &nbsp
 	<%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Dental coverage</label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, true %>
-    <%= f.label :Yes %>
+
+<p>  
+<label>Dental coverage</label>
+	<%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, true %>
+    Yes &nbsp
 	<%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
-</table>
+    No 
+</p>
 
-  <div class="field">
-    <label>Insurance Company Name </label><br />
+
+  <p>
+    <label>Insurance Company Name </label> 
     <%= f.text_field :Insurance_Company_Primary_Name %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insurance Company Address1 </label><br />
+  <p>
+    <label>Insurance Company Address1 </label> 
     <%= f.text_field :Insurance_Company_Primary_Address1 %>
-  </div>
+  </p>
  
-  <div class="field">
-    <label>Insurance Company Address2 </label><br />
+  <p>
+    <label>Insurance Company Address2 </label> 
     <%= f.text_field :Insurance_Company_Primary_Address2 %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>City </label><br />
+  <p>
+    <label>City </label> 
     <%= f.text_field :Insurance_Company_Primary_City %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>State </label><br />
-    <%= f.text_field :Insurance_Company_Primary_State %>
-  </div>
+  <p>
+    <label>State </label> 
+    <%= f.select :Insurance_Company_Primary_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+		'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+  </p>
 
-  <div class="field">
-    <label>Zip </label><br />
+  <p>
+    <label>Zip </label> 
     <%= f.text_field :Insurance_Company_Primary_Postal_Code %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insurance Company Phone </label><br />
+  <p>
+    <label>Insurance Company Phone </label> 
     <%= f.text_field :Insurance_Company_Primary_Phone %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Group # (Plan, Local or Policy #) </label><br />
+  <p>
+    <label>Group # (Plan, Local or Policy #) </label> 
     <%= f.text_field :Insurance_Company_Primary_Group_Plan_Local_Policy_Number %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Firstname </label><br />
+  <p>
+    <label>Insured’s Firstname </label> 
     <%= f.text_field :Insurance_Company_Primary_Insured_Name_First %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Lastname </label><br />
+  <p>
+    <label>Insured’s Lastname </label> 
     <%= f.text_field :Insurance_Company_Primary_Insured_Name_Last %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Birthdate </label><br />
+  <p>
+    <label>Insured’s Birthdate </label> 
     <%= f.date_select :Insurance_Company_Primary_Insured_Birthdate , :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Relation </label><br />
+  <p>
+    <label>Insured’s Relation </label> 
     <%= f.text_field :Insurance_Company_Primary_Insured_Relationship %>
-  </div>
+  </p>
   
-  <div class="field">
-    <label>Insured's Social Security Number </label><br />
+  <p>
+    <label>Insured's Social Security Number </label> 
     <%= f.password_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured's Employer </label><br />
+  <p>
+    <label>Insured's Employer </label> 
     <%= f.text_field :Insurance_Company_Primary_Insured_Employer_Name %>
-  </div>
+  </p>
 
 <h3>Secondary Insurance</h3>
 
-<table>
-  <tr>
-	<td><label>Orthodontic coverage </label></td>
-  <div class="field"> 
-   <td> <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Orthodontic coverage </label>
+	<%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, true %>
+    Yes &nbsp
 	<%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+   No
+</p>
 
-  <tr>
-	<td><label>Dental coverage </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, true %>
-    <%= f.label :Yes %>
+<p>
+  <label>Dental coverage </label>
+	<%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, true %>
+    Yes &nbsp
 	<%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
-</table>
+    No
+</p>
 
-  <div class="field">
-    <label>Insurance Company Name </label><br />
+
+  <p>
+    <label>Insurance Company Name </label> 
     <%= f.text_field :Insurance_Company_Secondary_Name %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insurance Company Address1 </label><br />
+  <p>
+    <label>Insurance Company Address1 </label> 
     <%= f.text_field :Insurance_Company_Secondary_Address1 %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insurance Company Address2 </label><br />
+  <p>
+    <label>Insurance Company Address2 </label> 
     <%= f.text_field :Insurance_Company_Secondary_Address2 %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>City </label><br />
+  <p>
+    <label>City </label> 
     <%= f.text_field :Insurance_Company_Secondary_City %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>State </label><br />
-    <%= f.text_field :Insurance_Company_Secondary_State %>
-  </div>
+  <p>
+    <label>State </label> 
+   	<%= f.select :Insurance_Company_Secondary_State, ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MH','MA','MI','FM','MN',
+		'MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'], :include_blank => true %>
+  </p>
 
-  <div class="field">
-    <label>Zip </label><br />
+  <p>
+    <label>Zip </label> 
     <%= f.text_field :Insurance_Company_Secondary_Postal_Code %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insurance Company Phone </label><br />
+  <p>
+    <label>Insurance Company Phone </label> 
     <%= f.text_field :Insurance_Company_Secondary_Phone %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Group # (Plan, Local or Policy #) </label><br />
+  <p>
+    <label>Group # (Plan, Local or Policy #) </label> 
     <%= f.text_field :Insurance_Company_Secondary_Group_Plan_Local_Policy_Number %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Firstname</label><br />
+  <p>
+    <label>Insured’s Firstname</label> 
     <%= f.text_field :Insurance_Company_Secondary_Insured_Name_First %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Lastname</label><br />
+  <p>
+    <label>Insured’s Lastname</label> 
     <%= f.text_field :Insurance_Company_Secondary_Insured_Name_Last %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Birthdate </label><br />
+  <p>
+    <label>Insured’s Birthdate </label> 
     <%= f.date_select :Insurance_Company_Secondary_Insured_Birthdate , :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured’s Relation </label><br />
+  <p>
+    <label>Insured’s Relation </label> 
     <%= f.text_field :Insurance_Company_Secondary_Insured_Relationship %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured's Social Security Number </label><br />
+  <p>
+    <label>Insured's Social Security Number </label> 
     <%= f.password_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
-  </div>
+  </p>
 
-  <div class="field">
-    <label>Insured's Employer </label><br />
+  <p>
+    <label>Insured's Employer </label> 
     <%= f.text_field :Insurance_Company_Secondary_Insured_Employer_Name %>
-  </div>
+  </p>
+<br />
 </fieldset>
 
 <fieldset>
 <legend>Dental History </legend>
-	<div class="field">
-	    <label>What are the main concerns that you would like orthodontics to accomplish? </label><br />
-	    <%= f.text_area :Dental_History_Orthodontic_Goals, :cols => 60, :rows => 5 %>
-	  </div>
+	<p>
+	    <label>What are the main concerns that you would like orthodontics to accomplish? </label>
+	    <%= f.text_area :Dental_History_Orthodontic_Goals, :cols => 27, :rows => 5 %>
+	  </p>
 
-	<table>
-	  <tr>
-		<td><label>Has your child ever been Orthodontic evaluation <label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, true %>
-	    <%= f.label :Yes %>
+	<p>
+		
+	<label>Has your child ever been Orthodontic evaluation </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+    </p>
 
-	  <tr>
-		<td><label>Has your child ever had orthodontic
-		treatment before? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Has your child ever had orthodontic
+		treatment before? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+    </p>
 
-	  <tr>
-		<td><label>Has your child ever experienced pain /</br>
-		     discomfort in jaw joint (TMJ / TMD)? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Has your child ever experienced pain /
+		     discomfort in jaw joint (TMJ / TMD)? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+	</p>
 
-	  <tr>
-		<td><label>Is your child now experiencing pain /</br>
-		     discomfort in your jaw joint (TMJ / TMD)? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Is your child now experiencing pain /
+		     discomfort in your jaw joint (TMJ / TMD)? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
-	</table>
+	    No
+	</p> 
 	</br>
 
-	  <div class="field">
-		&nbsp&nbsp<label>Please describe your child's current physical health:</label>
+	  <p>
+		&nbsp&nbsp<label>Please describe your child's current physical health:</label>  &nbsp
 	    <%= f.radio_button :Med_His_Current_Physical_Health, "good" %>
-	    <%= f.label :Good %>
+	    Good
 		<%= f.radio_button :Med_His_Current_Physical_Health, "fair" %>
-	    <%= f.label :Fair %>
+	    Fair
 		<%= f.radio_button :Med_His_Current_Physical_Health, "poor" %>
-	    <%= f.label :Poor %>
-	  </div>
+	    Poor
+	  </p>
 
-	<table>
-	  <tr>
-		<td><label>Have there been any injuries to the
-		Face? </label></td>
-		<div class="field">
-		<td> <%= f.radio_button :Dental_History_Injury_To_Face, true %>
-		    <%= f.label :Yes %>
+	<p>
+	<label>Have there been any injuries to the
+		Face? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Injury_To_Face, true %>
+		    Yes &nbsp
 			<%= f.radio_button :Dental_History_Injury_To_Face, false %>
-		    <%= f.label :No %></td>   
-	    </div>
-	  </tr>
+		    No
+	</p>
 	
-	  <tr>
-		<td><label>Have there been any injuries to the
-		Mouth? </label></td>
-		<div class="field">
-		<td> <%= f.radio_button :Dental_History_Injury_To_Mouth, true %>
-		    <%= f.label :Yes %>
+	<p>  
+	<label>Have there been any injuries to the
+		Mouth? </label> &nbsp &nbsp &nbsp
+		 <%= f.radio_button :Dental_History_Injury_To_Mouth, true %>
+		    Yes &nbsp
 			<%= f.radio_button :Dental_History_Injury_To_Mouth, false %>
-		    <%= f.label :No %></td>   
-	    </div>
-	  </tr>
+		    No
+	</p>
 	
-	  <tr>
-		<td><label>Have there been any injuries to the
-		Teeth? </label></td>
-		<div class="field">
-		<td> <%= f.radio_button :Dental_History_Injury_To_Teeth, true %>
-		    <%= f.label :Yes %>
+	<p>  
+	<label>Have there been any injuries to the
+		Teeth? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Injury_To_Teeth, true %>
+		    Yes &nbsp
 			<%= f.radio_button :Dental_History_Injury_To_Teeth, false %>
-		    <%= f.label :No %></td>   
-	    </div>
-	  </tr>
+		    No
+	</p>
 	
-	  <tr>
-		<td><label>Have there been any injuries to the
-		Chin? </label></td>
-		<div class="field">
-		<td> <%= f.radio_button :Dental_History_Injury_To_Chin, true %>
-		    <%= f.label :Yes %>
+	<p>  
+	<label>Have there been any injuries to the
+		Chin? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Injury_To_Chin, true %>
+		    Yes &nbsp
 			<%= f.radio_button :Dental_History_Injury_To_Chin, false %>
-		    <%= f.label :No %></td>   
-	    </div>
-	  </tr>
-	
+		    No
+	</p>
 
-	  <tr>
-		<td><label>Does your child brush his / her teeth daily? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Brush_Teeth_Daily, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Does your child brush his / her teeth daily? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Brush_Teeth_Daily, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Brush_Teeth_Daily, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
-
-	  <tr>
-		<td><label>Floss his / her teeth daily? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Floss_Teeth_Daily, true %>
-	    <%= f.label :Yes %>
+	    No
+   </p> 
+   
+	<p>  
+	<label>Floss his / her teeth daily? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Floss_Teeth_Daily, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Floss_Teeth_Daily, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+   </p>
 
-	  <tr>
-		<td><label>Has your child been informed of any extra</br> permanent teeth? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Has your child been informed of any extra</br> permanent teeth? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+    </p>
 
-	  <tr>
-		<td><label>Has your child been informed of any missing</br> teeth? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Any_Missing_Teeth, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Has your child been informed of any missing teeth? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Any_Missing_Teeth, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Any_Missing_Teeth, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+   </p>
 
-	  <tr>
-		<td><label>Have adenoids or tonsils been removed? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Dental_History_Tonsils_Removed, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Have adenoids or tonsils been removed? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Dental_History_Tonsils_Removed, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Dental_History_Tonsils_Removed, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+	</p>
 	
-	  <tr>
-		<td><label>Are you currently under the care of a physician? </label></td>
-	  <div class="field">		
-	   <td> <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Are you currently under the care of a physician? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+	</p>
 	
-	  <tr>
-		<td><label>Has puberty begun? </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Med_His_Puberty_Begun, true %>
-	    <%= f.label :Yes %>
+	<p>  
+	<label>Has puberty begun? </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Med_His_Puberty_Begun, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Med_His_Puberty_Begun, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
+	    No
+	</p>
 	
-	  <tr>
-		<td><label>Has menstruation begun? (Girls) </label></td>
-	  <div class="field">
-	   <td> <%= f.radio_button :Med_His_Menstruation_Begun, true %>
-	    <%= f.label :Yes %>
+    <p>
+     <label>Has menstruation begun? (Girls) </label> &nbsp &nbsp &nbsp
+		<%= f.radio_button :Med_His_Menstruation_Begun, true %>
+	    Yes &nbsp
 		<%= f.radio_button :Med_His_Menstruation_Begun, false %>
-	    <%= f.label :No %></td>
-	  </div>
-	  </tr>
-	</table>
+	    No
+	</p>
 	</br>
 	
-	<div class="field">
-	    <label>Child's Physician's Firstname </label><br />
+	<p>
+	    <label>Child's Physician's Firstname </label>
 	    <%= f.text_field :Med_His_Personal_Physician_Name_First %>
-	</div>
+	</p>
 
-	  <div class="field">
-	    <label>Child's Physician's Lastname </label><br />
+	  <p>
+	    <label>Child's Physician's Lastname </label>
 	    <%= f.text_field :Med_His_Personal_Physician_Name_Last %>
-	  </div>
+	  </p>
 
-	  <div class="field">
-	    <%= f.label :Phone %><br />
+	  <p>
+	    <%= f.label :Phone %>
 	    <%= f.text_field :Med_His_Personal_Physician_Phone %>
-	  </div>
-	<div class="field">
-	    <label>Date of last visit </label><br />
+	  </p>
+	<p>
+	    <label>Date of last visit </label>
 	    <%= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
-	</div>
+	</p>
 	
-	<div class="field">
-	    <label>List any musical instruments played: </label><br />
-	    <%= f.text_area :Dental_History_Play_Musical_Instruments, :cols => 60, :rows => 5 %>
-	</div>
+	<p>
+	    <label>List any musical instruments played: </label>
+	    <%= f.text_area :Dental_History_Play_Musical_Instruments, :cols => 27 , :rows => 5 %>
+	</p>
 	
-	<div class="field">
-	    <label>Please list all drugs that your child is currently taking(over the counter drugs): </label><br />
-	    <%= f.text_area :Med_His_Currently_Taking_Over_The_Counter_Drugs_List, :cols => 60, :rows => 5 %> 
-	</div>
+	<p>
+	    <label>Please list all drugs that your child is currently taking(over the counter drugs): </label>
+	    <%= f.text_area :Med_His_Currently_Taking_Over_The_Counter_Drugs_List, :cols => 27 , :rows => 5 %> 
+	</p>
 	
-	<div class="field">
-	    <label>Please list all drugs that your child is currently taking(prescription drugs): </label><br />
-	    <%= f.text_area :Med_His_Currently_Taking_Presc_Drugs_List, :cols => 60, :rows => 5 %> 
-	</div>
+	<p>
+	    <label>Please list all drugs that your child is currently taking(prescription drugs): </label>
+	    <%= f.text_area :Med_His_Currently_Taking_Presc_Drugs_List, :cols => 27 , :rows => 5 %> 
+	</p>
 	
-	<div class="field">
-	    <label>Please list all drugs/things that your child is allergic to: </label><br />
-	    <%= f.text_area :Allergic_To_Drugs_List, :cols => 60, :rows => 5 %>
-	</div>
-
+	<p>
+	    <label>Please list all drugs/things that your child is allergic to: </label>
+	    <%= f.text_area :Allergic_To_Drugs_List, :cols => 27 , :rows => 5 %>
+	</p>
+<br />
 </fieldset>
 
 <fieldset>
@@ -944,414 +911,335 @@
   <h4>Has your child ever had any of the
 following medical problems?</h4>
 
-<table>
-  <tr>
-	<td><label>Abnormal Bleeding </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Abnormal_Bleeding, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Abnormal Bleeding </label>
+	<%= f.radio_button :Med_His_Abnormal_Bleeding, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Abnormal_Bleeding, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>ADD </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_ADD, true %>
-    <%= f.label :Yes %>
+<p>
+<label>ADD </label>
+	<%= f.radio_button :Med_His_ADD, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_ADD, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>ADHD </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_ADHD, true %>
-    <%= f.label :Yes %>
+<p>
+<label>ADHD </label>
+	 <%= f.radio_button :Med_His_ADHD, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_ADHD, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>	
-	<td><label>Allergies to any Drugs </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Allergic_To_Any_Drugs, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Allergies to any Drugs </label>
+	<%= f.radio_button :Allergic_To_Any_Drugs, true %>
+    Yes &nbsp
 	<%= f.radio_button :Allergic_To_Any_Drugs, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Allergic to Metals </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Allergic_To_Metals, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Allergic to Metals </label>
+	<%= f.radio_button :Allergic_To_Metals, true %>
+    Yes &nbsp
 	<%= f.radio_button :Allergic_To_Metals, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>	
-	<td><label>Allergic to Plastics </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Allergic_To_Plastics, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Allergic to Plastics </label>
+	<%= f.radio_button :Allergic_To_Plastics, true %>
+    Yes &nbsp
 	<%= f.radio_button :Allergic_To_Plastics, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>	
-	<td><label>Allergic to Latex </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Allergic_To_Latex, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Allergic to Latex </label>
+	<%= f.radio_button :Allergic_To_Latex, true %>
+    Yes &nbsp
 	<%= f.radio_button :Allergic_To_Latex, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Hospitalized for Any Reason </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Hospitalized for Any Reason </label>
+	<%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Any Operations </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Any_Operations, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Any Operations </label>
+	<%= f.radio_button :Med_His_Any_Operations, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Any_Operations, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Artificial Bones / Joints / Valves </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Artificial Bones / Joints / Valves </label>
+	<%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Asthma /Arthritis </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Asthma, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Asthma /Arthritis </label>
+	<%= f.radio_button :Med_His_Asthma, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Asthma, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Cancer / Chemotherapy </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Cancer, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Cancer / Chemotherapy </label>
+	<%= f.radio_button :Med_His_Cancer, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Cancer, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Congenital Heart Defect </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Congenital_Heart_Defect, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Congenital Heart Defect </label>
+	<%= f.radio_button :Med_His_Congenital_Heart_Defect, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Congenital_Heart_Defect, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Convulsions / Epilepsy </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Epilepsy, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Convulsions / Epilepsy </label>
+   <%= f.radio_button :Med_His_Epilepsy, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Epilepsy, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Diabetes </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Diabetes, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Diabetes </label>
+	 <%= f.radio_button :Med_His_Diabetes, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Diabetes, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Handicaps / Disabilities </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Handicaps / Disabilities </label>
+	 <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Handicaps_Or_Disabilities, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Hearing Impairment </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Hearing_Impairment, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Hearing Impairment </label>
+	<%= f.radio_button :Med_His_Hearing_Impairment, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Hearing_Impairment, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Heart Murmur </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Heart_Murmur, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Heart Murmur </label>
+	 <%= f.radio_button :Med_His_Heart_Murmur, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Heart_Murmur, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Hemophilia </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Hemophilia, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Hemophilia </label>
+	 <%= f.radio_button :Med_His_Hemophilia, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Hemophilia, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Hepatitis </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Hepatitis, true %>
-    <%= f.label :Yes %>
+<p>
+ <label>Hepatitis </label>
+    <%= f.radio_button :Med_His_Hepatitis, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Hepatitis, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>AIDS </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_AIDS, true %>
-    <%= f.label :Yes %>
+<p>
+<label>AIDS </label>
+    <%= f.radio_button :Med_His_AIDS, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_AIDS, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>HIV+ </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_HIV_Positive, true %>
-    <%= f.label :Yes %>
+<p>
+<label>HIV+ </label>
+    <%= f.radio_button :Med_His_HIV_Positive, true %>
+   Yes &nbsp
 	<%= f.radio_button :Med_His_HIV_Positive, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Kidney Problems </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Kidney_Problems, true %>
-    <%= f.label :Yes %>
+<p> 
+<label>Kidney Problems </label>
+    <%= f.radio_button :Med_His_Kidney_Problems, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Kidney_Problems, false %>
-    <%= f.label :No %> </td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Liver Problems </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Liver_Problems, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Liver Problems </label>
+    <%= f.radio_button :Med_His_Liver_Problems, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Liver_Problems, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Lupus </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Med_His_Lupus, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Lupus </label>
+    <%= f.radio_button :Med_His_Lupus, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Lupus, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Rheumatic Fever </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Rheumatic_Fever, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Rheumatic Fever </label>
+    <%= f.radio_button :Med_His_Rheumatic_Fever, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Rheumatic_Fever, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Scarlet Fever </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Med_His_Scarlet_Fever, true %>
-    <%= f.label :Yes %>
+<p>
+ <label>Scarlet Fever </label>
+    <%= f.radio_button :Med_His_Scarlet_Fever, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Scarlet_Fever, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Sickle Cell Disease </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Med_His_Sickle_Cell_Disease, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Sickle Cell Disease </label>
+   <%= f.radio_button :Med_His_Sickle_Cell_Disease, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Sickle_Cell_Disease, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Sickle Cell Disease Traits </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Sickle Cell Disease Traits </label>
+    <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Tuberculosis (TB) </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Med_His_Tuberculosis, true %>
-    <%= f.label :Yes %>
+<p>  
+<label>Tuberculosis (TB) </label>
+   <%= f.radio_button :Med_His_Tuberculosis, true %>
+    Yes &nbsp
 	<%= f.radio_button :Med_His_Tuberculosis, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-</table>
-
-  <div class="field">
-    <label>Please discuss any medical problems that your child has had: </label><br />
-    <%= f.text_area :Med_His_Medical_Problems, :cols => 60, :rows => 5 %>
-  </div>
+  <p>
+    <label>Please discuss any medical problems that your child has had: </label>
+    <%= f.text_area :Med_His_Medical_Problems, :cols => 27 , :rows => 5 %>
+  </p>
+<br />
 </fieldset>
 
 <fieldset>
 <legend>Habits</legend>
 <h4>Does/did your child have any of the following
 habits?</h4>
-<table>
-	<tr>
-		<td><label>Clenching / Grinding Teeth </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, true %>
-    <%= f.label :Yes %>
+  <p>
+<label>Clenching / Grinding Teeth </label>
+
+    <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+  </p>
 
-  <tr>
-	<td><label>Lip Sucking / Biting </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Lip Sucking / Biting </label>
+
+  <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Lip_Sucking_Or_Biting, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Mouth Breather </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Habits_Mouth_Breather, true %>
-    <%= f.label :Yes %>
+<p>
+  <label>Mouth Breather </label>
+    <%= f.radio_button :Habits_Mouth_Breather, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Mouth_Breather, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 	
-  <tr>
-	<td><label>Nail Biting </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Habits_Nail_Biting, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Nail Biting </label>
+   <%= f.radio_button :Habits_Nail_Biting, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Nail_Biting, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No
+</p>
 
-  <tr>
-	<td><label>Nursing Bottle </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Habits_Nursing, true %>
-    <%= f.label :Yes %>
+<p>
+ <label>Nursing Bottle </label>
+	 <%= f.radio_button :Habits_Nursing, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Nursing, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-    <td><label>Speech Problems </label></td>
-  <div class="field">
-   <td> <%= f.radio_button :Habits_Speech_Problems, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Speech Problems </label>
+ <%= f.radio_button :Habits_Speech_Problems, true %>
+   Yes &nbsp
 	<%= f.radio_button :Habits_Speech_Problems, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+   No 
+</p>
 
-  <tr>
-	<td><label>Thumb / Finger Sucking </label></td>
-  <div class="field">
-    <td><%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Thumb / Finger Sucking </label>
+<%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+     No
+</p>
 
-  <tr>
-	<td><label>Tongue Thrust </label></td>
-  <div class="field">	
-    <td><%= f.radio_button :Habits_Tongue_Thrust, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Tongue Thrust </label>
+<%= f.radio_button :Habits_Tongue_Thrust, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Tongue_Thrust, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
+    No 
+</p>
 
-  <tr>
-	<td><label>Was your child breast fed? </label></td>
-  <div class="field">	
-    <td><%= f.radio_button :Habits_Breast_Fed, true %>
-    <%= f.label :Yes %>
+<p>
+<label>Was your child breast fed? </label>
+   <%= f.radio_button :Habits_Breast_Fed, true %>
+    Yes &nbsp
 	<%= f.radio_button :Habits_Breast_Fed, false %>
-    <%= f.label :No %></td>
-  </div>
-  </tr>
-</table>
-
+    No 
+</p>
+</br>
 <div class="actions">
   <%= f.submit  %>
 </div>
+<br />
 </fieldset>
 
 <% end %>

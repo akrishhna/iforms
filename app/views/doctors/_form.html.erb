@@ -8,15 +8,13 @@
     </ul> 
   </div> 
 <% end %>
-
-  <div class="field">
-    <%= f.label :firstname %><br />
+<br />
+  <div class="labelcss">Firstname </div>
     <%= f.text_field :firstname %>
-  </div>
-  <div class="field">
-    <%= f.label :lastname %><br />
+<br /><br />
+  <div class="labelcss">Lastname </div>
     <%= f.text_field :lastname %>
-  </div>
+<br /><br />
 
 <!-- <% @doctors = Doctor.all %>
 <select id = "doctor" name= "doctor">
@@ -25,5 +23,7 @@
 <option value = "<%= i.id %>" ><%= i.doctorname %></option>
 <%end%>
 </select> -->
+<div class="actions">
 <%= f.submit 'Submit' %>
+</div>
 <%end%>

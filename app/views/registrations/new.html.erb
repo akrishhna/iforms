@@ -1,0 +1,40 @@
+<div class="container">
+<h2>Sign up</h2>
+
+<%= form_for(resource_name, resource, :url => registration_path(resource_name)) do |f| %>
+<% if resource.errors.any? %>
+<div id="error_explanation">
+	<ul>
+    <% resource.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul> 
+  </div> 
+<% end %>
+<br />
+  <div class="labelcss">Email </div>
+  <%= f.text_field :email %>
+<br /><br />
+  <div class="labelcss">Password </div>
+  <%= f.password_field :password %>
+<br /><br />
+  <div class="labelcss">Password confirmation </div>
+  <%= f.password_field :password_confirmation %>
+<br /><br />
+
+<div class="labelcss">  
+  <%= f.radio_button :role, "patient" %>
+  Patient 
+  <%= f.radio_button :role, "doctor" %>
+  Doctor
+</div><br />
+
+<%= recaptcha_tags %>
+<br />
+  <div class="actions">
+  <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>
+</div>

@@ -1,0 +1,5 @@
+<p><%= @appointment.firstname.capitalize %>,</p>
+<p>Your appointment has been confirmed </p>
+<p>Your appointment is on <%= @appointment.date.strftime("%m-%d-%Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %></p>
+<p>Please signup using <%= @appointment.email %>
+ by <%= link_to 'Clicking here', "#{Configuration.notifier_path}deviseroles/index" %></p>

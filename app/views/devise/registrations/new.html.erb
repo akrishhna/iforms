@@ -11,23 +11,27 @@
     </ul> 
   </div> 
 <% end %>
-
-  <p><%= f.label :email %></br>
-  <%= f.text_field :email %></p>
-
-  <p><%= f.label :password %></br>
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %></br>
-  <%= f.password_field :password_confirmation %></p>
-  
-  <p><%= f.radio_button :role, "patient" %>
-  <%= f.label :Patient %>
+<br />
+  <div class="labelcss">Email </div>
+  <%= f.text_field :email %>
+<br /><br />
+  <div class="labelcss">Password </div>
+  <%= f.password_field :password %>
+<br /><br />
+  <div class="labelcss">Password confirmation </div>
+  <%= f.password_field :password_confirmation %>
+<br /><br />
+<div class="labelcss">  
+  <%= f.radio_button :role, "patient" %>
+  Patient 
   <%= f.radio_button :role, "doctor" %>
-  <%= f.label :Doctor %></p>
-
-
-  <p><%= f.submit "Sign up" %></p>
+  Doctor
+</div>
+<%= recaptcha_tags %>
+<br />
+  <div class="actions">
+  <%= f.submit "Sign up" %>
+  </div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

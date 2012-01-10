@@ -1,5 +1,5 @@
 class DeviserolesController < ApplicationController
-  before_filter :authenticate_user!, :except => ["new"]
+  before_filter :authenticate_user!, :except => ["new","contacts"]
 
   def index
      case current_user.role
@@ -25,5 +25,23 @@ class DeviserolesController < ApplicationController
        render :text => "some error"
      end
   end
+  
+
+    def new
+      
+    end 
+    def contacts
+      @name = params[:name]
+      @email = params[:email]
+      @subject = params[:subject]
+      @message = params[:body]
+      if !@name.empty? and !@email.empty? and !@message.empty? and verify_recaptcha
+        Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver
+       redirect_to root_url
+      else
+        flash.now[:error] = "Please enter valid data"
+         redirect_to '/contact'
+      end 
+    end   
       
 end

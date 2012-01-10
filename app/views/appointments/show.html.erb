@@ -1,12 +1,17 @@
 
 <% if current_user.role == 'patient'%>
 <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", @appointment.id, current_user.id)%>
+<div class = "breadcrumbs_app_show">
+<ul class = "breadcrumbs">
+<li>	<%= link_to 'My appointments', patients_path %>></li> 
+</ul>
+</div>
 <div class = "formslist_show">
 <table border="0" width="80%" class="mytable">
 	<tr>
-		<th>Formname</th>
+		<th>Form</th>
 		<th>Status</th>
-		<th>Submitted At</th>
+		<th>Submitted</th>
 	</tr>
 	<% @appformjoins.each do |i| %>
 	<% if i.formname.include?("Adult") %>
@@ -36,7 +41,7 @@
 </table>
 </br>
 </br>
-<%= link_to 'Back', :back %>
+
 </div>
 <% end %>
 
@@ -44,12 +49,17 @@
 
 <% if current_user.role == 'doctor'%>
 <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", @appointment.id, current_user.id)%>
+<div class = "breadcrumbs_app_show">
+<ul class = "breadcrumbs">
+<li>	<%= link_to 'My appointments', doctors_path %>></li> 
+</ul>
+</div>
 <div class = "formslist_show">
 <table border="0" width="80%" class="mytable">
 	<tr>
-		<th>Formname</th>
+		<th>Form</th>
 		<th>Status</th>
-		<th>Recieved At</th>
+		<th>Recieved</th>
 	</tr>
 	<% @appformjoins.each do |i| %>
 	<% if i.formname.include?("Adult") %>

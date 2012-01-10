@@ -1,16 +1,23 @@
-<div class="index">
+
 <% if current_user.role == 'doctor'%>
 <% @doctor = Doctor.find(@appointment.doctor_id) %>
 <% if current_user.id == @doctor.user_id %>
-<%= link_to 'My Appointments',doctors_path %> |
-<%= link_to 'Back', :back %> |
-<%= link_to 'Download as PDF file', @iform.path %>
+<div class = "breadcrumbs_iform_show">
+<ul class = "breadcrumbs">
+<li>	<%= link_to 'My Appointments',doctors_path %>></li> 
+<li>	<%= link_to 'View in PDF format', @iform.path %>></li>
+<li>	<%= link_to 'Back', :back %>></li>
+</ul>
+
 </br>
 </br>
+</div>
+<div class = "labelcss">
 FirstName:
 <%= @iform.Self_Name_First%></br>
 Lastname:
 <%= @iform.Self_Name_Last%>
+</div>
 <% end %>
 <% end %>
 </br>
@@ -18,16 +25,22 @@ Lastname:
 <% if current_user.role == 'patient'%>
 <% @patient = Patient.find(@appointment.patient_id) %>
 <% if current_user.id == @patient.user_id %>
-<%= link_to 'My Appointments', patients_path %> |
-<%= link_to 'Edit', edit_iform_path(@iform) %> |
-<%= link_to 'Back', :back %>
+<div class = "breadcrumbs_iform_show">
+<ul class = "breadcrumbs">
+<li><%= link_to 'My Appointments', patients_path %>></li>
+<li><%= link_to 'Edit', edit_iform_path(@iform) %>></li>
+<li><%= link_to 'View in PDF format', @iform.path %>></li>
+<li><%= link_to 'Back', :back %>></li>
+</ul>
 </br>
 </br>
+</div>
+<div class = "labelcss">
 FirstName:
 <%= @iform.Self_Name_First%></br>
 Lastname:
 <%= @iform.Self_Name_Last%>
+</div>
 <% end %>
 <% end %>
 
-</div>

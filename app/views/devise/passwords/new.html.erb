@@ -11,11 +11,14 @@
     </ul> 
   </div> 
 <% end %>
-
-  <p><%= f.label :email %></br>
-  <%= f.text_field :email %></p>
-
-  <p><%= f.submit "Send me reset password instructions" %></p>
+<br />
+  <div class="labelcss">Email </div>
+  <%= f.text_field :email %>
+<br /><br />
+  
+  <div class="actions">
+  <%= f.submit "Send me reset password instructions" %>
+  </div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

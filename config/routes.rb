@@ -1,4 +1,8 @@
 Iforms::Application.routes.draw do
+  get "contactus/new"
+  get "contactus/index"
+  resources :contactus
+
   get "childforms/new"
 
   get "childforms/show"
@@ -21,7 +25,8 @@ Iforms::Application.routes.draw do
 
   get "admin/index"
 
-  devise_for :users
+  devise_for :users, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "" }, :controllers => {:registrations => 'registrations'}
+  
 get "deviseroles/index"
   #get "doctors/index"
 
@@ -40,7 +45,11 @@ get "deviseroles/index"
   resources :forms
   resources :patients
   resources :appointments
-  resources :deviseroles
+  resources :deviseroles do
+    collection do
+      post 'contacts'
+    end
+  end
   resources :childforms
   resources :iforms do 
   # collection do
@@ -100,7 +109,11 @@ get "deviseroles/index"
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "deviseroles#new"
+  root :to => redirect("/users/login")
+  
+  match '/about', :to => "deviseroles#about"
+  match '/contact', :to => "deviseroles#contact"
+  match '/FAQ', :to => "deviseroles#FAQ"
 
   # See how all your routes lay out with "rake routes"
 

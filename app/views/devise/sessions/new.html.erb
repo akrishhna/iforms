@@ -11,18 +11,21 @@
     </ul> 
   </div> 
 <% end %>
+<br />
 
-  <p><%= f.label :email %></br>
-  <%= f.text_field :email %></p>
-
-  <p><%= f.label :password %></br>
-  <%= f.password_field :password %></p>
-
+  <div class = "labelcss">Email </div>
+  <%= f.text_field :email %>
+<br /><br />
+  <div class = "labelcss">Password </div>
+  <%= f.password_field :password %>
+<br /><br />
   <% if devise_mapping.rememberable? -%>
-    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
+   <div class = "labelcss"> <%= f.check_box :remember_me %> Remember_me </div>
   <% end -%>
-
-  <p><%= f.submit "Sign in" %></p>
+<br />
+<div class = "actions">
+  <%= f.submit "Sign in" %>
+</div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>

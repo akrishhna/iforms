@@ -2,7 +2,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :doctor
   has_one :iform
   has_one :childform
-  validates_presence_of :firstname, :lastname, :email, :date, :formname, :appointment_time
+  validates_presence_of :firstname, :lastname, :email, :date, :appointment_time
   validates_format_of :firstname, :lastname, :with => /^[a-zA-Z]+$/ , :unless => "firstname.blank? or lastname.blank?"
   validates_format_of :email,:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i , :unless => "email.blank?"
 
