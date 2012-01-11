@@ -12,6 +12,7 @@
 		<th>Form</th>
 		<th>Appointment</th>
 		<th>Sent</th>
+		<th></th>
 	
 	</tr>
 	<% count = 1 %>
@@ -39,10 +40,11 @@
 	<% if i.formname.blank? %>
 	<td></td>
 	<%else%>
-	<td><%= link_to 'Fill form here', i %></td>
+	<td><%= link_to 'View form here', i %></td>
 	<%end%>
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
+	<td><%= link_to "Resend", edit_appointment_path(i) %></td>
 	
 </tr>	
 <%end%>

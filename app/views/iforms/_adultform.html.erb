@@ -1,14 +1,11 @@
 
 <% content_for :javascript do %>
 <script type="text/javascript">
-    $(document).ready(function(){  
-        $("#dd_dd").formToWizard({ submitButton: 'step_submit' });
-    });
 
 </script>
 <% end %>
 
-<%= form_for @iform, :method => :post, :html => { :id => "dd_dd" }, :validate => true do |f| %>
+<%= form_for @iform, :method => :post, :onsubmit => "unmask_str();":html => { :id => "dd_dd", :onsubmit => "unmask_str();" }, :validate => true do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
@@ -116,17 +113,17 @@
 
   <p>
     <%= f.label :Homephone %> 
-    <%= f.text_field :Self_Phone_Home, :onblur => "validate_homephone();" %>&nbsp<span id="self_homephone_errorMsg" style = "color:red; margin-left:60px"></span>
+    <%= f.text_field :Self_Phone_Home %>
   </p>
 
   <p>
     <%= f.label :Mobilephone %> 
-    <%= f.text_field :Self_Phone_Mobile, :onblur => "validate_mobilephone();" %>&nbsp<span id="self_mobilephone_errorMsg" style = "color:red; margin-left:60px"></span>
+    <%= f.text_field :Self_Phone_Mobile %>
   </p>
 
   <p>
     <%= f.label :Workphone %> 
-    <%= f.text_field :Self_Phone_Work, :onblur => "validate_workphone();" %>&nbsp<span id="self_workphone_errorMsg" style = "color:red; margin-left:60px"></span>
+    <%= f.text_field :Self_Phone_Work %>
   </p>
 
   <p>
@@ -254,7 +251,7 @@
 
   <p>
     <label>Social Security Number</label> 
-    <%= f.password_field :Spouse_Social_Security_Number %>
+    <%= f.text_field :Spouse_Social_Security_Number %>
   </p>
 
   <p>
@@ -326,7 +323,7 @@
 
   <p>
     <label>Social Security Number</label> 
-    <%= f.password_field :Person_Responsible_For_Account_Social_Security_Number %>
+    <%= f.text_field :Person_Responsible_For_Account_Social_Security_Number %>
   </p>
 
   <p>
@@ -435,7 +432,7 @@
   
   <p>
     <label>Insured's Social Security Number </label> 
-    <%= f.password_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
+    <%= f.text_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
   </p>
 
   <p>
@@ -528,7 +525,7 @@
 
   <p>
     <label>Insured's Social Security Number </label> 
-    <%= f.password_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
   </p>
 
   <p>
@@ -1347,132 +1344,53 @@
 <script type="text/javascript">
 function validate_firstname()
 {
-
-	var regex = /[a-zA-z]/
-	var x = document.getElementById ('iform_Self_Name_First').value;
-	if (x==null || x=="")
-	  {
-	  document.getElementById('firstname_errorMsg').innerHTML = "Firstname cant be blank";
-	  return false;
-	  
-	  } 
-	
-	else if (x.length<3 && x != regex )
-	{
-	document.getElementById('firstname_errorMsg').innerHTML = "Not a valid firstname";
-	return false;	
-	}
-	else
-	{
-		document.getElementById('firstname_errorMsg').innerHTML = "";
-	   return true;
-	}		
+	// var x = document.getElementById('iform_Self_Name_First').value;
+	// 	var regex = /^[a-zA-z ]*$/
+	// 	if (x==null || x=="")
+	// 	{
+	// 		document.getElementById('firstname_errorMsg').innerHTML = "Firstname cant be blank";
+	// 		document.getElementById("iform_Self_Name_First").focus();
+	// 		return false;
+	// 
+	// 	} 
+	// 	else if (x.length<3 || x.search(regex) == -1 )
+	// 	{
+	// 		document.getElementById('firstname_errorMsg').innerHTML = "Not a valid name";
+	// 		return false;	
+	// 	}
+	// 	else
+	// 	{
+	// 		document.getElementById('firstname_errorMsg').innerHTML = "";
+	// 		return true;
+	// 	}	
 	
 }
 
 function validate_lastname()
 {
 
-	var regex = /^[a-zA-z]/
-	var x = document.getElementById ('iform_Self_Name_Last').value;
-	if (x==null || x=="")
-	  {
-	  document.getElementById('lastname_errorMsg').innerHTML = "Lastname cant be blank";
-	  return false;
-	  
-	  } 
-	
-	else if (x.length<3 && x != regex )
-	{
-	document.getElementById('lastname_errorMsg').innerHTML = "Not a valid lastname";
-	return false;	
-	}
-	else
-	{
-		document.getElementById('lastname_errorMsg').innerHTML = "";
-	   return true;
-	}		
-	
-}
-
-function validate_homephone()
-{
-
-	//var phone_regex = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
-	var x = document.getElementById ('iform_Self_Phone_Home').value;
-	if (x=== '-' || x === ' ')
-	  {
-	  document.getElementById('self_homephone_errorMsg').innerHTML = "No spaces or hyphens ";
-	  return false;
-	  
-	  } 
-	
-	else if (x.length>0 && x.length !=10)
-	{
-	document.getElementById('self_homephone_errorMsg').innerHTML = "Not a valid number";
-	return false;	
-	}
-	
-	else
-	{
-		document.getElementById('self_homephone_errorMsg').innerHTML = "";
-	   return true;
-	}		
+	// var x = document.getElementById ('iform_Self_Name_Last').value;
+	// 	var regex = /^[a-zA-z ]*$/
+	// 	if (x==null || x=="")
+	// 	  {
+	// 	  document.getElementById('lastname_errorMsg').innerHTML = "Lastname cant be blank";
+	// 	  return false;
+	// 	  
+	// 	  } 
+	// 	
+	// 	else if (x.length<3 || x.search(regex) == -1 )
+	// 	{
+	// 	document.getElementById('lastname_errorMsg').innerHTML = "Not a valid name";
+	// 	return false;	
+	// 	}
+	// 	else
+	// 	{
+	// 		document.getElementById('lastname_errorMsg').innerHTML = "";
+	// 	   return true;
+	// 	}		
 	
 }
 
-function validate_mobilephone()
-{
-
-	//var phone_regex = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
-	var x = document.getElementById ('iform_Self_Phone_Mobile').value;
-	if (x=== '-' || x === ' ')
-	  {
-	  document.getElementById('self_mobilephone_errorMsg').innerHTML = "No spaces or hyphens ";
-	  return false;
-	  
-	  } 
-	
-	else if (x.length>0 && x.length !=10)
-	{
-	document.getElementById('self_mobilephone_errorMsg').innerHTML = "Not a valid number";
-	return false;	
-	}
-	
-	else
-	{
-		document.getElementById('self_mobilephone_errorMsg').innerHTML = "";
-	   return true;
-	}		
-	
-}
-
-function validate_workphone()
-{
-
-	//var phone_regex = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
-	var regexphone = /\\[0-9]{10}/;
-	var x = document.getElementById ('iform_Self_Phone_Work').value; 
-	if (regexphone.test(x))
-	  {
-	  document.getElementById('self_workphone_errorMsg').innerHTML = "No spaces or hyphens ";
-	  return false;
-	  
-	  } 
-	
-	else if (x.length>0 && x.length !=10)
-	{
-	document.getElementById('self_workphone_errorMsg').innerHTML = "Not a valid number";
-	return false;	
-	}
-	
-	else
-	{
-		document.getElementById('self_workphone_errorMsg').innerHTML = "";
-	   return true;
-	}		
-	
-}
 
 function validate_p()
 {
@@ -1484,19 +1402,54 @@ if (document.getElementById ('iform_Med_His_Personal_Physician_true').checked ==
 }
 </script>
 
-
-
-<!-- <script src="jquery.js" type="text/javascript"></script>
-<script src="jquery.maskedinput.js" type="text/javascript"></script>
-
+<script type="text/javascript">
+function unmask_str(){
 jQuery(function($){
-   $("#Self_Social_Security_Number").mask("999-99-9999");
-}); -->
+$("#iform_Self_Phone_Home").mask("9999999999");
+$("#iform_Self_Phone_Mobile").mask("9999999999");
+   $("#iform_Self_Phone_Work").mask("9999999999");
+   $("#iform_Spouse_Phone_Home").mask("9999999999");   
+   $("#iform_Spouse_Phone_Work").mask("9999999999");
+   $("#iform_Person_Responsible_For_Account_Phone_Work").mask("9999999999");
+   $("#iform_Person_Responsible_For_Account_Phone_Home").mask("9999999999");
+   $("#iform_Insurance_Company_Primary_Phone").mask("9999999999");
+   $("#iform_Insurance_Company_Secondary_Phone").mask("9999999999");
+   $("#iform_Emergency_Contact_Phone_Home").mask("9999999999");
+   $("#iform_Emergency_Contact_Phone_Work").mask("9999999999");
+   $("#iform_Med_His_Personal_Physician_Phone").mask("9999999999");
+   $("#iform_Self_Social_Security_Number").mask("999999999");
+   $("#iform_Spouse_Social_Security_Number").mask("999999999");
+   $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999999999");
+   $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999999999");
+   $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999999999");
+});
+}
+</script>
+<script>
+jQuery(function($){
+   $("#iform_Self_Phone_Home").mask("(999) 999-9999");
+   $("#iform_Self_Phone_Mobile").mask("(999) 999-9999");
+   $("#iform_Self_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Spouse_Phone_Home").mask("(999) 999-9999");   
+   $("#iform_Spouse_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Person_Responsible_For_Account_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Person_Responsible_For_Account_Phone_Home").mask("(999) 999-9999");
+   $("#iform_Insurance_Company_Primary_Phone").mask("(999) 999-9999");
+   $("#iform_Insurance_Company_Secondary_Phone").mask("(999) 999-9999");
+   $("#iform_Emergency_Contact_Phone_Home").mask("(999) 999-9999");
+   $("#iform_Emergency_Contact_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Med_His_Personal_Physician_Phone").mask("(999) 999-9999");
+   $("#iform_Self_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Spouse_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999-99-9999");
+   $("#ssn").mask("999-99-9999");
+  
+});
+</script>
 
-<!-- <script type="text/javascript">
-var while_awake = "<%= @iform.Dental_History_Breathe_Through_Mouth_While_Awake %>"
-  if (while_awake == '')
-      $('#while_awake').attr('checked', false);
-  end
-</script> -->
+
+
+
 

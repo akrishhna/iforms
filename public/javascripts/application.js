@@ -9,6 +9,7 @@ $(function() {
 $("#dd_dd").formToWizard({ submitButton: 'step_submit' });
 });
 
+
 //Check if the function exists
 if (typeof Element.insert !== "function") {
   //If not, hook it onto the $().append method.

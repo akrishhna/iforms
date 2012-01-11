@@ -1,5 +1,5 @@
 class DeviserolesController < ApplicationController
-  before_filter :authenticate_user!, :except => ["new","contacts"]
+  before_filter :authenticate_user!, :only => ["index"]
 
   def index
      case current_user.role
@@ -35,13 +35,14 @@ class DeviserolesController < ApplicationController
       @email = params[:email]
       @subject = params[:subject]
       @message = params[:body]
+      respond_to do |format|
       if !@name.empty? and !@email.empty? and !@message.empty? and verify_recaptcha
-        Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver
-       redirect_to root_url
+        format.html { redirect_to(root_url, :notice => 'Message sent.') }
+        Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver 
       else
-        flash.now[:error] = "Please enter valid data"
-         redirect_to '/contact'
+        format.html { redirect_to('/contact', :alert => "Please enter valid re-captcha tag") }
       end 
+    end
     end   
       
 end

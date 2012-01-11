@@ -76,11 +76,23 @@ class AppointmentsController < ApplicationController
   end
   
   def edit
+    @appointment = Appointment.find(params[:id])
     
   end
   
   def update
-    
+    @appointment = Appointment.find(params[:id])
+     respond_to do |format|
+       @appointment.timesent = Time.now
+     if @appointment.update_attributes(params[:appointment])
+       Notifier.appointment_confirmation_notification(@appointment).deliver
+       format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }
+       format.xml  { head :ok }
+     else
+       format.html { render :action => "edit" }
+       format.xml  { render :xml => @appointment.errors, :status => :unprocessable_entity }
+     end
+     end
   end
   
   def destroy

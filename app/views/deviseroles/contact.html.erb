@@ -1,7 +1,7 @@
 
 <h2>Contact Us</h2>
 
-<% form_tag(contacts_deviseroles_path,:name =>"form", :method=>'post', :validate => true, :onSubmit => "return validateThis();") do %>
+<% form_tag(contacts_deviseroles_path,:name =>"form", :method=>'post', :validate => true, :onsubmit => "return validateThis();") do %>
 Name <span style = "color:red">*</span></br>
 <%= text_field_tag "name" ,"", :onblur=>"name_validation();"%>&nbsp<span id="name_errorMsg" style = "color:red"></span><br /><br />
 Email <span style = "color:red">*</span></br>
@@ -18,7 +18,7 @@ Message <span style = "color:red">*</span></br>
 <script type="text/javascript">
 function validateThis()
 {
-	var regex = /^[a-zA-z]/
+	var regex = /^[a-zA-z ]*$/
 	var x=document.forms["form"]["name"].value;
 	if (x==null || x=="")
 	  {
@@ -27,7 +27,7 @@ function validateThis()
 	  return false;
 	  
 	  } 
-	else if (x.length<3 && x != regex )
+	else if (x.length<3 || x.search(regex) == -1 ) // -1 not matches and 0 matches
 	{
 	document.getElementById('name_errorMsg').innerHTML = "Not a valid name";
 	return false;	

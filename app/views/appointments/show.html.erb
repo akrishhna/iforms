@@ -51,7 +51,8 @@
 <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", @appointment.id, current_user.id)%>
 <div class = "breadcrumbs_app_show">
 <ul class = "breadcrumbs">
-<li>	<%= link_to 'My appointments', doctors_path %>></li> 
+<li>	<%= link_to 'My appointments', doctors_path %>></li>
+<li> <%= link_to 'New appointment', new_appointment_path %>></li>
 </ul>
 </div>
 <div class = "formslist_show">

@@ -263,7 +263,13 @@ class IformsController < ApplicationController
     @yes = "Yes"
     @Any_serious_medical_conditions = @iform.Med_His_Serious_Medical_Issues
     @Any_speech_problems = @iform.Dental_History_Habits_Speech_Problems
-    p @Are_you_taking_any_Prescription_over_the_counter_drugs = @iform.Med_His_Currently_Taking_Presc_Drugs_List+" "+@iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List
+    if !@iform.Med_His_Currently_Taking_Presc_Drugs_List.empty? and !@iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List.empty?
+    @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List+", "+@iform.Med_His_Currently_Taking_Presc_Drugs_List
+    elsif @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List.empty?
+     @Please_list_all_drugs_that_your_child_is_currently_taking =  @iform.Med_His_Currently_Taking_Presc_Drugs_List
+    else
+       @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List
+    end
     @Billing_Address = @iform.Person_Responsible_For_Account_Address1+" "+@iform.Person_Responsible_For_Account_Address2+" "+ @iform.Person_Responsible_For_Account_City+" "+ @iform.Person_Responsible_For_Account_State+" "+@iform.Person_Responsible_For_Account_Postal_Code
     unless @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.blank?
     @Date_of_last_visit = @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.strftime("%m-%d-%Y")
@@ -795,19 +801,19 @@ class IformsController < ApplicationController
     when "m"
       @You_mail = @yes
     end
-    if @iform.Dental_History_Breathe_Through_Mouth_While_Asleep
+    if @iform.Dental_History_Breathe_Through_Mouth_While_Asleep == "1"
       @While_Asleep = @yes
     end
-    if @iform.Dental_History_Breathe_Through_Mouth_While_Awake
+    if @iform.Dental_History_Breathe_Through_Mouth_While_Awake == "1"
       @While_Awake = @yes
     end
-    if @iform.Dental_History_Injury_To_Chin
+    if @iform.Dental_History_Injury_To_Chin == "1"
       @Chin = @yes
     end
-    if @iform.Dental_History_Injury_To_Mouth
+    if @iform.Dental_History_Injury_To_Mouth == "1"
       @Mouth = @yes
     end
-    if @iform.Dental_History_Injury_To_Teeth
+    if @iform.Dental_History_Injury_To_Teeth == "1"
       @Teeth = @yes
     end
   end
@@ -828,10 +834,13 @@ class IformsController < ApplicationController
   #     #end 
   #   end
   formname_split = iform.formname.split(" ")
-  pdf_form = formname_split[0]+"_"+formname_split[1]
-
+  if formname_split[2]
+  @pdf_form = formname_split[0]+"_"+formname_split[1]+"_"+formname_split[2]
+  else
+  @pdf_form = formname_split[0]+"_"+formname_split[1]
+  end
   
-  @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
+  @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
     "Anemia N" => @Anemia_N,
     "Anemia Y" => @Anemia_Y,
     "Anesthetics N" => @Anesthetics_N,
@@ -1074,11 +1083,19 @@ class IformsController < ApplicationController
     @Appt_phone_2 = @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(3,3) + "-" + @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(6,4)
     @Appt_area_code_2 = @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(0,3)
     end
+    if !@iform.Person_Responsible_For_Account_Address2.empty?
     @Billing_Address_1 = @iform.Person_Responsible_For_Account_Address1 + ", " + @iform.Person_Responsible_For_Account_Address2
+    else
+     @Billing_Address_1 = @iform.Person_Responsible_For_Account_Address1
+    end 
     @Billing_City_2 = @iform.Person_Responsible_For_Account_City
     @Billing_State_2 = @iform.Person_Responsible_For_Account_State
     @Billing_Zipcode_2 = @iform.Person_Responsible_For_Account_Postal_Code
+    if !@iform.Self_Home_Address2.empty?
     @Child_Address = @iform.Self_Home_Address1 + ", " + @iform.Self_Home_Address2
+    else
+    @Child_Address = @iform.Self_Home_Address1
+    end
     unless @iform.Self_Birthdate.blank?
     @Child_Bday = @iform.Self_Birthdate.strftime("%m-%d-%Y")
     end
@@ -1126,7 +1143,11 @@ class IformsController < ApplicationController
     unless @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.blank?
     @Date_of_last_visit = @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.strftime("%m-%d-%Y")
     end
+    if !@iform.Neighbor_Or_Relative_Not_Living_With_You_Address2.empty?
     @Friend_Address = @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1+ ", " +@iform.Neighbor_Or_Relative_Not_Living_With_You_Address2
+    else
+    @Friend_Address = @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1
+    end  
     @Friend_City = @iform.Neighbor_Or_Relative_Not_Living_With_You_City
     @Friend_Name = @iform.Neighbor_Or_Relative_Not_Living_With_You_Name_First+ " " +@iform.Neighbor_Or_Relative_Not_Living_With_You_Name_Middle + " " + @iform.Neighbor_Or_Relative_Not_Living_With_You_Name_Last
     if !@iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.blank? and @iform.Neighbor_Or_Relative_Not_Living_With_You_Phone.length == 10
@@ -1182,13 +1203,24 @@ class IformsController < ApplicationController
     @Mother_Name_2 = @iform.Mother_Name_First + " " + @iform.Mother_Name_Middle + " " + @iform.Mother_Name_Last
     @My_method_of_payment_will_be = @iform.Person_Responsible_For_Account_Payment_Method
     @Please_discuss_any_medical_problems_that_your_child_has_had_3 = @iform.Med_His_Medical_Problems
+    if !@iform.Med_His_Currently_Taking_Presc_Drugs_List.empty? and !@iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List.empty?
     @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List+", "+@iform.Med_His_Currently_Taking_Presc_Drugs_List
+    elsif @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List.empty?
+     @Please_list_all_drugs_that_your_child_is_currently_taking =  @iform.Med_His_Currently_Taking_Presc_Drugs_List
+    else
+       @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List
+    end
+      
     @Please_list_all_drugsthings_that_your_child_is_allergic_to = @iform.Allergic_To_Drugs_List
     if !@iform.Insurance_Company_Primary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Primary_Insured_Social_Security_Number.length == 9
     @Policy_1_SS = @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(0,3) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(5,4)
     end
     @Policy_Owner8217s_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
+    if !@iform.Person_Responsible_For_Account_Previous_Address2.empty?
     @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1 + ", " + @iform.Person_Responsible_For_Account_Previous_Address2
+    else
+      @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1
+    end
     @Previous_Address_State = @iform.Person_Responsible_For_Account_Previous_State
     @Previous_City = @iform.Person_Responsible_For_Account_Previous_City
     @Previous_Zip = @iform.Person_Responsible_For_Account_Previous_Postal_Code
@@ -1618,9 +1650,13 @@ class IformsController < ApplicationController
     path = pdffilepath + "#{str}.pdf"        
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
     formname_split = iform.formname.split(" ")
-    pdf_form = formname_split[0]+"_"+formname_split[1]
+    if formname_split[2]
+    @pdf_form = formname_split[0]+"_"+formname_split[1]+"_"+formname_split[2]
+    else
+    @pdf_form = formname_split[0]+"_"+formname_split[1]
+    end
 
-    @pdftk.fill_form(pdffilepath+"#{pdf_form}.pdf", path, {
+    @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
                 "ADHD N" => @ADHD_N,
                 "ADHD Y" => @ADHD_Y,
                 "Appt area code 2" => @Appt_area_code_2,

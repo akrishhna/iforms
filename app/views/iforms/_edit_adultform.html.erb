@@ -1,14 +1,6 @@
 
-<% content_for :javascript do %>
-<script type="text/javascript">
-    $(document).ready(function(){  
-        $("#dd_dd").formToWizard({ submitButton: 'step_submit' });
-    });
 
-</script>
-<% end %>
-
-<%= form_for @iform, :method => :post, :html => { :id => "dd_dd" } do |f| %>
+<%= form_for @iform, :method => :post, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" } do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
@@ -33,12 +25,13 @@
 
   <p>
     <%= f.label :Firstname %> 
-    <%= f.text_field :Self_Name_First %>
-  </p>
+    <%= f.text_field :Self_Name_First, :onblur => "validate_firstname();" %>&nbsp<span id="firstname_errorMsg" style = "color:red;
+margin-left:60px"></span> 
+ </p>
 
   <p>
     <%= f.label :Lastname %> 
-    <%= f.text_field :Self_Name_Last %>
+    <%= f.text_field :Self_Name_Last, :onblur => "validate_lastname();" %>&nbsp<span id="lastname_errorMsg" style = "color:red; margin-left:60px"></span>
   </p>
 
   <p>
@@ -71,7 +64,7 @@
   
   <p>
     <label>Social Security Number</label> 
-    <%= f.password_field :Self_Social_Security_Number %>
+    <%= f.text_field :Self_Social_Security_Number %>
   </p>
 
   <p>
@@ -259,7 +252,7 @@
 
   <p>
     <label>Social Security Number</label> 
-    <%= f.password_field :Spouse_Social_Security_Number %>
+    <%= f.text_field :Spouse_Social_Security_Number %>
   </p>
 
   <p>
@@ -331,7 +324,7 @@
 
   <p>
     <label>Social Security Number</label> 
-    <%= f.password_field :Person_Responsible_For_Account_Social_Security_Number %>
+    <%= f.text_field :Person_Responsible_For_Account_Social_Security_Number %>
   </p>
 
   <p>
@@ -445,7 +438,7 @@
   
   <p>
     <label>Insured's Social Security Number </label> 
-    <%= f.password_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
+    <%= f.text_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
   </p>
 
   <p>
@@ -538,7 +531,7 @@
 
   <p>
     <label>Insured's Social Security Number </label> 
-    <%= f.password_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
+    <%= f.text_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
   </p>
 
   <p>
@@ -1361,13 +1354,121 @@
 <br />
 </fieldset>
 
-
 <% end %>
 
-<!-- <script type="text/javascript">
-var while_awake = "<%= @iform.Dental_History_Breathe_Through_Mouth_While_Awake %>"
-  if (while_awake == '')
-      $('#while_awake').attr('checked', false);
-  end
-</script> -->
+<script type="text/javascript">
+function validate_firstname()
+{
+	// var x = document.getElementById('iform_Self_Name_First').value;
+	// 	var regex = /^[a-zA-z ]*$/
+	// 	if (x==null || x=="")
+	// 	{
+	// 		document.getElementById('firstname_errorMsg').innerHTML = "Firstname cant be blank";
+	// 		document.getElementById("iform_Self_Name_First").focus();
+	// 		return false;
+	// 
+	// 	} 
+	// 	else if (x.length<3 || x.search(regex) == -1 )
+	// 	{
+	// 		document.getElementById('firstname_errorMsg').innerHTML = "Not a valid name";
+	// 		return false;	
+	// 	}
+	// 	else
+	// 	{
+	// 		document.getElementById('firstname_errorMsg').innerHTML = "";
+	// 		return true;
+	// 	}	
+	
+}
 
+function validate_lastname()
+{
+
+	// var x = document.getElementById ('iform_Self_Name_Last').value;
+	// 	var regex = /^[a-zA-z ]*$/
+	// 	if (x==null || x=="")
+	// 	  {
+	// 	  document.getElementById('lastname_errorMsg').innerHTML = "Lastname cant be blank";
+	// 	  return false;
+	// 	  
+	// 	  } 
+	// 	
+	// 	else if (x.length<3 || x.search(regex) == -1 )
+	// 	{
+	// 	document.getElementById('lastname_errorMsg').innerHTML = "Not a valid name";
+	// 	return false;	
+	// 	}
+	// 	else
+	// 	{
+	// 		document.getElementById('lastname_errorMsg').innerHTML = "";
+	// 	   return true;
+	// 	}		
+	
+}
+
+// function mask_ssn(){
+// var obj = document.getElementById('iform_Self_Social_Security_Number').value	
+// var regex = 9
+// var m = "X"
+// var newstring = obj.split(regex);
+// newstring = newstring.join(m);
+// alert(newstring)
+// document.getElementById('iform_Self_Social_Security_Number').value = newstring;
+// }
+
+function validate_p()
+{
+if (document.getElementById('iform_Med_His_Personal_Physician_true').checked == true)
+{
+
+
+}
+}
+</script>
+
+<script type="text/javascript">
+function unmask_str(){
+jQuery(function($){
+$("#iform_Self_Phone_Home").mask("9999999999");
+$("#iform_Self_Phone_Mobile").mask("9999999999");
+   $("#iform_Self_Phone_Work").mask("9999999999");
+   $("#iform_Spouse_Phone_Home").mask("9999999999");   
+   $("#iform_Spouse_Phone_Work").mask("9999999999");
+   $("#iform_Person_Responsible_For_Account_Phone_Work").mask("9999999999");
+   $("#iform_Person_Responsible_For_Account_Phone_Home").mask("9999999999");
+   $("#iform_Insurance_Company_Primary_Phone").mask("9999999999");
+   $("#iform_Insurance_Company_Secondary_Phone").mask("9999999999");
+   $("#iform_Emergency_Contact_Phone_Home").mask("9999999999");
+   $("#iform_Emergency_Contact_Phone_Work").mask("9999999999");
+   $("#iform_Med_His_Personal_Physician_Phone").mask("9999999999");
+   $("#iform_Self_Social_Security_Number").mask("999999999");
+   $("#iform_Spouse_Social_Security_Number").mask("999999999");
+   $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999999999");
+   $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999999999");
+   $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999999999");
+});
+}
+</script>
+<script>
+jQuery(function($){
+   $("#iform_Self_Phone_Home").mask("(999) 999-9999");
+   $("#iform_Self_Phone_Mobile").mask("(999) 999-9999");
+   $("#iform_Self_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Spouse_Phone_Home").mask("(999) 999-9999");   
+   $("#iform_Spouse_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Person_Responsible_For_Account_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Person_Responsible_For_Account_Phone_Home").mask("(999) 999-9999");
+   $("#iform_Insurance_Company_Primary_Phone").mask("(999) 999-9999");
+   $("#iform_Insurance_Company_Secondary_Phone").mask("(999) 999-9999");
+   $("#iform_Emergency_Contact_Phone_Home").mask("(999) 999-9999");
+   $("#iform_Emergency_Contact_Phone_Work").mask("(999) 999-9999");
+   $("#iform_Med_His_Personal_Physician_Phone").mask("(999) 999-9999");
+   $("#iform_Self_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Spouse_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999-99-9999");
+   $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999-99-9999");
+   $("#ssn").mask("999-99-9999");
+  
+});
+</script>
