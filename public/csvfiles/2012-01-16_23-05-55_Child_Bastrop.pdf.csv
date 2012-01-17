@@ -1,0 +1,220 @@
+ControlName,ControlType
+Childs Age,text_field
+Relation,text_field
+Whom may we Thank for referring you,text_field
+List brothers  sisters with age 2,text_field
+General Dentist,text_field
+Billing Address 1,text_field
+Previous Address 1,text_field
+Date of Last Visit,text_field
+Please list all drugs that your child is currently taking,text_area
+Please list all drugsthings that your child is allergic to,text_area
+Please discuss any medical problems that your child has had 3,text_area
+My method of payment will be,text_field
+Main_concerns,text_area
+Bleeding Y,check_box
+Bleeding N,check_box
+Todays Date,text_field
+Child Male,check_box
+Child Female,check_box
+CHILD FIRST,text_field
+Child Nickname,text_field
+Child SS,text_field
+Child Bday,text_field
+Child Grade,text_field
+Child School,text_field
+Child Hobbies,text_field
+Child area code,text_field
+Child phone,text_field
+Child Address,text_field
+Child CITY,text_field
+Child STATE,text_field
+Child Zip,text_field
+Child E-Mail Address,text_field
+Relation Name,text_field
+Custody Yes,check_box
+Custody No,check_box
+Last Dental Date,text_field
+SIngle,check_box
+Widowed,check_box
+Married,check_box
+Divorced,check_box
+Separated,check_box
+Step Mother,check_box
+Guaradian,check_box
+Mother Name_2,text_field
+Mother BDay,text_field
+Mom ext,text_field
+Mom phone 2,text_field
+Mom area code 2,text_field
+Mom area code 1,text_field
+Mom phone 1,text_field
+Mom employer,text_field
+Mom Job Title,text_field
+Mom How Long at Current Job,text_field
+Mom SS_2,text_field
+Mom DL,text_field
+Step Father,check_box
+Guardian,check_box
+Dad Name_3,text_field
+Dad Bday,text_field
+Dad area code 1,text_field
+Dad phone 1,text_field
+Dad ext,text_field
+Dad area code 2,text_field
+Dad phone 2,text_field
+Dad employer,text_field
+Dad How Long at Current Job_2,text_field
+Dad Job Title_2,text_field
+Dad SS_3,text_field
+Dad DL_2,text_field
+Relationsip to Patient 2,text_field
+Ins Co Address_2,text_area
+Ins Co Phone_2,text_field
+Ins Co_2  area code,text_field
+Ins Co_2,text_area
+Dental_2 Yes,check_box
+Dental_2 No,check_box
+Ortho_2 Yes,check_box
+Ortho_2 No,check_box
+Policy Owner&#8217;s Employer_1,text_field
+Insured_1 Bday,text_field
+Policy_1 SS,text_field
+Ins Co Address_1,text_field
+Ins Co_1 area code,text_field
+Ins Co_1,text_field
+Ins Co_1 phone,text_field
+Ins Co_1 Group #,text_field
+Ins Co_1 Name,text_field
+Ins Co_1 Relationship,text_field
+Friend Name,text_field
+Friend area code,text_field
+Friend phone,text_field
+Friend Address,text_field
+Friend City,text_field
+Friend State,text_field
+Friend Zip,text_field
+Responsible Name,text_field
+Responsible Relation,text_field
+Previous City,text_field
+Previous Address State,text_field
+Previous Zip,text_field
+Responsible DL,text_field
+Responsible Employer,text_field
+Responsible area code,text_field
+Responsible phone,text_field
+Responsible ext,text_field
+Responsible SS,text_field
+Appt area code,text_field
+Appt phone,text_field
+Appt ext,text_field
+Appt area code 2,text_field
+Appt phone 2,text_field
+Treated before - Yes,check_box
+Treated before - No,check_box
+Injuries - Yes,check_box
+Injuries - No,check_box
+Instruments played,text_field
+Tonsils - No,check_box
+Tonsils - Yes,check_box
+Teeth - Yes,check_box
+Teeth - No,check_box
+TMJ - Yes,check_box
+TMJ - No,check_box
+Brush - Yes,check_box
+Brush - No,check_box
+Floss - Yes,check_box
+Floss - No,check_box
+Child's Physician,text_field
+Childs Physician area code,text_field
+Child's Physician phone,text_field
+Dr - Yes,check_box
+Dr - No,check_box
+Puberty - Yes,check_box
+Puberty- No,check_box
+Menstruation - Yes,check_box
+Menstruation - No,check_box
+Health Good,check_box
+Health Fair,check_box
+Health Poor,check_box
+Breast Fed Y,check_box
+Breast Fed N,check_box
+Tongue Thrust Y,check_box
+Tongue Thrust N,check_box
+Thumb Y,check_box
+THumb N,check_box
+Speech Y,check_box
+Speech N,check_box
+Bottle Y,check_box
+Bottle N,check_box
+Grinding Y,check_box
+Grinding N,check_box
+Lip Y,check_box
+Lip N,check_box
+Mouth Breather Y,check_box
+Mouth Breather N,check_box
+Nail Biting Y,check_box
+Nail Biting N,check_box
+ADHD Y,check_box
+ADHD N,check_box
+Drug Allergies Y,check_box
+Drug Allergies N,check_box
+Latex Allergies Y,check_box
+Latex Allergies N,check_box
+Plastic Allergies Y,check_box
+Plastic Allergies N,check_box
+Hospital Y,check_box
+Hospital N,check_box
+Operations Y,check_box
+Operations N,check_box
+Congenital Heart Defect Y,check_box
+Epilepsy Y,check_box
+Epilepsy N,check_box
+Cancer Y,check_box
+Cancer N,check_box
+Asthma Y,check_box
+Asthma N,check_box
+Bones Y,check_box
+Bones N,check_box
+TB Y,check_box
+TB N,check_box
+Sickle Cell Y,check_box
+Sickle Cell N,check_box
+Rheumatic Fever Y,check_box
+Rheumatic Fever N,check_box
+Lupus Y,check_box
+Lupus N,check_box
+Liver Y,check_box
+Liver N,check_box
+Kidney Y,check_box
+HIV N,check_box
+Hepatitis Y,check_box
+Hepatitis N,check_box
+Diabetes Y,check_box
+Diabetes N,check_box
+Hemophilia Y,check_box
+Hemophilia N,check_box
+Handicaps Y,check_box
+Handicaps N,check_box
+Hearing Y,check_box
+Hearing N,check_box
+Heart Murmur Y,check_box
+Heart Murmur N,check_box
+HIV Y,check_box
+Kidney N,check_box
+Secondary Ins SS,text_field
+Secondary Ins Birthdate,text_field
+Secondary Ins Employer_2,text_field
+Secondary Ins Name_2,text_field
+Secondary Ins Group #_2,text_field
+Responsible Person to make Appointments,text_field
+Billing State 2,text_field
+Billing City 2,text_field
+Billing Zipcode 2,text_field
+Dentalcoverage_yes,check_box
+Dentalcoverage_no,check_box
+Orthocoverage_yes,check_box
+Orthocoverage_no,check_box
+Responsible phone_work,text_field
+Responsible area code work,text_field
+Congenital Heart Deffect N,check_box

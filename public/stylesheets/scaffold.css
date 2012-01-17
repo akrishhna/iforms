@@ -35,7 +35,7 @@ a:hover {color: #000;}
     width: 22.5em;
 }
 .index {
-	margin-left: auto;
+	margin-left: -70px;
 	margin-right: auto;
 	padding: 10px 10px;
  width: 1080px;

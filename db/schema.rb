@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111214418) do
+ActiveRecord::Schema.define(:version => 20120117045813) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -472,7 +472,6 @@ ActiveRecord::Schema.define(:version => 20120111214418) do
     t.string   "Dental_History_Injury_To_Mouth",                                  :limit => 6
     t.boolean  "Dental_History_Like_Smile"
     t.boolean  "Dental_History_Bleeding_Gums"
-    t.boolean  "Dental_History_Habits_Speech_Problems"
     t.boolean  "Dental_History_Habits_Mouth_Breather"
     t.string   "Dental_History_Breathe_Through_Mouth_While_Awake",                :limit => 10
     t.string   "Dental_History_Breathe_Through_Mouth_While_Asleep",               :limit => 10
@@ -572,6 +571,7 @@ ActiveRecord::Schema.define(:version => 20120111214418) do
     t.string   "Self_Hobbies",                                                    :limit => 100
     t.string   "Self_School",                                                     :limit => 50
     t.string   "Allergic_To_Drugs_List"
+    t.string   "Dental_History_Habits_Speech_Problems"
   end
 
   create_table "patients", :force => true do |t|

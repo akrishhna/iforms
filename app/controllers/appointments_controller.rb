@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
-  before_filter :is_doctor?, :only =>["new"]
+  before_filter :is_doctor?, :except =>["show"]
+  before_filter :is_admin?, :only => ["show"]
   def new
     @appointment = Appointment.new
     #Form.create(:formname => "Bastrop_Child", :doctor_id => 2, :formpath => "http://50.57.138.165/iforms/new")
@@ -36,8 +37,7 @@ class AppointmentsController < ApplicationController
        @i = @appointment.doctor
        @i.doctorname
        @appointment.doctorname = @i.doctorname
-       p "appointment timesent below"
-       p @appointment.timesent = Time.now
+       @appointment.timesent = Time.now
        @appointment.save
        if @formids
        @formids.each do |i|
@@ -97,7 +97,7 @@ class AppointmentsController < ApplicationController
   
   def destroy
    @appointment = Appointment.find(params[:id])
-   @appointment.destroy
+  # @appointment.destroy
    respond_to do |format|
       format.html { redirect_to doctors_url }
       format.xml  { head :ok }
@@ -108,17 +108,17 @@ class AppointmentsController < ApplicationController
    if i.formsubmittedtime
    i.formsubmittedtime = i.formsubmittedtime.to_datetime 
    formsubmittedtime_date = i.formsubmittedtime.strftime("%Y-%m-%d")
-   p formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H")
+   formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H")
    formsubmittedtime_min = i.formsubmittedtime.strftime("%M")
    formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i 
    var = 12
    if var<=formsubmittedtime_hrs_int
    formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s
    am_pm = "PM"
-   p formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
+   formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
    else 
    am_pm = "AM" 
-   p formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
+   formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
    end 
    end 
    return formsubmittedtime 

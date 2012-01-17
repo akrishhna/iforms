@@ -25,10 +25,10 @@ Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 <div class = "logo" onclick="window.location.href='/';">
 </div>
 <div class ="container_layout">
-<span style = "color:red;margin-left:200px">
+<span style = "color:red;margin-left:150px">
 <%= alert %>
 </span>
-<span style = "color:green">
+<span style = "color:green;margin-left:50px">
 <%= notice %>
 </span>
 <%= yield %>
@@ -39,7 +39,7 @@ Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 	<%elsif user_signed_in? and current_user.role =="doctor"%>
 	<%= link_to 'Home', doctors_path %> |
 	<%elsif user_signed_in? and current_user.role =="admin"%>
-	<%= link_to 'Home', admin_path %> |
+	<%= link_to 'Home', :controller => "admin", :action => "index" %> |
 	<%else%>
 	<%= link_to 'Home', root_url %> |
 	<%end %>

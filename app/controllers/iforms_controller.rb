@@ -1,7 +1,8 @@
 class IformsController < ApplicationController
   
- before_filter :authenticate_user!, :except => [:index]
+ before_filter :authenticate_user! #, :except => [:index]
  before_filter :is_patient?, :except => [:show]
+ before_filter :is_admin?, :only => ["show"]
 # before_filter :is_doctor?, :only => [:show]
 
   # GET /iform
@@ -324,7 +325,7 @@ class IformsController < ApplicationController
     @Name = @iform.Self_Name_Last + ", " + @iform.Self_Name_First + " " + @iform.Self_Name_Middle+"       "+@iform.Self_Name_Honorific
     @Occupation = @iform.Self_Occupation
     @Other_family_members_seen_by_us = @iform.Self_Other_Family_Members
-    @Person_Responsible_for_Account = @iform.Person_Responsible_For_Account_Name_First + " " + @iform.Person_Responsible_For_Account_Name_Last
+    @Person_Responsible_for_Account = @iform.Person_Responsible_For_Account_Name_First + " " + @iform.Person_Responsible_For_Account_Name_Middle+" "+ @iform.Person_Responsible_For_Account_Name_Last
     if !@iform.Med_His_Personal_Physician_Phone.blank? and @iform.Med_His_Personal_Physician_Phone.length == 10
     @Physician_areacode = @iform.Med_His_Personal_Physician_Phone.slice(0,3)
     @Physician_phone = @iform.Med_His_Personal_Physician_Phone.slice(3,3) + "-" + @iform.Med_His_Personal_Physician_Phone.slice(6,4)
@@ -1215,7 +1216,7 @@ class IformsController < ApplicationController
     if !@iform.Insurance_Company_Primary_Insured_Social_Security_Number.blank? and @iform.Insurance_Company_Primary_Insured_Social_Security_Number.length == 9
     @Policy_1_SS = @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(0,3) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(3,2) + "-" + @iform.Insurance_Company_Primary_Insured_Social_Security_Number.slice(5,4)
     end
-    @Policy_Owner8217s_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
+    @Policy_Owners_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
     if !@iform.Person_Responsible_For_Account_Previous_Address2.empty?
     @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1 + ", " + @iform.Person_Responsible_For_Account_Previous_Address2
     else
@@ -1822,7 +1823,7 @@ class IformsController < ApplicationController
                 "Please discuss any medical problems that your child has had 3" => @Please_discuss_any_medical_problems_that_your_child_has_had_3,
                 "Please list all drugs that your child is currently taking" => @Please_list_all_drugs_that_your_child_is_currently_taking,
                 "Please list all drugsthings that your child is allergic to" => @Please_list_all_drugsthings_that_your_child_is_allergic_to,
-                "Policy Owner&#8217;s Employer_1" => @Policy_Owner8217s_Employer_1, 
+                "Policy Owners Employer_1" => @Policy_Owners_Employer_1, 
                 "Policy_1 SS" => @Policy_1_SS,
                 "Previous Address 1" => @Previous_Address_1,
                 "Previous Address State" => @Previous_Address_State,

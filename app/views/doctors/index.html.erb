@@ -1,17 +1,16 @@
 <div class="index">
-	<ul class = "breadcrumbs">
-	<li>	<%= link_to 'My Appointments',doctors_path %>></li>
-<li><%= link_to 'New Appointment', new_appointment_path %></li>
-</ul>
-<br />
+	
+<h4><%= link_to 'New Appointment', new_appointment_path %></h4>
+
 <% if !@appointments.blank? %>
-<table border="0" width="80%" class="mytable">
+<table border="0" width="105%" class="mytable">
 	<tr BGCOLOR="grey" >
 		<th>Name</th>
 		<th>Email</th>
 		<th>Form</th>
 		<th>Appointment</th>
 		<th>Sent</th>
+		<th>Received</th>
 		<th></th>
 	
 	</tr>
@@ -20,7 +19,7 @@
 <% if i.timesent %>
 <% i.timesent = i.timesent.to_datetime %>
 <% timesent_date = i. timesent.strftime("%Y-%m-%d") %>
-<% timesent_hrs = i.timesent.strftime("%H") %>
+<% timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
 <% timesent_min = i.timesent.strftime("%M") %>
 <% timesent_hrs_int = timesent_hrs.to_i %>
 <% var = 12 %>
@@ -39,12 +38,50 @@
 	<td><%= i.email%></td>
 	<% if i.formname.blank? %>
 	<td></td>
-	<%else%>
-	<td><%= link_to 'View form here', i %></td>
-	<%end%>
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
+	<td></td>
 	<td><%= link_to "Resend", edit_appointment_path(i) %></td>
+	<%else%>
+	<% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id)%>
+    
+	<% @appformjoins.each do |j| %>
+	<% if j.formsubmittedtime %>
+   <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %> 
+   <% formsubmittedtime_date = j.formsubmittedtime.strftime("%Y-%m-%d") %>
+   <% formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
+   <% formsubmittedtime_min = j.formsubmittedtime.strftime("%M") %>
+   <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %>
+   <% var = 12 %>
+   <% if var<=formsubmittedtime_hrs_int %>
+   <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
+   <% am_pm = "PM" %>
+   <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %> 
+   <% else %>
+   <% am_pm = "AM" %>
+   <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+   <% end %> 
+   <% end %>
+	<% if j.iform_id %>
+	<% @iform = Iform.find(j.iform_id)%>
+	<% end %>
+	<% if j.status == "submitted" %>
+	<td><%= link_to j.formname, @iform.path  %></td>
+	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+	<td><%= @timesent %></td>
+	<td><%= @formsubmittedtime%></td>
+	<td><%= link_to "Resend", edit_appointment_path(i) %></td>	
+	<%end%>
+	<% if j.status == "pending" %>
+	<td></td>
+	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+	<td><%= @timesent %></td>
+	<td>Pending</td>
+	<td><%= link_to "Resend", edit_appointment_path(i) %></td>
+	<%break%>
+	<%end%>
+	<%end%>
+	<%end%>
 	
 </tr>	
 <%end%>

@@ -26,7 +26,7 @@
  </div>
  <div class="field">
     <div class = "labelcss">Appointment Date</div>
-    <%= f.text_field :date %>
+    <%= f.date_select :date %>
     
  </div>
 
@@ -43,12 +43,28 @@
 			<% @forms.each do |i|%>
 			<%a<< i.formname %>
 			<%end %>
+			
+			<% p p = @appointment.formname.split(",")%>
 
 		<div class = "labelcss">
-		<% for form in @forms %>	    
+			
+			
+			<% for i in (0...p.length) %>			
+			<% for form in @forms %>		    
+			<% if p[i]== form.formname %>
+			<%= check_box_tag "form_ids[]","", form.id %>
+			<%= form.formname %>			
+			<% end%>			
+			<%end%>
+			<%end%>
+			
+			<% for form in @forms %>
+			<% unless form.formname== p[0] || form.formname== p[1] || form.formname== p[2] %>
 			<%= check_box_tag "form_ids[]", form.id %>
 			<%= form.formname %><%if form.id==4%><br /><%end%>
-		<% end%>
+			<% end%>
+			<% end%>
+		
 	    </div>
 
 

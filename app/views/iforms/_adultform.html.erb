@@ -5,7 +5,7 @@
 </script>
 <% end %>
 
-<%= form_for @iform, :method => :post, :onsubmit => "unmask_str();":html => { :id => "dd_dd", :onsubmit => "unmask_str();" }, :validate => true do |f| %>
+<%= form_for @iform, :method => :post, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" }, :validate => true do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
@@ -189,12 +189,17 @@
   </p>
 
   <p>
+    <%= f.label :Lastvisitdate %> 
+    <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+  </p>
+
+  <p>
     <label>Whom may we Thank for referring you?</label> 
     <%= f.text_field :Self_Referred_By %>
   </p>
 
   <p>
-    <label>Other family members seen by us:</label> 
+    <label>Other family members seen<br /> by us:</label> 
     <%= f.text_field :Self_Other_Family_Members%>
   </p>
 
@@ -209,10 +214,6 @@
     <%= f.text_field :Self_Best_Contact_Time %>
   </p>
 
-  <p>
-    <%= f.label :Lastvisitdate %> 
-    <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
-  </p>
 <br />  
 </fieldset>
 
@@ -1250,10 +1251,7 @@
  
   <p>   
 	 <label>Do you have any speech problems? </label> 
-     <%= f.radio_button :Dental_History_Habits_Speech_Problems, true %>
-    Yes
-	<%= f.radio_button :Dental_History_Habits_Speech_Problems, false %>
-    No 
+     <%= f.text_field :Dental_History_Habits_Speech_Problems %> 
   </p>
    
 

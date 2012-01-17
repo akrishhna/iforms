@@ -1,0 +1,22 @@
+
+<%= form_for @iform, :method => :post do |f| %>
+<p>
+    <label>Physician's Firstname </label> 
+    <%= f.text_field :Med_His_Personal_Physician_Name_First %>
+  </p>
+
+  <p>
+    <label>Physician's Lastname </label> 
+    <%= f.text_field :Med_His_Personal_Physician_Name_Last %>
+  </p>
+
+  <p>
+    <%= f.label :Phone %> 
+    <%= f.text_field :Med_His_Personal_Physician_Phone %>
+  </p>
+
+  <p>
+    <label>Date of last visit </label> 
+    <%= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+  </p>
+<% end %>

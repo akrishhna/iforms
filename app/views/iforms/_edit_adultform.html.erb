@@ -51,9 +51,9 @@ margin-left:60px"></span>
 
   <p>
 	<label>Sex</label>
-    <%= f.radio_button :Self_Sex, "f" %>
+    <%= f.radio_button :Self_Sex, "f" , :onclick => "validate_female();" %>
     Female
-	<%= f.radio_button :Self_Sex, "m" %>
+	<%= f.radio_button :Self_Sex, "m" , :onclick => "validate_male();" %>
     Male
   </p> 
 
@@ -185,12 +185,17 @@ margin-left:60px"></span>
   </p>
 
   <p>
+    <%= f.label :Lastvisitdate %> 
+    <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+  </p>
+
+  <p>
     <label>Whom may we Thank for referring you?</label> 
     <%= f.text_field :Self_Referred_By %>
   </p>
 
   <p>
-    <label>Other family members seen by us:</label> 
+    <label>Other family members seen<br /> by us:</label> 
     <%= f.text_field :Self_Other_Family_Members%>
   </p>
 
@@ -205,10 +210,6 @@ margin-left:60px"></span>
     <%= f.text_field :Self_Best_Contact_Time %>
   </p>
 
-  <p>
-    <%= f.label :Lastvisitdate %> 
-    <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
-  </p>
 
 <br /> 
 <div class="actions">
@@ -580,9 +581,9 @@ margin-left:60px"></span>
  
   <p>
 	<label>Do you have a personal physician?</label>
-    <%= f.radio_button :Med_His_Personal_Physician, true %>
+    <%= f.radio_button :Med_His_Personal_Physician, true , :onclick => "validate_physician();"%>
     Yes
-	<%= f.radio_button :Med_His_Personal_Physician, false %>
+	<%= f.radio_button :Med_His_Personal_Physician, false , :onclick => "validate_physician_false();"%>
     No
   </p>
 
@@ -659,10 +660,9 @@ margin-left:60px"></span>
     <%= f.text_area :Med_His_Currently_Taking_Over_The_Counter_Drugs_List, :cols => 27, :rows => 5 %> 
   </p>
 
-    
   <h4>For Women: </h4>
 
- 
+
   <p>   
 	 <label>Are you taking birth control pills?</label> 
      <%= f.radio_button :Med_His_Currently_Taking_Birth_Control_Pills, true %>
@@ -670,7 +670,7 @@ margin-left:60px"></span>
 	<%= f.radio_button :Med_His_Currently_Taking_Birth_Control_Pills, false %>
     No 
   </p>
-   
+
 
   <p>   
 	 <label>Are you pregnant?</label> 
@@ -679,24 +679,23 @@ margin-left:60px"></span>
 	<%= f.radio_button :Med_His_Currently_Pregnant, false %>
     No 
   </p>
-   
- 
-  
+
+
+
   <p>
     <%= f.label :Pregnancyweek %> 
     <%= f.text_field :Med_His_Weeks_Pregnant %>
   </p>
 
- 
+
   <p>   
 	 <label>Are you nursing?</label> 
      <%= f.radio_button :Med_His_Currently_Nursing, true %>
     Yes
 	<%= f.radio_button :Med_His_Currently_Nursing, false %>
     No 
-  </p>
+  </p>  
    
- 
 
   <h4>Have you ever had any of the following
   diseases or medical problems?</h4>
@@ -1266,10 +1265,7 @@ margin-left:60px"></span>
  
   <p>   
 	 <label>Do you have any speech problems? </label> 
-     <%= f.radio_button :Dental_History_Habits_Speech_Problems, true %>
-    Yes
-	<%= f.radio_button :Dental_History_Habits_Speech_Problems, false %>
-    No 
+     <%= f.text_field :Dental_History_Habits_Speech_Problems %> 
   </p>
    
 
@@ -1416,13 +1412,21 @@ function validate_lastname()
 // document.getElementById('iform_Self_Social_Security_Number').value = newstring;
 // }
 
-function validate_p()
-{
-if (document.getElementById('iform_Med_His_Personal_Physician_true').checked == true)
+function validate_female()
 {
 
+	//$("#button_female").html("<%= escape_javascript(render(:partial => "iforms/adult_female", :locals => {:iform => @iform})) %>");
 
 }
+function validate_male()
+{ //location.reload(); 
+}
+function validate_physician()
+{
+ //$("#button_physicain").html("<%= escape_javascript(render(:partial => "iforms/adult_physician", :locals => {:iform => @iform})) %>");	
+}
+function validate_physician_false()
+{ //location.reload(); 
 }
 </script>
 
@@ -1468,7 +1472,13 @@ jQuery(function($){
    $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999-99-9999");
    $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999-99-9999");
    $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999-99-9999");
-   $("#ssn").mask("999-99-9999");
+   //$("#iform_Self_Home_Postal_Code").mask("99999-9999");
+   //$("#iform_Self_Employer_Postal_Code").mask("99999-9999");
+   //$("#iform_Person_Responsible_For_Account_Postal_Code").mask("99999-9999");
+   //$("#iform_Insurance_Company_Primary_Postal_Code").mask("99999-9999");
+  // $("#iform_Insurance_Company_Secondary_Postal_Code").mask("99999-9999");
+   //$("#iform_Self_Home_Postal_Code").mask("99999");
+   
   
 });
 </script>

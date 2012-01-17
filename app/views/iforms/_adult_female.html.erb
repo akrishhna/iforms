@@ -1,0 +1,40 @@
+
+<%= form_for @iform, :method => :post do |f| %> 
+<h4>For Women: </h4>
+
+ 
+  <p>   
+	 <label>Are you taking birth control pills?</label> 
+     <%= f.radio_button :Med_His_Currently_Taking_Birth_Control_Pills, true %>
+    Yes
+	<%= f.radio_button :Med_His_Currently_Taking_Birth_Control_Pills, false %>
+    No 
+  </p>
+   
+
+  <p>   
+	 <label>Are you pregnant?</label> 
+     <%= f.radio_button :Med_His_Currently_Pregnant, true %>
+    Yes
+	<%= f.radio_button :Med_His_Currently_Pregnant, false %>
+    No 
+  </p>
+   
+ 
+  
+  <p>
+    <%= f.label :Pregnancyweek %> 
+    <%= f.text_field :Med_His_Weeks_Pregnant %>
+  </p>
+
+ 
+  <p>   
+	 <label>Are you nursing?</label> 
+     <%= f.radio_button :Med_His_Currently_Nursing, true %>
+    Yes
+	<%= f.radio_button :Med_His_Currently_Nursing, false %>
+    No 
+  </p>
+   
+
+<%end%>
