@@ -18,10 +18,6 @@
 <fieldset>
 <legend>Tell Us About Your Child</legend>
 
-<p>
-<label>Childs Lastname</label>
-<%= f.text_field :Self_Name_Last, :onblur => "validate_lastname();" %>&nbsp<span id="lastname_errorMsg" style = "color:red; margin-left:60px"></span>
-</p>
 
 <p>
 <label>Childs Firstname</label>
@@ -31,6 +27,11 @@
 <p>
 <label>Childs Middlename</label>
 <%= f.text_field :Self_Name_Middle %>
+</p>
+
+<p>
+<label>Childs Lastname</label>
+<%= f.text_field :Self_Name_Last, :onblur => "validate_lastname();" %>&nbsp<span id="lastname_errorMsg" style = "color:red; margin-left:60px"></span>
 </p>
 
 <p>

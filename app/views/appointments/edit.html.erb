@@ -52,7 +52,7 @@
 			<% for i in (0...p.length) %>			
 			<% for form in @forms %>		    
 			<% if p[i]== form.formname %>
-			<%= check_box_tag "form_ids[]","", form.id %>
+			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
 			<%= form.formname %>			
 			<% end%>			
 			<%end%>

@@ -84,6 +84,32 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
      respond_to do |format|
        @appointment.timesent = Time.now
+       p @formids = params[:form_ids]
+       a=""
+        if @formids
+        @formids.each do |i|
+          @form = Form.find(i) 
+          a<<@form.formname+","
+        end
+        end
+        p a
+        unless @appointment.formname == a
+        p @appointment.formname = a
+         app_delete = Appformjoin.where("appointment_id =?",@appointment.id)
+         app_delete.delete_all
+         @user = User.all(:conditions => ['email = ?', @appointment.email]).first
+         if @formids
+          @formids.each do |i|
+          @form = Form.find(i)
+          @appformjoin = Appformjoin.create(:appointment_id => @appointment.id, :form_id => i, :formname => @form.formname, :status => "pending", :doctor_user_id => current_user.id)
+          if @user
+          @appformjoin.patient_user_id = @user.id
+          @appformjoin.save
+          end
+          end
+        end
+        end
+         
      if @appointment.update_attributes(params[:appointment])
        Notifier.appointment_confirmation_notification(@appointment).deliver
        format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }

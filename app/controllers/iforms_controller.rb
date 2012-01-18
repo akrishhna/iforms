@@ -265,7 +265,7 @@ class IformsController < ApplicationController
     @Any_serious_medical_conditions = @iform.Med_His_Serious_Medical_Issues
     @Any_speech_problems = @iform.Dental_History_Habits_Speech_Problems
     if !@iform.Med_His_Currently_Taking_Presc_Drugs_List.empty? and !@iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List.empty?
-    @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List+", "+@iform.Med_His_Currently_Taking_Presc_Drugs_List
+    @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Presc_Drugs_List+" / "+@iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List
     elsif @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List.empty?
      @Please_list_all_drugs_that_your_child_is_currently_taking =  @iform.Med_His_Currently_Taking_Presc_Drugs_List
     else
@@ -291,7 +291,7 @@ class IformsController < ApplicationController
     @I_prefer_to_be_called = @iform.Self_Name_Preferred
     @Ins_Relation_2 = @iform.Insurance_Company_Primary_Insured_Relationship
     unless @iform.Insurance_Company_Primary_Insured_Birthdate.blank? 
-    @InsBday_1 = @iform.Insurance_Company_Primary_Insured_Birthdate.strftime("%m  %d  %Y")
+    @InsBday_1 = @iform.Insurance_Company_Primary_Insured_Birthdate.strftime("%m-%d-%Y")
     end
     @Insurance_Co_Address = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
     @Insurance_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
@@ -362,14 +362,14 @@ class IformsController < ApplicationController
     if !@iform.Spouse_Social_Security_Number.blank? and @iform.Spouse_Social_Security_Number.length == 9
     @SpouseSS = @iform.Spouse_Social_Security_Number.slice(0,3) + "-" + @iform.Spouse_Social_Security_Number.slice(3,2) + "-" + @iform.Spouse_Social_Security_Number.slice(5,4)
     end
-    @Today_8217_s_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider.strftime("%m %d %Y")
+    @Today_8217_s_Date = @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider.strftime("%m-%d-%Y")
     @Week = @iform.Med_His_Weeks_Pregnant
     @What_do_you_want = @iform.Dental_History_Orthodontic_Goals
     @When_taken_Phen_Fen = @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin
     p @Where_amp_when_are_best_times_to_reach_you = @iform.Self_Best_Contact_Method + ": " + @iform.Self_Best_Contact_Time
     @Whom_may_we_Thank_for_referring_you = @iform.Self_Referred_By
     unless @iform.Self_Birthdate.blank?
-    @You_Birthdate = @iform.Self_Birthdate.strftime("%m %d  %Y")
+    @You_Birthdate = @iform.Self_Birthdate.strftime("%m-%d-%Y")
     end
     @You_City = @iform.Self_Home_City
     @You_Drivers_License = @iform.Self_Driver_License_State + ": " + @iform.Self_Driver_License_Number
@@ -599,9 +599,9 @@ class IformsController < ApplicationController
     end
     case @iform.Med_His_Congenital_Heart_Defect
     when true
-      @Congenital_Heart_Deffect_N = @yes
-    when false
       @Congenital_Heart_Defect_Y = @yes
+    when false
+      @Congenital_Heart_Defect_N = @yes
     end
     case @iform.Med_His_Currently_Nursing
     when true
@@ -773,9 +773,9 @@ class IformsController < ApplicationController
     end
     case @iform.Med_His_Ulcers
     when true
-      @Ulcers_N = @yes
+     p "ulcer 1", @Ulcer_Y = @yes
     when false
-      @Ulcer_Y = @yes
+     p 0, @Ulcers_N = @yes
     end
     case @iform.Med_His_Venereal_Disease
     when true
@@ -862,7 +862,7 @@ class IformsController < ApplicationController
     "Codeine N" => @Codeine_N,
     "Codeine Y" => @Codeine_Y,
     "Congenital Heart Defect Y" => @Congenital_Heart_Defect_Y,
-    "Congenital Heart Deffect N" => @Congenital_Heart_Deffect_N,
+    "Congenital Heart Defect N" => @Congenital_Heart_Defect_N,
     "Dentalcoverage_no" => @Dentalcoverage_no,
     "DentalCoverage_No2" => @DentalCoverage_No2,
     "Dentalcoverage_yes" => @Dentalcoverage_yes,
@@ -967,7 +967,7 @@ class IformsController < ApplicationController
     "Tobacco_yes" => @Tobacco_yes,
     "Transfusion N" => @Transfusion_N,
     "Transfusion Y" => @Transfusion_Y,
-    "Ulcer Y" => @Ulcer_Y,
+    "Ulcers Y" => @Ulcer_Y,
     "Ulcers N" => @Ulcers_N,
     "Venereal Disease N" => @Venereal_Disease_N,
     "Venereal Disease Y" => @Venereal_Disease_Y,
@@ -987,7 +987,7 @@ class IformsController < ApplicationController
     "Allergic" => @Allergic,
     "Any serious medical conditions" => @Any_serious_medical_conditions,
     "Any speech problems" => @Any_speech_problems,
-    "Are you taking any prescription over-the-counter drugs" => @Are_you_taking_any_prescription_over_the_counter_drugs,
+    "Are you taking any prescription  over-the-counter drugs" => @Please_list_all_drugs_that_your_child_is_currently_taking,
     "Billing Address" => @Billing_Address,
     "Date of last visit" => @Date_of_last_visit,
     "emergency_phone_hm" => @emergency_phone_hm,
@@ -1009,12 +1009,12 @@ class IformsController < ApplicationController
     "Insurance Co Name_2" => @Insurance_Co_Name_2,
     "Insurance Co. Phone" => @Insurance_Co_Phone,
     "Insurance Co. Phone2" => @Insurance_Co_Phone2,
-    "Insured&#8217;s Employer" => @Insured_8217_s_Employer_1,
-    "Insured&#8217;s Employer_2" => @Insured_8217_s_Employer_2,
-    "Insured&#8217;s Name" => @Insured_8217_s_Name,
-    "Insured&#8217;s Name_2" => @Insured_8217_s_Name_2,
-    "Insured&#8217;s SS" => @Insured_8217_s_SS,
-    "Insured&#8217;s SS_2" => @Insured_8217_s_SS_2,
+    "Insureds Employer" => @Insured_8217_s_Employer_1,
+    "Insureds Employer_2" => @Insured_8217_s_Employer_2,
+    "Insureds Name" => @Insured_8217_s_Name,
+    "Insureds Name_2" => @Insured_8217_s_Name_2,
+    "Insureds SS" => @Insured_8217_s_SS,
+    "Insureds SS_2" => @Insured_8217_s_SS_2,
     "InsuredBday_" => @InsuredBday_2,
     "Last Visit Date" => @Last_Visit_Date,
     "Name" => @Name,
@@ -1023,7 +1023,7 @@ class IformsController < ApplicationController
     "Person Responsible for Account" => @Person_Responsible_for_Account,
     "Physician_areacode" => @Physician_areacode,
     "Physician_phone" => @Physician_phone,
-    "Physician&#8217;s Name" => @Physician_8217_s_Name,
+    "Physicians Name" => @Physician_8217_s_Name,
     "Please explain" => @Please_explain,
     "Relation" => @Relation,
     "Relation_3" => @Relation_3,
@@ -1043,11 +1043,11 @@ class IformsController < ApplicationController
     "Spouse Wk Ext" => @Spouse_Wk_Ext,
     "Spouse Wk Phone" => @Spouse_Wk_Phone,
     "SpouseSS" => @SpouseSS,
-    "Today&#8217;s Date" => @Today_8217_s_Date,
+    "Todays Date" => @Today_8217_s_Date,
     "Week#" => @Week,
     "What do you want" => @What_do_you_want,
     "When taken Phen-Fen" => @When_taken_Phen_Fen,
-    "Where &amp; when are best times to reach you" => @Where_amp_when_are_best_times_to_reach_you,
+    "Where and when are best times to reach you" => @Where_amp_when_are_best_times_to_reach_you,
     "Whom may we Thank for referring you" => @Whom_may_we_Thank_for_referring_you,
     "Wk_areacode" => @Wk_areacode,
     "You Age" => @You_Age,
@@ -1055,7 +1055,7 @@ class IformsController < ApplicationController
     "You City" => @You_City,
     "You Drivers License" => @You_Drivers_License,
     "You Employer" => @You_Employer,
-    "You Employer&#8217;s Address" => @You_Employer_8217_s_Address,
+    "You Employers Address" => @You_Employer_8217_s_Address,
     "You Ext" => @You_Ext,
     "You Hm" => @You_Hm,
     "You Hm Area Code" => @You_Hm_Area_Code,
@@ -1102,7 +1102,7 @@ class IformsController < ApplicationController
     end
     @Child_CITY = @iform.Self_Home_City
     @Child_EMail_Address = @iform.Self_Email_Address
-    @CHILD_FIRST = @iform.Self_Name_First + " " + @iform.Self_Name_Middle + " " + @iform.Self_Name_Last
+    @CHILD_FIRST = @iform.Self_Name_Last + ", " + @iform.Self_Name_First + " " + @iform.Self_Name_Middle
     @Child_Grade = @iform.Self_Grade
     @Child_Hobbies = @iform.Self_Hobbies
     @Child_Nickname = @iform.Self_Name_Preferred
@@ -1123,7 +1123,7 @@ class IformsController < ApplicationController
     end
     if !@iform.Father_Phone_Work.blank? and @iform.Father_Phone_Work.length == 10
     @Dad_area_code_1 = @iform.Father_Phone_Work.slice(0,3)
-    @Dad_phone_1 = @iform.Father_Phone_Work.slice(3,3) + @iform.Father_Phone_Work.slice(6,4)
+    @Dad_phone_1 = @iform.Father_Phone_Work.slice(3,3)+"-"+@iform.Father_Phone_Work.slice(6,4)
     end
     unless @iform.Father_Birthdate.blank?
     @Dad_Bday = @iform.Father_Birthdate.strftime("%m-%d-%Y")
@@ -1136,7 +1136,7 @@ class IformsController < ApplicationController
     @Dad_Name_3 = @iform.Father_Name_First+" "+@iform.Father_Name_Middle+" "+@iform.Father_Name_Last
     if !@iform.Father_Phone_Home.blank? and @iform.Father_Phone_Home.length == 10
     @Dad_area_code_2 = @iform.Father_Phone_Home.slice(0,3)
-    @Dad_phone_2 = @iform.Father_Phone_Home.slice(3,3) + @iform.Father_Phone_Home.slice(6,4)
+    @Dad_phone_2 = @iform.Father_Phone_Home.slice(3,3)+"-"+@iform.Father_Phone_Home.slice(6,4)
     end
     if !@iform.Father_Social_Security_Number.blank? and @iform.Father_Social_Security_Number.length == 9
     @Dad_SS_3 = @iform.Father_Social_Security_Number.slice(0,3) + "-" + @iform.Father_Social_Security_Number.slice(3,2) + "-" + @iform.Father_Social_Security_Number.slice(5,4)

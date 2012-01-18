@@ -16,7 +16,7 @@
 <% if i.timesent %>
 <% i.timesent = i.timesent.to_datetime %>
 <% timesent_date = i. timesent.strftime("%Y-%m-%d") %>
-<% p timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+<% timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
 <% timesent_min = i.timesent.strftime("%M") %>
 <% timesent_hrs_int = timesent_hrs.to_i %>
 <% var = 12 %>
@@ -24,11 +24,11 @@
 <% if var<timesent_hrs_int %>
 <% timesent_hrs = (timesent_hrs_int - var).to_s %>
 <% am_pm = "PM" %>
-<% p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+<% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% else %>
 <% timesent_hrs = timesent_hrs_int.to_s %>
 <% am_pm = "AM" %>
-<%p @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+<% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
 <% end %>
 <% end %>
 <tr>
@@ -43,12 +43,31 @@
 	<td></td>
 	<%else%>
 	<% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id)%>
-    
+    <td>
+	<% @appformjoins.each do |j| %>
+	<% if j.iform_id %>
+	<% @iform = Iform.find(j.iform_id)%>
+	<% end %>
+	
+	
+	<% if j.status == "submitted" %>
+	<%= link_to j.formname, @iform.path  %>	
+	<%elsif j.status == nil %>
+	<li><%=  j.formname %></li>	
+	<%else%>
+	<li><%= link_to j.formname, :controller => "iforms", :action => "new", :name => j.formname, :appointment_id => i %></li>	
+	<%end%>
+	
+	<%end%>
+	</td>
+	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+	<td><%= @timesent %></td>
+	<% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id)%>
 	<% @appformjoins.each do |j| %>
 	<% if j.formsubmittedtime %>
    <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %> 
    <% formsubmittedtime_date = j.formsubmittedtime.strftime("%Y-%m-%d") %>
-   <% p formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
+   <% formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
    <% formsubmittedtime_min = j.formsubmittedtime.strftime("%M") %>
    <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %>
    <% var = 12 %>
@@ -65,37 +84,16 @@
 	<% @iform = Iform.find(j.iform_id)%>
 	<% end %>
 	<% if j.status == "submitted" %>
-	<td><%= link_to j.formname, @iform.path  %></td>
-	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
-	<td><%= @timesent %></td>
-	<td><%= @formsubmittedtime%></td>
-	<td><%= link_to "Edit", :controller => "iforms", :action => "edit", :id =>j.iform_id  %></td>	
-	<%end%>
-	<%end%>
-	
-	<% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id)%>
-	<% @appformjoins.each do |j| %>
-	<% if j.status == "pending" %>
-    <td>
+	<td><%= @formsubmittedtime %></td>
+	<td> <%= link_to "Edit", :controller => "iforms", :action => "edit", :id =>j.iform_id  %> </td>
 	<%break%>
-	<%end%>
-	<%end%>
-	<% @appformjoins.each do |j| %>
-	<% if j.status == "pending" %>
-	<li style = "padding: 0.3em; vertical-align: top;"><%= link_to j.formname, :controller => "iforms", :action => "new", :name => j.formname, :appointment_id => i %></li>
-	<%end%>
-	<%end%>
-	</td>
-	<% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id)%>
-	<% @appformjoins.each do |j| %>
-	<% if j.status == "pending" %>
-	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
-	<td><%= @timesent %></td>
+	<%elsif j.status == "pending" %>
 	<td>Pending</td>
 	<td></td>
 	<%break%>
 	<%end%>
 	<%end%>
+	
 	
 	
 </tr>
