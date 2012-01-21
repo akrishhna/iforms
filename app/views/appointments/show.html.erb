@@ -2,18 +2,33 @@
 <% if current_user.role == 'patient'%>
 <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", @appointment.id, current_user.id)%>
 <div class = "breadcrumbs_app_show">
-<ul class = "breadcrumbs">
-<li>	<%= link_to 'My appointments', patients_path %>></li> 
-</ul>
+<%= link_to 'Back', patients_path %> 
 </div>
 <div class = "formslist_show">
 <table border="0" width="80%" class="mytable">
 	<tr>
 		<th>Form</th>
-		<th>Status</th>
 		<th>Submitted</th>
+		<th></th>
 	</tr>
 	<% @appformjoins.each do |i| %>
+	<% if i.formsubmittedtime %>
+   <% i.formsubmittedtime = i.formsubmittedtime.to_datetime %> 
+   <% formsubmittedtime_date = i.formsubmittedtime.strftime("%Y-%m-%d") %>
+   <% formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H") %>
+   <% formsubmittedtime_min = i.formsubmittedtime.strftime("%M") %>
+   <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %> 
+   <% var = 12 %>
+   <% if var<=formsubmittedtime_hrs_int %>
+   <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
+   <% am_pm = "PM" %>
+   <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %> 
+   <% else %>
+   <% am_pm = "AM" %> 
+   <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %> 
+   <% end %> 
+   <% end %>
+
 	<% if i.formname.include?("Adult") %>
 	<% @controller_name = "iforms" %>
 	<% @id = i.iform_id %>
@@ -23,18 +38,16 @@
 	<% @id = i.childform_id %>
 	<% end %>
     <tr>
+	<% if i.iform_id %>
+	<% @iform = Iform.find(i.iform_id) %>
+	<%end%>
 	<% if i.status == "submitted" %>
-	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :appointment_id => @appointment.id, :id =>i.iform_id %></td>
-	<td><%= i.status.capitalize %></td>
+	<td><%= link_to i.formname, @iform.path %></td>
 	<td><%= @formsubmittedtime %></td>
-	<% elsif i.status == nil %>
-	<td><%= i.formname %></td>
-	<td></td>
-	<td></td>
+	<td><%= link_to 'Edit', edit_iform_path(@iform.id) %>
 	<% else %>
 	<td><%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %></td>
-	<td> Pending</td>
-	<td>Not yet submitted </td>
+	<td> Pending </td>
 	</tr>
 	<% end %>
 	<% end %>
@@ -50,19 +63,34 @@
 <% if current_user.role == 'doctor'%>
 <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", @appointment.id, current_user.id)%>
 <div class = "breadcrumbs_app_show">
-<ul class = "breadcrumbs">
-<li>	<%= link_to 'My appointments', doctors_path %>></li>
-<li> <%= link_to 'New appointment', new_appointment_path %>></li>
-</ul>
+<%= link_to 'Back', doctors_path %> 
 </div>
 <div class = "formslist_show">
 <table border="0" width="80%" class="mytable">
 	<tr>
 		<th>Form</th>
-		<th>Status</th>
 		<th>Recieved</th>
+		<th></th>
 	</tr>
 	<% @appformjoins.each do |i| %>
+	<% if i.formsubmittedtime %>
+   <% i.formsubmittedtime = i.formsubmittedtime.to_datetime %> 
+   <% formsubmittedtime_date = i.formsubmittedtime.strftime("%Y-%m-%d") %>
+   <% formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H") %>
+   <% formsubmittedtime_min = i.formsubmittedtime.strftime("%M") %>
+   <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %> 
+   <% var = 12 %>
+   <% if var<=formsubmittedtime_hrs_int %>
+   <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
+   <% am_pm = "PM" %>
+   <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %> 
+   <% else %>
+   <% am_pm = "AM" %> 
+   <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %> 
+   <% end %> 
+   <% end %>
+	
+	
 	<% if i.formname.include?("Adult") %>
 	<% @controller_name = "iforms" %>
 	<% @id = i.iform_id %>
@@ -72,26 +100,22 @@
 	<% @id = i.childform_id %>
 	<% end %>
 	<tr>
+		<% if i.iform_id %>
+		<% @iform = Iform.find(i.iform_id) %>
+		<%end%>
 	<% if i.status == "submitted" %>
-	<td><%= link_to i.formname, :controller => "iforms", :action => "show", :appointment_id => @appointment.id, :id =>i.iform_id  %></td>
-	<td>Received</td>
+	<td><%= link_to i.formname, @iform.path  %></td>
 	<td><%= @formsubmittedtime %></td>
-	<% elsif i.status == nil %>
-	<td><%= i.formname %></td>
-	<td></td>
-	<td></td>
 	<% else %>
 	<td><%= i.formname %></td>
-	<td> Pending</td>
-	<td>Not yet submitted </td>
+	<td>Pending </td>
 	</tr>
 	<% end %>
 	</tr>
 	<% end %>
 </table>
 </br>
-</br>
-<%= link_to 'Back', :back %>
+
 </div>
 <% end %>
 

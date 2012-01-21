@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120117045813) do
+ActiveRecord::Schema.define(:version => 20120120191951) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -572,6 +572,7 @@ ActiveRecord::Schema.define(:version => 20120117045813) do
     t.string   "Self_School",                                                     :limit => 50
     t.string   "Allergic_To_Drugs_List"
     t.string   "Dental_History_Habits_Speech_Problems"
+    t.binary   "pdffile_path",                                                    :limit => 16777215
   end
 
   create_table "patients", :force => true do |t|

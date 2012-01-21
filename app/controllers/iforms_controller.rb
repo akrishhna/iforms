@@ -50,14 +50,14 @@ class IformsController < ApplicationController
 
   # GET /iform/1/edit
   def edit
-    @iform_id = Iform.find(params[:id])
-    @appointment = Appointment.find(@iform_id.appointment_id)
-    @iform = @appointment.iform
+    @iform = Iform.find(params[:id])
+    @appointment = Appointment.find(@iform.appointment_id) 
   end
 
   # POST /iform
   # POST /iform.xml
   def create
+  if session[:formname]
   if session[:formname].include?("Child")  
   submit_childform()
   end
@@ -131,19 +131,22 @@ class IformsController < ApplicationController
   end
   # p @appformjoin.status
   #   Iform.update_appformjoin(@appformjoin)
-  @appformjoin = Appformjoin.where("appointment_id = ?", session[:appointment_id])
-  @appformjoin.each do |i|
-    if i.status == "pending"
-      i.status = nil
-      i.save
-    end
-  end
+  # @appformjoin = Appformjoin.where("appointment_id = ?", session[:appointment_id])
+  #   @appformjoin.each do |i|
+  #     if i.status == "pending"
+  #       i.status = nil
+  #       i.save
+  #     end
+  #   end
   else
     render :text => "You have already filled the form"
   end
   end
   session[:formname]=nil
   session[:appointment_id]=nil
+  else
+  render :text => "You have already filled the form"
+  end
   end
   
  
@@ -366,7 +369,13 @@ class IformsController < ApplicationController
     @Week = @iform.Med_His_Weeks_Pregnant
     @What_do_you_want = @iform.Dental_History_Orthodontic_Goals
     @When_taken_Phen_Fen = @iform.Dental_History_When_Taken_PhenFen_Redux_Pondimin
-    p @Where_amp_when_are_best_times_to_reach_you = @iform.Self_Best_Contact_Method + ": " + @iform.Self_Best_Contact_Time
+    if !@iform.Self_Best_Contact_Method.empty? and !@iform.Self_Best_Contact_Time.empty?
+    @Where_amp_when_are_best_times_to_reach_you = @iform.Self_Best_Contact_Method + ": " + @iform.Self_Best_Contact_Time
+    elsif !@iform.Self_Best_Contact_Method.empty?
+      @Where_amp_when_are_best_times_to_reach_you = @iform.Self_Best_Contact_Method
+    else  
+      @Where_amp_when_are_best_times_to_reach_you = @iform.Self_Best_Contact_Time
+    end
     @Whom_may_we_Thank_for_referring_you = @iform.Self_Referred_By
     unless @iform.Self_Birthdate.blank?
     @You_Birthdate = @iform.Self_Birthdate.strftime("%m-%d-%Y")
@@ -374,7 +383,7 @@ class IformsController < ApplicationController
     @You_City = @iform.Self_Home_City
     @You_Drivers_License = @iform.Self_Driver_License_State + ": " + @iform.Self_Driver_License_Number
     @You_Employer = @iform.Self_Employer_Name
-    p @You_Employer_8217_s_Address = @iform.Self_Employer_Address1 + " " + @iform.Self_Employer_Address2 + " " + @iform.Self_Employer_City + " " + @iform.Self_Employer_State + " " + @iform.Self_Employer_Postal_Code
+    @You_Employer_8217_s_Address = @iform.Self_Employer_Address1 + " " + @iform.Self_Employer_Address2 + " " + @iform.Self_Employer_City + " " + @iform.Self_Employer_State + " " + @iform.Self_Employer_Postal_Code
     @You_Ext = @iform.Self_Phone_Work_Extension
     if !@iform.Self_Phone_Home.blank? and @iform.Self_Phone_Home.length == 10
     @You_Hm = @iform.Self_Phone_Home.slice(3,3) + "-" + @iform.Self_Phone_Home.slice(6,4)

@@ -28,7 +28,7 @@ class Notifier < ActionMailer::Base
     @email = email
     @subject = subject
     @message = body
-    mail(:to => "admichaeliforms@gmail.com", :subject => @subject)
+    mail(:to => "Michael.R.Whitworth@gmail.com", :subject => @subject)
   end
   
 end

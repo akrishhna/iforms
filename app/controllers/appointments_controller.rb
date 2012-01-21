@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   before_filter :is_doctor?, :except =>["show"]
-  before_filter :is_admin?, :only => ["show"]
+  #before_filter :is_admin?, :only => ["show"]
   def new
     @appointment = Appointment.new
     #Form.create(:formname => "Bastrop_Child", :doctor_id => 2, :formpath => "http://50.57.138.165/iforms/new")
@@ -69,10 +69,6 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find(params[:id])
-    @appformjoins = Appformjoin.where("appointment_id = ?", params[:id])
-    @appformjoins.each do |i|
-     @formsubmittedtime = time_conversion(i)
-    end
   end
   
   def edit
@@ -130,24 +126,5 @@ class AppointmentsController < ApplicationController
    end
   end
   
-  def time_conversion(i) 
-   if i.formsubmittedtime
-   i.formsubmittedtime = i.formsubmittedtime.to_datetime 
-   formsubmittedtime_date = i.formsubmittedtime.strftime("%Y-%m-%d")
-   formsubmittedtime_hrs = i.formsubmittedtime.strftime("%H")
-   formsubmittedtime_min = i.formsubmittedtime.strftime("%M")
-   formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i 
-   var = 12
-   if var<=formsubmittedtime_hrs_int
-   formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s
-   am_pm = "PM"
-   formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
-   else 
-   am_pm = "AM" 
-   formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm 
-   end 
-   end 
-   return formsubmittedtime 
-  end 
   
 end

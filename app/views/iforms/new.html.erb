@@ -1,6 +1,6 @@
 
 <% @appointment = Appointment.where("email = ? and id = ?", current_user.email, session[:appointment_id]).first %>
-<% @iformcheck = Iform.where("appointment_id = ?",session[:appointment_id]).first %>
+<% @iformcheck = Iform.where("appointment_id = ? and formname = ?",session[:appointment_id], session[:formname]).first %>
 <% if @iformcheck.blank?  %>
 <% if session[:formname].include?("Adult") %>
 <%= render 'adultform' %>
@@ -9,7 +9,7 @@
 <%= render 'childform' %>
 <% end %>
 
-<%= link_to 'Back', iforms_path %>
+<%= link_to 'Back', patients_path %>
 <% else %>
 <p>You have already filled the form.</p>
 <p>If you care to edit <%= link_to 'Click here', :controller => "iforms", :action => "edit", :id => @iformcheck.id, :appointment_id => @iformcheck.appointment_id %></br></br>

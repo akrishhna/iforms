@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :authenticate_user!
   protect_from_forgery
   helper_method :is_admin?
  #helper_method :patient_profile_exists

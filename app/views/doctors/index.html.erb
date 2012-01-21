@@ -36,31 +36,30 @@
 	<% str = i.firstname.capitalize + " " + i.lastname.capitalize %>
 	<td><%= str%></td>
 	<td><%= i.email%></td>
+	<% p formname_length = i.formname.split(",")%>
 	<% if i.formname.blank? %>
 	<td></td>
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
 	<td></td>
 	<td><%= link_to "Resend", edit_appointment_path(i) %></td>
-	<%else%>
+	
+	<%elsif formname_length.length ==1 %>
 	<% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id)%>
+
     <td>
 	<% @appformjoins.each do |j| %>
 	<% if j.iform_id %>
 	<% @iform = Iform.find(j.iform_id)%>
-	<% end %>
-	
-	
+	<% end %>		
 	<% if j.status == "submitted" %>
-	<%= link_to j.formname, @iform.path  %>	
-	<%elsif j.status == nil %>
-	<li><%=  j.formname %></li>	
-	<%else%>
-	<li><%=  j.formname %></li>	
-	<%end%>
-	
+	<li><%= link_to j.formname, @iform.path  %></li>	
+	<%else %>
+	<li><%= j.formname %></li>	
+	<%end%>	
 	<%end%>
 	</td>
+
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
 	<td><%= @timesent %></td>
 	<% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id)%>
@@ -86,16 +85,32 @@
 	<% end %>
 	<% if j.status == "submitted" %>
 	<td><%= @formsubmittedtime %></td>
-	<td> </td>
-	<%break%>
+	<td></td>
 	<%elsif j.status == "pending" %>
-	<td>Pending</td>
-	<td><%= link_to "Resend", edit_appointment_path(i) %></td>
-	<%break%>
+	 <td>Pending</td>
+	 <td><%= link_to "Resend", edit_appointment_path(i) %></td>
 	<%end%>
 	<%end%>
+
 	
-</tr>	
+	<%else%>
+    <td><%= link_to "multiple forms", i %></td>
+	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+	<td><%= @timesent %></td>
+	<td></td>
+	<%@counter = 0%>
+	<% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id)%>
+	<% @appformjoins.each do |j| %>
+	<% if j.status == "submitted" %>
+	<% @counter += 1%>
+	<%end%>
+	<%end%>
+	<%if @counter < 1 %>
+	<td><%= link_to "Resend", edit_appointment_path(i) %></td>
+	<%else%>
+	<td></td>
+	<%end%>
+</tr>
 <%end%>
 <%end%>
 </table>

@@ -50,20 +50,33 @@
 			
 			
 			<% for i in (0...p.length) %>			
-			<% for form in @forms %>		    
+			<% for form in @forms %>
+			<% if form.formname.include?("Adult")%>		    
 			<% if p[i]== form.formname %>
 			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
 			<%= form.formname %>			
-			<% end%>			
+			<% end%>
+			<%end%>			
 			<%end%>
 			<%end%>
 			
 			<% for form in @forms %>
-			<% unless form.formname== p[0] || form.formname== p[1] || form.formname== p[2] %>
+			<% unless form.formname== p[0] || form.formname== p[1] || form.formname== p[2] || form.formname== p[3] || form.formname== p[4] || form.formname== p[5] %>
 			<%= check_box_tag "form_ids[]", form.id %>
 			<%= form.formname %><%if form.id==4%><br /><%end%>
 			<% end%>
 			<% end%>
+			
+			<% for i in (0...p.length) %>			
+			<% for form in @forms %>
+			<% if form.formname.include?("Child")%>		    
+			<% if p[i]== form.formname %>
+			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
+			<%= form.formname %>			
+			<% end%>
+			<%end%>			
+			<%end%>
+			<%end%>
 		
 	    </div>
 
