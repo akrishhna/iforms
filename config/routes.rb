@@ -44,7 +44,7 @@ get "deviseroles/index"
   resources :doctors
   resources :forms
   resources :patients
-  resources :appointments
+  resources :appointments 
   resources :deviseroles do
     collection do
       post 'contacts'
@@ -52,9 +52,9 @@ get "deviseroles/index"
   end
   resources :childforms
   resources :iforms do 
-  # collection do
-#   post 'submit'
-#   end
+    collection do
+      get 'get_iform'
+    end
   end
   
 

@@ -42,7 +42,7 @@
 	<% @iform = Iform.find(i.iform_id) %>
 	<%end%>
 	<% if i.status == "submitted" %>
-	<td><%= link_to i.formname, @iform.path %></td>
+	<td><%= link_to i.formname, get_iform_iforms_path(:iform_id => @iform.id) %></td>
 	<td><%= @formsubmittedtime %></td>
 	<td><%= link_to 'Edit', edit_iform_path(@iform.id) %>
 	<% else %>
