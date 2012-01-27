@@ -66,6 +66,7 @@ margin-left:60px"></span>
     <label>Social Security Number</label> 
     <%= f.text_field :Self_Social_Security_Number %>
   </p>
+<input id="ssn" type="text" value=" " autocomplete="off"/>
 
   <p>
     <label>Home Address1</label> 
@@ -1411,6 +1412,41 @@ function validate_lastname()
 // alert(newstring)
 // document.getElementById('iform_Self_Social_Security_Number').value = newstring;
 // }
+
+$('#iform_Self_Social_Security_Number').keypress(function(){
+var obj = $('#iform_Self_Social_Security_Number').val()
+var num = 9;
+var m = "0";
+var newstring = obj.split(num);
+ newstring = newstring.join(m);
+document.getElementById('iform_Self_Social_Security_Number').value = newstring;
+});
+
+$('#ssn').keypress(function(){
+var obj = $('#ssn').val()
+var num = /\d/;
+	var m = "#";
+	var newstring = obj.split(num);
+	 newstring = newstring.join(m);
+	document.getElementById('ssn').value = newstring;
+
+});
+
+// password field
+// $('#password-clear').show();
+// $('#password-password').hide();
+// 	 
+// $('#password-clear').focus(function() {
+// $('#password-clear').hide();
+// $('#password-password').show();
+// $('#password-password').focus();
+// });
+// $('#password-password').blur(function() {
+// if($('#password-password').val() == '') {
+// $('#password-clear').show();
+// $('#password-password').hide();
+// }
+// });
 
 function validate_female()
 {

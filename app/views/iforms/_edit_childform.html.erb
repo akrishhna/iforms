@@ -185,10 +185,14 @@
 <h4>Mother’s Information:</h4>
 
 <p>
-    <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "stepmother" %>
-    Step Mother
-	<%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "guardian" %>
+	<%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "mother" %>
+    Mother
+	<%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "stepmother" %>
+    Step Mother<br />
+    <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "guardian" %>
     Guardian
+	<%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "none" %>
+    None
 </p>
 
 <p>
@@ -260,10 +264,14 @@
 <h4>Father’s Information:</h4>
 
 <p>
-    <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "stepfather" %>
-   Step Father
+    <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "father" %>
+   Father
+   	<%= f.radio_button :Father_Stepfather_Or_Gaurdian, "stepfather" %>
+  Step Father<br />
 	<%= f.radio_button :Father_Stepfather_Or_Gaurdian, "guardian" %>
     Guardian 
+	<%= f.radio_button :Father_Stepfather_Or_Gaurdian, "none" %>
+    None
 </p>
 
 <p>

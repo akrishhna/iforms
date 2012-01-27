@@ -1,7 +1,8 @@
 class Notifier < ActionMailer::Base
   default :from => "info.emailsender@gmail.com"
-  def appointment_confirmation_notification(appointment)
+  def appointment_confirmation_notification(appointment, doctor)
       @appointment = appointment
+      @doctor = doctor
       mail(:to => @appointment.email, :subject => "Appointment confirmation")
   end
   

@@ -1,6 +1,6 @@
 class AddPdffilePathToIform < ActiveRecord::Migration
   def self.up
-    add_column :iforms, :pdffile_path, :binary, :limit => 10.megabyte
+    add_column :iforms, :pdffile_path, :binary, :limit => 16.megabyte
   end
 
   def self.down

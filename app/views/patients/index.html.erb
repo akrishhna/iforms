@@ -1,3 +1,4 @@
+
 <div class="index">
 <h3>My Appointments</h3>
 <% if !@appointments.blank? %>
@@ -35,7 +36,7 @@
 	<td><%= i.firstname.capitalize%> <%= i.lastname.capitalize%></td>
 	<% p = i.doctorname.split(" ")%>
 	<td><%= p[0].capitalize %> <%= p[1].capitalize%></td>
-	<% p formname_length = i.formname.split(",")%>
+	<% formname_length = i.formname.split(",")%>
 	<% if i.formname.blank? %>
 	<td></td>
 	<td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
@@ -44,16 +45,15 @@
 	<td></td>
 
 	<%elsif formname_length.length==1 %>
-	<% p "with in length 1" %>
 	<% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id)%>
 
     <td>
 	<% @appformjoins.each do |j| %>
 	<% if j.iform_id %>
-	<% @iform = Iform.find(j.iform_id)%>
+	<% @iform = Iform.find(j.iform_id)%>	
 	<% end %>	
 	<% if j.status == "submitted" %>
-	<li><%= link_to j.formname, @iform.path   %></li>	
+	<li><%= link_to j.formname, get_iform_iforms_path(:iform_id => @iform.id) %></li>	
 	<%else%>
 	<li><%= link_to j.formname, :controller => "iforms", :action => "new", :name => j.formname, :appointment_id => i %></li>	
 	<%end%>	

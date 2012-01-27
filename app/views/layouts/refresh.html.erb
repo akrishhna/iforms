@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- <meta http-equiv="refresh" content="5" /> -->
+	
+  <title>Iforms</title>
+  <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script> -->
+   <%= yield :javascript %>
+  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css","scaffold" %>
+ 
+  <%= javascript_include_tag :defaults,
+  "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js",  
+   "formToWizard", "rails.validations" %> 
+
+<%= csrf_meta_tag %>
+  
+</head>
+<body>
+<div class = "header">
+<% if current_user %>
+Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
+<%= link_to 'Sign out', destroy_user_session_path %>
+<% else %>
+<%= link_to 'Sign in', new_user_session_path %>
+<%end%>
+</div>
+<div class = "logo" onclick="window.location.href='/';">
+</div>
+<div class ="container_layout">
+<span style = "color:red;margin-left:150px">
+<%= alert %>
+</span>
+<span style = "color:green;margin-left:50px">
+<%= notice %>
+</span>
+<%= yield %>
+</div>
+<div class="footer">
+	<% if user_signed_in? and current_user.role =="patient" %>
+	<%= link_to 'Home', patients_path %> |
+	<%elsif user_signed_in? and current_user.role =="doctor"%>
+	<%= link_to 'Home', doctors_path %> |
+	<%elsif user_signed_in? and current_user.role =="admin"%>
+	<%= link_to 'Home', :controller => "admin", :action => "index" %> |
+	<%else%>
+	<%= link_to 'Home', root_url %> |
+	<%end %>
+	<%= link_to 'About Us', '/about'%> |
+	<%= link_to 'FAQ', '/FAQ'%> |
+	<%= link_to 'Contact', '/contact'%>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 class Iform < ActiveRecord::Base
  belongs_to :appointment
+ 
  # after_save :update_appformjoin
  #  
  # def self.update_appformjoin(appformjoin)

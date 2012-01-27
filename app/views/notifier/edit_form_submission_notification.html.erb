@@ -1,4 +1,5 @@
-<p><%= @doctor.firstname.capitalize %>,</p>
-<p>You received a Form from your Patient, <%= @appointment.firstname.capitalize %> <%= @appointment.lastname.capitalize %> </p>
-<p>Appointment is on <%= @appointment.date.strftime("%m-%d-%Y") %> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %></p>
-<p><%= link_to 'Click here', "#{Configuration.notifier_path}iforms/#{@iform.id}" %> to view the Form</p>
+
+<p><%= @appointment.firstname.capitalize %> <%= @appointment.lastname.capitalize %> has just edited <%= @formname %>.  You may view it by <%= link_to 'clicking here', "#{Configuration.notifier_path}#{@iform.path}" %></p>
+
+Regards,<br />
+iFor.ms

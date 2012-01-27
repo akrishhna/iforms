@@ -89,10 +89,8 @@ class IformsController < ApplicationController
   #@age = Date.today.year - @iform.Self_Birthdate.year
   #@age -= 1 if Date.today < @iform.Self_Birthdate + age.years and birthdate.month > now.month and birthdate.day > now.day
   age_calculator(@iform)  
-  time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
-  str = time_now+"_"+@iform.Self_Name_Last + "_" + @iform.Self_Name_First
-  pathx = "/pdffiles/#{str}.pdf"
-  @iform.path = pathx
+ 
+  @iform.path = iform_file_name(@iform)
   @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
   @iform.formname = session[:formname]
   respond_to do |format|
@@ -119,7 +117,7 @@ class IformsController < ApplicationController
           p @appformjoin.formsubmittedtime = Time.now
           @appformjoin.iform_id = @iform.id
           @appformjoin.save
-          adultform_controls_mapping(str, @iform)
+          adultform_controls_mapping(@iform.path, @iform)
           Notifier.form_submission_notification(@appointment, session[:formname], @iform).deliver
        
         format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
@@ -153,25 +151,23 @@ class IformsController < ApplicationController
   # PUT /iform/1
   # PUT /iform/1.xml
   def update
+    p "with in update"
     @iform = Iform.find(params[:id])
     respond_to do |format|
       if @iform.update_attributes(params[:iform])
-        time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
-         str = time_now+"_"+@iform.Self_Name_Last + "_" + @iform.Self_Name_First
-          @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
-          age_calculator(@iform)
-           @iform.Self_Age = @You_Age
-         pathx = "/pdffiles/#{str}.pdf"
-         @iform.path = pathx
+        @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
+        age_calculator(@iform)
+        @iform.Self_Age = @You_Age
+        @iform.path = iform_file_name(@iform)
          @iform.save
          if @iform.formname.include?("Adult")
          @iform.save
          adultform_control_conditions(@iform)
-         adultform_controls_mapping(str, @iform)
+         adultform_controls_mapping(@iform.path, @iform)
          end
          if @iform.formname.include?("Child")
           childform_control_conditions(@iform)
-          childform_controls_mapping(str, @iform)
+          childform_controls_mapping(@iform.path, @iform)
          end
          Notifier.edit_form_submission_notification(@iform.appointment, @iform.formname, @iform).deliver 
         format.html { redirect_to(@iform, :notice => 'Form was successfully updated.') }
@@ -195,15 +191,22 @@ class IformsController < ApplicationController
     end
   end
   
+  def get_iform
+      iform_id = params[:iform_id]
+      @iform = Iform.find(iform_id)
+
+      send_data @iform.pdffile_path,
+                :filename => "#{@iform.path}.pdf",
+                :disposition => "inline",
+                :type => "application/pdf"
+  end
+  
   protected
   def submit_childform
       @iformcheck = Iform.where("appointment_id = ? and formname = ?",session[:appointment_id], session[:formname]).first
       if !@iformcheck  
       @iform = Iform.new(params[:iform])
-      time_now = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
-      str = time_now+"_"+@iform.Self_Name_Last+"_"+@iform.Self_Name_First
-      pathx = "/pdffiles/#{str}.pdf"
-      @iform.path = pathx
+      @iform.path = iform_file_name(@iform)
       @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
       age_calculator(@iform)
        @iform.Self_Age = @You_Age
@@ -227,7 +230,7 @@ class IformsController < ApplicationController
              p @appformjoin.formsubmittedtime = Time.now
              @appformjoin.iform_id = @iform.id
              @appformjoin.save
-             childform_controls_mapping(str, @iform)
+             childform_controls_mapping(@iform.path, @iform)
              Notifier.form_submission_notification(@appointment, session[:formname], @iform).deliver
              format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
              format.xml  { render :xml => @iform, :status => :created, :location => @iform }
@@ -830,10 +833,10 @@ class IformsController < ApplicationController
   
   protected
    def adultform_controls_mapping(str, iform)
-      
+
   pdftkpath = "#{Configuration.pdftk_path}"
   pdffilepath = "#{Configuration.pdffiles_path}"
-  path = pdffilepath + "#{str}.pdf"        
+  p path = pdffilepath + "#{str}.pdf"        
   @pdftk = PdftkForms::Wrapper.new(pdftkpath)
   
   # @pfields = @pdftk.fields(pdffilepath + 'iform.pdf')
@@ -1077,6 +1080,11 @@ class IformsController < ApplicationController
     "You Zip" => @You_Zip,
     "Your E-Mail Address" => @Your_EMail_Address
 })
+    iform_file = File.new(path, 'rb')
+    iform.pdffile_path = iform_file.read()
+    iform.save
+    
+    File.delete(path)
   end
   
   protected
@@ -1888,6 +1896,17 @@ class IformsController < ApplicationController
                 "Widowed" => @Widowed
 
     })
-  end
-    
-end
+    iform_file = File.new(path, 'rb')
+        iform.pdffile_path = iform_file.read()
+        iform.save
+
+        File.delete(path)
+
+      end
+
+      def iform_file_name(iform)
+        time_now = Time.now.strftime("%Y%m%d%H%M%S")
+        str = "#{iform.Self_Name_Last.gsub(' ', '-')}_#{@iform.Self_Name_First.gsub(' ', '-')}_#{time_now}"
+        pathx = "#{str}"
+      end
+    end

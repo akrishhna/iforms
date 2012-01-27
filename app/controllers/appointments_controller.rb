@@ -49,7 +49,7 @@ class AppointmentsController < ApplicationController
        end
        end 
        end  
-       Notifier.appointment_confirmation_notification(@appointment).deliver
+       Notifier.appointment_confirmation_notification(@appointment, @doctor).deliver
        format.html { redirect_to(doctors_path, :id => nil, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}") }
        format.xml  { render :xml => @appointment, :status => :created, :location => @appointment }
       else
@@ -79,6 +79,7 @@ class AppointmentsController < ApplicationController
   def update
     @appointment = Appointment.find(params[:id])
      respond_to do |format|
+       @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
        @appointment.timesent = Time.now
        p @formids = params[:form_ids]
        a=""
@@ -107,7 +108,7 @@ class AppointmentsController < ApplicationController
         end
          
      if @appointment.update_attributes(params[:appointment])
-       Notifier.appointment_confirmation_notification(@appointment).deliver
+       Notifier.appointment_confirmation_notification(@appointment, @doctor).deliver
        format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }
        format.xml  { head :ok }
      else

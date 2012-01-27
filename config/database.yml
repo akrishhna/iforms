@@ -6,6 +6,8 @@ development:
   pool: 5
   username: root
   password: 
+  # reconnect: true
+  #   wait_timeout: 2147483
 #  #socket: /var/run/mysqld/mysqld.sock
 
 #development:
