@@ -43,6 +43,24 @@ class DeviserolesController < ApplicationController
         format.html { redirect_to('/contact', :alert => "Please enter valid re-captcha tag") }
       end 
     end
-    end   
+    end 
+    
+    def user_details
+      p "user details"
+      if session[:user_email_after_update]
+        user = User.where("email =?", session[:user_email_after_update]).first
+        user.confirmed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+        user.save
+      end
+    if session[:user_email_before_update]
+      p session[:user_email_before_update] 
+      @appointments = Appointment.where("email = ?", session[:user_email_before_update])
+      @appointments.each do |i|
+        i.email = session[:user_email_after_update]
+        i.save(:validate =>false)
+      end
+      redirect_to deviseroles_path
+      end 
+    end  
       
 end

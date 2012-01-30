@@ -37,10 +37,10 @@ a:hover {color: #000;}
 .index {
 	margin-left: -70px;
 	margin-right: auto;
-	padding: 10px 10px;
+	padding: 0px 8px;
  width: 1080px;
  border: solid 1px #fff;
-  margin-top: 10px;
+  margin-top: 5px;
   background-color: #fff;
 }
 .formslist_show{
@@ -180,7 +180,7 @@ margin-left:50px;
 	padding: 40px 0 0 50px;
 	text-shadow: 3px 3px 3px #ccc;
     cursor: pointer;
-    margin-bottom:2em;
+    margin-bottom:1em;
     margin-left: 5em;
     margin-top: 1em;
 }
@@ -188,7 +188,8 @@ margin-left:50px;
 .footer
 {
 	padding: 10px;
-	margin: 70px 20px;
+	margin: 70px 10px;
+	margin-bottom: 0px;
 	font-size: 0.9em;
 	text-align: center;
 	border-top: 1px solid #C9E0ED;

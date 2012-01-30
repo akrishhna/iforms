@@ -28,7 +28,7 @@ Iforms::Application.configure do
     Configuration.pdftk_path = '/usr/bin/pdftk'
     Configuration.pdffiles_path = '/home/railsapps/iforms_staging/current/public/pdffiles/'
     Configuration.csvfiles_path = '/home/railsapps/iforms_staging/current/public/csvfiles/'
-    Configuration.notifier_path = 'staging.ifor.ms'
+    Configuration.notifier_path = 'http://50.57.138.165:8082'
   end 
 
   

@@ -32,4 +32,8 @@ class Notifier < ActionMailer::Base
     mail(:to => "Michael.R.Whitworth@gmail.com", :subject => @subject)
   end
   
+  def confirmation_instructions_notification(user)
+    @user = user
+    mail(:to => @user.email, :subject => "Confirmation Instructions")
+  end
 end

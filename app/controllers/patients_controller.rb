@@ -2,7 +2,8 @@ class PatientsController < ApplicationController
   before_filter :is_patient?
   before_filter :patient_profile_exists?, :except => [:new,:create]
   def index
-    @appointments = Appointment.all(:conditions => ['email = ?', current_user.email])
+     #@appointments = Appointment.paging(params[:page], params[:id])
+    @appointments = Appointment.where('email = ?', current_user.email).order("date DESC").paging(params[:page], params[:appointment_id])
   end
 
   def new

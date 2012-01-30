@@ -48,6 +48,7 @@ get "deviseroles/index"
   resources :deviseroles do
     collection do
       post 'contacts'
+      get 'user_details'
     end
   end
   resources :childforms

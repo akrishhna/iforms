@@ -14,8 +14,8 @@ class Appointment < ActiveRecord::Base
       end
       
       def self.paging(page, id)
-            paginate :per_page => 15, :page => page,
-                    :conditions => ['appointment_id  = ?', id]
+            paginate :per_page => 10, :page => page
+                    
       end
     
 end
