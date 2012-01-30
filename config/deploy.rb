@@ -31,7 +31,12 @@ set :chmod777, "public/csvfiles public/pdffiles"
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
    end
+   task :permissions do
+     run "#{try_sudo} chmod 777 #{File.join(current_path,'public/csvfiles')}"
  end
+ end
+ 
+ after "deploy:restart", "deploy:permissions"
   
 #after "deploy:symlink"
 #, "deploy:update_crontab"
