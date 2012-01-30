@@ -4,14 +4,21 @@ set :domain, '50.57.138.165' #Your Accelerators public IP address
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
+if stage == "production"
+  set :deploy_to, "/home/railsapps/iforms/"
+else
+  set :deploy_to, "/home/railsapps/iforms_staging/"
+end
 
-set :deploy_to, "/home/railsapps/iforms/"
+
 set :user, "root"
 set :scm_passphrase, "eagleOr2W6Whl0"
 
 role :web, domain # Your HTTP server, Apache/etc
 role :app, domain # This may be the same as your `Web` server
 role :db, domain, :primary => true # This is where Rails migrations will run
+
+set :chmod755, "public/csvfiles public/pdffiles"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -25,7 +32,7 @@ role :db, domain, :primary => true # This is where Rails migrations will run
    end
  end
 
- 
+  
 #after "deploy:symlink"
 #, "deploy:update_crontab"
 #namespace :deploy do

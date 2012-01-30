@@ -28,7 +28,7 @@ Iforms::Application.configure do
     Configuration.pdftk_path = '/usr/bin/pdftk'
     Configuration.pdffiles_path = '/home/railsapps/iforms/current/public/pdffiles/'
     Configuration.csvfiles_path = '/home/railsapps/iforms/current/public/csvfiles/'
-    Configuration.notifier_path = 'http://50.57.138.165'
+    Configuration.notifier_path = 'http://ifor.ms'
   end 
 
   
@@ -69,7 +69,7 @@ Iforms::Application.configure do
   
       config.action_view.debug_rjs             = true
    
-      config.action_mailer.default_url_options = { :host => '50.57.138.165' }
+      config.action_mailer.default_url_options = { :host => 'http://ifor.ms' }
       
       # Don't care if the mailer can't send
       config.action_mailer.raise_delivery_errors = false

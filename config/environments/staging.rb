@@ -18,7 +18,7 @@ Iforms::Application.configure do
   config.cache_classes = false
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
@@ -26,9 +26,9 @@ Iforms::Application.configure do
   #file paths
   config.after_initialize do 
     Configuration.pdftk_path = '/usr/bin/pdftk'
-    Configuration.pdffiles_path = '/home/railsapps/iforms/current/public/pdffiles/'
-    Configuration.csvfiles_path = '/home/railsapps/iforms/current/public/csvfiles/'
-    Configuration.notifier_path = 'http://50.57.138.165/'
+    Configuration.pdffiles_path = '/home/railsapps/iforms_staging/current/public/pdffiles/'
+    Configuration.csvfiles_path = '/home/railsapps/iforms_staging/current/public/csvfiles/'
+    Configuration.notifier_path = 'staging.ifor.ms'
   end 
 
   
@@ -69,7 +69,7 @@ Iforms::Application.configure do
   
       config.action_view.debug_rjs             = true
    
-      config.action_mailer.default_url_options = { :host => '50.57.138.165' }
+      config.action_mailer.default_url_options = { :host => 'staging.ifor.ms' }
       
       # Don't care if the mailer can't send
       config.action_mailer.raise_delivery_errors = false
