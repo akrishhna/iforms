@@ -18,7 +18,8 @@ role :web, domain # Your HTTP server, Apache/etc
 role :app, domain # This may be the same as your `Web` server
 role :db, domain, :primary => true # This is where Rails migrations will run
 
-set :chmod755, "public/csvfiles public/pdffiles"
+
+set :chmod777, "public/csvfiles public/pdffiles"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -31,7 +32,6 @@ set :chmod755, "public/csvfiles public/pdffiles"
      run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
    end
  end
-
   
 #after "deploy:symlink"
 #, "deploy:update_crontab"
@@ -52,4 +52,4 @@ set :chmod755, "public/csvfiles public/pdffiles"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
-\
+
