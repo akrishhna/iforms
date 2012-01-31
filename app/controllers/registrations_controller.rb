@@ -12,8 +12,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
     
     def update
-      Sessionstore.delete_all
+      
       if params[:user][:email] != @user.email
+        Sessionstore.delete_all
         p session[:useremail_before_update]= @user.email
           @user.confirmed_at = nil
           #@user.confirmation_sent_at =nil
