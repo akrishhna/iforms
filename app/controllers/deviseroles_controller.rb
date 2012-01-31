@@ -46,21 +46,22 @@ class DeviserolesController < ApplicationController
     end 
     
     def user_details
+      @sessionstore = Sessionstore.all.first
       p "user details"
-      p session[:user_email_after_update]
-      if session[:user_email_after_update]
-        p session[:user_email_after_update]
-        @user = User.where("email =?", session[:user_email_after_update]).first
+     p @sessionstore.useremail_beforeupdate
+      p @sessionstore.useremail_afterupdate
+      if @sessionstore.useremail_afterupdate
+        @user = User.where("email =?", @sessionstore.useremail_afterupdate).first
         @user.confirmed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
         @user.save
       end
-     @user = User.where("email =?", session[:user_email_after_update]).first
+     @user = User.where("email =?", @sessionstore.useremail_afterupdate).first 
      if @user.role == 'patient'  
-     if session[:user_email_before_update]
-      p session[:user_email_before_update] 
-      @appointments = Appointment.where("email = ?", session[:user_email_before_update])
+     if @sessionstore.useremail_beforeupdate 
+       p "updating appointments for patient"
+      @appointments = Appointment.where("email = ?", @sessionstore.useremail_beforeupdate)
       @appointments.each do |i|
-        i.email = session[:user_email_after_update]
+        i.email = @sessionstore.useremail_afterupdate
         i.save(:validate =>false)
       end
       end

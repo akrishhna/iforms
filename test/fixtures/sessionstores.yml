@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  useremail_beforeupdate: MyString
+  useremail_afterupdate: MyString
+
+two:
+  useremail_beforeupdate: MyString
+  useremail_afterupdate: MyString
