@@ -12,26 +12,29 @@ class RegistrationsController < Devise::RegistrationsController
     end
     
     def update
-
+     
       if params[:user][:email] != @user.email
         p session[:user_email_before_update]= @user.email
           @user.confirmed_at = nil
           #@user.confirmation_sent_at =nil
           @user.email = params[:user][:email]
-          if params[:user][:password]
+          if !params[:user][:password].empty?
           @user.password = params[:user][:password]
           end
-          if params[:user][:password_confirmation]
+          if !params[:user][:password_confirmation].empty?
           @user.password_confirmation = params[:user][:password_confirmation]
           end
-          @user.save
+          if @user.save
           p session[:user_email_after_update]= @user.email
           Notifier.confirmation_instructions_notification(@user).deliver
           redirect_to root_path
+          else
+            flash[:alert] = "Email is already taken"
+            redirect_to edit_user_registration_path
+          end
       else
         super
       end
-
     end
 
 end

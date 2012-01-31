@@ -47,20 +47,25 @@ class DeviserolesController < ApplicationController
     
     def user_details
       p "user details"
+      p session[:user_email_after_update]
       if session[:user_email_after_update]
-        user = User.where("email =?", session[:user_email_after_update]).first
-        user.confirmed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-        user.save
+        p session[:user_email_after_update]
+        @user = User.where("email =?", session[:user_email_after_update]).first
+        @user.confirmed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+        @user.save
       end
-    if session[:user_email_before_update]
+     @user = User.where("email =?", session[:user_email_after_update]).first
+     if @user.role == 'patient'  
+     if session[:user_email_before_update]
       p session[:user_email_before_update] 
       @appointments = Appointment.where("email = ?", session[:user_email_before_update])
       @appointments.each do |i|
         i.email = session[:user_email_after_update]
         i.save(:validate =>false)
       end
-      redirect_to deviseroles_path
+      end
       end 
+       redirect_to deviseroles_path
     end  
       
 end

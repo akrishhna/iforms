@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
   before_filter :is_doctor?, :except =>["show"]
   #before_filter :is_admin?, :only => ["show"]
   def new
-    @appointment = Appointment.new(:skip_validation => true)
+    @appointment = Appointment.new
     #Form.create(:formname => "Bastrop_Child", :doctor_id => 2, :formpath => "http://50.57.138.165/iforms/new")
     #Form.create(:formname => "Steiner_Ranch_Adult", :doctor_id => 2, :formpath => "http://localhost:3000/iforms/new")
   end
