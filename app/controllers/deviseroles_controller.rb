@@ -53,6 +53,7 @@ class DeviserolesController < ApplicationController
       if @sessionstore.useremail_afterupdate
         @user = User.where("email =?", @sessionstore.useremail_afterupdate).first
         @user.confirmed_at = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+        @user.edit_confirmed = "confirmed"
         @user.save
       end
      @user = User.where("email =?", @sessionstore.useremail_afterupdate).first 

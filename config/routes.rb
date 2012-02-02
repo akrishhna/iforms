@@ -1,4 +1,6 @@
 Iforms::Application.routes.draw do
+  get "confirmations/new"
+
   get "contactus/new"
   get "contactus/index"
   resources :contactus
@@ -25,7 +27,7 @@ Iforms::Application.routes.draw do
 
   get "admin/index"
 
-  devise_for :users, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "" }, :controllers => {:registrations => 'registrations'}
+  devise_for :users, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "" }, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations'}
   
 get "deviseroles/index"
   #get "doctors/index"

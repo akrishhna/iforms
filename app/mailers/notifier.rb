@@ -36,4 +36,9 @@ class Notifier < ActionMailer::Base
     @user = user
     mail(:to => @user.email, :subject => "Confirmation Instructions")
   end
+  
+  def resend_confirmation_notification(user)
+  @user = user
+  mail(:to => @user.email, :subject => "Resending Confirmation Instructions")
+  end
 end

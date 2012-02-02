@@ -1,0 +1,24 @@
+<div class="container">
+<h2>Resend instructions</h2>
+
+<%= form_for(resource_name, resource, :url => confirmation_path(resource_name)) do |f| %>
+ <% if resource %>
+<div id="error_explanation">
+	<ul>
+    <% resource.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul> 
+  </div> 
+<% end %>
+<br />
+  <div class="labelcss">Email </div>
+  <%= f.text_field :email %>
+<br /><br />
+  <div class="actions">
+  <%= f.submit "Resend confirmation instructions" %>
+  </div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>
+</div>
