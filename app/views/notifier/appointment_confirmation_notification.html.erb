@@ -6,12 +6,19 @@
 <p>If you already have an account, Signin
  by <%= link_to 'Clicking here', "#{Configuration.notifier_path}deviseroles/index" %></p> -->
 
+<% @user = User.where("email =?", @appointment.email).first %>
 
 <p>Dear <%= @appointment.firstname.capitalize %> <%= @appointment.lastname.capitalize %>,</p>
 
 <p>This email confirms your appointment with Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> on <%= @appointment.date.strftime("%m-%d-%Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</p>
 
-<p>iFor.ms is the technology partner of Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> providing their patients with online access to their patient forms.  Prior to your visit with Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %>, please <%= link_to 'click here', "#{Configuration.notifier_path}/users/registration" %> to complete and submit your patient forms.  Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> will have your printed forms available for your review and signature when you arrive for your appointment.</p>
+<p>iFor.ms is the technology partner of Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> providing their patients with online access to their patient forms.  Prior to your visit with Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %>, please 
+<% if @user %>
+<%= link_to 'click here', "#{Configuration.notifier_path}/login" %>
+<%else%>
+<%= link_to 'click here', "#{Configuration.notifier_path}/users/registration" %> 
+<%end%> 
+to complete and submit your patient forms.  Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> will have your printed forms available for your review and signature when you arrive for your appointment.</p>
 
 <p>To sign in to iFor.ms, please use the email address you supplied to Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> when booking your appointment.</p>
 

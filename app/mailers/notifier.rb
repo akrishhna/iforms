@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default :from => "info.emailsender@gmail.com"
+  default :from => "iforms-noreply@ifor.ms"
   def appointment_confirmation_notification(appointment, doctor)
       @appointment = appointment
       @doctor = doctor
@@ -29,7 +29,7 @@ class Notifier < ActionMailer::Base
     @email = email
     @subject = subject
     @message = body
-    mail(:to => "Michael.R.Whitworth@gmail.com", :subject => @subject)
+    mail(:to => "michael.whitworth@ifor.ms", :subject => @subject)
   end
   
   def confirmation_instructions_notification(user)

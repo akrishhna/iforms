@@ -1,7 +1,11 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+if ENV['RAILS_ENV'] == 'production'
+include SslRequirement
+else
 
+end
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)

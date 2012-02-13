@@ -2,16 +2,16 @@ Iforms::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.perform_deliveries = true
-  ActionMailer::Base.raise_delivery_errors = true
+  #ActionMailer::Base.perform_deliveries = true
+  #ActionMailer::Base.raise_delivery_errors = true
   ActionMailer::Base.smtp_settings = {
     :enable_starttls_auto => true,  
-    :address            => 'smtp.gmail.com',
-    :port               => 587,
-    :domain             => 'google.com', #you can also use google.com
+    :address            => 'smtpout.secureserver.net',
+    :port               => 80,
+    :domain             => 'ifor.ms', #you can also use google.com
     :authentication     => :plain,
-    :user_name          => 'info.emailsender@gmail.com',
-    :password           => 'admininfo123'
+    :user_name          => 'iforms-noreply@ifor.ms',
+    :password           => 'wK7W5cd6'
  }
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
