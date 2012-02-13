@@ -14,7 +14,7 @@
 
 <p>iFor.ms is the technology partner of Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> providing their patients with online access to their patient forms.  Prior to your visit with Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %>, please 
 <% if @user %>
-<%= link_to 'click here', "#{Configuration.notifier_path}/login" %>
+<%= link_to 'click here', "#{Configuration.notifier_path}/users/login" %>
 <%else%>
 <%= link_to 'click here', "#{Configuration.notifier_path}/users/registration" %> 
 <%end%> 

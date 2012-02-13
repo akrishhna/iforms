@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 if ENV['RAILS_ENV'] == 'production'
-include SslRequirement
+#include SslRequirement
 else
 
 end
