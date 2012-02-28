@@ -14,6 +14,15 @@ class IformsController < ApplicationController
           format.xml  { head :ok }
       end
   end
+  
+  def save
+    @iform = Iform.new(params[:iform])
+    p "with in save"
+    p @iform.Self_Name_First
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # GET /iform/1
   # GET /iform/1.xml
@@ -57,7 +66,20 @@ class IformsController < ApplicationController
   # POST /iform
   # POST /iform.xml
   def create
-  if session[:formname]
+    # if params[:save]
+    #       p "with in save"
+    #       @iform = Iform.new(params[:iform])
+    #       @iform.save
+    #       p session[:iform_id] = @iform.id  
+    #     end
+    #     if params[:save1]
+    #       p "with in save1"
+    #       p session[:iform_id]
+    #       @iform = Iform.find(session[:iform_id])
+    #       @iform.update_attributes(params[:iform])
+    #       @iform.save
+    #     end
+  if session[:formname] #and params[:iform_submit]
   if session[:formname].include?("Child")  
   submit_childform()
   end
@@ -101,9 +123,8 @@ class IformsController < ApplicationController
          age_calculator(@iform)
          @iform.Self_Age = @You_Age
          @iform.save
-         #------------------------------------------------------------------ 
-            adultform_control_conditions(@iform)                                
-            
+         #------------------------------------------------------------------
+                                           
          #--------------------------------------------------------------------------------
           
           @appointment = Appointment.find(session[:appointment_id])
@@ -117,15 +138,18 @@ class IformsController < ApplicationController
           p @appformjoin.formsubmittedtime = Time.now
           @appformjoin.iform_id = @iform.id
           @appformjoin.save
+          if params[:iform_submit] 
+          adultform_control_conditions(@iform)
           adultform_controls_mapping(@iform.path, @iform)
           Notifier.form_submission_notification(@appointment, session[:formname], @iform).deliver
-       
+          
         format.html { redirect_to(@iform, :notice => 'form was successfully submitted.') }
         format.xml  { render :xml => @iform, :status => :created, :location => @iform }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @iform.errors, :status => :unprocessable_entity }
       end
+          end
   end
   # p @appformjoin.status
   #   Iform.update_appformjoin(@appformjoin)
