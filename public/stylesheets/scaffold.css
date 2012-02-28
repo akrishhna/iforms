@@ -198,3 +198,24 @@ margin-left:50px;
 .hidden {
     display: none;
 }
+
+.flash {
+    border: 1px solid #cccccc;
+    margin: 5px;
+    padding: 10px;
+    font-size: 14px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.flash-alert {
+    color: red;
+}
+
+.flash-notice {
+    color: green;
+}

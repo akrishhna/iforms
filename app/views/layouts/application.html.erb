@@ -25,12 +25,12 @@
     <div class="logo" onclick="window.location.href='/';">
     </div>
     <div class="container_layout">
-    <span style="color:red;margin-left:150px">
-    <%= alert %>
-    </span>
-    <span style="color:green;margin-left:50px">
-    <%= notice %>
-    </span>
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, :id => "flash_#{name}", :class => "flash flash-#{name}" do %>
+          <%= raw msg %>
+        <% end %>
+      <% end %>
+
       <%= yield %>
     </div>
     <div class="footer">
