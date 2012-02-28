@@ -1,14 +1,14 @@
 <h2>Editing Form</h2>
 <% if @iform.formname.include?("Adult") %>
-<% session[:formname]= @iform.formname %>
-<%= render 'edit_adultform' %>
-<% session[:formname]=nil%>
+  <% session[:formname]= @iform.formname %>
+  <%= render 'edit_adultform' %>
+  <% session[:formname]=nil %>
 <% end %>
 
 <% if @iform.formname.include?("Child") %>
-<% session[:formname]= @iform.formname %>
-<%= render 'edit_childform' %>
-<% session[:formname]=nil%>
+  <% session[:formname]= @iform.formname %>
+  <%= render 'edit_childform' %>
+  <% session[:formname]=nil %>
 <% end %>
 
 
