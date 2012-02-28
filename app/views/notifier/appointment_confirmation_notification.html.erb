@@ -14,9 +14,9 @@
 
 <p>iFor.ms is the technology partner of Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> providing their patients with online access to their patient forms.  Prior to your visit with Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %>, please 
 <% if @user %>
-<%= link_to 'click here', "#{Configuration.notifier_path}/users/login" %>
+<%= link_to 'click here', @login_url %>
 <%else%>
-<%= link_to 'click here', "#{Configuration.notifier_path}/users/registration" %> 
+<%= link_to 'click here', @registration_url %>
 <%end%> 
 to complete and submit your patient forms.  Dr. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> will have your printed forms available for your review and signature when you arrive for your appointment.</p>
 
