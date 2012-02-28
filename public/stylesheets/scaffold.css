@@ -195,3 +195,6 @@ margin-left:50px;
 	border-top: 1px solid #C9E0ED;
 }
 
+.hidden {
+    display: none;
+}
