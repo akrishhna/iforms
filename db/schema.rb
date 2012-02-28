@@ -572,7 +572,7 @@ ActiveRecord::Schema.define(:version => 20120131211929) do
     t.string   "Self_School",                                                     :limit => 50
     t.string   "Allergic_To_Drugs_List"
     t.string   "Dental_History_Habits_Speech_Problems"
-    t.binary   "pdffile_path",                                                    :limit => 2147483647
+    t.binary   "pdffile_path",                                                    :limit => 16777215
   end
 
   create_table "patients", :force => true do |t|

@@ -57,7 +57,7 @@ get "deviseroles/index"
   resources :iforms do
     collection do
       get 'get_iform'
-      post 'save'
+      post 'iform_field_update'
     end
   end
   

@@ -1,5 +1,3 @@
-
-
 <%= form_for @iform, :method => :post, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" } do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
@@ -10,10 +8,13 @@
         <li><%= msg %></li>
       <% end %>
       </ul>
-    </p>
+    </div>
   <% end %>
 <h3 style = "color:#808080">&nbsp You are filling <%= session[:formname] %> form </h3>
 
+  <div class="hidden">
+    <%= hidden_field_tag "iform_id", @iform.id %>
+  </div>
 
 <fieldset>
 <legend>Tell Us About Your Child</legend>
