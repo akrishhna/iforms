@@ -46,7 +46,13 @@
 	<td><%= @formsubmittedtime %></td>
 	<td><%= link_to 'Edit', edit_iform_path(@iform.id) %>
 	<% else %>
-	<td><%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %></td>
+	<td>
+    <% if i.status == "pending" && i.iform_id.nil? %>
+      <%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %>
+    <% else %>
+      <li><%= link_to i.formname, edit_iform_path(i.iform_id) %></li>
+    <% end%>
+  </td>
 	<td> Pending </td>
 	</tr>
 	<% end %>

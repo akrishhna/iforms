@@ -48,9 +48,12 @@ class IformsController < ApplicationController
 
     @iform.formname = params[:name]
     @iform.appointment_id = params[:appointment_id]
-    #@iform.save(:validate => false)
+    @iform.save(:validate => false)
 
-    #redirect_to edit_iform_path(@iform)
+    @appformjoin = Appformjoin.where(:patient_user_id => current_user.id, :appointment_id => @iform.appointment_id, :formname => @iform.formname).first
+    @appformjoin.update_attributes({:iform_id => @iform.id})
+
+    redirect_to edit_iform_path(@iform)
   end
 
   def create
@@ -170,7 +173,12 @@ class IformsController < ApplicationController
           childform_control_conditions(@iform)
           childform_controls_mapping(@iform.path, @iform)
         end
-        raise @iform.appointment.to_yaml
+
+        appformjoin = Appformjoin.where(:iform_id => @iform.id).first
+        appformjoin.status = "submitted"
+        appformjoin.formsubmittedtime = Time.now
+        appformjoin.save
+
         Notifier.edit_form_submission_notification(@iform.appointment, @iform.formname, @iform).deliver
         format.html { redirect_to(@iform, :notice => 'Form was successfully updated.') }
         format.xml { head :ok }
