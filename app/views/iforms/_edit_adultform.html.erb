@@ -1,3 +1,4 @@
+<% submit_tag_text = "Submit form to #{@doctor.firstname.capitalize} #{@doctor.lastname.capitalize}" %>
 
 
 <%= form_for @iform, :method => :post, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" } do |f| %>
@@ -217,7 +218,7 @@ margin-left:60px"></span>
 
 <br /> 
 <div class="actions">
-    <%= f.submit 'Submit form to James Waters' %>
+    <%= f.submit submit_tag_text %>
   </div>
 <br /> 
 </fieldset>
@@ -350,7 +351,7 @@ margin-left:60px"></span>
 
 <br />
 <div class="actions">
-    <%= f.submit 'Submit form to James Waters' %>
+    <%= f.submit submit_tag_text %>
   </div>
 <br />
 </fieldset>
@@ -574,7 +575,7 @@ margin-left:60px"></span>
 
 <br />
 <div class="actions">
-    <%= f.submit 'Submit form to James Waters' %>
+    <%= f.submit submit_tag_text %>
   </div>
 <br />
 </fieldset>
@@ -1171,7 +1172,7 @@ margin-left:60px"></span>
 
 <br />
 <div class="actions">
-    <%= f.submit 'Submit form to James Waters' %>
+    <%= f.submit submit_tag_text %>
 </div>
 <br />
 </fieldset>
@@ -1345,11 +1346,11 @@ margin-left:60px"></span>
 	<%= f.radio_button :Dental_History_Tobacco_Smokeless, false %>
     No 
   </p>
-   
+
  
 <br /><br />
   <div class="actions">
-    <%= f.submit 'Submit form to James Waters' %>
+    <%= f.submit submit_tag_text %>
   </div>
 <br />
 </fieldset>

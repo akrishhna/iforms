@@ -150,6 +150,7 @@ class IformsController < ApplicationController
   def edit
     @iform = Iform.find(params[:id])
     @appointment = Appointment.find(@iform.appointment_id)
+    @doctor = Doctor.find(@appointment.doctor_id)
   end
 
   # PUT /iform/1
