@@ -86,9 +86,11 @@
               <% end %>
               <% if j.status == "submitted" %>
                 <td><%= @formsubmittedtime %></td>
-              <% else %>
-                <td>Pending</td>
+			  <% elsif j.status == "pending" && j.iform_id %>
+				<td>Pending</td>
                 <td><%= link_to "Edit", :controller => "iforms", :action => "edit", :id => @iform.id %></td>
+              <% else %>
+                <td>New</td>
               <% end %>
             <% end %>
 
