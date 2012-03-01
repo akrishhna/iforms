@@ -29,7 +29,7 @@
   </div>
 <% end %>
 <% if current_user.role == "patient" %>
-<% @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]) %>
+<% @patient = Patient.find_by_user_id(current_user.id) %>
 <%= link_to'Update Profile Information', edit_patient_path(@patient) %></br></br>
 <%= link_to "Back", patients_path %>
 <% end %>
