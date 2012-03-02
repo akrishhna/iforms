@@ -32,9 +32,9 @@
         <% end %>
 
         <tr>
-          <td><%= i.firstname.capitalize %> <%= i.lastname.capitalize %></td>
+          <td><%= i.firstname %> <%= i.lastname %></td>
           <% p = i.doctorname.split(" ") %>
-          <td><%= p[0].capitalize %> <%= p[1].capitalize %></td>
+          <td><%= p[0] %> <%= p[1] %></td>
           <% formname_length = i.formname.split(",") %>
           <% if i.formname.blank? %>
             <td></td>

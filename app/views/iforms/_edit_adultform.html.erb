@@ -1,4 +1,4 @@
-<% submit_tag_text = "Submit form to #{@doctor.firstname.capitalize} #{@doctor.lastname.capitalize}" %>
+<% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
 
 <%= form_for @iform, :method => :post, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" } do |f| %>
