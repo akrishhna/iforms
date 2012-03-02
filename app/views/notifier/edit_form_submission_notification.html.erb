@@ -1,5 +1,5 @@
 
-<p><%= @appointment.firstname.capitalize %> <%= @appointment.lastname.capitalize %> has just edited <%= @formname %>. You may view it by <%= link_to 'clicking here', Configuration.notifier_path+get_iform_iforms_path(:iform_id => @iform.id) %></p>
+<p><%= @appointment.firstname %> <%= @appointment.lastname %> has just edited <%= @formname %>. You may view it by <%= link_to 'clicking here', Configuration.notifier_path+get_iform_iforms_path(:iform_id => @iform.id) %></p>
 
 Regards,<br />
 iFor.ms

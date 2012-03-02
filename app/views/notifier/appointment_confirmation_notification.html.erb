@@ -8,19 +8,19 @@
 
 <% @user = User.where("email =?", @appointment.email).first %>
 
-<p>Dear <%= @appointment.firstname.capitalize %> <%= @appointment.lastname.capitalize %>,</p>
+<p>Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
 
-<p>This email confirms your appointment with <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> on <%= @appointment.date.strftime("%m-%d-%Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</p>
+<p>This email confirms your appointment with <%= @doctor.firstname %> <%= @doctor.lastname %> on <%= @appointment.date.strftime("%m-%d-%Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</p>
 
-<p>iFor.ms is the technology partner of  <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> providing their patients with online access to their patient forms.  Prior to your visit with  <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %>, please
+<p>iFor.ms is the technology partner of  <%= @doctor.firstname %> <%= @doctor.lastname %> providing their patients with online access to their patient forms.  Prior to your visit with  <%= @doctor.firstname %> <%= @doctor.lastname %>, please
 <% if @user %>
 <%= link_to 'click here', @login_url %>
 <%else%>
 <%= link_to 'click here', @registration_url %>
 <%end%> 
-to complete and submit your patient forms. <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> will have your printed forms available for your review and signature when you arrive for your appointment.</p>
+to complete and submit your patient forms. <%= @doctor.firstname %> <%= @doctor.lastname %> will have your printed forms available for your review and signature when you arrive for your appointment.</p>
 
-<p>To sign in to iFor.ms, please use the email address you supplied to  <%= @doctor.firstname.capitalize %> <%= @doctor.lastname.capitalize %> when booking your appointment.</p>
+<p>To sign in to iFor.ms, please use the email address you supplied to  <%= @doctor.firstname.capitalize %> <%= @doctor.lastname %> when booking your appointment.</p>
 
 Regards,<br />
 iFor.ms
