@@ -35,7 +35,6 @@ class AppointmentsController < ApplicationController
        end
        #changes end
        @i = @appointment.doctor
-       @i.doctorname
        @appointment.doctorname = @i.doctorname
        @appointment.timesent = Time.now
        @appointment.save

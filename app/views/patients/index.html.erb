@@ -34,7 +34,7 @@
         <tr>
           <td><%= i.firstname %> <%= i.lastname %></td>
           <% p = i.doctorname.split(" ") %>
-          <td><%= p[0] %> <%= p[1] %></td>
+          <td><%= i.doctorname %></td>
           <% formname_length = i.formname.split(",") %>
           <% if i.formname.blank? %>
             <td></td>
