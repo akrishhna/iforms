@@ -1,7 +1,8 @@
 <div class="container">
 <h2>Resend instructions</h2>
 
-<%= form_for(resource_name, resource, :url => confirmation_path(resource_name)) do |f| %>
+
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name)) do |f| %>
  <% if resource %>
 <div id="error_explanation">
 	<ul>

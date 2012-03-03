@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Iforms::Application.config.secret_token = '0486ba3c69bf9d577b74af1ae84ed52765a649fe33bef2f50b5ca407b9acee32d488b67fd3ec61121d88a3d37c3775a6209bb6d1efdee767151c8ddfebcf663c'
+Iforms::Application.config.secret_token = 'b9de80938bb24fda3f0a6619c4f9493e3e7b518fda5494c7ecd46c00f4f6379e69fbd6999b8c723f3bb028d01133ff2243dc68f941e54384e6022cf60d1988f8'

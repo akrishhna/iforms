@@ -28,7 +28,7 @@
     
  </div>
 
- <div class="field", id = "tasks">
+ <div class="field" id = "tasks">
     <div class = "labelcss"> Appointment Time</div>
     <%= f.select :time_hrs, ["00",1,2,3,4,5,6,7,8,9,10,11], :include_blank => true %>
     <%= f.select :time_min, ["00",5,10,15,20,25,30,35,40,45,50,55], :include_blank => true %>
@@ -50,7 +50,7 @@
 	    </div>
 
 
-
+<% if false %>
 <!-- <%= link_to_function "Adult forms" do |page| 
 page.insert_html :bottom, :tasks, :partial => 'adultform_checkboxes' 
 end %> |
@@ -58,12 +58,13 @@ end %> |
 <%= link_to_function "Child forms" do |page| 
 page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes' 
 end %> -->
+<% end %>
 
-</br></br>	
+<br><br>
 <div class="actions">
     <%= f.submit %>
 </div>
-</br>
+<br>
 
 <% end %>
 

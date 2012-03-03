@@ -1,7 +1,7 @@
 <div class="container">
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource_name, resource, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 <% if resource.errors.any? %>
 <div id="error_explanation">
 	<ul>
@@ -30,12 +30,12 @@
 <% end %>
 <% if current_user.role == "patient" %>
 <% @patient = Patient.find_by_user_id(current_user.id) %>
-<%= link_to'Update Profile Information', edit_patient_path(@patient) %></br></br>
+<%= link_to'Update Profile Information', edit_patient_path(@patient) %><br><br>
 <%= link_to "Back", patients_path %>
 <% end %>
 <% if current_user.role == "doctor" %>
 <% @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]) %>
-<%= link_to'Update Profile Information', edit_doctor_path(@doctor) %></br></br>
+<%= link_to'Update Profile Information', edit_doctor_path(@doctor) %><br><br>
 <%= link_to "Back", doctors_path %>
 <% end %>
 <!-- <h3>Cancel my account</h3>

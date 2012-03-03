@@ -4,6 +4,12 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = "iforms-noreply@ifor.ms"
 
+  config.case_insensitive_keys = [:email]
+  config.use_salt_as_remember_token = true
+  config.reset_password_within = 24.hours
+
+  config.encryptor = :sha1
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating an user. By default is
   # just :email. You can configure it to use [:username, :subdomain], so for

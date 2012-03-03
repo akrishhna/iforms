@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   protect_from_forgery
+  helper :all
   helper_method :is_admin?
  #helper_method :patient_profile_exists
- protected
+
+  protected
   def is_doctor?
     unless current_user.role=="doctor"
       flash[:notice]="unauthorized access"
