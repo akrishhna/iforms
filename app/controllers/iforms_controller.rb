@@ -852,8 +852,8 @@ class IformsController < ApplicationController
   protected
   def adultform_controls_mapping(str, iform)
 
-    pdftkpath = "#{Configuration.pdftk_path}"
-    pdffilepath = "#{Configuration.pdffiles_path}"
+    pdftkpath = PDFTK_PATH
+    pdffilepath = PDF_FILES_PATH
     p path = pdffilepath + "#{str}.pdf"
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
 
@@ -1681,8 +1681,8 @@ class IformsController < ApplicationController
 
   protected
   def childform_controls_mapping(str, iform)
-    pdftkpath = "#{Configuration.pdftk_path}"
-    pdffilepath = "#{Configuration.pdffiles_path}"
+    pdftkpath = PDFTK_PATH
+    pdffilepath = PDF_FILES_PATH
     path = pdffilepath + "#{str}.pdf"
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
     formname_split = iform.formname.split(" ")

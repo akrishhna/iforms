@@ -59,3 +59,6 @@ Iforms::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+PDFTK_PATH = '/usr/bin/pdftk'
+PDF_FILES_PATH = "#{Rails.root}/public/pdffiles/"

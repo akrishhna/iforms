@@ -1,7 +1,7 @@
 <% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
 
-<%= form_for @iform, :method => :post, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" } do |f| %>
+<%= form_for @iform, :html => { :id => "dd_dd", :onsubmit => "unmask_str();" } do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
