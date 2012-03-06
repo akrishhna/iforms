@@ -1,0 +1,49 @@
+<div class="form">
+  <%= form_for user, :url => user.new_record? ? admin_doctors_path : admin_doctor_path(user)  ,:html => {:class => "form-horizontal"} do |f|%>
+    <fieldset>
+      <legend><%= form_header %></legend>
+      <div class="control-group">
+        <%= f.label :email, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :email %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.password_field :password %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password_confirmation, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.password_field :password_confirmation %>
+        </div>
+      </div>
+      <%= f.fields_for :doctor do |doctor| %>
+        <div class="control-group">
+          <%= doctor.label :doctorname, :class => 'control-label' %>
+          <div class="controls">
+            <%= doctor.text_field :doctorname %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= doctor.label :firstname, :class => 'control-label' %>
+          <div class="controls">
+            <%= doctor.text_field :firstname %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= doctor.label :lastname, :class => 'control-label' %>
+          <div class="controls">
+            <%= doctor.text_field :lastname %>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-actions">
+        <%= f.submit "Create Doctor", :class => "btn btn-primary" %>
+        <%= link_to "Cancel", admin_doctors_path, :class => "btn" %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

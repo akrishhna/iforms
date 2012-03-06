@@ -89,5 +89,7 @@ Iforms::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
 
+TITLE_EXT = 'ifor.ms'
+
 PDFTK_PATH = '/usr/bin/pdftk'
 PDF_FILES_PATH = "#{Rails.root}/public/pdffiles/"

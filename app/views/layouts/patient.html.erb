@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "iforms" %></title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <%= stylesheet_link_tag "application", "patient" %>
+  <%= javascript_include_tag "application", "patient" %>
+  <%= yield(:head) %>
+  <%= stylesheet_link_tag params[:controller] %>
+  <%= javascript_include_tag params[:controller] %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/header' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <div class="sidebar">
+        <ul class="nav nav-list">
+          <li class="nav-header">
+            Profile Settings
+          </li>
+          <li>
+            <%= link_to 'Profile', edit_patient_profile_path %>
+          </li>
+          <li>
+            <%= link_to 'Change Password', change_password_patient_profile_path %>
+          </li>
+          <li class="nav-header">
+            Appointments
+          </li>
+          <li>
+            <%= link_to 'Schedule Appointments', patient_appointments_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="span10">
+      <div class="content">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, :id => "flash_#{name}", :class => "alert alert-#{name}" do %>
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            <%= raw msg %>
+          <% end %>
+        <% end %>
+        <%= content_tag :div, :class => page_controller do %>
+          <%= yield %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
+</body>
+</html>

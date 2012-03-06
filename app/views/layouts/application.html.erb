@@ -11,38 +11,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="header">
-      <% if current_user %>
-          Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
-          <%= link_to 'Sign out', destroy_user_session_path %>
-      <% else %>
-          <%= link_to 'Sign in', new_user_session_path %>
+  <%= render 'layouts/header' %>
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, :id => "flash_#{name}", :class => "alert alert-#{name}" do %>
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        <%= raw msg %>
       <% end %>
-    </div>
-    <div class="logo" onclick="window.location.href='/';">
-    </div>
-    <div class="container_layout">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, :id => "flash_#{name}", :class => "flash flash-#{name}" do %>
-          <%= raw msg %>
-        <% end %>
-      <% end %>
-
+    <% end %>
+    <%=  content_tag :div, :class => page_controller do %>
       <%= yield %>
-    </div>
-    <div class="footer">
-      <% if user_signed_in? and current_user.role =="patient" %>
-          <%= link_to 'Home', patients_path %> |
-      <% elsif user_signed_in? and current_user.role =="doctor" %>
-          <%= link_to 'Home', doctors_path %> |
-      <% elsif user_signed_in? and current_user.role =="admin" %>
-          <%= link_to 'Home', :controller => "admin", :action => "index" %> |
-      <% else %>
-          <%= link_to 'Home', root_url %> |
-      <% end %>
-      <%= link_to 'About Us', '/about' %> |
-      <%= link_to 'FAQ', '/FAQ' %> |
-      <%= link_to 'Contact', '/contact' %>
-    </div>
+    <% end %>
+  </div>
+  <%= render 'layouts/footer' %>
 </body>
 </html>

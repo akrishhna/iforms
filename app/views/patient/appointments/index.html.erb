@@ -1,0 +1,149 @@
+<% title 'Appointments'%>
+
+<div class="<%= page_action %>">
+  <div class="index">
+    <h3>My Appointments</h3>
+
+    <% if !@appointments.blank? %>
+      <table class="table table-bordered">
+        <tr>
+          <th>Name</th>
+          <th>Service Provider</th>
+          <th>Form</th>
+          <th>Appointment</th>
+          <th>Received</th>
+          <th>Submitted</th>
+          <th>&nbsp&nbsp</th>         1
+        </tr>
+        <% count = 1 %>
+        <% @appointments.each do |i| %>
+          <% if i.timesent %>
+            <% i.timesent = i.timesent.to_datetime %>
+            <% timesent_date = i.timesent.strftime("%Y-%m-%d") %>
+            <% timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+            <% timesent_min = i.timesent.strftime("%M") %>
+            <% timesent_hrs_int = timesent_hrs.to_i %>
+            <% var = 12 %>
+            <% if var<timesent_hrs_int %>
+              <% timesent_hrs = (timesent_hrs_int - var).to_s %>
+              <% am_pm = "PM" %>
+              <% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+            <% else %>
+              <% timesent_hrs = timesent_hrs_int.to_s %>
+              <% am_pm = "AM" %>
+              <% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+            <% end %>
+          <% end %>
+
+          <tr>
+            <td><%= i.firstname %> <%= i.lastname %></td>
+            <% p = i.doctorname.split(" ") %>
+            <td><%= i.doctorname %></td>
+            <% formname_length = i.formname.split(",") %>
+            <% if i.formname.blank? %>
+              <td></td>
+              <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+              <td><%= @timesent %></td>
+              <td></td>
+              <td></td>
+
+            <% elsif formname_length.length==1 %>
+              <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id) %>
+
+              <td>
+                <% @appformjoins.each do |j| %>
+                  <% if j.iform_id %>
+                    <% @iform = Iform.find(j.iform_id) %>
+                  <% end %>
+                  <% if j.status == "submitted" %>
+                    <%= link_to j.formname, get_iform_iforms_path(:iform_id => @iform.id) %>
+                  <% elsif j.status == "pending" && j.iform_id %>
+                    <%= link_to j.formname, edit_iform_path(j.iform_id) %>
+                  <% else %>
+                    <%= link_to j.formname, new_iform_path(:name => j.formname, :appointment_id => i) %>
+                  <% end %>
+                <% end %>
+              </td>
+
+              <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+              <td><%= @timesent %></td>
+              <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id) %>
+              <% @appformjoins.each do |j| %>
+                <% if j.formsubmittedtime %>
+                  <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %>
+                  <% formsubmittedtime_date = j.formsubmittedtime.strftime("%Y-%m-%d") %>
+                  <% formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
+                  <% formsubmittedtime_min = j.formsubmittedtime.strftime("%M") %>
+                  <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %>
+                  <% var = 12 %>
+                  <% if var<=formsubmittedtime_hrs_int %>
+                    <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
+                    <% am_pm = "PM" %>
+                    <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                  <% else %>
+                    <% am_pm = "AM" %>
+                    <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                  <% end %>
+                <% end %>
+                <% if j.iform_id %>
+                  <% @iform = Iform.find(j.iform_id) %>
+                <% end %>
+                <% if j.status == "submitted" %>
+                  <td><%= @formsubmittedtime %></td>
+                <% elsif j.status == "pending" && j.iform_id %>
+                  <td>Pending</td>
+                  <td><%= link_to "Edit", :controller => "iforms", :action => "edit", :id => @iform.id %></td>
+                <% else %>
+                  <td>New</td>
+                <% end %>
+              <% end %>
+
+            <% else %>
+              <td><%= link_to "multiple forms", patient_appointment_path(i) %></td>
+              <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+              <td><%= @timesent %></td>
+              <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id) %>
+              <td>
+                <% @appformjoins.each do |j| %>
+                  <% if j.formsubmittedtime %>
+                    <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %>
+                    <% formsubmittedtime_date = j.formsubmittedtime.strftime("%Y-%m-%d") %>
+                    <% formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
+                    <% formsubmittedtime_min = j.formsubmittedtime.strftime("%M") %>
+                    <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %>
+                    <% var = 12 %>
+                    <% if var<=formsubmittedtime_hrs_int %>
+                      <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
+                      <% am_pm = "PM" %>
+                      <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                    <% else %>
+                      <% am_pm = "AM" %>
+                      <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                    <% end %>
+                  <% end %>
+                  <% if j.iform_id %>
+                    <% @iform = Iform.find(j.iform_id) %>
+                  <% end %>
+                  <% if j.status == "submitted" %>
+
+                  <% elsif j.status == "pending" %>
+
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+              </tr>
+            <% end %>
+        <% end %>
+      </table>
+      <br/>
+      <%= will_paginate @appointments %>
+    <% else %>
+      <p>You have no Appointments! </p>
+    <% end %>
+  </div>
+
+
+
+
+</div>

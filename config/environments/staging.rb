@@ -81,5 +81,7 @@ Iforms::Application.configure do
       config.action_dispatch.best_standards_support = :builtin
 end
 
+TITLE_EXT = 'Staging'
+
 PDFTK_PATH = '/usr/bin/pdftk'
 PDF_FILES_PATH = "#{Rails.root}/public/pdffiles/"

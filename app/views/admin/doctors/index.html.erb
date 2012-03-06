@@ -1,0 +1,23 @@
+<% title 'List of Doctors'%>
+
+<div class="<%= page_action %>">
+  <h2>List of Doctors</h2>
+  <div class="doctors_list">
+    <table class="table table-bordered">
+      <tr>
+        <th>Email</th>
+        <th>Doctor Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+      <% @doctors.each do |doctor| %>
+      <tr>
+        <td><%= doctor.user.email %></td>
+        <td><%= doctor.doctorname %></td>
+        <td><%= doctor.firstname %></td>
+        <td><%= doctor.lastname %></td>
+      </tr>
+      <% end%>
+    </table>
+  </div>
+</div>

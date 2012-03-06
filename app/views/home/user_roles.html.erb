@@ -1,0 +1,10 @@
+<div class="<%= page_action %>">
+  <div>
+    <% @user_roles.each do |user_role| %>
+      <% path = admin_dashboard_path %>
+      <% path = doctor_dashboard_path if user_role.role == 'doctor' %>
+      <% path = patient_dashboard_path if user_role.role == 'patient' %>
+      <h2>I am <%= link_to user_role.role.capitalize, path %></h2>
+    <% end %>
+  </div>
+</div>

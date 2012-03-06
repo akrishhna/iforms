@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "iforms :: Admin" %></title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <%= stylesheet_link_tag "application", "admin" %>
+  <%= javascript_include_tag "application", "admin" %>
+  <%= yield(:head) %>
+  <%= stylesheet_link_tag params[:controller] %>
+  <%= javascript_include_tag params[:controller] %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render 'layouts/header' %>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <div class="sidebar">
+          <ul class="nav nav-list">
+            <li class="nav-header">
+              Doctors
+            </li>
+            <li>
+              <%= link_to 'Add Doctor', new_admin_doctor_path %>
+            </li>
+            <li>
+              <%= link_to 'Doctors', admin_doctors_path %>
+            </li>
+            <li class="nav-header">
+              Forms
+            </li>
+            <li>
+              <%= link_to 'Add Form', new_admin_form_path %>
+            </li>
+            <li>
+              <%= link_to 'Forms', admin_forms_path %>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="span10">
+        <div class="content">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, :id => "flash_#{name}", :class => "alert alert-#{name}" do %>
+              <a class="close" data-dismiss="alert" href="#">&times;</a>
+              <%= raw msg %>
+            <% end %>
+          <% end %>
+          <%= content_tag :div, :class => page_controller do %>
+            <%= yield %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'layouts/footer' %>
+</body>
+</html>

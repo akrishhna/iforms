@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="logo">
+    <%= link_to image_tag("iforms_logo.png"), root_url, :alt => "logo", :title => root_url %>
+  </div>
+  <div class="header_nav">
+    <% if current_user %>
+      Welcome! <%= link_to current_user.email, user_roles_home_path %>,
+      <%= link_to 'Dashboard', user_dashboard_url %>,
+      <%= link_to 'Sign out', destroy_user_session_path %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</div>
+

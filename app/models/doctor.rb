@@ -6,5 +6,5 @@ class Doctor < ActiveRecord::Base
   
   validates_presence_of :firstname, :lastname
  # validates_format_of :firstname, :lastname, :with => /^[A-Za-z .-]+$/ , :unless => "firstname.blank? or lastname.blank?"
-  
+
 end

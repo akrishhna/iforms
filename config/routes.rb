@@ -1,5 +1,60 @@
 Iforms::Application.routes.draw do
 
+  namespace :patient do
+
+    resources :appointments
+    resource :profile do
+      collection do
+        get 'change_password'
+        post 'update_password'
+      end
+    end
+    resource :dashboard do
+      collection do
+        get 'index'
+      end
+    end
+  end
+
+  namespace :doctor do
+
+    resources :appointments
+    resource :profile do
+      collection do
+        get 'change_password'
+        post 'update_password'
+      end
+    end
+
+    resource :dashboard do
+      collection do
+        get 'index'
+      end
+    end
+  end
+
+  namespace :admin do
+
+    resources :forms
+    resources :doctors
+
+    resource :dashboard do
+      collection do
+        get 'index'
+      end
+    end
+  end
+
+  resource :home do
+    collection do
+      get 'index'
+      get 'user_roles'
+    end
+  end
+
+  root :to => 'home#index'
+
+  #TODO old routes need remove which is un necessary after testing
   get 'confirmations/new'
 
   get 'contactus/new'
@@ -51,14 +106,13 @@ Iforms::Application.routes.draw do
     end
   end
 
-  devise_for :admins
   devise_for :users, :path => 'users', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => '' }, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations'}
 
   match '/about', :to => 'deviseroles#about'
   match '/contact', :to => 'deviseroles#contact'
   match '/FAQ', :to => 'deviseroles#FAQ'
 
-  root :to => redirect("/users/login")
+
 
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'

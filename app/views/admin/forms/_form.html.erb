@@ -1,0 +1,27 @@
+<div class="form">
+  <%= form_for form, :url => form.new_record? ? admin_forms_path : admin_form_path(form)  ,:html => {:class => "form-horizontal"} do |f|%>
+    <fieldset>
+      <legend><%= form_header %></legend>
+      <div class="control-group">
+        <%= f.label :doctor_id, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :doctor_id, @doctors.collect{|d| [d.doctorname, d.id]}, :prompt => true %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :formname, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :formname, 'data-provide'=>'typeahead' %>
+          <p class="help-block">
+            <b>Create form with following names #TODO</b><br>
+            'Adult Steiner Ranch', 'Adult Central Austin', 'Adult Bastrop', 'Child Steiner Ranch', 'Child Bastrop', 'Child Central Austin'
+          </p>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.submit 'Create', :class => 'btn btn-primary' %>
+        <%= link_to 'Cancel', admin_forms_path,:class => 'btn' %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

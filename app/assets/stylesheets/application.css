@@ -1,5 +1,53 @@
 /*
  *
- *= require scaffold
+ *= require bootstrap
  *= require_self
 */
+
+/* modified bootstrap */
+
+.container {
+	padding: 20px 40px;
+	min-height: 400px;
+}
+
+.container-fluid {
+	min-height: 400px;
+}
+
+.clear {
+	clear:both;
+	height:0;
+	overflow:hidden;
+}
+
+.hidden {
+	display: none;
+}
+
+/* */
+.header {
+	padding: 10px 40px;
+	margin:0 auto;
+	margin-bottom: 10px;
+	height: 100px;
+}
+
+.logo {
+	float: left;
+	margin: 10px 0 10px 0;
+}
+
+.header_nav {
+	float: right;
+	margin: 20px 0;
+	font-size: 14px;
+}
+
+.footer {
+	border-top: 1px solid #C9E0ED;
+	text-align: center;
+	font-size: 14px;
+	margin: 20px 10px;
+	padding: 20px 10px;
+}
