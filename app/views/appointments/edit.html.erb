@@ -11,6 +11,7 @@
     </ul> 
     </div> 
   <% end %>
+</br>
   1. Create a New Appointment For:</br></br>
     <div class="field">
        <div class = "labelcss">Email Address</div>
@@ -77,7 +78,7 @@
 			<% if form.formname.include?("Adult")%>		    
 			<% if p[i]== form.formname %>
 			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
-			<%= form.formname %>			
+			<%= form.formname %></br>			
 			<% end%>
 			<%end%>			
 			<%end%>

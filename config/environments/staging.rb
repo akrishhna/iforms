@@ -72,7 +72,7 @@ Iforms::Application.configure do
   # Send deprecation notices to registered listeners
   #config.active_support.deprecation = :notify
   
-      config.action_view.debug_rjs             = true
+      #config.action_view.debug_rjs             = true
    
       config.action_mailer.default_url_options = { :host => '50.57.138.165:8082' }
       
