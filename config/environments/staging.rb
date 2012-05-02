@@ -25,11 +25,16 @@ Iforms::Application.configure do
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
   #file paths
   config.after_initialize do 
-    Configuration.pdftk_path = '/usr/bin/pdftk'
-    Configuration.pdffiles_path = '/home/railsapps/iforms_staging/current/public/pdffiles/'
-    Configuration.csvfiles_path = '/home/railsapps/iforms_staging/current/public/csvfiles/'
-    Configuration.notifier_path = '50.57.138.165:8082'
+    # Configuration.pdftk_path = '/usr/bin/pdftk'
+    #     Configuration.pdffiles_path = '/home/railsapps/iforms_staging/current/public/pdffiles/'
+    #     Configuration.csvfiles_path = '/home/railsapps/iforms_staging/current/public/csvfiles/'
+    #     Configuration.notifier_path = '50.57.138.165:8082'
   end 
+  
+  PDFTK_PATH = '/usr/bin/pdftk'
+  PDFFILES_PATH = '/home/railsapps/iforms_staging/current/public/pdffiles/'
+  CSVFILES_PATH = '/home/railsapps/iforms_staging/current/public/csvfiles/'
+  NOTIFIER_PATH = '50.57.138.165:8082'
 
   
   # For nginx:
