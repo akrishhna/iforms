@@ -8,8 +8,8 @@ class Appointment < ActiveRecord::Base
 
   validate :validate_date
       def validate_date
-        if !date.blank? and date<Date.today
-          errors.add(:date, "can't be in the past")
+        if !date.blank? and date<=Date.today
+          errors.add(:date, "is not valid")
         end
       end
       
