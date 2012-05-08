@@ -9,6 +9,7 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(params[:appointment])
+
      respond_to do |format|
        @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
        @appointment.doctor_id = @doctor.id
@@ -21,8 +22,11 @@ class AppointmentsController < ApplicationController
        end
        end
         @appointment.formname = a
-        if !@appointment.time_hrs.empty? and !@appointment.AM_PM.empty? and !@appointment.time_min.empty?
+        if !@appointment.time_hrs.empty? and !@appointment.AM_PM.nil? and !@appointment.time_min.empty?
            @appointment.appointment_time = @appointment.time_hrs+@appointment.AM_PM+@appointment.time_min
+        end
+        if !@appointment.location.nil?
+          
         end
       if @appointment.save 
        @user = User.all(:conditions => ['email = ?', @appointment.email]).first
