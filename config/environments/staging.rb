@@ -34,7 +34,7 @@ Iforms::Application.configure do
   PDFTK_PATH = '/usr/bin/pdftk'
   PDFFILES_PATH = '/home/railsapps/iforms_staging/current/public/pdffiles/'
   CSVFILES_PATH = '/home/railsapps/iforms_staging/current/public/csvfiles/'
-  NOTIFIER_PATH = '50.57.138.165:8082'
+  NOTIFIER_PATH = 'http://50.57.138.165:8082'
 
   
   # For nginx:

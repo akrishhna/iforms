@@ -34,7 +34,7 @@ Iforms::Application.configure do
   PDFTK_PATH = '/usr/bin/pdftk'
   PDFFILES_PATH = '/home/railsapps/iforms/current/public/pdffiles/'
   CSVFILES_PATH = '/home/railsapps/iforms/current/public/csvfiles/'
-  NOTIFIER_PATH = 'ifor.ms'
+  NOTIFIER_PATH = 'http://ifor.ms'
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
