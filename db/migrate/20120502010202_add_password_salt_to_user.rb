@@ -1,5 +1,9 @@
 class AddPasswordSaltToUser < ActiveRecord::Migration  
-  def change
-    #add_column :users, :password_salt, :string
+  def up
+    add_column :users, :password_salt, :string
+  end
+
+  def down
+    remove_column :users, :password_salt, :string
   end
 end
