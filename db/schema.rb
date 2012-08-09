@@ -11,12 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305055742) do
+ActiveRecord::Schema.define(:version => 20120502185423) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
     t.string   "encrypted_password", :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                     :default => "", :null => false
     t.integer  "sign_in_count",                     :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -25,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.integer  "failed_attempts",                   :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
   end
 
   create_table "appformjoins", :force => true do |t|
@@ -39,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "formname"
     t.string   "status"
     t.datetime "formsubmittedtime"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "appointments", :force => true do |t|
@@ -59,8 +58,10 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "appointment_time"
     t.integer  "patient_id"
     t.integer  "doctor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "location"
+    t.string   "responsible_party"
   end
 
   create_table "childforms", :force => true do |t|
@@ -258,8 +259,8 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "path"
     t.string   "formname",                                                        :limit => 50
     t.integer  "appointment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                     :null => false
+    t.datetime "updated_at",                                                                     :null => false
   end
 
   create_table "contactus", :force => true do |t|
@@ -267,16 +268,16 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "email"
     t.string   "subject"
     t.string   "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "controls", :force => true do |t|
     t.string   "name"
     t.string   "controltype"
     t.integer  "pdfupload_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "doctors", :force => true do |t|
@@ -284,16 +285,16 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "forms", :force => true do |t|
     t.string   "formname"
     t.string   "formpath"
     t.integer  "doctor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "iforms", :force => true do |t|
@@ -485,8 +486,8 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "path"
     t.string   "formname",                                                        :limit => 50
     t.integer  "appointment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                            :null => false
+    t.datetime "updated_at",                                                                            :null => false
     t.boolean  "Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child"
     t.string   "Accompanying_Your_Child_Today_Relationship",                      :limit => 20
     t.string   "Accompanying_Your_Child_Today_Siblings_And_Ages",                 :limit => 100
@@ -573,7 +574,7 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "Self_School",                                                     :limit => 50
     t.string   "Allergic_To_Drugs_List"
     t.string   "Dental_History_Habits_Speech_Problems"
-    t.binary   "pdffile_path",                                                    :limit => 16777215
+    t.binary   "pdffile_path",                                                    :limit => 2147483647
   end
 
   create_table "patients", :force => true do |t|
@@ -581,13 +582,13 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
     t.string   "lastname"
     t.integer  "user_id"
     t.integer  "doctor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pdfuploads", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -605,8 +606,8 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
   create_table "sessionstores", :force => true do |t|
     t.string   "useremail_beforeupdate", :null => false
     t.string   "useremail_afterupdate",  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "user_roles", :force => true do |t|
@@ -618,24 +619,24 @@ ActiveRecord::Schema.define(:version => 20120305055742) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "",        :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "",        :null => false
-    t.string   "password_salt",                       :default => "",        :null => false
+    t.string   "email",                                 :default => "",        :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",        :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
-    t.string   "remember_token"
+    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "role",                                :default => "patient", :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+    t.string   "role",                                  :default => "patient", :null => false
     t.string   "edit_confirmed"
+    t.string   "password_salt"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

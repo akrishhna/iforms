@@ -1,7 +1,6 @@
 <% time_now = Time.now.strftime("%Y-%m-%d_%H-%M-%S")%>
-<% path = Configuration.csvfiles_path+time_now+"_"+@pdfupload.file_file_name %>
+<% path = CSVFILES_PATH+time_now+"_"+@pdfupload.file_file_name %>
 <% path1 = time_now+"_"+@pdfupload.file_file_name %>
-<% p Configuration.csvfiles_path %>
 <% pathx = "/csvfiles/#{path1}.csv"%>
 <div class = "index">
 <%= link_to 'Home', :controller => "admin", :action => "index"%> |

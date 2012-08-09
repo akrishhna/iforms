@@ -639,8 +639,8 @@ class ChildformsController < ApplicationController
   protected
   def form_controls_mapping(str)
 
-  pdftkpath = "#{Configuration.pdftk_path}"
-  pdffilepath = "#{Configuration.pdffiles_path}"
+  pdftkpath = PDFTK_PATH
+  pdffilepath = PDFFILES_PATH
   path = pdffilepath + "#{str}.pdf"        
   @pdftk = PdftkForms::Wrapper.new(pdftkpath)
   p "000000000000000000000000000"

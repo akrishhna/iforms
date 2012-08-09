@@ -6,6 +6,13 @@ class Doctor::ProfileController < DoctorController
 
   def edit
     @doctor = doctor
+    if @doctor.nil?
+      d = Doctor.new
+      d.user_id = current_user.id
+      d.save(:validate => false)
+      @doctor = d
+    end
+
   end
 
   def update

@@ -9,45 +9,77 @@
     </ul> 
     </div> 
   <% end %>
+  </br>
+1. Create a New Appointment For:</br></br>
   <div class="field">
-    <div class = "labelcss">Firstname </div>
+     <div class = "labelcss">Email Address</div>
+     <%= f.text_field :email %>
+  </div>
+  
+  <div class="field">
+    <div class = "labelcss">First Name </div>
     <%= f.text_field :firstname %>
   </div>
   <div class="field">
-    <div class = "labelcss">Lastname </div>
+    <div class = "labelcss">Last Name </div>
     <%= f.text_field :lastname %>
   </div>
+  <div class="field">
+    <div class = "labelcss">(Optional) - Responsible Party </div>
+    <%= f.text_field :responsible_party %>
+  </div>
   
+
+2. With:
+    <%= radio_button_tag '','' , :checked => 'checked'%>
+    James Waters
+</br></br>
+
+3. At Location:
+</br></br>
+  <%= f.radio_button :location,'Bastrop' %>Bastrop</br>
+  <%= f.radio_button :location,'Central Austin' %>Central Austin</br>
+  <%= f.radio_button :location,'Steiner Ranch' %>Steiner Ranch
+</br></br>
+
+4. On This Date/Time:
+</br></br>
  <div class="field">
-    <div class = "labelcss">Email</div>
-    <%= f.text_field :email %>
- </div>
- <div class="field">
-    <div class = "labelcss">Appointment Date</div>
-    <%= f.date_select :date %>
+    Date:
+    <%= f.date_select :date, :start_year => Date.current.year, :end_year => 2014 %>
     
  </div>
-
  <div class="field" id = "tasks">
-    <div class = "labelcss"> Appointment Time</div>
-    <%= f.select :time_hrs, ["00",1,2,3,4,5,6,7,8,9,10,11], :include_blank => true %>
-    <%= f.select :time_min, ["00",5,10,15,20,25,30,35,40,45,50,55], :include_blank => true %>
-    <%= f.select :AM_PM, ["AM","PM"], :include_blank => true %>
+     Time:
+     <%= f.select :time_hrs, [1,2,3,4,5,6,7,8,9,10,11,"12"], :include_blank => true %> :
+     <%= f.select :time_min, ["00","05",10,15,20,25,30,35,40,45,50,55], :include_blank => true %>
+     <%= f.radio_button :AM_PM, "AM" %> AM
+     <%= f.radio_button :AM_PM, "PM" %> PM
+  </div>
+
+5. With These Forms:
+</br></br>
+  <% @doctor = Doctor.first%>
+	<% a=[]%>
+	<% @forms = @doctor.forms %>
+	<% @forms.each do |i|%>
+	<%a<< i.formname %>
+	<%end %>
+
+ <div class = "labelcss">
+  <% for form in @forms %>	    
+	 <%= check_box_tag "form_ids[]", form.id %>
+	 <%= form.formname %></br>
+  <% end%>
  </div>
+</br>
+6. And Lastly:
+  
+ 
 
-			<% @doctor = Doctor.first%>
-			<% a=[]%>
-			<% @forms = @doctor.forms %>
-			<% @forms.each do |i|%>
-			<%a<< i.formname %>
-			<%end %>
+ 
 
-		<div class = "labelcss">
-		<% for form in @forms %>	    
-			<%= check_box_tag "form_ids[]", form.id %>
-			<%= form.formname %><%if form.id==4%><br /><%end%>
-		<% end%>
-	    </div>
+			
 
 
 <% if false %>
@@ -62,7 +94,7 @@ end %> -->
 
 <br><br>
 <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Create Appointment and Send Email Confirmation'%>
 </div>
 <br>
 

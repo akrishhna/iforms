@@ -16,7 +16,7 @@ class PdfuploadsController < ApplicationController
     respond_to do |format|
     if @pdfupload.save!
       if file_data.respond_to?(:path)
-        pdftkpath = "#{Configuration.pdftk_path}"       
+        pdftkpath = PDFTK_PATH      
         @pdftk = PdftkForms::Wrapper.new(pdftkpath)
         p "path = #{file_data.path}"
         @pfields = @pdftk.fields(file_data.path)

@@ -25,11 +25,16 @@ Iforms::Application.configure do
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
   #file paths
   config.after_initialize do 
-    Configuration.pdftk_path = '/usr/bin/pdftk'
-    Configuration.pdffiles_path = '/home/railsapps/iforms_staging/current/public/pdffiles/'
-    Configuration.csvfiles_path = '/home/railsapps/iforms_staging/current/public/csvfiles/'
-    Configuration.notifier_path = '50.57.138.165:8082'
+    # Configuration.pdftk_path = '/usr/bin/pdftk'
+    #     Configuration.pdffiles_path = '/home/railsapps/iforms_staging/current/public/pdffiles/'
+    #     Configuration.csvfiles_path = '/home/railsapps/iforms_staging/current/public/csvfiles/'
+    #     Configuration.notifier_path = '50.57.138.165:8082'
   end 
+  
+  PDFTK_PATH = '/usr/bin/pdftk'
+  PDFFILES_PATH = '/home/railsapps/iforms_staging/current/public/pdffiles/'
+  CSVFILES_PATH = '/home/railsapps/iforms_staging/current/public/csvfiles/'
+  NOTIFIER_PATH = 'http://50.57.138.165:8082'
 
   
   # For nginx:
@@ -67,7 +72,7 @@ Iforms::Application.configure do
   # Send deprecation notices to registered listeners
   #config.active_support.deprecation = :notify
   
-      config.action_view.debug_rjs             = true
+      #config.action_view.debug_rjs             = true
    
       config.action_mailer.default_url_options = { :host => '50.57.138.165:8082' }
       
@@ -82,6 +87,3 @@ Iforms::Application.configure do
 end
 
 TITLE_EXT = 'Staging'
-
-PDFTK_PATH = '/usr/bin/pdftk'
-PDF_FILES_PATH = "#{Rails.root}/public/pdffiles/"

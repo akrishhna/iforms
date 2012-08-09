@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def page_action
-    params[:controller].gsub('/', '-') + '_' + params[:action]
+    params[:action]
   end
 
   def page_controller

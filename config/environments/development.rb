@@ -23,11 +23,16 @@ Iforms::Application.configure do
 
   # filepaths
   config.after_initialize do
-    Configuration.pdftk_path = '/usr/bin/pdftk'
-    Configuration.pdffiles_path = "#{Rails.root}/public/pdffiles/"
-    Configuration.csvfiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
-    Configuration.notifier_path = 'http://localhost:3000'
+    # Configuration.pdftk_path = '/usr/local/bin/pdftk'
+    #     Configuration.pdffiles_path = "#{Rails.root}/public/pdffiles/"
+    #     Configuration.csvfiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
+    #     Configuration.notifier_path = 'http://localhost:3000'
   end
+    PDFTK_PATH = '/usr/local/bin/pdftk'
+    PDFFILES_PATH = "#{Rails.root}/public/pdffiles/"
+    CSVFILES_PATH = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
+    NOTIFIER_PATH = 'http://localhost:3000'
+  
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
@@ -61,6 +66,3 @@ Iforms::Application.configure do
 end
 
 TITLE_EXT = 'Development'
-
-PDFTK_PATH = '/usr/bin/pdftk'
-PDF_FILES_PATH = "#{Rails.root}/public/pdffiles/"

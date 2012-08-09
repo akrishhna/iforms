@@ -1,5 +1,5 @@
 <div class="form">
-  <%= form_for doctor, :url => doctor.new_record? ? doctor_profile_path : doctor_profile_path, :html => {:class => "form-horizontal"} do |f|%>
+  <%= form_for @doctor, :url => doctor_profile_path, :html => {:class => "form-horizontal"} do |f|%>
     <fieldset>
       <legend><%= form_header %></legend>
       <div class="control-group">

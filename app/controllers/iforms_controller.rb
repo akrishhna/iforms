@@ -2,7 +2,7 @@ class IformsController < ApplicationController
 
   before_filter :authenticate_user! #, :except => [:index]
   before_filter :is_patient?, :except => [:show, :get_iform]
-
+  before_filter :is_admin?, :only => ["show"]
                                     # before_filter :is_doctor?, :only => [:show]
 
                                     # GET /iform
@@ -853,7 +853,7 @@ class IformsController < ApplicationController
   def adultform_controls_mapping(str, iform)
 
     pdftkpath = PDFTK_PATH
-    pdffilepath = PDF_FILES_PATH
+    pdffilepath = PDF_FILES_PATH 
     p path = pdffilepath + "#{str}.pdf"
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
 
