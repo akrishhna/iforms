@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502185423) do
+ActiveRecord::Schema.define(:version => 20120808073535) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -595,11 +595,27 @@ ActiveRecord::Schema.define(:version => 20120502185423) do
     t.datetime "file_updated_at"
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "role"
+    t.string   "description"
+    t.boolean  "disabled",    :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "sessionstores", :force => true do |t|
     t.string   "useremail_beforeupdate", :null => false
     t.string   "useremail_afterupdate",  :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+  end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.boolean  "deleted"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -620,6 +636,7 @@ ActiveRecord::Schema.define(:version => 20120502185423) do
     t.datetime "updated_at",                                                   :null => false
     t.string   "role",                                  :default => "patient", :null => false
     t.string   "edit_confirmed"
+    t.string   "username"
     t.string   "password_salt"
   end
 
