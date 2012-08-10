@@ -9,6 +9,9 @@
   <%= stylesheet_link_tag params[:controller]%>
   <%= javascript_include_tag params[:controller]%>
   <%= csrf_meta_tags %>
+  <%= javascript_tag do %>
+     var params =  <%= raw params.to_json %>;
+  <% end %>
 </head>
 <body>
     <div class="header">
