@@ -13,13 +13,14 @@ class RegistrationsController < Devise::RegistrationsController
     
     def update
       
-      if params[:user][:email] != @user.email
+      if params[:user][:email] != @user.email || params[:user][:username] != @user.username
         Sessionstore.delete_all
         p session[:useremail_before_update]= @user.email
           @user.confirmed_at = nil
           @user.edit_confirmed = "edited"
           #@user.confirmation_sent_at =nil
           @user.email = params[:user][:email]
+          @user.username = params[:user][:username]
           if !params[:user][:password].empty?
           @user.password = params[:user][:password]
           end
