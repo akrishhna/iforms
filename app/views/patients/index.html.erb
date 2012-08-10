@@ -1,5 +1,8 @@
 <div class="index">
   <h3>My Appointments</h3>
+  <div style="margin-bottom: 10px;">
+    Date : <%= text_field_tag :date,"", :class => "appointments_date_selector" %>
+  </div>
   <% if !@appointments.blank? %>
     <table border="0" width="105%" class="mytable">
       <tr BGCOLOR="grey">

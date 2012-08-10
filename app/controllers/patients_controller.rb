@@ -4,11 +4,13 @@ class PatientsController < ApplicationController
 
   def index
     #@appointments = Appointment.paging(params[:page], params[:id])
-    @appointments = Appointment.where('email = ?', current_user.email).order("timereceived DESC").paging(params[:page], params[:appointment_id])
+    #@appointments = Appointment.where('email = ?', current_user.email).order("timereceived DESC").paging(params[:page], params[:appointment_id])
+
+    @appointments = Appointment.where('email = ? and date = ?', current_user.email,params['appointment_date']?params['appointment_date']:Date.today.to_s).order("timesent DESC").paging(params[:page], params[:appointment_id])
   end
 
   def new
-    @patient = Patient.new
+     @patient = Patient.new
   end
 
   def create

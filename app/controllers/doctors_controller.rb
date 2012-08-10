@@ -4,7 +4,7 @@ class DoctorsController < ApplicationController
   def index    
     @iforms = Iform.all
     @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
-    @appointments = Appointment.where('doctor_id = ?', @doctor.id).order("timesent DESC").paging(params[:page], params[:appointment_id])
+    @appointments = Appointment.where('doctor_id = ? and date = ?', @doctor.id,params['appointment_date']?params['appointment_date']:Date.today.to_s).order("timesent DESC").paging(params[:page], params[:appointment_id])
   end
 
   def new
