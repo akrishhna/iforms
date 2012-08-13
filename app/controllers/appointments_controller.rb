@@ -3,6 +3,10 @@ class AppointmentsController < ApplicationController
   #before_filter :is_admin?, :only => ["show"]
   def new
     @appointment = Appointment.new
+    @old_appointment = Appointment.find_by_id(params[:appointment_id])
+    @forms = Appformjoin.where('appointment_id = ?',params[:appointment_id])
+    @ids = @forms.map{|f| f.form_id}
+
     #Form.create(:formname => "Bastrop_Child", :doctor_id => 2, :formpath => "http://50.57.138.165/iforms/new")
     #Form.create(:formname => "Steiner_Ranch_Adult", :doctor_id => 2, :formpath => "http://localhost:3000/iforms/new")
   end

@@ -42,7 +42,7 @@
     <%= f.radio_button :location,'Bastrop' %>Bastrop</br>
     <%= f.radio_button :location,'Central Austin' %>Central Austin</br>
     <%= f.radio_button :location,'Steiner Ranch' %>Steiner Ranch
-  </br></br>
+  <br><br>
 
   4. On This Date/Time:
   </br></br>
@@ -60,7 +60,7 @@
     </div>
 
     5. With These Forms:
-    </br></br>
+    <br><br>
       <% @doctor = Doctor.first%>
 			<% a=[]%>
 			<% @forms = @doctor.forms %>
@@ -78,7 +78,7 @@
 			<% if form.formname.include?("Adult")%>		    
 			<% if p[i]== form.formname %>
 			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
-			<%= form.formname %></br>			
+			<%= form.formname %><br>
 			<% end%>
 			<%end%>			
 			<%end%>
@@ -87,7 +87,7 @@
 			<% for form in @forms %>
 			<% unless form.formname== p[0] || form.formname== p[1] || form.formname== p[2] || form.formname== p[3] || form.formname== p[4] || form.formname== p[5] %>
 			<%= check_box_tag "form_ids[]", form.id %>
-			<%= form.formname %></br>
+			<%= form.formname %><br>
 			<% end%>
 			<% end%>
 			
@@ -103,27 +103,27 @@
 			<%end%>
 		
 	    </div>
-    </br>
+    <br>
     6. And Lastly:
 
 			
 
 
 <% if false %>
-<!-- <%= link_to_function "Adult forms" do |page| 
+<!-- <%#= link_to_function "Adult forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'adultform_checkboxes' 
 end %> |
 
-<%= link_to_function "Child forms" do |page| 
-page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes' 
+<%#= link_to_function "Child forms" do |page|
+page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes'
 end %> -->
 <% end %>
 
-</br></br>	
+<br><br>
 <div class="actions">
     <%= f.submit "Resend" %>
 </div>
-</br>
+<br>
 
 <% end %>
 

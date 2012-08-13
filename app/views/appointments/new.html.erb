@@ -4,3 +4,7 @@
 <%= render "form" %>
 </div>
 
+<%= javascript_tag do %>
+  var old_appointment = <%= raw @old_appointment.to_json %>;
+  var ids = <%= raw @ids.to_json %>;
+<% end %>

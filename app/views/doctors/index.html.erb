@@ -14,6 +14,7 @@
 		<th>Sent</th>
 		<th>Received</th>
 		<th></th>
+    <th></th>
 	
 	</tr>
 	<% count = 1 %>
@@ -92,6 +93,7 @@
 	 <td>Pending</td>
 	 <td><%= link_to "Resend", edit_appointment_path(i) %></td>
 	<%end%>
+      <td><%= link_to "Next Appointment",new_appointment_path(:appointment_id => i.id),:class => "next_appointment" %></td>
 	<%end%>
 
 	
@@ -112,6 +114,7 @@
 	<%else%>
 	<td></td>
 	<%end%>
+    <td><%= link_to "Next Appointment",new_appointment_path(:appointment_id => i.id),:class => "next_appointment" %></td>
 </tr>
 <%end%>
 <%end%>

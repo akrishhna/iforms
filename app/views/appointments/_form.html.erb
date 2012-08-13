@@ -9,7 +9,7 @@
     </ul> 
     </div> 
   <% end %>
-  </br>
+  <br>
 1. Create a New Appointment For:</br></br>
   <div class="field">
      <div class = "labelcss">Email Address</div>
@@ -33,17 +33,17 @@
 2. With:
     <%= radio_button_tag '','' , :checked => 'checked'%>
     James Waters
-</br></br>
+<br><br>
 
 3. At Location:
-</br></br>
+<br><br>
   <%= f.radio_button :location,'Bastrop' %>Bastrop</br>
   <%= f.radio_button :location,'Central Austin' %>Central Austin</br>
   <%= f.radio_button :location,'Steiner Ranch' %>Steiner Ranch
-</br></br>
+<br><br>
 
 4. On This Date/Time:
-</br></br>
+<br><br>
  <div class="field">
     Date:
     <%= f.date_select :date, :start_year => Date.current.year, :end_year => 2014 %>
@@ -58,7 +58,7 @@
   </div>
 
 5. With These Forms:
-</br></br>
+<br><br>
   <% @doctor = Doctor.first%>
 	<% a=[]%>
 	<% @forms = @doctor.forms %>
@@ -69,10 +69,10 @@
  <div class = "labelcss">
   <% for form in @forms %>	    
 	 <%= check_box_tag "form_ids[]", form.id %>
-	 <%= form.formname %></br>
+	 <%= form.formname %><br>
   <% end%>
  </div>
-</br>
+<br>
 6. And Lastly:
   
  
@@ -83,11 +83,11 @@
 
 
 <% if false %>
-<!-- <%= link_to_function "Adult forms" do |page| 
+<!-- <%#= link_to_function "Adult forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'adultform_checkboxes' 
 end %> |
 
-<%= link_to_function "Child forms" do |page| 
+<%#= link_to_function "Child forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes' 
 end %> -->
 <% end %>
