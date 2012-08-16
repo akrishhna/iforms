@@ -1,12 +1,13 @@
 <div class="index">
-	
+
 <h4><%= link_to 'New Appointment', new_appointment_path %></h4>
   <div style="margin-bottom: 10px;">
-    Date : <%= text_field_tag :date,"", :class => "appointments_date_selector" %>
+    Appointment Date : <%= text_field_tag :date,"", :class => "appointments_date_selector" %>
   </div>
 <% if !@appointments.blank? %>
 <table border="0" width="105%" class="mytable">
-	<tr BGCOLOR="grey" >
+	<tr BGCOLOR="grey" id="table_header" >
+    <th>Next Appointment</th>
 		<th>Name</th>
 		<th>Email</th>
 		<th>Form</th>
@@ -14,8 +15,6 @@
 		<th>Sent</th>
 		<th>Received</th>
 		<th></th>
-    <th></th>
-	
 	</tr>
 	<% count = 1 %>
 <% @appointments.each do |i|%>
@@ -37,6 +36,7 @@
 <% end %>
 <tr>
 	<% str = i.firstname + " " + i.lastname %>
+  <td><%= link_to "Next Appt",new_appointment_path(:appointment_id => i.id),:class => "next_appointment",:title => "Next Appointment" %></td>
 	<td><%= str%></td>
 	<td><%= i.email%></td>
 	<% p formname_length = i.formname.split(",")%>
@@ -93,7 +93,6 @@
 	 <td>Pending</td>
 	 <td><%= link_to "Resend", edit_appointment_path(i) %></td>
 	<%end%>
-      <td><%= link_to "Next Appointment",new_appointment_path(:appointment_id => i.id),:class => "next_appointment" %></td>
 	<%end%>
 
 	
@@ -114,7 +113,6 @@
 	<%else%>
 	<td></td>
 	<%end%>
-    <td><%= link_to "Next Appointment",new_appointment_path(:appointment_id => i.id),:class => "next_appointment" %></td>
 </tr>
 <%end%>
 <%end%>
@@ -122,7 +120,7 @@
 <br />
 <%= will_paginate @appointments %>
 <% else %>
-<p>You have no Appointments! </p>
+<p>No Appointments On This Day</p>
 <%end%>
 </br>
 
