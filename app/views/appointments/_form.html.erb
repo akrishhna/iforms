@@ -46,8 +46,8 @@
 <br><br>
  <div class="field">
     Date:
-    <%= f.date_select :date, :start_year => Date.current.year, :end_year => 2014 %>
-    
+    <%#= f.date_select :date, :start_year => Date.current.year, :end_year => 2014 %>
+   <%= f.text_field :date, :class => "appointments_date_selector" %>
  </div>
  <div class="field" id = "tasks">
      Time:
