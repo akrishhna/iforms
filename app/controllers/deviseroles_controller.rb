@@ -68,6 +68,10 @@ class DeviserolesController < ApplicationController
       end
       end 
        redirect_to deviseroles_path
-    end  
-      
+    end
+
+  def privacy_policy
+
+  end
+
 end

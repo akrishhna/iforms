@@ -57,7 +57,7 @@ Iforms::Application.routes.draw do
   match '/about', :to => 'deviseroles#about'
   match '/contact', :to => 'deviseroles#contact'
   match '/FAQ', :to => 'deviseroles#FAQ'
-
+  match 'privacy_policy', :to => 'deviseroles#privacy_policy'
   root :to => redirect("/users/login")
 
   # Note: This route will make all actions in every controller accessible via GET requests.
