@@ -76,6 +76,7 @@ div.field, div.actions {
   /*padding: 0px;
   background-color: ;
   display: table;*/
+  display: inline;
 }
 
 /*#error_explanation {
