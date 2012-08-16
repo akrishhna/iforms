@@ -1,7 +1,9 @@
-<div class="index">
+<div class="index" xmlns="http://www.w3.org/1999/html">
   <h3>My Appointments</h3>
   <div style="margin-bottom: 10px;">
-    Date : <%= text_field_tag :date,"", :class => "appointments_date_selector" %>
+   Appointment Date : <%= text_field_tag :date,"", :class => "appointments_date_selector" %>
+   <%= check_box_tag :all_appointments, 1, (true if !params[:appointment_date].present?),:class => "show_all" %>&nbsp;Show All Appointments
+
   </div>
   <% if !@appointments.blank? %>
     <table border="0" width="105%" class="mytable">
@@ -138,7 +140,7 @@
     <br/>
     <%= will_paginate @appointments %>
   <% else %>
-    <p>You have no Appointments! </p>
+    <p>No Appointments On This Day </p>
   <% end %>
 </div>
 
