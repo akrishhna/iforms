@@ -16,7 +16,7 @@
 <body>
     <div class="header">
       <% if current_user %>
-          Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
+          Welcome! <%= link_to current_user_name, edit_user_registration_path %>,
           <%= link_to 'Sign out', destroy_user_session_path %>
       <% else %>
           <%= link_to 'Sign in', new_user_session_path %>

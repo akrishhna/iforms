@@ -3,43 +3,54 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   helper_method :is_admin?
- #helper_method :patient_profile_exists
+  helper_method :current_user_name
+  #helper_method :patient_profile_exists
+
+  def current_user_name
+    if current_user.role == 'doctor'
+      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname).capitalize rescue 'Doctor'
+    elsif current_user.role == 'patient'
+      (current_user.patients.first.firstname + ' ' + current_user.patients.first.lastname).capitalize rescue 'User'
+    end
+  end
 
   protected
   def is_doctor?
     unless current_user.role=="doctor"
       flash[:notice]="unauthorized access"
-      redirect_to :controller=> "deviseroles", :action=>"index"
+      redirect_to :controller => "deviseroles", :action => "index"
       false
     end
   end
- protected 
+
+  protected
   def is_patient?
     unless current_user.role=="patient"
       flash[:notice]="unauthorized access"
-      redirect_to :controller=> "deviseroles", :action=>"index"
+      redirect_to :controller => "deviseroles", :action => "index"
       false
     end
   end
-protected  
+
+  protected
   def is_admin?
     unless current_user.role=="admin"
       flash[:notice]="unauthorized access"
-      redirect_to :controller=> "deviseroles", :action=>"index"
+      redirect_to :controller => "deviseroles", :action => "index"
       false
     end
   end
- 
- protected
- def patient_profile_exists?
-   @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]).first
-   if @patient.blank?
-     redirect_to :controller => "patients", :action => "new"
-     false
-   end
- end
- 
- protected
+
+  protected
+  def patient_profile_exists?
+    @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]).first
+    if @patient.blank?
+      redirect_to :controller => "patients", :action => "new"
+      false
+    end
+  end
+
+  protected
   def doctor_profile_exists?
     @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
     if @doctor.blank?
@@ -47,9 +58,9 @@ protected
       false
     end
   end
-  
+
   def after_sign_in_path_for(resource)
-      return deviseroles_path
+    return deviseroles_path
   end
 
 end
