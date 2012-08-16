@@ -10,6 +10,8 @@ Devise.setup do |config|
 
   config.encryptor = :sha1
 
+  config.authentication_keys = [ :username ]
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating an user. By default is
   # just :email. You can configure it to use [:username, :subdomain], so for

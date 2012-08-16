@@ -15,14 +15,14 @@
 <% end %>
 <br />
 
-  <div class = "labelcss">Email </div>
-  <%= f.text_field :email %>
+  <div class = "labelcss">Username </div>
+  <%= f.text_field :username %>
 <br /><br />
   <div class = "labelcss">Password </div>
   <%= f.password_field :password %>
 <br /><br />
   <% if devise_mapping.rememberable? -%>
-   <div class = "labelcss"> <%= f.check_box :remember_me %> Remember_me </div>
+   <div class = "labelcss"> <%= f.check_box :remember_me %> Remember Me </div>
   <% end -%>
 <br />
 <div class = "actions">
