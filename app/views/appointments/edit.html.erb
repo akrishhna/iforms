@@ -48,7 +48,8 @@
   </br></br>
    <div class="field">
       Date:
-      <%= f.date_select :date, :start_year => Date.current.year, :end_year => 2014  %>
+      <%#= f.date_select :date, :start_year => Date.current.year, :end_year => 2014  %>
+     <%= f.text_field :date, :class => "appointments_date_selector" %>
 
    </div>
    <div class="field" id = "tasks">
@@ -96,7 +97,7 @@
 			<% if form.formname.include?("Child")%>		    
 			<% if p[i]== form.formname %>
 			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
-			<%= form.formname %>			
+			<%= form.formname %><br>
 			<% end%>
 			<%end%>			
 			<%end%>
