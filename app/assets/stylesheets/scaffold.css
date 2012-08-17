@@ -149,8 +149,9 @@ div.field, div.actions {
 ul, li { list-style-type:none; padding:0; margin:0; }
 
 .labelcss{
-	font-size:14px
-	border:none; width:500px;
+	font-size:14px;
+	border:none;
+  width:500px;
 }
  .mytable {
 border-collapse: collapse;
