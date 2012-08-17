@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Forgot username?</h2>
+
+  <%= form_for(resource, :as => resource_name, :url => sending_username_deviseroles_path) do |f| %>
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <br/>
+
+    <div class="labelcss">Email</div>
+    <%= f.text_field :email %>
+    <br/><br/>
+
+    <div class="actions">
+      <%= f.submit "Send my username " %>
+    </div>
+  <% end %>
+
+  <%= render :partial => "devise/shared/links" %>
+</div>

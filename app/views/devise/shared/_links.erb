@@ -2,6 +2,9 @@
   <%= link_to "Sign in", new_session_path(resource_name) %><br />
 <% end -%>
 
+<%- if action_name != 'forget_username' %>
+  <%= link_to "Forget username?",forget_username_deviseroles_path() %><br />
+<% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
   <%= link_to "Forgot password?", new_password_path(resource_name) %><br />
