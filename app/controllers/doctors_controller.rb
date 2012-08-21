@@ -32,7 +32,7 @@ class DoctorsController < ApplicationController
   
   def update
    @doctor = Doctor.find(params[:id])
-   @doctor.doctorname = @doctor.firstname + " " + @doctor.lastname
+   @doctor.doctorname =  params[:doctor][:firstname] + " " +  params[:doctor][:lastname]
    respond_to do |format|
    if @doctor.update_attributes(params[:doctor])
      format.html { redirect_to(edit_user_registration_path, :notice => 'Profile Updated successfully.') }
