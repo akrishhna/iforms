@@ -41,7 +41,7 @@ Iforms::Application.routes.draw do
     collection do
       post 'contacts'
       get 'user_details'
-      get 'forget_username'
+      get 'forgot_username'
       post 'sending_username'
     end
   end

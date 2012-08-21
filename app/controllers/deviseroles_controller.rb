@@ -75,7 +75,7 @@ class DeviserolesController < ApplicationController
 
   end
 
-  def forget_username
+  def forgot_username
 
   end
 

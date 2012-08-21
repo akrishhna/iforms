@@ -30,12 +30,12 @@
 <% end %>
 <% if current_user.role == "patient" %>
 <% @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]) %>
-<%= link_to'Update Profile Information', edit_patient_path(@patient) %></br></br>
+<%#= link_to'Update Profile Information', edit_patient_path(@patient) %><br><br>
 <%= link_to "Back", patients_path %>
 <% end %>
 <% if current_user.role == "doctor" %>
 <% @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]) %>
-<%= link_to'Update Profile Information', edit_doctor_path(@doctor) %></br></br>
+<%#= link_to'Update Profile Information', edit_doctor_path(@doctor) %><br><br>
 <%= link_to "Back", doctors_path %>
 <% end %>
 <!-- <h3>Cancel my account</h3>
