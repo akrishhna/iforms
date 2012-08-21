@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
 
   def current_user_name
     if current_user.role == 'doctor'
-      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname).capitalize rescue 'Doctor'
+      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
     elsif current_user.role == 'patient'
-      (current_user.patients.first.firstname + ' ' + current_user.patients.first.lastname).capitalize rescue 'User'
+      (current_user.patients.first.firstname + ' ' + current_user.patients.first.lastname) rescue 'User'
     end
   end
 
