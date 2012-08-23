@@ -1,5 +1,39 @@
 /*
  *= require jquery-ui
- *= require scaffold
+ *= require bootstrap
  *= require_self
 */
+
+.header {
+  height: 70px;
+  margin: 20px 0;
+  border-bottom: 1px solid #6F6F6F;
+}
+
+.logo {
+  margin-left: 20px;
+  width: 225px;
+  float: left;
+}
+
+.header_navigation {
+  margin: 20px 20px 0 0;
+  float: right;
+}
+
+.content {
+  min-height: 400px;
+  padding: 20px 40px;
+}
+
+.footer {
+  border-top: 1px solid #6F6F6F;
+  margin-top: 10px;
+  min-height: 50px;
+}
+
+.footer_links {
+  margin: 5px 0;
+  padding: 10px;
+  text-align: center;
+}

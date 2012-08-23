@@ -5,48 +5,60 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
-  <%= yield(:head)%>
-  <%= stylesheet_link_tag params[:controller]%>
-  <%= javascript_include_tag params[:controller]%>
-  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
   <%= javascript_tag do %>
-     var params =  <%= raw params.to_json %>;
+    var params =  <%= raw params.to_json %>;
   <% end %>
+  <%= stylesheet_link_tag params[:controller] %>
+  <%= javascript_include_tag params[:controller] %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="header">
+<div class="header">
+  <div class="logo">
+    <%= link_to '/' do %>
+      <%= image_tag 'iforms_logo.png', :title => 'ifor.ms' %>
+    <% end %>
+  </div>
+  <div class="header_navigation">
+    <div class="header_navigation_links">
       <% if current_user %>
-          Welcome! <%= link_to current_user_name, edit_user_registration_path %>,
-          <%= link_to 'Sign out', destroy_user_session_path %>
+        Welcome! <%= link_to current_user_name, edit_user_registration_path %>,
+        <%= link_to 'Sign out', destroy_user_session_path %>
       <% else %>
-          <%= link_to 'Sign in', new_user_session_path %>
+        <%= link_to 'Sign in', new_user_session_path %>
       <% end %>
     </div>
-    <div class="logo" onclick="window.location.href='/';">
-    </div>
-    <div class="container_layout">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, :id => "flash_#{name}", :class => "flash flash-#{name}" do %>
-          <%= raw msg %>
-        <% end %>
-      <% end %>
+  </div>
+</div>
+<div class="content container">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, :id => "flash_#{name}", :class => "alert alert-#{name}" do %>
+      <a class="close" data-dismiss="alert">&times;</a>
+      <%= raw msg %>
+    <% end %>
+  <% end %>
+  <%= content_tag :div, "data-page-action" => page_action, "data-page-controller" => page_controller do %>
+    <%= yield %>
+  <% end %>
+</div>
+<div class="footer">
+  <div class="footer_links">
+    <% if user_signed_in? and current_user.role =="patient" %>
+      <%= link_to 'Home', patients_path %> |
+    <% elsif user_signed_in? and current_user.role =="doctor" %>
+      <%= link_to 'Home', doctors_path %> |
+    <% elsif user_signed_in? and current_user.role =="admin" %>
+      <%= link_to 'Home', :controller => "admin", :action => "index" %> |
+    <% else %>
+      <%= link_to 'Home', root_url %> |
+    <% end %>
+    <%= link_to 'About Us', '/about' %> |
+    <%= link_to 'FAQ', '/FAQ' %> |
+    <%= link_to 'Contact', '/contact' %> |
+    <%= link_to 'Privacy Policy','/privacy_policy' %>
+  </div>
+</div>
 
-      <%= yield %>
-    </div>
-    <div class="footer">
-      <% if user_signed_in? and current_user.role =="patient" %>
-          <%= link_to 'Home', patients_path %> |
-      <% elsif user_signed_in? and current_user.role =="doctor" %>
-          <%= link_to 'Home', doctors_path %> |
-      <% elsif user_signed_in? and current_user.role =="admin" %>
-          <%= link_to 'Home', :controller => "admin", :action => "index" %> |
-      <% else %>
-          <%= link_to 'Home', root_url %> |
-      <% end %>
-      <%= link_to 'About Us', '/about' %> |
-      <%= link_to 'FAQ', '/FAQ' %> |
-      <%= link_to 'Contact', '/contact' %> |
-      <%= link_to 'Privacy Policy','/privacy_policy' %>
-    </div>
 </body>
 </html>
