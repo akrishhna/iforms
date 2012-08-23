@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810073213) do
+ActiveRecord::Schema.define(:version => 20120823082938) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -603,6 +603,15 @@ ActiveRecord::Schema.define(:version => 20120810073213) do
     t.datetime "updated_at",                     :null => false
   end
 
+  create_table "service_providers", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "description"
+    t.boolean  "status",      :default => true
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
   create_table "sessionstores", :force => true do |t|
     t.string   "useremail_beforeupdate", :null => false
     t.string   "useremail_afterupdate",  :null => false
@@ -616,6 +625,15 @@ ActiveRecord::Schema.define(:version => 20120810073213) do
     t.boolean  "deleted"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_service_providers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "service_provider_id"
+    t.boolean  "status",              :default => true
+    t.date     "expiry_date"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "users", :force => true do |t|
