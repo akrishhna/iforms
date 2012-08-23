@@ -12,7 +12,7 @@ gem 'client_side_validations'
 gem 'paperclip'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'ssl_requirement'
-gem 'capistrano'
+gem 'capistrano', '2.11.2'
 
 # Gems used only for assets and not required
 # in production environments by default.
