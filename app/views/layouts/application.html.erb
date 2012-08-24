@@ -20,6 +20,11 @@
       <%= image_tag 'iforms_logo.png', :title => 'ifor.ms' %>
     <% end %>
   </div>
+  <% if current_user %>
+  <div class="service_provide_select">
+    <%= select_tag("user_service_provider_list", options_for_select(user_service_provider_list)) %>
+  </div>
+  <% end %>
   <div class="header_navigation">
     <div class="header_navigation_links">
       <% if current_user %>
