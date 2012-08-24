@@ -30,6 +30,22 @@ $(document).ready(function(){
 			},
 			'json');
 	});
+
+
+
+  // User service provides selection
+  $('select#user_service_provider_list').change(function() {
+    if($(this).val() == 1){
+      window.location = '/doctor/appointments'
+    }
+    else if($(this).val() == 2){
+      window.location = '/girl_scouts_troop_leaders'
+    }
+    else{
+      window.location = '/'
+    }
+  });
+
 });
 
 //Check if the function exists
