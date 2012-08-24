@@ -1,0 +1,2 @@
+module GirlScoutsTroopLeadersHelper
+end

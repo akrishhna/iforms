@@ -1,5 +1,11 @@
 Iforms::Application.routes.draw do
 
+  resources :girl_scouts_troop_leaders do
+    collection do
+      get 'roster'
+    end
+  end
+
   get 'confirmations/new'
 
   get 'contactus/new'
