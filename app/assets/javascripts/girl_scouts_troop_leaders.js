@@ -37,7 +37,10 @@ $(function () {
     }).get();
 
     if (checked_vals.length != 0) {
-      $.post("/girl_scouts_troop_leaders/delete_girl_scouts",{checked_vals:checked_vals.join()});
+      var result = confirm("Are you sure ?");
+      if(result){
+        $.post("/girl_scouts_troop_leaders/delete_girl_scouts",{checked_vals:checked_vals.join()});
+      }
     }
     return false;
   });

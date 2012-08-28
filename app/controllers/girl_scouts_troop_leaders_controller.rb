@@ -8,7 +8,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def roster
-    @girls_scouts = current_user.girls_scouts
+    @girls_scouts = current_user.girls_scouts.order("name ASC")
   end
 
   def girl_scouts_roster
@@ -28,7 +28,6 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def delete_girl_scouts
       @ids = params[:checked_vals]
-     #  raise @ids.to_yaml
       GirlsScout.delete(@ids.split(','))
   end
 
