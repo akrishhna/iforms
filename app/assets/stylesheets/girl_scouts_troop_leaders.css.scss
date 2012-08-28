@@ -6,3 +6,36 @@
   text-align: center;
   margin-bottom: 10px;
 }
+.girl_scouts_div{
+  margin-top: 15px;
+}
+
+/* roster */
+
+table.girl_scouts_table {
+
+}
+
+th.girl_scout_check_box, td.girl_scout_check_box {
+  width: 40px;
+  text-align: center;
+
+  input[type=checkbox] {
+    margin-bottom: 2px;
+  }
+}
+
+td.girl_scout_check_box {
+  input[type=checkbox] {
+    margin-top: 8px;
+  }
+}
+
+tr.girl_scout_row {
+
+  input[type=text] {
+    margin: 0;
+  }
+
+}
+/* end roster*/

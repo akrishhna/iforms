@@ -1,0 +1,16 @@
+<% row_index = girl_scout_counter + 1 %>
+<tr class="girl_scout_row" data_row_number=<%= row_index %>>
+  <td class="girl_scout_check_box">
+    <%= check_box_tag :check_box_row, girl_scout.id, false, :id => "check_box_row_#{row_index}" %>
+    <%= hidden_field_tag :id, girl_scout.id, :id => "id_#{row_index}" %>
+  </td>
+  <td>
+    <%= text_field_tag :name, girl_scout.name, :id => "name_#{row_index}", :class => 'girl_scout_name' %>
+  </td>
+  <td>
+    <%= text_field_tag :parent_name, girl_scout.parent_name, :id => "parent_name_#{row_index}", :class => 'girl_scout_parent_name' %>
+  </td>
+  <td>
+    <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email' %>
+  </td>
+</tr>

@@ -1,0 +1,6 @@
+console.log(<%= @row_index%>);
+var new_girl_scout = "<%= escape_javascript render :partial => 'girl_scout', :locals => {:girl_scout_counter => @row_index, :girl_scout => @girls_scout} %>";
+$('#girl_scouts_table').append(new_girl_scout);
+$('#name_<%= @row_index + 1 %>').focus();
+
+

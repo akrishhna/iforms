@@ -3,6 +3,9 @@ Iforms::Application.routes.draw do
   resources :girl_scouts_troop_leaders do
     collection do
       get 'roster'
+      get 'get_girl_scouts_row'
+      post 'girl_scouts_roster'
+      post 'delete_girl_scouts'
     end
   end
 
