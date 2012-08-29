@@ -2,6 +2,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery.fancybox
 //= require 'jquery.maskedinput'
 //= require formToWizard
 //= require_self
