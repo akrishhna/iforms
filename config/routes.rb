@@ -1,5 +1,7 @@
 Iforms::Application.routes.draw do
 
+  resources :consumer
+
   resources :girl_scouts_troop_leaders do
     collection do
       get 'roster'
