@@ -15,11 +15,13 @@ $(function () {
   $('.girl_scout_name, .girl_scout_parent_name, .girl_scout_email').live('blur', function () {
     var row_index = $(this).parents('tr').attr('data_row_number');
     var id = $('#id_' + row_index).val();
-    var girl_scout_name = $('#name_' + row_index).val();
-    var girl_scout_parent_name = $('#parent_name_' + row_index).val();
+    var girl_scout_first_name = $('#first_name_' + row_index).val();
+    var girl_scout_last_name = $('#last_name_' + row_index).val();
+    var girl_scout_parent_first_name = $('#parent_first_name_' + row_index).val();
+    var girl_scout_parent_last_name = $('#parent_last_name_' + row_index).val();
     var girl_scout_email = $('#email_' + row_index).val();
     $.post("/girl_scouts_troop_leaders/girl_scouts_roster",
-      {row_index:row_index, id:id, name:girl_scout_name, parent_name:girl_scout_parent_name, email:girl_scout_email});
+      {row_index:row_index, id:id, first_name:girl_scout_first_name, last_name:girl_scout_last_name, parent_first_name:girl_scout_parent_first_name, parent_last_name:girl_scout_parent_last_name, email:girl_scout_email});
   });
 
   $('#select_all_check_box').click(function () {
@@ -31,18 +33,21 @@ $(function () {
     }
   });
 
-  $('#delete_girl_scouts').click(function () {
+  $('.delete_girls_scouts').fancybox({
+    closeBtn: false
+   });
+
+  $('#delete_yes').click(function () {
     var checked_vals = $('#girl_scouts_table input[name=check_box_row]:checked').map(function () {
       return $(this).val();
     }).get();
 
     if (checked_vals.length != 0) {
-      var result = confirm("Are you sure ?");
-      if(result){
-        $.post("/girl_scouts_troop_leaders/delete_girl_scouts",{checked_vals:checked_vals.join()});
-      }
+      $.post("/girl_scouts_troop_leaders/delete_girl_scouts",{checked_vals:checked_vals.join()});
+    }
+    else{
+      $.fancybox({href: '#alert_box_error', closeBtn: false});
     }
     return false;
   });
-
 });

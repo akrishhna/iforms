@@ -8,17 +8,19 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def roster
-    @girls_scouts = current_user.girls_scouts.order("name ASC")
+    @girls_scouts = current_user.girls_scouts.order("first_name ASC")
   end
 
   def girl_scouts_roster
     @row_index = params[:row_index]
     @girls_scout = GirlsScout.find_or_initialize_by_id(params[:id])
     @girls_scout.user_id = current_user.id
-    @girls_scout.name = params[:name]
-    @girls_scout.parent_name = params[:parent_name]
+    @girls_scout.first_name = params[:first_name]
+    @girls_scout.last_name = params[:last_name]
+    @girls_scout.parent_first_name = params[:parent_first_name]
+    @girls_scout.parent_last_name = params[:parent_last_name]
     @girls_scout.email = params[:email]
-    @girls_scout.save if @girls_scout.name.present? || @girls_scout.parent_name.present? || @girls_scout.email.present?
+    @girls_scout.save if @girls_scout.first_name.present? || @girls_scout.last_name.present? || @girls_scout.parent_first_name.present? || @girls_scout.parent_last_name.present? || @girls_scout.email.present?
   end
 
   def get_girl_scouts_row

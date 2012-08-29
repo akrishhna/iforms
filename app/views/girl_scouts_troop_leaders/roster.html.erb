@@ -5,7 +5,7 @@
 </div>
 <div>
   <%= link_to "Add Girl Scout", "#", :class => "btn btn-primary", :id => "add_girl_scout" %>
-  <%= link_to "Delete Selected Girl Scout(s)", "#", :class => "btn btn-danger", :id => "delete_girl_scouts" %>
+  <%= link_to "Delete Selected Girl Scout(s)", "#alert_box_text", :class => "btn btn-danger delete_girls_scouts", :id => "delete_girl_scouts" %>
 </div>
 <div class="girl_scouts_div">
   <table class="table table-bordered table-hover" id="girl_scouts_table">
@@ -19,4 +19,17 @@
     </tr>
     <%= render :partial => "girl_scout", :collection => @girls_scouts %>
   </table>
+  <div id="alert_box_text" class="hide" style="text-align: center;">
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Delete selected Girls Scouts?</p>
+    <%= link_to "Yes", "#alert_box_error", :class => "btn btn-danger delete_yes", :id => "delete_yes" %>&nbsp;&nbsp;
+    <%= link_to "No", "#", :class => "btn btn-primary", :id => "delete_no", :onclick => "$.fancybox.close();" %>
+  </div>
+  <div id="alert_box_error" class="hide" style="text-align: center">
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Select minimum one Girl Scout. </p>
+    <%= link_to "Ok", "#", :class => "btn btn-primary", :onclick => "$.fancybox.close();" %>
+  </div>
+  <div id="alert_box_success" class="hide" style="text-align: center">
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Deleted selected Girl scouts. </p>
+    <%= link_to "Ok", "#", :class => "btn btn-primary",:onclick => "$.fancybox.close();"%>
+  </div>
 </div>
