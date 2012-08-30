@@ -50,4 +50,7 @@ $(function () {
     }
     return false;
   });
+
+  $(".girls_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', new Date());
+
 });

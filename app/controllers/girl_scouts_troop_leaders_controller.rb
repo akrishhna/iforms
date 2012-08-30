@@ -1,6 +1,6 @@
 class GirlScoutsTroopLeadersController < ApplicationController
 
-  before_filter :set_service_provider
+  before_filter :set_service_provider, :girls_scouts_activities
 
   def index
 
@@ -37,7 +37,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   # girls scout activities
 
   def activities
-
+    @girls_activity = GirlScoutsActivity.new
   end
 
 
@@ -47,9 +47,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @current_service_provider = 2
   end
 
-
   def girls_scouts_activities
     return @girls_scouts_activities if defined?(@girls_scouts_activities)
     @girls_scouts_activities = ["<Create New Activity>",0],["--------------------",:disabled => "disabled"]
   end
+
 end

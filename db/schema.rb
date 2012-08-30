@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829051804) do
+ActiveRecord::Schema.define(:version => 20120830064431) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -295,6 +295,40 @@ ActiveRecord::Schema.define(:version => 20120829051804) do
     t.integer  "doctor_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "girl_scouts_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "activity_name"
+    t.string   "activity_location"
+    t.date     "activity_date_begin"
+    t.date     "activity_date_end"
+    t.date     "activity_signed_permission_due_date"
+    t.string   "activity_leave_from"
+    t.datetime "activity_leave_time"
+    t.string   "activity_return_to"
+    t.datetime "activity_return_time"
+    t.decimal  "activity_cost",                       :precision => 10, :scale => 0
+    t.boolean  "girls_were_checkbox"
+    t.string   "activity_girls_wear_others"
+    t.string   "activity_girls_bring"
+    t.string   "activity_equipment"
+    t.string   "troop_service_unit"
+    t.string   "troop_pal"
+    t.string   "troop_number"
+    t.string   "leader_first_name"
+    t.string   "leader_last_name"
+    t.string   "leader_email"
+    t.integer  "leader_day_phone"
+    t.integer  "leader_evening_phone"
+    t.integer  "leader_cell_phone"
+    t.string   "emergency_first_name"
+    t.string   "emergency_last_name"
+    t.integer  "emergency_day_phone"
+    t.integer  "emergency_evening_phone"
+    t.text     "email_notification"
+    t.datetime "created_at",                                                         :null => false
+    t.datetime "updated_at",                                                         :null => false
   end
 
   create_table "girls_scouts", :force => true do |t|
@@ -656,6 +690,7 @@ ActiveRecord::Schema.define(:version => 20120829051804) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
@@ -664,11 +699,10 @@ ActiveRecord::Schema.define(:version => 20120829051804) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                                   :null => false
     t.datetime "updated_at",                                                   :null => false
-    t.string   "role",                                  :default => "patient", :null => false
-    t.string   "edit_confirmed"
     t.string   "password_salt"
+    t.string   "role",                                  :default => "patient", :null => false
     t.string   "username"
-    t.datetime "reset_password_sent_at"
+    t.string   "edit_confirmed"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
