@@ -7,6 +7,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   end
 
+  # Girls scout roster
   def roster
     @girls_scouts = current_user.girls_scouts.order("first_name ASC")
   end
@@ -33,9 +34,22 @@ class GirlScoutsTroopLeadersController < ApplicationController
       GirlsScout.delete(@ids.split(','))
   end
 
+  # girls scout activities
+
+  def activities
+
+  end
+
+
   private
 
   def set_service_provider
     @current_service_provider = 2
+  end
+
+
+  def girls_scouts_activities
+    return @girls_scouts_activities if defined?(@girls_scouts_activities)
+    @girls_scouts_activities = ["<Create New Activity>",0],["--------------------",:disabled => "disabled"]
   end
 end
