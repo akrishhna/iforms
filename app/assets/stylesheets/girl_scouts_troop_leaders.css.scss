@@ -6,7 +6,8 @@
   text-align: center;
   margin-bottom: 10px;
 }
-.girl_scouts_div{
+
+.girl_scouts_div {
   margin-top: 15px;
 }
 
@@ -38,15 +39,44 @@ tr.girl_scout_row {
   }
 
 }
+
 /* end roster*/
 
 /* Activity */
 
-.activity_tabs{
+.activity_tabs {
   margin: 25px 0 0 0;
 }
 
-#girls_scouts_activities{
+#girls_scouts_activities {
   margin: 1px 30px 1px 0;
 }
+
+.notification_email_to_parent_text {
+  padding: 23px 18px;
+}
+
+.activity_footer_links {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.activity_phone {
+  width: 30px;
+}
+
+.activity_phone_last {
+  width: 40px;
+}
+
+.girl_scouts_activity_form {
+  .controls {
+    margin-left: 240px;
+  }
+
+  .control-label {
+    width: 225px;
+  }
+}
+
 /* end ACtivity */

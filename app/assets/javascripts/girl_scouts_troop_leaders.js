@@ -34,8 +34,8 @@ $(function () {
   });
 
   $('.delete_girls_scouts').fancybox({
-    closeBtn: false
-   });
+    closeBtn:false
+  });
 
   $('#delete_yes').click(function () {
     var checked_vals = $('#girl_scouts_table input[name=check_box_row]:checked').map(function () {
@@ -43,14 +43,29 @@ $(function () {
     }).get();
 
     if (checked_vals.length != 0) {
-      $.post("/girl_scouts_troop_leaders/delete_girl_scouts",{checked_vals:checked_vals.join()});
+      $.post("/girl_scouts_troop_leaders/delete_girl_scouts", {checked_vals:checked_vals.join()});
     }
-    else{
-      $.fancybox({href: '#alert_box_error', closeBtn: false});
+    else {
+      $.fancybox({href:'#alert_box_error', closeBtn:false});
     }
     return false;
   });
 
-  $(".girls_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', new Date());
+
+  // activity tabs
+
+  $(".girls_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+
+  $('.activity_nav_link').click(function () {
+    var tab_index = parseInt($(this).attr('data_tab_index'));
+    $("#activity_tab_links a:eq(" + tab_index + ")").tab('show');
+    return false;
+  });
+
+  $('select#girls_scouts_activities').change(function() {
+    if($(this).val() == 0){
+      window.location = '/girl_scouts_troop_leaders/activities'
+    }
+  });
 
 });

@@ -3,200 +3,256 @@
   <%= link_to "Permission Forms", "#" %> <strong> | </strong>
   <%= link_to "Roster", roster_girl_scouts_troop_leaders_path %>
 </div>
+<div>&nbsp;</div>
 <div>
   <%= select_tag("girls_scouts_activities", options_for_select(@girls_scouts_activities), :prompt => "Select Activity") %>
   <%= link_to "Delete This Activity", "#", :class => "btn btn-danger" %> &nbsp;
   <%= link_to "View This Permission Form PDF", "#", :class => "btn btn-info" %>
 </div>
 <div class="clear"></div>
-<%= form_for @girls_activity, :url => "", :html => {:class => 'form-horizontal', :multipart => true} do |f| %>
+<%= form_for @girls_activity, :url => "", :html => {:class => 'form-horizontal girl_scouts_activity_form', :multipart => true} do |f| %>
   <div class="tabbable tabs-left activity_tabs">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <%= link_to "Activity", "#activity", "data-toggle" => "tab" %>
-      </li>
-      <li>
-        <%= link_to "Troop", "#troop", "data-toggle" => "tab" %>
-      </li>
-      <li>
-        <%= link_to "Troop Leader", "#troop_leader", "data-toggle" => "tab" %>
-      </li>
-      <li>
-        <%= link_to "Troop Emergency Contact", "#troop_emergency_contact", "data-toggle" => "tab" %>
-      <li>
-      <li>
-        <%= link_to "Send Notification Email", "#send_notification_email", "data-toggle" => "tab" %>
-      </li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active" id="activity">
-        <div class="control-group">
-          <%= f.label :activity_name, "Name", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_name %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_location,"Location", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_location %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_date_begin,"Date Begin", :class => 'control-label'%>
-          <div class="controls">
-            <%= f.text_field :activity_date_begin, :class => "girls_scout_activity_date_selector" %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_date_end,"Date End", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_date_end, :class => "girls_scout_activity_date_selector"  %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_signed_permission_due_date,"Signed Permission Form Due Date", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_signed_permission_due_date, :class => "girls_scout_activity_date_selector"  %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_leave_from,"We Will Leave from", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_leave_from %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_leave_time,"At This Time", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_leave_time %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_return_to,"We Will Return To", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_return_to %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_return_time,"At This Time", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_return_time %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_cost,"Cost", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_cost %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :girls_were_checkbox,"Girls Should Were", :class => 'control-label' %>
-          <div class="controls">
-           <%= f.check_box :girls_were_checkbox %> <p style="float: right;margin: -17px 496px;">Uniform</p>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_girls_wear_others,"Girls Should Were Others", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_girls_wear_others %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_girls_bring,"Girls Should Bring", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_girls_bring %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :activity_equipment,"Equipment Needed", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :activity_equipment %>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="troop">
-        <div class="control-group">
-          <%= f.label :troop_service_unit,"Service Unit", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.select :troop_service_unit, {}, :include_blank => true %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :troop_pal,"PAL", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.select :troop_pal, {}, :include_blank => true %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :troop_number,"Troop Number", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :troop_number %>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="troop_leader">
-        <div class="control-group">
-          <%= f.label :leader_first_name, "Name", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :leader_first_name,:placeholder => "First Name",:class => "input-small" %>
-            <%= f.text_field :leader_last_name ,:placeholder => "Last Name",:class => "input-small"%>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :leader_email,"Email" , :class => 'control-label' %>
-          <div class="controls">
-            <%= f.email_field :leader_email %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :leader_day_phone,"Day Phone", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :leader_day_phone %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :leader_evening_phone,"Evening Phone", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :leader_evening_phone %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :leader_cell_phone,"Cell Phone", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :leader_cell_phone %>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="troop_emergency_contact">
-        <div class="control-group">
-          <%= f.label :emergency_first_name,"Name", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :emergency_first_name,:placeholder => "First Name",:class => "input-small" %>
-            <%= f.text_field :emergency_first_name ,:placeholder => "Last Name",:class => "input-small"%>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :emergency_day_phone,"Day Phone", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :emergency_day_phone %>
-          </div>
-        </div>
-        <div class="control-group">
-          <%= f.label :emergency_evening_phone,"Evening Phone", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.text_field :emergency_evening_phone %>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="send_notification_email">
-        <div class="control-group">
-          <%= f.label :email_notification,"Send Notifcation Email to parent" %>
-          <div class="controls">
-            <%= f.text_area :email_notification, :rows => 5, :cols => 100 %>
-          </div>
-        </div>
+  <ul class="nav nav-tabs" id="activity_tab_links">
+    <li class="active">
+      <%= link_to "Activity", "#activity", "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Troop", "#troop", "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Troop Leader", "#troop_leader", "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Troop Emergency Contact", "#troop_emergency_contact", "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Send Notifcation Email to parent", "#send_notification_email", "data-toggle" => "tab" %>
+    </li>
+  </ul>
+  <div class="tab-content">
+  <div class="tab-pane active" id="activity">
+    <div class="control-group">
+      <%= f.label :activity_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_name, :style => "width:400px" %>
       </div>
     </div>
+    <div class="control-group">
+      <%= f.label :activity_location, "Location", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_location, :style => "width:400px" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_date_begin, "Date Begin", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_date_begin, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_date_end, "Date End", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_date_end, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_signed_permission_due_date, "Signed Permission Form Due Date", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_signed_permission_due_date, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_leave_from, "We Will Leave from", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_leave_from, :style => "width:400px" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_leave_time_hh, "At This Time", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_leave_time_hh, :style => "width:30px", :placeholder => "HH" %>
+        <strong> : </strong>
+        <%= f.text_field :activity_leave_time_mm, :style => "width:30px", :placeholder => "MM" %>
+        <%= f.select :activity_leave_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_return_to, "We Will Return To", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_return_to, :style => "width:400px" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_return_time_hh, "At This Time", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_return_time_hh, :style => "width:30px", :placeholder => "HH" %>
+        <strong> : </strong>
+        <%= f.text_field :activity_return_time_mm, :style => "width:30px", :placeholder => "MM" %>
+        <%= f.select :activity_return_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_cost_dollars, "Cost", :class => 'control-label' %>
+      <div class="controls">
+        $ <%= f.text_field :activity_cost_dollars, :style => "width:100px", :placeholder => "Dollars" %>
+        <strong> . </strong>
+        <%= f.text_field :activity_cost_cents, :style => "width:20px", :placeholder => "" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :girls_wear_checkbox, "Girls Should Wear", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+          <%= f.check_box :girls_wear_checkbox %>&nbsp;Uniforms
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_girls_wear_others, "Girls Should Wear - Other", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_girls_wear_others, :style => 'width:400px' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_girls_bring, "Girls Should Bring", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_girls_bring, :style => 'width:400px' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :activity_equipment, "Equipment Needed", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_equipment, :style => 'width:400px' %>
+      </div>
+    </div>
+    <div class="activity_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "1" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="troop">
+    <div class="control-group">
+      <%= f.label :troop_service_unit, "Service Unit", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :troop_service_unit, options_for_select([]), {:include_blank => true}, {:style => 'width:400px;'} %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :troop_pal, "PAL", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :troop_pal, {}, :include_blank => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :troop_number, "Troop Number", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_number, :class => "input-small" %>
+      </div>
+    </div>
+    <div class="activity_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "0" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "2" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="troop_leader">
+    <div class="control-group">
+      <%= f.label :leader_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :leader_last_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :leader_email, "Email", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :leader_email, :style => 'width:400px' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :leader_day_phone_1, "Day Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_day_phone_1, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :leader_day_phone_2, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :leader_day_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :leader_evening_phone_1, "Evening Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_evening_phone_1, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :leader_evening_phone_2, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :leader_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :leader_cell_phone_1, "Cell Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_cell_phone_1, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :leader_cell_phone_2, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :leader_cell_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="activity_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "1" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "3" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="troop_emergency_contact">
+    <div class="control-group">
+      <%= f.label :emergency_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :emergency_first_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :emergency_day_phone_1, "Day Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_day_phone_1, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :emergency_day_phone_2, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :emergency_day_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :emergency_evening_phone_1, "Evening Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_evening_phone_1, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :emergency_evening_phone_2, :class => "activity_phone", :placeholder => "###" %> -
+        <%= f.text_field :emergency_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="activity_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "2" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "4" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="send_notification_email">
+    <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent" %>
+    <br>
+    <%#= f.text_area :email_notification, :rows => 5, :cols => 100 %> <br>
+
+    <div class='notification_email_to_parent_text radius-border'>
+      <%= render :partial => 'parents_email_notification' %>
+    </div>
+    <div class="activity_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => 3 do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+    </div>
+  </div>
+  </div>
+  </div>
 <% end %>
-</div>
