@@ -244,9 +244,8 @@
     <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent" %>
     <br>
     <%#= f.text_area :email_notification, :rows => 5, :cols => 100 %> <br>
-
     <div class='notification_email_to_parent_text radius-border'>
-      <%= render :partial => 'parents_email_notification' %>
+      <%= render :partial => 'parents_email_notification', :locals => {:girls_activity => @girls_activity} %>
     </div>
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => 3 do %>
