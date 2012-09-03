@@ -52,6 +52,12 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @activity.save(:validate => false)
   end
 
+   def send_notification_email
+     @girls_scout = GirlScoutsActivity.find(params[:id])
+     if @girls_scout.invalid?
+       flash[:error] = "Something wrong please try again."
+     end
+   end
 
   private
 

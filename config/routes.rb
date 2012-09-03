@@ -11,6 +11,7 @@ Iforms::Application.routes.draw do
       post 'girl_scouts_roster'
       post 'delete_girl_scouts'
       post 'create_activity'
+      post 'send_notification_email'
     end
   end
 

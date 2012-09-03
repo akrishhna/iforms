@@ -77,4 +77,10 @@ $(function () {
     $.post('/girl_scouts_troop_leaders/create_activity', params);
     return false;
   });
+
+  $('#notification_email_to_parent').click(function(){
+     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
+    $.post('/girl_scouts_troop_leaders/send_notification_email',{id:id});
+    return false;
+  });
 });
