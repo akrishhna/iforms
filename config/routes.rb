@@ -2,6 +2,7 @@ Iforms::Application.routes.draw do
 
   resources :consumer
 
+
   resources :girl_scouts_troop_leaders do
     collection do
       get 'activities'
@@ -9,6 +10,7 @@ Iforms::Application.routes.draw do
       get 'get_girl_scouts_row'
       post 'girl_scouts_roster'
       post 'delete_girl_scouts'
+      post 'create_activity'
     end
   end
 

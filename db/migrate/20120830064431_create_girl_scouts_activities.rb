@@ -57,6 +57,8 @@ class CreateGirlScoutsActivities < ActiveRecord::Migration
 
       t.text :email_notification
 
+      t.boolean :status
+
       t.timestamps
     end
   end

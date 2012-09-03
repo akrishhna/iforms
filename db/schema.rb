@@ -342,6 +342,7 @@ ActiveRecord::Schema.define(:version => 20120830064431) do
     t.integer  "emergency_evening_phone_2"
     t.integer  "emergency_evening_phone_3"
     t.text     "email_notification"
+    t.boolean  "status"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end

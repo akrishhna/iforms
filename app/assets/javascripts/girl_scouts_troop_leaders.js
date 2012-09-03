@@ -62,10 +62,19 @@ $(function () {
     return false;
   });
 
-  $('select#girls_scouts_activities').change(function() {
-    if($(this).val() == 0){
-      window.location = '/girl_scouts_troop_leaders/activities'
+  $('select#girls_scouts_activities').change(function () {
+    if ($(this).val() == 0) {
+      window.location = '/girl_scouts_troop_leaders/activities';
+    } else {
+      window.location = '/girl_scouts_troop_leaders/activities?id=' + $(this).val();
     }
   });
 
+  $('.girl_scouts_activity_form input,.girl_scouts_activity_form select').change(function () {
+    var params = {};
+    params["girl_scouts_activity[id]"] = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
+    params[$(this).attr('name')] = $(this).val();
+    $.post('/girl_scouts_troop_leaders/create_activity', params);
+    return false;
+  });
 });

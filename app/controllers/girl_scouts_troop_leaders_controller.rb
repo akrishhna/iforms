@@ -30,14 +30,26 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def delete_girl_scouts
-      @ids = params[:checked_vals]
-      GirlsScout.delete(@ids.split(','))
+    @ids = params[:checked_vals]
+    GirlsScout.delete(@ids.split(','))
   end
 
   # girls scout activities
 
   def activities
-    @girls_activity = GirlScoutsActivity.new
+    @girls_activity = GirlScoutsActivity.new if !params[:id].present?
+    @girls_activity = GirlScoutsActivity.find(params[:id]) if params[:id].present?
+    @activities = current_user.girl_scouts_activities.order("created_at DESC")
+    @activities.each do |activity|
+      @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
+    end
+  end
+
+  def create_activity
+    @activity = GirlScoutsActivity.find_or_initialize_by_id(params[:girl_scouts_activity][:id])
+    @activity.user_id = current_user.id
+    @activity.attributes = params[:girl_scouts_activity]
+    @activity.save(:validate => false)
   end
 
 
@@ -49,7 +61,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def girls_scouts_activities
     return @girls_scouts_activities if defined?(@girls_scouts_activities)
-    @girls_scouts_activities = ["<Create New Activity>",0],["--------------------",:disabled => "disabled"]
+    @girls_scouts_activities = ["<Create New Activity>", 0], ["--------------------", :disabled => "disabled"]
   end
 
 end
