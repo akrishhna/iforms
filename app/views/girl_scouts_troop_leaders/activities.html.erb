@@ -6,12 +6,12 @@
 <div>&nbsp;</div>
 <div>
   <%= select_tag("girls_scouts_activities", options_for_select(@girls_scouts_activities, params[:id]), :prompt => "Select Activity") %>
-  <%= link_to "Delete This Activity", "#", :class => "btn btn-danger" %> &nbsp;
+  <%= link_to "Delete This Activity", "#delete_activity_alert_box", :class => "btn btn-danger delete_activity" %> &nbsp;
   <%= link_to "View This Permission Form PDF", "#", :class => "btn btn-info" %>
 </div>
 <div class="clear"></div>
 <%= form_for @girls_activity, :url => "", :html => {:class => 'form-horizontal girl_scouts_activity_form', :multipart => true} do |f| %>
-  <%= f.hidden_field :id  %>
+  <%= f.hidden_field :id %>
   <div class="tabbable tabs-left activity_tabs">
   <ul class="nav nav-tabs" id="activity_tab_links">
     <li class="active">
@@ -241,9 +241,18 @@
     </div>
   </div>
   <div class="tab-pane" id="send_notification_email">
-    <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent" %>
+   <%#= debug @girls_activity.leader_first_name.nil? %>
+    <% if @girls_activity.activity_name.to_s == "" ||
+          @girls_activity.activity_signed_permission_due_date.to_s == "" ||
+          @girls_activity.leader_first_name.to_s == "" ||
+          @girls_activity.leader_last_name.to_s == ""%>
+      <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => "disabled" %>
+    <% else %>
+    <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false , "data-loading-text" => "loading" %>
+    <% end %>
     <br>
     <%#= f.text_area :email_notification, :rows => 5, :cols => 100 %> <br>
+
     <div class='notification_email_to_parent_text radius-border'>
       <%= render :partial => 'parents_email_notification', :locals => {:girls_activity => @girls_activity} %>
     </div>
@@ -256,3 +265,10 @@
   </div>
   </div>
 <% end %>
+
+
+<div id="delete_activity_alert_box" class="hide" style="width:200px;text-align: center;">
+  <p style="font-size:18px;margin: 10px 0 15px 0; "> Are you sure?</p>
+  <%= link_to "Yes", "#", :class => "btn btn-danger delete_activity_yes", :id => "delete_activity_yes" %>&nbsp;&nbsp;
+  <%= link_to "No", "#", :class => "btn btn-primary", :id => "delete_activity_no", :onclick => "$.fancybox.close();" %>
+</div>

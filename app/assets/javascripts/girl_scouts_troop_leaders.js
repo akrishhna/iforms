@@ -78,9 +78,30 @@ $(function () {
     return false;
   });
 
-  $('#notification_email_to_parent').click(function(){
-     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
-    $.post('/girl_scouts_troop_leaders/send_notification_email',{id:id});
+  $('#notification_email_to_parent').click(function () {
+    if($(this).attr('disabled') == "disabled") {
+      return false;
+    }
+    $(this).text('Sending Email...');
+    var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
+    $.post('/girl_scouts_troop_leaders/send_notification_email', {id:id});
+    return false;
+  });
+
+  $('.delete_activity').click(function () {
+    var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
+    if (id != '') {
+      $.fancybox({
+        href: '#delete_activity_alert_box',
+        closeBtn:false
+      });
+    }
+    return false;
+  });
+
+  $('#delete_activity_yes').click(function(){
+    var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
+    $.post('/girl_scouts_troop_leaders/delete_activity',{id:id});
     return false;
   });
 });

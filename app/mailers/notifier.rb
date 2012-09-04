@@ -49,4 +49,10 @@ class Notifier < ActionMailer::Base
     @user = user
     mail(:to => @user.email, :subject => "Your username")
   end
+
+  def send_parent_email_notification(activity, girl_scout)
+    @activity = activity
+    @girl_scout = girl_scout
+    mail(:to => @girl_scout.email, :subject => "Activity Permission Form")
+  end
 end

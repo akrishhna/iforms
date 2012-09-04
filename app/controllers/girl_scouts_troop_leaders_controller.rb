@@ -52,12 +52,59 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @activity.save(:validate => false)
   end
 
-   def send_notification_email
-     @girls_scout = GirlScoutsActivity.find(params[:id])
-     if @girls_scout.invalid?
-       flash[:error] = "Something wrong please try again."
-     end
-   end
+  def send_notification_email
+    @activity = GirlScoutsActivity.find(params[:id])
+    if @activity.invalid?
+      flash[:error] = "Something wrong please try again."
+
+      #re organized error messages
+=begin
+       if @girls_scout.errors[:activity_leave_time_hh] || @girls_scout.errors[:activity_leave_time_mm] || @girls_scout.errors[:activity_leave_time_am_pm]
+         @girls_scout.errors.delete(:activity_leave_time_hh)
+         @girls_scout.errors.delete(:activity_leave_time_mm)
+         @girls_scout.errors.delete(:activity_leave_time_am_pm)
+         @girls_scout.errors[:base]  << "Activity leave time can't be blank"
+       end
+       if @girls_scout.errors[:activity_return_time_hh] || @girls_scout.errors[:activity_return_time_mm] || @girls_scout.errors[:activity_return_time_am_pm]
+         @girls_scout.errors.delete(:activity_return_time_hh)
+         @girls_scout.errors.delete(:activity_return_time_mm)
+         @girls_scout.errors.delete(:activity_return_time_am_pm)
+         @girls_scout.errors[:base]  << "Activity return time can't be blank"
+       end
+       if @girls_scout.errors[:activity_cost_dollars]  || @girls_scout.errors[:activity_cost_cents]
+         @girls_scout.errors.delete(:activity_cost_dollars)
+         @girls_scout.errors.delete(:activity_cost_cents)
+         @girls_scout.errors[:base]  << "Activity cost can't be blank"
+       end
+       if @girls_scout.errors[:leader_day_phone_1] || @girls_scout.errors[:leader_day_phone_2] || @girls_scout.errors[:leader_day_phone_3]
+         @girls_scout.errors.delete(:leader_day_phone_1)
+         @girls_scout.errors.delete(:leader_day_phone_2)
+         @girls_scout.errors.delete(:leader_day_phone_3)
+         @girls_scout.errors[:base]  << "Leader day phone can't be blank"
+       end
+       if @girls_scout.errors[:emergency_day_phone_1] || @girls_scout.errors[:emergency_day_phone_2] || @girls_scout.errors[:emergency_day_phone_3]
+         @girls_scout.errors.delete(:emergency_day_phone_1)
+         @girls_scout.errors.delete(:emergency_day_phone_2)
+         @girls_scout.errors.delete(:emergency_day_phone_3)
+         @girls_scout.errors[:base]  << "Emergency day phone can't be blank"
+       end
+=end
+    else
+      #sending mail to all parents
+      @girls_scouts = current_user.girls_scouts
+      @girls_scouts.each do |girl_scout|
+        email = girl_scout.email
+        if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
+          Notifier.send_parent_email_notification(@activity, girl_scout).deliver
+        end
+      end
+      flash[:notice] = "Sending Email"
+    end
+  end
+
+  def delete_activity
+    GirlScoutsActivity.delete(params[:id])
+  end
 
   private
 
