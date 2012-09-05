@@ -1,5 +1,5 @@
 class DoctorsController < ApplicationController
-  before_filter :is_doctor?
+  before_filter :is_doctor?, :set_service_provider
   before_filter :doctor_profile_exists?, :except => [:new,:create]
   def index    
     @iforms = Iform.all
@@ -47,5 +47,12 @@ class DoctorsController < ApplicationController
   def show
     @doctor = current_user.doctors.find(params[:id])
   end
+
+  private
+
+  def set_service_provider
+    session[:user_service_provider] = 1
+  end
+
 
 end

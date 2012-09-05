@@ -8,6 +8,6 @@ before_filter :set_service_provider
   private
 
   def set_service_provider
-    @current_service_provider = 0
+    session[:user_service_provider] = 0
   end
 end

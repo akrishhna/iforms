@@ -115,7 +115,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   private
 
   def set_service_provider
-    @current_service_provider = 2
+    session[:user_service_provider] = 2
   end
 
   def girls_scouts_activities

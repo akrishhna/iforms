@@ -1,10 +1,11 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
+
   protect_from_forgery
   helper :all
   helper_method :is_admin?
   helper_method :current_user_name
-  helper_method :user_service_provider_list
+  helper_method :user_service_provider_list, :set_service_provider
   #helper_method :patient_profile_exists
 
   def current_user_name
@@ -69,5 +70,10 @@ class ApplicationController < ActionController::Base
     @user_service_providers = current_user.service_providers.collect{|sp| [sp.title , sp.id]}
     @user_service_providers[@user_service_providers.size] = ["Consumer", 0]
     @user_service_providers
+  end
+
+  def set_service_provider
+    return @user_service_provider if defined?(@user_service_provider)
+    @user_service_provider = session[:user_service_provider]
   end
 end
