@@ -82,6 +82,7 @@ $(function () {
     if($(this).attr('disabled') == "disabled") {
       return false;
     }
+    $(this).attr('disabled',"disabled");
     $(this).text('Sending Email...');
     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
     $.post('/girl_scouts_troop_leaders/send_notification_email', {id:id});

@@ -250,6 +250,7 @@
     <% else %>
     <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false , "data-loading-text" => "loading" %>
     <% end %>
+      <span style="margin-left: 90px;background-color:#d3d3d3;" class="mail_success_notification hide"><span class="mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
     <br>
     <%#= f.text_area :email_notification, :rows => 5, :cols => 100 %> <br>
 

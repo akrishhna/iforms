@@ -1,6 +1,6 @@
 <p> Dear Parent,</p>
 
-<p>The <b><%= girls_activity.activity_name ? (link_to girls_activity.activity_name, "/girl_scouts_troop_leaders/activities?id=" + girls_activity.id.to_s) : "[Activity Name]" %></b> Permission Forms are now available. Please complete and submit by <b><%= girls_activity.activity_signed_permission_due_date ? girls_activity.activity_signed_permission_due_date : "[Signed Permission Form Due Date]" %></b>.</p>
+<p>The <b><%= girls_activity.activity_name.to_s != '' ? (link_to girls_activity.activity_name, girl_scouts_activity_url(girls_activity.id)) : "[Activity Name]" %></b> Permission Forms are now available. Please complete and submit by <b><%= girls_activity.activity_signed_permission_due_date.to_s !='' ? girls_activity.activity_signed_permission_due_date : "[Signed Permission Form Due Date]" %></b>.</p>
 
-<p>Thank You,<br><b><%= girls_activity.leader_first_name ? girls_activity.leader_first_name + " " + girls_activity.leader_last_name : "[Troop Leader Name]" %></b></p>
+<p>Thank You,<br><b><%= girls_activity.leader_first_name.to_s !='' ? girls_activity.leader_first_name + " " + girls_activity.leader_last_name : "[Troop Leader Name]" %></b></p>
 

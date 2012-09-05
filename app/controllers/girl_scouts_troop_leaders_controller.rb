@@ -91,19 +91,25 @@ class GirlScoutsTroopLeadersController < ApplicationController
 =end
     else
       #sending mail to all parents
+      @counter = 0
       @girls_scouts = current_user.girls_scouts
       @girls_scouts.each do |girl_scout|
         email = girl_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
           Notifier.send_parent_email_notification(@activity, girl_scout).deliver
+          @counter += 1
         end
       end
-      flash[:notice] = "Sending Email"
+      flash[:notice] = "Mails Send Successfully"
     end
   end
 
   def delete_activity
     GirlScoutsActivity.delete(params[:id])
+  end
+
+  def show_activity
+    @activity = GirlScoutsActivity.find(params[:activity_id])
   end
 
   private

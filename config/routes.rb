@@ -2,7 +2,7 @@ Iforms::Application.routes.draw do
 
   resources :consumer
 
-
+  match 'girl_scouts_troop_leaders/activity/:activity_id' => 'girl_scouts_troop_leaders#show_activity', :as => 'girl_scouts_activity'
   resources :girl_scouts_troop_leaders do
     collection do
       get 'activities'
