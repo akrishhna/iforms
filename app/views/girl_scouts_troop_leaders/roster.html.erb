@@ -6,7 +6,7 @@
 <div>&nbsp;</div>
 <div>
   <%= link_to "Add Girl Scout", "#", :class => "btn btn-primary", :id => "add_girl_scout" %>
-  <%= link_to "Delete Selected Girl Scout(s)", "#alert_box_text", :class => "btn btn-danger delete_girls_scouts", :id => "delete_girl_scouts" %>
+  <%= link_to "Delete Selected Girl Scout(s)", "#alert_box_text", :class => "btn btn-danger delete_girls_scouts", :id => "delete_girl_scouts", :disabled => "disabled" %>
 </div>
 <div class="girl_scouts_div">
   <table class="table table-bordered table-hover" id="girl_scouts_table">
@@ -21,7 +21,7 @@
     <%= render :partial => "girl_scout", :collection => @girls_scouts %>
   </table>
   <div id="alert_box_text" class="hide" style="text-align: center;">
-    <p style="font-size:18px;margin: 10px 0 15px 0; "> Delete selected Girls Scouts?</p>
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Delete Selected Girls Scouts?</p>
     <%= link_to "Yes", "#alert_box_error", :class => "btn btn-danger delete_yes", :id => "delete_yes" %>&nbsp;&nbsp;
     <%= link_to "No", "#", :class => "btn btn-primary", :id => "delete_no", :onclick => "$.fancybox.close();" %>
   </div>
@@ -30,7 +30,7 @@
     <%= link_to "Ok", "#", :class => "btn btn-primary", :onclick => "$.fancybox.close();" %>
   </div>
   <div id="alert_box_success" class="hide" style="text-align: center">
-    <p style="font-size:18px;margin: 10px 0 15px 0; "> Deleted selected Girl scouts. </p>
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Deleted Selected Girl scouts. </p>
     <%= link_to "Ok", "#", :class => "btn btn-primary",:onclick => "$.fancybox.close();"%>
   </div>
 </div>

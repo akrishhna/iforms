@@ -31,10 +31,20 @@ $(function () {
     else {
       $("#girl_scouts_table  input[name=check_box_row]").attr('checked', false);
     }
+    enable_delete_all_gs_btn();
   });
 
-  $('.delete_girls_scouts').fancybox({
-    closeBtn:false
+  $('#girl_scouts_table  input[name=check_box_row]').change(function () {
+    enable_delete_all_gs_btn();
+  });
+
+  $('.delete_girls_scouts').click(function () {
+    if ($(this).attr('disabled') == "disabled") {
+      return false;
+    }
+    $('.delete_girls_scouts').fancybox({
+      closeBtn:false
+    });
   });
 
   $('#delete_yes').click(function () {
@@ -50,6 +60,23 @@ $(function () {
     }
     return false;
   });
+
+  function enable_delete_all_gs_btn() {
+    var checkbox_count = $('#girl_scouts_table  input[name=check_box_row]').length;
+    var checked_checkbox_count = $('#girl_scouts_table  input[name=check_box_row]:checked').length;
+    if (checkbox_count == checked_checkbox_count) {
+      $('#select_all_check_box').attr('checked', true)
+    }
+    else {
+      $('#select_all_check_box').attr('checked', false)
+    }
+    if (checked_checkbox_count > 0) {
+      $('.delete_girls_scouts').attr('disabled', false);
+    }
+    else {
+      $('.delete_girls_scouts').attr('disabled', "disabled");
+    }
+  }
 
 
   // activity tabs
@@ -79,10 +106,10 @@ $(function () {
   });
 
   $('#notification_email_to_parent').click(function () {
-    if($(this).attr('disabled') == "disabled") {
+    if ($(this).attr('disabled') == "disabled") {
       return false;
     }
-    $(this).attr('disabled',"disabled");
+    $(this).attr('disabled', "disabled");
     $(this).text('Sending Email...');
     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
     $.post('/girl_scouts_troop_leaders/send_notification_email', {id:id});
@@ -93,16 +120,16 @@ $(function () {
     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
     if (id != '') {
       $.fancybox({
-        href: '#delete_activity_alert_box',
+        href:'#delete_activity_alert_box',
         closeBtn:false
       });
     }
     return false;
   });
 
-  $('#delete_activity_yes').click(function(){
+  $('#delete_activity_yes').click(function () {
     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
-    $.post('/girl_scouts_troop_leaders/delete_activity',{id:id});
+    $.post('/girl_scouts_troop_leaders/delete_activity', {id:id});
     return false;
   });
 });
