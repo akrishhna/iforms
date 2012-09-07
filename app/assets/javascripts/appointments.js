@@ -13,6 +13,13 @@ $(function(){
     }*/
   }
 
+
+
+  if($('div[data-page-controller=appointments][data-page-action=edit]').size()) {
+    $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', appointment["date"]);
+  } else {
     $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+  }
+
 
 });
