@@ -7,10 +7,10 @@
 <div>
   <%= select_tag("girls_scouts_activities", options_for_select(@girls_scouts_activities, params[:id]), :prompt => "Select Activity") %>
   <%= link_to "Delete This Activity", "#delete_activity_alert_box", :class => "btn btn-danger delete_activity" %> &nbsp;
-  <%= link_to "View This Permission Form PDF", "#", :class => "btn btn-info" %>
+  <%= link_to "View This Permission Form PDF", @girls_activity.new_record? ? '#' : girl_scouts_activity_path(:activity_id => @girls_activity.id, :format => :pdf), :class => "btn btn-info" %>
 </div>
 <div class="clear"></div>
-<%= form_for @girls_activity, :url => "", :html => {:class => 'form-horizontal girl_scouts_activity_form', :multipart => true} do |f| %>
+<%= form_for @girls_activity, :url => "/create_activity", :html => {:class => 'form-horizontal girl_scouts_activity_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
   <div class="tabbable tabs-left activity_tabs">
   <ul class="nav nav-tabs" id="activity_tab_links">
@@ -27,7 +27,7 @@
       <%= link_to "Troop Emergency Contact", "#troop_emergency_contact", "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Send Notifcation Email to parent", "#send_notification_email", "data-toggle" => "tab" %>
+      <%= link_to "Send Notifcation Email to Parent", "#send_notification_email", "data-toggle" => "tab" %>
     </li>
   </ul>
   <div class="tab-content">
@@ -71,10 +71,17 @@
     <div class="control-group">
       <%= f.label :activity_leave_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_leave_time_hh, :style => "width:30px", :placeholder => "HH" %>
+        <%= f.text_field :activity_leave_time_hh, :style => "width:30px;text-align:right", :placeholder => "HH",:id => 'activity_leave_time_hh' %>
         <strong> : </strong>
-        <%= f.text_field :activity_leave_time_mm, :style => "width:30px", :placeholder => "MM" %>
-        <%= f.select :activity_leave_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
+        <%= f.text_field :activity_leave_time_mm, :style => "width:30px;text-align:right", :placeholder => "MM",:id => 'activity_leave_time_mm' %> &nbsp;
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_leave_time_am_pm, "AM",:checked => 'checked' %> AM
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_leave_time_am_pm, "PM" %> PM
+        <% end %>
+
+        <%#= f.select :activity_leave_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
       </div>
     </div>
     <div class="control-group">
@@ -86,18 +93,24 @@
     <div class="control-group">
       <%= f.label :activity_return_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_return_time_hh, :style => "width:30px", :placeholder => "HH" %>
+        <%= f.text_field :activity_return_time_hh, :style => "width:30px;text-align: right", :placeholder => "HH",:id => 'activity_return_time_hh'%>
         <strong> : </strong>
-        <%= f.text_field :activity_return_time_mm, :style => "width:30px", :placeholder => "MM" %>
-        <%= f.select :activity_return_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
+        <%= f.text_field :activity_return_time_mm, :style => "width:30px;text-align: right", :placeholder => "MM",:id => 'activity_return_time_mm' %> &nbsp;
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_return_time_am_pm, "AM",:checked => 'checked' %> AM
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_return_time_am_pm, "PM" %> PM
+        <% end %>
+        <%#= f.select :activity_return_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :activity_cost_dollars, "Cost", :class => 'control-label' %>
       <div class="controls">
-        $ <%= f.text_field :activity_cost_dollars, :style => "width:100px", :placeholder => "Dollars" %>
+        $ <%= f.text_field :activity_cost_dollars, :style => "width:100px;text-align: right", :placeholder => "Dollars",:id => 'activity_cost_dollars' %>
         <strong> . </strong>
-        <%= f.text_field :activity_cost_cents, :style => "width:20px", :placeholder => "" %>
+        <%= f.text_field :activity_cost_cents, :style => "width:20px;text-align: right", :placeholder => "",:id => 'activity_cost_cents' %>
       </div>
     </div>
     <div class="control-group">
@@ -136,13 +149,13 @@
     <div class="control-group">
       <%= f.label :troop_service_unit, "Service Unit", :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :troop_service_unit, options_for_select([]), {:include_blank => true}, {:style => 'width:400px;'} %>
+        <%= f.select :troop_service_unit, options_for_select(StaticData.service_unit), {:include_blank => true}, {:style => 'width:400px;'} %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :troop_pal, "PAL", :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :troop_pal, {}, :include_blank => true %>
+        <%= f.select :troop_pal, options_for_select(StaticData.pal), :include_blank => true %>
       </div>
     </div>
     <div class="control-group">
@@ -241,21 +254,20 @@
     </div>
   </div>
   <div class="tab-pane" id="send_notification_email">
-   <%#= debug @girls_activity.leader_first_name.nil? %>
     <% if @girls_activity.activity_name.to_s == "" ||
-          @girls_activity.activity_signed_permission_due_date.to_s == "" ||
-          @girls_activity.leader_first_name.to_s == "" ||
-          @girls_activity.leader_last_name.to_s == ""%>
+      @girls_activity.activity_signed_permission_due_date.to_s == "" ||
+      @girls_activity.leader_first_name.to_s == "" ||
+      @girls_activity.leader_last_name.to_s == "" %>
       <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => "disabled" %>
     <% else %>
-    <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false , "data-loading-text" => "loading" %>
+      <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false, "data-loading-text" => "loading" %>
     <% end %>
-      <span style="margin-left: 90px;background-color:#d3d3d3;" class="mail_success_notification hide"><span class="mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
+    <span style="margin-left: 90px;background-color:#d3d3d3;" class="mail_success_notification hide"><span class="mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
     <br>
     <%#= f.text_area :email_notification, :rows => 5, :cols => 100 %> <br>
 
     <div class='notification_email_to_parent_text radius-border'>
-      <%= render :partial => 'parents_email_notification', :locals => {:girls_activity => @girls_activity} %>
+      <%= render :partial => 'parents_email_notification', :locals => {:girls_activity => @girls_activity,:girl_scout => @girl_scout} %>
     </div>
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => 3 do %>

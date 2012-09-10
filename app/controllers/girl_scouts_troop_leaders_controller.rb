@@ -4,7 +4,6 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def index
 
-
   end
 
   # Girls scout roster
@@ -37,8 +36,16 @@ class GirlScoutsTroopLeadersController < ApplicationController
   # girls scout activities
 
   def activities
-    @girls_activity = GirlScoutsActivity.new if !params[:id].present?
-    @girls_activity = GirlScoutsActivity.find(params[:id]) if params[:id].present?
+    if params[:id].present?
+      @girls_activity = GirlScoutsActivity.find(params[:id])
+    else
+      @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
+      @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
+      if @recent_activity
+        @girls_activity = @recent_activity.dup
+      end
+    end
+
     @activities = current_user.girl_scouts_activities.order("created_at DESC")
     @activities.each do |activity|
       @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]

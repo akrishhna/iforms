@@ -1,6 +1,9 @@
 // Place all the behaviors and hooks related to the matching controller here.
 //All this logic will automatically be available in application.js.
-// You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+//You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+//= require jquery.numeric
+//= require jquery.currency
 
 $(function () {
   $('#add_girl_scout').click(function () {
@@ -131,5 +134,47 @@ $(function () {
     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
     $.post('/girl_scouts_troop_leaders/delete_activity', {id:id});
     return false;
+  });
+
+  $('#activity_leave_time_hh,#activity_return_time_hh,#activity_leave_time_mm,#activity_return_time_mm,#activity_cost_cents').keyup(function (e) {
+    var id = $(this).attr('id');
+    var val = 0;
+    if (id == "activity_leave_time_hh" || id == "activity_return_time_hh") {
+      val = 12;
+    } else if (id == "activity_leave_time_mm" || id == "activity_return_time_mm") {
+      val = 59;
+    } else if (id == "activity_cost_cents") {
+      val = 99;
+    } else {
+      val = 0;
+    }
+    if ($(this).val().length <= 2 && $(this).val() <= val) {
+      if (e.keyCode >= 48 && e.keyCode <= 57) {
+      }
+      else {
+        $(this).val('')
+      }
+    }
+    else {
+      $(this).val('')
+    }
+  });
+
+  $('#activity_leave_time_hh,#activity_return_time_hh,#activity_return_time_mm,#activity_leave_time_mm,#activity_cost_cents').blur(function () {
+    if ($(this).val().length < 2) {
+      var hh = $(this).val();
+      $(this).val('0' + hh);
+    }
+  });
+
+  $("#activity_cost_dollars").numeric({decimal:false, negative:false}, function () {
+    this.value = "";
+    this.focus();
+  });
+
+      $('#activity_cost_dollars').currency({
+       decimals: 0,
+       hidePrefix: true,
+       thousands: ','
   });
 });
