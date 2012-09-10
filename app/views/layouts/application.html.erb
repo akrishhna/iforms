@@ -16,7 +16,7 @@
 <body>
 <div class="header">
   <div class="logo">
-    <%= link_to '/' do %>
+    <%= link_to @homepage_url do %>
       <%= image_tag 'iforms_logo.png', :title => 'ifor.ms' %>
     <% end %>
   </div>
@@ -50,9 +50,9 @@
 <div class="footer">
   <div class="footer_links">
     <% if user_signed_in? and current_user.role =="patient" %>
-      <%= link_to 'Home', patients_path %> |
+      <%= link_to 'Home', @homepage_url %> |
     <% elsif user_signed_in? and current_user.role =="doctor" %>
-      <%= link_to 'Home', doctors_path %> |
+      <%= link_to 'Home', @homepage_url %> |
     <% elsif user_signed_in? and current_user.role =="admin" %>
       <%= link_to 'Home', :controller => "admin", :action => "index" %> |
     <% else %>

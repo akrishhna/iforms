@@ -76,4 +76,15 @@ class ApplicationController < ActionController::Base
     return @user_service_provider if defined?(@user_service_provider)
     @user_service_provider = session[:user_service_provider]
   end
+
+  def homepage_url
+    return @homepage_url if defined?(@homepage_url)
+    if @user_service_provider == 1
+      @homepage_url = '/doctor/appointments'
+    elsif @user_service_provider == 2
+      @homepage_url = '/girl_scouts_troop_leaders'
+    elsif @user_service_provider == 0
+      @homepage_url = '/consumer'
+    end
+  end
 end
