@@ -1,4 +1,4 @@
-<p> Dear <%#= debug girl_scout.present? %>
+<p> Dear
 
   <%= girl_scout.present? ? (girl_scout.parent_first_name.to_s != '' ||  girl_scout.parent_last_name.to_s != '') ? girl_scout.parent_first_name + " " + girl_scout.parent_last_name : "Parent":'Parent' %>,</p>
 
