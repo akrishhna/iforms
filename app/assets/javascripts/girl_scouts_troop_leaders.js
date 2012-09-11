@@ -2,7 +2,7 @@
 //All this logic will automatically be available in application.js.
 //You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-//= require jquery.numeric
+//= require jquery.format.1.05
 //= require jquery.currency
 
 $(function () {
@@ -136,45 +136,54 @@ $(function () {
     return false;
   });
 
-  $('#activity_leave_time_hh,#activity_return_time_hh,#activity_leave_time_mm,#activity_return_time_mm,#activity_cost_cents').keyup(function (e) {
-    var id = $(this).attr('id');
-    var val = 0;
-    if (id == "activity_leave_time_hh" || id == "activity_return_time_hh") {
-      val = 12;
-    } else if (id == "activity_leave_time_mm" || id == "activity_return_time_mm") {
-      val = 59;
-    } else if (id == "activity_cost_cents") {
-      val = 99;
-    } else {
-      val = 0;
-    }
-    if ($(this).val().length <= 2 && $(this).val() <= val) {
+  $('#activity_cost_dollars').format({type:'decimal', precision:0, allow_negative:false, autofix:true});
+
+  $('#activity_cost_dollars').currency({
+    decimals:0,
+    hidePrefix:true,
+    thousands:','
+  });
+
+  $('#activity_cost_dollars').keyup(function (e) {
+    if ($(this).val().length <= 5 && $(this).val() <= 99999) {
       if (e.keyCode >= 48 && e.keyCode <= 57) {
       }
       else {
-        $(this).val('')
+        if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
+          return true;
+        } else {
+          $(this).val('');
+        }
       }
+    } else {
+      $(this).val('');
     }
-    else {
+    $(this).currency({
+      decimals:0,
+      hidePrefix:true,
+      thousands:','
+    });
+  });
+
+  $('#activity_cost_cents').keyup(function (e) {
+    if ($(this).val().length <= 2 && $(this).val() <= 99) {
+      if (e.keyCode >= 48 && e.keyCode <= 57) {
+      }
+      else if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
+        return true;
+      } else {
+        $(this).val('');
+      }
+    } else {
       $(this).val('')
     }
   });
 
-  $('#activity_leave_time_hh,#activity_return_time_hh,#activity_return_time_mm,#activity_leave_time_mm,#activity_cost_cents').blur(function () {
+  $('#activity_cost_cents').blur(function () {
     if ($(this).val().length < 2) {
       var hh = $(this).val();
       $(this).val('0' + hh);
     }
   });
 
-  $("#activity_cost_dollars").numeric({decimal:false, negative:false}, function () {
-    this.value = "";
-    this.focus();
-  });
-
-      $('#activity_cost_dollars').currency({
-       decimals: 0,
-       hidePrefix: true,
-       thousands: ','
-  });
 });
