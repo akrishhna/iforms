@@ -36,7 +36,10 @@ class GirlScoutsTroopLeadersController < ApplicationController
   # girls scout activities
 
   def activities
-    if params[:id].present?
+    if params[:id] == 'new'
+    @girls_activity = GirlScoutsActivity.new()
+    #raise @girls_activity.to_yaml
+    elsif params[:id].present?
       @girls_activity = GirlScoutsActivity.find(params[:id])
     else
       @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
@@ -107,7 +110,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
           @counter += 1
         end
       end
-      flash[:notice] = "Mails Send Successfully"
+      flash[:notice] = "Messages Successfully Sent For #{@activity.activity_name}"
     end
   end
 

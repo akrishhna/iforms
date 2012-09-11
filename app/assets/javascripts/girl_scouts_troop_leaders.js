@@ -94,7 +94,7 @@ $(function () {
 
   $('select#girls_scouts_activities').change(function () {
     if ($(this).val() == 0) {
-      window.location = '/girl_scouts_troop_leaders/activities';
+      window.location = '/girl_scouts_troop_leaders/activities?id=' + 'new';
     } else {
       window.location = '/girl_scouts_troop_leaders/activities?id=' + $(this).val();
     }
