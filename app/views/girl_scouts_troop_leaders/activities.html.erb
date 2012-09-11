@@ -72,10 +72,10 @@
       <%= f.label :activity_leave_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
         <%#= f.text_field :activity_leave_time_hh, :style => "width:30px;text-align:right", :placeholder => "HH",:id => 'activity_leave_time_hh' %>
-        <%= f.select :activity_leave_time_hh, options_for_select(["01","02","03","04","05","06","07","08","09","10","11","12"]),{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= f.select :activity_leave_time_hh,{"01"=>"1","02"=>"2","03"=>"3","04"=>"4","05"=>"5","06"=>6,"07"=>7,"08"=>8,"09"=>9,"10"=>10,"11"=>11,"12"=>12},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
         <strong> : </strong>
         <%#= f.text_field :activity_leave_time_mm, :style => "width:30px;text-align:right", :placeholder => "MM",:id => 'activity_leave_time_mm' %> &nbsp;
-        <%= f.select :activity_leave_time_mm, options_for_select(["00","05","10","15","20","25","30","35","40","45","50","55"]),{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= f.select :activity_leave_time_mm,{"00"=>"0","05"=>"5","10"=>"10","15"=>"15","20"=>"20","25"=>"25","30"=>"30","35"=>"35","40"=>"40","45"=>"45","50"=>"50","55"=>"55"},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :activity_leave_time_am_pm, "AM",:checked => 'checked' %> AM
         <% end %>
@@ -96,10 +96,10 @@
       <%= f.label :activity_return_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
         <%#= f.text_field :activity_return_time_hh, :style => "width:30px;text-align: right", :placeholder => "HH",:id => 'activity_return_time_hh'%>
-        <%= f.select :activity_return_time_hh, options_for_select(["01","02","03","04","05","06","07","08","09","10","11","12"]),{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= f.select :activity_return_time_hh, {"01"=>"1","02"=>"2","03"=>"3","04"=>"4","05"=>"5","06"=>6,"07"=>7,"08"=>8,"09"=>9,"10"=>10,"11"=>11,"12"=>12},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
         <strong> : </strong>
         <%#= f.text_field :activity_return_time_mm, :style => "width:30px;text-align: right", :placeholder => "MM",:id => 'activity_return_time_mm' %> &nbsp;
-        <%= f.select :activity_return_time_mm, options_for_select(["00","05","10","15","20","25","30","35","40","45","50","55"]),{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= f.select :activity_return_time_mm, {"00"=>"0","05"=>"5","10"=>"10","15"=>"15","20"=>"20","25"=>"25","30"=>"30","35"=>"35","40"=>"40","45"=>"45","50"=>"50","55"=>"55"},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :activity_return_time_am_pm, "AM",:checked => 'checked' %> AM
         <% end %>

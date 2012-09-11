@@ -38,15 +38,15 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def activities
     if params[:id] == 'new'
     @girls_activity = GirlScoutsActivity.new()
-    #raise @girls_activity.to_yaml
+    @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
+    if @recent_activity
+      @girls_activity = @recent_activity.dup
+    end
     elsif params[:id].present?
       @girls_activity = GirlScoutsActivity.find(params[:id])
     else
       @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
-      @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
-      if @recent_activity
-        @girls_activity = @recent_activity.dup
-      end
+
     end
 
     @activities = current_user.girl_scouts_activities.order("created_at DESC")
