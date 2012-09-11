@@ -83,8 +83,11 @@ $(function () {
 
 
   // activity tabs
-
   $(".girls_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+  $('#girl_scouts_activity_activity_date_begin').datepicker("setDate", $('#girl_scouts_activity_activity_date_begin').attr('data-value'));
+  $('#girl_scouts_activity_activity_date_end').datepicker("setDate", $('#girl_scouts_activity_activity_date_end').attr('data-value'));
+  $('#girl_scouts_activity_activity_signed_permission_due_date').datepicker("setDate", $('#girl_scouts_activity_activity_signed_permission_due_date').attr('data-value'));
+
 
   $('.activity_nav_link').click(function () {
     var tab_index = parseInt($(this).attr('data_tab_index'));
@@ -101,9 +104,8 @@ $(function () {
   });
 
   $('.girl_scouts_activity_form input,.girl_scouts_activity_form select').change(function () {
-    var params = {};
-    params["girl_scouts_activity[id]"] = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
-    params[$(this).attr('name')] = $(this).val();
+    $('input[name=_method]').val('post')
+    var params = $('.girl_scouts_activity_form').serializeArray();
     $.post('/girl_scouts_troop_leaders/create_activity', params);
     return false;
   });
@@ -138,12 +140,6 @@ $(function () {
 
   $('#activity_cost_dollars').format({type:'decimal', precision:0, allow_negative:false, autofix:true});
 
-  $('#activity_cost_dollars').currency({
-    decimals:0,
-    hidePrefix:true,
-    thousands:','
-  });
-
   $('#activity_cost_dollars').keyup(function (e) {
     if ($(this).val().length <= 5 && $(this).val() <= 99999) {
       if (e.keyCode >= 48 && e.keyCode <= 57) {
@@ -158,11 +154,18 @@ $(function () {
     } else {
       $(this).val('');
     }
+  });
+
+  $('#activity_cost_dollars').blur(function(){
     $(this).currency({
       decimals:0,
-      hidePrefix:true,
-      thousands:','
+      hidePrefix:true
     });
+  });
+
+  $('#activity_cost_dollars').currency({
+    decimals:0,
+    hidePrefix:true
   });
 
   $('#activity_cost_cents').keyup(function (e) {

@@ -47,19 +47,19 @@
     <div class="control-group">
       <%= f.label :activity_date_begin, "Date Begin", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_date_begin, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD" %>
+        <%= f.text_field :activity_date_begin, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_begin %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :activity_date_end, "Date End", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_date_end, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD" %>
+        <%= f.text_field :activity_date_end, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_end %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :activity_signed_permission_due_date, "Signed Permission Form Due Date", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_signed_permission_due_date, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD" %>
+        <%= f.text_field :activity_signed_permission_due_date, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_signed_permission_due_date %>
       </div>
     </div>
     <div class="control-group">
@@ -96,7 +96,7 @@
       <%= f.label :activity_return_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
         <%#= f.text_field :activity_return_time_hh, :style => "width:30px;text-align: right", :placeholder => "HH",:id => 'activity_return_time_hh'%>
-        <%= f.select :activity_return_time_hh, {"01"=>"1","02"=>"2","03"=>"3","04"=>"4","05"=>"5","06"=>6,"07"=>7,"08"=>8,"09"=>9,"10"=>10,"11"=>11,"12"=>12},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= f.select :activity_return_time_hh, {"01"=>"1","02"=>"2","03"=>"3","04"=>"4","05"=>"5","06"=>6,"07"=>7,"08"=>8,"09"=>9,"10"=>10,"11"=>11,"12"=>"12"},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
         <strong> : </strong>
         <%#= f.text_field :activity_return_time_mm, :style => "width:30px;text-align: right", :placeholder => "MM",:id => 'activity_return_time_mm' %> &nbsp;
         <%= f.select :activity_return_time_mm, {"00"=>"0","05"=>"5","10"=>"10","15"=>"15","20"=>"20","25"=>"25","30"=>"30","35"=>"35","40"=>"40","45"=>"45","50"=>"50","55"=>"55"},{:include_blank => true},{:style => "width:60px;text-align:center"} %> &nbsp;
@@ -153,13 +153,13 @@
     <div class="control-group">
       <%= f.label :troop_service_unit, "Service Unit", :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :troop_service_unit, options_for_select(StaticData.service_unit), {:include_blank => true}, {:style => 'width:400px;'} %>
+        <%= f.select :troop_service_unit, options_for_select(StaticData.service_unit,f.object.troop_service_unit), {:include_blank => true}, {:style => 'width:400px;'} %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :troop_pal, "PAL", :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :troop_pal, options_for_select(StaticData.pal), :include_blank => true %>
+        <%= f.select :troop_pal, options_for_select(StaticData.pal,f.object.troop_pal), :include_blank => true %>
       </div>
     </div>
     <div class="control-group">
