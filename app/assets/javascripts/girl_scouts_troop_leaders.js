@@ -106,7 +106,12 @@ $(function () {
   $('.girl_scouts_activity_form input,.girl_scouts_activity_form select').change(function () {
     $('input[name=_method]').val('post')
     var params = $('.girl_scouts_activity_form').serializeArray();
-    $.post('/girl_scouts_troop_leaders/create_activity', params);
+    $.post('/girl_scouts_troop_leaders/create_activity', params).success(function (){
+      $('#activity_cost_dollars').currency({
+        decimals:0,
+        hidePrefix:true
+      });
+    });
     return false;
   });
 
@@ -154,13 +159,6 @@ $(function () {
     } else {
       $(this).val('');
     }
-  });
-
-  $('#activity_cost_dollars').blur(function(){
-    $(this).currency({
-      decimals:0,
-      hidePrefix:true
-    });
   });
 
   $('#activity_cost_dollars').currency({
