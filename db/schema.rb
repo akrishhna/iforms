@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905120335) do
+ActiveRecord::Schema.define(:version => 20120912045319) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -307,11 +307,11 @@ ActiveRecord::Schema.define(:version => 20120905120335) do
     t.string   "activity_leave_from"
     t.integer  "activity_leave_time_hh"
     t.integer  "activity_leave_time_mm"
-    t.integer  "activity_leave_time_am_pm"
+    t.string   "activity_leave_time_am_pm"
     t.string   "activity_return_to"
     t.integer  "activity_return_time_hh"
     t.integer  "activity_return_time_mm"
-    t.integer  "activity_return_time_am_pm"
+    t.string   "activity_return_time_am_pm"
     t.integer  "activity_cost_dollars"
     t.integer  "activity_cost_cents"
     t.boolean  "girls_wear_checkbox"
