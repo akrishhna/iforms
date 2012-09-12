@@ -13,11 +13,11 @@ class CreateGirlScoutsActivities < ActiveRecord::Migration
       t.string :activity_leave_from
       t.integer :activity_leave_time_hh
       t.integer :activity_leave_time_mm
-      t.integer :activity_leave_time_am_pm
+      t.string :activity_leave_time_am_pm
       t.string :activity_return_to
       t.integer :activity_return_time_hh
       t.integer :activity_return_time_mm
-      t.integer :activity_return_time_am_pm
+      t.string :activity_return_time_am_pm
       t.integer :activity_cost_dollars
       t.integer :activity_cost_cents
       t.boolean :girls_wear_checkbox
