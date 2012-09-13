@@ -1,6 +1,16 @@
 Iforms::Application.routes.draw do
 
-  resources :consumer
+  resources :consumer do
+    collection do
+      get 'boy_scouts_list'
+      get 'dental_list'
+      get 'elementary_school_list'
+      get 'florist_list'
+      get 'girl_scouts_list'
+      get 'medical_list'
+      get 'pre_school_list'
+    end
+  end
 
   match 'girl_scouts_troop_leaders/activity_permission_form/:activity_id' => "girl_scouts_troop_leaders#activity_permission_form", :as => "activity_permission_form_pdf"
   match 'girl_scouts_troop_leaders/activity/:activity_id' => 'girl_scouts_troop_leaders#show_activity', :as => 'girl_scouts_activity'
@@ -43,7 +53,7 @@ Iforms::Application.routes.draw do
   get 'doctors/new'
   get 'doctors/show'
 
-  match 'patient/appointments' => 'patients#index'#, :as =>"patients/appointments"
+  match 'patient/appointments' => 'patients#index' #, :as =>"patients/appointments"
   match 'appointments/show' => 'appointments#show', :via => :post
   match 'doctor/appointments' => 'doctors#index'
 
@@ -71,7 +81,7 @@ Iforms::Application.routes.draw do
   end
 
   devise_for :admins
-  devise_for :users, :path => 'users', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => '' }, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations'}
+  devise_for :users, :path => 'users', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => ''}, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations'}
 
   match '/about', :to => 'deviseroles#about'
   match '/contact', :to => 'deviseroles#contact'
