@@ -2,6 +2,7 @@
  *= require jquery-ui
  *= require bootstrap
  *= require jquery.fancybox
+ *= require override
  *= require_self
 */
 
@@ -59,3 +60,4 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+

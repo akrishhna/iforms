@@ -1,0 +1,24 @@
+.iforms-tabs-left {
+  margin: 25px 0 0 0;
+
+  ul.nav-tabs {
+    margin-right: 0;
+    border-right: 0;
+
+    li a {
+      background: none repeat scroll 0 0 #959595;
+      color: #FFFFFF;
+    }
+
+    li.active a {
+      background: none repeat scroll 0 0 #FFFFFF;
+      color: #0088cc;
+    }
+  }
+
+  .tab-content {
+    padding: 20px;
+    border: 1px solid #DDDDDD;
+    min-height: 300px;
+  }
+}

@@ -12,7 +12,7 @@
 <div class="clear"></div>
 <%= form_for @girls_activity, :url => "/create_activity", :html => {:class => 'form-horizontal girl_scouts_activity_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
-  <div class="tabbable tabs-left activity_tabs">
+  <div class="tabbable tabs-left iforms-tabs-left activity_tabs">
   <ul class="nav nav-tabs" id="activity_tab_links">
     <li class="active">
       <%= link_to "Activity", "#activity", "data-toggle" => "tab" %>
