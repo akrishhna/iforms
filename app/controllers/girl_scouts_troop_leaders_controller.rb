@@ -124,7 +124,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def activity_permission_form
     @activity = current_user.girl_scouts_activities.find(params[:activity_id])
-    activity_name = @activity.activity_name.split(" ")[0] + '-' + @activity.activity_name.split(" ")[1]
+    activity_name = @activity.activity_name.gsub(' ', '-')
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
     activity_permission_form_pdf_generater(@activity,permission_form_path)
     send_file permission_form_path,
