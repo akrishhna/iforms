@@ -17,13 +17,14 @@ class Consumer::GirlScoutsController < ConsumerController
   def send_permission_form_to_troop_leader
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
+    @girl_scout = @girl_scouts_permission_form.girls_scout
     if @girl_scouts_permission_form.invalid?
       flash[:error] = "Something wrong please try again."
     else
       @girl_scouts_permission_form.status = "Submitted"
       @girl_scouts_permission_form.attending = true
       if @girl_scouts_permission_form.save()
-        Notifier.send_permission_form_to_tl_notification(@activity).deliver
+        Notifier.send_permission_form_to_tl_notification(@activity,@girl_scout).deliver
       end
     end
   end
