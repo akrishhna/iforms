@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120912045319) do
+ActiveRecord::Schema.define(:version => 20120914092357) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -343,6 +343,50 @@ ActiveRecord::Schema.define(:version => 20120912045319) do
     t.integer  "emergency_evening_phone_3"
     t.text     "email_notification"
     t.boolean  "status"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "girl_scouts_activity_permission_forms", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "girls_scout_id"
+    t.integer  "girl_scouts_activity_id"
+    t.boolean  "attending"
+    t.string   "status"
+    t.string   "gapf_girl_scouts_first_name"
+    t.string   "gapf_girl_scouts_last_name"
+    t.string   "gapf_emergency_contact_1_first_name"
+    t.string   "gapf_emergency_contact_1_last_name"
+    t.string   "gapf_emergency_contact_1_phone_1_1"
+    t.string   "gapf_emergency_contact_1_phone_1_2"
+    t.string   "gapf_emergency_contact_1_phone_1_3"
+    t.string   "gapf_emergency_contact_1_phone_2_1"
+    t.string   "gapf_emergency_contact_1_phone_2_2"
+    t.string   "gapf_emergency_contact_1_phone_2_3"
+    t.string   "gapf_emergency_contact_2_first_name"
+    t.string   "gapf_emergency_contact_2_last_name"
+    t.string   "gapf_emergency_contact_2_phone_1_1"
+    t.string   "gapf_emergency_contact_2_phone_1_2"
+    t.string   "gapf_emergency_contact_2_phone_1_3"
+    t.string   "gapf_emergency_contact_2_phone_2_1"
+    t.string   "gapf_emergency_contact_2_phone_2_2"
+    t.string   "gapf_emergency_contact_2_phone_2_3"
+    t.string   "gapf_emergency_contact_3_first_name"
+    t.string   "gapf_emergency_contact_3_last_name"
+    t.string   "gapf_emergency_contact_3_phone_1_1"
+    t.string   "gapf_emergency_contact_3_phone_1_2"
+    t.string   "gapf_emergency_contact_3_phone_1_3"
+    t.string   "gapf_emergency_contact_3_phone_2_1"
+    t.string   "gapf_emergency_contact_3_phone_2_2"
+    t.string   "gapf_emergency_contact_3_phone_2_3"
+    t.string   "gapf_physician_first_name"
+    t.string   "gapf_physician_last_name"
+    t.string   "gapf_physician_phone_1"
+    t.string   "gapf_physician_phone_2"
+    t.string   "gapf_physician_phone_3"
+    t.string   "gapf_my_insurance_carrier"
+    t.string   "gapf_policy"
+    t.text     "gapf_special_needs"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end

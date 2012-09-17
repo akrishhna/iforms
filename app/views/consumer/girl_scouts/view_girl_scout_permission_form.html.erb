@@ -1,7 +1,7 @@
 <div class="tabbable tabs-left iforms-tabs-left">
   <ul class="nav nav-tabs">
     <li class="active">
-      <%= link_to @activity.activity_name, '#activity_form', "data-toggle" => "tab" %>
+      <%= link_to "Activity Details", '#activity_form', "data-toggle" => "tab" %>
     </li>
     <li><%= link_to "Parent Permission", "#parent_permission", "data-toggle" => "tab" %></li>
   </ul>
@@ -14,10 +14,16 @@
         <div class="girlscout_permission_form_submit" style="float:right;margin-right: 87px;">
           <%= link_to "Submit to Troop Leader", "#", :class => "btn btn-primary", :id => "notification_email_to_troop_leader" %>
           <br> <br>
-          <span class="permission_form_tl_mail_success hide" >Successfully Sent!</span>
+          <span class="permission_form_tl_mail_success hide" style="margin-top: 20px;">Successfully Sent!</span>
         </div>
-      <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
+        <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
           <%= f.hidden_field :id %>
+          <p> My daughter,<strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>, has my permission
+            to go to and participate in the <strong><%= @activity.activity_name %></strong>.
+            I understand the cost will be
+            <strong>$<%= @activity.activity_cost_dollars %>.<%= @activity.activity_cost_cents %></strong>.
+          </p>
+          <p>IN CASE OF AN EMERGENCY, PLEASE CONTACT:</p>
           <div class="control-group">
             <%= f.label :gapf_girl_scouts_first_name, "Girl Scout Name", :class => 'control-label' %>
             <div class="controls">
@@ -107,23 +113,23 @@
               <%= f.text_field :gapf_emergency_contact_3_phone_2_3, :style => "width:40px;", :placeholder => " ####" %>
             </div>
           </div>
-              <div class="control-group">
-                <%= f.label :gapf_physician_first_name, "Physician Name", :class => 'control-label' %>
-                <div class="controls">
-                  <%= f.text_field :gapf_physician_first_name, :placeholder => "First Name", :class => "input-small" %>
-                  <%= f.text_field :gapf_physician_last_name, :placeholder => "Last Name", :class => "input-small" %>
-                </div>
-              </div>
-              <div class="control-group">
-                <%= f.label :gapf_physician_phone_1, "Physician Phone", :class => 'control-label' %>
-                <div class="controls">
-                  <%= f.text_field :gapf_physician_phone_1, :style => "width:30px;", :placeholder => "###" %>
-                  -
-                  <%= f.text_field :gapf_physician_phone_2, :style => "width:30px;", :placeholder => "###" %>
-                  -
-                  <%= f.text_field :gapf_physician_phone_3, :style => "width:40px;", :placeholder => " ####" %>
-                </div>
-              </div>
+          <div class="control-group">
+            <%= f.label :gapf_physician_first_name, "Physician Name", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_physician_first_name, :placeholder => "First Name", :class => "input-small" %>
+              <%= f.text_field :gapf_physician_last_name, :placeholder => "Last Name", :class => "input-small" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_physician_phone_1, "Physician Phone", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_physician_phone_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_physician_phone_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_physician_phone_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
           <div class="control-group">
             <%= f.label :gapf_my_insurance_carrier, "My Insurance Carrier", :class => 'control-label' %>
             <div class="controls">
@@ -137,15 +143,28 @@
             </div>
           </div>
           <div class="control-group">
+            <p style="margin: 0;font-size: 12px;text-align: justify;">
+              She is in good physical condition at present and has had no serious illness or operations since her last
+              health examination. I will make sure that she does not attend if she is not feeling well. I give my
+              consent
+              for emergency care to be rendered by another licensed doctor, if unavailable to reach family doctor. i
+              give
+              permission for pictures to be taken and used for Girl Scout publications, publicity, advertising or the
+              council
+              calender. If a private auto is to be used, she has my permission to ride. I understand the volunteers and
+              Girl Scouts of Central Texas cannot be responsible for loss of valuables.
+            </p>
+          </div>
+          <div class="control-group">
             <%= f.label :gapf_special_needs, "Please List Specific Needs, Medications, Comments", :class => 'control-label' %>
             <div class="controls">
-              <%= f.text_area :gapf_special_needs, :rows => 4, :style => "width:350px;" %>
+              <%= f.text_area :gapf_special_needs, :rows => 4, :style => "width:98%;" %>
             </div>
           </div>
+          </div>
+          </div>
+          </div>
+        <% end %>
         </div>
-        </div>
-        </div>
-      <% end %>
-      </div>
 </div>
 </div>

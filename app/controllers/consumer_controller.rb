@@ -46,6 +46,7 @@ class ConsumerController < ApplicationController
       item[:due_date] = pf.girl_scouts_activity.activity_signed_permission_due_date
       item[:attending] = pf.attending
       item[:status] = pf.status
+      item[:updated_at] = pf.updated_at
       @results << item
     end
     render :layout => false if request.xhr?
@@ -62,33 +63,6 @@ class ConsumerController < ApplicationController
     session["consumer_tab_index"] = 6
 
     render :layout => false if request.xhr?
-  end
-
-  def view_girl_scout_permission_form
-    @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
-    @girl_scouts_permission_form.status = 'In Progress'
-    @girl_scouts_permission_form.attending = true
-    @girl_scouts_permission_form.save()
-    @activity = @girl_scouts_permission_form.girl_scouts_activity
-  end
-
-  def girl_scouts_permission_form
-    @girl_scouts_permission_forms = GirlScoutsActivityPermissionForm.find_by_id(params[:girl_scouts_activity_permission_form][:id])
-    @girl_scouts_permission_forms.attributes = params[:girl_scouts_activity_permission_form]
-    @girl_scouts_permission_forms.save(:validate => false)
-  end
-
-  def send_permission_form_to_troop_leader
-    @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(params[:id])
-    @activity = @girl_scouts_permission_form.girl_scouts_activity
-    if @girl_scouts_permission_form.invalid?
-      flash[:error] = "Something wrong please try again."
-    else
-      Notifier.send_permission_form_to_tl_notification(@activity).deliver
-      @girl_scouts_permission_form.status = "Sent" + " " + Time.now.strftime("%m/%d/%Y")
-      @girl_scouts_permission_form.save()
-      #raise @pdftk.fields(form_pdf_path).to_yaml
-    end
   end
 
   private

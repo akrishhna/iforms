@@ -16,13 +16,19 @@
       <td><%= result[:activity_date_begin].strftime("%m/%d/%Y") %>
         - <%= result[:activity_date_end].strftime("%m/%d/%Y") %></td>
       <td><%= result[:price].present? ? number_to_currency(result[:price]) : "Free!" %></td>
-      <td><%= result[:due_date] %></td>
+      <td><%= result[:due_date].strftime("%m/%d/%Y") %></td>
       <td><%= label_tag "checkboxs", :class => 'checkbox inline' do %>
           <%= check_box_tag :attending, result[:attending] %>
         <% end %>
       </td>
-      <td><%= result[:status] %></td>
-      <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_index_path(:id => result[:id]) %>
+      <td>
+        <% if result[:status] == 'Submitted' %>
+          Sent <%= result[:updated_at].strftime("%m/%d/%Y") %>
+        <% else %>
+          <%= result[:status] %>
+        <% end %>
+      </td>
+      <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
         | <%= link_to "View PDF", "#" %></td>
     </tr>
   <% end %>
