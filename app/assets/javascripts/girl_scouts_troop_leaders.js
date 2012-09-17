@@ -104,7 +104,7 @@ $(function () {
   });
 
   $('.girl_scouts_activity_form input,.girl_scouts_activity_form select').change(function () {
-    $('input[name=_method]').val('post')
+    $('input[name=_method]').val('post');
     var params = $('.girl_scouts_activity_form').serializeArray();
     $.post('/girl_scouts_troop_leaders/create_activity', params).success(function () {
       $('#activity_cost_dollars').currency({
