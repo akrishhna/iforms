@@ -19,4 +19,17 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :role, :edit_confirmed, :remember_me, :username
+
+  after_create :resolve_girl_scout
+
+  def resolve_girl_scout
+    @girl_scout = GirlsScout.find_by_email(self.email)
+    if @girl_scout.present?
+      @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.find_all_by_girls_scout_id(@girl_scout.id)
+     @girl_scouts_activity_permission_form.each do |pf|
+       pf.user_id = @girl_scout.user_id if pf.user_id.nil?
+       pf.save
+     end
+    end
+  end
 end
