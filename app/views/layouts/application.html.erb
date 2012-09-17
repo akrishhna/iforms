@@ -43,7 +43,7 @@
       <%= raw msg %>
     <% end %>
   <% end %>
-  <%= content_tag :div, "data-page-action" => page_action, "data-page-controller" => page_controller do %>
+  <%= content_tag :div, :class => "page", "data-page" => page, "data-page-action" => page_action, "data-page-controller" => page_controller do %>
     <%= yield %>
   <% end %>
 </div>
