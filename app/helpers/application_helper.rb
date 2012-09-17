@@ -25,6 +25,10 @@ module ApplicationHelper
     params[:controller].gsub('/', '-')
   end
 
+  def page
+    page_controller + "_" + page_action
+  end
+
   # Render error messages for the given objects. The :message and :header_message options are allowed.
   def error_messages_for(*objects)
     options = objects.extract_options!
