@@ -46,7 +46,6 @@ class GirlScoutsTroopLeadersController < ApplicationController
       @girls_activity = GirlScoutsActivity.find(params[:id])
     else
       @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
-
     end
 
     @activities = current_user.girl_scouts_activities.order("created_at DESC")
@@ -106,6 +105,12 @@ class GirlScoutsTroopLeadersController < ApplicationController
       @girls_scouts.each do |girl_scout|
         email = girl_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
+          @user = User.find_by_email(email)
+          if @user
+          @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => @user.id,:girl_scouts_activity_id => @activity.id,:girls_scout_id => girl_scout.id,:status => 'Pending')
+          else
+            @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => '',:girl_scouts_activity_id => @activity.id,:girls_scout_id => girl_scout.id,:status => 'Pending')
+          end
           Notifier.send_parent_email_notification(@activity, girl_scout).deliver
           @counter += 1
         end
