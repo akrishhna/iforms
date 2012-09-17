@@ -21,7 +21,7 @@ class Consumer::GirlScoutsController < ConsumerController
     if @girl_scouts_permission_form.invalid?
       flash[:error] = "Something wrong please try again."
     else
-      @girl_scouts_permission_form.status = "Submitted"
+      @girl_scouts_permission_form.status = "Sent"
       @girl_scouts_permission_form.attending = true
       if @girl_scouts_permission_form.save()
         Notifier.send_permission_form_to_tl_notification(@activity,@girl_scout).deliver
