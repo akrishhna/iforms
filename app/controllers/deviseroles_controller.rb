@@ -8,7 +8,7 @@ class DeviserolesController < ApplicationController
         if @patient.blank?
           redirect_to :controller => "patients", :action => "new"
         else
-          redirect_to :controller => "patients", :action => "index"
+          redirect_to :controller => "consumer", :action => "index"
         end
 
       when 'doctor'
