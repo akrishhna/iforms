@@ -1,46 +1,46 @@
 <div class="permission_form">
-  <table class="table table-bordered" style="width: 70%; ">
+  <table class="table">
     <tr>
       <th colspan="2">Activity</th>
     </tr>
     <tr>
-      <td style="width: 40%;">Name</td>
+      <td><strong>Name :</strong></td>
       <td><%= @activity.activity_name %></td>
     </tr>
     <tr>
-      <td>Location</td>
+      <td><strong>Location : </strong></td>
       <td><%= @activity.activity_location %></td>
     </tr>
     <tr>
-      <td>Date Begin</td>
-      <td><%= @activity.activity_date_begin %></td>
+      <td><strong>Date Begin : </strong></td>
+      <td><%= @activity.activity_date_begin.strftime("%m/%d/%Y") %></td>
     </tr>
     <tr>
-      <td>Date End</td>
-      <td><%= @activity.activity_date_end %></td>
+      <td><strong>Date End : </strong></td>
+      <td><%= @activity.activity_date_end.strftime("%m/%d/%Y") %></td>
     </tr>
     <tr>
-      <td>Signed Permission Form Due Date</td>
-      <td><%= @activity.activity_signed_permission_due_date %></td>
+      <td><strong>Signed Permission Form Due Date : </strong></td>
+      <td><%= @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") %></td>
     </tr>
     <tr>
-      <td>We Will Leave From</td>
+      <td><strong>We Will Leave From : </strong></td>
       <td><%= @activity.activity_leave_from %></td>
     </tr>
     <tr>
-      <td>At This Time</td>
-      <td><%= @activity.activity_leave_time_hh %>&nbsp;<%= @activity.activity_leave_time_mm %>&nbsp;<%= @activity.activity_leave_time_am_pm %></td>
+      <td><strong>At This Time : </strong></td>
+      <td><%= @activity.activity_leave_time_hh.to_s.rjust(2,'0') %><strong>:</strong><%= @activity.activity_leave_time_mm.to_s.rjust(2,'0')  %>&nbsp;<%= @activity.activity_leave_time_am_pm %></td>
     </tr>
     <tr>
-      <td>We Will Return To</td>
-      <td><%= @activity.activity_return_time_hh %>&nbsp;<%= @activity.activity_return_time_mm %>&nbsp;<%= @activity.activity_return_time_am_pm %></td>
+      <td><strong>We Will Return To : </strong></td>
+      <td><%= @activity.activity_return_time_hh.to_s.rjust(2,'0') %><strong>:</strong><%= @activity.activity_return_time_mm.to_s.rjust(2,'0')  %>&nbsp;<%= @activity.activity_return_time_am_pm %></td>
     </tr>
     <tr>
-      <td>Cost</td>
-      <td><%= @activity.activity_cost_dollars %><%= @activity.activity_cost_cents %></td>
+      <td><strong>Cost : </strong></td>
+      <td><%= number_to_currency(@activity.activity_cost_dollars.to_s + '.' + @activity.activity_cost_cents.to_s )%></td>
     </tr>
     <tr>
-      <td> Girls Should Wear</td>
+      <td><strong>Girls Should Wear : </strong></td>
       <td>
         <% if @activity.girls_wear_checkbox %>
           Uniforms
@@ -48,69 +48,78 @@
       </td>
     </tr>
     <tr>
-      <td>Girls Should Wear Other</td>
+      <td><strong>Girls Should Wear Other : </strong></td>
       <td><%= @activity.activity_girls_wear_others %></td>
     </tr>
     <tr>
-      <td>Girls Should Bring</td>
+      <td><strong>Girls Should Bring : </strong></td>
       <td><%= @activity.activity_girls_bring %></td>
     </tr>
     <tr>
-      <td>Equipment Needed</td>
+      <td><strong>Equipment Needed : </strong></td>
       <td><%= @activity.activity_equipment %></td>
     </tr>
+    <tr>
+    </table>
+  <table class="table">
     <tr>
       <th colspan="2">Troop</th>
     </tr>
     <tr>
-      <td> Service Unit</td>
+      <td><strong>Service Unit : </strong></td>
       <td><%= @activity.troop_service_unit %></td>
     </tr>
     <tr>
-      <td>PAL</td>
+      <td><strong>PAL : </strong></td>
       <td><%= @activity.troop_pal %></td>
     </tr>
     <tr>
-      <td>Troop Number</td>
+      <td><strong>Troop Number : </strong></td>
       <td><%= @activity.troop_number %></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border-bottom: 1px solid #cccccc;margin-bottom: 5px;padding: 0;"></td>
     </tr>
     <tr>
       <th colspan="2">Troop Leader</th>
     </tr>
     <tr>
-      <td>Name</td>
+      <td><strong>Name : </strong></td>
       <td><%= @activity.leader_first_name %> &nbsp; <%= @activity.leader_last_name %></td>
     </tr>
     <tr>
-      <td>Email</td>
+      <td><strong>Email : </strong></td>
       <td><%= @activity.leader_email %></td>
     </tr>
     <tr>
-      <td>Day Phone</td>
-      <td><%= @activity.leader_day_phone_1 %><%= @activity.leader_day_phone_2 %><%= @activity.leader_day_phone_3 %></td>
+      <td><strong>Day Phone : </strong></td>
+      <td>(<%= @activity.leader_day_phone_1 %>)<%= @activity.leader_day_phone_2 %><%= @activity.leader_day_phone_3 %></td>
     </tr>
     <tr>
-      <td>Evening Phone</td>
-      <td><%= @activity.leader_evening_phone_1 %><%= @activity.leader_evening_phone_2 %><%= @activity.leader_evening_phone_3 %></td>
+      <td><strong>Evening Phone : </strong></td>
+      <td>(<%= @activity.leader_evening_phone_1 %>)<%= @activity.leader_evening_phone_2 %><%= @activity.leader_evening_phone_3 %></td>
     </tr>
     <tr>
-      <td>Cell Phone</td>
-      <td><%= @activity.leader_cell_phone_1 %><%= @activity.leader_cell_phone_2 %><%= @activity.leader_cell_phone_3 %></td>
+      <td><strong>Cell Phone : </strong></td>
+      <td>(<%= @activity.leader_cell_phone_1 %>)<%= @activity.leader_cell_phone_2 %><%= @activity.leader_cell_phone_3 %></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="border-bottom: 1px solid #cccccc;margin-bottom: 5px;padding: 0;"></td>
     </tr>
     <tr>
       <th colspan="2">Troop Emergency Contact</th>
     </tr>
     <tr>
-      <td>Name</td>
+      <td><strong>Name : </strong></td>
       <td><%= @activity.emergency_first_name %> &nbsp; <%= @activity.emergency_last_name %></td>
     </tr>
     <tr>
-      <td>Day Phone</td>
-      <td><%= @activity.emergency_day_phone_1 %><%= @activity.emergency_day_phone_2 %><%= @activity.emergency_day_phone_3 %></td>
+      <td><strong>Day Phone : </strong></td>
+      <td>(<%= @activity.emergency_day_phone_1 %>)<%= @activity.emergency_day_phone_2 %><%= @activity.emergency_day_phone_3 %></td>
     </tr>
     <tr>
-      <td>Evening Phone</td>
-      <td><%= @activity.emergency_evening_phone_1 %><%= @activity.emergency_evening_phone_2 %><%= @activity.emergency_evening_phone_3 %></td>
+      <td><strong>Evening Phone : </strong></td>
+      <td>(<%= @activity.emergency_evening_phone_1 %>)<%= @activity.emergency_evening_phone_2 %><%= @activity.emergency_evening_phone_3 %></td>
     </tr>
   </table>
 </div>
