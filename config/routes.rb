@@ -2,6 +2,9 @@ Iforms::Application.routes.draw do
 
   resources :consumer do
     collection do
+      post 'send_permission_form_to_troop_leader'
+      post 'girl_scouts_permission_form'
+      get 'view_girl_scout_permission_form'
       get 'boy_scouts_list'
       get 'dental_list'
       get 'elementary_school_list'

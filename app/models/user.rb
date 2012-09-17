@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :service_providers, :through => :user_service_providers
   has_many :girls_scouts
   has_many :girl_scouts_activities
+  has_many :girl_scouts_activity_permission_forms
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :timeoutable and :activatable

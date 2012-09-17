@@ -57,4 +57,9 @@ class Notifier < ActionMailer::Base
     @registration_url = user_registration_url
     mail(:to => @girl_scout.email, :subject => "Activity Permission Form")
   end
+
+  def send_permission_form_to_tl_notification(activity)
+    @activity = activity
+    mail(:to => @activity.leader_email, :subject => "Parent Permission Granted Form")
+  end
 end
