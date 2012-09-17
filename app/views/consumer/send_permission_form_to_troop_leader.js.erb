@@ -1,0 +1,11 @@
+<% unless @activity.errors.empty? %>
+var errors = '<%= escape_javascript(error_messages_for(@activity)) %>';
+$('.girl_scout_permission_form').find('#flash_error,.form_errors').remove();
+$('.girl_scout_permission_form').prepend(errors);
+<% else %>
+$('#notification_email_to_troop_leader').attr('disabled', false);
+$('#notification_email_to_troop_leader').text('Submit to Troop Leader');
+
+$('.permission_form_tl_mail_success').fadeIn('slow');
+$('.permission_form_tl_mail_success').delay(3000).fadeOut('slow');
+<% end %>

@@ -1,0 +1,151 @@
+<div class="tabbable tabs-left iforms-tabs-left">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <%= link_to @activity.activity_name, '#activity_form', "data-toggle" => "tab" %>
+    </li>
+    <li><%= link_to "Parent Permission", "#parent_permission", "data-toggle" => "tab" %></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="activity_form">
+      <%= render :partial => "girl_scouts_troop_leaders/show_activity" %>
+    </div>
+    <div class="tab-pane" id="parent_permission">
+      <div class="tab-pane active" id="parent_permissionx">
+        <div class="girlscout_permission_form_submit" style="float:right;margin-right: 87px;">
+          <%= link_to "Submit to Troop Leader", "#", :class => "btn btn-primary", :id => "notification_email_to_troop_leader" %>
+          <br> <br>
+          <span class="permission_form_tl_mail_success hide" >Successfully Sent!</span>
+        </div>
+      <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
+          <%= f.hidden_field :id %>
+          <div class="control-group">
+            <%= f.label :gapf_girl_scouts_first_name, "Girl Scout Name", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_girl_scouts_first_name, :placeholder => "First Name", :class => "input-small" %>
+              <%= f.text_field :gapf_girl_scouts_last_name, :placeholder => "Last Name", :class => "input-small" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_1_first_name, "Emergency Contact 1", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_1_first_name, :placeholder => "First Name", :class => "input-small" %>
+              <%= f.text_field :gapf_emergency_contact_1_last_name, :placeholder => "Last Name", :class => "input-small" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_1_phone_1_1, "Emergency Contact 1 Phone 1", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_1_phone_1_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_1_phone_1_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_1_phone_1_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_1_phone_2_1, "Emergency Contact 1 Phone 2", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_1_phone_2_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_1_phone_2_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_1_phone_2_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_2_first_name, "Emergency Contact 2", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_2_first_name, :placeholder => "First Name", :class => "input-small" %>
+              <%= f.text_field :gapf_emergency_contact_2_last_name, :placeholder => "Last Name", :class => "input-small" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_2_phone_1_1, "Emergency Contact 2 Phone 2", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_2_phone_1_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_2_phone_1_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_2_phone_1_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_2_phone_2_1, "Emergency Contact 2 Phone 2", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_2_phone_2_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_2_phone_2_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_2_phone_2_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_3_first_name, "Emergency Contact 3", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_3_first_name, :placeholder => "First Name", :class => "input-small" %>
+              <%= f.text_field :gapf_emergency_contact_3_last_name, :placeholder => "Last Name", :class => "input-small" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_3_phone_1_1, "Emergency Contact 3 Phone 1", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_3_phone_1_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_3_phone_1_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_3_phone_1_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_emergency_contact_3_phone_2_1, "Emergency Contact 3 Phone 2", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_emergency_contact_3_phone_2_1, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_3_phone_2_2, :style => "width:30px;", :placeholder => "###" %>
+              -
+              <%= f.text_field :gapf_emergency_contact_3_phone_2_3, :style => "width:40px;", :placeholder => " ####" %>
+            </div>
+          </div>
+              <div class="control-group">
+                <%= f.label :gapf_physician_first_name, "Physician Name", :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_field :gapf_physician_first_name, :placeholder => "First Name", :class => "input-small" %>
+                  <%= f.text_field :gapf_physician_last_name, :placeholder => "Last Name", :class => "input-small" %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= f.label :gapf_physician_phone_1, "Physician Phone", :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_field :gapf_physician_phone_1, :style => "width:30px;", :placeholder => "###" %>
+                  -
+                  <%= f.text_field :gapf_physician_phone_2, :style => "width:30px;", :placeholder => "###" %>
+                  -
+                  <%= f.text_field :gapf_physician_phone_3, :style => "width:40px;", :placeholder => " ####" %>
+                </div>
+              </div>
+          <div class="control-group">
+            <%= f.label :gapf_my_insurance_carrier, "My Insurance Carrier", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_my_insurance_carrier %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_policy, "Policy Number ", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :gapf_policy %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :gapf_special_needs, "Please List Specific Needs, Medications, Comments", :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_area :gapf_special_needs, :rows => 4, :style => "width:350px;" %>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      <% end %>
+      </div>
+</div>
+</div>
