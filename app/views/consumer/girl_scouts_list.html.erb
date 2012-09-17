@@ -22,7 +22,7 @@
         <% end %>
       </td>
       <td>
-        <% if result[:status] == 'Submitted' %>
+        <% if result[:status] == 'Sent' %>
           Sent <%= result[:updated_at].strftime("%m/%d/%Y") %>
         <% else %>
           <%= result[:status] %>
