@@ -1,7 +1,6 @@
 class GirlScoutsActivity < ActiveRecord::Base
   belongs_to :user
-  has_many :girl_scouts_activity_permission_forms
-
+  has_many :girl_scouts_activity_permission_forms, :dependent => :destroy
 
  # validates_presence_of :activity_name,:activity_location,:activity_date_begin,:activity_date_end,:activity_signed_permission_due_date,:activity_leave_from,:activity_leave_time_hh,:activity_leave_time_mm,:activity_leave_time_am_pm,:activity_return_to,:activity_return_time_hh,:activity_return_time_mm,:activity_return_time_am_pm,:activity_cost_dollars,:activity_cost_cents
  # validates_presence_of :troop_service_unit,:troop_pal,:troop_number

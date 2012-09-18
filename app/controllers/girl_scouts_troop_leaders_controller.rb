@@ -126,8 +126,10 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def delete_activity
     GirlScoutsActivity.delete(params[:id])
-    activities = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
-    GirlScoutsActivityPermissionForm.delete(activities)
+    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ?',params[:id])
+    permissionforms.each do|pf|
+      GirlScoutsActivityPermissionForm.delete(pf.id)
+    end
     session[:selected_id] = ''
   end
 
