@@ -11,10 +11,9 @@
     </div>
     <div class="tab-pane" id="parent_permission">
       <div class="tab-pane active" id="parent_permissionx">
-        <div class="girlscout_permission_form_submit" style="text-align:right;margin-right: 87px;">
+        <div class="girlscout_permission_form_submit" style="text-align:right;margin-right: 100px;margin-bottom: 20px;">
+          <span class="permission_form_tl_mail_success hide" style="margin-right: 100px;background-color:#d3d3d3;">Successfully Sent!</span>
           <%= link_to "Submit to Troop Leader", "#", :class => "btn btn-primary", :id => "notification_email_to_troop_leader" %>
-          <br> <br>
-          <span class="permission_form_tl_mail_success hide" style="margin-top: 20px;">Successfully Sent!</span>
         </div>
         <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
           <%= f.hidden_field :id %>
