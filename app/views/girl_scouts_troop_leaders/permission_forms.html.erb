@@ -24,7 +24,7 @@
 
     <% @results.each do |result| %>
       <tr>
-        <td><%= check_box_tag :check_box_row, '', false, :id => "check_box_row" , "data-girl_scout_id" => result[:girl_scout_id],"data-status" => result[:status] %></td>
+        <td class = "girl_scout_check_box"><%= check_box_tag :check_box_row,'', false %></td>
         <td><%= result[:girl_scout] %></td>
         <td>
           <% if result[:attending] %>
