@@ -1,6 +1,7 @@
 class Consumer::GirlScoutsController < ConsumerController
 
   def index
+    session["consumer_tab_index"] = 4
     @results = []
     @girl_scouts_activity_permission_forms = current_user.girl_scouts_activity_permission_forms.order("updated_at DESC")
     @girl_scouts_activity_permission_forms.each do |pf|
