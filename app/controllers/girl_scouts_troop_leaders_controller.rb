@@ -110,21 +110,12 @@ class GirlScoutsTroopLeadersController < ApplicationController
         email = girl_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
           @user = User.find_by_email(email)
-          if @user
-            activity_presents = GirlScoutsActivityPermissionForm.where("girls_scout_id = ? and girl_scouts_activity_id = ?", girl_scout.id, @activity.id)
-            if !activity_presents.nil?
-              activity_presents.each do |activity_present|
-                @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.update(activity_present.id, :user_id => @user.id, :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
-                Notifier.send_parent_email_notification(@activity, girl_scout).deliver
-              end
-            else
-              @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => @user.id, :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
-              Notifier.send_parent_email_notification(@activity, girl_scout).deliver
-            end
-          else
-            @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => '', :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
-            Notifier.send_parent_email_notification(@activity, girl_scout).deliver
-          end
+          pf = GirlScoutsActivityPermissionForm.find_or_initialize_by_girls_scout_id_and_girl_scouts_activity_id(girl_scout.id,@activity.id)
+          pf.user_id = @user.id if @user
+          pf.girls_scout_id = girl_scout.id
+          pf.girl_scouts_activity_id = @activity.id
+          pf.status = "Pending"
+          pf.save
           #Notifier.send_parent_email_notification(@activity, girl_scout).deliver
           @counter += 1
         end
@@ -232,14 +223,12 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     def resend_permission_form
       @counter = 0
-      @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:activity_id])
+      @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?',params[:activity_id],'Pending')
       @girl_scouts_activity_permission_forms.each do|pf|
         @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
         @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
-        if pf.status == 'Pending' || pf.status == 'In Progress'
-          Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
+        Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
           @counter += 1
-        end
       end
     end
   end
