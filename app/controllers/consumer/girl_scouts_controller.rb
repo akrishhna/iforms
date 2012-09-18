@@ -1,5 +1,25 @@
 class Consumer::GirlScoutsController < ConsumerController
 
+  def index
+    @results = []
+    @girl_scouts_activity_permission_forms = current_user.girl_scouts_activity_permission_forms.order("updated_at DESC")
+    @girl_scouts_activity_permission_forms.each do |pf|
+      item = {}
+      item[:id] = pf.id
+      item[:girl_scout] = pf.girls_scout.first_name + ' ' + pf.girls_scout.last_name
+      item[:activity_name] = pf.girl_scouts_activity.activity_name
+      item[:activity_date_begin] = pf.girl_scouts_activity.activity_date_begin
+      item[:activity_date_end] = pf.girl_scouts_activity.activity_date_end
+      item[:price] = pf.girl_scouts_activity.activity_cost_dollars.to_s + '.' + pf.girl_scouts_activity.activity_cost_cents.to_s
+      item[:due_date] = pf.girl_scouts_activity.activity_signed_permission_due_date
+      item[:attending] = pf.attending
+      item[:status] = pf.status
+      item[:updated_at] = pf.updated_at
+      @results << item
+    end
+    render :layout => false if request.xhr?
+  end
+
   def view_girl_scout_permission_form
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
     @girl_scouts_permission_form.status = 'In Progress'

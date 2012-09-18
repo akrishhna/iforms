@@ -1,0 +1,35 @@
+<table class="table table-bordered">
+  <tr>
+    <th>Girl Scout</th>
+    <th>Activity</th>
+    <th>Activity Date(s)</th>
+    <th>Price</th>
+    <th>Due Date</th>
+    <th>Attending</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  <% @results.each do |result| %>
+    <tr style="text-align: center;">
+      <td><%= result[:girl_scout] %></td>
+      <td><%= result[:activity_name] %></td>
+      <td><%= result[:activity_date_begin].strftime("%m/%d/%Y") %>
+        - <%= result[:activity_date_end].strftime("%m/%d/%Y") %></td>
+      <td><%= result[:price].present? ? number_to_currency(result[:price]) : "Free!" %></td>
+      <td><%= result[:due_date].strftime("%m/%d/%Y") %></td>
+      <td><%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+          <%= check_box_tag :attending, '',result[:attending] %>
+        <% end %>
+      </td>
+      <td>
+        <% if result[:status] == 'Sent' %>
+          Sent <%= result[:updated_at].strftime("%m/%d/%Y") %>
+        <% else %>
+          <%= result[:status] %>
+        <% end %>
+      </td>
+      <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
+        | <%= link_to "View PDF", "#" %></td>
+    </tr>
+  <% end %>
+</table>
