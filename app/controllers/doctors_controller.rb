@@ -1,10 +1,12 @@
 class DoctorsController < ApplicationController
   before_filter :is_doctor?, :set_service_provider
   before_filter :doctor_profile_exists?, :except => [:new,:create]
-  def index    
+  def index
+    session["consumer_tab_index"] = 1
     @iforms = Iform.all
     @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
     @appointments = Appointment.where('doctor_id = ? and date = ?', @doctor.id,params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id])
+    render :layout => false if request.xhr?
   end
 
   def new

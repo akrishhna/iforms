@@ -10,6 +10,9 @@ Iforms::Application.routes.draw do
         get 'index'
       end
     end
+    resources :dental do
+      get 'index'
+    end
   end
 
   resources :consumer do
