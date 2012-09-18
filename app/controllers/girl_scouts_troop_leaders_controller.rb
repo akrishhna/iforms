@@ -114,7 +114,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
             activity_presents = GirlScoutsActivityPermissionForm.where("girls_scout_id = ? and girl_scouts_activity_id = ?", girl_scout.id, @activity.id)
             if !activity_presents.nil?
               activity_presents.each do |activity_present|
-                @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.update_attributes(:user_id => @user.id, :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
+                @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.update(activity_present.id, :user_id => @user.id, :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
                 Notifier.send_parent_email_notification(@activity, girl_scout).deliver
               end
             else
@@ -135,6 +135,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def delete_activity
     GirlScoutsActivity.delete(params[:id])
+    activities = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
+    GirlScoutsActivityPermissionForm.delete(activities)
+    session[:selected_id] = ''
   end
 
   def show_activity
@@ -229,11 +232,11 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     def resend_permission_form
       @counter = 0
-      ids = params[:checked_vals].split(',')
-      ids.each do |id|
-        @girl_scout = GirlsScout.find_by_id(id.to_i)
-        @activity = GirlScoutsActivity.find_by_id(params[:activity_id])
-        if @girl_scout.email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
+      @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:activity_id])
+      @girl_scouts_activity_permission_forms.each do|pf|
+        @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
+        @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
+        if pf.status == 'Pending' || pf.status == 'In Progress'
           Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
           @counter += 1
         end
