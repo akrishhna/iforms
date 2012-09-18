@@ -100,7 +100,7 @@ class Consumer::GirlScoutsController < ConsumerController
       "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y"),
       "TroopNumber" => @activity.troop_number,
       "PAL" => @activity.troop_pal,
-      "DaughterName" => @girl_scouts_permission_form.gapf_girl_scouts_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_girl_scouts_last_name,
+      "DaughterName" => @girl_scouts_permission_form.gapf_girl_scouts_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_girl_scouts_last_name.to_s,
       "EmergencyContact1Name" => @girl_scouts_permission_form.gapf_emergency_contact_1_first_name+ ' ' + @girl_scouts_permission_form.gapf_emergency_contact_1_last_name,
       "EmergencyContact2Name" => @girl_scouts_permission_form.gapf_emergency_contact_2_first_name+ ' ' + @girl_scouts_permission_form.gapf_emergency_contact_2_last_name,
       "EmergencyContact3Name" => @girl_scouts_permission_form.gapf_emergency_contact_3_first_name+ ' ' + @girl_scouts_permission_form.gapf_emergency_contact_3_last_name,
