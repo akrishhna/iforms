@@ -37,13 +37,17 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def activities
     if params[:id] == 'new'
+      session[:selected_id] = params[:id]
       @girls_activity = GirlScoutsActivity.new()
       @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
       if @recent_activity
         @girls_activity = @recent_activity.dup
       end
     elsif params[:id].present?
+      session[:selected_id] = params[:id]
       @girls_activity = GirlScoutsActivity.find(params[:id])
+    elsif session[:selected_id].present? && session[:selected_id] != 'new'
+      @girls_activity = GirlScoutsActivity.find(session[:selected_id])
     else
       @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
     end
@@ -107,11 +111,21 @@ class GirlScoutsTroopLeadersController < ApplicationController
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
           @user = User.find_by_email(email)
           if @user
-          @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => @user.id,:girl_scouts_activity_id => @activity.id,:girls_scout_id => girl_scout.id,:status => 'Pending')
+            activity_presents = GirlScoutsActivityPermissionForm.where("girls_scout_id = ? and girl_scouts_activity_id = ?", girl_scout.id, @activity.id)
+            if !activity_presents.nil?
+              activity_presents.each do |activity_present|
+                @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.update_attributes(:user_id => @user.id, :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
+                Notifier.send_parent_email_notification(@activity, girl_scout).deliver
+              end
+            else
+              @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => @user.id, :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
+              Notifier.send_parent_email_notification(@activity, girl_scout).deliver
+            end
           else
-            @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => '',:girl_scouts_activity_id => @activity.id,:girls_scout_id => girl_scout.id,:status => 'Pending')
+            @girl_scouts_activity_permission_form = GirlScoutsActivityPermissionForm.create(:user_id => '', :girl_scouts_activity_id => @activity.id, :girls_scout_id => girl_scout.id, :status => 'Pending')
+            Notifier.send_parent_email_notification(@activity, girl_scout).deliver
           end
-          Notifier.send_parent_email_notification(@activity, girl_scout).deliver
+          #Notifier.send_parent_email_notification(@activity, girl_scout).deliver
           @counter += 1
         end
       end
@@ -132,20 +146,20 @@ class GirlScoutsTroopLeadersController < ApplicationController
     activity_name = @activity.activity_name.gsub(' ', '-')
     activity_name = "Activity-#{@activity.id}" if !activity_name.present?
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    activity_permission_form_pdf_generater(@activity,permission_form_path)
+    activity_permission_form_pdf_generater(@activity, permission_form_path)
     send_file permission_form_path,
               :filename => "#{activity_name}.pdf",
               :disposition => "inline",
               :type => "application/pdf"
   end
 
-  def activity_permission_form_pdf_generater(activity,permission_form_path)
+  def activity_permission_form_pdf_generater(activity, permission_form_path)
     @activity = activity
     form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       "ServiceUnit" => @activity.troop_service_unit,
-      "ProgramYearFrom" => (@activity.activity_date_begin.to_s.split("-")[0] == 10 || @activity.activity_date_begin.to_s.split("-")[0] == 11 || @activity.activity_date_begin.to_s.split("-")[0] == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1 ,
+      "ProgramYearFrom" => (@activity.activity_date_begin.to_s.split("-")[0] == 10 || @activity.activity_date_begin.to_s.split("-")[0] == 11 || @activity.activity_date_begin.to_s.split("-")[0] == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1,
       "ProgramYearTo" => (@activity.activity_date_begin.to_s.split("-")[0] == 10 || @activity.activity_date_begin.to_s.split("-")[0] == 11 || @activity.activity_date_begin.to_s.split("-")[0] == 12) ? @activity.activity_date_begin.to_s.split("-")[0].to_i + 1 : @activity.activity_date_begin.to_s.split("-")[0],
       "TroopLeaderName" => @activity.leader_first_name + " " + @activity.leader_last_name,
       "TroopLeaderEmailAddress" => @activity.leader_email,
@@ -185,7 +199,46 @@ class GirlScoutsTroopLeadersController < ApplicationController
       "TroopNumber" => @activity.troop_number,
       "PAL" => @activity.troop_pal
     })
-   # raise @pdftk.fields(form_pdf_path).to_yaml
+    # raise @pdftk.fields(form_pdf_path).to_yaml
+  end
+
+  # Girl Scout Permission Forms
+
+  def permission_forms
+    if params[:id].present?
+      @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
+      session[:selected_id] = params[:id]
+    else
+      @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_id])
+    end
+    @results = []
+    @counter = 0
+    @girls_scout_permission_forms.each do |pf|
+      item = {}
+      item[:girl_scout] = pf.girls_scout.first_name + ' ' + pf.girls_scout.last_name
+      item[:attending] = pf.attending
+      item[:status] = pf.status
+      item[:updated_at] = pf.updated_at.strftime('%m/%d/%y')
+      item[:girl_scout_id] = pf.girls_scout_id
+      @results << item
+    end
+    @activities = current_user.girl_scouts_activities.order("created_at DESC")
+    @activities.each do |activity|
+      @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
+    end
+
+    def resend_permission_form
+      @counter = 0
+      ids = params[:checked_vals].split(',')
+      ids.each do |id|
+        @girl_scout = GirlsScout.find_by_id(id.to_i)
+        @activity = GirlScoutsActivity.find_by_id(params[:activity_id])
+        if @girl_scout.email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
+          Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
+          @counter += 1
+        end
+      end
+    end
   end
 
   private

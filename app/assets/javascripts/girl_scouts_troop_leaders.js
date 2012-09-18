@@ -27,7 +27,7 @@ $(function () {
       {row_index:row_index, id:id, first_name:girl_scout_first_name, last_name:girl_scout_last_name, parent_first_name:girl_scout_parent_first_name, parent_last_name:girl_scout_parent_last_name, email:girl_scout_email});
   });
 
-  $('#select_all_check_box').click(function () {
+  $('.select_all_check_box').click(function () {
     if ($(this).is(':checked')) {
       $("#girl_scouts_table  input[name=check_box_row]").attr('checked', true);
     }
@@ -68,10 +68,10 @@ $(function () {
     var checkbox_count = $('#girl_scouts_table  input[name=check_box_row]').length;
     var checked_checkbox_count = $('#girl_scouts_table  input[name=check_box_row]:checked').length;
     if (checkbox_count == checked_checkbox_count) {
-      $('#select_all_check_box').attr('checked', true)
+      $('.select_all_check_box').attr('checked', true)
     }
     else {
-      $('#select_all_check_box').attr('checked', false)
+      $('.select_all_check_box').attr('checked', false)
     }
     if (checked_checkbox_count > 0) {
       $('.delete_girls_scouts').attr('disabled', false);
@@ -83,6 +83,7 @@ $(function () {
 
 
   // activity tabs
+
   $(".girls_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
   $('#girl_scouts_activity_activity_date_begin').datepicker("setDate", $('#girl_scouts_activity_activity_date_begin').attr('data-value'));
   $('#girl_scouts_activity_activity_date_end').datepicker("setDate", $('#girl_scouts_activity_activity_date_end').attr('data-value'));
@@ -181,5 +182,66 @@ $(function () {
       $(this).val('0' + hh);
     }
   });
+
+
+  // Permission Forms Tab
+
+  $('.pf_select_all_check_box').click(function () {
+    if ($(this).is(':checked')) {
+      $("#girl_scouts_permission_form_table  input[name=check_box_row]").attr('checked', true);
+    }
+    else {
+      $("#girl_scouts_permission_form_table  input[name=check_box_row]").attr('checked', false);
+    }
+    enable_pf_btns()
+  });
+
+  $('#girl_scouts_permission_form_table  input[name=check_box_row]').change(function () {
+    enable_pf_btns();
+  });
+
+  function enable_pf_btns() {
+    var checkbox_count = $('#girl_scouts_permission_form_table  input[name=check_box_row]').length;
+    var checked_checkbox_count = $('#girl_scouts_permission_form_table  input[name=check_box_row]:checked').length;
+    if (checkbox_count == checked_checkbox_count) {
+      $('.pf_select_all_check_box').attr('checked', true)
+    }
+    else {
+      $('.pf_select_all_check_box').attr('checked', false)
+    }
+    if (checked_checkbox_count > 0) {
+      $('.permission_form_print_btn').attr('disabled', false);
+    }
+    else {
+      $('.permission_form_print_btn').attr('disabled', "disabled");
+    }
+  }
+
+  $('select#girls_scout_permission_form').change(function () {
+    if ($(this).val() == 0) {
+      window.location = '/girl_scouts_troop_leaders/permission_forms?id=' + 'new';
+    } else {
+      window.location = '/girl_scouts_troop_leaders/permission_forms?id=' + $(this).val();
+    }
+  });
+
+//  $('#permission_form_send_email_btn').click(function () {
+//    if ($(this).attr('disabled') == "disabled") {
+//      return false;
+//    }
+//    console.log('');
+//    var checked_vals = $($('#girl_scouts_permission_form_table').attr('data-status') == 'Pending').map(function () {
+//      return $(this).attr('data-girl_scout_id');
+//    }).get();
+//    console.log(checked_vals);
+//    var activity_id = $('select#girls_scout_permission_form').val();
+//    $(this).attr('disabled', "disabled");
+//    $(this).text('Sending Email...');
+//
+//    if (checked_vals.length != 0) {
+//      $.post("/girl_scouts_troop_leaders/resend_permission_form", {activity_id:activity_id,checked_vals:checked_vals.join()});
+//    }
+//    return false;
+//  });
 
 });
