@@ -42,11 +42,13 @@
         </td>
       </tr>
     <% end %>
+    <% if @results != [] %>
     <tr>
       <td></td>
       <td>Number Attending</td>
       <td><%= @counter %></td>
       <td></td>
     </tr>
+      <% end %>
   </table>
 </div>
