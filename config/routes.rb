@@ -6,6 +6,7 @@ Iforms::Application.routes.draw do
         post 'send_permission_form_to_troop_leader'
         post 'girl_scouts_permission_form'
         get 'view_girl_scout_permission_form'
+        get 'index'
       end
     end
   end
@@ -26,6 +27,7 @@ Iforms::Application.routes.draw do
   match 'girl_scouts_troop_leaders/activity/:activity_id' => 'girl_scouts_troop_leaders#show_activity', :as => 'girl_scouts_activity'
   resources :girl_scouts_troop_leaders do
     collection do
+      get 'permission_forms'
       get 'activities'
       get 'roster'
       get 'get_girl_scouts_row'
@@ -34,6 +36,7 @@ Iforms::Application.routes.draw do
       post 'create_activity'
       post 'send_notification_email'
       post 'delete_activity'
+      post 'resend_permission_form'
     end
   end
 

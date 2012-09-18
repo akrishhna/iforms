@@ -1,0 +1,52 @@
+<div class="girl_scouts_troop_leaders_nav_links">
+  <%= link_to "Activities", activities_girl_scouts_troop_leaders_path %> <strong> | </strong>
+  <strong>Permission Forms</strong> <strong> | </strong>
+  <%= link_to "Roster", roster_girl_scouts_troop_leaders_path %>
+</div>
+<div>&nbsp;</div>
+<div>
+  <%= select_tag("girls_scout_permission_form", options_for_select(@girls_scouts_activities, session[:selected_id]), :prompt => "Select Activity") %>
+  <%= link_to "Print Form(s)", "#", :class => "btn btn-info permission_form_print_btn",:id => 'permission_form_print_forms_btn', :disabled => "disabled"  %> &nbsp;
+  <%= link_to "Send Email Remainder to Pending", "#", :class => "btn btn-primary",:id => 'permission_form_send_email_btn' %>
+  <span style="margin-left: 90px;background-color:#d3d3d3;" class="resend_mail_success_notification hide"><span class="resend_mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
+</div>
+<div>
+  <table class="table table-bordered table-hover" id="girl_scouts_permission_form_table">
+    <tr>
+      <th class="girl_scout_check_box">
+        <%= check_box_tag :select_all_ch_box, 1,false,:class => "pf_select_all_check_box" %>
+      </th>
+      <th>Girl Scout</th>
+      <th>Attending?</th>
+      <th>Permission Form Status</th>
+    </tr>
+
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= check_box_tag :check_box_row, '', false, :id => "check_box_row" , "data-girl_scout_id" => result[:girl_scout_id],"data-status" => result[:status] %></td>
+        <td><%= result[:girl_scout] %></td>
+        <td>
+          <% if result[:attending] %>
+            Yes
+            <% @counter += 1 %>
+          <% else %>
+            No
+          <% end %>
+        </td>
+        <td>
+          <% if result[:status] == 'Sent' %>
+            Recived <%= result[:updated_at] %>
+          <% else %>
+            <%= result[:status] %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td>Number Attending</td>
+      <td><%= @counter %></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
