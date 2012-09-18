@@ -3,6 +3,7 @@ Iforms::Application.routes.draw do
   namespace :consumer do
     resources :girl_scouts do
       collection do
+        get 'consumer_view_pdf'
         post 'send_permission_form_to_troop_leader'
         post 'girl_scouts_permission_form'
         get 'view_girl_scout_permission_form'
