@@ -209,12 +209,6 @@ $(function () {
     else {
       $('.pf_select_all_check_box').attr('checked', false)
     }
-    if (checked_checkbox_count > 0) {
-      $('.permission_form_print_btn').attr('disabled', false);
-    }
-    else {
-      $('.permission_form_print_btn').attr('disabled', "disabled");
-    }
   }
 
   $('select#girls_scout_permission_form').change(function () {
@@ -225,23 +219,12 @@ $(function () {
     }
   });
 
-//  $('#permission_form_send_email_btn').click(function () {
-//    if ($(this).attr('disabled') == "disabled") {
-//      return false;
-//    }
-//    console.log('');
-//    var checked_vals = $($('#girl_scouts_permission_form_table').attr('data-status') == 'Pending').map(function () {
-//      return $(this).attr('data-girl_scout_id');
-//    }).get();
-//    console.log(checked_vals);
-//    var activity_id = $('select#girls_scout_permission_form').val();
-//    $(this).attr('disabled', "disabled");
-//    $(this).text('Sending Email...');
-//
-//    if (checked_vals.length != 0) {
-//      $.post("/girl_scouts_troop_leaders/resend_permission_form", {activity_id:activity_id,checked_vals:checked_vals.join()});
-//    }
-//    return false;
-//  });
+  $('#permission_form_send_email_btn').click(function () {
+    activity_id = $('select#girls_scout_permission_form').val();
+    $(this).attr('disabled', "disabled");
+    $(this).text('Sending Email...');
+    $.post("/girl_scouts_troop_leaders/resend_permission_form", {activity_id:activity_id});
+    return false;
+  });
 
 });
