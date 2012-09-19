@@ -37,17 +37,17 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def activities
     if params[:id] == 'new'
-      session[:selected_id] = params[:id]
+      session[:selected_activity_id] = params[:id]
       @girls_activity = GirlScoutsActivity.new()
       @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
       if @recent_activity
         @girls_activity = @recent_activity.dup
       end
     elsif params[:id].present?
-      session[:selected_id] = params[:id]
+      session[:selected_activity_id] = params[:id]
       @girls_activity = GirlScoutsActivity.find(params[:id])
-    elsif session[:selected_id].present? && session[:selected_id] != 'new'
-      @girls_activity = GirlScoutsActivity.find(session[:selected_id])
+    elsif session[:selected_activity_id].present? && session[:selected_activity_id] != 'new'
+      @girls_activity = GirlScoutsActivity.find(session[:selected_activity_id])
     else
       @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
     end
@@ -130,7 +130,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     permissionforms.each do|pf|
       GirlScoutsActivityPermissionForm.delete(pf.id)
     end
-    session[:selected_id] = ''
+    session[:selected_activity_id] = ''
   end
 
   def show_activity
@@ -203,9 +203,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def permission_forms
     if params[:id].present?
       @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
-      session[:selected_id] = params[:id]
+      session[:selected_activity_id] = params[:id]
     else
-      @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_id])
+      @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_activity_id])
     end
     @results = []
     @counter = 0
