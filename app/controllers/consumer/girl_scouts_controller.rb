@@ -115,6 +115,7 @@ class Consumer::GirlScoutsController < ConsumerController
       "PhysicianPhoneLocalNumber" => @girl_scouts_permission_form.gapf_physician_phone_2 + '-' + @girl_scouts_permission_form.gapf_physician_phone_3,
       "MyInsuranceCarrier" => @girl_scouts_permission_form.gapf_my_insurance_carrier,
       "MyInsuranceCarrierPolicyNumber" => @girl_scouts_permission_form.gapf_policy,
+      "SpecialNeedsMedicationsComments" => @girl_scouts_permission_form.gapf_special_needs
     })
     #raise @pdftk.fields(form_pdf_path).to_yaml
   end
