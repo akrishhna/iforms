@@ -146,7 +146,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     activity_name = @activity.activity_name.gsub(' ', '-')
     activity_name = "Activity-#{@activity.id}" if !activity_name.present?
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    activity_permission_form_pdf_generater(@activity, permission_form_path)
+   # activity_permission_form_pdf_generater(@activity, permission_form_path)
     send_file permission_form_path,
               :filename => "#{activity_name}.pdf",
               :disposition => "inline",
