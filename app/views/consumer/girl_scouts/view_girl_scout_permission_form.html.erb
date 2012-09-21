@@ -19,10 +19,10 @@
         </div>
         <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
           <%= f.hidden_field :id %>
-          <p> My daughter <%= f.text_field :gapf_girl_scouts_first_name, :class => "input-mini" %>
-            <%= f.text_field :gapf_girl_scouts_last_name, :class => "input-mini" %> ,has my permission
+          <p> My daughter <%= f.text_field :gapf_girl_scouts_first_name,:placeholder => @girl_scout.first_name , :class => "input-mini" %>
+            <%= f.text_field :gapf_girl_scouts_last_name,:placeholder => @girl_scout.last_name , :class => "input-mini" %> ,has my permission
             to go to and participate in the <strong><%= @activity.activity_name %></strong>.I understand the cost will be
-            <strong>$<%= @activity.activity_cost_dollars %>.<%= @activity.activity_cost_cents %></strong>.
+            <strong><%= number_to_currency(@activity.activity_cost_dollars.to_s + '.' + @activity.activity_cost_cents.to_s)%></strong>.
           </p>
           <p>IN CASE OF AN EMERGENCY, PLEASE CONTACT:</p>
 
