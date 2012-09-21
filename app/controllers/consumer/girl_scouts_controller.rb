@@ -23,10 +23,16 @@ class Consumer::GirlScoutsController < ConsumerController
 
   def view_girl_scout_permission_form
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
-    @girl_scouts_permission_form.status = 'In Progress'
-    @girl_scouts_permission_form.save()
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
+    if !@girl_scouts_permission_form.gapf_emergency_contact_1_first_name.present? || !@girl_scouts_permission_form.gapf_emergency_contact_1_last_name.present?
+      @recent_permission_form = current_user.girl_scouts_activity_permission_forms.order("updated_at").last
+      @girl_scouts_permission_form = @recent_permission_form.dup if @recent_permission_form
+      @girl_scouts_permission_form.id = params[:id]
+    end
+    @girl_scouts_permission_form.status = 'In Progress'
+
+    @girl_scouts_permission_form.save()
   end
 
   def girl_scouts_permission_form
@@ -46,8 +52,8 @@ class Consumer::GirlScoutsController < ConsumerController
       @girl_scouts_permission_form.attending = true
       if @girl_scouts_permission_form.save()
         Notifier.send_permission_form_to_tl_notification(@activity, @girl_scout).deliver
-        activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form'
-        activity_name = "Activity-#{@activity.id}" + 'permission-form' if !activity_name.present?
+        activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-' + (@girl_scout.first_name ? @girl_scout.first_name : @girl_scout.id)
+        activity_name = "Activity-#{@activity.id}" + 'permission-form-of-' + (@girl_scout.first_name ? @girl_scout.first_name : @girl_scout.id) if !activity_name.present?
         permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
         activity_parent_permission_form_pdf_generater(@activity, permission_form_path)
       end
@@ -101,9 +107,9 @@ class Consumer::GirlScoutsController < ConsumerController
       "TroopNumber" => @activity.troop_number,
       "PAL" => @activity.troop_pal,
       "DaughterName" => @girl_scouts_permission_form.gapf_girl_scouts_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_girl_scouts_last_name.to_s,
-      "EmergencyContact1Name" => @girl_scouts_permission_form.gapf_emergency_contact_1_first_name+ ' ' + @girl_scouts_permission_form.gapf_emergency_contact_1_last_name,
-      "EmergencyContact2Name" => @girl_scouts_permission_form.gapf_emergency_contact_2_first_name+ ' ' + @girl_scouts_permission_form.gapf_emergency_contact_2_last_name,
-      "EmergencyContact3Name" => @girl_scouts_permission_form.gapf_emergency_contact_3_first_name+ ' ' + @girl_scouts_permission_form.gapf_emergency_contact_3_last_name,
+      "EmergencyContact1Name" => @girl_scouts_permission_form.gapf_emergency_contact_1_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_1_last_name.to_s,
+      "EmergencyContact2Name" => @girl_scouts_permission_form.gapf_emergency_contact_2_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_2_last_name.to_s,
+      "EmergencyContact3Name" => @girl_scouts_permission_form.gapf_emergency_contact_3_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_3_last_name.to_s ,
       "EmergencyContact1PhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_1_phone_1_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_1_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_1_3.to_s,
       "EmergencyContact2PhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_2_phone_1_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_2_phone_1_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_2_phone_1_3.to_s,
       "EmergencyContact3PhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_3_phone_1_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_3_phone_1_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_3_phone_1_3.to_s,
@@ -112,22 +118,24 @@ class Consumer::GirlScoutsController < ConsumerController
       "EmergencyContact3AlternatePhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_3_phone_2_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_3_phone_2_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_3_phone_2_3.to_s,
       "PhysicianName" => @girl_scouts_permission_form.gapf_physician_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_physician_last_name.to_s,
       "PhysicianPhoneAreaCode" => @girl_scouts_permission_form.gapf_physician_phone_1,
-      "PhysicianPhoneLocalNumber" => @girl_scouts_permission_form.gapf_physician_phone_2 + '-' + @girl_scouts_permission_form.gapf_physician_phone_3,
+      "PhysicianPhoneLocalNumber" => @girl_scouts_permission_form.gapf_physician_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_physician_phone_3.to_s,
       "MyInsuranceCarrier" => @girl_scouts_permission_form.gapf_my_insurance_carrier,
       "MyInsuranceCarrierPolicyNumber" => @girl_scouts_permission_form.gapf_policy,
       "SpecialNeedsMedicationsComments" => @girl_scouts_permission_form.gapf_special_needs
     })
-    #raise @pdftk.fields(form_pdf_path).to_yaml
+   # raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
   def consumer_view_pdf
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
-    activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form'
-    activity_name = "Activity-#{@activity.id}" + 'permission-form' if !activity_name.present?
-    permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
+    @girl_scout = @girl_scouts_permission_form.girls_scout
+    activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-' + (@girl_scout.first_name ? @girl_scout.first_name : @girl_scout.id)
+    alternate_activity_name = @activity.activity_name.gsub(' ', '-')
+    activity_name = "Activity-#{@activity.id}" + 'permission-form-f-' + (@girl_scout.first_name ? @girl_scout.first_name : @girl_scout.id) if !activity_name.present?
+    permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf" # ? "#{PDFFILES_PATH}#{alternate_activity_name}.pdf": ""
     send_file permission_form_path,
-              :filename => "#{activity_name}.pdf",
+              :filename => "#{activity_name}.pdf",# ? "#{alternate_activity_name}.pdf":"",
               :disposition => "inline",
               :type => "application/pdf"
   end
