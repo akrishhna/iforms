@@ -13,11 +13,11 @@
     </tr>
     <tr>
       <td><strong>Date Begin</strong></td>
-      <td><%= @activity.activity_date_begin.strftime("%m/%d/%Y") %></td>
+      <td><%= @activity.activity_date_begin.strftime("%m/%d/%Y") if @activity.activity_date_begin.present? %></td>
     </tr>
     <tr>
       <td><strong>Date End</strong></td>
-      <td><%= @activity.activity_date_end.strftime("%m/%d/%Y") %></td>
+      <td><%= @activity.activity_date_end.strftime("%m/%d/%Y") if @activity.activity_date_end.present?%></td>
     </tr>
     <tr>
       <td><strong>Signed Permission Form Due</strong></td>
