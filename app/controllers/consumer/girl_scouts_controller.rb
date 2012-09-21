@@ -31,8 +31,8 @@ class Consumer::GirlScoutsController < ConsumerController
       @girl_scouts_permission_form.id = params[:id]
     end
     @girl_scouts_permission_form.status = 'In Progress'
-
     @girl_scouts_permission_form.save()
+   # raise @girl_scouts_permission_form.to_yaml
   end
 
   def girl_scouts_permission_form
@@ -109,7 +109,7 @@ class Consumer::GirlScoutsController < ConsumerController
       "DaughterName" => @girl_scouts_permission_form.gapf_girl_scouts_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_girl_scouts_last_name.to_s,
       "EmergencyContact1Name" => @girl_scouts_permission_form.gapf_emergency_contact_1_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_1_last_name.to_s,
       "EmergencyContact2Name" => @girl_scouts_permission_form.gapf_emergency_contact_2_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_2_last_name.to_s,
-      "EmergencyContact3Name" => @girl_scouts_permission_form.gapf_emergency_contact_3_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_3_last_name.to_s ,
+      "EmergencyContact3Name" => @girl_scouts_permission_form.gapf_emergency_contact_3_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_3_last_name.to_s,
       "EmergencyContact1PhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_1_phone_1_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_1_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_1_3.to_s,
       "EmergencyContact2PhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_2_phone_1_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_2_phone_1_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_2_phone_1_3.to_s,
       "EmergencyContact3PhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_3_phone_1_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_3_phone_1_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_3_phone_1_3.to_s,
@@ -123,7 +123,7 @@ class Consumer::GirlScoutsController < ConsumerController
       "MyInsuranceCarrierPolicyNumber" => @girl_scouts_permission_form.gapf_policy,
       "SpecialNeedsMedicationsComments" => @girl_scouts_permission_form.gapf_special_needs
     })
-   # raise @pdftk.fields(form_pdf_path).to_yaml
+    # raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
   def consumer_view_pdf
@@ -133,11 +133,20 @@ class Consumer::GirlScoutsController < ConsumerController
     activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-' + (@girl_scout.first_name ? @girl_scout.first_name : @girl_scout.id)
     alternate_activity_name = @activity.activity_name.gsub(' ', '-')
     activity_name = "Activity-#{@activity.id}" + 'permission-form-f-' + (@girl_scout.first_name ? @girl_scout.first_name : @girl_scout.id) if !activity_name.present?
-    permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf" # ? "#{PDFFILES_PATH}#{alternate_activity_name}.pdf": ""
-    send_file permission_form_path,
-              :filename => "#{activity_name}.pdf",# ? "#{alternate_activity_name}.pdf":"",
-              :disposition => "inline",
-              :type => "application/pdf"
-  end
+    if @girl_scouts_permission_form.status == 'Pending' || @girl_scouts_permission_form.status == 'In Progress'
+      permission_form_path = "#{PDFFILES_PATH}#{alternate_activity_name}.pdf"
+      send_file permission_form_path,
+                :filename => "#{alternate_activity_name}.pdf",
+                :disposition => "inline",
+                :type => "application/pdf"
 
+    else
+      permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf" # ? "#{PDFFILES_PATH}#{alternate_activity_name}.pdf": ""
+      send_file permission_form_path,
+                :filename => "#{activity_name}.pdf", # ? "#{alternate_activity_name}.pdf":"",
+                :disposition => "inline",
+                :type => "application/pdf"
+
+    end
+  end
 end
