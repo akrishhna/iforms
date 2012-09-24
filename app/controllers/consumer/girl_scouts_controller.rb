@@ -25,14 +25,13 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
+    @girl_scouts_permission_form.status = 'In Progress'
+    @girl_scouts_permission_form.save()
     if !@girl_scouts_permission_form.gapf_emergency_contact_1_first_name.present? || !@girl_scouts_permission_form.gapf_emergency_contact_1_last_name.present?
       @recent_permission_form = current_user.girl_scouts_activity_permission_forms.order("updated_at").last
       @girl_scouts_permission_form = @recent_permission_form.dup if @recent_permission_form
       @girl_scouts_permission_form.id = params[:id]
     end
-    @girl_scouts_permission_form.status = 'In Progress'
-    @girl_scouts_permission_form.save()
-   # raise @girl_scouts_permission_form.to_yaml
   end
 
   def girl_scouts_permission_form
