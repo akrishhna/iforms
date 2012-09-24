@@ -4,7 +4,7 @@
 
 $(function(){
 
-  $('.girl_scout_permission_form input').change(function () {
+  $('.girl_scout_permission_form input, textarea').change(function () {
     $('input[name=_method]').val('post');
     var params = $('.girl_scout_permission_form').serializeArray();
     $.post('/consumer/girl_scouts/girl_scouts_permission_form', params);
