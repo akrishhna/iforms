@@ -1,5 +1,5 @@
 <p style="text-align: center;font-size:18px "><%= @activity.activity_name %></p>
-<%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;margin-left: 433px;' %>
+<%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;margin-left: 430px;' %>
 <div class="tabbable tabs-left iforms-tabs-left">
   <ul class="nav nav-tabs">
     <li class="active">
@@ -17,11 +17,10 @@
           <span class="permission_form_tl_mail_success hide" style="margin-right: 100px;background-color:#d3d3d3;">Successfully Sent!</span>
           <%= link_to "Submit to Troop Leader", "#", :class => "btn btn-primary", :id => "notification_email_to_troop_leader" %>
         </div>
-        <div>&nbsp;</div>
         <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
           <%= f.hidden_field :id %>
           <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>, has my permission
-            to go to and participate in the <strong><%= @activity.activity_name %></strong>.I understand the cost will be
+            to go to and participate in the <strong><%= @activity.activity_name %></strong>. I understand the cost will be
             <strong><%= number_to_currency(@activity.activity_cost_dollars.to_s + '.' + @activity.activity_cost_cents.to_s)%></strong>.
           </p>
           <p>IN CASE OF AN EMERGENCY, PLEASE CONTACT:</p>
