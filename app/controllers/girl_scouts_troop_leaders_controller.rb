@@ -215,7 +215,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @counter = 0
     @girls_scout_permission_forms.each do |pf|
       item = {}
-      item[:girl_scout] = pf.girls_scout.first_name + ' ' + pf.girls_scout.last_name
+      girl_scout_first_name = pf.girls_scout.first_name.present? ? pf.girls_scout.first_name : "--"
+      girl_scout_last_name = pf.girls_scout.last_name.present? ? pf.girls_scout.last_name : "--"
+      item[:girl_scout] = girl_scout_first_name + ' ' + girl_scout_last_name
       item[:attending] = pf.attending
       item[:status] = pf.status
       item[:updated_at] = pf.updated_at.strftime('%m/%d/%y')
