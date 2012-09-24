@@ -67,8 +67,8 @@ class Consumer::GirlScoutsController < ConsumerController
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       "ServiceUnit" => @activity.troop_service_unit,
-      "ProgramYearFrom" => (@activity.activity_date_begin.to_s.split("-")[0] == 10 || @activity.activity_date_begin.to_s.split("-")[0] == 11 || @activity.activity_date_begin.to_s.split("-")[0] == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1,
-      "ProgramYearTo" => (@activity.activity_date_begin.to_s.split("-")[0] == 10 || @activity.activity_date_begin.to_s.split("-")[0] == 11 || @activity.activity_date_begin.to_s.split("-")[0] == 12) ? @activity.activity_date_begin.to_s.split("-")[0].to_i + 1 : @activity.activity_date_begin.to_s.split("-")[0],
+      "ProgramYearFrom" => (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1,
+      "ProgramYearTo" => (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0].to_i + 1 : @activity.activity_date_begin.to_s.split("-")[0],
       "TroopLeaderName" => @activity.leader_first_name + " " + @activity.leader_last_name,
       "TroopLeaderEmailAddress" => @activity.leader_email,
       "TroopLeaderDayPhoneAreaCode" => @activity.leader_day_phone_1,
