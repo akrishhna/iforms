@@ -24,7 +24,7 @@
 
     <% @results.each do |result| %>
       <tr>
-        <td class = "girl_scout_check_box"><%= check_box_tag :check_box_row,'', false %></td>
+        <td class = "girl_scout_check_box"><%= check_box_tag :check_box_row,'', false, "data-id" => result[:id] %></td>
         <td><%= result[:girl_scout] %></td>
         <td>
           <% if result[:attending] %>
@@ -36,7 +36,7 @@
         </td>
         <td>
           <% if result[:status] == 'Sent' %>
-            Recived
+            Received
           <% else %>
             <%= result[:status] %>
           <% end %>

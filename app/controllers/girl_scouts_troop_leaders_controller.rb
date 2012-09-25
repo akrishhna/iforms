@@ -218,6 +218,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
       girl_scout_first_name = pf.girls_scout.first_name.present? ? pf.girls_scout.first_name : "--"
       girl_scout_last_name = pf.girls_scout.last_name.present? ? pf.girls_scout.last_name : "--"
       item[:girl_scout] = girl_scout_first_name + ' ' + girl_scout_last_name
+      item[:id] = pf.id
       item[:attending] = pf.attending
       item[:status] = pf.status
       item[:updated_at] = pf.updated_at.strftime('%m/%d/%y')
@@ -239,6 +240,10 @@ class GirlScoutsTroopLeadersController < ApplicationController
           @counter += 1
       end
     end
+  end
+
+  def pdf_merging
+
   end
 
   private

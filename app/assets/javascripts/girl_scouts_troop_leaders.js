@@ -233,4 +233,12 @@ $(function () {
     return false;
   });
 
+  $('#permission_form_print_forms_btn').click(function(){
+    var checked_vals = $('#girl_scouts_permission_form_table input[name=check_box_row]:checked').map(function () {
+      return $(this).attr('data-id');
+    }).get();
+    if (checked_vals.length != 0) {
+      $.post("/girl_scouts_troop_leaders/pdf_merging", {checked_vals:checked_vals.join()});
+    }
+  });
 });

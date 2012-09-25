@@ -42,6 +42,7 @@ Iforms::Application.routes.draw do
       post 'send_notification_email'
       post 'delete_activity'
       post 'resend_permission_form'
+      post 'pdf_merging'
     end
   end
 
