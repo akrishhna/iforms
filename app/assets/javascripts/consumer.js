@@ -30,8 +30,10 @@ $(function () {
   }
 
   /* Girl Scout Tab */
-
-
+  $('.attending_check_box').live('change', function(){
+     var id = $(this).attr('data-id');
+    $.post("/consumer/girl_scouts/girl_scout_attending_val_change",{id:id})
+  });
 
   /* end Girl Scout Tab */
 

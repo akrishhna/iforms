@@ -27,11 +27,6 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scout = @girl_scouts_permission_form.girls_scout
     @girl_scouts_permission_form.status = 'In Progress'
     @girl_scouts_permission_form.save()
-    if !@girl_scouts_permission_form.gapf_emergency_contact_1_first_name.present? || !@girl_scouts_permission_form.gapf_emergency_contact_1_last_name.present?
-      @recent_permission_form = current_user.girl_scouts_activity_permission_forms.order("updated_at").last
-      @girl_scouts_permission_form = @recent_permission_form.dup if @recent_permission_form
-      @girl_scouts_permission_form.id = params[:id]
-    end
   end
 
   def girl_scouts_permission_form
@@ -147,5 +142,11 @@ class Consumer::GirlScoutsController < ConsumerController
                 :type => "application/pdf"
 
     end
+  end
+
+  def girl_scout_attending_val_change
+    @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
+    @girl_scouts_permission_form.attending = true
+    @girl_scouts_permission_form.save
   end
 end
