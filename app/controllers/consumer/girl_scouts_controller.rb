@@ -27,6 +27,14 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scout = @girl_scouts_permission_form.girls_scout
     @girl_scouts_permission_form.status = 'In Progress'
     @girl_scouts_permission_form.save()
+    @recent_submitted_form = current_user.girl_scouts_activity_permission_forms.where('status=?', 'Sent').order('updated_at').last
+    if @recent_submitted_form
+      @girl_scouts_permission_form.attributes.each do |attr_name, attr_val|
+        unless attr_val
+          @girl_scouts_permission_form[attr_name] = @recent_submitted_form[attr_name]
+        end
+      end
+    end
   end
 
   def girl_scouts_permission_form
