@@ -209,6 +209,12 @@ $(function () {
     else {
       $('.pf_select_all_check_box').attr('checked', false)
     }
+    if (checked_checkbox_count > 0) {
+      $('#permission_form_print_forms_btn').attr('disabled', false);
+    }
+    else {
+      $('#permission_form_print_forms_btn').attr('disabled', "disabled");
+    }
   }
 
   $('select#girls_scout_permission_form').change(function () {
