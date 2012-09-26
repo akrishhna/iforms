@@ -246,16 +246,16 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @activities.each do |activity|
       @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
     end
+  end
 
-    def resend_permission_form
-      @counter = 0
-      @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?',params[:activity_id],'Pending')
-      @girl_scouts_activity_permission_forms.each do|pf|
-        @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
-        @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
-        Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
-          @counter += 1
-      end
+  def resend_permission_form
+    @counter = 0
+    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?',params[:activity_id],'Pending')
+    @girl_scouts_activity_permission_forms.each do|pf|
+      @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
+      @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
+      Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
+      @counter += 1
     end
   end
 
