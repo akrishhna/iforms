@@ -3,7 +3,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
   before_filter :set_service_provider, :girls_scouts_activities
 
   def index
-
+    @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ?", Date.today).order('activity_date_begin ').first
+    id = @girls_activity.id rescue nil
+    redirect_to activities_girl_scouts_troop_leaders_path(:id => id)
   end
 
   # Girls scout roster
@@ -36,12 +38,31 @@ class GirlScoutsTroopLeadersController < ApplicationController
   # girls scout activities
 
   def activities
+    @girls_activity = GirlScoutsActivity.new()
     if params[:id] == 'new'
       session[:selected_activity_id] = params[:id]
-      @girls_activity = GirlScoutsActivity.new()
       @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
       if @recent_activity
         @girls_activity = @recent_activity.dup
+        @girls_activity[:activity_name] = ''
+        @girls_activity[:activity_location] = ''
+        @girls_activity[:activity_date_begin] = ''
+        @girls_activity[:activity_date_end] = ''
+        @girls_activity[:activity_signed_permission_due_date] = ''
+        @girls_activity[:activity_leave_from] = ''
+        @girls_activity[:activity_leave_time_hh] = ''
+        @girls_activity[:activity_leave_time_mm] = ''
+        @girls_activity[:activity_leave_time_am_pm] = ''
+        @girls_activity[:activity_return_to] = ''
+        @girls_activity[:activity_return_time_hh] = ''
+        @girls_activity[:activity_return_time_mm] = ''
+        @girls_activity[:activity_return_time_am_pm] = ''
+        @girls_activity[:activity_cost_dollars] = ''
+        @girls_activity[:activity_cost_cents] = ''
+        @girls_activity[:girls_wear_checkbox] = ''
+        @girls_activity[:activity_girls_wear_others] = ''
+        @girls_activity[:activity_girls_bring] = ''
+        @girls_activity[:activity_equipment] = ''
       end
     elsif params[:id].present?
       session[:selected_activity_id] = params[:id]
@@ -49,7 +70,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     elsif session[:selected_activity_id].present? && session[:selected_activity_id] != 'new'
       @girls_activity = GirlScoutsActivity.find(session[:selected_activity_id])
     else
-      @girls_activity = GirlScoutsActivity.find_or_initialize_by_id("")
+
     end
 
     @activities = current_user.girl_scouts_activities.order("created_at DESC")
