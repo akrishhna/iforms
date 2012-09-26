@@ -5,7 +5,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def index
     @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ?", Date.today).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
-    redirect_to activities_girl_scouts_troop_leaders_path(:id => id)
+    redirect_to permission_forms_girl_scouts_troop_leaders_path(:id => id)
   end
 
   # Girls scout roster
