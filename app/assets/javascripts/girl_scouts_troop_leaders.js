@@ -238,7 +238,7 @@ $(function () {
       return $(this).attr('data-id');
     }).get();
     if (checked_vals.length != 0) {
-      $.post("/girl_scouts_troop_leaders/pdf_merging", {checked_vals:checked_vals.join()});
+      $.get("/girl_scouts_troop_leaders/pdf_merging", {checked_vals:checked_vals.join()});
     }
   });
 });

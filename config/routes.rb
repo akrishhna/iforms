@@ -32,6 +32,7 @@ Iforms::Application.routes.draw do
   match 'girl_scouts_troop_leaders/activity/:activity_id' => 'girl_scouts_troop_leaders#show_activity', :as => 'girl_scouts_activity'
   resources :girl_scouts_troop_leaders do
     collection do
+      get 'pdf_merging'
       get 'permission_forms'
       get 'activities'
       get 'roster'
@@ -42,7 +43,6 @@ Iforms::Application.routes.draw do
       post 'send_notification_email'
       post 'delete_activity'
       post 'resend_permission_form'
-      post 'pdf_merging'
     end
   end
 

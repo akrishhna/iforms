@@ -5,6 +5,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def index
     @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ?", Date.today).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
+    id = session[:selected_activity_id] if session[:selected_activity_id].present?
     redirect_to permission_forms_girl_scouts_troop_leaders_path(:id => id)
   end
 
@@ -84,6 +85,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @activity.user_id = current_user.id
     @activity.attributes = params[:girl_scouts_activity]
     @activity.save(:validate => false)
+    session[:selected_activity_id] = @activity.id
   end
 
   def send_notification_email
@@ -131,7 +133,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
         email = girl_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
           @user = User.find_by_email(email)
-          pf = GirlScoutsActivityPermissionForm.find_or_initialize_by_girls_scout_id_and_girl_scouts_activity_id(girl_scout.id,@activity.id)
+          pf = GirlScoutsActivityPermissionForm.find_or_initialize_by_girls_scout_id_and_girl_scouts_activity_id(girl_scout.id, @activity.id)
           pf.user_id = @user.id if @user
           pf.girls_scout_id = girl_scout.id
           pf.girl_scouts_activity_id = @activity.id
@@ -147,8 +149,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def delete_activity
     GirlScoutsActivity.delete(params[:id])
-    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ?',params[:id])
-    permissionforms.each do|pf|
+    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ?', params[:id])
+    permissionforms.each do |pf|
       GirlScoutsActivityPermissionForm.delete(pf.id)
     end
     session[:selected_activity_id] = ''
@@ -163,60 +165,11 @@ class GirlScoutsTroopLeadersController < ApplicationController
     activity_name = @activity.activity_name.gsub(' ', '-')
     activity_name = "Activity-#{@activity.id}" if !activity_name.present?
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    activity_permission_form_pdf_generater(@activity, permission_form_path)
+    GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
     send_file permission_form_path,
               :filename => "#{activity_name}.pdf",
               :disposition => "inline",
               :type => "application/pdf"
-  end
-
-  def activity_permission_form_pdf_generater(activity, permission_form_path)
-    @activity = activity
-    form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
-    @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
-    @pdftk.fill_form(form_pdf_path, permission_form_path, {
-      "ServiceUnit" => @activity.troop_service_unit,
-      "ProgramYearFrom" => @activity.activity_date_begin ? (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1 : '',
-      "ProgramYearTo" => @activity.activity_date_begin ? (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0].to_i + 1 : @activity.activity_date_begin.to_s.split("-")[0] : '',
-      "TroopLeaderName" => @activity.leader_first_name + " " + @activity.leader_last_name,
-      "TroopLeaderEmailAddress" => @activity.leader_email,
-      "TroopLeaderDayPhoneAreaCode" => @activity.leader_day_phone_1,
-      "TroopLeaderDayPhoneLocalNumber" => @activity.leader_day_phone_2.to_s + '-' + @activity.leader_day_phone_3.to_s,
-      "TroopLeaderEveningPhoneAreaCode" => @activity.leader_evening_phone_1,
-      "TroopLeaderEveningPhoneLocalNumber" => @activity.leader_evening_phone_2.to_s + '-' + @activity.leader_evening_phone_3.to_s,
-      "TroopLeaderEmergencyContactName" => @activity.emergency_first_name + ' ' + @activity.emergency_last_name,
-      "TroopLeaderMobilePhoneAreaCode" => @activity.leader_cell_phone_1,
-      "TroopLeaderMobilePhoneLocalNumber" => @activity.leader_cell_phone_2.to_s + '-' + @activity.leader_cell_phone_3.to_s,
-      "TroopLeaderEmergencyContactDayPhoneAreaCode" => @activity.emergency_day_phone_1,
-      "TroopLeaderEmergencyContactDayPhoneLocalNumber" => @activity.emergency_day_phone_2.to_s + '-' + @activity.emergency_day_phone_3.to_s,
-      "TroopLeaderEmergencyContactEveningPhoneAreaCode" => @activity.emergency_evening_phone_1,
-      "TroopLeaderEmergencyContactEveningPhoneLocalNumber" => @activity.emergency_evening_phone_2.to_s + '-' + @activity.emergency_evening_phone_3.to_s,
-      "ActivityName" => @activity.activity_name,
-      "ActivityLocation" => @activity.activity_location,
-      "ActivityDateBeginMonth" => @activity.activity_date_begin.to_s.split("-")[1],
-      "ActivityDateBeginDay" => @activity.activity_date_begin.to_s.split("-")[2],
-      "ActivityDateBeginYear" => @activity.activity_date_begin.to_s.split("-")[0],
-      "ActivityDateEndMonth" => @activity.activity_date_end.to_s.split("-")[1],
-      "ActivityDateEndDay" => @activity.activity_date_end.to_s.split("-")[2],
-      "ActivityDateEndYear" => @activity.activity_date_end.to_s.split("-")[0],
-      "WeWillLeaveFrom" => @activity.activity_leave_from,
-      "WeWillLeaveFromTime" => @activity.activity_leave_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0'),
-      "WeWillLeaveFromTimeAM" => @activity.activity_leave_time_am_pm == "AM" ? "Yes" : "Off",
-      "WeWillLeaveFromTimePM" => @activity.activity_leave_time_am_pm == "PM" ? "Yes" : "Off",
-      "WeWillReturnTo" => @activity.activity_return_to,
-      "WeWillReturnToTime" => @activity.activity_return_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_return_time_mm.to_s.rjust(2, '0'),
-      "WeWillReturnToTimeAM" => @activity.activity_return_time_am_pm == "AM" ? "Yes" : "Off",
-      "WeWillReturnToTimePM" => @activity.activity_return_time_am_pm == "PM" ? "Yes" : "Off",
-      "Cost" => @activity.activity_cost_dollars.to_s + '.' + @activity.activity_cost_cents.to_s,
-      "GirlsShouldWearOther" => @activity.activity_girls_wear_others,
-      "GirlsShouldWearUniforms" => @activity.girls_wear_checkbox ? "Yes" : "Off",
-      "GirlsShouldBring" => @activity.activity_girls_bring,
-      "EquipmentNeeded" => @activity.activity_equipment,
-      "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '',
-      "TroopNumber" => @activity.troop_number,
-      "PAL" => @activity.troop_pal
-    })
-    # raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
   # Girl Scout Permission Forms
@@ -250,8 +203,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def resend_permission_form
     @counter = 0
-    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?',params[:activity_id],'Pending')
-    @girl_scouts_activity_permission_forms.each do|pf|
+    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?', params[:activity_id], 'Pending')
+    @girl_scouts_activity_permission_forms.each do |pf|
       @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
       @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
       Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
@@ -260,7 +213,23 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def pdf_merging
-
+    files = []
+    ids = params[:checked_vals].split(',')
+    @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(ids[0])
+    @activity = @girl_scouts_permission_form.girl_scouts_activity
+    ids.each do |id|
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
+      @activity = @girl_scouts_permission_form.girl_scouts_activity
+      @girl_scout = @girl_scouts_permission_form.girls_scout
+      activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
+      permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
+      GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+      files << Rails.root.join("#{PDFFILES_PATH}#{activity_name}.pdf")
+    end
+    pdf = Pdftk.combine files
+    combined_file = File.new("#{@activity.activity_name}_all_permission_forms.pdf", 'w+b')
+    combined_file.puts pdf.read
+    combined_file.close
   end
 
   private
