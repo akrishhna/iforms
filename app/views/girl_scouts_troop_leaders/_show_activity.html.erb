@@ -13,15 +13,15 @@
     </tr>
     <tr>
       <td><strong>Date Begin</strong></td>
-      <td><%= @activity.activity_date_begin.strftime("%m/%d/%Y") if @activity.activity_date_begin.present? %></td>
+      <td><%= @activity.activity_date_begin.strftime("%m/%d/%Y") rescue '' %></td>
     </tr>
     <tr>
       <td><strong>Date End</strong></td>
-      <td><%= @activity.activity_date_end.strftime("%m/%d/%Y") if @activity.activity_date_end.present?%></td>
+      <td><%= @activity.activity_date_end.strftime("%m/%d/%Y") rescue '' %></td>
     </tr>
     <tr>
       <td><strong>Signed Permission Form Due</strong></td>
-      <td><%= @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") %></td>
+      <td><%= @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") rescue '' %></td>
     </tr>
     <tr>
       <td><strong>We Will Leave From</strong></td>

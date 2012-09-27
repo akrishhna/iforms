@@ -115,7 +115,7 @@ class Consumer::GirlScoutsController < ConsumerController
       "GirlsShouldWearUniforms" => @activity.girls_wear_checkbox ? "Yes" : "Off",
       "GirlsShouldBring" => @activity.activity_girls_bring,
       "EquipmentNeeded" => @activity.activity_equipment,
-      "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y"),
+      "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '',
       "TroopNumber" => @activity.troop_number,
       "PAL" => @activity.troop_pal,
       "DaughterName" => @girl_scouts_permission_form.gapf_girl_scouts_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_girl_scouts_last_name.to_s,
