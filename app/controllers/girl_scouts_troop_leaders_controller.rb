@@ -212,7 +212,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
       "GirlsShouldWearUniforms" => @activity.girls_wear_checkbox ? "Yes" : "Off",
       "GirlsShouldBring" => @activity.activity_girls_bring,
       "EquipmentNeeded" => @activity.activity_equipment,
-      "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y"),
+      "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '',
       "TroopNumber" => @activity.troop_number,
       "PAL" => @activity.troop_pal
     })
