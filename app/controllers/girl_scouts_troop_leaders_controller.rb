@@ -177,9 +177,11 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def permission_forms
     if params[:id].present?
       @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
+      @activity = GirlScoutsActivity.find(params[:id])
       session[:selected_activity_id] = params[:id]
     else
       @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_activity_id])
+      @activity = GirlScoutsActivity.find(session[:selected_activity_id])
     end
     @results = []
     @counter = 0
@@ -227,9 +229,18 @@ class GirlScoutsTroopLeadersController < ApplicationController
       files << Rails.root.join("#{PDFFILES_PATH}#{activity_name}.pdf")
     end
     pdf = Pdftk.combine files
-    combined_file = File.new("#{@activity.activity_name}_all_permission_forms.pdf", 'w+b')
+    combined_file = File.new("#{@activity.activity_name}_permission_forms.pdf", 'w+b')
     combined_file.puts pdf.read
     combined_file.close
+  end
+
+  def show_all_permission_forms_pdf
+   @activity = GirlScoutsActivity.find(params[:activity_id])
+    pdf_form_path = Rails.root.join('',"#{@activity.activity_name}_permission_forms.pdf")
+    send_file pdf_form_path,
+              :filename => "#{@activity.activity_name}_permission_forms.pdf",
+              :disposition => "inline",
+              :type => "application/pdf"
   end
 
   private
