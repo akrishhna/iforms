@@ -14,6 +14,7 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'ssl_requirement'
 gem 'capistrano', '2.11.2'
 gem "pdfkit"
+gem 'wicked_pdf'
 
 # Gems used only for assets and not required
 # in production environments by default.
