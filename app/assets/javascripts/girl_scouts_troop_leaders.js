@@ -234,6 +234,9 @@ $(function () {
   });
 
   $('#permission_form_print_forms_btn').click(function(){
+    if ($(this).attr('disabled') == "disabled") {
+      return false;
+    }
     var checked_vals = $('#girl_scouts_permission_form_table input[name=check_box_row]:checked').map(function () {
       return $(this).attr('data-id');
     }).get();
