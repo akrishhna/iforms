@@ -6,6 +6,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ?", Date.today).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
     id = session[:selected_activity_id] if session[:selected_activity_id].present?
+    session[:selected_activity_id] = id
     redirect_to permission_forms_girl_scouts_troop_leaders_path(:id => id)
   end
 
@@ -177,11 +178,11 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def permission_forms
     if params[:id].present?
       @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
-      @activity = GirlScoutsActivity.find(params[:id])
+      @activity = GirlScoutsActivity.find_by_id(params[:id])
       session[:selected_activity_id] = params[:id]
     else
       @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_activity_id])
-      @activity = GirlScoutsActivity.find(session[:selected_activity_id])
+      @activity = GirlScoutsActivity.find_by_id(session[:selected_activity_id])
     end
     @results = []
     @counter = 0
@@ -235,7 +236,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def show_all_permission_forms_pdf
-   @activity = GirlScoutsActivity.find(params[:activity_id])
+    @activity = GirlScoutsActivity.find(params[:activity_id])
     pdf_form_path = Rails.root.join('',"#{@activity.activity_name}_permission_forms.pdf")
     send_file pdf_form_path,
               :filename => "#{@activity.activity_name}_permission_forms.pdf",
