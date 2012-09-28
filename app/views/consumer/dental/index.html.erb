@@ -65,7 +65,7 @@
                   <% elsif j.status == "pending" && j.iform_id %>
                     <%= link_to j.formname, edit_iform_path(j.iform_id) %>
                   <% else %>
-                    <%= link_to j.formname, :controller => "iforms", :action => "new", :name => j.formname, :appointment_id => i %>
+                    <%= link_to j.formname,  new_iform_path(:name => j.formname, :appointment_id => i) %>
                   <% end %>
                 <% end %>
               </td>
