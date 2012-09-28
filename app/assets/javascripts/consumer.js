@@ -19,34 +19,23 @@ $(function () {
     $('#consumer_tab_links li a').on('shown', function (e) {
       if ($($(this).attr('href')).attr('data-is_loaded') == 'false') {
         $($(this).attr('href')).attr('data-is_loaded', 'true');
-        if ($(this).attr('href') == '#dental'){
-          $($(this).attr('href')).load('/patient/appointments');
-        }else{
-          $($(this).attr('href')).load('/consumer/' + $(this).attr('data-action'));
-        }
+        $($(this).attr('href')).load('/consumer/' + $(this).attr('data-action'));
       }
       return false;
     });
   }
 
   /* Girl Scout Tab */
-  $('.attending_check_box').live('change', function(){
-     var id = $(this).attr('data-id');
-    $.post("/consumer/girl_scouts/girl_scout_attending_val_change",{id:id})
+
+  $('.attending_check_box').live('change', function () {
+    var id = $(this).attr('data-id');
+    $.post("/consumer/girl_scouts/girl_scout_attending_val_change", {id:id})
   });
 
   /* end Girl Scout Tab */
 
-  /* Dental*/
+  /* Dental */
 
-//  $(".appointments_date_selector").datepicker({
-//    onSelect:function (dateText, inst) {
-//       window.location = '/patient/appointments' + '?appointment_date=' + dateText;
-//    }
-//  }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');
-//
-//  $('.show_all').change(function(){console.log('aa')});
-
- /* end  Dental Tab */
+  /* end  Dental Tab */
 
 });

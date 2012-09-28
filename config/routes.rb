@@ -12,7 +12,9 @@ Iforms::Application.routes.draw do
       end
     end
     resources :dental do
-      get 'index'
+      collection do
+        get 'index'
+      end
     end
   end
 
