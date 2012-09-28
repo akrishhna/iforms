@@ -218,28 +218,31 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def pdf_merging
     files = []
     ids = params[:checked_vals].split(',')
-    @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(ids[0])
-    @activity = @girl_scouts_permission_form.girl_scouts_activity
+    @activity = GirlScoutsActivity.find(params[:activity_id])
+    activity_name = @activity.activity_name.gsub(' ', '-')
+
     ids.each do |id|
       @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @activity = @girl_scouts_permission_form.girl_scouts_activity
       @girl_scout = @girl_scouts_permission_form.girls_scout
-      activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
-      permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
+      permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
+      permission_form_path = "#{PDFFILES_PATH}#{permission_form_name}.pdf"
       GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-      files << Rails.root.join("#{PDFFILES_PATH}#{activity_name}.pdf")
+      files << Rails.root.join("#{PDFFILES_PATH}#{permission_form_name}.pdf")
     end
+
     pdf = Pdftk.combine files
-    combined_file = File.new("#{@activity.activity_name}_permission_forms.pdf", 'w+b')
+    combined_file = File.new("#{PDFFILES_PATH}#{activity_name}_permission_forms.pdf", 'w+b')
     combined_file.puts pdf.read
     combined_file.close
   end
 
   def show_all_permission_forms_pdf
     @activity = GirlScoutsActivity.find(params[:activity_id])
-    pdf_form_path = Rails.root.join('',"#{@activity.activity_name}_permission_forms.pdf")
+    activity_name = @activity.activity_name.gsub(' ', '-')
+
+    pdf_form_path = Rails.root.join("#{PDFFILES_PATH}#{activity_name}_permission_forms.pdf")
     send_file pdf_form_path,
-              :filename => "#{@activity.activity_name}_permission_forms.pdf",
+              :filename => "#{activity_name}_permission_forms.pdf",
               :disposition => "inline",
               :type => "application/pdf"
   end
