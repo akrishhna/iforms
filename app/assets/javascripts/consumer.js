@@ -36,6 +36,10 @@ $(function () {
 
   /* Dental */
 
+  $(".show_all").live('change', function () {
+    window.location = '/consumer';
+  });
+
   /* end  Dental Tab */
 
 });

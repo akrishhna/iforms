@@ -5,10 +5,10 @@ class PatientsController < ApplicationController
   def index
     #@appointments = Appointment.paging(params[:page], params[:id])
     #@appointments = Appointment.where('email = ?', current_user.email).order("timereceived DESC").paging(params[:page], params[:appointment_id])
-    session["consumer_tab_index"] = 1
+    #session["consumer_tab_index"] = 1
     @appointments = Appointment.where('email = ? and date = ?', current_user.email, params['appointment_date'] ? params['appointment_date'] : Date.today.to_s).order("timesent DESC").paging(params[:page], params[:appointment_id])
     @appointments = Appointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id]) if !params['appointment_date'].present?
-    render :layout => false if request.xhr?
+    #render :layout => false if request.xhr?
   end
 
   def new
