@@ -9,6 +9,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
   def self.activity_parent_permission_form_pdf_generater(activity,girl_scouts_permission_form, permission_form_path)
     @activity = activity
     @girl_scouts_permission_form = girl_scouts_permission_form
+    @girl_scout = @girl_scouts_permission_form.girls_scout
     #@girl_scouts_permission_form = girl_scouts_permission_form
     form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
@@ -53,7 +54,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "SignedPermissionFormDueDate" => @activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '',
       "TroopNumber" => @activity.troop_number,
       "PAL" => @activity.troop_pal,
-      "DaughterName" => @girl_scouts_permission_form.gapf_girl_scouts_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_girl_scouts_last_name.to_s,
+      "DaughterName" => @girl_scout.first_name.to_s + ' ' + @girl_scout.last_name.to_s,
       "EmergencyContact1Name" => @girl_scouts_permission_form.gapf_emergency_contact_1_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_1_last_name.to_s,
       "EmergencyContact2Name" => @girl_scouts_permission_form.gapf_emergency_contact_2_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_2_last_name.to_s,
       "EmergencyContact3Name" => @girl_scouts_permission_form.gapf_emergency_contact_3_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_3_last_name.to_s,
