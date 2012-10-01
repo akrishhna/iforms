@@ -185,14 +185,16 @@ class GirlScoutsTroopLeadersController < ApplicationController
       @activity = GirlScoutsActivity.find_by_id(session[:selected_activity_id])
     end
     @results = []
-    @counter = 0
+    @yes_counter = 0
+    @no_counter = 0
+    @other_counter = 0
     @girls_scout_permission_forms.each do |pf|
       item = {}
       girl_scout_first_name = pf.girls_scout.first_name.present? ? pf.girls_scout.first_name : "--"
       girl_scout_last_name = pf.girls_scout.last_name.present? ? pf.girls_scout.last_name : "--"
       item[:girl_scout] = girl_scout_first_name + ' ' + girl_scout_last_name
       item[:id] = pf.id
-      item[:attending] = pf.attending
+      item[:girl_scout_attending] = pf.girl_scout_attending
       item[:status] = pf.status
       item[:updated_at] = pf.updated_at.strftime('%m/%d/%y')
       item[:girl_scout_id] = pf.girls_scout_id

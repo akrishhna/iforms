@@ -13,7 +13,7 @@ class Consumer::GirlScoutsController < ConsumerController
       item[:activity_date_end] = pf.girl_scouts_activity.activity_date_end
       item[:price] = pf.girl_scouts_activity.activity_cost_dollars.to_s + '.' + pf.girl_scouts_activity.activity_cost_cents.to_s
       item[:due_date] = pf.girl_scouts_activity.activity_signed_permission_due_date
-      item[:attending] = pf.attending
+      item[:girl_scout_attending] = pf.girl_scout_attending
       item[:status] = pf.status
       item[:updated_at] = pf.updated_at
       @results << item
@@ -74,11 +74,7 @@ class Consumer::GirlScoutsController < ConsumerController
 
   def girl_scout_attending_val_change
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
-    if @girl_scouts_permission_form.attending
-    @girl_scouts_permission_form.attending = false
-    else
-      @girl_scouts_permission_form.attending = true
-      end
+    @girl_scouts_permission_form.girl_scout_attending = params[:selected_val]
     @girl_scouts_permission_form.save
   end
 end

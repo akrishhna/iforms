@@ -27,9 +27,10 @@ $(function () {
 
   /* Girl Scout Tab */
 
-  $('.attending_check_box').live('change', function () {
+  $('select#girl_scout_attending').live('change', function () {
+    var selected_val = $(this).val();
     var id = $(this).attr('data-id');
-    $.post("/consumer/girl_scouts/girl_scout_attending_val_change", {id:id})
+    $.post("/consumer/girl_scouts/girl_scout_attending_val_change", {id:id,selected_val:selected_val})
   });
 
   /* end Girl Scout Tab */

@@ -27,11 +27,13 @@
         <td class="girl_scout_check_box"><%= check_box_tag :check_box_row, '', false, "data-id" => result[:id] %></td>
         <td><%= result[:girl_scout] %></td>
         <td>
-          <% if result[:attending] %>
-            Yes
-            <% @counter += 1 %>
+          <%= result[:girl_scout_attending] %>
+          <% if result[:girl_scout_attending] == 'Yes' %>
+            <% @yes_counter += 1 %>
+          <% elsif result[:girl_scout_attending] == 'No' %>
+            <% @no_counter += 1 %>
           <% else %>
-            No
+            <% @other_counter += 1 %>
           <% end %>
         </td>
         <td>
@@ -47,7 +49,9 @@
       <tr>
         <td></td>
         <td>Number Attending</td>
-        <td><%= @counter %></td>
+         <td>
+          Yes= <%= @yes_counter %>, No= <%= @no_counter %>, ?= <%= @other_counter %>
+         </td>
         <td></td>
       </tr>
     <% end %>
