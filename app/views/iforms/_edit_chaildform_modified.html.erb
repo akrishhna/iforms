@@ -1,0 +1,1753 @@
+<% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
+
+<%= form_for @iform, :html => {:id => "dd_dd", :class => 'form-horizontal edit_chaild_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
+  <% if @iform.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
+
+      <ul>
+        <% @iform.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h3 style="color:#808080">&nbsp You are filling <%= session[:formname] %> form </h3>
+
+  <div class="hidden">
+    <%= hidden_field_tag "iform_id", @iform.id %>
+  </div>
+  <div class="tabbable tabs-left iforms-tabs-left">
+  <ul class="nav nav-tabs" id="chaild_iforms_tab_links">
+    <li class="active">
+      <%= link_to "Tell Us About Your Child", '#tell_us_about_your_child', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Child Accompanied by", '#child_accompanied_by', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Parents Information", '#parents_information', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Responsible Persons Information", '#responsible_persons_information', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Orthodontic Insurance", '#orthodontic_insurance', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Dental History", '#dental_history ', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Medical History", '#medical_history ', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Habits", '#habits', "data-toggle" => "tab" %>
+    </li>
+  </ul>
+  <div class="tab-content">
+  <div class="tab-pane active" id="tell_us_about_your_child">
+    <div class="control-group">
+      <%= f.label :Self_Name_First, 'Childs First Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Name_First, :onblur => "validate_firstname();" %>
+        &nbsp<span id="firstname_errorMsg" style="color:red; margin-left:60px"></span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Name_Middle, 'Childs Middle Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Name_Middle %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Name_Last, 'Childs Last Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Name_Last, :onblur => "validate_lastname();" %>
+        &nbsp<span id="lastname_errorMsg" style="color:red; margin-left:60px"></span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Sex, 'Sex', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Sex, "f" %>Female
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Sex, "m" %>Male
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Name_Last, 'Childs Nick Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Name_Preferred %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.date_select :Self_Birthdate, :start_year => 1990, :end_year => Date.current.year, :include_blank => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Social_Security_Number, 'Social Security Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Social_Security_Number %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_School, 'School', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_School %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Grade, 'Grade', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Grade %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Hobbies, 'Hobbies/Sports', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Hobbies %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Phone_Home, 'Home Phone', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Phone_Home %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Home_Address1, 'Home Address1', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Home_Address1 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Home_Address2, 'Home Address2', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Home_Address2 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Home_City, 'City', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Home_City %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Home_State, 'State', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :Self_Home_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                        'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Zip, 'Zip', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Home_Postal_Code %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Email_Address, 'Email', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Email_Address %>
+      </div>
+    </div>
+    <div class="chaild_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "1" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="child_accompanied_by">
+    <div class="control-group">
+      <%= f.label :Accompanying_Your_Child_Today_Name_First, 'First Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Accompanying_Your_Child_Today_Name_First %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Accompanying_Your_Child_Today_Name_Last, 'Last Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Accompanying_Your_Child_Today_Name_Last %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Accompanying_Your_Child_Today_Relationship, 'Relation', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Accompanying_Your_Child_Today_Relationship %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, 'Do you have legal custody of this child?', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, "no", :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Accompanying_Your_Child_Today_Siblings_And_Ages, 'List brothers/sisters with age:', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :Accompanying_Your_Child_Today_Siblings_And_Ages, :style => 'width:60%', :rows => 3 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Referred_By, 'Whom may we Thank for referring you?', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Referred_By %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_General_Dentist_Name, 'General Dentist', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_General_Dentist_Name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Birthdate, 'Last Visit Date', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Marital_Status, 'Marital Status', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "single" %>Single
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "married" %>Married
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "divorced" %>Divorced
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "widowed" %>Widowed
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "separated" %>Separated
+        <% end %>
+      </div>
+    </div>
+    <div class="chaild_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "0" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "2" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="parents_information">
+   <h4 style = "color:#070202">Mother’s Information:</h4>
+
+  <div class="control-group">
+    <%= f.label :Mother_Stepmother_Or_Gaurdian, raw('&nbsp;'), :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "mother" %>Mother
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "stepmother" %>Stepmother
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "guardian" %>Guardian
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Mother_Stepmother_Or_Gaurdian, "none" %>None
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Name_First, 'First Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Name_Last, 'Last Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Name_Middle, 'Middle Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Name_Middle %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Birthdate, 'Birth Date', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.date_select :Mother_Birthdate, :start_year => 1950, :end_year => Date.current.year, :include_blank => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Phone_Home, 'Home Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Phone_Home %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Phone_Work, 'Work Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Phone_Work %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Phone_Work_Extension, 'Workphone Extension', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Phone_Work_Extension %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Employer_Name, 'Employer', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Employer_Name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Length_Of_Employment, 'How long at current job', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Length_Of_Employment %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Job_Title, 'Job Title', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Job_Title %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Social_Security_Number, 'Social Security Number', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Social_Security_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Drivers_License_Number, 'Drivers License Number', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Mother_Drivers_License_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Mother_Drivers_License_State, 'Drivers License State', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.select :Mother_Drivers_License_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                   'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <h4 style = "color:#070202">Father’s Information:</h4>
+
+  <div class="control-group">
+    <%= f.label :Father_Stepfather_Or_Gaurdian, '   ', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "mother" %>Father
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "stepmother" %>Stepfather
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "guardian" %>Guardian
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Father_Stepfather_Or_Gaurdian, "none" %>None
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Name_First, 'First Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Name_Last, 'Last Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Name_Middle, 'Middle Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Name_Middle %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Birthdate, 'Birth Date', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.date_select :Father_Birthdate, :start_year => 1950, :end_year => Date.current.year, :include_blank => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Phone_Home, 'Home Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Phone_Home %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Phone_Work, 'Work Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Phone_Work %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Phone_Work_Extension, 'Workphone Extension', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Phone_Work_Extension %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Employer_Name, 'Employer', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Employer_Name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Length_Of_Employment, 'How long at current job', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Length_Of_Employment %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Job_Title, 'Job Title', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Job_Title %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Social_Security_Number, 'Social Security Number', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Social_Security_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Drivers_License_Number, 'Drivers License Number', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Father_Drivers_License_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Father_Drivers_License_State, 'Drivers License State', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.select :Father_Drivers_License_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                   'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="chaild_iforms_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "1" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "3" do %>
+      Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+    <% end %>
+  </div>
+ </div>
+  <div class="tab-pane" id="responsible_persons_information">
+    <h4 style = "color:#070202">Person Responsible for Account</h4>
+
+    <div class="control-group">
+      <%= f.label :Person_Responsible_For_Account_Name_First, 'First Name', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.text_field :Person_Responsible_For_Account_Name_First %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Person_Responsible_For_Account_Name_Last, 'Last Name', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.text_field :Person_Responsible_For_Account_Name_Last %>
+      </div>
+    </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Name_Middle, 'Middle Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Name_Middle %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Phone_Work, 'Work Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Phone_Work %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Phone_Work_Extension, 'Work Phone Ext', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Phone_Work_Extension %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Phone_Home, 'Home Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Phone_Home %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Address1, 'Billing Address1', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Address1 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Address2, 'Billing Address2', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Address2 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_City, 'City', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_City %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_State, 'State', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.select :Person_Responsible_For_Account_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                           'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Postal_Code, 'Zip', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Postal_Code %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Previous_Address1, 'Previous Address1', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Previous_Address1 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Previous_Address2, 'Previous Address2', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Previous_Address2 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Previous_City, 'City', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Previous_City %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Previous_State, 'State', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.select :Person_Responsible_For_Account_Previous_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                                    'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Previous_Postal_Code, 'Zip', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Previous_Postal_Code %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Relationship, 'Relation', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Relationship %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Social_Security_Number, 'Social Security Number', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Social_Security_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Employer_Name, 'Employer', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Employer_Name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Drivers_License_State, 'Drivers License State', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.select :Person_Responsible_For_Account_Drivers_License_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                                           'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Account_Drivers_License_Number, 'Drivers License Number', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Account_Drivers_License_Number %>
+    </div>
+  </div>
+  <h4 style = "color:#070202">Who is responsible for making appointments?</h4>
+
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Making_Appointments_Name_First, 'First Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Making_Appointments_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Making_Appointments_Name_Last, 'Last Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Making_Appointments_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Making_Appointments_Name_Middle, 'Middle Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Making_Appointments_Name_Middle %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Making_Appointments_Phone_Work, 'Work Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Making_Appointments_Phone_Work %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Making_Appointments_Phone_Work_Extension, 'Work Phone Ext', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Making_Appointments_Phone_Work_Extension %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Person_Responsible_For_Making_Appointments_Phone_Home, 'Home Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Person_Responsible_For_Making_Appointments_Phone_Home %>
+    </div>
+  </div>
+  <h4 style = "color:#070202">Neighbor or Relative not living with you</h4>
+
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Name_First, 'First Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Name_Last, 'Last Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Name_Middle, 'Middle Name', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Name_Middle %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Phone, 'Phone', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Phone %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Address1, 'Address1', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Address1 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Address2, 'Address2', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Address2 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_City, 'City', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_City %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_State, 'State', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.select :Neighbor_Or_Relative_Not_Living_With_You_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                                     'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Neighbor_Or_Relative_Not_Living_With_You_Postal_Code, 'Zip', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.text_field :Neighbor_Or_Relative_Not_Living_With_You_Postal_Code %>
+    </div>
+  </div>
+  <div class="chaild_iforms_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "2" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "4" do %>
+      Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+    <% end %>
+  </div>
+  </div>
+  <div class="tab-pane" id="orthodontic_insurance">
+  <h3 style = "color:#070202">Primary Insurance</h3>
+
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Orthodontic_Coverage, 'Orthodontic coverage', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, "Yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, "No", :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Dental_Coverage, 'Dental coverage', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, "Yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, "No", :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Name, 'Insurance Company Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Address1, 'Insurance Company Address1', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Address1 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Address2, 'Insurance Company Address2', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Address2 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_City, 'City', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_City %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_State, 'State', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :Insurance_Company_Primary_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                      'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Postal_Code, 'Zip', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Postal_Code %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Phone, 'Insurance Company Phone', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Phone %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Group_Plan_Local_Policy_Number, 'Group # (Plan, Local or Policy #)', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Group_Plan_Local_Policy_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Insured_Name_First, 'Insured’s First Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Insured_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Insured_Name_Last, 'Insured’s First Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Insured_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :Insurance_Company_Primary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%#= f.text_field :Insurance_Company_Primary_Insured_Birthdate, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Insured_Relationship, 'Insured’s Relation', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Insured_Relationship %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Insured_Social_Security_Number, 'Insured’s Social Security Number', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Insured_Social_Security_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Primary_Insured_Employer_Name, 'Insured’s Employer', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Primary_Insured_Employer_Name %>
+    </div>
+  </div>
+  <h3 style = "color:#070202">Secondary Insurance</h3>
+
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Orthodontic_Coverage, 'Orthodontic coverage', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, "Yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, "No", :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Dental_Coverage, 'Dental coverage', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, "Yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, "No", :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Name, 'Insurance Company Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Address1, 'Insurance Company Address1', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Address1 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Address2, 'Insurance Company Address2', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Address2 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_City, 'City', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_City %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_State, 'State', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :Insurance_Company_Secondary_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                        'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Postal_Code, 'Zip', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Postal_Code %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Phone, 'Insurance Company Phone', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Phone %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Group_Plan_Local_Policy_Number, 'Group # (Plan, Local or Policy #) ', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Group_Plan_Local_Policy_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Insured_Name_First, 'Insured’s First Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Insured_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Insured_Name_Last, 'Insured’s Last Name', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Insured_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :Insurance_Company_Secondary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%#= f.text_field :Insurance_Company_Secondary_Insured_Birthdate, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Insured_Relationship, 'Insured’s Relation', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Insured_Relationship %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Insured_Social_Security_Number, 'Insured’s Social Security Number', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Insured_Social_Security_Number %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Insurance_Company_Secondary_Insured_Employer_Name, 'Insured’s Employer', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Insurance_Company_Secondary_Insured_Employer_Name %>
+    </div>
+  </div>
+  <div class="chaild_iforms_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "3" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "5" do %>
+      Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+    <% end %>
+  </div>
+  </div>
+  <div class="tab-pane" id="dental_history">
+  <div class="control-group">
+    <%= f.label :Dental_History_Orthodontic_Goals, 'What are the main concerns that you would like orthodontics to accomplish? ', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :Dental_History_Orthodontic_Goals, :style => 'width:60%', :rows => 3 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Previous_Orthodontic_Evaluation, 'Has your child ever been Orthodontic evaluation', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Previous_Orthodontic_Treatment, 'Has your child ever had orthodontic treatment before?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_TMJ_TMD_Issues_Previous, 'Has your child ever experienced pain / discomfort in jaw joint (TMJ / TMD)? ', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_TMJ_TMD_Issues_Current, 'Is your child now experiencing pain / discomfort in your jaw joint (TMJ / TMD)?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">                                              i
+    <%= f.label :Med_His_Current_Physical_Health, "Please describe your child's current physical health:", :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Current_Physical_Health, "good", :checked => 'checked' %>Good
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Current_Physical_Health, "fair", :checked => false %>Fair
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Current_Physical_Health, "poor", :checked => false %>Poor
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Injury_To_Face, 'Have there been any injuries to the Face?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Face, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Face, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Injury_To_Mouth, 'Have there been any injuries to the Mouth?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Mouth, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Mouth, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Injury_To_Teeth, 'Have there been any injuries to the Teeth?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Teeth, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Teeth, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Injury_To_Chin, 'Have there been any injuries to the Chin?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Chin, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Injury_To_Chin, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Brush_Teeth_Daily, 'Does your child brush his / her teeth daily?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Brush_Teeth_Daily, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Brush_Teeth_Daily, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Floss_Teeth_Daily, 'Floss his / her teeth daily?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Floss_Teeth_Daily, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Floss_Teeth_Daily, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Any_Extra_Permanent_Teeth, 'Has your child been informed of any extra permanent teeth?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Any_Missing_Teeth, 'Has your child been informed of any missing teeth?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Any_Missing_Teeth, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Any_Missing_Teeth, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Tonsils_Removed, 'Have adenoids or tonsils been removed?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Tonsils_Removed, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Dental_History_Tonsils_Removed, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Currently_Under_The_Care_Of_A_Physician, 'Are you currently under the care of a physician?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Puberty_Begun, 'Has puberty begun?', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Puberty_Begun, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Puberty_Begun, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Menstruation_Begun, 'Has menstruation begun? (Girls)', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Menstruation_Begun, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Menstruation_Begun, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Personal_Physician_Name_First, "Child's Physician's First Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Med_His_Personal_Physician_Name_First %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Personal_Physician_Name_Last, "Child's Physician's Last Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Med_His_Personal_Physician_Name_Last %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Personal_Physician_Phone, 'Phone', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Med_His_Personal_Physician_Phone %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Personal_Physician_Date_Of_Last_Visit, 'Date of last visit', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Dental_History_Play_Musical_Instruments, 'List any musical instruments played:', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :Dental_History_Play_Musical_Instruments, :style => 'width:60%', :rows => 3 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Currently_Taking_Over_The_Counter_Drugs_List, 'Please list all drugs that your child is currently taking(over the counter drugs):', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :Med_His_Currently_Taking_Over_The_Counter_Drugs_List, :style => 'width:60%', :rows => 3 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :Med_His_Currently_Taking_Presc_Drugs_List, 'Please list all drugs that your child is currently taking(prescription drugs):', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :Med_His_Currently_Taking_Presc_Drugs_List, :style => 'width:60%', :rows => 3 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Allergic_To_Drugs_List, 'Please list all drugs/things that your child is allergic to:', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :Allergic_To_Drugs_List, :style => 'width:60%', :rows => 3 %>
+    </div>
+  </div>
+  <div class="chaild_iforms_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "4" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "6" do %>
+      Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+    <% end %>
+  </div>
+  </div>
+  <div class="tab-pane" id="medical_history">
+  <h4 style = "color:#070202">Has your child ever had any of the following medical problems?</h4>
+
+  <div class="control-group">
+    <%= f.label :Med_His_Abnormal_Bleeding, 'Abnormal Bleeding', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Abnormal_Bleeding, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Abnormal_Bleeding, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_ADD, 'ADD', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_ADD, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_ADD, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_ADHD, 'ADHD', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_ADHD, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_ADHD, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Allergic_To_Any_Drugs, 'Allergies to any Drugs', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Any_Drugs, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Any_Drugs, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Allergic_To_Metals, 'Allergic to Metals ', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Metals, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Metals, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Allergic_To_Plastics, 'Allergic to Plastics', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Plastics, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Plastics, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Allergic_To_Latex, 'Allergic to Latex', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Latex, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Allergic_To_Latex, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Hospitalized_For_Any_Reason, 'Hospitalized for Any Reason', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Any_Operations, 'Any Operations', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Any_Operations, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Any_Operations, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Artificial_Bones_Joints_Valves, 'Artificial Bones / Joints / Valves', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Asthma, 'Asthma /Arthritis', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Asthma, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Asthma, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Cancer, 'Cancer / Chemotherapy', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Cancer, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Cancer, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Congenital_Heart_Defect, 'Congenital Heart Defect', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Congenital_Heart_Defect, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Congenital_Heart_Defect, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Epilepsy, 'Convulsions / Epilepsy', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Epilepsy, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Epilepsy, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Diabetes, 'Diabetes', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Diabetes, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Diabetes, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Handicaps_Or_Disabilities, 'Handicaps / Disabilities', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Hearing_Impairment, 'Hearing Impairment', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hearing_Impairment, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hearing_Impairment, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Heart_Murmur, 'Heart Murmur', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Heart_Murmur, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Heart_Murmur, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Hemophilia, 'Hemophilia', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hemophilia, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hemophilia, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Hepatitis, 'Hepatitis', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hepatitis, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Hepatitis, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_AIDS, 'AIDS', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_AIDS, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_AIDS, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_HIV_Positive, 'HIV+', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_HIV_Positive, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_HIV_Positive, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Kidney_Problems, 'Kidney Problems', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Kidney_Problems, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Kidney_Problems, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Liver_Problems, 'Liver Problems', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Liver_Problems, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Liver_Problems, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Lupus, 'Lupus', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Lupus, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Lupus, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Rheumatic_Fever, 'Rheumatic Fever', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Rheumatic_Fever, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Rheumatic_Fever, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Scarlet_Fever, 'Scarlet Fever', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Scarlet_Fever, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Scarlet_Fever, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Sickle_Cell_Disease, 'Sickle Cell Disease', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Sickle_Cell_Disease_Traits, 'Sickle Cell Disease Traits', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Tuberculosis, 'Tuberculosis (TB)', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Tuberculosis, "yes", :checked => 'checked' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :Med_His_Tuberculosis, 'no', :checked => false %>No
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Med_His_Medical_Problems, 'Please discuss any medical problems that your child has had:', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :Med_His_Medical_Problems, :style => 'width:60%', :rows => 3 %>
+    </div>
+  </div>
+  <div class="chaild_iforms_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "5" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+    <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "7" do %>
+      Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+    <% end %>
+  </div>
+  </div>
+  <div class="tab-pane" id="habits">
+    <h4 style = "color:#070202">Does/did your child have any of the following habits?</h4>
+
+    <div class="control-group">
+      <%= f.label :Habits_Clenching_Or_Grinding_Teeth, 'Clenching / Grinding Teeth', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Lip_Sucking_Or_Biting, 'Lip Sucking / Biting', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Mouth_Breather, 'Mouth Breather', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Mouth_Breather, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Mouth_Breather, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Nail_Biting, 'Nail Biting', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Nail_Biting, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Nail_Biting, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Nursing, 'Nursing Bottle', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Nursing, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Nursing, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Speech_Problems, 'Speech Problems', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Speech_Problems, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Speech_Problems, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Thumb_Or_Finger_Sucking, 'Thumb / Finger Sucking ', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Tongue_Thrust, 'Tongue Thrust', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Tongue_Thrust, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Tongue_Thrust, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Habits_Breast_Fed, 'Was your child breast fed?', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Breast_Fed, "yes", :checked => 'checked' %>Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Habits_Breast_Fed, 'no', :checked => false %>No
+        <% end %>
+      </div>
+    </div>
+    <div class="chaild_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary chaild_iforms_nav_link', :data_tab_index => "6" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= f.submit submit_tag_text , :class => 'btn btn-primary' %>
+    </div>
+  </div>
+  </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  function validate_firstname() {
+    // var x = document.getElementById('iform_Self_Name_First').value;
+    // 	var regex = /^[a-zA-z ]*$/
+    // 	if (x==null || x=="")
+    // 	{
+    // 		document.getElementById('firstname_errorMsg').innerHTML = "Firstname cant be blank";
+    // 		document.getElementById("iform_Self_Name_First").focus();
+    // 		return false;
+    //
+    // 	}
+    // 	else if (x.length<3 || x.search(regex) == -1 )
+    // 	{
+    // 		document.getElementById('firstname_errorMsg').innerHTML = "Not a valid name";
+    // 		return false;
+    // 	}
+    // 	else
+    // 	{
+    // 		document.getElementById('firstname_errorMsg').innerHTML = "";
+    // 		return true;
+    // 	}
+
+  }
+
+  function validate_lastname() {
+
+    // var x = document.getElementById ('iform_Self_Name_Last').value;
+    // 	var regex = /^[a-zA-z ]*$/
+    // 	if (x==null || x=="")
+    // 	  {
+    // 	  document.getElementById('lastname_errorMsg').innerHTML = "Lastname cant be blank";
+    // 	  return false;
+    //
+    // 	  }
+    //
+    // 	else if (x.length<3 || x.search(regex) == -1 )
+    // 	{
+    // 	document.getElementById('lastname_errorMsg').innerHTML = "Not a valid name";
+    // 	return false;
+    // 	}
+    // 	else
+    // 	{
+    // 		document.getElementById('lastname_errorMsg').innerHTML = "";
+    // 	   return true;
+    // 	}
+
+  }
+
+
+  function validate_p() {
+    if (document.getElementById('iform_Med_His_Personal_Physician_true').checked == true) {
+
+
+    }
+  }
+</script>
+
+<script type="text/javascript">
+  function unmask_str() {
+    jQuery(function ($) {
+      $("#iform_Self_Phone_Home").mask("9999999999");
+      $("#iform_Self_Phone_Mobile").mask("9999999999");
+      $("#iform_Mother_Phone_Home").mask("9999999999");
+      $("#iform_Mother_Phone_Work").mask("9999999999");
+      $("#iform_Father_Phone_Home").mask("9999999999");
+      $("#iform_Father_Phone_Work").mask("9999999999");
+      $("#iform_Person_Responsible_For_Account_Phone_Work").mask("9999999999");
+      $("#iform_Person_Responsible_For_Account_Phone_Home").mask("9999999999");
+      $("#iform_Person_Responsible_For_Making_Appointments_Phone_Work").mask("9999999999");
+      $("#iform_Person_Responsible_For_Making_Appointments_Phone_Home").mask("9999999999");
+      $("#iform_Neighbor_Or_Relative_Not_Living_With_You_Phone").mask("9999999999");
+
+      $("#iform_Insurance_Company_Primary_Phone").mask("9999999999");
+      $("#iform_Insurance_Company_Secondary_Phone").mask("9999999999");
+      $("#iform_Emergency_Contact_Phone_Home").mask("9999999999");
+      $("#iform_Emergency_Contact_Phone_Work").mask("9999999999");
+      $("#iform_Med_His_Personal_Physician_Phone").mask("9999999999");
+      $("#iform_Self_Social_Security_Number").mask("999999999");
+      $("#iform_Mother_Social_Security_Number").mask("999999999");
+      $("#iform_Father_Social_Security_Number").mask("999999999");
+      $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999999999");
+      $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999999999");
+      $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999999999");
+    });
+  }
+</script>
+<script>
+  jQuery(function ($) {
+    $("#iform_Self_Phone_Home").mask("(999) 999-9999");
+    $("#iform_Self_Phone_Mobile").mask("(999) 999-9999");
+    $("#iform_Mother_Phone_Home").mask("(999) 999-9999");
+    $("#iform_Mother_Phone_Work").mask("(999) 999-9999");
+    $("#iform_Father_Phone_Home").mask("(999) 999-9999");
+    $("#iform_Father_Phone_Work").mask("(999) 999-9999");
+    $("#iform_Person_Responsible_For_Account_Phone_Work").mask("(999) 999-9999");
+    $("#iform_Person_Responsible_For_Account_Phone_Home").mask("(999) 999-9999");
+
+    $("#iform_Person_Responsible_For_Making_Appointments_Phone_Work").mask("(999) 999-9999");
+    $("#iform_Person_Responsible_For_Making_Appointments_Phone_Home").mask("(999) 999-9999");
+    $("#iform_Neighbor_Or_Relative_Not_Living_With_You_Phone").mask("(999) 999-9999");
+
+    $("#iform_Insurance_Company_Primary_Phone").mask("(999) 999-9999");
+    $("#iform_Insurance_Company_Secondary_Phone").mask("(999) 999-9999");
+    $("#iform_Emergency_Contact_Phone_Home").mask("(999) 999-9999");
+    $("#iform_Emergency_Contact_Phone_Work").mask("(999) 999-9999");
+    $("#iform_Med_His_Personal_Physician_Phone").mask("(999) 999-9999");
+    $("#iform_Self_Social_Security_Number").mask("999-99-9999");
+    $("#iform_Mother_Social_Security_Number").mask("999-99-9999");
+    $("#iform_Father_Social_Security_Number").mask("999-99-9999");
+    $("#iform_Person_Responsible_For_Account_Social_Security_Number").mask("999-99-9999");
+    $("#iform_Insurance_Company_Primary_Insured_Social_Security_Number").mask("999-99-9999");
+    $("#iform_Insurance_Company_Secondary_Insured_Social_Security_Number").mask("999-99-9999");
+    $("#ssn").mask("999-99-9999");
+
+  });
+</script>
