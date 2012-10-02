@@ -1,4 +1,21 @@
 <%= form_for @iform, :method => :put, :html => {:id => "dd_dd", :class => 'form-horizontal edit_adult_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
+  <% if @iform.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
+
+      <ul>
+        <% @iform.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3 style = "color:#808080">&nbsp You are filling <%= session[:formname] %> form </h3>
+
+  <div class="hidden">
+    <%= hidden_field_tag "iform_id", @iform.id %>
+  </div>
   <div class="tabbable tabs-left iforms-tabs-left">
   <ul class="nav nav-tabs" id="adult_iforms_tab_links">
     <li class="active">
@@ -244,7 +261,7 @@
       <%= f.text_field :Self_Other_Family_Members %>
     </div>
   </div>
-  <h4>Where & when are best times to reach you?</h4>
+  <h4 style = "color:#070202">Where & when are best times to reach you?</h4>
 
   <div class="control-group">
     <%= f.label :Self_Best_Contact_Method, 'Where:', :class => 'control-label' %>
@@ -314,7 +331,7 @@
         <%= f.text_field :Spouse_Employer_Name %>
       </div>
     </div>
-    <h4>Person Responsible for Account</h4>
+    <h4 style = "color:#070202">Person Responsible for Account</h4>
 
     <div class="control-group">
       <%= f.label :Person_Responsible_For_Account_Name_First, 'First Name', :class => 'control-label' %>
@@ -425,7 +442,7 @@
     </div>
   </div>
   <div class="tab-pane" id="orthodontic_insurance">
-  <h3>Primary Insurance</h3>
+  <h3 style = "color:#070202">Primary Insurance</h3>
 
   <div class="control-group">
     <%= f.label :Insurance_Company_Primary_Orthodontic_Coverage, 'Orthodontic coverage', :class => 'control-label' %>
@@ -535,7 +552,7 @@
       <%= f.text_field :Insurance_Company_Primary_Insured_Employer_Name %>
     </div>
   </div>
-  <h3>Secondary Insurance</h3>
+  <h3 style = "color:#070202">Secondary Insurance</h3>
 
   <div class="control-group">
     <%= f.label :Insurance_Company_Secondary_Orthodontic_Coverage, 'Orthodontic coverage', :class => 'control-label' %>
@@ -645,7 +662,7 @@
       <%= f.text_field :Insurance_Company_Secondary_Insured_Employer_Name %>
     </div>
   </div>
-  <h4>In the event of an emergency, is there someone<br>
+  <h4 style = "color:#070202">In the event of an emergency, is there someone<br>
     who lives near you that we should contact?</h4><br>
 
   <div class="control-group">
@@ -791,7 +808,7 @@
       <%= f.text_area :Med_His_Currently_Taking_Over_The_Counter_Drugs_List, :style =>'width:60%', :rows => 3 %>
     </div>
   </div>
-  <h4>For Women: </h4>
+  <h4 style = "color:#070202">For Women: </h4>
 
   <div class="control-group">
     <%= f.label :Med_His_Currently_Taking_Birth_Control_Pills, 'Are you taking birth control pills?', :class => 'control-label' %>
@@ -832,7 +849,7 @@
       <% end %>
     </div>
   </div>
-  <h4>Have you ever had any of the following
+  <h4 style = "color:#070202">Have you ever had any of the following
     diseases or medical problems?</h4>
 
   <div class="control-group">
@@ -1281,7 +1298,7 @@
       <%= f.text_area :Med_His_Serious_Medical_Issues, :style =>'width:60%', :rows => 3 %>
     </div>
   </div>
-  <h4>Are you allergic to any of the following?</h4>
+  <h4 style = "color:#070202">Are you allergic to any of the following?</h4>
 
   <div class="control-group">
     <%= f.label :Allergic_To_Aspirin, 'Aspirin ', :class => 'control-label' %>
