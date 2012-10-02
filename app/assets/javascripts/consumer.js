@@ -27,8 +27,8 @@ $(function () {
 
   /* Girl Scout Tab */
 
-  $('select#girl_scout_attending').live('change', function () {
-    var selected_val = $(this).val();
+  $('.girl_scout_attending').live('change', function () {
+    var selected_val = $(this).attr('data-value');
     var id = $(this).attr('data-id');
     $.post("/consumer/girl_scouts/girl_scout_attending_val_change", {id:id,selected_val:selected_val})
   });
