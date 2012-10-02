@@ -22,6 +22,7 @@ class Consumer::GirlScoutsController < ConsumerController
   end
 
   def view_girl_scout_permission_form
+    session["consumer_tab_index"] = 4
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout

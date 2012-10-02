@@ -53,6 +53,7 @@ class Notifier < ActionMailer::Base
   def send_parent_email_notification(activity, girl_scout)
     @activity = activity
     @girl_scout = girl_scout
+    @permission_form = GirlScoutsActivityPermissionForm.find_by_girl_scouts_activity_id_and_girls_scout_id(@activity.id,@girl_scout.id)
     @user = User.find_by_email(@girl_scout.email)
     @registration_url = user_registration_url
     mail(:to => @girl_scout.email, :subject => "Activity Permission Form")
