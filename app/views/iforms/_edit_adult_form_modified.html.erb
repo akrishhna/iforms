@@ -1,3 +1,5 @@
+<% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
+
 <%= form_for @iform, :method => :put, :html => {:id => "dd_dd", :class => 'form-horizontal edit_adult_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
@@ -38,7 +40,7 @@
   <div class="tab-content">
   <div class="tab-pane active" id="about_you">
   <div class="control-group">
-    <%= f.label :Self_Name_Honorific, '  ', :class => 'control-label' %>
+    <%= f.label :Self_Name_Honorific,raw('&nbsp;'), :class => 'control-label' %>
     <div class="controls">
       <%= f.select :Self_Name_Honorific, ['MS', 'MR', 'MRS', 'DR'],{:include_blank => true},{:style => "width:222px;"} %>
     </div>
@@ -80,10 +82,10 @@
     <%= f.label :Self_Sex, 'Sex', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Self_Sex, "female", :onclick => "validate_female();" %>Female
+        <%= f.radio_button :Self_Sex, "f", :onclick => "validate_female();" %>Female
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Self_Sex, "male", :onclick => "validate_male();" %>Male
+        <%= f.radio_button :Self_Sex, "m", :onclick => "validate_male();" %>Male
       <% end %>
     </div>
   </div>
@@ -1622,7 +1624,7 @@
       <% end %>
     </div>
     <div class="actions">
-      <%= f.submit 'Submit to Doctor', :class => 'btn btn-primary' %>
+      <%= f.submit submit_tag_text , :class => 'btn btn-primary' %>
     </div>
   </div>
   </div>
