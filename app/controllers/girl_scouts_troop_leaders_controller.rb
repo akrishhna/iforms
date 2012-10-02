@@ -162,15 +162,23 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def activity_permission_form
-    @activity = current_user.girl_scouts_activities.find(params[:activity_id])
-    activity_name = @activity.activity_name.gsub(' ', '-')
-    activity_name = "Activity-#{@activity.id}" if !activity_name.present?
-    permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
-    send_file permission_form_path,
-              :filename => "#{activity_name}.pdf",
-              :disposition => "inline",
-              :type => "application/pdf"
+    if params[:activity_id] == 'new'
+      send_file "#{PDFFILES_PATH}Parent_Permission_iForms.pdf",
+                :filename => "Parent_Permission_iForms.pdf",
+                :disposition => "inline",
+                :type => "application/pdf"
+    elsif params[:activity_id].present?
+      @activity = current_user.girl_scouts_activities.find(params[:activity_id])
+      activity_name = @activity.activity_name.gsub(' ', '-')
+      activity_name = "Activity-#{@activity.id}" if !activity_name.present?
+      permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
+      GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
+      send_file permission_form_path,
+                :filename => "#{activity_name}.pdf",
+                :disposition => "inline",
+                :type => "application/pdf"
+    else
+    end
   end
 
   # Girl Scout Permission Forms
