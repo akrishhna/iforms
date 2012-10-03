@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.2'
 gem 'rake', '0.9.2'
 
+gem 'will_paginate-bootstrap'
 gem 'mysql2', '0.3.11'
 gem 'devise', '2.0.4'
 gem 'dynamic_form'

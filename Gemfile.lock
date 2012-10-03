@@ -146,6 +146,8 @@ GEM
       rack (>= 1.0)
     wicked_pdf (0.7.9)
     will_paginate (3.0.3)
+    will_paginate-bootstrap (0.2.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -174,3 +176,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   wicked_pdf
   will_paginate (= 3.0.3)
+  will_paginate-bootstrap
