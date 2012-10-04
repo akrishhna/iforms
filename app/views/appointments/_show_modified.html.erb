@@ -1,16 +1,11 @@
-
-<%= render 'show_modified' %>
-
-<!--
-original show code
 <% if current_user.role == 'patient' %>
   <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", @appointment.id, current_user.id) %>
   <div class="breadcrumbs_app_show">
-    <%= link_to 'Back', patients_path %>
+    <%= link_to 'Back', '/consumer' %>
   </div>
   <div class="formslist_show">
-    <table border="0" width="80%" class="mytable">
-      <tr>
+    <table class="table table-bordered" style="width:50%;text-align: center;margin-left: 15%">
+      <tr BGCOLOR="grey">
         <th>Form</th>
         <th>Submitted</th>
         <th></th>
@@ -47,25 +42,40 @@ original show code
             <% @iform = Iform.find(i.iform_id) %>
           <% end %>
           <% if i.status == "submitted" %>
-            <td><%= link_to i.formname, get_iform_iforms_path(:iform_id => @iform.id) %></td>
+            <td><%= i.formname %></td>
             <td><%= @formsubmittedtime %></td>
-            <td></td>
+            <td>
+              <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
+              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+            </td>
           <% elsif i.status == "pending" %>
-            <td>
-              <% if i.iform_id.nil? %>
-                <%= link_to i.formname, :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %>
-              <% else %>
-                <li><%= link_to i.formname, edit_iform_path(i.iform_id) %></li>
-              <% end %>
-            </td>
+            <td><%= i.formname %></td>
             <td>Pending</td>
-            <td>
-              <% if i.iform_id %>
-                <%= link_to "Edit", :controller => "iforms", :action => "new", :name => i.formname, :appointment_id => @appointment.id %>
-              <% else %>
-
-              <% end %>
-            </td>
+            <% if i.iform_id.nil? %>
+              <td>
+                <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+              </td>
+            <% else %>
+              <td>
+                <%= link_to "Edit", edit_iform_path(i.iform_id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+              </td>
+            <% end %>
+          <% else %>
+            <td><%= i.formname %></td>
+            <td>New</td>
+            <% if i.iform_id.nil? %>
+              <td>
+                <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+              </td>
+            <% else %>
+              <td>
+                <%= link_to "Edit", edit_iform_path(i.iform_id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+              </td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>
@@ -82,10 +92,10 @@ original show code
     <%= link_to 'Back', doctors_path %>
   </div>
   <div class="formslist_show">
-    <table border="0" width="80%" class="mytable">
-      <tr>
+    <table class="table table-bordered" style="width:50%;text-align: center;margin-left: 15%">
+      <tr BGCOLOR="grey">
         <th>Form</th>
-        <th>Received</th>
+        <th>Submitted</th>
         <th></th>
       </tr>
       <% @appformjoins.each do |i| %>
@@ -120,11 +130,13 @@ original show code
             <% @iform = Iform.find(i.iform_id) %>
           <% end %>
           <% if i.status == "submitted" %>
-            <td><%= link_to i.formname, get_iform_iforms_path(:iform_id => @iform.id) %></td>
+            <td> <%= i.formname %> </td>
             <td><%= @formsubmittedtime %></td>
+            <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %></td>
           <% else %>
             <td><%= i.formname %></td>
             <td>Pending</td>
+            <td></td>
           <% end %>
         </tr>
       <% end %>
@@ -132,5 +144,3 @@ original show code
     <br>
   </div>
 <% end %>
-
--->
