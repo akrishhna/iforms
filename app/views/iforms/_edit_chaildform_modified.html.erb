@@ -1,3 +1,6 @@
+<div style="margin: 0 auto;width:80px;">
+  <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
+</div>
 <% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
 <%= form_for @iform, :html => {:id => "dd_dd", :class => 'form-horizontal edit_chaild_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
@@ -12,7 +15,7 @@
       </ul>
     </div>
   <% end %>
-  <h3 style="color:#808080">&nbsp You are filling <%= session[:formname] %> form </h3>
+  <!-- <h3 style="color:#808080">&nbsp You are filling <%#= session[:formname] %> form </h3> -->
 
   <div class="hidden">
     <%= hidden_field_tag "iform_id", @iform.id %>
@@ -185,12 +188,10 @@
       <%= f.label :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, 'Do you have legal custody of this child?', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, true, :checked => (f.object.Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child.nil? ? true : (f.object.Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child ? true : false)) %>
-          Yes
+          <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, false, :checked => (f.object.Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child.nil? ? false : (f.object.Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child ? false : true)) %>
-          No
+          <%= f.radio_button :Accompanying_Your_Child_Today_Has_Legal_Custody_Of_Child, false %>No
         <% end %>
       </div>
     </div>
@@ -696,12 +697,10 @@
     <%= f.label :Insurance_Company_Primary_Orthodontic_Coverage, 'Orthodontic coverage', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, true, :checked => (f.object.Insurance_Company_Primary_Orthodontic_Coverage.nil? ? true : (f.object.Insurance_Company_Primary_Orthodontic_Coverage ? true : false)) %>
-        Yes
+        <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, false, :checked => (f.object.Insurance_Company_Primary_Orthodontic_Coverage.nil? ? false : (f.object.Insurance_Company_Primary_Orthodontic_Coverage ? false : true)) %>
-        No
+        <%= f.radio_button :Insurance_Company_Primary_Orthodontic_Coverage, false %>No
       <% end %>
     </div>
   </div>
@@ -709,12 +708,10 @@
     <%= f.label :Insurance_Company_Primary_Dental_Coverage, 'Dental coverage', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, true, :checked => (f.object.Insurance_Company_Primary_Dental_Coverage.nil? ? true : (f.object.Insurance_Company_Primary_Dental_Coverage ? true : false)) %>
-        Yes
+        <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, false, :checked => (f.object.Insurance_Company_Primary_Dental_Coverage.nil? ? false : (f.object.Insurance_Company_Primary_Dental_Coverage ? false : true)) %>
-        No
+        <%= f.radio_button :Insurance_Company_Primary_Dental_Coverage, false %>No
       <% end %>
     </div>
   </div>
@@ -810,12 +807,10 @@
     <%= f.label :Insurance_Company_Secondary_Orthodontic_Coverage, 'Orthodontic coverage', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, true, :checked => (f.object.Insurance_Company_Secondary_Orthodontic_Coverage.nil? ? true : (f.object.Insurance_Company_Secondary_Orthodontic_Coverage ? true : false)) %>
-        Yes
+        <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, false, :checked => (f.object.Insurance_Company_Secondary_Orthodontic_Coverage.nil? ? false : (f.object.Insurance_Company_Secondary_Orthodontic_Coverage ? false : true)) %>
-        No
+        <%= f.radio_button :Insurance_Company_Secondary_Orthodontic_Coverage, false %>No
       <% end %>
     </div>
   </div>
@@ -823,12 +818,10 @@
     <%= f.label :Insurance_Company_Secondary_Dental_Coverage, 'Dental coverage', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, true, :checked => (f.object.Insurance_Company_Secondary_Dental_Coverage.nil? ? true : (f.object.Insurance_Company_Secondary_Dental_Coverage ? true : false)) %>
-        Yes
+        <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, false, :checked => (f.object.Insurance_Company_Secondary_Dental_Coverage.nil? ? false : (f.object.Insurance_Company_Secondary_Dental_Coverage ? false : true)) %>
-        No
+        <%= f.radio_button :Insurance_Company_Secondary_Dental_Coverage, false %>No
       <% end %>
     </div>
   </div>
@@ -938,12 +931,10 @@
     <%= f.label :Dental_History_Previous_Orthodontic_Evaluation, 'Has your child ever been Orthodontic evaluation', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, true, :checked => (f.object.Dental_History_Previous_Orthodontic_Evaluation.nil? ? true : (f.object.Dental_History_Previous_Orthodontic_Evaluation ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, false, :checked => (f.object.Dental_History_Previous_Orthodontic_Evaluation.nil? ? false : (f.object.Dental_History_Previous_Orthodontic_Evaluation ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Evaluation, false %>No
       <% end %>
     </div>
   </div>
@@ -951,12 +942,10 @@
     <%= f.label :Dental_History_Previous_Orthodontic_Treatment, 'Has your child ever had orthodontic treatment before?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, true, :checked => (f.object.Dental_History_Previous_Orthodontic_Treatment.nil? ? true : (f.object.Dental_History_Previous_Orthodontic_Treatment ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, false, :checked => (f.object.Dental_History_Previous_Orthodontic_Treatment.nil? ? false : (f.object.Dental_History_Previous_Orthodontic_Treatment ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Previous_Orthodontic_Treatment, false %>No
       <% end %>
     </div>
   </div>
@@ -964,12 +953,10 @@
     <%= f.label :Dental_History_TMJ_TMD_Issues_Previous, 'Has your child ever experienced pain / discomfort in jaw joint (TMJ / TMD)? ', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, true, :checked => (f.object.Dental_History_TMJ_TMD_Issues_Previous.nil? ? true : (f.object.Dental_History_TMJ_TMD_Issues_Previous ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, false, :checked => (f.object.Dental_History_TMJ_TMD_Issues_Previous.nil? ? false : (f.object.Dental_History_TMJ_TMD_Issues_Previous ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Previous, false %>No
       <% end %>
     </div>
   </div>
@@ -977,12 +964,10 @@
     <%= f.label :Dental_History_TMJ_TMD_Issues_Current, 'Is your child now experiencing pain / discomfort in your jaw joint (TMJ / TMD)?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, true, :checked => (f.object.Dental_History_TMJ_TMD_Issues_Current.nil? ? true : (f.object.Dental_History_TMJ_TMD_Issues_Current ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, false, :checked => (f.object.Dental_History_TMJ_TMD_Issues_Current.nil? ? false : (f.object.Dental_History_TMJ_TMD_Issues_Current ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_TMJ_TMD_Issues_Current, false %>No
       <% end %>
     </div>
   </div>
@@ -990,16 +975,13 @@
     <%= f.label :Med_His_Current_Physical_Health, "Please describe your child's current physical health:", :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Current_Physical_Health, 'good', :checked => (f.object.Med_His_Current_Physical_Health.nil? ? true : (f.object.Med_His_Current_Physical_Health == 'good' ? true : false)) %>
-        Good
+        <%= f.radio_button :Med_His_Current_Physical_Health, 'good' %>Good
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Current_Physical_Health, 'fair', :checked => (f.object.Med_His_Current_Physical_Health.nil? ? false : (f.object.Med_His_Current_Physical_Health == 'fair' ? true : false)) %>
-        Fair
+        <%= f.radio_button :Med_His_Current_Physical_Health, 'fair' %>Fair
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Current_Physical_Health, 'poor', :checked => (f.object.Med_His_Current_Physical_Health.nil? ? false : (f.object.Med_His_Current_Physical_Health == 'poor' ? true : false)) %>
-        Poor
+        <%= f.radio_button :Med_His_Current_Physical_Health, 'poor' %>Poor
       <% end %>
     </div>
   </div>
@@ -1007,11 +989,11 @@
     <%= f.label :Dental_History_Injury_To_Face, 'Have there been any injuries to the Face?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Face, 'Yes', :checked => (f.object.Dental_History_Injury_To_Face.nil? ? true : (f.object.Dental_History_Injury_To_Face == 'Yes' ? true : false)) %>
+        <%= f.radio_button :Dental_History_Injury_To_Face, true %>
         Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Face, 'No', :checked => (f.object.Dental_History_Injury_To_Face.nil? ? false : (f.object.Dental_History_Injury_To_Face == 'No' ? true : false)) %>
+        <%= f.radio_button :Dental_History_Injury_To_Face, false %>
         No
       <% end %>
     </div>
@@ -1020,12 +1002,10 @@
     <%= f.label :Dental_History_Injury_To_Mouth, 'Have there been any injuries to the Mouth?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Mouth, 'Yes', :checked => (f.object.Dental_History_Injury_To_Mouth.nil? ? true : (f.object.Dental_History_Injury_To_Mouth == 'Yes' ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Injury_To_Mouth, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Mouth, 'No', :checked => (f.object.Dental_History_Injury_To_Mouth.nil? ? false : (f.object.Dental_History_Injury_To_Mouth == 'No' ? true : false)) %>
-        No
+        <%= f.radio_button :Dental_History_Injury_To_Mouth, false %>No
       <% end %>
     </div>
   </div>
@@ -1033,12 +1013,10 @@
     <%= f.label :Dental_History_Injury_To_Teeth, 'Have there been any injuries to the Teeth?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Teeth, 'Yes', :checked => (f.object.Dental_History_Injury_To_Teeth.nil? ? true : (f.object.Dental_History_Injury_To_Teeth == 'Yes' ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Injury_To_Teeth, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Teeth, 'No', :checked => (f.object.Dental_History_Injury_To_Teeth.nil? ? false : (f.object.Dental_History_Injury_To_Teeth == 'No' ? true : false)) %>
-        No
+        <%= f.radio_button :Dental_History_Injury_To_Teeth, false %>No
       <% end %>
     </div>
   </div>
@@ -1046,12 +1024,10 @@
     <%= f.label :Dental_History_Injury_To_Chin, 'Have there been any injuries to the Chin?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Chin, 'Yes', :checked => (f.object.Dental_History_Injury_To_Chin.nil? ? true : (f.object.Dental_History_Injury_To_Chin == 'Yes' ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Injury_To_Chin, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Injury_To_Chin, 'No', :checked => (f.object.Dental_History_Injury_To_Chin.nil? ? false : (f.object.Dental_History_Injury_To_Chin == 'No' ? true : false)) %>
-        No
+        <%= f.radio_button :Dental_History_Injury_To_Chin, false %>No
       <% end %>
     </div>
   </div>
@@ -1059,12 +1035,10 @@
     <%= f.label :Dental_History_Brush_Teeth_Daily, 'Does your child brush his / her teeth daily?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Brush_Teeth_Daily, true, :checked => (f.object.Dental_History_Brush_Teeth_Daily.nil? ? true : (f.object.Dental_History_Brush_Teeth_Daily ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Brush_Teeth_Daily, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Brush_Teeth_Daily, false, :checked => (f.object.Dental_History_Brush_Teeth_Daily.nil? ? false : (f.object.Dental_History_Brush_Teeth_Daily ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Brush_Teeth_Daily, false %>No
       <% end %>
     </div>
   </div>
@@ -1072,12 +1046,10 @@
     <%= f.label :Dental_History_Floss_Teeth_Daily, 'Floss his / her teeth daily?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Floss_Teeth_Daily, true, :checked => (f.object.Dental_History_Floss_Teeth_Daily.nil? ? true : (f.object.Dental_History_Floss_Teeth_Daily ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Floss_Teeth_Daily, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Floss_Teeth_Daily, false, :checked => (f.object.Dental_History_Floss_Teeth_Daily.nil? ? false : (f.object.Dental_History_Floss_Teeth_Daily ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Floss_Teeth_Daily, false %>No
       <% end %>
     </div>
   </div>
@@ -1085,12 +1057,10 @@
     <%= f.label :Dental_History_Any_Extra_Permanent_Teeth, 'Has your child been informed of any extra permanent teeth?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, true, :checked => (f.object.Dental_History_Any_Extra_Permanent_Teeth.nil? ? true : (f.object.Dental_History_Any_Extra_Permanent_Teeth ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, false, :checked => (f.object.Dental_History_Any_Extra_Permanent_Teeth.nil? ? false : (f.object.Dental_History_Any_Extra_Permanent_Teeth ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Any_Extra_Permanent_Teeth, false %>No
       <% end %>
     </div>
   </div>
@@ -1098,12 +1068,10 @@
     <%= f.label :Dental_History_Any_Missing_Teeth, 'Has your child been informed of any missing teeth?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Any_Missing_Teeth, true, :checked => (f.object.Dental_History_Any_Missing_Teeth.nil? ? true : (f.object.Dental_History_Any_Missing_Teeth ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Any_Missing_Teeth, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Any_Missing_Teeth, false, :checked => (f.object.Dental_History_Any_Missing_Teeth.nil? ? false : (f.object.Dental_History_Any_Missing_Teeth ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Any_Missing_Teeth, false %>No
       <% end %>
     </div>
   </div>
@@ -1111,12 +1079,10 @@
     <%= f.label :Dental_History_Tonsils_Removed, 'Have adenoids or tonsils been removed?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Tonsils_Removed, true, :checked => (f.object.Dental_History_Tonsils_Removed.nil? ? true : (f.object.Dental_History_Tonsils_Removed ? true : false)) %>
-        Yes
+        <%= f.radio_button :Dental_History_Tonsils_Removed, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Dental_History_Tonsils_Removed, false, :checked => (f.object.Dental_History_Tonsils_Removed.nil? ? false : (f.object.Dental_History_Tonsils_Removed ? false : true)) %>
-        No
+        <%= f.radio_button :Dental_History_Tonsils_Removed, false %>No
       <% end %>
     </div>
   </div>
@@ -1124,12 +1090,10 @@
     <%= f.label :Med_His_Currently_Under_The_Care_Of_A_Physician, 'Are you currently under the care of a physician?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, true, :checked => (f.object.Med_His_Currently_Under_The_Care_Of_A_Physician.nil? ? true : (f.object.Med_His_Currently_Under_The_Care_Of_A_Physician ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, false, :checked => (f.object.Med_His_Currently_Under_The_Care_Of_A_Physician.nil? ? false : (f.object.Med_His_Currently_Under_The_Care_Of_A_Physician ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Currently_Under_The_Care_Of_A_Physician, false %>No
       <% end %>
     </div>
   </div>
@@ -1137,12 +1101,10 @@
     <%= f.label :Med_His_Puberty_Begun, 'Has puberty begun?', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Puberty_Begun, true, :checked => (f.object.Med_His_Puberty_Begun.nil? ? true : (f.object.Med_His_Puberty_Begun ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Puberty_Begun, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Puberty_Begun, false, :checked => (f.object.Med_His_Puberty_Begun.nil? ? false : (f.object.Med_His_Puberty_Begun ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Puberty_Begun, false %>No
       <% end %>
     </div>
   </div>
@@ -1150,12 +1112,10 @@
     <%= f.label :Med_His_Menstruation_Begun, 'Has menstruation begun? (Girls)', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Menstruation_Begun, true, :checked => (f.object.Med_His_Menstruation_Begun.nil? ? true : (f.object.Med_His_Menstruation_Begun ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Menstruation_Begun, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Menstruation_Begun, false, :checked => (f.object.Med_His_Menstruation_Begun.nil? ? false : (f.object.Med_His_Menstruation_Begun ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Menstruation_Begun, false %>No
       <% end %>
     </div>
   </div>
@@ -1224,12 +1184,10 @@
     <%= f.label :Med_His_Abnormal_Bleeding, 'Abnormal Bleeding', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Abnormal_Bleeding, true, :checked => (f.object.Med_His_Abnormal_Bleeding.nil? ? true : (f.object.Med_His_Abnormal_Bleeding ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Abnormal_Bleeding, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Abnormal_Bleeding, false, :checked => (f.object.Med_His_Abnormal_Bleeding.nil? ? false : (f.object.Med_His_Abnormal_Bleeding ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Abnormal_Bleeding, false %>No
       <% end %>
     </div>
   </div>
@@ -1237,12 +1195,10 @@
     <%= f.label :Med_His_ADD, 'ADD', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_ADD, true, :checked => (f.object.Med_His_ADD.nil? ? true : (f.object.Med_His_ADD ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_ADD, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_ADD, false, :checked => (f.object.Med_His_ADD.nil? ? false : (f.object.Med_His_ADD ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_ADD, false %>No
       <% end %>
     </div>
   </div>
@@ -1250,12 +1206,10 @@
     <%= f.label :Med_His_ADHD, 'ADHD', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_ADHD, true, :checked => (f.object.Med_His_ADHD.nil? ? true : (f.object.Med_His_ADHD ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_ADHD, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_ADHD, false, :checked => (f.object.Med_His_ADHD.nil? ? false : (f.object.Med_His_ADHD ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_ADHD, false %>No
       <% end %>
     </div>
   </div>
@@ -1263,12 +1217,10 @@
     <%= f.label :Allergic_To_Any_Drugs, 'Allergies to any Drugs', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Any_Drugs, true, :checked => (f.object.Allergic_To_Any_Drugs.nil? ? true : (f.object.Allergic_To_Any_Drugs ? true : false)) %>
-        Yes
+        <%= f.radio_button :Allergic_To_Any_Drugs, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Any_Drugs, false, :checked => (f.object.Allergic_To_Any_Drugs.nil? ? false : (f.object.Allergic_To_Any_Drugs ? false : true)) %>
-        No
+        <%= f.radio_button :Allergic_To_Any_Drugs, false %>No
       <% end %>
     </div>
   </div>
@@ -1276,12 +1228,10 @@
     <%= f.label :Allergic_To_Metals, 'Allergic to Metals ', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Metals, true, :checked => (f.object.Allergic_To_Metals.nil? ? true : (f.object.Allergic_To_Metals ? true : false)) %>
-        Yes
+        <%= f.radio_button :Allergic_To_Metals, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Metals, false, :checked => (f.object.Allergic_To_Metals.nil? ? false : (f.object.Allergic_To_Metals ? false : true)) %>
-        No
+        <%= f.radio_button :Allergic_To_Metals, false %>No
       <% end %>
     </div>
   </div>
@@ -1289,12 +1239,10 @@
     <%= f.label :Allergic_To_Plastics, 'Allergic to Plastics', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Plastics, true, :checked => (f.object.Allergic_To_Plastics.nil? ? true : (f.object.Allergic_To_Plastics ? true : false)) %>
-        Yes
+        <%= f.radio_button :Allergic_To_Plastics, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Plastics, false, :checked => (f.object.Allergic_To_Plastics.nil? ? false : (f.object.Allergic_To_Plastics ? false : true)) %>
-        No
+        <%= f.radio_button :Allergic_To_Plastics, false %>No
       <% end %>
     </div>
   </div>
@@ -1302,12 +1250,10 @@
     <%= f.label :Allergic_To_Latex, 'Allergic to Latex', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Latex, true, :checked => (f.object.Allergic_To_Latex.nil? ? true : (f.object.Allergic_To_Latex ? true : false)) %>
-        Yes
+        <%= f.radio_button :Allergic_To_Latex, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Allergic_To_Latex, false, :checked => (f.object.Allergic_To_Latex.nil? ? false : (f.object.Allergic_To_Latex ? false : true)) %>
-        No
+        <%= f.radio_button :Allergic_To_Latex, false %>No
       <% end %>
     </div>
   </div>
@@ -1315,12 +1261,10 @@
     <%= f.label :Med_His_Hospitalized_For_Any_Reason, 'Hospitalized for Any Reason', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, true, :checked => (f.object.Med_His_Hospitalized_For_Any_Reason.nil? ? true : (f.object.Med_His_Hospitalized_For_Any_Reason ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, false, :checked => (f.object.Med_His_Hospitalized_For_Any_Reason.nil? ? false : (f.object.Med_His_Hospitalized_For_Any_Reason ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Hospitalized_For_Any_Reason, false %>No
       <% end %>
     </div>
   </div>
@@ -1328,12 +1272,10 @@
     <%= f.label :Med_His_Any_Operations, 'Any Operations', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Any_Operations, true, :checked => (f.object.Med_His_Any_Operations.nil? ? true : (f.object.Med_His_Any_Operations ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Any_Operations, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Any_Operations, false, :checked => (f.object.Med_His_Any_Operations.nil? ? false : (f.object.Med_His_Any_Operations ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Any_Operations, false %>No
       <% end %>
     </div>
   </div>
@@ -1341,12 +1283,10 @@
     <%= f.label :Med_His_Artificial_Bones_Joints_Valves, 'Artificial Bones / Joints / Valves', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, true, :checked => (f.object.Med_His_Artificial_Bones_Joints_Valves.nil? ? true : (f.object.Med_His_Artificial_Bones_Joints_Valves ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, false, :checked => (f.object.Med_His_Artificial_Bones_Joints_Valves.nil? ? false : (f.object.Med_His_Artificial_Bones_Joints_Valves ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Artificial_Bones_Joints_Valves, false %>No
       <% end %>
     </div>
   </div>
@@ -1354,12 +1294,10 @@
     <%= f.label :Med_His_Asthma, 'Asthma /Arthritis', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Asthma, true, :checked => (f.object.Med_His_Asthma.nil? ? true : (f.object.Med_His_Asthma ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Asthma, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Asthma, false, :checked => (f.object.Med_His_Asthma.nil? ? false : (f.object.Med_His_Asthma ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Asthma, false %>No
       <% end %>
     </div>
   </div>
@@ -1367,12 +1305,10 @@
     <%= f.label :Med_His_Cancer, 'Cancer / Chemotherapy', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Cancer, true, :checked => (f.object.Med_His_Cancer.nil? ? true : (f.object.Med_His_Cancer ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Cancer, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Cancer, false, :checked => (f.object.Med_His_Cancer.nil? ? false : (f.object.Med_His_Cancer ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Cancer, false %>No
       <% end %>
     </div>
   </div>
@@ -1380,12 +1316,10 @@
     <%= f.label :Med_His_Congenital_Heart_Defect, 'Congenital Heart Defect', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Congenital_Heart_Defect, true, :checked => (f.object.Med_His_Congenital_Heart_Defect.nil? ? true : (f.object.Med_His_Congenital_Heart_Defect ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Congenital_Heart_Defect, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Congenital_Heart_Defect, false, :checked => (f.object.Med_His_Congenital_Heart_Defect.nil? ? false : (f.object.Med_His_Congenital_Heart_Defect ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Congenital_Heart_Defect, false %>No
       <% end %>
     </div>
   </div>
@@ -1393,12 +1327,10 @@
     <%= f.label :Med_His_Epilepsy, 'Convulsions / Epilepsy', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Epilepsy, true, :checked => (f.object.Med_His_Epilepsy.nil? ? true : (f.object.Med_His_Epilepsy ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Epilepsy, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Epilepsy, false, :checked => (f.object.Med_His_Epilepsy.nil? ? false : (f.object.Med_His_Epilepsy ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Epilepsy, false %>No
       <% end %>
     </div>
   </div>
@@ -1406,12 +1338,10 @@
     <%= f.label :Med_His_Diabetes, 'Diabetes', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Diabetes, true, :checked => (f.object.Med_His_Diabetes.nil? ? true : (f.object.Med_His_Diabetes ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Diabetes, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Diabetes, false, :checked => (f.object.Med_His_Diabetes.nil? ? false : (f.object.Med_His_Diabetes ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Diabetes, false %>No
       <% end %>
     </div>
   </div>
@@ -1419,12 +1349,10 @@
     <%= f.label :Med_His_Handicaps_Or_Disabilities, 'Handicaps / Disabilities', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, true, :checked => (f.object.Med_His_Handicaps_Or_Disabilities.nil? ? true : (f.object.Med_His_Handicaps_Or_Disabilities ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, false, :checked => (f.object.Med_His_Handicaps_Or_Disabilities.nil? ? false : (f.object.Med_His_Handicaps_Or_Disabilities ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Handicaps_Or_Disabilities, false %>No
       <% end %>
     </div>
   </div>
@@ -1432,12 +1360,10 @@
     <%= f.label :Med_His_Hearing_Impairment, 'Hearing Impairment', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hearing_Impairment, true, :checked => (f.object.Med_His_Hearing_Impairment.nil? ? true : (f.object.Med_His_Hearing_Impairment ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Hearing_Impairment, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hearing_Impairment, false, :checked => (f.object.Med_His_Hearing_Impairment.nil? ? false : (f.object.Med_His_Hearing_Impairment ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Hearing_Impairment, false %>No
       <% end %>
     </div>
   </div>
@@ -1445,12 +1371,10 @@
     <%= f.label :Med_His_Heart_Murmur, 'Heart Murmur', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Heart_Murmur, true, :checked => (f.object.Med_His_Heart_Murmur.nil? ? true : (f.object.Med_His_Heart_Murmur ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Heart_Murmur, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Heart_Murmur, false, :checked => (f.object.Med_His_Heart_Murmur.nil? ? false : (f.object.Med_His_Heart_Murmur ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Heart_Murmur, false %>No
       <% end %>
     </div>
   </div>
@@ -1458,12 +1382,10 @@
     <%= f.label :Med_His_Hemophilia, 'Hemophilia', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hemophilia, true, :checked => (f.object.Med_His_Hemophilia.nil? ? true : (f.object.Med_His_Hemophilia ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Hemophilia, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hemophilia, false, :checked => (f.object.Med_His_Hemophilia.nil? ? false : (f.object.Med_His_Hemophilia ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Hemophilia, false %>No
       <% end %>
     </div>
   </div>
@@ -1471,12 +1393,10 @@
     <%= f.label :Med_His_Hepatitis, 'Hepatitis', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hepatitis, true, :checked => (f.object.Med_His_Hepatitis.nil? ? true : (f.object.Med_His_Hepatitis ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Hepatitis, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Hepatitis, false, :checked => (f.object.Med_His_Hepatitis.nil? ? false : (f.object.Med_His_Hepatitis ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Hepatitis, false %>No
       <% end %>
     </div>
   </div>
@@ -1484,12 +1404,10 @@
     <%= f.label :Med_His_AIDS, 'AIDS', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_AIDS, true, :checked => (f.object.Med_His_AIDS.nil? ? true : (f.object.Med_His_AIDS ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_AIDS, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_AIDS, false, :checked => (f.object.Med_His_AIDS.nil? ? false : (f.object.Med_His_AIDS ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_AIDS, false %>No
       <% end %>
     </div>
   </div>
@@ -1497,12 +1415,10 @@
     <%= f.label :Med_His_HIV_Positive, 'HIV+', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_HIV_Positive, true, :checked => (f.object.Med_His_HIV_Positive.nil? ? true : (f.object.Med_His_HIV_Positive ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_HIV_Positive, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_HIV_Positive, false, :checked => (f.object.Med_His_HIV_Positive.nil? ? false : (f.object.Med_His_HIV_Positive ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_HIV_Positive, false %>No
       <% end %>
     </div>
   </div>
@@ -1510,12 +1426,10 @@
     <%= f.label :Med_His_Kidney_Problems, 'Kidney Problems', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Kidney_Problems, true, :checked => (f.object.Med_His_Kidney_Problems.nil? ? true : (f.object.Med_His_Kidney_Problems ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Kidney_Problems, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Kidney_Problems, false, :checked => (f.object.Med_His_Kidney_Problems.nil? ? false : (f.object.Med_His_Kidney_Problems ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Kidney_Problems, false %>No
       <% end %>
     </div>
   </div>
@@ -1523,12 +1437,10 @@
     <%= f.label :Med_His_Liver_Problems, 'Liver Problems', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Liver_Problems, true, :checked => (f.object.Med_His_Liver_Problems.nil? ? true : (f.object.Med_His_Liver_Problems ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Liver_Problems, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Liver_Problems, false, :checked => (f.object.Med_His_Liver_Problems.nil? ? false : (f.object.Med_His_Liver_Problems ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Liver_Problems, false %>No
       <% end %>
     </div>
   </div>
@@ -1536,12 +1448,10 @@
     <%= f.label :Med_His_Lupus, 'Lupus', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Lupus, true, :checked => (f.object.Med_His_Lupus.nil? ? true : (f.object.Med_His_Lupus ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Lupus, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Lupus, false, :checked => (f.object.Med_His_Lupus.nil? ? false : (f.object.Med_His_Lupus ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Lupus, false %>No
       <% end %>
     </div>
   </div>
@@ -1549,12 +1459,10 @@
     <%= f.label :Med_His_Rheumatic_Fever, 'Rheumatic Fever', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Rheumatic_Fever, true, :checked => (f.object.Med_His_Rheumatic_Fever.nil? ? true : (f.object.Med_His_Rheumatic_Fever ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Rheumatic_Fever, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Rheumatic_Fever, false, :checked => (f.object.Med_His_Rheumatic_Fever.nil? ? false : (f.object.Med_His_Rheumatic_Fever ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Rheumatic_Fever, false %>No
       <% end %>
     </div>
   </div>
@@ -1562,12 +1470,10 @@
     <%= f.label :Med_His_Scarlet_Fever, 'Scarlet Fever', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Scarlet_Fever, true, :checked => (f.object.Med_His_Scarlet_Fever.nil? ? true : (f.object.Med_His_Scarlet_Fever ? true : false))
-        %>Yes
+        <%= f.radio_button :Med_His_Scarlet_Fever, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Scarlet_Fever, false, :checked => (f.object.Med_His_Scarlet_Fever.nil? ? false : (f.object.Med_His_Scarlet_Fever ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Scarlet_Fever, false %>No
       <% end %>
     </div>
   </div>
@@ -1575,12 +1481,10 @@
     <%= f.label :Med_His_Sickle_Cell_Disease, 'Sickle Cell Disease', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Sickle_Cell_Disease, true, :checked => (f.object.Med_His_Sickle_Cell_Disease.nil? ? true : (f.object.Med_His_Sickle_Cell_Disease ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Sickle_Cell_Disease, false, :checked => (f.object.Med_His_Sickle_Cell_Disease.nil? ? false : (f.object.Med_His_Sickle_Cell_Disease ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease, false %>No
       <% end %>
     </div>
   </div>
@@ -1588,12 +1492,10 @@
     <%= f.label :Med_His_Sickle_Cell_Disease_Traits, 'Sickle Cell Disease Traits', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, true, :checked => (f.object.Med_His_Sickle_Cell_Disease_Traits.nil? ? true : (f.object.Med_His_Sickle_Cell_Disease_Traits ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, false, :checked => (f.object.Med_His_Sickle_Cell_Disease_Traits.nil? ? false : (f.object.Med_His_Sickle_Cell_Disease_Traits ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease_Traits, false %>No
       <% end %>
     </div>
   </div>
@@ -1601,12 +1503,10 @@
     <%= f.label :Med_His_Tuberculosis, 'Tuberculosis (TB)', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Tuberculosis, true, :checked => (f.object.Med_His_Tuberculosis.nil? ? true : (f.object.Med_His_Tuberculosis ? true : false)) %>
-        Yes
+        <%= f.radio_button :Med_His_Tuberculosis, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :Med_His_Tuberculosis, false, :checked => (f.object.Med_His_Tuberculosis.nil? ? false : (f.object.Med_His_Tuberculosis ? false : true)) %>
-        No
+        <%= f.radio_button :Med_His_Tuberculosis, false %>No
       <% end %>
     </div>
   </div>
@@ -1632,12 +1532,10 @@
       <%= f.label :Habits_Clenching_Or_Grinding_Teeth, 'Clenching / Grinding Teeth', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, true, :checked => (f.object.Habits_Clenching_Or_Grinding_Teeth.nil? ? true : (f.object.Habits_Clenching_Or_Grinding_Teeth ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, false, :checked => (f.object.Habits_Clenching_Or_Grinding_Teeth.nil? ? false : (f.object.Habits_Clenching_Or_Grinding_Teeth ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Clenching_Or_Grinding_Teeth, false %>No
         <% end %>
       </div>
     </div>
@@ -1645,12 +1543,10 @@
       <%= f.label :Habits_Lip_Sucking_Or_Biting, 'Lip Sucking / Biting', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, true, :checked => (f.object.Habits_Lip_Sucking_Or_Biting.nil? ? true : (f.object.Habits_Lip_Sucking_Or_Biting ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, false, :checked => (f.object.Habits_Lip_Sucking_Or_Biting.nil? ? false : (f.object.Habits_Lip_Sucking_Or_Biting ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Lip_Sucking_Or_Biting, false %>No
         <% end %>
       </div>
     </div>
@@ -1658,12 +1554,10 @@
       <%= f.label :Habits_Mouth_Breather, 'Mouth Breather', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Mouth_Breather, true, :checked => (f.object.Habits_Mouth_Breather.nil? ? true : (f.object.Habits_Mouth_Breather ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Mouth_Breather, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Mouth_Breather, false, :checked => (f.object.Habits_Mouth_Breather.nil? ? false : (f.object.Habits_Mouth_Breather ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Mouth_Breather, false %>No
         <% end %>
       </div>
     </div>
@@ -1671,12 +1565,10 @@
       <%= f.label :Habits_Nail_Biting, 'Nail Biting', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Nail_Biting, true, :checked => (f.object.Habits_Nail_Biting.nil? ? true : (f.object.Habits_Nail_Biting ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Nail_Biting, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Nail_Biting, false, :checked => (f.object.Habits_Nail_Biting.nil? ? false : (f.object.Habits_Nail_Biting ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Nail_Biting, false %>No
         <% end %>
       </div>
     </div>
@@ -1684,12 +1576,10 @@
       <%= f.label :Habits_Nursing, 'Nursing Bottle', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Nursing, true, :checked => (f.object.Habits_Nursing.nil? ? true : (f.object.Habits_Nursing ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Nursing, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Nursing, false, :checked => (f.object.Habits_Nursing.nil? ? false : (f.object.Habits_Nursing ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Nursing, false %>No
         <% end %>
       </div>
     </div>
@@ -1697,12 +1587,10 @@
       <%= f.label :Habits_Speech_Problems, 'Speech Problems', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Speech_Problems, true, :checked => (f.object.Habits_Speech_Problems.nil? ? true : (f.object.Habits_Speech_Problems ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Speech_Problems, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Speech_Problems, false, :checked => (f.object.Habits_Speech_Problems.nil? ? false : (f.object.Habits_Speech_Problems ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Speech_Problems, false %>No
         <% end %>
       </div>
     </div>
@@ -1710,12 +1598,10 @@
       <%= f.label :Habits_Thumb_Or_Finger_Sucking, 'Thumb / Finger Sucking ', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, true, :checked => (f.object.Habits_Thumb_Or_Finger_Sucking.nil? ? true : (f.object.Habits_Thumb_Or_Finger_Sucking ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, false, :checked => (f.object.Habits_Thumb_Or_Finger_Sucking.nil? ? false : (f.object.Habits_Thumb_Or_Finger_Sucking ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Thumb_Or_Finger_Sucking, false %>No
         <% end %>
       </div>
     </div>
@@ -1723,12 +1609,10 @@
       <%= f.label :Habits_Tongue_Thrust, 'Tongue Thrust', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Tongue_Thrust, true, :checked => (f.object.Habits_Tongue_Thrust.nil? ? true : (f.object.Habits_Tongue_Thrust ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Tongue_Thrust, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Tongue_Thrust, false, :checked => (f.object.Habits_Tongue_Thrust.nil? ? false : (f.object.Habits_Tongue_Thrust ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Tongue_Thrust, false %>No
         <% end %>
       </div>
     </div>
@@ -1736,12 +1620,10 @@
       <%= f.label :Habits_Breast_Fed, 'Was your child breast fed?', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Breast_Fed, true, :checked => (f.object.Habits_Breast_Fed.nil? ? true : (f.object.Habits_Breast_Fed ? true : false)) %>
-          Yes
+          <%= f.radio_button :Habits_Breast_Fed, true %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :Habits_Breast_Fed, false, :checked => (f.object.Habits_Breast_Fed.nil? ? false : (f.object.Habits_Breast_Fed ? false : true)) %>
-          No
+          <%= f.radio_button :Habits_Breast_Fed, false %>No
         <% end %>
       </div>
     </div>
