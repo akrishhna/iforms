@@ -62,7 +62,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    return deviseroles_path
+    # return deviseroles_path
+    stored_location_for(resource) || deviseroles_path
   end
 
   def user_service_provider_list
@@ -85,6 +86,8 @@ class ApplicationController < ActionController::Base
       @homepage_url = '/girl_scouts_troop_leaders'
     elsif session[:user_service_provider] == 0
       @homepage_url = '/consumer'
+    else
+      @homepage_url = root_url
     end
   end
 end
