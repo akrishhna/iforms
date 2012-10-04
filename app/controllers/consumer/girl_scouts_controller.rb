@@ -11,7 +11,7 @@ class Consumer::GirlScoutsController < ConsumerController
       item[:activity_name] = pf.girl_scouts_activity.activity_name
       item[:activity_date_begin] = pf.girl_scouts_activity.activity_date_begin
       item[:activity_date_end] = pf.girl_scouts_activity.activity_date_end
-      item[:price] = pf.girl_scouts_activity.activity_cost_dollars.to_s + '.' + pf.girl_scouts_activity.activity_cost_cents.to_s
+      item[:price] = pf.girl_scouts_activity.activity_cost_dollars.to_s + '.' + (pf.girl_scouts_activity.activity_cost_cents <= 9 ? ('0' + pf.girl_scouts_activity.activity_cost_cents.to_s) : pf.girl_scouts_activity.activity_cost_cents.to_s )
       item[:due_date] = pf.girl_scouts_activity.activity_signed_permission_due_date
       item[:girl_scout_attending] = pf.girl_scout_attending
       item[:status] = pf.status
