@@ -1,6 +1,6 @@
 <% if !@appointments.blank? %>
   <table class="table table-bordered">
-    <tr>
+    <tr BGCOLOR="grey">
       <th>Name</th>
       <th>Service Provider</th>
       <th>Form</th>
@@ -49,13 +49,14 @@
               <% if j.iform_id %>
                 <% @iform = Iform.find(j.iform_id) %>
               <% end %>
-              <% if j.status == "submitted" %>
-                <%= link_to j.formname, get_iform_iforms_path(:iform_id => @iform.id) %>
-              <% elsif j.status == "pending" && j.iform_id %>
-                <%= link_to j.formname, edit_iform_path(j.iform_id) %>
-              <% else %>
-                <%= link_to j.formname,  new_iform_path(:name => j.formname, :appointment_id => i) %>
-              <% end %>
+              <%= j.formname %>
+              <%# if j.status == "submitted" %>
+              <%#= link_to j.formname, get_iform_iforms_path(:iform_id => @iform.id) %>
+              <%# elsif j.status == "pending" && j.iform_id %>
+              <%#= link_to j.formname, edit_iform_path(j.iform_id) %>
+              <%# else %>
+              <%#= link_to j.formname,  new_iform_path(:name => j.formname, :appointment_id => i) %>
+              <%# end %>
             <% end %>
           </td>
 
@@ -84,18 +85,27 @@
             <% end %>
             <% if j.status == "submitted" %>
               <td><%= @formsubmittedtime %></td>
-              <td><%= link_to "Update", edit_iform_path(:id => @iform.id) %></td>
+              <td>
+                <%= link_to "Update", edit_iform_path(:id => @iform.id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+              </td>
             <% elsif j.status == "pending" && j.iform_id %>
               <td>Pending</td>
-              <td><%= link_to "Edit", edit_iform_path(:id => @iform.id) %></td>
+              <td>
+                <%= link_to "Edit", edit_iform_path(:id => @iform.id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => j.status, :iform_name => j.formname) %>
+              </td>
             <% else %>
               <td>New</td>
-              <td></td>
+              <td>
+                <%= link_to "Edit", new_iform_path(:name => j.formname, :appointment_id => i) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => j.status, :iform_name => j.formname) %>
+              </td>
             <% end %>
           <% end %>
 
         <% else %>
-          <td><%= link_to "multiple forms", i %></td>
+          <td>Multiple Forms</td>
           <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
           <td><%= @timesent %></td>
           <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id) %>
@@ -127,13 +137,16 @@
               <% end %>
             <% end %>
           </td>
-          <td></td>
+          <td>
+            <%= link_to "Edit", i %> |
+            <%= link_to "View PDF", i %>
+          </td>
           </tr>
         <% end %>
     <% end %>
   </table>
   <br/>
-  <%= will_paginate @appointments , :renderer => BootstrapPagination::Rails%>
+  <%= will_paginate @appointments, :renderer => BootstrapPagination::Rails %>
 <% else %>
   <p>No Appointments On This Day </p>
 <% end %>
