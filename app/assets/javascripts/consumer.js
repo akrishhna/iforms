@@ -42,6 +42,9 @@ $(function () {
   });
 
   $('.pagination a').live("click", function () {
+   if ($(this).attr('href') == '#'){
+     return false
+   }
     $('.pagination').html('Page is loading...');
     $.get(this.href, null, null, 'script');
     return false;
