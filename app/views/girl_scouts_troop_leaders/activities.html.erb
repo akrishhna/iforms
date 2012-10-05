@@ -112,7 +112,8 @@
     <div class="control-group">
       <%= f.label :activity_cost_dollars, "Cost", :class => 'control-label' %>
       <div class="controls">
-        $ <%= f.text_field :activity_cost_dollars, :style => "width:100px;text-align: right", :placeholder => "Dollars",:id => 'activity_cost_dollars' %>
+        $ <%= text_field_tag :activity_cost_dollars, f.object.activity_cost_dollars,:style => "width:100px;text-align: right", :placeholder => "Dollars",:id => 'activity_cost_dollars' %>
+        <%= f.hidden_field :activity_cost_dollars, :id => 'hidden_activity_cost_dollars'%>
         <strong> . </strong>
         <%= f.text_field :activity_cost_cents, :value => f.object.activity_cost_cents.to_s.rjust(2,"0"), :style => "width:20px;text-align: right", :placeholder => "", :id => 'activity_cost_cents' %>
       </div>

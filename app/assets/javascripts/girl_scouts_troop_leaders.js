@@ -147,6 +147,7 @@ $(function () {
   $('#activity_cost_dollars').format({type:'decimal', precision:0, allow_negative:false, autofix:true});
 
   $('#activity_cost_dollars').keyup(function (e) {
+    $('#hidden_activity_cost_dollars').val($(this).val());
     if ($(this).val().length <= 5 && $(this).val() <= 99999) {
     } else {
       if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
