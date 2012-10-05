@@ -3,6 +3,7 @@ class Notifier < ActionMailer::Base
   def appointment_confirmation_notification(appointment, doctor)
       @appointment = appointment
       @doctor = doctor
+      @preferred_name = @appointment.preferred_name
       @login_url = new_user_session_url
       @registration_url = user_registration_url
       mail(:to => @appointment.email, :subject => "Appointment confirmation")
