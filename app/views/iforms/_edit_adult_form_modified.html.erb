@@ -1,3 +1,4 @@
+<p style="text-align: center;font-size:18px "><%= session[:formname] %> for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
 <div style="margin: 0 auto;width:80px;">
   <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
 </div>
@@ -1237,7 +1238,7 @@
         <%= f.radio_button :Med_His_Sickle_Cell_Disease, true %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        %= f.radio_button :Med_His_Sickle_Cell_Disease, false %>No
+        <%= f.radio_button :Med_His_Sickle_Cell_Disease, false %>No
       <% end %>
     </div>
   </div>
