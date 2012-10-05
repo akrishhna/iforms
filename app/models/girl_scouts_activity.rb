@@ -11,6 +11,11 @@ class GirlScoutsActivity < ActiveRecord::Base
 
   def self.activity_permission_form_pdf_generater(activity, permission_form_path)
     @activity = activity
+    if !@activity.activity_cost_cents.nil?
+      @cents = @activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s
+    else
+      @cents = '00'
+    end
     form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
@@ -46,7 +51,7 @@ class GirlScoutsActivity < ActiveRecord::Base
       "WeWillReturnToTime" => @activity.activity_return_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_return_time_mm.to_s.rjust(2, '0'),
       "WeWillReturnToTimeAM" => @activity.activity_return_time_am_pm == "AM" ? "Yes" : "Off",
       "WeWillReturnToTimePM" => @activity.activity_return_time_am_pm == "PM" ? "Yes" : "Off",
-      "Cost" => @activity.activity_cost_dollars ? (@activity.activity_cost_dollars.to_s + '.' + (@activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s )) : '',
+      "Cost" => @activity.activity_cost_dollars ? (@activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!',
       "GirlsShouldWearOther" => @activity.activity_girls_wear_others,
       "GirlsShouldWearUniforms" => @activity.girls_wear_checkbox ? "Yes" : "Off",
       "GirlsShouldBring" => @activity.activity_girls_bring,

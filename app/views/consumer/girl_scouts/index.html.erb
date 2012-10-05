@@ -15,7 +15,7 @@
       <td><%= result[:activity_name] %></td>
       <td><%= result[:activity_date_begin].strftime("%m/%d/%Y") rescue '' %>
         - <%= result[:activity_date_end].strftime("%m/%d/%Y") rescue '' %></td>
-      <td><%= result[:price].present? ? number_to_currency(result[:price]) : "Free!" %></td>
+      <td><%= result[:dollars].present? ? number_to_currency(result[:price]) : "Free!" %></td>
       <td><%= result[:due_date].strftime("%m/%d/%Y") rescue '' %></td>
       <td style="text-align: center;">
         <%#= debug result[:girl_scout_attending] == 'Yes' %>

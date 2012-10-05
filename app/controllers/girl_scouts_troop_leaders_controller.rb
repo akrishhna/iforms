@@ -159,6 +159,11 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def show_activity
     @activity = current_user.girl_scouts_activities.find(params[:activity_id])
+    if !@activity.activity_cost_cents.nil?
+      @cents = @activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s
+    else
+      @cents = '00'
+    end
   end
 
   def activity_permission_form

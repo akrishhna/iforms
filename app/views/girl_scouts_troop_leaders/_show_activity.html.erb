@@ -41,7 +41,7 @@
     </tr>
     <tr>
       <td><strong>Cost</strong></td>
-      <td><%= number_to_currency(@activity.activity_cost_dollars.to_s + '.' + (@activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s ) )%></td>
+      <td><%= number_to_currency(@activity.activity_cost_dollars ? (@activity.activity_cost_dollars.to_s + '.' + @cents.to_s ) : 'Free!') %></td>
     </tr>
     <tr>
       <td><strong>Girls Should Wear</strong></td>
