@@ -1,7 +1,7 @@
 class IformsController < ApplicationController
 
   before_filter :authenticate_user! #, :except => [:index]
-  before_filter :is_patient?, :except => [:show, :get_iform]
+#  before_filter :is_patient?, :except => [:show, :get_iform]
   before_filter :is_admin?, :only => ["show"]
                                     # before_filter :is_doctor?, :only => [:show]
 
@@ -203,7 +203,8 @@ class IformsController < ApplicationController
   end
 
   def get_iform
-    @iform = Iform.find(params[:iform_id]) if params[:iform_id].present?
+   iform_id = params[:iform_id]
+    @iform = Iform.find(iform_id)
     iform_status = params[:iform_status]
     iform_name = params[:iform_name].gsub(' ', '_') rescue nil
     if iform_status
@@ -212,7 +213,7 @@ class IformsController < ApplicationController
                 :disposition => "inline",
                 :type => "application/pdf"
     else
-      send_file @iform.pdffile_path,
+      send_data @iform.pdffile_path,
                 :filename => "#{@iform.path}.pdf",
                 :disposition => "inline",
                 :type => "application/pdf"
