@@ -99,7 +99,7 @@
               <td>New</td>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => j.formname, :appointment_id => i) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => j.status, :iform_name => j.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => j.status, :iform_name => j.formname) %>
               </td>
             <% end %>
           <% end %>

@@ -54,7 +54,7 @@
             <% if i.iform_id.nil? %>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname) %>
               </td>
             <% else %>
               <td>
@@ -68,12 +68,12 @@
             <% if i.iform_id.nil? %>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname) %>
               </td>
             <% else %>
               <td>
                 <%= link_to "Edit", edit_iform_path(i.iform_id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname) %>
               </td>
             <% end %>
           <% end %>

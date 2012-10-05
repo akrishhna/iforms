@@ -203,8 +203,7 @@ class IformsController < ApplicationController
   end
 
   def get_iform
-    iform_id = params[:iform_id]
-    @iform = Iform.find(iform_id)
+    @iform = Iform.find(params[:iform_id]) if params[:iform_id].present?
     iform_status = params[:iform_status]
     iform_name = params[:iform_name].gsub(' ', '_') rescue nil
     if iform_status
@@ -213,7 +212,7 @@ class IformsController < ApplicationController
                 :disposition => "inline",
                 :type => "application/pdf"
     else
-      send_data @iform.pdffile_path,
+      send_file @iform.pdffile_path,
                 :filename => "#{@iform.path}.pdf",
                 :disposition => "inline",
                 :type => "application/pdf"
