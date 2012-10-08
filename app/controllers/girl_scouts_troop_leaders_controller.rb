@@ -190,13 +190,16 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def permission_forms
     if params[:id].present?
-      @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
+      #@girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
+      activity_id = params[:id]
       @activity = GirlScoutsActivity.find_by_id(params[:id])
       session[:selected_activity_id] = params[:id]
     else
-      @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_activity_id])
+      #@girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(session[:selected_activity_id])
+      activity_id = session[:selected_activity_id]
       @activity = GirlScoutsActivity.find_by_id(session[:selected_activity_id])
     end
+    @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ?", activity_id).order("girls_scouts.first_name")
     @results = []
     @yes_counter = 0
     @no_counter = 0
@@ -231,24 +234,28 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def pdf_merging
-    files = []
+    @files = []
     ids = params[:checked_vals].split(',')
     @activity = GirlScoutsActivity.find(params[:activity_id])
     activity_name = @activity.activity_name.gsub(' ', '-')
 
     ids.each do |id|
-      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @girl_scout = @girl_scouts_permission_form.girls_scout
-      permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
-      permission_form_path = "#{PDFFILES_PATH}#{permission_form_name}.pdf"
-      GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-      files << Rails.root.join("#{PDFFILES_PATH}#{permission_form_name}.pdf")
+      #@girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status=?', id, "Sent").first
+      if @girl_scouts_permission_form
+        @girl_scout = @girl_scouts_permission_form.girls_scout
+        permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
+        permission_form_path = "#{PDFFILES_PATH}#{permission_form_name}.pdf"
+        GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+        @files << Rails.root.join("#{PDFFILES_PATH}#{permission_form_name}.pdf")
+      end
     end
-
-    pdf = Pdftk.combine files
-    combined_file = File.new("#{PDFFILES_PATH}#{activity_name}_permission_forms.pdf", 'w+b')
-    combined_file.puts pdf.read
-    combined_file.close
+    if !@files.empty?
+      pdf = Pdftk.combine @files
+      combined_file = File.new("#{PDFFILES_PATH}#{activity_name}_permission_forms.pdf", 'w+b')
+      combined_file.puts pdf.read
+      combined_file.close
+    end
   end
 
   def show_all_permission_forms_pdf
