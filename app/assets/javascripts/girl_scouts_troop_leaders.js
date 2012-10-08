@@ -145,15 +145,16 @@ $(function () {
   });
 
   $('#activity_cost_dollars').format({type:'decimal', precision:0, allow_negative:false, autofix:true});
-
+  var activity_cost_dollars
   $('#activity_cost_dollars').keyup(function (e) {
     $('#hidden_activity_cost_dollars').val($(this).val());
     if ($(this).val().length <= 5 && $(this).val() <= 99999) {
+      activity_cost_dollars = $(this).val();
     } else {
       if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
         return true;
       } else {
-        $(this).val('');
+        $(this).val(activity_cost_dollars);
       }
     }
   });
@@ -162,18 +163,19 @@ $(function () {
     decimals:0,
     hidePrefix:true
   });
-
+  var activity_cost_cents;
   $('#activity_cost_cents').keyup(function (e) {
+
     if ($(this).val().length <= 2 && $(this).val() <= 99) {
       if (e.keyCode >= 48 && e.keyCode <= 57) {
-      }
-      else if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
-        return true;
-      } else {
-        $(this).val('');
+        activity_cost_cents = $(this).val();
       }
     } else {
-      $(this).val('')
+      if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 13 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
+        return true;
+      } else {
+        $(this).val(activity_cost_cents)
+      }
     }
   });
 
@@ -234,7 +236,7 @@ $(function () {
     return false;
   });
 
-  $('#permission_form_print_forms_btn').click(function(){
+  $('#permission_form_print_forms_btn').click(function () {
     if ($(this).attr('disabled') == "disabled") {
       return false;
     }
@@ -247,10 +249,10 @@ $(function () {
 
     if (checked_vals.length != 0) {
       $.get("/girl_scouts_troop_leaders/pdf_merging",
-        {activity_id:activity_id,checked_vals:checked_vals.join()}
-      ).success(function(){
-        window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id="+activity_id);
-      });
+        {activity_id:activity_id, checked_vals:checked_vals.join()}
+      ).success(function () {
+          window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id=" + activity_id);
+        });
     }
   });
 });
