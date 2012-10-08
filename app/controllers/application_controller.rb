@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
   helper_method :user_service_provider_list, :set_service_provider,:homepage_url
   #helper_method :patient_profile_exists
 
+  #http://ramblinglabs.com/blog/2012/01/rails-3-1-adding-custom-404-and-500-error-pages
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from Exception, with: :render_500
+    rescue_from ActionController::RoutingError, with: :render_404
+    rescue_from ActionController::UnknownController, with: :render_404
+    rescue_from ActionController::UnknownAction, with: :render_404
+    rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  end
+
   def current_user_name
     if current_user.role == 'doctor'
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
@@ -88,6 +97,27 @@ class ApplicationController < ActionController::Base
       @homepage_url = '/consumer'
     else
       @homepage_url = root_url
+    end
+  end
+
+  private
+
+  #404 errors
+  def render_404(error)
+    @error = error
+    @not_found_path = error.message
+    respond_to do |format|
+      format.html { render template: 'errors/error_404', layout: 'layouts/application', status: 404 }
+      format.all { render nothing: true, status: 404 }
+    end
+  end
+
+  #500 errors
+  def render_500(error)
+    @error = error
+    respond_to do |format|
+      format.html { render template: 'errors/error_500', layout: 'layouts/application', status: 500 }
+      format.all { render nothing: true, status: 500}
     end
   end
 end

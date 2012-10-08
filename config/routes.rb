@@ -1,5 +1,9 @@
 Iforms::Application.routes.draw do
 
+  get "errors/error_404"
+
+  get "errors/error_500"
+
   namespace :consumer do
     resources :girl_scouts do
       collection do
@@ -110,6 +114,10 @@ Iforms::Application.routes.draw do
   match '/FAQ', :to => 'deviseroles#FAQ'
   match 'privacy_policy', :to => 'deviseroles#privacy_policy'
   root :to => redirect("/users/login")
+
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', :to => 'errors#error_404'
+  end
 
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
