@@ -1,0 +1,5 @@
+<% if !@files.empty? %>
+window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id="+<%= @activity.id %>);
+<% else %>
+alert('No form is there');
+<% end %>

@@ -251,7 +251,7 @@ $(function () {
       $.get("/girl_scouts_troop_leaders/pdf_merging",
         {activity_id:activity_id, checked_vals:checked_vals.join()}
       ).success(function () {
-          window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id=" + activity_id);
+        //  window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id=" + activity_id);
         });
     }
   });
