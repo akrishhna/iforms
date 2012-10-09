@@ -33,15 +33,15 @@
       </td>
       <td>
         <% if result[:status] == 'Updated' %>
-          <p data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">
-            Updated <%= result[:updated_at].strftime("%m/%d/%Y") %></p>
+          <span data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">
+            Updated <%= result[:updated_at].strftime("%m/%d/%Y") %></span>
         <% elsif result[:status] == 'Sent' %>
-          <p data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">Sent <%= result[:updated_at].strftime("%m/%d/%Y") %></p>
+          <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">Sent <%= result[:updated_at].strftime("%m/%d/%Y") %></span>
         <% elsif result[:status] == 'In Progress' %>
-          <p data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">In
-            Progress</p>
+          <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">In
+            Progress</span>
         <% else %>
-          <p data-placement="top" rel="tooltip" data-original-title="Form editing has not begun"><%= result[:status] %></p>
+          <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun"><%= result[:status] %></span>
         <% end %>
       </td>
       <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
@@ -51,6 +51,6 @@
 </table>
 
 <script>
-  $("p").tooltip({
+  $("span").tooltip({
   });
 </script>
