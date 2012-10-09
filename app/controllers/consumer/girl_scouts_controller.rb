@@ -32,8 +32,8 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
-    if @girl_scouts_permission_form.status == "Sent" || @girl_scouts_permission_form.status == "Updated"
-      @girl_scouts_permission_form.status = "Sent"
+    if @girl_scouts_permission_form.status == "Submitted" || @girl_scouts_permission_form.status == "Updated"
+      @girl_scouts_permission_form.status = "Submitted"
     else
       @girl_scouts_permission_form.status = 'In Progress'
     end
