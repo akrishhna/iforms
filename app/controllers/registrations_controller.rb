@@ -35,9 +35,9 @@ class RegistrationsController < Devise::RegistrationsController
         redirect_to root_path
       else
         if username != params[:user][:username]
-          flash[:alert] = "Username is already taken"
+          flash[:alert] = "Your desired Username #{params[:user][:username]} is not available."
         else
-          flash[:alert] = "Email is already taken"
+          flash[:alert] = "Your desired email address #{params[:user][:email]} is not available."
         end
         redirect_to edit_user_registration_path
       end
