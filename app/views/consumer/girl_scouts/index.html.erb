@@ -19,18 +19,22 @@
       <td><%= result[:due_date].strftime("%m/%d/%Y") rescue '' %></td>
       <td style="text-align: center;">
         <%#= debug result[:girl_scout_attending] == 'Yes' %>
-        <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending','data-value' => 'Yes','data-id' => result[:id] do %>
-          <%= radio_button_tag "girl_scout_attending_#{i}", "Yes", (true if result[:girl_scout_attending] == 'Yes') %>Yes
+        <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending', 'data-value' => 'Yes', 'data-id' => result[:id] do %>
+          <%= radio_button_tag "girl_scout_attending_#{i}", "Yes", (true if result[:girl_scout_attending] == 'Yes') %>
+          Yes
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending', 'data-value' => 'No','data-id' => result[:id] do %>
-          <%= radio_button_tag "girl_scout_attending_#{i}", "No",(true if result[:girl_scout_attending] == 'No' )%>No
+        <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending', 'data-value' => 'No', 'data-id' => result[:id] do %>
+          <%= radio_button_tag "girl_scout_attending_#{i}", "No", (true if result[:girl_scout_attending] == 'No') %>No
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending', 'data-value' => '?','data-id' => result[:id] do %>
-          <%= radio_button_tag "girl_scout_attending_#{i}", "?",(true if result[:girl_scout_attending] != 'No' && result[:girl_scout_attending] != 'Yes') %>?
+        <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending', 'data-value' => '?', 'data-id' => result[:id] do %>
+          <%= radio_button_tag "girl_scout_attending_#{i}", "?", (true if result[:girl_scout_attending] != 'No' && result[:girl_scout_attending] != 'Yes') %>
+          ?
         <% end %>
       </td>
       <td>
-        <% if result[:status] == 'Sent' %>
+        <% if result[:status] == 'Updated' %>
+          Updated <%= result[:updated_at].strftime("%m/%d/%Y") %>
+        <% elsif result[:status] == 'Sent' %>
           Sent <%= result[:updated_at].strftime("%m/%d/%Y") %>
         <% else %>
           <%= result[:status] %>

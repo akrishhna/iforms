@@ -37,7 +37,7 @@
           <% end %>
         </td>
         <td>
-          <% if result[:status] == 'Sent' %>
+          <% if result[:status] == 'Sent' || result[:status] == 'Updated' %>
             Received
           <% else %>
             <%= result[:status] %>

@@ -12,7 +12,7 @@ class Consumer::GirlScoutsController < ConsumerController
       item[:activity_date_begin] = pf.girl_scouts_activity.activity_date_begin
       item[:activity_date_end] = pf.girl_scouts_activity.activity_date_end
       if !pf.girl_scouts_activity.activity_cost_cents.nil?
-      item[:cents] = pf.girl_scouts_activity.activity_cost_cents <= 9 ? ('0' + pf.girl_scouts_activity.activity_cost_cents.to_s) : pf.girl_scouts_activity.activity_cost_cents.to_s
+        item[:cents] = pf.girl_scouts_activity.activity_cost_cents <= 9 ? ('0' + pf.girl_scouts_activity.activity_cost_cents.to_s) : pf.girl_scouts_activity.activity_cost_cents.to_s
       else
         item[:cents] = '00'
       end
@@ -32,8 +32,13 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
-    @girl_scouts_permission_form.status = 'In Progress'
+    if @girl_scouts_permission_form.status == "Sent" || @girl_scouts_permission_form.status == "Updated"
+      @girl_scouts_permission_form.status = "Sent"
+    else
+      @girl_scouts_permission_form.status = 'In Progress'
+    end
     @girl_scouts_permission_form.save()
+
     if !@activity.activity_cost_cents.nil?
       @cents = @activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s
     else
@@ -62,7 +67,12 @@ class Consumer::GirlScoutsController < ConsumerController
     if @girl_scouts_permission_form.invalid?
       flash[:error] = "Something wrong please try again."
     else
-      @girl_scouts_permission_form.status = "Sent"
+      #raise @girl_scouts_permission_form.status.to_yaml
+      if @girl_scouts_permission_form.status == "Sent" || @girl_scouts_permission_form.status == "Updated"
+        @girl_scouts_permission_form.status = "Updated"
+      else
+        @girl_scouts_permission_form.status = "Sent"
+      end
       @girl_scouts_permission_form.attending = true
       if @girl_scouts_permission_form.save()
         Notifier.send_permission_form_to_tl_notification(@activity, @girl_scout).deliver
@@ -76,7 +86,7 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scout = @girl_scouts_permission_form.girls_scout
     activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-id-' + @girl_scout.id.to_s
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity,@girl_scouts_permission_form,permission_form_path)
+    GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf" # ? "#{PDFFILES_PATH}#{alternate_activity_name}.pdf": ""
     send_file permission_form_path,
               :filename => "#{activity_name}.pdf", # ? "#{alternate_activity_name}.pdf":"",
