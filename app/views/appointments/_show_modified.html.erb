@@ -7,7 +7,7 @@
     <table class="table table-bordered" style="width:50%;text-align: center;margin-left: 15%">
       <tr BGCOLOR="grey">
         <th>Form</th>
-        <th>Submitted</th>
+        <th>Status</th>
         <th></th>
       </tr>
       <% @appformjoins.each do |i| %>
@@ -41,16 +41,47 @@
           <% if i.iform_id %>
             <% @iform = Iform.find(i.iform_id) %>
           <% end %>
-          <% if i.status == "submitted" %>
+          <% if i.status == "updated" %>
             <td><%= i.formname %></td>
-            <td><%= @formsubmittedtime %></td>
+            <td>
+              <% @subtimefortool = formsubmittedtime_date.to_date.strftime("%m-%d-%Y") %>
+              <span data-placement="top" rel="tooltip" data-original-title="User submitted an updated form on this <%= @subtimefortool %>">
+              Updated <%= @formsubmittedtime %>
+                </span>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
+              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+            </td>
+          <% elsif i.status == "submitted" %>
+            <td><%= i.formname %></td>
+            <td>
+              <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this date <%= @subtimefortool %>">
+             Submitted <%= @formsubmittedtime %>
+                </span>
+            </td>
             <td>
               <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
               <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
             </td>
           <% elsif i.status == "pending" %>
             <td><%= i.formname %></td>
-            <td>Pending</td>
+            <td>
+              <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
+             Pending
+                </span>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
+              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+            </td>
+          <% elsif i.status == "in progress" %>
+            <td><%= i.formname %></td>
+            <td>
+              <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
+                In Progress
+                </span>
+            </td>
             <% if i.iform_id.nil? %>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
@@ -64,7 +95,7 @@
             <% end %>
           <% else %>
             <td><%= i.formname %></td>
-            <td>New</td>
+            <td></td>
             <% if i.iform_id.nil? %>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
@@ -95,7 +126,7 @@
     <table class="table table-bordered" style="width:50%;text-align: center;margin-left: 15%">
       <tr BGCOLOR="grey">
         <th>Form</th>
-        <th>Submitted</th>
+        <th>Status</th>
         <th></th>
       </tr>
       <% @appformjoins.each do |i| %>
@@ -129,13 +160,17 @@
           <% if i.iform_id %>
             <% @iform = Iform.find(i.iform_id) %>
           <% end %>
-          <% if i.status == "submitted" %>
+          <% if i.status == "submitted" || i.status == "updated" %>
             <td> <%= i.formname %> </td>
             <td><%= @formsubmittedtime %></td>
             <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %></td>
           <% else %>
             <td><%= i.formname %></td>
-            <td>Pending</td>
+            <td>
+                <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
+             Pending
+                </span>
+            </td>
             <td></td>
           <% end %>
         </tr>
@@ -144,3 +179,9 @@
     <br>
   </div>
 <% end %>
+
+
+<script>
+  $("span").tooltip({
+  });
+</script>

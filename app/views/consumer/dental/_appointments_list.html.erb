@@ -74,29 +74,51 @@
               <% if var<=formsubmittedtime_hrs_int %>
                 <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
                 <% am_pm = "PM" %>
-                <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm  %>
               <% else %>
                 <% am_pm = "AM" %>
-                <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm  %>
               <% end %>
             <% end %>
             <% if j.iform_id %>
               <% @iform = Iform.find(j.iform_id) %>
             <% end %>
-            <% if j.status == "submitted" %>
-              <td>Sent <%=@formsubmittedtime %></td>
+            <% if j.status == "updated" %>
+              <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="User submitted an updated form on this <%= @formsubmittedtime %>">
+            Updated <%= @formsubmittedtime %>
+                </span>
+              </td>
               <td>
                 <%= link_to "Update", edit_iform_path(:id => @iform.id) %> |
                 <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
               </td>
-            <% elsif j.status == "pending" && j.iform_id %>
-              <td>Pending</td>
+            <% elsif j.status == "submitted" %>
+              <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= @formsubmittedtime %>">
+           Submitted <%= @formsubmittedtime %>
+                </span>
+              </td>
+              <td>
+                <%= link_to "Update", edit_iform_path(:id => @iform.id) %> |
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+              </td>
+            <% elsif j.status == "in progress" && j.iform_id %>
+              <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
+             In Progress
+                </span>
+              </td>
               <td>
                 <%= link_to "Edit", edit_iform_path(:id => @iform.id) %> |
                 <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => j.status, :iform_name => j.formname) %>
               </td>
             <% else %>
-              <td>New</td>
+              <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
+              Pending
+                </span>
+              </td>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => j.formname, :appointment_id => i) %> |
                 <%= link_to "View PDF", get_iform_iforms_path(:iform_status => j.status, :iform_name => j.formname) %>
@@ -121,19 +143,14 @@
                 <% if var<=formsubmittedtime_hrs_int %>
                   <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
                   <% am_pm = "PM" %>
-                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm  %>
                 <% else %>
                   <% am_pm = "AM" %>
-                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm  %>
                 <% end %>
               <% end %>
               <% if j.iform_id %>
                 <% @iform = Iform.find(j.iform_id) %>
-              <% end %>
-              <% if j.status == "submitted" %>
-                &nbsp;
-              <% elsif j.status == "pending" %>
-                &nbsp;
               <% end %>
             <% end %>
           </td>
@@ -157,4 +174,8 @@
       $('#dental').load('/consumer/dental?appointment_date=' + dateText);
     }
   }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');
+
+  $("span").tooltip({
+  });
+
 </script>

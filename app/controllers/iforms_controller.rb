@@ -151,6 +151,15 @@ class IformsController < ApplicationController
     @iform = Iform.find(params[:id])
     @appointment = Appointment.find(@iform.appointment_id)
     @doctor = Doctor.find(@appointment.doctor_id)
+    @appforms = Appformjoin.find_all_by_appointment_id(@appointment.id)
+    @appforms.each do|appform|
+      if appform.status == 'submitted' || appform.status == 'updated'
+        appform.status = 'submitted'
+      else
+        appform.status = 'in progress'
+      end
+      appform.save
+    end
   end
 
   # PUT /iform/1
@@ -176,10 +185,13 @@ class IformsController < ApplicationController
         end
 
         appformjoin = Appformjoin.where(:iform_id => @iform.id).first
-        appformjoin.status = "submitted"
+        if appformjoin.status == "submitted" || appformjoin.status == "Updated"
+          appformjoin.status = "updated"
+        else
+          appformjoin.status = "submitted"
+        end
         appformjoin.formsubmittedtime = Time.now
         appformjoin.save
-
         Notifier.edit_form_submission_notification(@iform.appointment, @iform.formname, @iform).deliver
         format.html { redirect_to(@iform, :notice => 'Form was successfully updated.') }
         format.xml { head :ok }
