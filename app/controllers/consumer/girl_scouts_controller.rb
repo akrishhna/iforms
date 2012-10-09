@@ -68,10 +68,10 @@ class Consumer::GirlScoutsController < ConsumerController
       flash[:error] = "Something wrong please try again."
     else
       #raise @girl_scouts_permission_form.status.to_yaml
-      if @girl_scouts_permission_form.status == "Sent" || @girl_scouts_permission_form.status == "Updated"
+      if @girl_scouts_permission_form.status == "Submitted" || @girl_scouts_permission_form.status == "Updated"
         @girl_scouts_permission_form.status = "Updated"
       else
-        @girl_scouts_permission_form.status = "Sent"
+        @girl_scouts_permission_form.status = "Submitted"
       end
       @girl_scouts_permission_form.attending = true
       if @girl_scouts_permission_form.save()
