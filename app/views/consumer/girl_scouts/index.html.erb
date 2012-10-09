@@ -33,11 +33,15 @@
       </td>
       <td>
         <% if result[:status] == 'Updated' %>
-          Updated <%= result[:updated_at].strftime("%m/%d/%Y") %>
+          <p data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">
+            Updated <%= result[:updated_at].strftime("%m/%d/%Y") %></p>
         <% elsif result[:status] == 'Sent' %>
-          Sent <%= result[:updated_at].strftime("%m/%d/%Y") %>
+          <p data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">Sent <%= result[:updated_at].strftime("%m/%d/%Y") %></p>
+        <% elsif result[:status] == 'In Progress' %>
+          <p data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">In
+            Progress</p>
         <% else %>
-          <%= result[:status] %>
+          <p data-placement="top" rel="tooltip" data-original-title="Form editing has not begun"><%= result[:status] %></p>
         <% end %>
       </td>
       <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
@@ -45,3 +49,8 @@
     </tr>
   <% end %>
 </table>
+
+<script>
+  $("p").tooltip({
+  });
+</script>
