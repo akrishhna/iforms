@@ -51,7 +51,7 @@
             </td>
             <td>
               <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
-              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %>
             </td>
           <% elsif i.status == "submitted" %>
             <td><%= i.formname %></td>
@@ -62,7 +62,7 @@
             </td>
             <td>
               <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
-              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %>
             </td>
           <% elsif i.status == "pending" %>
             <td><%= i.formname %></td>
@@ -73,7 +73,7 @@
             </td>
             <td>
               <%= link_to 'Edit', edit_iform_path(i.iform_id) %> |
-              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %>
+              <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %>
             </td>
           <% elsif i.status == "in progress" %>
             <td><%= i.formname %></td>
@@ -85,12 +85,12 @@
             <% if i.iform_id.nil? %>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname), :target => '_blank' %>
               </td>
             <% else %>
               <td>
                 <%= link_to "Edit", edit_iform_path(i.iform_id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => i.status, :iform_name => i.formname), :target => '_blank' %>
               </td>
             <% end %>
           <% else %>
@@ -99,12 +99,12 @@
             <% if i.iform_id.nil? %>
               <td>
                 <%= link_to "Edit", new_iform_path(:name => i.formname, :appointment_id => @appointment.id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname), :target => '_blank' %>
               </td>
             <% else %>
               <td>
                 <%= link_to "Edit", edit_iform_path(i.iform_id) %> |
-                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname) %>
+                <%= link_to "View PDF", get_iform_iforms_path(:iform_status => i.status, :iform_name => i.formname), :target => '_blank' %>
               </td>
             <% end %>
           <% end %>
@@ -163,7 +163,7 @@
           <% if i.status == "submitted" || i.status == "updated" %>
             <td> <%= i.formname %> </td>
             <td><%= @formsubmittedtime %></td>
-            <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %></td>
+            <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %></td>
           <% else %>
             <td><%= i.formname %></td>
             <td>

@@ -85,7 +85,7 @@
               <% end %>
               <% if j.status == "submitted" || j.status == "updated" %>
                 <td><%= @formsubmittedtime %></td>
-                <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id) %></td>
+                <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %></td>
               <% elsif j.status == "in progress" %>
                 <td>
                     <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">

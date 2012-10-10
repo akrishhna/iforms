@@ -45,7 +45,7 @@
         <% end %>
       </td>
       <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
-        | <%= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]) %></td>
+        | <%= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %></td>
     </tr>
   <% end %>
 </table>

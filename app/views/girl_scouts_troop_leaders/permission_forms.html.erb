@@ -6,7 +6,7 @@
 <div>&nbsp;</div>
 <div>
   <%= select_tag("girls_scout_permission_form", options_for_select(@girls_scouts_activities, session[:selected_activity_id]), :prompt => "Select Activity") %>
-  <%= link_to "Print Form(s)",  "#", :class => "btn btn-info ", :id => 'permission_form_print_forms_btn', :disabled => "disabled", "data-activity-id" => (@activity.id rescue "") %> &nbsp;
+  <%= link_to "Print Form(s)",  "#", :class => "btn btn-info ", :id => 'permission_form_print_forms_btn', :disabled => "disabled", "data-activity-id" => (@activity.id rescue ""), :target => '_blank' %> &nbsp;
   <%= link_to "Send Email Reminder to Pending", "#", :class => "btn btn-primary", :id => 'permission_form_send_email_btn' %>
   <span style="margin-left: 90px;background-color:#d3d3d3;" class="resend_mail_success_notification hide"><span class="resend_mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
 </div>
