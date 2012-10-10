@@ -88,7 +88,7 @@
                 <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %></td>
               <% elsif j.status == "in progress" %>
                 <td>
-                    <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
+                    <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
           In Progress
                 </span>
                   In Progress
@@ -96,7 +96,7 @@
                 <td><%= link_to "Resend", edit_appointment_path(i) %></td>
               <% elsif j.status == "pending" %>
                 <td>
-                    <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
+                    <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
           Pending
                 </span>
                 </td>
