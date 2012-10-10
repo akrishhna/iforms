@@ -1,13 +1,13 @@
- 
+
 <% @user = User.where("email =?", @appointment.email).first %>
 
 <html><head><style type="text/css">ol{margin:0;padding:0}.c5{vertical-align:top;width:234pt;border-style:solid;border-color:#000000;border-width:0pt;padding:5pt 5pt 5pt 5pt}.c2{vertical-align:top;width:104.2pt;border-style:solid;border-color:#ffffff;border-width:0pt;padding:5pt 5pt 5pt 5pt}.c15{vertical-align:middle;width:363.8pt;border-style:solid;border-color:#ffffff;border-width:0pt;padding:5pt 5pt 5pt 5pt}.c3{line-height:1.0;text-align:center;direction:ltr}.c4{max-width:468pt;background-color:#ffffff;padding:72pt 72pt 72pt 72pt}.c0{color:inherit;text-decoration:inherit}.c1{color:#1155cc;text-decoration:underline}.c12{vertical-align:super}.c6{direction:ltr}.c10{text-align:center}.c11{border-collapse:collapse}.c9{font-weight:bold}.c7{height:11pt}.c13{height:0pt}.c14{font-size:18pt}.c8{font-size:12pt}.title{padding-top:24pt;line-height:1.15;text-align:left;color:#000000;font-size:36pt;font-family:"Arial";font-weight:bold;padding-bottom:6pt}.subtitle{padding-top:18pt;line-height:1.15;text-align:left;color:#666666;font-style:italic;font-size:24pt;font-family:"Georgia";padding-bottom:4pt}p{color:#000000;font-size:11pt;margin:0;font-family:"Arial"}h1{padding-top:24pt;line-height:1.15;text-align:left;color:#000000;font-size:18pt;font-family:"Arial";font-weight:bold;padding-bottom:6pt}h2{padding-top:18pt;line-height:1.15;text-align:left;color:#000000;font-size:14pt;font-family:"Arial";font-weight:bold;padding-bottom:4pt}h3{padding-top:14pt;line-height:1.15;text-align:left;color:#666666;font-size:12pt;font-family:"Arial";font-weight:bold;padding-bottom:4pt}h4{padding-top:12pt;line-height:1.15;text-align:left;color:#666666;font-style:italic;font-size:11pt;font-family:"Arial";padding-bottom:2pt}h5{padding-top:11pt;line-height:1.15;text-align:left;color:#666666;font-size:10pt;font-family:"Arial";font-weight:bold;padding-bottom:2pt}h6{padding-top:10pt;line-height:1.15;text-align:left;color:#666666;font-style:italic;font-size:10pt;font-family:"Arial";padding-bottom:2pt}</style></head><body class="c4"><p class="c6 c10 c7"><span></span></p><a href="#" name="d218ce57c0d930f4944fce8e62ebc8d57fb93521"></a><a href="#" name="0"></a><table align="center" cellpadding="30" cellspacing="10px" class="c11"><tbody><tr><td class="c2"><p class="c3"><img src="<%= "#{NOTIFIER_PATH}/assets/image00.jpg" %>" height="102" width="100" /></p></td><td class="c15"><p class="c3"><span class="c14"><h2 style="text-align:center">James R. Waters, DDS, MSD, PA</h2></span></p><p class="c3 c7"><span></span></p><p class="c3"><span class="c8">Contemporary Orthodontics and Dentofacial Orthopedics</span></p><p class="c3 c7"><span></span></p><p class="c3"><span>Board Certified Treatment for Children, Teens &amp; Adults</span></p></td></tr></tbody></table><p class="c6 c10 c7"><span></span></p>
 
-<% if @preferred_name.empty? and !@appointment.formname.empty? %>
-<p class="c6"><span>Dear <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s + ' ' + @appointment.lastname %>,
+<% if @appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,
 </span></p><p class="c6 c7"><span></span></p><p class="c6"><span>I would like to take this opportunity to welcome you to my practice. Rest assured every effort will be made to provide you the highest quality orthodontic treatment. Attending to your orthodontic needs in a thorough and efficient manner is my priority. There will be an extensive examination during the complimentary initial appointment, and I will work with you to set up a program that best enhances your smile while also providing ideal function.</span></p><p class="c6 c7"><span></span></p><p class="c6">
 
-<span>At your earliest convenience, please complete and submit our online </span>
+  <span>At your earliest convenience, please complete and submit our online </span>
 <span class="c1 c9">
   <% if @user %>
   <%= link_to 'New Patient', @login_url %>
@@ -15,11 +15,25 @@
   <%= link_to 'New Patient', @registration_url %>
   <%end%>
 </span><span>form.</span>
-<span>We will print your submitted form and have it available for your review and signature when you arrive at our office for your appointment.</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>Again, my team and I welcome you to our practice and we look forward to seeing you at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %> for your orthodontic examination with Dr. James Waters! Until then, if there are any questions we can assist you with please feel free to call our office.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+  <span>We will print your submitted form and have it available for your review and signature when you arrive at our office for your appointment.</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>Again, my team and I welcome you to our practice and we look forward to seeing you at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %> for your orthodontic examination with Dr. James Waters! Until then, if there are any questions we can assist you with please feel free to call our office.</span></p><p class="c6 c7"><span></span></p><p class="c6">
 
-<% elsif !@preferred_name.empty? and !@appointment.formname.empty? %>
-<p class="c6"><span>Dear <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s + ' ' + @appointment.lastname %>,
-</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>We would like to take this opportunity to welcome you and <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s %> to our practice. Rest assured every effort will be made to provide him with the highest quality orthodontic treatment. Attending to <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s %>'s orthodontic needs in a thorough and efficient manner is our priority. There will be an extensive examination during the complimentary initial appointment, and we will work with you to set up a program that best enhances <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s %>'s smile while also providing ideal function.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @preferred_name %> <%= @appointment.lastname %>,
+</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>I would like to take this opportunity to welcome you to my practice. Rest assured every effort will be made to provide you the highest quality orthodontic treatment. Attending to your orthodontic needs in a thorough and efficient manner is my priority. There will be an extensive examination during the complimentary initial appointment, and I will work with you to set up a program that best enhances your smile while also providing ideal function.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+  <span>At your earliest convenience, please complete and submit our online </span>
+<span class="c1 c9">
+  <% if @user %>
+  <%= link_to 'New Patient', @login_url %>
+  <%else%>
+  <%= link_to 'New Patient', @registration_url %>
+  <%end%>
+</span><span>form.</span>
+  <span>We will print your submitted form and have it available for your review and signature when you arrive at our office for your appointment.</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>Again, my team and I welcome you to our practice and we look forward to seeing you at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %> for your orthodontic examination with Dr. James Waters! Until then, if there are any questions we can assist you with please feel free to call our office.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @appointment.responsible_party %>,
+</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>We would like to take this opportunity to welcome you and <%= @appointment.firstname %> to our practice. Rest assured every effort will be made to provide him with the highest quality orthodontic treatment. Attending to <%= @appointment.firstname %>'s orthodontic needs in a thorough and efficient manner is our priority. There will be an extensive examination during the complimentary initial appointment, and we will work with you to set up a program that best enhances <%= @appointment.firstname %>'s smile while also providing ideal function.</span></p><p class="c6 c7"><span></span></p><p class="c6">
 
   <span>At your earliest convenience, please complete and submit our online </span>
   <span class="c1 c9">
@@ -29,15 +43,37 @@
     <%= link_to 'New Patient', @registration_url %>
     <%end%>
   </span><span>form.</span>
-  <span>We will print your submitted form and have it available for your review and signature when you arrive at our office for your appointment.</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>Again, my team and I welcome you to our practice and we look forward to seeing you at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %> for <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s %>'s orthodontic examination with Dr. James Waters! Until then, if there are any questions we can assist you with please feel free to call our office.</span></p><p class="c6 c7"><span></span></p><p class="c6 c7"><span></span></p><p class="c6">
-    
-<% elsif @preferred_name and @appointment.formname.empty? %>
-<p class="c6"><span>Dear <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s + ' ' + @appointment.lastname %>,
+  <span>We will print your submitted form and have it available for your review and signature when you arrive at our office for your appointment.</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>Again, my team and I welcome you to our practice and we look forward to seeing you at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %> for <%= @appointment.firstname %>'s orthodontic examination with Dr. James Waters! Until then, if there are any questions we can assist you with please feel free to call our office.</span></p><p class="c6 c7"><span></span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @appointment.responsible_party %>,
+</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>We would like to take this opportunity to welcome you and <%= @preferred_name %> to our practice. Rest assured every effort will be made to provide him with the highest quality orthodontic treatment. Attending to <%= @preferred_name %>'s orthodontic needs in a thorough and efficient manner is our priority. There will be an extensive examination during the complimentary initial appointment, and we will work with you to set up a program that best enhances <%= @preferred_name %>'s smile while also providing ideal function.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+  <span>At your earliest convenience, please complete and submit our online </span>
+  <span class="c1 c9">
+    <% if @user %>
+    <%= link_to 'New Patient', @login_url %>
+    <%else%>
+    <%= link_to 'New Patient', @registration_url %>
+    <%end%>
+  </span><span>form.</span>
+  <span>We will print your submitted form and have it available for your review and signature when you arrive at our office for your appointment.</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>Again, my team and I welcome you to our practice and we look forward to seeing you at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %> for <%= @preferred_name %>'s orthodontic examination with Dr. James Waters! Until then, if there are any questions we can assist you with please feel free to call our office.</span></p><p class="c6 c7"><span></span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+<% elsif @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,
 </span></p><p class="c6 c7"><span></span></p><p class="c6"><span>This message confirms your appointment with Dr. James Waters at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</span></p><p class="c6 c7"><span></span></p><p class="c6">
 
-<% elsif !@preferred_name.empty? and @appointment.formname.empty? %>
-<p class="c6"><span>Dear <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s + ' ' + @appointment.lastname %>,
-</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>This message confirms <%= @preferred_name.present? ? @preferred_name : @appointment.firstname.to_s %>'s appointment with Dr. James Waters at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+<% elsif @appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @preferred_name %> <%= @appointment.lastname %>,
+</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>This message confirms your appointment with Dr. James Waters at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @appointment.responsible_party %>,
+</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>This message confirms your appointment with Dr. James Waters at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</span></p><p class="c6 c7"><span></span></p><p class="c6">
+
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p class="c6"><span>Dear <%= @appointment.responsible_party %>,
+</span></p><p class="c6 c7"><span></span></p><p class="c6"><span>This message confirms <%= @preferred_name %>'s appointment with Dr. James Waters at our <%= @appointment.location %> office on <%= @appointment.date.strftime("%A %B %d, %Y")%> at <%= @appointment.time_hrs %>:<%= @appointment.time_min %>  <%= @appointment.AM_PM %>.</span></p><p class="c6 c7"><span></span></p><p class="c6">
 <%end%>
 
 <p><span>Best regards,</span></p><p class="c6"><span>Dr. James R. Waters, DDS, MSD, PA</span></p><p class="c6 c7"><span></span></p><p><span></span></p><p class="c6"><span>Alicia McMurray, Patient Coordinator</span></p><p class="c6"><span>Amanda Hartman, Patient Coordinator</span></p><p class="c6 c7"><span></span></p><a href="#" name="5ed6712393d4ae879f0ac84b021dbc6128985713"></a><a href="#" name="1"></a><table align="center" cellpadding="30" cellspacing="10px" class="c11"><tbody><tr class="c13"><td class="c5"><p class="c3"><span class="c9"><b>Central Austin</b></span></p><p class="c3"><span>1814 W. 35</span><span class="c12">th</span><span>&nbsp;Street</span></p><p class="c3"><span>Austin, Texas 78703</span></p><p class="c3"><span>Phone: (512) 451-6457</span></p><p class="c3"><span class="c1"><a class="c0" href="http://g.co/maps/wj5z7">Map</a></span></p><p class="c3 c7"><span></span></p></td><td></td><td class="c5"><p class="c3"><span class="c9"><b>Steiner Ranch</b></span></p><p class="c3"><span>4302 North Quinlan Park</span></p><p class="c3"><span>Austin, Texas 78732</span></p><p class="c3"><span>Phone: (512) 266-8585</span></p><p class="c3"><span class="c1"><a class="c0" href="http://g.co/maps/a2j3w">Map</a></span></p></td></tr></tbody></table><p class="c6 c7"><span></span></p><p style="text-align:center" class="c6 c10"><span class="c1" style="align:center"><a class="c0" href="http://www.bracesaustin.com/">BracesAustin.com</a></span></p></body></html>
