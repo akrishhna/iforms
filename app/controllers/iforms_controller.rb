@@ -151,15 +151,14 @@ class IformsController < ApplicationController
     @iform = Iform.find(params[:id])
     @appointment = Appointment.find(@iform.appointment_id)
     @doctor = Doctor.find(@appointment.doctor_id)
-    @appforms = Appformjoin.find_all_by_appointment_id(@appointment.id)
-    @appforms.each do|appform|
-      if appform.status == 'submitted' || appform.status == 'updated'
-        appform.status = 'submitted'
+    @appform = Appformjoin.find_by_appointment_id(@appointment.id)
+    @appform = Appformjoin.find_by_appointment_id_and_id(@appointment.id,params[:appform_id]) if params[:appform_id].present?
+      if @appform.status == 'submitted' || @appform.status == 'updated'
+        @appform.status = 'submitted'
       else
-        appform.status = 'in progress'
+        @appform.status = 'in progress'
       end
-      appform.save
-    end
+    @appform.save
   end
 
   # PUT /iform/1
