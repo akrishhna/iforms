@@ -44,12 +44,13 @@ class Consumer::GirlScoutsController < ConsumerController
     else
       @cents = '00'
     end
-    @recent_submitted_form = current_user.girl_scouts_activity_permission_forms.where('status=?', 'Sent').order('updated_at').last
+    @recent_submitted_form = current_user.girl_scouts_activity_permission_forms.where('status in (?)', ['Sent','Submitted','Updated']).order('updated_at').last
     if @recent_submitted_form
       @girl_scouts_permission_form.attributes.each do |attr_name, attr_val|
         unless attr_val
           @girl_scouts_permission_form[attr_name] = @recent_submitted_form[attr_name]
         end
+        @girl_scouts_permission_form[:gapf_special_needs] = ''
       end
     end
   end
