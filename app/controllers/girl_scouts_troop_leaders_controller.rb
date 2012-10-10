@@ -190,6 +190,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   # Girl Scout Permission Forms
 
   def permission_forms
+
     if params[:id].present?
       #@girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
       activity_id = params[:id]
@@ -243,7 +244,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     ids.each do |id|
       #@girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted','Sent','Updated']).first
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted','Sent']).first
       if @girl_scouts_permission_form
         @girl_scout = @girl_scouts_permission_form.girls_scout
         permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
@@ -279,7 +280,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def girls_scouts_activities
     return @girls_scouts_activities if defined?(@girls_scouts_activities)
-    @girls_scouts_activities = ["<Create New Activity>", 0], ["--------------------", :disabled => "disabled"]
+    @girls_scouts_activities = ["Select Activity", 0], ["--------------------", :disabled => "disabled"]
   end
 
 end

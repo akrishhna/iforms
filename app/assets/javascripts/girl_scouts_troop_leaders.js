@@ -98,10 +98,15 @@ $(function () {
 
   $('select#girls_scouts_activities').change(function () {
     if ($(this).val() == 0) {
-      window.location = '/girl_scouts_troop_leaders/activities?id=' + 'new';
+      //window.location.reload();
+     // window.location = '/girl_scouts_troop_leaders/activities?id=' + 'new';
     } else {
       window.location = '/girl_scouts_troop_leaders/activities?id=' + $(this).val();
     }
+  });
+
+  $('.create_new_activity').click(function(){
+    window.location = '/girl_scouts_troop_leaders/activities?id=' + 'new';
   });
 
   $('.girl_scouts_activity_form input,.girl_scouts_activity_form select').change(function () {
@@ -222,7 +227,8 @@ $(function () {
 
   $('select#girls_scout_permission_form').change(function () {
     if ($(this).val() == 0) {
-      window.location = '/girl_scouts_troop_leaders/activities?id=' + 'new';
+     // window.location.reload();
+     // window.location = '/girl_scouts_troop_leaders/activities?id=' + 'new';
     } else {
       window.location = '/girl_scouts_troop_leaders/permission_forms?id=' + $(this).val();
     }
