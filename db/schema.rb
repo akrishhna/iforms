@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005095254) do
+ActiveRecord::Schema.define(:version => 20121010092042) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -277,6 +277,22 @@ ActiveRecord::Schema.define(:version => 20121005095254) do
     t.string   "name"
     t.string   "controltype"
     t.integer  "pdfupload_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "display_messages", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "message_type"
+    t.boolean  "status"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "display_messsages", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "message_type"
+    t.boolean  "status"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

@@ -50,6 +50,7 @@ Iforms::Application.routes.draw do
       post 'send_notification_email'
       post 'delete_activity'
       post 'resend_permission_form'
+      post 'change_welcome_message_status'
     end
   end
 

@@ -7,7 +7,24 @@ class GirlScoutsTroopLeadersController < ApplicationController
     id = @girls_activity.id rescue nil
     id = session[:selected_activity_id] if session[:selected_activity_id].present?
     session[:selected_activity_id] = id
-    redirect_to permission_forms_girl_scouts_troop_leaders_path(:id => id)
+
+    #checking default message
+    display_message = current_user.display_messages.where("message_type = 'welcome_msg_girl_scouts_troop_leaders'").first
+
+    unless display_message && display_message.status
+      @display_message = DisplayMessage.new
+    else
+      redirect_to permission_forms_girl_scouts_troop_leaders_path(:id => id)
+    end
+  end
+
+  def change_welcome_message_status
+    @display_message = DisplayMessage.new
+    @display_message.user_id = current_user.id
+    @display_message.message_type = 'welcome_msg_girl_scouts_troop_leaders'
+    @display_message.status = true
+    @display_message.save
+    redirect_to girl_scouts_troop_leaders_path
   end
 
   # Girls scout roster
@@ -244,7 +261,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     ids.each do |id|
       #@girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted','Sent']).first
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted', 'Sent']).first
       if @girl_scouts_permission_form
         @girl_scout = @girl_scouts_permission_form.girls_scout
         permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''

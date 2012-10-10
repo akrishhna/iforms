@@ -4,4 +4,14 @@
   <%= link_to "Roster", roster_girl_scouts_troop_leaders_path %>
 </div>
 <div>&nbsp;</div>
-<strong>Welcome! </strong>Girl Scouts Troop Leader
+<div>
+  <p style="text-align: center;font-size: 22px"><strong>Welcome to iFor.ms for Girl Scouts Troop Leaders </strong></p><br>
+  <p style="text-align: center;font-size: 18px">Step 1. Click the Roster link above to enter the names of the girls and parents in your troop.</p>
+  <p style="text-align: center;font-size: 18px">Step 2. Click Activities link above to create an Activity and send email notification to parents.</p>
+  <p style="text-align: center;font-size: 18px;margin-left: 48px;">Step 3. Monitor Parent Permission Form submission status from the Permission Forms link above.</p>
+</div>
+<div style="text-align: center">
+ <%= form_for @display_message, :url => change_welcome_message_status_girl_scouts_troop_leaders_path do|f|  %>
+  <%= f.submit "OK – I’ve got it.  No need to show this to me again.",:class => 'btn btn-primary btn-large display_message_btn' %>
+    <% end %>
+</div>
