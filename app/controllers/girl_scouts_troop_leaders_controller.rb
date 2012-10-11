@@ -297,7 +297,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def girls_scouts_activities
     return @girls_scouts_activities if defined?(@girls_scouts_activities)
-    @girls_scouts_activities = ["Select Activity", 0], ["--------------------", :disabled => "disabled"]
+    @girls_scouts_activities = []
   end
 
 end
