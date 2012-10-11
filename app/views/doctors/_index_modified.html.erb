@@ -8,14 +8,14 @@
   <% if !@appointments.blank? %>
     <table class="table table-bordered">
       <tr BGCOLOR="grey" id="table_header">
-        <th>Next Appointment</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Form</th>
-        <th>Appointment</th>
-        <th>Sent</th>
-        <th>Received</th>
-        <th></th>
+        <th style="text-align: center">Next Appointment</th>
+        <th style="text-align: center">Name</th>
+        <th style="text-align: center">Email</th>
+        <th style="text-align: center">Form</th>
+        <th style="text-align: center">Appointment</th>
+        <th style="text-align: center">Sent</th>
+        <th style="text-align: center">Status</th>
+        <th style="text-align: center"></th>
       </tr>
       <% count = 1 %>
       <% @appointments.each do |i| %>
