@@ -261,7 +261,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     ids.each do |id|
       #@girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted', 'Sent']).first
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted', 'Sent', 'Updated']).first
       if @girl_scouts_permission_form
         @girl_scout = @girl_scouts_permission_form.girls_scout
         permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''

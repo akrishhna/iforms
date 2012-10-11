@@ -211,13 +211,19 @@ $(function () {
   function enable_pf_btns() {
     var checkbox_count = $('#girl_scouts_permission_form_table  input[name=check_box_row]').length;
     var checked_checkbox_count = $('#girl_scouts_permission_form_table  input[name=check_box_row]:checked').length;
+    var checked_checkbox_status =false;
+      $('#girl_scouts_permission_form_table  input[name=check_box_row]:checked').each(function(){
+      if($(this).attr('data-status') == 'Submitted' || $(this).attr('data-status') == 'Updated'){
+       checked_checkbox_status = true;
+      }
+    });
     if (checkbox_count == checked_checkbox_count) {
       $('.pf_select_all_check_box').attr('checked', true)
     }
     else {
       $('.pf_select_all_check_box').attr('checked', false)
     }
-    if (checked_checkbox_count > 0) {
+    if (checked_checkbox_count > 0 && checked_checkbox_status) {
       $('#permission_form_print_forms_btn').attr('disabled', false);
     }
     else {
@@ -257,7 +263,7 @@ $(function () {
       $.get("/girl_scouts_troop_leaders/pdf_merging",
         {activity_id:activity_id, checked_vals:checked_vals.join()}
       ).success(function () {
-        //  window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id=" + activity_id);
+          window.open("/girl_scouts_troop_leaders/show_all_permission_forms_pdf?activity_id=" + activity_id);
         });
     }
   });
