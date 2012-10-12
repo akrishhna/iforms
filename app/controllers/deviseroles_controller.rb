@@ -40,7 +40,7 @@ class DeviserolesController < ApplicationController
     @email = params[:email]
     @subject = params[:subject]
     @message = params[:message]
-    @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
+    @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
 
     if !@name.empty? and !@email.empty? and !@message.empty? and ayah_passed

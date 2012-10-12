@@ -100,3 +100,7 @@ Iforms::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 end
+
+# Play Thre keys
+PUBLISHER_KEY = "a3a9fc361780e4ea7d14985514c0ad9ca8a38df9"
+SCORING_KEY = "d58ce97ad474464d1f2b1739d0ff4f7ef011581e"
