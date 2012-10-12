@@ -191,6 +191,9 @@ $(function () {
     }
   });
 
+  $('#girls_scouts_activities option:first').hide();
+
+
 
   // Permission Forms Tab
 
@@ -267,4 +270,15 @@ $(function () {
         });
     }
   });
+
+
+
+
+  //permission forms
+  if($('.page').attr('data-page') == 'girl_scouts_troop_leaders_permission_forms') {
+    $('#girls_scout_permission_form option:first').hide();
+    if(params["id"] == undefined && $('#selected_activity_id') == "") {
+      $('#girls_scout_permission_form').val('');
+    }
+  }
 });
