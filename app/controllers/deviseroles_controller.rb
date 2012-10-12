@@ -31,19 +31,38 @@ class DeviserolesController < ApplicationController
 
   end
 
+  def contact
+    @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
+  end
+
   def contacts
     @name = params[:name]
     @email = params[:email]
     @subject = params[:subject]
-    @message = params[:body]
-    respond_to do |format|
-      if !@name.empty? and !@email.empty? and !@message.empty? and verify_recaptcha
-        format.html { redirect_to(root_url, :notice => 'Message sent.') }
-        Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver
+    @message = params[:message]
+    @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
+    ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+
+    if !@name.empty? and !@email.empty? and !@message.empty? and ayah_passed
+      Notifier.contactus_form_notification(@name,@email,@subject,@message).deliver
+      redirect_to(homepage_url, :notice => "Thanks for contacting")
+    else
+      if ayah_passed
+        flash[:notice] = 'Please fill up all * mark fields'
       else
-        format.html { redirect_to('/contact', :alert => "Please enter valid re-captcha tag") }
+        flash[:notice] = 'Please fill up all * mark fields and complete the game'
       end
+      redirect_to('/contact')
     end
+
+    #respond_to do |format|
+    #  if !@name.empty? and !@email.empty? and !@message.empty? and verify_recaptcha
+    #    format.html { redirect_to(root_url, :notice => 'Message sent.') }
+    #    Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver
+    #  else
+    #    format.html { redirect_to('/contact', :alert => "Please enter valid re-captcha tag") }
+    #  end
+    #end
   end
 
   def user_details
