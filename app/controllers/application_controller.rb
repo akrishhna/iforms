@@ -18,10 +18,20 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_name
-    if current_user.role == 'doctor'
+    #if current_user.role == 'doctor'
+    #  (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
+    #elsif current_user.role == 'patient'
+    #  (current_user.patients.first.firstname + ' ' + current_user.patients.first.lastname) rescue 'User'
+    #end
+    service_provider = current_user.service_providers.first
+    if service_provider.nil?
+      (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
+    elsif service_provider.id == 2
+      (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'Troop Leader'
+    elsif service_provider.id == 1
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
-    elsif current_user.role == 'patient'
-      (current_user.patients.first.firstname + ' ' + current_user.patients.first.lastname) rescue 'User'
+    else
+      (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     end
   end
 

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :girl_scouts_activities
   has_many :girl_scouts_activity_permission_forms
   has_many :display_messages, :dependent => :destroy
+  has_one :profile
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :timeoutable and :activatable

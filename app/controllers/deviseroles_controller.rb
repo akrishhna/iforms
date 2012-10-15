@@ -2,28 +2,55 @@ class DeviserolesController < ApplicationController
   before_filter :authenticate_user!, :only => ["index"]
 
   def index
-    case current_user.role
-      when 'patient'
-        @patient = Patient.all(:conditions => ['user_id = ?', current_user.id]).first
-        if @patient.blank?
-          redirect_to :controller => "patients", :action => "new"
-        else
-          redirect_to :controller => "consumer", :action => "index"
-        end
-
-      when 'doctor'
-        @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
-        if @doctor.blank?
-          redirect_to :controller => "doctors", :action => "new"
-        else
-          redirect_to :controller => "doctors", :action => "index"
-        end
-
-      when 'admin'
-        redirect_to :controller => "admin", :action => "index"
+    @service_provider = current_user.service_providers.first
+    if @service_provider.nil?
+      @profile = Profile.find_by_user_id( current_user.id)
+      if @profile.nil?
+        redirect_to :controller => "profiles", :action => "new"
       else
-        render :text => "some error"
+        redirect_to :controller => "consumer", :action => "index"
+      end
+
+    elsif @service_provider.id == 2
+      @profile = Profile.find_by_user_id(current_user.id)
+      if @profile.nil?
+        redirect_to :controller => "profiles", :action => "new"
+      else
+        redirect_to permission_forms_girl_scouts_troop_leaders_path
+      end
+    elsif @service_provider.id == 1
+      @doctor = Doctor.find_by_user_id( current_user.id)
+      if @doctor.nil?
+       redirect_to :controller => "doctors", :action => "new"
+      else
+       redirect_to :controller => "doctors", :action => "index"
+      end
+    else
+
     end
+
+    #case current_user.role
+    #  when 'patient'
+    #    @profile = Profile.all(:conditions => ['user_id = ?', current_user.id]).first
+    #    if @profile.blank?
+    #      redirect_to :controller => "profile", :action => "new"
+    #    else
+    #      redirect_to :controller => "consumer", :action => "index"
+    #    end
+    #
+    #  when 'doctor'
+    #    @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
+    #    if @doctor.blank?
+    #      redirect_to :controller => "doctors", :action => "new"
+    #    else
+    #      redirect_to :controller => "doctors", :action => "index"
+    #    end
+    #
+    #  when 'admin'
+    #    redirect_to :controller => "admin", :action => "index"
+    #  else
+    #    render :text => "some error"
+    #end
   end
 
 
@@ -44,7 +71,7 @@ class DeviserolesController < ApplicationController
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
 
     if !@name.empty? and !@email.empty? and !@message.empty? and ayah_passed
-      Notifier.contactus_form_notification(@name,@email,@subject,@message).deliver
+      Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver
       redirect_to(homepage_url, :notice => "Thanks for contacting")
     else
       if ayah_passed
@@ -107,12 +134,12 @@ class DeviserolesController < ApplicationController
       redirect_to root_path
     else
       if !params[:user][:email].empty?
-      flash[:error] = "#{params[:user][:email]} not found"
-      redirect_to :back
+        flash[:error] = "#{params[:user][:email]} not found"
+        redirect_to :back
       else
         flash[:error] = "Please enter Email"
         redirect_to :back
-        end
+      end
     end
   end
 end

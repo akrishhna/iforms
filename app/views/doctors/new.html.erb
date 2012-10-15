@@ -1,14 +1,13 @@
 <% @doctornew = Doctor.where("user_id = ?",current_user.id).first %>
 <% if !@doctornew %>
 <div class="container">
-<h3>Enter Profile Information</h3><br>
-<%= render "doctors/form" %><br><br>
-
+<h3>Enter Profile Information</h3>
+<%= render "form" %>
 <%= link_to 'Back', doctors_path %>
 </div>
 <% else %>
 <p>Your Profile Information is already in our database.</p>
-<p>If you care to edit <%= link_to 'Click here', edit_patient_path(@doctornew)%><br><br>
-<%= link_to 'Back', doctors_path %>	
+<p>If you care to edit <%= link_to 'Click here', edit_profile_path(@doctornew)%><br><br>
+<%= link_to 'Back', doctors_path %>
 <%end%>
 

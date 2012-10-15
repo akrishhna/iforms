@@ -11,9 +11,15 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def edit
+    @service_provider = current_user.service_providers.first
+    #@profile = current_user.profile.id if current_user.profile.id.present?
+  end
+
   def update
     username = @user.username
     email = @user.email
+    @service_provider = current_user.service_providers.first
     if params[:user][:email] != @user.email || params[:user][:username] != @user.username
       Sessionstore.delete_all
       p session[:useremail_before_update]= @user.email
@@ -32,12 +38,14 @@ class RegistrationsController < Devise::RegistrationsController
         p session[:useremail_after_update]= @user.email
         Notifier.confirmation_instructions_notification(@user).deliver
         Sessionstore.create(:useremail_beforeupdate => session[:useremail_before_update], :useremail_afterupdate => session[:useremail_after_update])
-        redirect_to root_path
+        redirect_to :controller => "consumer", :action => "index"
       else
         if username != params[:user][:username]
-          flash[:alert] = "Your desired Username #{params[:user][:username]} is not available."
+          flash[:error] = "Your desired Username #{params[:user][:username]} is not available."
+        elsif email != params[:user][:email]
+          flash[:error] = "Your desired email address #{params[:user][:email]} is not available."
         else
-          flash[:alert] = "Your desired email address #{params[:user][:email]} is not available."
+          flash[:error] = "Something is wrong try again."
         end
         redirect_to edit_user_registration_path
       end

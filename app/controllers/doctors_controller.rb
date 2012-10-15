@@ -1,5 +1,5 @@
 class DoctorsController < ApplicationController
-  before_filter :is_doctor?, :set_service_provider
+  before_filter :set_service_provider
   before_filter :doctor_profile_exists?, :except => [:new,:create]
   def index
     session["consumer_tab_index"] = 1
@@ -37,7 +37,7 @@ class DoctorsController < ApplicationController
    @doctor.doctorname =  params[:doctor][:firstname] + " " +  params[:doctor][:lastname]
    respond_to do |format|
    if @doctor.update_attributes(params[:doctor])
-     format.html { redirect_to(edit_user_registration_path, :notice => 'Profile Updated successfully.') }
+     format.html { redirect_to(doctors_path, :notice => 'Profile Updated successfully.') }
      format.xml  { head :ok }
    else
      format.html { render :action => "edit" }

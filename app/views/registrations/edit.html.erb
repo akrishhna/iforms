@@ -1,49 +1,91 @@
 <div class="container">
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-<% if resource.errors.any? %>
-<div id="error_explanation">
-	<ul>
-    <% resource.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put,:class => "form-horizontal"}) do |f| %>
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    </ul> 
-  </div> 
-<% end %>
-<br />
-    <div class="labelcss">Username</div>
-    <%= f.text_field :username %>
-    <br /> <br />
-  <div class="labelcss">Email</div>  
-  <%= f.text_field :email %>
-<br /><br />
-  <div class="labelcss">New password </div> 
-  <%= f.password_field :password %>
-<br /><br />
-  <div class="labelcss">Password confirmation </div>
-  <%= f.password_field :password_confirmation %>
-<br /><br />
-  <div class="labelcss">Current password </div> 
-  <%= f.password_field :current_password %>
-<br /><br />
-  <div class="actions">  
-  <%= f.submit "Update" %>
-  </div>
-<% end %>
-<% if current_user.role == "patient" %>
-<% @patient = Patient.find_by_user_id(current_user.id) %>
-<%= link_to'Update Profile Information', edit_patient_path(@patient) %><br><br>
-<%= link_to "Back", patients_path %>
-<% end %>
-<% if current_user.role == "doctor" %>
-<% @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]) %>
-<%= link_to'Update Profile Information', edit_doctor_path(@doctor) %><br><br>
-<%= link_to "Back", doctors_path %>
-<% end %>
-<!-- <h3>Cancel my account</h3>
+    <div class="control-group">
+      <%= f.label :username, "User Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :username %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email, "Email", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password, "New password", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password_confirmation, "Password confirmation", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :current_password, "Current password", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :current_password %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Update", :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+  <% if @service_provider.nil? %>
+    <% @profile = Profile.find_by_user_id(current_user.id) %>
+    <%= link_to 'Update Profile Information', edit_profile_path(@profile) %>
+    <br><br>
+    <%= link_to "Back", consumer_index_path %>
+  <% elsif @service_provider.id == 2 %>
+    <% @profile = Profile.find_by_user_id(current_user.id) %>
+    <%= link_to 'Update Profile Information', edit_profile_path(@profile) %>
+    <br><br>
+    <%= link_to "Back", consumer_index_path %>
+  <% elsif @service_provider.id == 1 %>
+    <% @doctor = Doctor.find_by_user_id(current_user.id) %>
+    <%= link_to 'Update Profile Information', edit_doctor_path(@doctor) %>
+    <br><br>
+    <%= link_to "Back", doctors_path %>
+  <% else %>
+  <% end %>
+
+
+  <% if false %>
+    <% if current_user.role == "patient" %>
+      <% @patient = Patient.find_by_user_id(current_user.id) %>
+      <%= link_to 'Update Profile Information', edit_patient_path(@patient) %>
+      <br><br>
+      <%= link_to "Back", patients_path %>
+    <% end %>
+    <% if current_user.role == "doctor" %>
+      <% @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]) %>
+      <%= link_to 'Update Profile Information', edit_doctor_path(@doctor) %>
+      <br><br>
+      <%= link_to "Back", doctors_path %>
+    <% end %>
+    <!-- <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p> -->
 
-
+  <% end %>
 </div>
+
+<style>
+  .form-horizontal .control-label {
+    width: 144px;
+  }
+</style>

@@ -1,0 +1,7 @@
+<% @profilenew = Patient.where("user_id = ?",current_user.id).first %>
+<% if !@profilenew %>
+  <div class="container">
+    <h3>Enter Profile Information</h3><br>
+    <%= render "form" %><br><br>
+</div>
+<%end%>
