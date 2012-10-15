@@ -110,7 +110,7 @@ Iforms::Application.routes.draw do
   end
 
   devise_for :admins
-  devise_for :users, :path => 'users', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => ''}, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations'}
+  devise_for :users, :path => 'users', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => ''}, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations', :passwords => 'passwords'}
 
   match '/about', :to => 'deviseroles#about'
   match '/contact', :to => 'deviseroles#contact'

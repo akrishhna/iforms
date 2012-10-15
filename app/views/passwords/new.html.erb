@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Forgot password?</h2>
+
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name)) do |f| %>
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <% msg %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <br />
+    <div class="labelcss">Email </div>
+    <%= f.text_field :email %>
+    <br /><br />
+
+    <div class="actions">
+      <%= f.submit "Send me reset password instructions", :class =>'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= render :partial => "devise/shared/links" %>
+</div>
