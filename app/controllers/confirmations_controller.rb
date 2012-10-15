@@ -14,7 +14,7 @@ class ConfirmationsController < Devise::ConfirmationsController
         if @user
           if @user.confirmation_token == nil and @user.edit_confirmed == "edited"
             p "inside if"
-            flash[:notice] = "Password reset instructions sent to #{params[:user][:email]}"
+            flash[:success] = "Account conformation instructions sent to #{params[:user][:email]}"
             Notifier.confirmation_instructions_notification(@user).deliver
             redirect_to root_url
           else

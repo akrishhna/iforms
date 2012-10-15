@@ -130,7 +130,7 @@ class DeviserolesController < ApplicationController
     #raise user.to_yaml
     if user
       Notifier.send_username_notification(user).deliver
-      flash[:alert] = "Username sent to #{user.email}"
+      flash[:success] = "Username sent to #{user.email}"
       redirect_to root_path
     else
       if !params[:user][:email].empty?

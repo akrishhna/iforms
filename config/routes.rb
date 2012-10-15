@@ -116,7 +116,7 @@ Iforms::Application.routes.draw do
   match '/contact', :to => 'deviseroles#contact'
   match '/FAQ', :to => 'deviseroles#FAQ'
   match 'privacy_policy', :to => 'deviseroles#privacy_policy'
-  root :to => redirect("/users/login")
+  root :to => redirect {|p, req| req.flash.keep; "/users/login"}
 
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', :to => 'errors#error_404'
