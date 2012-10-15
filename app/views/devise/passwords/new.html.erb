@@ -6,7 +6,11 @@
 <div id="error_explanation">
 	<ul>
     <% resource.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+      <% if params[:user][:email].empty? %>
+        <% flash[:error] = "Please enter Email" %>
+        <% else %>
+        <% flash[:error] = "#{params[:user][:email]} not found" %>
+        <% end %>
     <% end %>
     </ul> 
   </div> 

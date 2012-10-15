@@ -103,11 +103,16 @@ class DeviserolesController < ApplicationController
     #raise user.to_yaml
     if user
       Notifier.send_username_notification(user).deliver
-      flash[:notice] = "Please check your mail"
+      flash[:alert] = "Username sent to #{user.email}"
       redirect_to root_path
     else
-      flash[:notice] = "Email does not exist"
+      if !params[:user][:email].empty?
+      flash[:error] = "#{params[:user][:email]} not found"
       redirect_to :back
+      else
+        flash[:error] = "Please enter Email"
+        redirect_to :back
+        end
     end
   end
 end
