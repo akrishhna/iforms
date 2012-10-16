@@ -63,6 +63,10 @@ class DeviserolesController < ApplicationController
   end
 
   def contacts
+    @name = params[:name]
+    @email = params[:email]
+    @subject = params[:subject]
+    @message = params[:message]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
     ayah_passed = true if current_user.present?

@@ -29,7 +29,7 @@ class Notifier < ActionMailer::Base
   
   def contactus_form_notification(name, email, subject, body)
     email_to = "Michael.R.Whitworth@gmail.com"
-    email_to = "ranjith@startupsourcing.com" if Rails.env.development?
+    email_to = "catchall@startupsourcing.com" if Rails.env.development? || Rails.env.staging?
     @name = name
     @email = email
     @subject = subject
