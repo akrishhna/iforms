@@ -10,7 +10,9 @@ class CreateProfiles < ActiveRecord::Migration
     users = User.find_all_by_role("patient")
     users.each do |user|
       patient = Patient.find_by_user_id(user.id)
-      Profile.create({:user_id => user.id, :first_name => patient.firstname, :last_name =>patient.lastname})
+      if patient
+        Profile.create({:user_id => user.id, :first_name => patient.firstname, :last_name =>patient.lastname})
+      end
     end
   end
 

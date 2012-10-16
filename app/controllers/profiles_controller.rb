@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
       if service_provider.nil?
         redirect_to :controller => "consumer", :action => "index"
       elsif service_provider.id == 2
-        redirect_to  permission_forms_girl_scouts_troop_leaders_path
+        redirect_to  girl_scouts_troop_leaders_path
       else
         redirect_to :controller => "consumer", :action => "index"
         end
@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
       if service_provider.nil?
         redirect_to :controller => "consumer", :action => "index"
       elsif service_provider.id == 2
-        redirect_to  permission_forms_girl_scouts_troop_leaders_path
+        redirect_to girl_scouts_troop_leaders_path
       else
         redirect_to :controller => "consumer", :action => "index"
       end

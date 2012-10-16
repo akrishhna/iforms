@@ -16,7 +16,7 @@ class DeviserolesController < ApplicationController
       if @profile.nil?
         redirect_to :controller => "profiles", :action => "new"
       else
-        redirect_to permission_forms_girl_scouts_troop_leaders_path
+        redirect_to girl_scouts_troop_leaders_path
       end
     elsif @service_provider.id == 1
       @doctor = Doctor.find_by_user_id( current_user.id)
