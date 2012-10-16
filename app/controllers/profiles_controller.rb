@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(params[:profile])
     @profile.user_id = current_user.id
     if @profile.save
-      flash[:notice] = 'Profile saved successfully'
+      flash[:success] = 'Profile saved successfully'
       service_provider = current_user.service_providers.first
       if service_provider.nil?
         redirect_to :controller => "consumer", :action => "index"
@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
   def update
    @profile = Profile.find(params[:id])
     if @profile.update_attributes(params[:profile])
-      flash[:notice] = 'Profile Updated successfully'
+      flash[:success] = 'Profile Updated successfully'
       service_provider = current_user.service_providers.first
       if service_provider.nil?
         redirect_to :controller => "consumer", :action => "index"
