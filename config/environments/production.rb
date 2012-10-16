@@ -93,3 +93,7 @@ Iforms::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
+
+# Play Thre keys
+PUBLISHER_KEY = "25bf724141039ddc8ab2d2f80b180f3ed6abc169"
+SCORING_KEY = "6f0d2c5d05e139532364a9a7710e3234d8722524"
