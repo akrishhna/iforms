@@ -63,3 +63,7 @@ Iforms::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+# Play Thre keys
+PUBLISHER_KEY = "c4767d34bc724283166728cdf6e6da245f7b16fd"
+SCORING_KEY = "d58ce97ad474464d1f2b1739d0ff4f7ef011581e"
