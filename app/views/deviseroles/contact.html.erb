@@ -1,6 +1,6 @@
 <h2>Contact Us</h2>
 
-<%= form_tag(contacts_deviseroles_path, :name => "form", :method => 'post', :class => 'form-horizontal') do %>
+<%= form_tag(contacts_deviseroles_path, :name => "form", :method => 'post', :class => 'form-horizontal contact_us') do %>
   <div class="control-group">
     <%= label_tag :name, :class => 'control-label' do %>
       Name<span style="color: red;">*</span>
@@ -30,16 +30,18 @@
       Message<span style="color: red;">*</span>
     <% end %>
     <div class="controls">
-      <%= text_area_tag :message,'', :rows => 3 %>
+      <%= text_area_tag :message,'',:rows => 3 %>
     </div>
   </div>
   <div class="control-group">
+
     <div class="controls">
-      <%= @ayah.get_publisher_html.html_safe %>
+      <%= @ayah.get_publisher_html.html_safe if !current_user.present? %>
     </div>
+
   </div>
   <div class="form-actions">
-    <%= submit_tag "Submit", :class => 'btn btn-primary btn-large span3' %>
+    <%= submit_tag "Submit", :class => 'btn btn-primary btn-large span3 contact_us_submit',:disabled => "disabled" %>
   </div>
 
 <% end %>

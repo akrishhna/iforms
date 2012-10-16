@@ -4,7 +4,7 @@ class DeviserolesController < ApplicationController
   def index
     @service_provider = current_user.service_providers.first
     if @service_provider.nil?
-      @profile = Profile.find_by_user_id( current_user.id)
+      @profile = Profile.find_by_user_id(current_user.id)
       if @profile.nil?
         redirect_to :controller => "profiles", :action => "new"
       else
@@ -19,11 +19,11 @@ class DeviserolesController < ApplicationController
         redirect_to girl_scouts_troop_leaders_path
       end
     elsif @service_provider.id == 1
-      @doctor = Doctor.find_by_user_id( current_user.id)
+      @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
-       redirect_to :controller => "doctors", :action => "new"
+        redirect_to :controller => "doctors", :action => "new"
       else
-       redirect_to :controller => "doctors", :action => "index"
+        redirect_to :controller => "doctors", :action => "index"
       end
     else
 
@@ -63,22 +63,15 @@ class DeviserolesController < ApplicationController
   end
 
   def contacts
-    @name = params[:name]
-    @email = params[:email]
-    @subject = params[:subject]
-    @message = params[:message]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
-
-    if !@name.empty? and !@email.empty? and !@message.empty? and ayah_passed
+    ayah_passed = true if current_user.present?
+    if ayah_passed
       Notifier.contactus_form_notification(@name, @email, @subject, @message).deliver
-      redirect_to(homepage_url, :notice => "Thanks for contacting")
+      flash[:success] = 'Thanks for contacting'
+      redirect_to homepage_url
     else
-      if ayah_passed
-        flash[:notice] = 'Please fill up all * mark fields'
-      else
-        flash[:notice] = 'Please fill up all * mark fields and complete the game'
-      end
+      flash[:error] = 'Please Play the game'
       redirect_to('/contact')
     end
 
