@@ -6,7 +6,7 @@
 <div>&nbsp;</div>
 <div>
   <p style="margin: 0 ">Select an Activity</p>
-  <%= select_tag("girls_scout_permission_form", options_for_select(@girls_scouts_activities, session[:selected_activity_id]), :prompt =>'') %>
+  <%= select_tag("girls_scout_permission_form", options_for_select(@girls_scouts_activities.collect {|a| [truncate(a[0], :length => 30), a[1], :title => a[0]]}, session[:selected_activity_id]), :prompt =>'') %>
   <%= hidden_field_tag :selected_activity_id, session[:selected_activity_id]%>
   <%= link_to "Print Form(s)",  "#", :class => "btn btn-info ", :id => 'permission_form_print_forms_btn', :disabled => "disabled", "data-activity-id" => (@activity.id rescue "") %> &nbsp;
   <%= link_to "Send Email Reminder to Pending", "#", :class => "btn btn-primary", :id => 'permission_form_send_email_btn' %>
