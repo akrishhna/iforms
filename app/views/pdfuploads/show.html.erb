@@ -3,9 +3,8 @@
 <% path1 = time_now+"_"+@pdfupload.file_file_name %>
 <% pathx = "/csvfiles/#{path1}.csv"%>
 <div class = "index">
-<%= link_to 'Home', :controller => "admin", :action => "index"%> |
 <%= link_to 'View uploaded file', @pdfupload.file.url%> |
-<%= link_to 'Download csv format', pathx %></br></br>
+<%= link_to 'Download csv format', pathx %><br><br>
 <table>
 	<tr>
 		<th><b>ControlName</b>&nbsp&nbsp&nbsp&nbsp</th>

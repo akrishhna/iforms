@@ -1,5 +1,5 @@
 class ChildformsController < ApplicationController
-  before_filter :is_admin?
+
   def new
     @childform = Childform.new
     session[:formname] = params[:name]

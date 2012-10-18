@@ -1,5 +1,5 @@
 class PdfuploadsController < ApplicationController
-   before_filter :is_admin?
+
   require 'csv'
  
   def index

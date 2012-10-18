@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   helper :all
-  helper_method :is_admin?
   helper_method :current_user_name
   helper_method :user_service_provider_list, :set_service_provider,:homepage_url
   #helper_method :patient_profile_exists
@@ -47,15 +46,6 @@ class ApplicationController < ActionController::Base
   protected
   def is_patient?
     unless current_user.role=="patient"
-      flash[:notice]="unauthorized access"
-      redirect_to :controller => "deviseroles", :action => "index"
-      false
-    end
-  end
-
-  protected
-  def is_admin?
-    unless current_user.role=="admin"
       flash[:notice]="unauthorized access"
       redirect_to :controller => "deviseroles", :action => "index"
       false

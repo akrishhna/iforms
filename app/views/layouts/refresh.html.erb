@@ -40,8 +40,6 @@ Welcome! <%= link_to current_user.email, edit_user_registration_path %>,
 	<%= link_to 'Home', patients_path %> |
 	<%elsif user_signed_in? and current_user.role =="doctor"%>
 	<%= link_to 'Home', doctors_path %> |
-	<%elsif user_signed_in? and current_user.role =="admin"%>
-	<%= link_to 'Home', :controller => "admin", :action => "index" %> |
 	<%else%>
 	<%= link_to 'Home', root_url %> |
 	<%end %>

@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   before_filter :is_doctor?, :except =>["show"]
-  #before_filter :is_admin?, :only => ["show"]
+
   def new
     @appointment = Appointment.new
     @old_appointment = Appointment.find_by_id(params[:appointment_id])

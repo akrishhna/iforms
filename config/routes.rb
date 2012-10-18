@@ -1,5 +1,9 @@
 Iforms::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :profiles
 
   get "errors/error_404"
@@ -76,7 +80,6 @@ Iforms::Application.routes.draw do
   get 'pdfuploads/new'
   get 'pdfuploads/show'
 
-  get 'admin/index'
   get 'deviseroles/index'
 
   get 'doctors/new'
@@ -109,7 +112,6 @@ Iforms::Application.routes.draw do
     end
   end
 
-  devise_for :admins
   devise_for :users, :path => 'users', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => ''}, :controllers => {:registrations => 'registrations', :confirmations => 'confirmations', :passwords => 'passwords'}
 
   match '/about', :to => 'deviseroles#about'

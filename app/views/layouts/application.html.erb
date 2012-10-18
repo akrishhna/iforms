@@ -53,8 +53,6 @@
       <%= link_to 'Home', homepage_url %> |
     <% elsif user_signed_in? and current_user.role =="doctor" %>
       <%= link_to 'Home', homepage_url %> |
-    <% elsif user_signed_in? and current_user.role =="admin" %>
-      <%= link_to 'Home', :controller => "admin", :action => "index" %> |
     <% else %>
       <%= link_to 'Home', root_url %> |
     <% end %>

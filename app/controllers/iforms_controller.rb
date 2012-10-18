@@ -2,12 +2,8 @@ class IformsController < ApplicationController
 
   before_filter :authenticate_user! #, :except => [:index]
 #  before_filter :is_patient?, :except => [:show, :get_iform]
-  before_filter :is_admin?, :only => ["show"]
-                                    # before_filter :is_doctor?, :only => [:show]
 
-                                    # GET /iform
-                                    # GET /iform.xml
-  def index
+   def index
     # @iform = Iform.all
     respond_to do |format|
       format.html { redirect_to patients_path }
