@@ -109,6 +109,11 @@ class DeviserolesController < ApplicationController
           i.email = @sessionstore.useremail_afterupdate
           i.save(:validate => false)
         end
+        @girls_scouts = GirlsScout.where("email = ?", @sessionstore.useremail_beforeupdate)
+        @girls_scouts.each do|girl_scout|
+          girl_scout.email = @sessionstore.useremail_afterupdate
+          girl_scout.save(:validate => false)
+        end
       end
     end
     redirect_to deviseroles_path

@@ -5,14 +5,21 @@
     <%= hidden_field_tag :id, girl_scout.id, :id => "id_#{row_index}" %>
   </td>
   <td>
-    <%= text_field_tag :first_name, girl_scout.first_name, :id => "first_name_#{row_index}", :class => 'girl_scout_name input-medium',:placeholder => "First Name" %>
-    <%= text_field_tag :last_name, girl_scout.last_name, :id => "last_name_#{row_index}",:class => 'girl_scout_name input-small',:placeholder => "Last Name" %>
+    <%= text_field_tag :first_name, girl_scout.first_name, :id => "first_name_#{row_index}", :class => 'girl_scout_name input-medium', :placeholder => "First Name" %>
+    <%= text_field_tag :last_name, girl_scout.last_name, :id => "last_name_#{row_index}", :class => 'girl_scout_name input-small', :placeholder => "Last Name" %>
   </td>
   <td>
-    <%= text_field_tag :parent_first_name, girl_scout.parent_first_name, :id => "parent_first_name_#{row_index}",:class => 'girl_scout_parent_name input-medium',:placeholder => "First Name" %>
-    <%= text_field_tag :parent_last_name, girl_scout.parent_last_name, :id => "parent_last_name_#{row_index}",:class => 'girl_scout_parent_name input-small',:placeholder => "Last Name" %>
+    <%= text_field_tag :parent_first_name, girl_scout.parent_first_name, :id => "parent_first_name_#{row_index}", :class => 'girl_scout_parent_name input-medium', :placeholder => "First Name" %>
+    <%= text_field_tag :parent_last_name, girl_scout.parent_last_name, :id => "parent_last_name_#{row_index}", :class => 'girl_scout_parent_name input-small', :placeholder => "Last Name" %>
   </td>
   <td>
-    <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email',:placeholder => "Email" %>
+    <% @user = User.find_by_email(girl_scout.email) %>
+    <% if @user %>
+      <% if @user.edit_confirmed == 'confirmed' %>
+        <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email', :placeholder => "Email", :disabled => 'disabled' %>
+      <% end %>
+    <% else %>
+      <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email', :placeholder => "Email" %>
+    <% end %>
   </td>
 </tr>
