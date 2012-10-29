@@ -159,7 +159,8 @@ class DeviserolesController < ApplicationController
       @user.email = params[:user][:email]
       @existing_user = User.find_by_email(params[:user][:email])
       if @existing_user
-        UserServiceProvider.create(:user_id => @existing_user.id,:service_provider_id => 2)
+        user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id,2)
+        UserServiceProvider.create(:user_id => @existing_user.id,:service_provider_id => 2) if user_exist.nil?
         flash[:success] = "#{params[:user][:email]} already exist Please login"
         redirect_to homepage_url
       elsif @user.save
