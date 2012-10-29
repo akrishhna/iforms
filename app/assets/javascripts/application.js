@@ -42,6 +42,9 @@ $(document).ready(function(){
     else if($(this).val() == 2){
       window.location = '/girl_scouts_troop_leaders'
     }
+    else if($(this).val() == 3){
+      window.location = '/girl_scout_diamonds'
+    }
     else if($(this).val() == 0){
       window.location = '/consumer'
     }

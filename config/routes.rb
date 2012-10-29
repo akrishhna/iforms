@@ -4,6 +4,7 @@ Iforms::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+  resources :girl_scout_diamonds
 
   resources :profiles
 
