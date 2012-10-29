@@ -12,12 +12,12 @@ class DeviserolesController < ApplicationController
       end
 
     elsif @service_provider.id == 2
-      @profile = Profile.find_by_user_id(current_user.id)
-      if @profile.nil?
-        redirect_to :controller => "profiles", :action => "new"
-      else
+      #@profile = Profile.find_by_user_id(current_user.id)
+      #if @profile.nil?
+      #  redirect_to :controller => "profiles", :action => "new"
+      #else
         redirect_to girl_scouts_troop_leaders_path
-      end
+     # end
     elsif @service_provider.id == 1
       @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
@@ -110,7 +110,7 @@ class DeviserolesController < ApplicationController
           i.save(:validate => false)
         end
         @girls_scouts = GirlsScout.where("email = ?", @sessionstore.useremail_beforeupdate)
-        @girls_scouts.each do|girl_scout|
+        @girls_scouts.each do |girl_scout|
           girl_scout.email = @sessionstore.useremail_afterupdate
           girl_scout.save(:validate => false)
         end
@@ -142,6 +142,37 @@ class DeviserolesController < ApplicationController
         flash[:error] = "Please enter Email"
         redirect_to :back
       end
+    end
+  end
+
+  def girl_scout_sign_up_page
+    @user = User.new
+    @user.build_girl_scout_troop_leader_profile
+    @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
+  end
+
+  def girl_scout_new
+    @user = User.new(params[:user])
+    @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
+    ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+    if ayah_passed
+      @user.email = params[:user][:email]
+      @existing_user = User.find_by_email(params[:user][:email])
+      if @existing_user
+        UserServiceProvider.create(:user_id => @existing_user.id,:service_provider_id => 2)
+        flash[:success] = "#{params[:user][:email]} already exist Please login"
+        redirect_to homepage_url
+      elsif @user.save
+        UserServiceProvider.create(:user_id => @user.id,:service_provider_id => 2)
+        flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
+        redirect_to homepage_url
+      else
+        flash[:error] = 'Something Wrong Please Try again'
+        redirect_to('/girls_scout/sign_up')
+      end
+    else
+      flash[:error] = 'Please Play the game'
+      redirect_to('/girls_scout/sign_up')
     end
   end
 end

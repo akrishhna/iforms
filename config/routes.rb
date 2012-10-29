@@ -4,6 +4,7 @@ Iforms::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+
   resources :profiles
 
   get "errors/error_404"
@@ -104,6 +105,9 @@ Iforms::Application.routes.draw do
       post 'sending_username'
     end
   end
+  match 'girls_scout/sign_up' => 'deviseroles#girl_scout_sign_up_page'
+  match '/deviseroles/girl_scout_new' => 'deviseroles#girl_scout_new'
+
   resources :childforms
   resources :iforms do
     collection do

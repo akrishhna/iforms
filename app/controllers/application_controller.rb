@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     if service_provider.nil?
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     elsif service_provider.id == 2
-      (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'Troop Leader'
+      (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
     elsif service_provider.id == 1
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
     else

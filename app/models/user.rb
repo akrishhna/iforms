@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :girl_scouts_activity_permission_forms
   has_many :display_messages, :dependent => :destroy
   has_one :profile, :dependent => :destroy
+  has_one :girl_scout_troop_leader_profile
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :timeoutable and :activatable
@@ -21,6 +22,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :role, :edit_confirmed, :remember_me, :username
+  attr_accessible :service_provider_ids,:status
+  attr_accessible :girl_scout_troop_leader_profile_attributes
+  accepts_nested_attributes_for :girl_scout_troop_leader_profile
+
 
   after_create :resolve_girl_scout
 

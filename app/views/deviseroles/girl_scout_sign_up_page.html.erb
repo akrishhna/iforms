@@ -1,0 +1,67 @@
+<h2>Sign up</h2>
+<%= form_for @user, :url => girl_scout_new_deviseroles_path, :html => {:class => 'form-horizontal girl_scout_sign_up_form', :multipart => true} do |f| %>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :username, "Username", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :username %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, "Email", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  <%= f.fields_for :girl_scout_troop_leader_profile do |builder| %>
+    <div class="control-group">
+      <%= builder.label :first_name, "First Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= builder.text_field :first_name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= builder.label :last_name, "Last Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= builder.text_field :last_name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= builder.label :council_type, "Council", :class => 'control-label' %>
+      <div class="controls">
+         <%= builder.select :council_type,["Central Texas"],{:include_blank => true} %>
+      </div>
+    </div>
+  <% end %>
+  <div class="control-group">
+    <%= f.label :password, "Password", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :password_confirmation, "Password Confirmation", :class => 'control-label', :style => "width:148px" %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <%= @ayah.get_publisher_html.html_safe if !current_user.present? %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= submit_tag "Submit", :class => 'btn btn-primary ' %>
+  </div>
+
+<% end %>

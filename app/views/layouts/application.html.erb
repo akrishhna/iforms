@@ -31,7 +31,8 @@
         Welcome! <%= link_to current_user_name, edit_user_registration_path %>,
         <%= link_to 'Sign out', destroy_user_session_path %>
       <% else %>
-        <%= link_to 'Sign in', new_user_session_path %>
+        <%= link_to 'Sign in', new_user_session_path %> |
+        <%= link_to 'Sign Up', "/girls_scout/sign_up" %>
       <% end %>
     </div>
   </div>
