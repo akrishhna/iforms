@@ -10,7 +10,7 @@ class CreateServiceProviders < ActiveRecord::Migration
     end
 
     ServiceProvider.create({:name => "dentistry", :title => "Dentistry"})
-    ServiceProvider.create({:name => "girl_scouts_troop_leader", :title => "Girl Scouts Troop Leader"})
+    ServiceProvider.create({:name => "girl_scouts_troop_leader", :title => "Girl Scouts Central Texas"})
   end
   def down
     drop_table :service_providers
