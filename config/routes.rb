@@ -4,13 +4,21 @@ Iforms::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :girl_scout_diamonds
-
   resources :profiles
 
   get "errors/error_404"
 
   get "errors/error_500"
+
+  match 'girl_scout_diamonds/activity_permission_form/:activity_id' => "girl_scout_diamonds#activity_permission_form", :as => "diamond_activity_permission_form_pdf"
+  resources :girl_scout_diamonds do
+    collection do
+      get 'activities'
+      post 'create_activity'
+      post 'delete_activity'
+      post 'send_notification_email'
+    end
+  end
 
   namespace :consumer do
     resources :girl_scouts do

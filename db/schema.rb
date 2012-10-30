@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029054602) do
+ActiveRecord::Schema.define(:version => 20121030092123) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -323,6 +323,62 @@ ActiveRecord::Schema.define(:version => 20121029054602) do
     t.integer  "doctor_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "girl_scout_diamond_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "activity_name"
+    t.string   "activity_location"
+    t.date     "activity_date_begin"
+    t.date     "activity_date_end"
+    t.date     "activity_signed_permission_due_date"
+    t.string   "activity_leave_from"
+    t.integer  "activity_leave_time_hh"
+    t.integer  "activity_leave_time_mm"
+    t.string   "activity_leave_time_am_pm"
+    t.string   "activity_return_to"
+    t.integer  "activity_return_time_hh"
+    t.integer  "activity_return_time_mm"
+    t.string   "activity_return_time_am_pm"
+    t.integer  "activity_cost_dollars"
+    t.integer  "activity_cost_cents"
+    t.string   "activity_mode_of_transportation"
+    t.string   "activity_equipment"
+    t.string   "troop_number"
+    t.string   "leader_first_name_1"
+    t.string   "leader_last_name_1"
+    t.string   "leader_first_name_2"
+    t.string   "leader_last_name_2"
+    t.integer  "leader_phone_1_1"
+    t.integer  "leader_phone_1_2"
+    t.integer  "leader_phone_1_3"
+    t.integer  "leader_cell_1_1"
+    t.integer  "leader_cell_1_2"
+    t.integer  "leader_cell_1_3"
+    t.integer  "leader_phone_2_1"
+    t.integer  "leader_phone_2_2"
+    t.integer  "leader_phone_2_3"
+    t.integer  "leader_cell_2_1"
+    t.integer  "leader_cell_2_2"
+    t.integer  "leader_cell_2_3"
+    t.string   "emergency_first_name"
+    t.string   "emergency_last_name"
+    t.integer  "emergency_phone_1"
+    t.integer  "emergency_phone_2"
+    t.integer  "emergency_phone_3"
+    t.integer  "emergency_cell_1"
+    t.integer  "emergency_cell_2"
+    t.integer  "emergency_cell_3"
+    t.string   "emergency_address_street"
+    t.string   "emergency_address_line"
+    t.string   "emergency_address_city"
+    t.string   "emergency_address_state"
+    t.boolean  "emergency_address_zip"
+    t.string   "emergency_address_country"
+    t.text     "email_notification"
+    t.boolean  "status"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "girl_scout_troop_leader_profiles", :force => true do |t|

@@ -1,0 +1,28 @@
+$('.girl_scout_diamonds_activity_form #girl_scout_diamond_activity_id').val(<%= @activity.id %>);
+$('.view_permission_form_btn').attr('href','<%#= activity_permission_form_pdf_path(:activity_id => @activity.id)%>');
+
+<% if params[:girl_scout_diamond_activity][:activity_name].present? || params[:girl_scout_diamond_activity][:leader_first_name_1].present? || params[:girl_scout_diamond_activity][:leader_last_name_1].present? || params[:girl_scout_diamond_activity][:activity_signed_permission_due_date].present? %>
+
+<% end %>
+
+$('.notification_email_to_parent_text').html(" <%= escape_javascript render :partial => 'parents_email_notification', :locals => {:girls_activity => @activity, :girl_scout => @girls_scout }  %>");
+
+<% if  @activity.activity_name.to_s != '' %>
+  $('select#girl_scout_diamonds_activities option:selected').text('<%= @activity.activity_name %>');
+<% else %>
+  $('select#girl_scout_diamonds_activities option:selected').text('Activity #'+ + <%= @activity.id %>);
+<% end %>
+
+<% if @activity.activity_name.to_s == "" ||
+      @activity.activity_signed_permission_due_date.to_s == "" ||
+      @activity.leader_first_name_1.to_s == "" ||
+      @activity.leader_last_name_1.to_s == "" %>
+$('#notification_email_to_parent').attr('disabled','disabled');
+<% else %>
+$('#notification_email_to_parent').attr('disabled', false);
+<% end %>
+
+
+
+
+

@@ -1,3 +1,49 @@
 // Place all the styles related to the GirlScoutDiamonds controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* ACtivity */
+.girl_scouts_troop_leaders_nav_links {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#girl_scout_diamonds_activities, #girls_scout_permission_form{
+  margin: 1px 30px 1px 0;
+}
+.notification_email_to_parent_text {
+  padding: 23px 18px;
+  margin-right: 10px;
+}
+
+.activity_footer_links {
+  text-align: right;
+  margin: 10px 10px 0 0;
+}
+
+.activity_phone {
+  width: 30px;
+}
+
+.activity_phone_last {
+  width: 40px;
+}
+
+.girl_scout_diamonds_activity_form {
+
+  margin: 10px 0 0 0;
+
+  .controls {
+    margin-left: 240px;
+  }
+
+  .control-label {
+    width: 225px;
+  }
+
+  .form_errors {
+    margin: 10px 0;
+  }
+}
+
+/* end ACtivity */
