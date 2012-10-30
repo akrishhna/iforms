@@ -10,7 +10,7 @@ class GirlScoutDiamondsController < ApplicationController
   def activities
     @girls_activity = GirlScoutDiamondActivity.new()
     if params[:id] == 'new'
-      session[:selected_activity_id] = params[:id]
+      session[:selected_diamond_activity_id] = params[:id]
       @recent_activity = current_user.girl_scout_diamond_activities.order('updated_at').last
       if @recent_activity
         @girls_activity = @recent_activity.dup
@@ -33,10 +33,10 @@ class GirlScoutDiamondsController < ApplicationController
         @girls_activity[:activity_equipment] = ''
       end
     elsif params[:id].present?
-      session[:selected_activity_id] = params[:id]
+      session[:selected_diamond_activity_id] = params[:id]
       @girls_activity = current_user.girl_scout_diamond_activities.find(params[:id])
-    elsif session[:selected_activity_id].present? && session[:selected_activity_id] != 'new'
-      @girls_activity = current_user.girl_scout_diamond_activities.find(session[:selected_activity_id])
+    elsif session[:selected_diamond_activity_id].present? && session[:selected_diamond_activity_id] != 'new'
+      @girls_activity = current_user.girl_scout_diamond_activities.find(session[:selected_diamond_activity_id])
     else
     end
 
@@ -52,7 +52,7 @@ class GirlScoutDiamondsController < ApplicationController
     @activity.user_id = current_user.id
     @activity.attributes = params[:girl_scout_diamond_activity]
     @activity.save(:validate => false)
-    session[:selected_activity_id] = @activity.id
+    session[:selected_diamond_activity_id] = @activity.id
   end
 
   def delete_activity
@@ -61,7 +61,7 @@ class GirlScoutDiamondsController < ApplicationController
    # permissionforms.each do |pf|
   #    GirlScoutsActivityPermissionForm.delete(pf.id)
   #  end
-    session[:selected_activity_id] = ''
+    session[:selected_diamond_activity_id] = ''
   end
 
   def send_notification_email

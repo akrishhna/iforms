@@ -6,7 +6,7 @@
 <div>&nbsp;</div>
 <div>
   <p style="margin: 0">Select an Activity</p>
-  <%= select_tag("girl_scout_diamonds_activities", options_for_select(@girl_scout_diamonds_activities.collect {|a| [truncate(a[0], :length => 30), a[1], :title => a[0]]}, session[:selected_activity_id]), :include_blank => true) %>
+  <%= select_tag("girl_scout_diamonds_activities", options_for_select(@girl_scout_diamonds_activities.collect {|a| [truncate(a[0], :length => 30), a[1], :title => a[0]]}, session[:selected_diamond_activity_id]), :include_blank => true) %>
   <%= link_to "Create New Activity", "#", :class => "btn btn-primary create_new_activity" %> &nbsp;
   <%= link_to "Delete This Activity", "#delete_activity_alert_box", :class => "btn btn-danger delete_activity" %> &nbsp;
   <%= link_to "View This Permission Form PDF",@girls_activity.new_record? ? diamond_activity_permission_form_pdf_path(:activity_id => 'new' ) : diamond_activity_permission_form_pdf_path(:activity_id => @girls_activity.id ), :class => "btn btn-info view_permission_form_btn" , :target => '_blank'%>
