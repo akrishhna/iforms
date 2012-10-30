@@ -51,7 +51,7 @@
     <br><br>
     <%= link_to "Back", consumer_index_path %>
   <% elsif @service_provider.id == 2 %>
-    <% @profile = Profile.find_by_user_id(current_user.id) %>
+    <% @profile = GirlScoutTroopLeaderProfile.find_by_user_id(current_user.id) %>
     <%= link_to 'Update Profile Information', edit_profile_path(@profile) %>
     <br><br>
     <%= link_to "Back", consumer_index_path %>
