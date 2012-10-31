@@ -92,7 +92,9 @@ class ApplicationController < ActionController::Base
     if session[:user_service_provider] == 1
       @homepage_url = '/doctor/appointments'
     elsif session[:user_service_provider] == 2
-      @homepage_url = '/girl_scouts_troop_leaders'
+      @homepage_url = '/girl_scouts_troop_leaders?sp_id=2'
+    elsif session[:user_service_provider] == 3
+      @homepage_url = '/girl_scouts_troop_leaders?sp_id=3'
     elsif session[:user_service_provider] == 0
       @homepage_url = '/consumer'
     else

@@ -22,7 +22,7 @@
   </div>
   <% if current_user %>
   <div class="service_provide_select">
-    <%= select_tag("user_service_provider_list", options_for_select(user_service_provider_list, set_service_provider)) %>
+    <%= select_tag("user_service_provider_list", options_for_select(user_service_provider_list,session[:user_service_provider])) %>
   </div>
   <% end %>
   <div class="header_navigation">

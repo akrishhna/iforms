@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030092123) do
+ActiveRecord::Schema.define(:version => 20121031081958) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -325,62 +325,6 @@ ActiveRecord::Schema.define(:version => 20121030092123) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "girl_scout_diamond_activities", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "activity_name"
-    t.string   "activity_location"
-    t.date     "activity_date_begin"
-    t.date     "activity_date_end"
-    t.date     "activity_signed_permission_due_date"
-    t.string   "activity_leave_from"
-    t.integer  "activity_leave_time_hh"
-    t.integer  "activity_leave_time_mm"
-    t.string   "activity_leave_time_am_pm"
-    t.string   "activity_return_to"
-    t.integer  "activity_return_time_hh"
-    t.integer  "activity_return_time_mm"
-    t.string   "activity_return_time_am_pm"
-    t.integer  "activity_cost_dollars"
-    t.integer  "activity_cost_cents"
-    t.string   "activity_mode_of_transportation"
-    t.string   "activity_equipment"
-    t.string   "troop_number"
-    t.string   "leader_first_name_1"
-    t.string   "leader_last_name_1"
-    t.string   "leader_first_name_2"
-    t.string   "leader_last_name_2"
-    t.integer  "leader_phone_1_1"
-    t.integer  "leader_phone_1_2"
-    t.integer  "leader_phone_1_3"
-    t.integer  "leader_cell_1_1"
-    t.integer  "leader_cell_1_2"
-    t.integer  "leader_cell_1_3"
-    t.integer  "leader_phone_2_1"
-    t.integer  "leader_phone_2_2"
-    t.integer  "leader_phone_2_3"
-    t.integer  "leader_cell_2_1"
-    t.integer  "leader_cell_2_2"
-    t.integer  "leader_cell_2_3"
-    t.string   "emergency_first_name"
-    t.string   "emergency_last_name"
-    t.integer  "emergency_phone_1"
-    t.integer  "emergency_phone_2"
-    t.integer  "emergency_phone_3"
-    t.integer  "emergency_cell_1"
-    t.integer  "emergency_cell_2"
-    t.integer  "emergency_cell_3"
-    t.string   "emergency_address_street"
-    t.string   "emergency_address_line"
-    t.string   "emergency_address_city"
-    t.string   "emergency_address_state"
-    t.boolean  "emergency_address_zip"
-    t.string   "emergency_address_country"
-    t.text     "email_notification"
-    t.boolean  "status"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-  end
-
   create_table "girl_scout_troop_leader_profiles", :force => true do |t|
     t.integer  "user_id"
     t.string   "first_name"
@@ -436,8 +380,37 @@ ActiveRecord::Schema.define(:version => 20121030092123) do
     t.integer  "emergency_evening_phone_3"
     t.text     "email_notification"
     t.boolean  "status"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.integer  "service_provider_id"
+    t.string   "mode_of_transportation"
+    t.string   "leader_advisor_1_name"
+    t.integer  "leader_advisor_1_phone_1"
+    t.integer  "leader_advisor_1_phone_2"
+    t.integer  "leader_advisor_1_phone_3"
+    t.integer  "leader_advisor_1_cell_1"
+    t.integer  "leader_advisor_1_cell_2"
+    t.integer  "leader_advisor_1_cell_3"
+    t.string   "leader_advisor_2_name"
+    t.integer  "leader_advisor_2_phone_1"
+    t.integer  "leader_advisor_2_phone_2"
+    t.integer  "leader_advisor_2_phone_3"
+    t.integer  "leader_advisor_2_cell_1"
+    t.integer  "leader_advisor_2_cell_2"
+    t.integer  "leader_advisor_2_cell_3"
+    t.string   "troop_leader_emergency_contact_name"
+    t.integer  "troop_leader_emergency_contact_phone_number_1"
+    t.integer  "troop_leader_emergency_contact_phone_number_2"
+    t.integer  "troop_leader_emergency_contact_phone_number_3"
+    t.integer  "troop_leader_emergency_contact_cell_number_1"
+    t.integer  "troop_leader_emergency_contact_cell_number_2"
+    t.integer  "troop_leader_emergency_contact_cell_number_3"
+    t.string   "troop_leader_emergency_contact_name_address_street"
+    t.string   "troop_leader_emergency_contact_name_address_line"
+    t.string   "troop_leader_emergency_contact_name_address_city"
+    t.string   "troop_leader_emergency_contact_name_address_state"
+    t.string   "troop_leader_emergency_contact_name_address_country"
+    t.string   "troop_leader_emergency_contact_name_address_zip"
   end
 
   create_table "girl_scouts_activity_permission_forms", :force => true do |t|
@@ -480,9 +453,29 @@ ActiveRecord::Schema.define(:version => 20121030092123) do
     t.string   "gapf_my_insurance_carrier"
     t.string   "gapf_policy"
     t.text     "gapf_special_needs"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.string   "girl_scout_attending"
+    t.string   "daughter_name"
+    t.string   "act_in_my_behalf_name"
+    t.integer  "parent_phone_number_during_activity_1"
+    t.integer  "parent_phone_number_during_activity_2"
+    t.integer  "parent_phone_number_during_activity_3"
+    t.string   "emergency_contact_name"
+    t.integer  "emergency_contact_phone_number_1"
+    t.integer  "emergency_contact_phone_number_2"
+    t.integer  "emergency_contact_phone_number_3"
+    t.integer  "emergency_contact_cell_number_1"
+    t.integer  "emergency_contact_cell_number_2"
+    t.integer  "emergency_contact_cell_number_3"
+    t.string   "emergency_contact_address_street"
+    t.string   "emergency_contact_address_line"
+    t.string   "emergency_contact_address_city"
+    t.string   "emergency_contact_address_state"
+    t.string   "emergency_contact_address_country"
+    t.integer  "emergency_contact_address_zip"
+    t.string   "emergency_contact_relationship_to_participant"
+    t.text     "medications"
   end
 
   create_table "girls_scouts", :force => true do |t|
@@ -490,12 +483,13 @@ ActiveRecord::Schema.define(:version => 20121030092123) do
     t.string   "name"
     t.string   "parent_name"
     t.string   "email"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "parent_first_name"
     t.string   "parent_last_name"
+    t.integer  "service_provider_id"
   end
 
   create_table "iforms", :force => true do |t|

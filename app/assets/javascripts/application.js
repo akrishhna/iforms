@@ -40,7 +40,10 @@ $(document).ready(function(){
       window.location = '/doctor/appointments'
     }
     else if($(this).val() == 2){
-      window.location = '/girl_scouts_troop_leaders'
+      window.location = '/girl_scouts_troop_leaders?sp_id=2'
+    }
+    else if($(this).val() == 3){
+      window.location = '/girl_scouts_troop_leaders?sp_id=3'
     }
     else if($(this).val() == 0){
       window.location = '/consumer'

@@ -3,7 +3,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   before_filter :set_service_provider, :girls_scouts_activities
 
   def index
-    @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ?", Date.today).order('activity_date_begin ').first
+    @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ? and service_provider_id=?", Date.today,session[:user_service_provider]).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
     id = session[:selected_activity_id] if session[:selected_activity_id].present?
     session[:selected_activity_id] = id
@@ -29,7 +29,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   # Girls scout roster
   def roster
-    @girls_scouts = current_user.girls_scouts.order("first_name ASC")
+    @girls_scouts = current_user.girls_scouts.where("service_provider_id=?",session[:user_service_provider]).order("first_name ASC")
   end
 
   def girl_scouts_roster
@@ -60,7 +60,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @girls_activity = GirlScoutsActivity.new()
     if params[:id] == 'new'
       session[:selected_activity_id] = params[:id]
-      @recent_activity = current_user.girl_scouts_activities.order('updated_at').last
+      @recent_activity = current_user.girl_scouts_activities.where("service_provider_id=?",session[:user_service_provider]).order('updated_at').last
       if @recent_activity
         @girls_activity = @recent_activity.dup
         @girls_activity[:activity_name] = ''
@@ -92,7 +92,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     end
 
-    @activities = current_user.girl_scouts_activities.order("created_at DESC")
+    @activities = current_user.girl_scouts_activities.where("service_provider_id=?",session[:user_service_provider]).order("created_at DESC")
     @activities.each do |activity|
       @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
     end
@@ -168,7 +168,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def delete_activity
     GirlScoutsActivity.delete(params[:id])
-    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ?', params[:id])
+    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and service_provider_id=?', params[:id],session[:user_service_provider])
     permissionforms.each do |pf|
       GirlScoutsActivityPermissionForm.delete(pf.id)
     end
@@ -218,7 +218,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
       activity_id = session[:selected_activity_id]
       @activity = GirlScoutsActivity.find_by_id(session[:selected_activity_id])
     end
-    @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ?", activity_id).order("girls_scouts.first_name")
+    #@girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ?", activity_id).order("girls_scouts.first_name")
+    @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ? and service_provider_id=?", activity_id,session[:user_service_provider]).order("girls_scouts.first_name")
     @results = []
     @yes_counter = 0
     @no_counter = 0
@@ -235,7 +236,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
       item[:girl_scout_id] = pf.girls_scout_id
       @results << item
     end
-    @activities = current_user.girl_scouts_activities.order("created_at DESC")
+    @activities = current_user.girl_scouts_activities.where("service_provider_id=?",session[:user_service_provider]).order("created_at DESC")
     @activities.each do |activity|
       @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
     end
@@ -244,7 +245,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def resend_permission_form
     @counter = 0
     #@girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?', params[:activity_id], 'Pending')
-    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id=? and status in (?) and girl_scout_attending in (?)', params[:activity_id], ['Pending', 'In Progress'], ['Yes', '?'])
+    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id=? and service_provider_xid=? and status in (?) and girl_scout_attending in (?)', params[:activity_id],session[:user_service_provider], ['Pending', 'In Progress'], ['Yes', '?'])
     @girl_scouts_activity_permission_forms.each do |pf|
       @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
       @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
@@ -261,7 +262,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     ids.each do |id|
       #@girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted', 'Sent', 'Updated']).first
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and service_provider_id=? and status in (?)', id,session[:user_service_provider], ['Submitted', 'Sent', 'Updated']).first
       if @girl_scouts_permission_form
         @girl_scout = @girl_scouts_permission_form.girls_scout
         permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
@@ -292,7 +293,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
   private
 
   def set_service_provider
-    session[:user_service_provider] = 2
+    session[:user_service_provider] = 2 if params[:sp_id] == '2'
+    session[:user_service_provider] = 3 if params[:sp_id] == '3'
   end
 
   def girls_scouts_activities
