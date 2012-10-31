@@ -10,16 +10,6 @@ Iforms::Application.routes.draw do
 
   get "errors/error_500"
 
-  match 'girl_scout_diamonds/activity_permission_form/:activity_id' => "girl_scout_diamonds#activity_permission_form", :as => "diamond_activity_permission_form_pdf"
-  resources :girl_scout_diamonds do
-    collection do
-      get 'activities'
-      post 'create_activity'
-      post 'delete_activity'
-      post 'send_notification_email'
-    end
-  end
-
   namespace :consumer do
     resources :girl_scouts do
       collection do

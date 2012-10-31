@@ -28,7 +28,7 @@ Iforms::Application.configure do
     #     Configuration.csvfiles_path = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
     #     Configuration.notifier_path = 'http://localhost:3000'
   end
-    PDFTK_PATH = '/usr/local/bin/pdftk'
+    PDFTK_PATH = '/usr/bin/pdftk'
     PDFFILES_PATH = "#{Rails.root}/public/pdffiles/"
     CSVFILES_PATH = '/Users/ashwinipatlola/railsapps/iforms/public/csvfiles/'
     NOTIFIER_PATH = 'http://localhost:3000'
