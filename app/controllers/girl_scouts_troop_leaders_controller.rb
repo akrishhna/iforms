@@ -112,7 +112,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def send_notification_email
-    @activity = GirlScoutsActivity.find(params[:id])
+    @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:id],session[:user_service_provider])
     if @activity.invalid?
       flash[:error] = "Something wrong please try again."
 
@@ -151,7 +151,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     else
       #sending mail to all parents
       @counter = 0
-      @girls_scouts = current_user.girls_scouts
+      @girls_scouts = current_user.girls_scouts.where('service_provider_id=?',session[:user_service_provider])
       @girls_scouts.each do |girl_scout|
         email = girl_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
