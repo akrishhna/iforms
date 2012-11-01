@@ -3,7 +3,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   before_filter :set_service_provider, :girls_scouts_activities
 
   def index
-    @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ? and service_provider_id=?", Date.today,session[:user_service_provider]).order('activity_date_begin ').first
+    @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ? and service_provider_id=?", Date.today, session[:user_service_provider]).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
     id = session[:selected_activity_id] if session[:selected_activity_id].present?
     session[:selected_activity_id] = id
@@ -29,7 +29,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   # Girls scout roster
   def roster
-    @girls_scouts = current_user.girls_scouts.where("service_provider_id=?",session[:user_service_provider]).order("first_name ASC")
+    @girls_scouts = current_user.girls_scouts.where("service_provider_id=?", session[:user_service_provider]).order("first_name ASC")
   end
 
   def girl_scouts_roster
@@ -41,6 +41,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @girls_scout.parent_first_name = params[:parent_first_name]
     @girls_scout.parent_last_name = params[:parent_last_name]
     @girls_scout.email = params[:email]
+    @girls_scout.service_provider_id = session[:user_service_provider]
     @girls_scout.save if @girls_scout.first_name.present? || @girls_scout.last_name.present? || @girls_scout.parent_first_name.present? || @girls_scout.parent_last_name.present? || @girls_scout.email.present?
   end
 
@@ -60,7 +61,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @girls_activity = GirlScoutsActivity.new()
     if params[:id] == 'new'
       session[:selected_activity_id] = params[:id]
-      @recent_activity = current_user.girl_scouts_activities.where("service_provider_id=?",session[:user_service_provider]).order('updated_at').last
+      @recent_activity = current_user.girl_scouts_activities.where("service_provider_id=?", session[:user_service_provider]).order('updated_at').last
       if @recent_activity
         @girls_activity = @recent_activity.dup
         @girls_activity[:activity_name] = ''
@@ -85,14 +86,17 @@ class GirlScoutsTroopLeadersController < ApplicationController
       end
     elsif params[:id].present?
       session[:selected_activity_id] = params[:id]
-      @girls_activity = GirlScoutsActivity.find(params[:id])
+      #  @girls_activity = GirlScoutsActivity.find(params[:id])
+      @girls_activity = GirlScoutsActivity.find_by_id_and_service_provider_id(params[:id], session[:user_service_provider])
     elsif session[:selected_activity_id].present? && session[:selected_activity_id] != 'new'
-      @girls_activity = GirlScoutsActivity.find(session[:selected_activity_id])
+      # @girls_activity = GirlScoutsActivity.find(session[:selected_activity_id])
+      @girls_activity = GirlScoutsActivity.find_by_id_and_service_provider_id(session[:selected_activity_id], session[:user_service_provider])
+      @girls_activity = GirlScoutsActivity.new if @girls_activity.nil?
     else
 
     end
 
-    @activities = current_user.girl_scouts_activities.where("service_provider_id=?",session[:user_service_provider]).order("created_at DESC")
+    @activities = current_user.girl_scouts_activities.where("service_provider_id=?", session[:user_service_provider]).order("created_at DESC")
     @activities.each do |activity|
       @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
     end
@@ -102,6 +106,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @activity = GirlScoutsActivity.find_or_initialize_by_id(params[:girl_scouts_activity][:id])
     @activity.user_id = current_user.id
     @activity.attributes = params[:girl_scouts_activity]
+    @activity.service_provider_id = session[:user_service_provider]
     @activity.save(:validate => false)
     session[:selected_activity_id] = @activity.id
   end
@@ -168,7 +173,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def delete_activity
     GirlScoutsActivity.delete(params[:id])
-    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and service_provider_id=?', params[:id],session[:user_service_provider])
+    permissionforms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and service_provider_id=?', params[:id], session[:user_service_provider])
     permissionforms.each do |pf|
       GirlScoutsActivityPermissionForm.delete(pf.id)
     end
@@ -176,7 +181,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def show_activity
-    @activity = current_user.girl_scouts_activities.find(params[:activity_id])
+    @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:activity_id], session[:user_service_provider])
     if !@activity.activity_cost_cents.nil?
       @cents = @activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s
     else
@@ -186,16 +191,28 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def activity_permission_form
     if params[:activity_id] == 'new'
-      send_file "#{PDFFILES_PATH}Parent_Permission_iForms.pdf",
+      if session[:user_service_provider] == 2
+        form_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
+      elsif session[:user_service_provider] == 3
+        form_path = "#{PDFFILES_PATH}Parent_Permission_Diamonds.pdf"
+      else
+      end
+      send_file form_path,
                 :filename => "Parent_Permission_iForms.pdf",
                 :disposition => "inline",
                 :type => "application/pdf"
     elsif params[:activity_id].present?
-      @activity = current_user.girl_scouts_activities.find(params[:activity_id])
-      activity_name = @activity.activity_name.gsub(' ', '-')
-      activity_name = "Activity-#{@activity.id}" if !activity_name.present?
+      # @activity = current_user.girl_scouts_activities.find(params[:activity_id])
+      @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:activity_id], session[:user_service_provider])
+      activity_name = @activity.activity_name.gsub(' ', '-') + "-sp_id-#{session[:user_service_provider]}"
+      activity_name = "Activity-#{@activity.id}" + "-sp_id-#{session[:user_service_provider]}" if !activity_name.present?
       permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-      GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
+      if session[:user_service_provider] == 2
+        GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
+      elsif session[:user_service_provider] == 3
+        GirlScoutsActivity.activity_permission_diamonds_form_pdf_generater(@activity, permission_form_path)
+      else
+      end
       send_file permission_form_path,
                 :filename => "#{activity_name}.pdf",
                 :disposition => "inline",
@@ -204,10 +221,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
     end
   end
 
-  # Girl Scout Permission Forms
+# Girl Scout Permission Forms
 
   def permission_forms
-
     if params[:id].present?
       #@girls_scout_permission_forms = GirlScoutsActivityPermissionForm.find_all_by_girl_scouts_activity_id(params[:id])
       activity_id = params[:id]
@@ -219,7 +235,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
       @activity = GirlScoutsActivity.find_by_id(session[:selected_activity_id])
     end
     #@girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ?", activity_id).order("girls_scouts.first_name")
-    @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ? and service_provider_id=?", activity_id,session[:user_service_provider]).order("girls_scouts.first_name")
+    @girls_scout_permission_forms = GirlScoutsActivityPermissionForm.joins(:girls_scout).where("girl_scouts_activity_id = ? and service_provider_id=?", activity_id, session[:user_service_provider]).order("girls_scouts.first_name")
     @results = []
     @yes_counter = 0
     @no_counter = 0
@@ -236,7 +252,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
       item[:girl_scout_id] = pf.girls_scout_id
       @results << item
     end
-    @activities = current_user.girl_scouts_activities.where("service_provider_id=?",session[:user_service_provider]).order("created_at DESC")
+    @activities = current_user.girl_scouts_activities.where("service_provider_id=?", session[:user_service_provider]).order("created_at DESC")
     @activities.each do |activity|
       @girls_scouts_activities << [activity.activity_name.present? ? activity.activity_name : "Activity #" + activity.id.to_s, activity.id.to_s]
     end
@@ -245,7 +261,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def resend_permission_form
     @counter = 0
     #@girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?', params[:activity_id], 'Pending')
-    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id=? and service_provider_xid=? and status in (?) and girl_scout_attending in (?)', params[:activity_id],session[:user_service_provider], ['Pending', 'In Progress'], ['Yes', '?'])
+    @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id=? and service_provider_xid=? and status in (?) and girl_scout_attending in (?)', params[:activity_id], session[:user_service_provider], ['Pending', 'In Progress'], ['Yes', '?'])
     @girl_scouts_activity_permission_forms.each do |pf|
       @girl_scout = GirlsScout.find_by_id(pf.girls_scout_id)
       @activity = GirlScoutsActivity.find_by_id(pf.girl_scouts_activity_id)
@@ -257,17 +273,22 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def pdf_merging
     @files = []
     ids = params[:checked_vals].split(',')
-    @activity = GirlScoutsActivity.find(params[:activity_id])
+    @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:activity_id], session[:user_service_provider])
     activity_name = @activity.activity_name.gsub(' ', '-')
 
     ids.each do |id|
       #@girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(id)
-      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and service_provider_id=? and status in (?)', id,session[:user_service_provider], ['Submitted', 'Sent', 'Updated']).first
+      @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.where('id=? and status in (?)', id, ['Submitted', 'Sent', 'Updated']).first
       if @girl_scouts_permission_form
         @girl_scout = @girl_scouts_permission_form.girls_scout
-        permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s rescue ''
+        permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s + "-sp_id-#{session[:user_service_provider]}" rescue ''
         permission_form_path = "#{PDFFILES_PATH}#{permission_form_name}.pdf"
-        GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+        if session[:user_service_provider] == 2
+          GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+        elsif session[:user_service_provider] == 3
+          GirlScoutsActivityPermissionForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+        else
+        end
         @files << Rails.root.join("#{PDFFILES_PATH}#{permission_form_name}.pdf")
       end
     end
@@ -285,7 +306,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
     pdf_form_path = Rails.root.join("#{PDFFILES_PATH}#{activity_name}_permission_forms.pdf")
     send_file pdf_form_path,
-              :filename => "#{activity_name}_permission_forms.pdf",
+              :filename => "#{activity_name}_permission_forms-of-sp_id-#{session[:user_service_provider]}.pdf",
               :disposition => "inline",
               :type => "application/pdf"
   end

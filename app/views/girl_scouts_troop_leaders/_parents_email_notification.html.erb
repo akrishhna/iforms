@@ -5,6 +5,8 @@
 
 
 <p>The <b><%= girls_activity.activity_name.to_s != '' ? (link_to girls_activity.activity_name, girls_activity.id.present? ? activity_permission_form_pdf_url(girls_activity.id) : "#", :target => '_blank') : "[Activity Name]" %></b> Permission Forms are now available. Please complete and submit by <b><%= girls_activity.activity_signed_permission_due_date.to_s !='' ? girls_activity.activity_signed_permission_due_date : "[Signed Permission Form Due Date]" %></b>.</p>
-
+<% if session[:user_service_provider] == 2 %>
 <p>Thank You,<br><b><%= (girls_activity.leader_first_name.to_s !='' || girls_activity.leader_last_name.to_s != '') ? girls_activity.leader_first_name.to_s + " " + girls_activity.leader_last_name.to_s : "[Troop Leader Name]" %></b></p>
-
+  <% elsif session[:user_service_provider] == 3 %>
+  <p>Thank You ,<br><b><%= (girls_activity.leader_advisor_1_first_name.to_s !='' || girls_activity.leader_advisor_1_last_name.to_s != '') ? girls_activity.leader_advisor_1_first_name.to_s + " " + girls_activity.leader_advisor_1_last_name.to_s : "[Troop Leader Name]" %></b></p>
+<% end %>

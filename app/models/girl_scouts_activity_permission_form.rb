@@ -6,7 +6,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
   #alidates_presence_of :gapf_emergency_contact_1_first_name,:gapf_emergency_contact_1_last_name,:gapf_emergency_contact_1_phone_1_1,:gapf_emergency_contact_1_phone_1_2,:gapf_emergency_contact_1_phone_1_3,:gapf_girl_scouts_first_name,:gapf_emergency_contact_3_last_name,:gapf_physician_first_name,:gapf_physician_last_name,:gapf_physician_phone_1,:gapf_physician_phone_2,:gapf_physician_phone_3,:gapf_policy,:gapf_my_insurance_carrier
 
 
-  def self.activity_parent_permission_form_pdf_generater(activity,girl_scouts_permission_form, permission_form_path)
+  def self.activity_parent_permission_form_pdf_generater(activity, girl_scouts_permission_form, permission_form_path)
     @activity = activity
     @girl_scouts_permission_form = girl_scouts_permission_form
     @girl_scout = @girl_scouts_permission_form.girls_scout
@@ -73,5 +73,48 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
     })
     # raise @pdftk.fields(form_pdf_path).to_yaml
   end
+
+
+  def self.activity_parent_diamonds_permission_form_pdf_generater(activity, girl_scouts_permission_form, permission_form_path)
+    @activity = activity
+    @girl_scouts_permission_form = girl_scouts_permission_form
+    @girl_scout = @girl_scouts_permission_form.girls_scout
+    #@girl_scouts_permission_form = girl_scouts_permission_form
+    form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_Diamonds.pdf"
+    @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
+    @pdftk.fill_form(form_pdf_path, permission_form_path, {
+      "TroopNumber" => @activity.troop_number,
+      "ActivityName" => @activity.activity_name,
+      "ActivityDate" => @activity.activity_date_begin,
+      "ActivityLocation" => @activity.activity_location,
+      "TimeAndPlaceOfDeparture" => @activity.activity_leave_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_leave_time_am_pm + ', ' + @activity.activity_leave_from,
+      "TimeAndPlaceOfReturn" => @activity.activity_return_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_return_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_return_time_am_pm + ', ' + @activity.activity_return_to,
+      "ModeOfTransportation" => @activity.mode_of_transportation,
+      "LeaderAdvisor1Name" => @activity.leader_advisor_1_first_name.to_s + ' ' + @activity.leader_advisor_1_last_name.to_s,
+      "LeaderAdvisor1Phone" => @activity.leader_advisor_1_phone_1.to_s + '-' + @activity.leader_advisor_1_phone_2.to_s + '-' + @activity.leader_advisor_1_phone_3.to_s,
+      "LeaderAdvisor1Cell" => @activity.leader_advisor_1_cell_1.to_s + '-' + @activity.leader_advisor_1_cell_2.to_s + '-' + @activity.leader_advisor_1_cell_3.to_s,
+      "LeaderAdvisor2Name" => @activity.leader_advisor_2_first_name.to_s + ' ' + @activity.leader_advisor_2_last_name.to_s,
+      "LeaderAdvisor2Phone" => @activity.leader_advisor_2_phone_1.to_s + '-' + @activity.leader_advisor_2_phone_2.to_s + '-' + @activity.leader_advisor_2_phone_3.to_s,
+      "LeaderAdvisor2Cell" => @activity.leader_advisor_2_cell_1.to_s + '-' + @activity.leader_advisor_2_cell_2.to_s + '-' + @activity.leader_advisor_2_cell_3.to_s,
+      "ForExpenses" => @activity.activity_cost_dollars ? (@activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!',
+      "TroopLeaderEmergencyContactName" => @activity.troop_leader_emergency_contact_first_name.to_s + ' ' + @activity.troop_leader_emergency_contact_last_name.to_s,
+      "TroopLeaderEmergencyContactPhoneNumber" => @activity.troop_leader_emergency_contact_phone_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_3.to_s,
+      "TroopLeaderEmergencyContactCellNumber" => @activity.troop_leader_emergency_contact_cell_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_3.to_s,
+      "TroopLeaderEmergencyContactNameAddress" => @activity.troop_leader_emergency_contact_name_address_street.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_line.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_city.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_state.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_country.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_zip.to_s,
+      "DaughterName" => @girl_scout.first_name.to_s + ' ' + @girl_scout.last_name.to_s,
+      "ActInMyBehalfName" => @girl_scouts_permission_form.act_in_my_behalf_first_name.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_last_name.to_s,
+      "ParentPhoneNumberDuringActivity" => @girl_scouts_permission_form.parent_phone_number_during_activity_1.to_s + '-' + @girl_scouts_permission_form.parent_phone_number_during_activity_2.to_s + '-' + @girl_scouts_permission_form.parent_phone_number_during_activity_3.to_s,
+      "EmergencyContactName" => @girl_scouts_permission_form.emergency_contact_first_name.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_last_name.to_s,
+      "EmergencyContactPhoneNumber" => @girl_scouts_permission_form.emergency_contact_phone_number_1.to_s + '-' + @girl_scouts_permission_form.emergency_contact_phone_number_2.to_s + '-' + @girl_scouts_permission_form.emergency_contact_phone_number_3.to_s,
+      "EmergencyContactCellNumber" => @girl_scouts_permission_form.emergency_contact_cell_number_1.to_s + '-' + @girl_scouts_permission_form.emergency_contact_cell_number_2.to_s + '-' + @girl_scouts_permission_form.emergency_contact_cell_number_3.to_s,
+      "EmergencyContactAddress" => @girl_scouts_permission_form.emergency_contact_address_street.to_s + ',' + @girl_scouts_permission_form.emergency_contact_address_line.to_s,
+      "EmergencyContactCity" => @girl_scouts_permission_form.emergency_contact_address_city.to_s,
+      "emergency_contact_address_street" => @girl_scouts_permission_form.emergency_contact_address_state.to_s,
+      "EmergencyContactRelationshipToParticipant" => @girl_scouts_permission_form.emergency_contact_relationship_to_participant.to_s,
+      "Medications" => @girl_scouts_permission_form.medications
+    })
+    # raise @pdftk.fields(form_pdf_path).to_yaml
+  end
+
 
 end

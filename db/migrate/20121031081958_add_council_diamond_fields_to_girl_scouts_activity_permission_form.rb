@@ -1,12 +1,15 @@
 class AddCouncilDiamondFieldsToGirlScoutsActivityPermissionForm < ActiveRecord::Migration
 
   def up
-    add_column :girl_scouts_activity_permission_forms,:daughter_name, :string
-    add_column :girl_scouts_activity_permission_forms,:act_in_my_behalf_name, :string
+    add_column :girl_scouts_activity_permission_forms,:daughter_first_name, :string
+    add_column :girl_scouts_activity_permission_forms,:daughter_last_name, :string
+    add_column :girl_scouts_activity_permission_forms,:act_in_my_behalf_first_name, :string
+    add_column :girl_scouts_activity_permission_forms,:act_in_my_behalf_last_name, :string
     add_column :girl_scouts_activity_permission_forms,:parent_phone_number_during_activity_1, :integer
     add_column :girl_scouts_activity_permission_forms,:parent_phone_number_during_activity_2, :integer
     add_column :girl_scouts_activity_permission_forms,:parent_phone_number_during_activity_3, :integer
-    add_column :girl_scouts_activity_permission_forms,:emergency_contact_name, :string
+    add_column :girl_scouts_activity_permission_forms,:emergency_contact_first_name, :string
+    add_column :girl_scouts_activity_permission_forms,:emergency_contact_last_name, :string
     add_column :girl_scouts_activity_permission_forms,:emergency_contact_phone_number_1, :integer
     add_column :girl_scouts_activity_permission_forms,:emergency_contact_phone_number_2, :integer
     add_column :girl_scouts_activity_permission_forms,:emergency_contact_phone_number_3, :integer
@@ -24,12 +27,15 @@ class AddCouncilDiamondFieldsToGirlScoutsActivityPermissionForm < ActiveRecord::
   end
 
   def down
-    remove_column :girl_scouts_activity_permission_forms,:daughter_name
-    remove_column :girl_scouts_activity_permission_forms,:act_in_my_behalf_name
+    remove_column :girl_scouts_activity_permission_forms,:daughter_first_name
+    remove_column :girl_scouts_activity_permission_forms,:daughter_last_name
+    remove_column :girl_scouts_activity_permission_forms,:act_in_my_behalf_first_name
+    remove_column :girl_scouts_activity_permission_forms,:act_in_my_behalf_last_name
     remove_column :girl_scouts_activity_permission_forms,:parent_phone_number_during_activity_1
     remove_column :girl_scouts_activity_permission_forms,:parent_phone_number_during_activity_2
     remove_column :girl_scouts_activity_permission_forms,:parent_phone_number_during_activity_3
-    remove_column :girl_scouts_activity_permission_forms,:emergency_contact_name
+    remove_column :girl_scouts_activity_permission_forms,:emergency_contact_first_name
+    remove_column :girl_scouts_activity_permission_forms,:emergency_contact_last_name
     remove_column :girl_scouts_activity_permission_forms,:emergency_contact_phone_number_1
     remove_column :girl_scouts_activity_permission_forms,:emergency_contact_phone_number_2
     remove_column :girl_scouts_activity_permission_forms,:emergency_contact_phone_number_3

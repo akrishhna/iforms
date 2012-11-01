@@ -1,0 +1,82 @@
+<%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
+  <%= f.hidden_field :id %>
+  <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>,has permission to participate
+      in the above named activity. In case of accident or injury she may be given emergency first aid treatment.
+  </p>
+  <div class="control-group">
+    <%= f.label :act_in_my_behalf_first_name, "In addition to the person in charge, I authorize this person to act in my behalf", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :act_in_my_behalf_first_name, :placeholder => "First Name", :class => "input-small" %>
+      <%= f.text_field :act_in_my_behalf_last_name, :placeholder => "Last Name", :class => "input-small" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :parent_phone_number_during_activity_1, "During the activity I may be reached at this number", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :parent_phone_number_during_activity_1, :style => "width:30px;", :placeholder => "###" %>
+      -
+      <%= f.text_field :parent_phone_number_during_activity_2, :style => "width:30px;", :placeholder => "###" %>
+      -
+      <%= f.text_field :parent_phone_number_during_activity_3, :style => "width:40px;", :placeholder => " ####" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :emergency_contact_first_name, "Emergency Contact", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :emergency_contact_first_name, :placeholder => "First Name", :class => "input-small" %>
+      <%= f.text_field :emergency_contact_last_name, :placeholder => "Last Name", :class => "input-small" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :emergency_contact_phone_number_1, "Emergency Contact Phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :emergency_contact_phone_number_1, :style => "width:30px;", :placeholder => "###" %>
+      -
+      <%= f.text_field :emergency_contact_phone_number_2, :style => "width:30px;", :placeholder => "###" %>
+      -
+      <%= f.text_field :emergency_contact_phone_number_3, :style => "width:40px;", :placeholder => " ####" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :emergency_contact_cell_number_1, "Emergency Contact Cell", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :emergency_contact_cell_number_1, :style => "width:30px;", :placeholder => "###" %>
+      -
+      <%= f.text_field :emergency_contact_cell_number_2, :style => "width:30px;", :placeholder => "###" %>
+      -
+      <%= f.text_field :emergency_contact_cell_number_3, :style => "width:40px;", :placeholder => " ####" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :emergency_contact_address_street, "Address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :emergency_contact_address_street, :placeholder => "Street", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :emergency_contact_address_line, :placeholder => "Line", :style => 'width:445px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :emergency_contact_address_city, :placeholder => "City", :style => 'margin-bottom:10px;' %> &nbsp;
+      <%= f.text_field :emergency_contact_address_state, :placeholder => "State / Province / Region", :style => 'margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :emergency_contact_address_zip, :placeholder => "Postal / Zip Code" %> &nbsp;
+      <%= f.select :emergency_contact_address_country, options_for_select(StaticData.diamond_activity_state, f.object.emergency_contact_address_country), :include_blank => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :emergency_contact_relationship_to_participant, "Relationship to participant", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :emergency_contact_relationship_to_participant, :placeholder => "Relationship", :class => "input-xlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <p style="margin: 0;font-size: 12px;text-align: justify;">
+      My daughter is in good physical condition at present and has had no serious illness or operation since her last
+      health examination. I will ensure that she does not attend if she is not physically able. I will ensure that
+      she has the required equipment, clothing and supplies with her.
+    </p>
+  </div>
+  <div class="control-group">
+    <%= f.label :medications, " She will have medication with her. It will be in the original bottle, in a plastic baggie and labeled for the First Aider. Her medication(s) are as follows ", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :medications, :rows => 4, :style => "width:98%;" %>
+    </div>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
 $('.girl_scouts_activity_form #girl_scouts_activity_id').val(<%= @activity.id %>);
-$('.view_permission_form_btn').attr('href','<%= activity_permission_form_pdf_path(:activity_id => @activity.id)%>');
+$('.view_permission_form_btn').attr('href', '<%= activity_permission_form_pdf_path(:activity_id => @activity.id)%>');
 
 <% if params[:girl_scouts_activity][:activity_name].present? || params[:girl_scouts_activity][:leader_first_name].present? || params[:girl_scouts_activity][:leader_last_name].present? || params[:girl_scouts_activity][:activity_signed_permission_due_date].present? %>
 
@@ -8,19 +8,36 @@ $('.view_permission_form_btn').attr('href','<%= activity_permission_form_pdf_pat
 $('.notification_email_to_parent_text').html(" <%= escape_javascript render :partial => 'parents_email_notification', :locals => {:girls_activity => @activity, :girl_scout => @girls_scout }  %>");
 
 <% if  @activity.activity_name.to_s != '' %>
-  $('select#girls_scouts_activities option:selected').text('<%= @activity.activity_name %>');
+$('select#girls_scouts_activities option:selected').text('<%= @activity.activity_name %>');
 <% else %>
-  $('select#girls_scouts_activities option:selected').text('Activity #'+ + <%= @activity.id %>);
+$('select#girls_scouts_activities option:selected').text('Activity #' + + <%= @activity.id %>);
 <% end %>
+
+<% if session[:user_service_provider] == 2 %>
 
 <% if @activity.activity_name.to_s == "" ||
       @activity.activity_signed_permission_due_date.to_s == "" ||
       @activity.leader_first_name.to_s == "" ||
       @activity.leader_last_name.to_s == "" %>
-$('#notification_email_to_parent').attr('disabled','disabled');
+$('#notification_email_to_parent').attr('disabled', 'disabled');
 <% else %>
 $('#notification_email_to_parent').attr('disabled', false);
 <% end %>
+
+<% elsif session[:user_service_provider] == 3 %>
+
+<% if @activity.activity_name.to_s == "" ||
+      @activity.activity_signed_permission_due_date.to_s == "" ||
+      @activity.leader_advisor_1_first_name.to_s == "" ||
+      @activity.leader_advisor_1_last_name.to_s == ""
+ %>
+$('#notification_email_to_parent').attr('disabled', 'disabled');
+<% else %>
+$('#notification_email_to_parent').attr('disabled', false);
+<% end %>
+
+<% end %>
+
 
 
 

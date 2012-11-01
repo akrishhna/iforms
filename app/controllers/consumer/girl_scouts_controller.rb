@@ -44,7 +44,7 @@ class Consumer::GirlScoutsController < ConsumerController
     else
       @cents = '00'
     end
-    @recent_submitted_form = current_user.girl_scouts_activity_permission_forms.where('status in (?) and girls_scout_id=?', ['Sent','Submitted','Updated'], @girl_scout.id).order('updated_at').last
+    @recent_submitted_form = current_user.girl_scouts_activity_permission_forms.where('status in (?) and girls_scout_id=?', ['Sent', 'Submitted', 'Updated'], @girl_scout.id).order('updated_at').last
     if @recent_submitted_form
       @girl_scouts_permission_form.attributes.each do |attr_name, attr_val|
         unless attr_val
@@ -84,12 +84,16 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
-    activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-id-' + @girl_scout.id.to_s
+    activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-id-' + @girl_scout.id.to_s + '-sp_id-' + @activity.service_provider_id.to_s
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-    permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf" # ? "#{PDFFILES_PATH}#{alternate_activity_name}.pdf": ""
+    if @activity.service_provider_id == 2
+      GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+    elsif @activity.service_provider_id == 3
+      GirlScoutsActivityPermissionForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+    else
+    end
     send_file permission_form_path,
-              :filename => "#{activity_name}.pdf", # ? "#{alternate_activity_name}.pdf":"",
+              :filename => "#{activity_name}.pdf",
               :disposition => "inline",
               :type => "application/pdf"
   end
