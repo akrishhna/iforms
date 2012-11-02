@@ -50,14 +50,14 @@
   <div class="control-group">
     <%= f.label :emergency_contact_address_street, "Address", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :emergency_contact_address_street, :placeholder => "Street", :style => 'width:445px;margin-bottom:10px;' %>
-      <%= f.text_field :emergency_contact_address_line, :placeholder => "Line", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :emergency_contact_address_street, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :emergency_contact_address_line, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
       <br>
-      <%= f.text_field :emergency_contact_address_city, :placeholder => "City", :style => 'margin-bottom:10px;' %> &nbsp;
-      <%= f.text_field :emergency_contact_address_state, :placeholder => "State / Province / Region", :style => 'margin-bottom:10px;' %>
+      <%= f.text_field :emergency_contact_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
+      <%#= f.text_field :emergency_contact_address_country, :placeholder => "country", :style => 'margin-bottom:10px;' %>
       <br>
-      <%= f.text_field :emergency_contact_address_zip, :placeholder => "Postal / Zip Code" %> &nbsp;
-      <%= f.select :emergency_contact_address_country, options_for_select(StaticData.diamond_activity_state, f.object.emergency_contact_address_country), :include_blank => true %>
+      <%= f.select :emergency_contact_address_state, options_for_select(StaticData.diamond_activity_state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
+      <%= f.text_field :emergency_contact_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
   <div class="control-group">
