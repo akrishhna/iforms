@@ -21,4 +21,8 @@ class StaticData < ActiveRecord::Base
      'MA','MI','MN','MS','MO''MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN',
      'TX','UT','VT','VI','VA','WA','WV','WI','WY']
   end
+
+  def self.sign_up_council_type
+    ['Central Texas','Diamonds of AR, OK, and TX']
+  end
 end

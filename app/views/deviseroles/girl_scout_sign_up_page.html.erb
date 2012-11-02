@@ -42,7 +42,7 @@
     <div class="control-group">
       <%= builder.label :council_type, "Council", :class => 'control-label' %>
       <div class="controls">
-         <%= builder.select :council_type,["Central Texas"],{:include_blank => true} %>
+         <%= builder.select :council_type,options_for_select(StaticData.sign_up_council_type),{:include_blank => true} %>
       </div>
     </div>
   <% end %>

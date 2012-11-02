@@ -104,7 +104,7 @@ Iforms::Application.routes.draw do
       post 'sending_username'
     end
   end
-  match 'girls_scouts/sign_up' => 'deviseroles#girl_scout_sign_up_page'
+  match 'girl_scouts/sign_up' => 'deviseroles#girl_scout_sign_up_page'
   match '/deviseroles/girl_scout_new' => 'deviseroles#girl_scout_new'
 
   resources :childforms
