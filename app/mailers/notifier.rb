@@ -62,9 +62,10 @@ class Notifier < ActionMailer::Base
     mail(:to => @girl_scout.email, :subject => "Activity Permission Form")
   end
 
-  def send_permission_form_to_tl_notification(activity,girl_scout)
+  def send_permission_form_to_tl_notification(activity,girl_scout,user)
     @activity = activity
     @girl_scout = girl_scout
-    mail(:to => @activity.leader_email, :subject => "Parent Permission Granted Form")
+    @user = user
+    mail(:to => @user.email, :subject => "Parent Permission Granted Form")
   end
 end

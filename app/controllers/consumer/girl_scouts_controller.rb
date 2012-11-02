@@ -64,6 +64,7 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
+    @user = User.find(@activity.user_id)
     if @girl_scouts_permission_form.invalid?
       flash[:error] = "Something wrong please try again."
     else
@@ -75,7 +76,7 @@ class Consumer::GirlScoutsController < ConsumerController
       end
       @girl_scouts_permission_form.attending = true
       if @girl_scouts_permission_form.save()
-        Notifier.send_permission_form_to_tl_notification(@activity, @girl_scout).deliver
+        Notifier.send_permission_form_to_tl_notification(@activity, @girl_scout,@user).deliver
       end
     end
   end
