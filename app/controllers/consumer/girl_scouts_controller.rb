@@ -7,7 +7,7 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_activity_permission_forms.each do |pf|
       item = {}
       item[:id] = pf.id
-      item[:girl_scout] = pf.girls_scout.first_name + ' ' + pf.girls_scout.last_name
+      item[:girl_scout] = (pf.girls_scout.first_name + ' ' + pf.girls_scout.last_name rescue "")
       item[:activity_name] = pf.girl_scouts_activity.activity_name
       item[:activity_date_begin] = pf.girl_scouts_activity.activity_date_begin
       item[:activity_date_end] = pf.girl_scouts_activity.activity_date_end
