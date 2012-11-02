@@ -1,8 +1,9 @@
 class GirlScoutsTroopLeadersController < ApplicationController
 
-  before_filter :set_service_provider, :girls_scouts_activities
+  before_filter :set_service_provider,:reset_activity, :girls_scouts_activities
 
   def index
+    session[:sp_id] = params[:sp_id]
     @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ? and service_provider_id=?", Date.today, session[:user_service_provider]).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
     id = session[:selected_activity_id] if session[:selected_activity_id].present?
@@ -112,7 +113,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
   end
 
   def send_notification_email
-    @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:id],session[:user_service_provider])
+    @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:id], session[:user_service_provider])
     if @activity.invalid?
       flash[:error] = "Something wrong please try again."
 
@@ -151,7 +152,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     else
       #sending mail to all parents
       @counter = 0
-      @girls_scouts = current_user.girls_scouts.where('service_provider_id=?',session[:user_service_provider])
+      @girls_scouts = current_user.girls_scouts.where('service_provider_id=?', session[:user_service_provider])
       @girls_scouts.each do |girl_scout|
         email = girl_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
@@ -263,8 +264,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
     #@girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id = ? and status = ?', params[:activity_id], 'Pending')
     @girl_scouts_activity_permission_forms = GirlScoutsActivityPermissionForm.where('girl_scouts_activity_id=? and status in (?) and girl_scout_attending in (?)', params[:activity_id], ['Pending', 'In Progress'], ['Yes', '?'])
     @girl_scouts_activity_permission_forms.each do |pf|
-      @girl_scout = current_user.girls_scouts.find_by_id_and_service_provider_id(pf.girls_scout_id,session[:user_service_provider])
-      @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(pf.girl_scouts_activity_id,session[:user_service_provider])
+      @girl_scout = current_user.girls_scouts.find_by_id_and_service_provider_id(pf.girls_scout_id, session[:user_service_provider])
+      @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(pf.girl_scouts_activity_id, session[:user_service_provider])
       Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
       @counter += 1
     end
@@ -321,6 +322,14 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def girls_scouts_activities
     return @girls_scouts_activities if defined?(@girls_scouts_activities)
     @girls_scouts_activities = []
+  end
+
+  private
+
+  def reset_activity
+    if session[:sp_id] != params[:sp_id]
+      session[:selected_activity_id] = ''
+    end
   end
 
 end
