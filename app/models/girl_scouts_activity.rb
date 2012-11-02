@@ -87,11 +87,11 @@ class GirlScoutsActivity < ActiveRecord::Base
       "LeaderAdvisor2Name" => @activity.leader_advisor_2_first_name.to_s + ' ' + @activity.leader_advisor_2_last_name.to_s,
       "LeaderAdvisor2Phone" => @activity.leader_advisor_2_phone_1.to_s + '-' + @activity.leader_advisor_2_phone_2.to_s + '-' + @activity.leader_advisor_2_phone_3.to_s,
       "LeaderAdvisor2Cell" => @activity.leader_advisor_2_cell_1.to_s + '-' + @activity.leader_advisor_2_cell_2.to_s + '-' + @activity.leader_advisor_2_cell_3.to_s,
-      "ForExpenses" => @activity.activity_cost_dollars ? (@activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!',
+      "ForExpenses" => @activity.activity_cost_dollars ? ('$' + @activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!',
       "TroopLeaderEmergencyContactName" => @activity.troop_leader_emergency_contact_first_name.to_s + ' ' + @activity.troop_leader_emergency_contact_last_name.to_s,
       "TroopLeaderEmergencyContactPhoneNumber" => @activity.troop_leader_emergency_contact_phone_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_3.to_s,
       "TroopLeaderEmergencyContactCellNumber" => @activity.troop_leader_emergency_contact_cell_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_3.to_s,
-      "TroopLeaderEmergencyContactNameAddress" => @activity.troop_leader_emergency_contact_name_address_street.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_line.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_city.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_state.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_country.to_s + ',' + @activity.troop_leader_emergency_contact_name_address_zip.to_s,
+      "TroopLeaderEmergencyContactNameAddress" => @activity.troop_leader_emergency_contact_name_address_street.to_s + ',' + (@activity.troop_leader_emergency_contact_name_address_line.to_s.present? ? (@activity.troop_leader_emergency_contact_name_address_line.to_s + ', ') : ' ') + @activity.troop_leader_emergency_contact_name_address_city.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_state.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_zip.to_s,
       "OtherEquipmentOrClothing" => @activity.activity_equipment
     })
     # raise @pdftk.fields(form_pdf_path).to_yaml

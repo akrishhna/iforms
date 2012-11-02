@@ -107,13 +107,13 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "EmergencyContactName" => @girl_scouts_permission_form.emergency_contact_first_name.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_last_name.to_s,
       "EmergencyContactPhoneNumber" => @girl_scouts_permission_form.emergency_contact_phone_number_1.to_s + '-' + @girl_scouts_permission_form.emergency_contact_phone_number_2.to_s + '-' + @girl_scouts_permission_form.emergency_contact_phone_number_3.to_s,
       "EmergencyContactCellNumber" => @girl_scouts_permission_form.emergency_contact_cell_number_1.to_s + '-' + @girl_scouts_permission_form.emergency_contact_cell_number_2.to_s + '-' + @girl_scouts_permission_form.emergency_contact_cell_number_3.to_s,
-      "EmergencyContactAddress" => @girl_scouts_permission_form.emergency_contact_address_street.to_s + ',' + @girl_scouts_permission_form.emergency_contact_address_line.to_s,
+      "EmergencyContactAddress" => @girl_scouts_permission_form.emergency_contact_address_street.to_s + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? (', ' + @girl_scouts_permission_form.emergency_contact_address_line.to_s) : ' '),
       "EmergencyContactCity" => @girl_scouts_permission_form.emergency_contact_address_city.to_s,
-      "emergency_contact_address_street" => @girl_scouts_permission_form.emergency_contact_address_state.to_s,
+      "EmergencyContactState" => @girl_scouts_permission_form.emergency_contact_address_state.to_s,
       "EmergencyContactRelationshipToParticipant" => @girl_scouts_permission_form.emergency_contact_relationship_to_participant.to_s,
       "Medications" => @girl_scouts_permission_form.medications
     })
-    # raise @pdftk.fields(form_pdf_path).to_yaml
+     #raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 
