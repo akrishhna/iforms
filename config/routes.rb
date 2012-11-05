@@ -1,5 +1,7 @@
 Iforms::Application.routes.draw do
 
+  resources :admin
+
   resources :profiles
 
   get "errors/error_404"
