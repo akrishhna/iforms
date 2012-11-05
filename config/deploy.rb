@@ -4,11 +4,12 @@ set :domain, '50.57.138.165' #Your Accelerators public IP address
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-if stage == "production"
-  set :deploy_to, "/home/railsapps/iforms/"
-else
+#if stage == "production"
+ # set :deploy_to, "/home/railsapps/iforms/"
+#else
+  set :branch, "development"
   set :deploy_to, "/home/railsapps/iforms_staging/"
-end
+#end
 
 
 set :user, "root"
