@@ -1,7 +1,11 @@
 Iforms::Application.routes.draw do
 
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+        get 'change_service_provider_status'
+      end
+    end
   end
 
   resources :admin do

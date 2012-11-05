@@ -40,11 +40,21 @@ class Admin::UsersController < AdminController
 
   def show
     @user = User.find(params[:id])
+    @user_services = UserServiceProvider.joins(:service_provider).where('user_id=?',@user.id)
   end
 
   def delete_user
     User.delete(params[:user_id])
     flash[:success] = "User deleted."
+    redirect_to :back
+  end
+
+  def change_service_provider_status
+    @user_service = UserServiceProvider.find(params[:usp_id])
+    @user_service.status = !@user_service.status
+    @user_service.save
+
+    flash[:notice] = "Changed Service Status."
     redirect_to :back
   end
 end

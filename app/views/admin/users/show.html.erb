@@ -1,6 +1,7 @@
 <%= link_to "Back",admin_users_path, :class => "btn btn-primary" %>
 <h3> <%= @user.username %> Details </h3>
 <div>
+  <p>User Details:</p>
   <table class="table table-bordered">
     <tr BGcolor=gray>
       <th>User Name</th>
@@ -10,5 +11,26 @@
       <td><%= @user.username %></td>
       <td><%= @user.email %></td>
     </tr>
+  </table>
+  <p>Services:</p>
+  <table class="table table-bordered">
+    <tr BGcolor=gray>
+      <th>Service Type</th>
+      <th>Status</th>
+      <th>Expiry Date</th>
+      <th>Options</th>
+    </tr>
+    <% @user_services.each do|user_service| %>
+    <tr>
+      <td><%= user_service.service_provider.title %></td>
+      <td><%= user_service.status ? 'Active' : 'In Active' %></td>
+      <td><%= user_service.expiry_date %></td>
+      <td>
+        <%= link_to change_service_provider_status_admin_users_path('usp_id' => user_service.id) do %>
+          <%= user_service.status ? "In Active" : "Active" %>
+        <% end %>
+      </td>
+    </tr>
+      <% end %>
   </table>
 </div>
