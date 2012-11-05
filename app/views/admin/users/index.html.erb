@@ -1,8 +1,9 @@
 <div style="margin: 10px">
   <%= form_tag("/admin/users", :method => 'get', :class => 'form-inline') do %>
     <%= link_to "Add User", new_admin_user_path, :class => 'add_user_btn btn btn-primary', :style => "width:120px" %>
-    <%= text_field_tag :user_search_filter, "", :class => 'input-medium search-query', :placeholder => 'Username or Email', :style => ' margin-left: 24%;' %>
+    <%= text_field_tag :user_search_filter, params[:user_search_filter], :class => 'input-medium search-query', :placeholder => 'Username or Email', :style => ' margin-left: 24%;' %>
     <%= submit_tag 'Search', :class => 'btn btn-info' %>
+    <%= link_to 'Clear ','#', :class => 'btn btn-danger clear_users_search' %>
     <%= link_to "Admin Home", admin_index_path, :class => "btn btn-primary", :style => 'float:right' %>
   <% end %>
 
