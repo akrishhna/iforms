@@ -1,6 +1,13 @@
 Iforms::Application.routes.draw do
 
-  resources :admin
+  resources :admin do
+    collection do
+      get 'admin_users'
+      get 'change_admin_user_status'
+      get 'delete_admin_user'
+      post 'add_admin_user'
+    end
+  end
 
   resources :profiles
 

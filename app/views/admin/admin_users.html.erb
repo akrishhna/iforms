@@ -1,0 +1,44 @@
+<div class="admin_user">
+  <%= link_to "Add Admin User", "#new_admin_alert_box", :class => ' add_admin_user_btn btn btn-primary', :style => "margin:10px;width:120px" %>
+  <table class="table table-bordered table-header-bg">
+    <tr>
+      <th>S.No</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th colspan="2">Options</th>
+    </tr>
+    <% @admin_users.each_with_index do |admin_user, i| %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= admin_user.user.username %></td>
+        <td><%= admin_user.user.email %></td>
+        <td>
+          <%= admin_user.status ? "Active" : "In Active" %>
+        </td>
+        <td>
+          <%= link_to change_admin_user_status_admin_index_path(:admin_user_id => admin_user.id) do %>
+            <%= admin_user.status ? "In Active" : "Active" %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Delete", delete_admin_user_admin_index_path(:admin_user_id => admin_user.id) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div id="new_admin_alert_box" class="hide">
+  <%= form_tag("/admin/add_admin_user") do  %>
+    <div class="control-group">
+      <%= label_tag :email, "Email", :class => 'control-label' %>
+      <div class="controls">
+        <%= text_field_tag :email %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= submit_tag 'Submit', :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

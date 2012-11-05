@@ -1,13 +1,13 @@
 <% if !@appointments.blank? %>
-  <table class="table table-bordered">
-    <tr BGCOLOR="grey">
-      <th style="text-align: center">Name</th>
-      <th style="text-align: center">Service Provider</th>
-      <th style="text-align: center">Form</th>
-      <th style="text-align: center">Appointment</th>
-      <th style="text-align: center">Received</th>
-      <th style="text-align: center">Status</th>
-      <th style="text-align: center"> &nbsp&nbsp</th>
+  <table class="table table-bordered table-header-bg">
+    <tr>
+      <th>Name</th>
+      <th>Service Provider</th>
+      <th>Form</th>
+      <th>Appointment</th>
+      <th>Received</th>
+      <th>Status</th>
+      <th> &nbsp&nbsp</th>
     </tr>
     <% count = 1 %>
     <% @appointments.each do |i| %>

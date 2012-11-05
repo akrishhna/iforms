@@ -61,3 +61,14 @@
   -webkit-border-radius: 5px;
 }
 
+.table-header-bg {
+
+}
+
+.table-header-bg tr:first-child {
+  background-color: gray;
+}
+
+.table-header-bg th {
+text-align: center
+}
