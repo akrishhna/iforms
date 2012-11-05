@@ -1,0 +1,14 @@
+<%= link_to "Back",admin_users_path, :class => "btn btn-primary" %>
+<h3> <%= @user.username %> Details </h3>
+<div>
+  <table class="table table-bordered">
+    <tr BGcolor=gray>
+      <th>User Name</th>
+      <th>Email</th>
+    </tr>
+    <tr>
+      <td><%= @user.username %></td>
+      <td><%= @user.email %></td>
+    </tr>
+  </table>
+</div>

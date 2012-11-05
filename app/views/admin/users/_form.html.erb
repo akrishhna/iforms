@@ -1,0 +1,40 @@
+<%= form_for @user,:url => @user.new_record? ? admin_users_path : admin_user_path(@user),:html => {:class => " new_user_form form-horizontal"} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="control-group">
+    <%= f.label :username, "User Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :username %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, "Email", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  <% if action_name == 'new' %>
+  <div class="control-group">
+    <%= f.label :password, "Password", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :password_confirmation, "Password Confirmation", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+    <% end %>
+  <div class="form-actions">
+    <%= f.submit action_name == 'new' ? 'Add User' : 'Update User', :class => 'btn btn-primary' %>
+  </div>
+<% end %>

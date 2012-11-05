@@ -1,0 +1,32 @@
+<div style="margin: 10px">
+  <%= form_tag("/admin/users", :method => 'get', :class => 'form-inline') do %>
+    <%= link_to "Add User", new_admin_user_path, :class => 'add_user_btn btn btn-primary', :style => "width:120px" %>
+    <%= text_field_tag :user_search_filter, "", :class => 'input-medium search-query', :placeholder => 'Username or Email', :style => ' margin-left: 24%;' %>
+    <%= submit_tag 'Search', :class => 'btn btn-info' %>
+    <%= link_to "Admin Home", admin_index_path, :class => "btn btn-primary", :style => 'float:right' %>
+  <% end %>
+
+</div>
+<div>
+  <table class="table table-bordered table-header-bg">
+    <tr>
+      <th>S.No</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Last signed</th>
+      <th colspan="2">Options</th>
+    </tr>
+    <% @users.each_with_index do |user, i| %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.edit_confirmed.nil? ? "Not at Confirmed" : user.edit_confirmed %></td>
+        <td><%= user.last_sign_in_at.nil? ? ' ' : user.last_sign_in_at.strftime('%m/%d/%Y %H:%M:%S') %></td>
+        <td><%= link_to "Edit", edit_admin_user_path(:id => user.id) %></td>
+        <td><%= link_to "View", admin_user_path(:id => user.id) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

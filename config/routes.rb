@@ -1,5 +1,9 @@
 Iforms::Application.routes.draw do
 
+  namespace :admin do
+    resources :users
+  end
+
   resources :admin do
     collection do
       get 'admin_users'
