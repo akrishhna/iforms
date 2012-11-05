@@ -8,10 +8,11 @@ class AdminController < ApplicationController
 
   def admin_users
     @admin_users = AdminUser.joins(:user).all
+    @admin_users = AdminUser.joins(:user).where('username=? or email=?', params[:admin_user_search_filter], params[:admin_user_search_filter]) if params[:admin_user_search_filter].present?
   end
 
   def add_admin_user
-   user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:email])
     if user
       user.build_admin_user
       user.save
@@ -34,9 +35,9 @@ class AdminController < ApplicationController
   end
 
   def delete_admin_user
-     AdminUser.delete(params[:admin_user_id])
-     flash[:notice] = "Deleted Admin User."
-     redirect_to :back
+    AdminUser.delete(params[:admin_user_id])
+    flash[:notice] = "Deleted Admin User."
+    redirect_to :back
   end
 
   private
