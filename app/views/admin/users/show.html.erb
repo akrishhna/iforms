@@ -1,7 +1,7 @@
 <%= link_to "Back",admin_users_path, :class => "btn btn-primary" %>
 <h3> <%= @user.username %> Details </h3>
 <div>
-  <p>User Details:</p>
+  <strong>User Details:</strong>
   <table class="table table-bordered">
     <tr BGcolor=gray>
       <th>User Name</th>
@@ -12,25 +12,66 @@
       <td><%= @user.email %></td>
     </tr>
   </table>
-  <p>Services:</p>
+  <strong>Services:
+  <%= link_to 'Add Service',"#add_service_alert_box",:class => ' add_service_btn btn btn-primary ',:style => 'float:right;margin:10px' %></strong>
   <table class="table table-bordered">
     <tr BGcolor=gray>
       <th>Service Type</th>
-      <th>Status</th>
-      <th>Expiry Date</th>
-      <th>Options</th>
+      <th colspan="2" >Status</th>
+      <th colspan="2">Expiry Date</th>
     </tr>
     <% @user_services.each do|user_service| %>
     <tr>
       <td><%= user_service.service_provider.title %></td>
       <td><%= user_service.status ? 'Active' : 'In Active' %></td>
-      <td><%= user_service.expiry_date %></td>
       <td>
         <%= link_to change_service_provider_status_admin_users_path('usp_id' => user_service.id) do %>
           <%= user_service.status ? "In Active" : "Active" %>
         <% end %>
       </td>
+      <td><%= user_service.expiry_date %></td>
+      <td>
+        <%= link_to 'Extend','#extend_service_alert_box',:class => ' extend_service btn btn-primary',:style => "text-align:center" %>
+
+        <div id="extend_service_alert_box" class="hide">
+          <%= form_tag("/admin/users/extend_service") do  %>
+            <%= hidden_field_tag :user_service_provider_id,user_service.id %>
+            <div class="control-group">
+              <%= label_tag :expiry_date, "Expiry Date", :class => 'control-label' %>
+              <div class="controls">
+                <%= text_field_tag :expiry_date,"", :class => "expiry_date_selector", :placeholder => "YYYY-MM-DD" %>
+              </div>
+            </div>
+            <div class="actions">
+              <%= submit_tag 'Extend Service', :class => 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+
+      </td>
     </tr>
       <% end %>
   </table>
+</div>
+
+
+<div id="add_service_alert_box" class="hide">
+  <%= form_tag("/admin/users/add_service") do  %>
+    <%= hidden_field_tag :user_id,@user.id %>
+    <div class="control-group">
+      <%= label_tag :service_provider_id, "Service", :class => 'control-label' %>
+      <div class="controls">
+        <%= select_tag :service_provider_id,options_for_select(StaticData.sign_up_service_type),{:include_blank => true} %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= label_tag :new_service_expiry_date, "Expiry Date", :class => 'control-label' %>
+      <div class="controls">
+        <%= text_field_tag :new_service_expiry_date,"", :class => "new_service_expiry_date_selector", :placeholder => "YYYY-MM-DD" %>
+      </div>
+    </div>
+    <div class="actions">
+      <%= submit_tag 'Add Service', :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
 </div>
