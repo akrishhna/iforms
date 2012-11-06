@@ -6,8 +6,13 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+    username = params[:user][:username]
+    email = params[:user][:email]
+    password = params[:user][:password]
+    password_confirmation = params[:user][:password_confirmation]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+    if !username.empty? && !email.empty? && ayah_passed && (password == password_confirmation)
     if ayah_passed
       super
     else
@@ -15,6 +20,10 @@ class RegistrationsController < Devise::RegistrationsController
       clean_up_passwords(resource)
       flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."
       render_with_scope :new
+    end
+    else
+      flash[:error] = 'Please fill all the fields and Play the game'
+      redirect_to :back
     end
   end
 

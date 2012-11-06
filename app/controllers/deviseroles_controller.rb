@@ -163,7 +163,7 @@ class DeviserolesController < ApplicationController
     password_confirmation = params[:user][:girl_scout_troop_leader_profile_attributes][:password]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
-    #if !username.nil? && !email.nil? && !service_type.nil? && ayah_passed && (password == password_confirmation)
+    if !username.empty? && !email.empty? && !service_type.empty? && ayah_passed && (password == password_confirmation)
       @user = User.new(params[:user])
       service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
       if ayah_passed
@@ -183,15 +183,15 @@ class DeviserolesController < ApplicationController
           redirect_to homepage_url
         else
           flash[:error] = 'Something Wrong Please Try again'
-          redirect_to('/girls_scout/sign_up')
+          redirect_to :back
         end
       else
         flash[:error] = 'Please Play the game'
-        redirect_to('/girls_scout/sign_up')
+        redirect_to :back
       end
-    #else
-    #  flash[:error] = 'Please fill all the fields and Play the game'
-    #  redirect_to('/girls_scout/sign_up')
-    #end
+    else
+      flash[:error] = 'Please fill all the fields and Play the game'
+      redirect_to :back
+    end
   end
 end
