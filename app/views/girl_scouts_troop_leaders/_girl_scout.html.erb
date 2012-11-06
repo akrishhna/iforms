@@ -17,8 +17,10 @@
     <% if @user %>
       <% if @user.edit_confirmed == 'confirmed' %>
         <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email', :placeholder => "Email", :disabled => 'disabled' %>
+      <% else %>
+        <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email', :placeholder => "Email" %>
       <% end %>
-    <% else %>
+      <% else %>
       <%= text_field_tag :email, girl_scout.email, :id => "email_#{row_index}", :class => 'girl_scout_email', :placeholder => "Email" %>
     <% end %>
   </td>
