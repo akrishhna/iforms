@@ -168,6 +168,7 @@ class DeviserolesController < ApplicationController
         redirect_to homepage_url
       elsif @user.save
         UserServiceProvider.create(:user_id => @user.id,:service_provider_id => 2)
+        Notifier.confirmation_instructions_notification(@user).deliver
         flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
         redirect_to homepage_url
       else
