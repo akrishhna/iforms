@@ -22,7 +22,7 @@ class StaticData < ActiveRecord::Base
      'TX','UT','VT','VI','VA','WA','WV','WI','WY']
   end
 
-  def self.sign_up_council_type
-    ['Central Texas','Diamonds of AR, OK, and TX']
+  def self.sign_up_service_type
+    [['Central Texas','2'],['Diamonds of AR, OK, and TX','3']]
   end
 end
