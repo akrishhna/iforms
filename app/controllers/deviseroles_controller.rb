@@ -156,32 +156,42 @@ class DeviserolesController < ApplicationController
   end
 
   def girl_scout_new
-    @user = User.new(params[:user])
+    username = params[:user][:username]
+    email = params[:user][:email]
+    service_type = params[:user][:girl_scout_troop_leader_profile_attributes][:council_type]
+    password = params[:user][:girl_scout_troop_leader_profile_attributes][:password]
+    password_confirmation = params[:user][:girl_scout_troop_leader_profile_attributes][:password]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
-    service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
-    if ayah_passed
-      @user.email = params[:user][:email]
-      @existing_user = User.find_by_email(params[:user][:email])
-      if @existing_user
-        user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id, 2)
-        user_profile_exist = GirlScoutTroopLeaderProfile.find_by_user_id(@existing_user.id)
-        @profile = Profile.find_by_user_id(@existing_user.id)
-        UserServiceProvider.create(:user_id => @existing_user.id, :service_provider_id => 2) if user_exist.nil?
-        GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id, :first_name => @profile.first_name, :last_name => @profile.last_name) if user_profile_exist.nil?
-        flash[:success] = "#{params[:user][:email]} already exist Please login"
-        redirect_to homepage_url
-      elsif @user.save
-        UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_type.id)
-        flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
-        redirect_to homepage_url
+    #if !username.nil? && !email.nil? && !service_type.nil? && ayah_passed && (password == password_confirmation)
+      @user = User.new(params[:user])
+      service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
+      if ayah_passed
+        @user.email = params[:user][:email]
+        @existing_user = User.find_by_email(params[:user][:email])
+        if @existing_user
+          user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id, 2)
+          user_profile_exist = GirlScoutTroopLeaderProfile.find_by_user_id(@existing_user.id)
+          @profile = Profile.find_by_user_id(@existing_user.id)
+          UserServiceProvider.create(:user_id => @existing_user.id, :service_provider_id => 2) if user_exist.nil?
+          GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id, :first_name => @profile.first_name, :last_name => @profile.last_name) if user_profile_exist.nil?
+          flash[:success] = "#{params[:user][:email]} already exist Please login"
+          redirect_to homepage_url
+        elsif @user.save
+          UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_type.id)
+          flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
+          redirect_to homepage_url
+        else
+          flash[:error] = 'Something Wrong Please Try again'
+          redirect_to('/girls_scout/sign_up')
+        end
       else
-        flash[:error] = 'Something Wrong Please Try again'
+        flash[:error] = 'Please Play the game'
         redirect_to('/girls_scout/sign_up')
       end
-    else
-      flash[:error] = 'Please Play the game'
-      redirect_to('/girls_scout/sign_up')
-    end
+    #else
+    #  flash[:error] = 'Please fill all the fields and Play the game'
+    #  redirect_to('/girls_scout/sign_up')
+    #end
   end
 end
