@@ -1,37 +1,50 @@
 <div class="container">
-<h2>Sign up</h2>
+  <h2>Sign up</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-<% if resource.errors.any? %>
-<div id="error_explanation">
-	<ul>
-    <% resource.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <% if false %>
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    </ul> 
-  </div> 
-<% end %>
-<br />
-    <div class="labelcss">Username</div>
-    <%= f.text_field :username %>
-    <br /><br />
-  <div class="labelcss">Email </div>
-  <%= f.text_field :email %>
-<br /><br />
-  <div class="labelcss">Password </div>
-  <%= f.password_field :password %>
-<br /><br />
-  <div class="labelcss">Password confirmation </div>
-  <%= f.password_field :password_confirmation %>
-<br /><br />
-
-
-<%= recaptcha_tags(:ssl => true) %>
-<br />
-  <div class="actions">
-  <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :username, "User Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :username %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email, "Email", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password, "Password", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password_confirmation, "Password Confirmation", :class => 'control-label', :style => "width:148px" %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= @ayah.get_publisher_html.html_safe if !current_user.present? %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "SIgn Up", :class => 'btn btn-primary ' %>
+    </div>
+  <% end %>
+  <%= render :partial => "devise/shared/links" %>
 </div>

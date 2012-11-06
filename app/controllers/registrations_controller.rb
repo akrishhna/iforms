@@ -1,7 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def new
+   # super
+    @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
+  end
+
   def create
-    if verify_recaptcha
+    @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
+    ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+    if ayah_passed
       super
     else
       build_resource
