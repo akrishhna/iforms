@@ -11,13 +11,6 @@ class DeviserolesController < ApplicationController
         redirect_to :controller => "consumer", :action => "index"
       end
 
-    elsif @service_provider.id == 2
-      #@profile = Profile.find_by_user_id(current_user.id)
-      #if @profile.nil?
-      #  redirect_to :controller => "profiles", :action => "new"
-      #else
-        redirect_to girl_scouts_troop_leaders_path
-     # end
     elsif @service_provider.id == 1
       @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
@@ -25,6 +18,17 @@ class DeviserolesController < ApplicationController
       else
         redirect_to :controller => "doctors", :action => "index"
       end
+
+    elsif @service_provider.id == 2
+      #@profile = Profile.find_by_user_id(current_user.id)
+      #if @profile.nil?
+      #  redirect_to :controller => "profiles", :action => "new"
+      #else
+      redirect_to '/girl_scouts_troop_leaders?sp_id=2'
+      # end
+
+    elsif @service_provider.id == 3
+      redirect_to '/girl_scouts_troop_leaders?sp_id=3'
     else
 
     end
@@ -155,20 +159,20 @@ class DeviserolesController < ApplicationController
     @user = User.new(params[:user])
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+    service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
     if ayah_passed
       @user.email = params[:user][:email]
       @existing_user = User.find_by_email(params[:user][:email])
       if @existing_user
-        user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id,2)
+        user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id, 2)
         user_profile_exist = GirlScoutTroopLeaderProfile.find_by_user_id(@existing_user.id)
         @profile = Profile.find_by_user_id(@existing_user.id)
-        UserServiceProvider.create(:user_id => @existing_user.id,:service_provider_id => 2) if user_exist.nil?
-        GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id,:first_name => @profile.first_name, :last_name => @profile.last_name) if user_profile_exist.nil?
+        UserServiceProvider.create(:user_id => @existing_user.id, :service_provider_id => 2) if user_exist.nil?
+        GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id, :first_name => @profile.first_name, :last_name => @profile.last_name) if user_profile_exist.nil?
         flash[:success] = "#{params[:user][:email]} already exist Please login"
         redirect_to homepage_url
       elsif @user.save
-        UserServiceProvider.create(:user_id => @user.id,:service_provider_id => 2)
-        Notifier.confirmation_instructions_notification(@user).deliver
+        UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_type.id)
         flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
         redirect_to homepage_url
       else
