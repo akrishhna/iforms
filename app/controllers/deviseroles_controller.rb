@@ -2,7 +2,7 @@ class DeviserolesController < ApplicationController
   before_filter :authenticate_user!, :only => ["index"]
 
   def index
-    @service_provider = current_user.service_providers.first
+    @service_provider = current_user.service_providers.where('user_service_providers.status=?',true).first
     if @service_provider.nil?
       @profile = Profile.find_by_user_id(current_user.id)
       if @profile.nil?
