@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
 
   def user_service_provider_list
     return @user_service_providers if defined?(@user_service_providers)
-    @user_service_providers = current_user.service_providers.collect{|sp| [sp.title , sp.id]}
+    @user_service_providers = current_user.service_providers.where('user_service_providers.status=?',true).collect{|sp| [sp.title , sp.id]}
     @user_service_providers[@user_service_providers.size] = ["Consumer", 0]
     @user_service_providers
   end

@@ -1,6 +1,6 @@
 class GirlScoutsTroopLeadersController < ApplicationController
 
-  before_filter :set_service_provider,:reset_activity, :girls_scouts_activities
+  before_filter :set_service_provider,:reset_activity, :girls_scouts_activities, :checking_user_status
 
   def index
     session[:sp_id] = params[:sp_id]
@@ -330,6 +330,15 @@ class GirlScoutsTroopLeadersController < ApplicationController
     if session[:sp_id] != params[:sp_id]
       session[:selected_activity_id] = ''
     end
+  end
+
+  def checking_user_status
+    status = current_user.service_providers.where('user_service_providers.status=? and user_service_providers.service_provider_id in (?)',true, [session[:sp_id],params[:sp_id]]).first
+  if status
+  else
+    flash[:error] = "You do not have permissions to access"
+    redirect_to consumer_index_path
+  end
   end
 
 end
