@@ -18,6 +18,7 @@
     <tr BGcolor=#D1D1D1>
       <th>Service Type</th>
       <th colspan="2" >Status</th>
+      <th>Begin Date</th>
       <th colspan="2">Expiry Date</th>
     </tr>
     <% @user_services.each do|user_service| %>
@@ -29,6 +30,7 @@
           <%= user_service.status ? "In Active" : "Active" %>
         <% end %>
       </td>
+      <td><%= user_service.created_at.strftime("%Y-%m-%d") %></td>
       <td><%= user_service.expiry_date %></td>
       <td>
         <%#= link_to 'Extend',extend_service_admin_users_path(:service_id => user_service.id),:class => 'extend_service btn btn-primary fancybox.ajax' %>
