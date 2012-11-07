@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
   def new
-   # super
+    # super
     @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
   end
 
@@ -13,14 +13,24 @@ class RegistrationsController < Devise::RegistrationsController
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
     ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
     if !username.empty? && !email.empty? && ayah_passed && (password == password_confirmation)
-    if ayah_passed
-      super
-    else
-      build_resource
-      clean_up_passwords(resource)
-      flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."
-      render_with_scope :new
-    end
+      username_present = User.find_by_username(username)
+      email_present = User.find_by_email(email)
+      if username_present
+        flash.now[:notice] = "Username #{username} is unavailable"
+        render :new
+      elsif email_present
+        flash.now[:notice] = "Email #{email} is unavailable"
+        render :new
+      else
+        if ayah_passed
+          super
+        else
+          build_resource
+          clean_up_passwords(resource)
+          flash.now[:alert] = "There was an error, Please re-enter."
+          render_with_scope :new
+        end
+      end
     else
       flash[:error] = 'Please fill all the fields and Play the game'
       redirect_to :back

@@ -167,7 +167,6 @@ class DeviserolesController < ApplicationController
       @user = User.new(params[:user])
       service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
       if ayah_passed
-        #@user.email = params[:user][:email]
         @existing_user = User.where('username=? or email=?', params[:user][:username], params[:user][:email]).first
         if @existing_user
           user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id, 2)
