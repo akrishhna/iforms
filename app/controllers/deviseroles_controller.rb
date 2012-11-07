@@ -190,7 +190,7 @@ class DeviserolesController < ApplicationController
       end
     else
       flash[:error] = 'Please fill all the fields and Play the game.'
-      render :girl_scout_sign_up
+      redirect_to :back
     end
   end
 end
