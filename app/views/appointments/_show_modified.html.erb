@@ -1,11 +1,11 @@
 <% if current_user.role == 'patient' %>
   <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", @appointment.id, current_user.id) %>
   <div class="breadcrumbs_app_show">
-    <%= link_to 'Back', '/consumer' %>
+    <%= link_to 'Back', '/consumer',:class => 'btn btn-primary' %>
   </div>
   <div class="formslist_show">
-    <table class="table table-bordered" style="width:50%;text-align: center;margin-left: 15%">
-      <tr BGCOLOR="grey">
+    <table class="table table-bordered table-header-bg" style="width:50%;margin-left: 15%">
+      <tr>
         <th>Form</th>
         <th>Status</th>
         <th></th>
@@ -120,14 +120,14 @@
 <% if current_user.role == 'doctor' %>
   <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", @appointment.id, current_user.id) %>
   <div class="breadcrumbs_app_show">
-    <%= link_to 'Back', doctors_path %>
+    <%= link_to 'Back', doctors_path,:class => 'btn btn-primary' %>
   </div>
   <div class="formslist_show">
-    <table class="table table-bordered" style="width:50%;text-align: center;margin-left: 15%">
-      <tr BGCOLOR="grey">
+    <table class="table table-bordered table-header-bg" style="width:50%;margin-left: 15%">
+      <tr>
         <th>Form</th>
         <th>Status</th>
-        <th></th>
+        <th>Action</th>
       </tr>
       <% @appformjoins.each do |i| %>
         <% if i.formsubmittedtime %>

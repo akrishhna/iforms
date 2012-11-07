@@ -6,8 +6,8 @@
     Appointment Date : <%= text_field_tag :date, "", :class => "appointments_date_selector" %>
   </div>
   <% if !@appointments.blank? %>
-    <table class="table table-bordered">
-      <tr BGCOLOR="grey" id="table_header">
+    <table class="table table-bordered table-header-bg">
+      <tr>
         <th style="text-align: center">Next Appointment</th>
         <th style="text-align: center">Name</th>
         <th style="text-align: center">Email</th>
@@ -15,7 +15,7 @@
         <th style="text-align: center">Appointment</th>
         <th style="text-align: center">Sent</th>
         <th style="text-align: center">Status</th>
-        <th style="text-align: center"></th>
+        <th style="text-align: center">Action</th>
       </tr>
       <% count = 1 %>
       <% @appointments.each do |i| %>

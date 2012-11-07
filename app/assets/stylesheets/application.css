@@ -66,9 +66,13 @@
 }
 
 .table-header-bg tr:first-child {
-  background-color: gray;
+  background-color: #D1D1D1;
 }
 
 .table-header-bg th {
 text-align: center
+}
+
+body{
+  color: #0B0000
 }

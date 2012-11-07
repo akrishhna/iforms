@@ -27,7 +27,7 @@
             <%= admin_user.status ? "In Active" : "Active" %>
           <% end %>
         </td>
-        <td>
+        <td style="text-align: center">
           <%= link_to "Delete", delete_admin_user_admin_index_path(:admin_user_id => admin_user.id) %>
         </td>
       </tr>

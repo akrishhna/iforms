@@ -25,8 +25,8 @@
         <td><%= user.email %></td>
         <td><%= user.confirmed_at.nil? ? "Not at Confirmed" : "Confirmed" %></td>
         <td><%= user.last_sign_in_at.nil? ? ' ' : user.last_sign_in_at.strftime('%m/%d/%Y %H:%M:%S') %></td>
-        <td><%= link_to "Edit", edit_admin_user_path(:id => user.id) %></td>
-        <td><%= link_to "Details", admin_user_path(:id => user.id) %></td>
+        <td style="text-align: center"><%= link_to "Edit", edit_admin_user_path(:id => user.id) %></td>
+        <td style="text-align: center"><%= link_to "Details", admin_user_path(:id => user.id) %></td>
       </tr>
     <% end %>
   </table>
