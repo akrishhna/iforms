@@ -7,7 +7,7 @@ class AdminController < ApplicationController
   end
 
   def admin_users
-    @admin_users = AdminUser.joins(:user).all
+    @admin_users = AdminUser.joins(:user).order('username ASC').all
     @admin_users = AdminUser.joins(:user).where('username=? or email=?', params[:admin_user_search_filter], params[:admin_user_search_filter]) if params[:admin_user_search_filter].present?
   end
 

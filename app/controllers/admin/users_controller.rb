@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
 
   def index
-    @users = User.all
+    @users = User.order('username ASC').all
     @users = User.where('username=? or email=?', params[:user_search_filter], params[:user_search_filter]) if params[:user_search_filter].present?
 
   end
