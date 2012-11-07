@@ -8,8 +8,5 @@ $(function () {
 
   $('.extend_service').fancybox();
 
-  $('.expiry_date_selector').datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
-
   $('.new_service_expiry_date_selector').datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
-
 });

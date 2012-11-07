@@ -3,7 +3,7 @@
 <div>
   <strong>User Details:</strong>
   <table class="table table-bordered">
-    <tr BGcolor=gray>
+    <tr BGcolor=#D1D1D1>
       <th>User Name</th>
       <th>Email</th>
     </tr>
@@ -15,7 +15,7 @@
   <strong>Services:
   <%= link_to 'Add Service',"#add_service_alert_box",:class => ' add_service_btn btn btn-primary ',:style => 'float:right;margin:10px' %></strong>
   <table class="table table-bordered">
-    <tr BGcolor=gray>
+    <tr BGcolor=#D1D1D1>
       <th>Service Type</th>
       <th colspan="2" >Status</th>
       <th colspan="2">Expiry Date</th>
@@ -31,23 +31,8 @@
       </td>
       <td><%= user_service.expiry_date %></td>
       <td>
-        <%= link_to 'Extend','#extend_service_alert_box',:class => ' extend_service btn btn-primary',:style => "text-align:center" %>
-
-        <div id="extend_service_alert_box" class="hide">
-          <%= form_tag("/admin/users/extend_service") do  %>
-            <%= hidden_field_tag :user_service_provider_id,user_service.id %>
-            <div class="control-group">
-              <%= label_tag :expiry_date, "Expiry Date", :class => 'control-label' %>
-              <div class="controls">
-                <%= text_field_tag :expiry_date,"", :class => "expiry_date_selector", :placeholder => "YYYY-MM-DD" %>
-              </div>
-            </div>
-            <div class="actions">
-              <%= submit_tag 'Extend Service', :class => 'btn btn-primary' %>
-            </div>
-          <% end %>
-        </div>
-
+        <%#= link_to 'Extend',extend_service_admin_users_path(:service_id => user_service.id),:class => 'extend_service btn btn-primary fancybox.ajax' %>
+      <%= link_to 'Extend','/admin/users/extend_service?service_id='+user_service.id.to_s,:class => 'extend_service btn btn-primary fancybox.ajax' %>
       </td>
     </tr>
       <% end %>
@@ -59,9 +44,9 @@
   <%= form_tag("/admin/users/add_service") do  %>
     <%= hidden_field_tag :user_id,@user.id %>
     <div class="control-group">
-      <%= label_tag :service_provider_id, "Service", :class => 'control-label' %>
+      <%= label_tag :service, "Service", :class => 'control-label' %>
       <div class="controls">
-        <%= select_tag :service_provider_id,options_for_select(StaticData.sign_up_service_type),{:include_blank => true} %>
+        <%= select_tag :service,options_for_select(StaticData.sign_up_service_type),{:include_blank => true} %>
       </div>
     </div>
     <div class="control-group">

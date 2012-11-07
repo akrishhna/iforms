@@ -4,8 +4,9 @@ Iforms::Application.routes.draw do
     resources :users do
       collection do
         get 'change_service_provider_status'
-        post 'extend_service'
+        get 'extend_service'
         post 'add_service'
+        post 'extend_user_service'
       end
     end
   end

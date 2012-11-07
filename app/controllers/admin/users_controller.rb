@@ -59,13 +59,13 @@ class Admin::UsersController < AdminController
   end
 
   def add_service
-    user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(params[:user_id], params[:service_provider_id])
+    user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(params[:user_id], params[:service])
     if user_exist
       flash[:notice] = 'User already having this service please upgrade.'
     else
       user_service_provider = UserServiceProvider.new
       user_service_provider.user_id = params[:user_id]
-      user_service_provider.service_provider_id = params[:service_provider_id]
+      user_service_provider.service_provider_id = params[:service]
       user_service_provider.expiry_date = params[:new_service_expiry_date]
       user_service_provider.save
       flash[:notice] = 'Added service.'
@@ -74,10 +74,16 @@ class Admin::UsersController < AdminController
   end
 
   def extend_service
-    user_service_provider = UserServiceProvider.find(params[:user_service_provider_id])
+    @user_service_provider = UserServiceProvider.find(params[:service_id])
+    render :layout => false if request.xhr?
+  end
+
+  def extend_user_service
+    user_service_provider = UserServiceProvider.find(params[:service_id])
     user_service_provider.expiry_date = params[:expiry_date]
     user_service_provider.save
     redirect_to :back
   end
+
 
 end
