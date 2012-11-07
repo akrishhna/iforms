@@ -2,7 +2,7 @@ class DeviserolesController < ApplicationController
   before_filter :authenticate_user!, :only => ["index"]
 
   def index
-    @service_provider = current_user.service_providers.where('user_service_providers.status=?',true).first
+    @service_provider = current_user.service_providers.where('user_service_providers.status=?', true).first
     if @service_provider.nil?
       @profile = Profile.find_by_user_id(current_user.id)
       if @profile.nil?
@@ -155,7 +155,7 @@ class DeviserolesController < ApplicationController
     @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
   end
 
-  def girl_scout_new
+  def girl_scout_sign_up
     username = params[:user][:username]
     email = params[:user][:email]
     service_type = params[:user][:girl_scout_troop_leader_profile_attributes][:council_type]
@@ -167,14 +167,14 @@ class DeviserolesController < ApplicationController
       @user = User.new(params[:user])
       service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
       if ayah_passed
-        @user.email = params[:user][:email]
-        @existing_user = User.find_by_email(params[:user][:email])
+        #@user.email = params[:user][:email]
+        @existing_user = User.where('username=? or email=?', params[:user][:username], params[:user][:email]).first
         if @existing_user
           user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id, 2)
           user_profile_exist = GirlScoutTroopLeaderProfile.find_by_user_id(@existing_user.id)
           @profile = Profile.find_by_user_id(@existing_user.id)
           UserServiceProvider.create(:user_id => @existing_user.id, :service_provider_id => 2) if user_exist.nil?
-          GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id, :first_name => @profile.first_name, :last_name => @profile.last_name) if user_profile_exist.nil?
+          GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id, :first_name => @profile.first_name ? @profile.first_name : '', :last_name => @profile.last_name ? @profile.last_name : '') if user_profile_exist.nil?
           flash[:success] = "#{params[:user][:email]} already exist Please login"
           redirect_to homepage_url
         elsif @user.save
@@ -182,16 +182,16 @@ class DeviserolesController < ApplicationController
           flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
           redirect_to homepage_url
         else
-          flash[:error] = 'Something Wrong Please Try again'
+          flash[:error] = 'Something Wrong Please Try again.'
           redirect_to :back
         end
       else
-        flash[:error] = 'Please Play the game'
+        flash[:error] = 'Please Play the game.'
         redirect_to :back
       end
     else
-      flash[:error] = 'Please fill all the fields and Play the game'
-      redirect_to :back
+      flash[:error] = 'Please fill all the fields and Play the game.'
+      render :girl_scout_sign_up
     end
   end
 end
