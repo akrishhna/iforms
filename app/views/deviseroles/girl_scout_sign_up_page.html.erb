@@ -18,16 +18,18 @@
     <%= f.label :username, "User Name", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :username %>&nbsp;&nbsp;
-      <span class="username_status available">Available</span>
-      <span class="username_status not_available">Not Available</span>
+      <span class="username_status default">Enter your Username.</span>
+      <span class="username_status ok">Available</span>
+      <span class="username_status error">Not Available</span>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :email, "Email", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email %>&nbsp;&nbsp;
-      <span class="email_status available">Available</span>
-      <span class="email_status not_available">Not Available</span>
+      <span class="email_status default">What’s your email address?</span>
+      <span class="email_status ok">Available</span>
+      <span class="email_status error">Not Available</span>
     </div>
   </div>
   <%= f.fields_for :girl_scout_troop_leader_profile do |builder| %>
@@ -53,13 +55,18 @@
   <div class="control-group">
     <%= f.label :password, "Password", :class => 'control-label' %>
     <div class="controls">
-      <%= f.password_field :password %>
+      <%= f.password_field :password %> &nbsp;&nbsp;
+      <span class="password_status default">6 characters or more! Be tricky.</span>
+      <span class="password_status ok">Password is okay!</span>
+      <span class="password_status error">Password must be at least 6 characters.</span>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :password_confirmation, "Password Confirmation", :class => 'control-label', :style => "width:148px" %>
     <div class="controls">
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation %>&nbsp;&nbsp;
+      <span class="password_confirmation_status ok">Password is matched!</span>
+      <span class="password_confirmation_status error">Password doesn't match!.</span>
     </div>
   </div>
   <div class="control-group">
@@ -68,17 +75,21 @@
     </div>
   </div>
   <div class="form-actions">
-    <%= f.submit "Sign Up", :class => 'btn btn-primary ' %>
+    <%= f.submit "Sign Up",:class => 'btn btn-primary btn-large span3 girl_scout_sign_up_form_submit',:disabled => "disabled" %>
   </div>
 
 <% end %>
 
 <script type="text/javascript">
-  $('#user_username, #user_email').blur(function(){
-    var field = "email";
-    if($(this).attr('id') == "user_username") {
-      field = "username";
-    }
+  $('#user_username, #user_email , #user_password, #user_password_confirmation').blur(function(){
+    var field = "username";
+    if($(this).attr('id') == "user_email") {
+      field = "email";
+    }else if($(this).attr('id') == "user_password") {
+      field = "password";
+    }else if($(this).attr('id') == "user_password_confirmation") {
+      field = "password_confirmation";
+    }else{}
     $.post('/deviseroles/validate_sign_up_page',
       {user_name:$('#user_username').val(),
         email:$('#user_email').val(),

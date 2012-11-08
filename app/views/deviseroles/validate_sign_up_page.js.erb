@@ -1,16 +1,64 @@
-$('.email_status').hide();
-$('.username_status').hide();
+//$('.email_status').hide();
+//$('.username_status').hide();
+
 
 <% if params[:field] == "username" && !@user_username %>
-$('.username_status.available').show();
+  $('.username_status.default').hide();
+  $('.username_status.ok').hide();
+  $('.username_status.error').hide();
+  if ($('#new_user input#user_username').val() == ""){
+    $('.username_status.default').show();
+  }
+  else{
+    $('.username_status.ok').show();
+  }
+
 <% elsif params[:field] == "username" %>
-$('.username_status.not_available').show();
+  $('.username_status.default').hide();
+  $('.username_status.ok').hide();
+  $('.username_status.error').show();
 <% else %>
 <% end %>
 
 <% if params[:field] == "email" && !@user_email %>
-$('.email_status.available').show();
+  $('.email_status.default').hide();
+  $('.email_status.ok').hide();
+  $('.email_status.error').hide();
+  if ($('#new_user input#user_email').val() == ""){
+    $('.email_status.default').show();
+  }
+  else{
+    $('.email_status.ok').show();
+  }
 <% elsif params[:field] == "email" %>
-$('.email_status.not_available').show();
+  $('.email_status.default').hide();
+  $('.email_status.ok').hide();
+  $('.email_status.error').show();
+<% else %>
+<% end %>
+
+<% if params[:field] == "password" %>
+  $('.password_status.default').hide();
+  $('.password_status.ok').hide();
+  $('.password_status.error').hide();
+  if ($('#new_user input#user_password').val() == ""){
+    $('.password_status.default').show();
+  }else if ($('#new_user input#user_password').val().length < 6){
+    $('.password_status.error').show();
+  }else{
+    $('.password_status.ok').show();
+  }
+<% else %>
+<% end %>
+
+<% if params[:field] == "password_confirmation" %>
+  $('.password_confirmation_status.ok').hide();
+  $('.password_confirmation_status.error').hide();
+  if ($('#new_user input#user_password').val() == ""){}
+  else if ($('#new_user input#user_password_confirmation').val() == $('#new_user input#user_password').val() ){
+  $('.password_confirmation_status.ok').show();
+}else{
+  $('.password_confirmation_status.error').show();
+}
 <% else %>
 <% end %>
