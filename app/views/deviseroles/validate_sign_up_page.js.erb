@@ -1,0 +1,16 @@
+$('.email_status').hide();
+$('.username_status').hide();
+
+<% if params[:field] == "username" && !@user_username %>
+$('.username_status.available').show();
+<% elsif params[:field] == "username" %>
+$('.username_status.not_available').show();
+<% else %>
+<% end %>
+
+<% if params[:field] == "email" && !@user_email %>
+$('.email_status.available').show();
+<% elsif params[:field] == "email" %>
+$('.email_status.not_available').show();
+<% else %>
+<% end %>

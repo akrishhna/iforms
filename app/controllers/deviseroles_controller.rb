@@ -166,26 +166,12 @@ class DeviserolesController < ApplicationController
     if !username.empty? && !email.empty? && !service_type.empty? && ayah_passed && (password == password_confirmation)
       @user = User.new(params[:user])
       service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
-      if ayah_passed
-        @existing_user = User.where('username=? or email=?', params[:user][:username], params[:user][:email]).first
-        if @existing_user
-          user_exist = UserServiceProvider.find_by_user_id_and_service_provider_id(@existing_user.id, 2)
-          user_profile_exist = GirlScoutTroopLeaderProfile.find_by_user_id(@existing_user.id)
-          @profile = Profile.find_by_user_id(@existing_user.id)
-          UserServiceProvider.create(:user_id => @existing_user.id, :service_provider_id => 2) if user_exist.nil?
-          GirlScoutTroopLeaderProfile.create(:user_id => @existing_user.id, :first_name => @profile.first_name ? @profile.first_name : '', :last_name => @profile.last_name ? @profile.last_name : '') if user_profile_exist.nil?
-          flash[:success] = "#{params[:user][:email]} already exist Please login"
-          redirect_to homepage_url
-        elsif @user.save
-          UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_type.id)
-          flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
-          redirect_to homepage_url
-        else
-          flash[:error] = 'Something Wrong Please Try again.'
-          redirect_to :back
-        end
+      if @user.save
+        UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_type.id)
+        flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
+        redirect_to homepage_url
       else
-        flash[:error] = 'Please Play the game.'
+        flash[:error] = 'Something Wrong Please Try again.'
         redirect_to :back
       end
     else
@@ -193,4 +179,10 @@ class DeviserolesController < ApplicationController
       redirect_to :back
     end
   end
+
+  def validate_sign_up_page
+    @user_username = User.find_by_username(params[:user_name])
+    @user_email = User.find_by_email(params[:email])
+  end
+
 end

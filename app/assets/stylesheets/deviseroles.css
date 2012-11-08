@@ -5,3 +5,15 @@
   padding: 5px 0 8px 145px;
   width: auto;
 }
+
+.username_status, .email_status {
+  display: none;
+}
+
+.username_status.available, .email_status.available {
+  color: green;
+}
+
+.username_status.not_available, .email_status.not_available {
+  color: #ff0000;
+}

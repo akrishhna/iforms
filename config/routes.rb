@@ -118,6 +118,7 @@ Iforms::Application.routes.draw do
       get 'user_details'
       get 'forgot_username'
       post 'sending_username'
+      post 'validate_sign_up_page'
     end
   end
   match 'girl_scouts/sign_up' => 'deviseroles#girl_scout_sign_up_page'

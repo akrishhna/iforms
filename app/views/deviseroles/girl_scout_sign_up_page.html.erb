@@ -17,13 +17,17 @@
   <div class="control-group">
     <%= f.label :username, "User Name", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :username %>
+      <%= f.text_field :username %>&nbsp;&nbsp;
+      <span class="username_status available">Available</span>
+      <span class="username_status not_available">Not Available</span>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :email, "Email", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :email %>
+      <%= f.text_field :email %>&nbsp;&nbsp;
+      <span class="email_status available">Available</span>
+      <span class="email_status not_available">Not Available</span>
     </div>
   </div>
   <%= f.fields_for :girl_scout_troop_leader_profile do |builder| %>
@@ -68,3 +72,18 @@
   </div>
 
 <% end %>
+
+<script type="text/javascript">
+  $('#user_username, #user_email').blur(function(){
+    var field = "email";
+    if($(this).attr('id') == "user_username") {
+      field = "username";
+    }
+    $.post('/deviseroles/validate_sign_up_page',
+      {user_name:$('#user_username').val(),
+        email:$('#user_email').val(),
+        field:field}
+    );
+    return false;
+  });
+</script>
