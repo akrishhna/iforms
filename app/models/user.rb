@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :girl_scout_troop_leader_profile
 
 
-  after_create :resolve_girl_scout
+  after_create :resolve_girl_scout, :resolve_patient_user_id
 
   def resolve_girl_scout
     @girl_scout = GirlsScout.find_by_email(self.email)
@@ -41,6 +41,15 @@ class User < ActiveRecord::Base
         pf.user_id = @user.id if pf.user_id.nil?
         pf.save
       end
+    end
+  end
+
+  def resolve_patient_user_id
+    appointments = Appointment.where('email=?',self.email)
+    appointments.each do|appointment|
+      appformjoin = Appformjoin.where('appointment_id=? and patient_user_id IS NULL',appointment.id)
+      appformjoin.patient_user_id = self.id
+      appformjoin.save
     end
   end
 end
