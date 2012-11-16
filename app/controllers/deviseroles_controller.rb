@@ -14,9 +14,9 @@ class DeviserolesController < ApplicationController
     elsif @service_provider.id == 1
       @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
-        redirect_to :controller => "doctors", :action => "new"
+        redirect_to '/doctor/new?sp_id=1'
       else
-        redirect_to :controller => "doctors", :action => "index"
+        redirect_to '/doctor/appointments?sp_id=1'
       end
 
     elsif @service_provider.id == 2
@@ -29,6 +29,15 @@ class DeviserolesController < ApplicationController
 
     elsif @service_provider.id == 3
       redirect_to '/girl_scouts_troop_leaders?sp_id=3'
+
+    elsif @service_provider.id == 4
+      @doctor = Doctor.find_by_user_id(current_user.id)
+      if @doctor.nil?
+        redirect_to '/doctor/new?sp_id=4'
+      else
+        redirect_to '/doctor/appointments?sp_id=4'
+      end
+
     else
 
     end

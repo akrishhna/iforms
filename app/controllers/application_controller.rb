@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
   helper_method :current_user_name
-  helper_method :user_service_provider_list, :set_service_provider,:homepage_url
+  helper_method :user_service_provider_list, :set_service_provider, :homepage_url
   #helper_method :patient_profile_exists
 
   #http://ramblinglabs.com/blog/2012/01/rails-3-1-adding-custom-404-and-500-error-pages
@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
     elsif service_provider.id == 2
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
     elsif service_provider.id == 1
+      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
+    elsif service_provider.id == 4
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
     else
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
@@ -77,7 +79,7 @@ class ApplicationController < ActionController::Base
 
   def user_service_provider_list
     return @user_service_providers if defined?(@user_service_providers)
-    @user_service_providers = current_user.service_providers.where('user_service_providers.status=?',true).collect{|sp| [sp.title , sp.id]}
+    @user_service_providers = current_user.service_providers.where('user_service_providers.status=?', true).collect { |sp| [sp.title, sp.id] }
     @user_service_providers[@user_service_providers.size] = ["Consumer", 0]
     @user_service_providers
   end
@@ -90,11 +92,13 @@ class ApplicationController < ActionController::Base
   def homepage_url
     return @homepage_url if defined?(@homepage_url)
     if session[:user_service_provider] == 1
-      @homepage_url = '/doctor/appointments'
+      @homepage_url = '/doctor/appointments?sp_id=1'
     elsif session[:user_service_provider] == 2
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=2'
     elsif session[:user_service_provider] == 3
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=3'
+    elsif session[:user_service_provider] == 1
+      @homepage_url = '/doctor/appointments?sp_id=4'
     elsif session[:user_service_provider] == 0
       @homepage_url = '/consumer'
     else
@@ -119,7 +123,7 @@ class ApplicationController < ActionController::Base
     @error = error
     respond_to do |format|
       format.html { render template: 'errors/error_500', layout: 'layouts/application', status: 500 }
-      format.all { render nothing: true, status: 500}
+      format.all { render nothing: true, status: 500 }
     end
   end
 end

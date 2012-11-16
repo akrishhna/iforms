@@ -37,7 +37,7 @@ $(document).ready(function(){
   // User service provides selection
   $('select#user_service_provider_list').change(function() {
     if($(this).val() == 1){
-      window.location = '/doctor/appointments'
+      window.location = '/doctor/appointments?sp_id=1'
     }
     else if($(this).val() == 2){
       window.location = '/girl_scouts_troop_leaders?sp_id=2'
@@ -47,6 +47,9 @@ $(document).ready(function(){
     }
     else if($(this).val() == 0){
       window.location = '/consumer'
+    }
+    else if($(this).val() == 4){
+      window.location = '/doctor/appointments?sp_id=4'
     }
     else{
       window.location = '/'
