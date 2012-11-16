@@ -129,6 +129,7 @@ Iforms::Application.routes.draw do
     collection do
       get 'get_iform'
       post 'iform_field_update'
+      post 'iform_all_fields_update'
     end
   end
 

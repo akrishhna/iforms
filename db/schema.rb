@@ -11,22 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107090353) do
-
-  create_table "active_admin_comments", :force => true do |t|
-    t.string   "resource_id",   :null => false
-    t.string   "resource_type", :null => false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.text     "body"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.string   "namespace"
-  end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+ActiveRecord::Schema.define(:version => 20121115053951) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -65,11 +50,14 @@ ActiveRecord::Schema.define(:version => 20121107090353) do
     t.string   "appointment_time"
     t.integer  "patient_id"
     t.integer  "doctor_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "location"
     t.string   "responsible_party"
     t.string   "preferred_name"
+    t.integer  "service_provider_id"
+    t.integer  "doctor_user_id"
+    t.integer  "patient_user_id"
   end
 
   create_table "childforms", :force => true do |t|
@@ -301,8 +289,9 @@ ActiveRecord::Schema.define(:version => 20121107090353) do
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "service_provider_id"
   end
 
   create_table "forms", :force => true do |t|
@@ -764,6 +753,64 @@ ActiveRecord::Schema.define(:version => 20121107090353) do
     t.string   "Allergic_To_Drugs_List"
     t.string   "Dental_History_Habits_Speech_Problems"
     t.binary   "pdffile_path",                                                    :limit => 2147483647
+    t.integer  "ssn_1"
+    t.integer  "ssn_2"
+    t.integer  "ssn_3"
+    t.string   "best_number_to_reach"
+    t.string   "person_responsible_for_ac"
+    t.string   "smile_evaluation_whiteness"
+    t.string   "smile_evaluation_staining"
+    t.string   "smile_evaluation_alignment_of_test"
+    t.string   "smile_evaluation_chipping"
+    t.string   "smile_evaluation_existing_dental_work"
+    t.string   "smile_evaluation_gum_health"
+    t.string   "smile_evaluation_smile_line"
+    t.string   "anything_else_about_smile"
+    t.integer  "home_phone_1"
+    t.integer  "home_phone_2"
+    t.integer  "home_phone_3"
+    t.integer  "work_phone_1"
+    t.integer  "work_phone_2"
+    t.integer  "work_phone_3"
+    t.integer  "cell_phone_1"
+    t.integer  "cell_phone_2"
+    t.integer  "cell_phone_3"
+    t.integer  "employer_phone_1"
+    t.integer  "employer_phone_2"
+    t.integer  "employer_phone_3"
+    t.integer  "emergency_contact_phone_1"
+    t.integer  "emergency_contact_phone_2"
+    t.integer  "emergency_contact_phone_3"
+    t.string   "how_did_you_hear_about_office"
+    t.string   "relationship_to_patient"
+    t.string   "billing_details_first_name"
+    t.string   "billing_details_last_name"
+    t.string   "billing_details_address1"
+    t.string   "billing_details_address2"
+    t.string   "billing_details_address_city"
+    t.string   "billing_details_address_state"
+    t.string   "billing_details_address_postal_code"
+    t.integer  "billing_details_home_phone_1"
+    t.integer  "billing_details_home_phone_2"
+    t.integer  "billing_details_home_phone_3"
+    t.integer  "billing_details_work_phone_1"
+    t.integer  "billing_details_work_phone_2"
+    t.integer  "billing_details_work_phone_3"
+    t.integer  "billing_details_cell_phone_1"
+    t.integer  "billing_details_cell_phone_2"
+    t.integer  "billing_details_cell_phone_3"
+    t.integer  "billing_details_ssn"
+    t.integer  "billing_details_driving_licence_number"
+    t.string   "billing_details_driving_licence_state"
+    t.string   "billing_details_employer_name"
+    t.string   "billing_details_employer_address1"
+    t.string   "billing_details_employer_address2"
+    t.string   "billing_details_employer_address_city"
+    t.string   "billing_details_employer_address_state"
+    t.string   "billing_details_employer_address_postal_code"
+    t.integer  "billing_details_employer_phone_1"
+    t.integer  "billing_details_employer_phone_2"
+    t.integer  "billing_details_employer_phone_3"
   end
 
   create_table "patients", :force => true do |t|

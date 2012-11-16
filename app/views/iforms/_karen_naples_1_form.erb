@@ -1,0 +1,676 @@
+<p style="text-align: center;font-size:18px "><%#= session[:formname] %>
+ Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
+<div style="margin: 0 auto;width:80px;">
+  <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
+</div>
+<% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
+
+<%= form_for @iform, :method => :put, :html => {:id => "dd_dd", :class => 'form-horizontal edit_karen_naples_1_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
+  <% if @iform.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
+
+      <ul>
+        <% @iform.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- <h3 style="color:#808080">&nbsp You are filling <%#= session[:formname] %> form </h3> -->
+
+  <div class="hidden">
+    <%= hidden_field_tag "iform_id", @iform.id %>
+  </div>
+  <div class="tabbable tabs-left iforms-tabs-left">
+  <ul class="nav nav-tabs" id="karen_naples_1_iforms_tab_links">
+    <li class="active">
+      <%= link_to "Patient", '#patient', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Employer", '#employer', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Spouse", '#spouse', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Emergency Contact", '#emergency_contact', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Billing", '#billing', "data-toggle" => "tab",:id => 'billing_tab' %>
+    </li>
+    <li>
+      <%= link_to "Smile Evaluation", '#smile_evaluation', "data-toggle" => "tab" %>
+    </li>
+
+
+  </ul>
+  <div class="tab-content">
+  <div class="tab-pane active" id="patient">
+    <div class="control-group">
+      <%= f.label :Self_Name_First, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Name_First, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :Self_Name_Last, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Sex, 'Gender', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Sex, "f" %>Female
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Sex, "m" %>Male
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Marital_Status, 'Marital Status', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "single" %>Single
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "married" %>Married
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "divorced" %>Divorced
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "widowed" %>Widowed
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :Self_Marital_Status, "separated" %>Separated
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :ssn_1, 'Social Security Number', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :ssn_1, :style => 'width:30px', :placeholder => "###" %>
+          -
+          <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##" %>
+          -
+          <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####" %>
+        </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Driver_License_State, 'Drivers License State', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :Self_Driver_License_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                  'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+      </div>
+    </div>
+    <div class='control-group'>
+      <%= f.label :Self_Driver_License_Number, 'Drivers License Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Driver_License_Number %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Home_Address1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Home_Address1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :Self_Home_Address2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :Self_Home_City, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
+        <br>
+        <%= f.select :Self_Home_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                        'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.text_field :Self_Home_Postal_Code, :placeholder => "Postal / Zip Code" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :home_phone_1, "Home Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :home_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :home_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :work_phone_1, "Work Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :work_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :work_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :cell_phone_1, "Cell Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :cell_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :cell_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :best_number_to_reach, 'Best Number to Reach You M-F, 8-5. ', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :best_number_to_reach, "home" %>Home
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :best_number_to_reach, "work" %>Work
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :best_number_to_reach, "cell" %>Cell
+        <% end %>
+      </div>
+    </div>
+    <div class="karen_naples_1_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "1" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="employer">
+    <div class="control-group">
+      <%= f.label :Self_Employer_Name, 'Employer Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Employer_Name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Self_Employer_Address1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Self_Employer_Address1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :Self_Employer_Address2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :Self_Employer_City, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
+        <br>
+        <%= f.select :Self_Employer_State, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                            'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.text_field :Self_Employer_Postal_Code, :placeholder => "Postal / Zip Code" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :employer_phone_1, " Employer Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :employer_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :employer_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :employer_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="karen_naples_1_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "0" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "2" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="spouse">
+    <div class="control-group">
+      <%= f.label :Spouse_Name_First, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Spouse_Name_First, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :Spouse_Name_Last, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :Spouse_Employer_Name, 'Employer', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Spouse_Employer_Name %>
+      </div>
+    </div>
+    <div class="karen_naples_1_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "1" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "3" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="emergency_contact">
+    <div class="control-group">
+      <%= f.label :Emergency_Contact_Name_First, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :Emergency_Contact_Name_First, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :Emergency_Contact_Name_Last, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :emergency_contact_phone_1, "Emergency Contact", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_contact_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :emergency_contact_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :emergency_contact_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+      </div>
+    </div>
+    <div class="karen_naples_1_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "2" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "4" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="billing">
+    <div class="control-group">
+      <%= f.label :person_responsible_for_ac, 'Person Responsible For Account', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :person_responsible_for_ac, "self", :class => 'karnel_naples_1_billing' %>Self
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :person_responsible_for_ac, "other", :class => 'karnel_naples_1_billing' %>Other
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_first_name, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_first_name, :placeholder => "First Name", :class => "input-small karnel_naples_1_billing_details_info" %>
+        <%= f.text_field :billing_details_last_name, :placeholder => "Last Name", :class => "input-small karnel_naples_1_billing_details_info" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :relationship_to_patient, 'Relationship to  Patient', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :relationship_to_patient, :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_address1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_address1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;', :class => 'karnel_naples_1_billing_details_info' %>
+        <%= f.text_field :billing_details_address2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;', :class => 'karnel_naples_1_billing_details_info' %>
+        <br>
+        <%= f.text_field :billing_details_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' , :class => 'karnel_naples_1_billing_details_info'%> &nbsp;
+        <br>
+        <%= f.select :billing_details_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                        'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;",:class => 'karnel_naples_1_billing_details_info' %>
+        <%= f.text_field :billing_details_address_postal_code, :placeholder => "Postal / Zip Code", :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_home_phone_1, "Home Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_home_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karnel_naples_1_billing_details_info'%>
+        -
+        <%= f.text_field :billing_details_home_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karnel_naples_1_billing_details_info' %>
+        -
+        <%= f.text_field :billing_details_home_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_work_phone_1, "Work Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_work_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karnel_naples_1_billing_details_info'%>
+        -
+        <%= f.text_field :billing_details_work_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karnel_naples_1_billing_details_info' %>
+        -
+        <%= f.text_field :billing_details_work_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_cell_phone_1, "Cell Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_cell_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karnel_naples_1_billing_details_info' %>
+        -
+        <%= f.text_field :billing_details_cell_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karnel_naples_1_billing_details_info' %>
+        -
+        <%= f.text_field :billing_details_cell_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_ssn, 'Social Security Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_ssn, :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_driving_licence_state, 'Drivers License State', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :billing_details_driving_licence_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                  'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;",:class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class='control-group'>
+      <%= f.label :billing_details_driving_licence_number, 'Drivers License Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_driving_licence_number, :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_employer_name, 'Employer Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_employer_name, :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_employer_address1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_employer_address1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;', :class => 'karnel_naples_1_billing_details_info' %>
+        <%= f.text_field :billing_details_employer_address2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;', :class => 'karnel_naples_1_billing_details_info' %>
+        <br>
+        <%= f.text_field :billing_details_employer_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;', :class => 'karnel_naples_1_billing_details_info' %> &nbsp;
+        <br>
+        <%= f.select :billing_details_employer_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                            'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;",:class => 'karnel_naples_1_billing_details_info' %>
+        <%= f.text_field :billing_details_employer_address_postal_code, :placeholder => "Postal / Zip Code", :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :billing_details_employer_phone_1, "Employer Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :billing_details_employer_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karnel_naples_1_billing_details_info' %>
+        -
+        <%= f.text_field :billing_details_employer_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karnel_naples_1_billing_details_info' %>
+        -
+        <%= f.text_field :billing_details_employer_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karnel_naples_1_billing_details_info' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :how_did_you_hear_about_office, ' How Did You Hear About Our Office? ', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :how_did_you_hear_about_office %>
+      </div>
+    </div>
+    <div class="karen_naples_1_iforms_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "3" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "5" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="smile_evaluation">
+  <p>Please let us know what you think about your smile by using our grading system.</p>
+  <table class="table table-bordered smile_evaluation_table" style="width:100%">
+  <tr>
+    <th></th>
+    <th>Love It (A)</th>
+    <th>Acceptable (B)</th>
+    <th>Could Be Better (C)</th>
+    <th>Not A Problem (NP)</th>
+    <th>Don't Like It (D)</th>
+    <th>Don't Like It At All (E)</th>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_whiteness, 'Whiteness' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_whiteness, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_whiteness, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_whiteness, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_whiteness, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_whiteness, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_whiteness, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_staining, 'Staining/Discoloration' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_staining, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_staining, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_staining, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_staining, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_staining, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_staining, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_alignment_of_test, 'Alignment of Teeth' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_alignment_of_test, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_alignment_of_test, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_alignment_of_test, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_alignment_of_test, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_alignment_of_test, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_alignment_of_test, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_chipping, 'Chipping/Cracking' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_chipping, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_chipping, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_chipping, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_chipping, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_chipping, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_chipping, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_existing_dental_work, 'Existing Dental Work' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_existing_dental_work, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_existing_dental_work, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_existing_dental_work, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_existing_dental_work, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_existing_dental_work, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_existing_dental_work, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_gum_health, 'Gum Health/Appearance' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_gum_health, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_gum_health, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_gum_health, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_gum_health, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_gum_health, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_gum_health, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.label :smile_evaluation_smile_line, 'Smile Line (Do you see too much or not enough of your smile?)' %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_smile_line, "a" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_smile_line, "b" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_smile_line, "c" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_smile_line, "np" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_smile_line, "d" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :smile_evaluation_smile_line, "e" %>
+      <% end %>
+    </td>
+  </tr>
+  </table>
+  <div class="control-group">
+    <%= f.label :anything_else_about_smile, "Is there anything else we should know about your smile? ", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :anything_else_about_smile, :rows => 4, :style => "width:98%;" %>
+    </div>
+  </div>
+  <div class="karen_naples_1_iforms_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary karen_naples_1_iforms_nav_link', :data_tab_index => "4" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit submit_tag_text, :class => 'btn btn-primary' %>
+  </div>
+  </div>
+  </div>
+  </div>
+<% end %>

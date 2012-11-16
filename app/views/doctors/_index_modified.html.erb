@@ -36,30 +36,17 @@
           <% end %>
         <% end %>
         <tr>
-          <% str = i.firstname + " " + i.lastname %>
           <td><%= link_to "Next Appt", new_appointment_path(:appointment_id => i.id), :class => "next_appointment", :title => "Next Appointment" %></td>
-          <td><%= str %></td>
+          <td><%= i.firstname + " " + i.lastname %></td>
           <td><%= i.email %></td>
-          <% p formname_length = i.formname.split(",") %>
           <% if i.formname.blank? %>
             <td></td>
             <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
             <td><%= @timesent %></td>
             <td></td>
             <td><%= link_to "Resend", edit_appointment_path(i) %></td>
-
-          <% elsif formname_length.length ==1 %>
-            <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
-
-            <td>
-              <% @appformjoins.each do |j| %>
-                <% if j.iform_id %>
-                  <% @iform = Iform.find(j.iform_id) %>
-                <% end %>
-                <%= j.formname %>
-              <% end %>
-            </td>
-
+          <% else %>
+            <td><%= i.formname %></td>
             <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
             <td><%= @timesent %></td>
             <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
@@ -91,7 +78,6 @@
                     <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
           In Progress
                 </span>
-                  In Progress
                 </td>
                 <td><%= link_to "Resend", edit_appointment_path(i) %></td>
               <% elsif j.status == "pending" %>
@@ -101,29 +87,97 @@
                 </span>
                 </td>
                 <td><%= link_to "Resend", edit_appointment_path(i) %></td>
-                <% else %>
-                <td></td>
-                <td></td>
+              <% else %>
               <% end %>
             <% end %>
+          <% end %>
 
-
-          <% else %>
-            <td>Multiple Forms</td>
-            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
-            <td><%= @timesent %></td>
-            <td></td>
-            <% @counter = 0 %>
-            <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
-            <% @appformjoins.each do |j| %>
-              <% if j.status == "submitted" || j.status == "updated" %>
-                <% @counter += 1 %>
-              <% end %>
-            <% end %>
-            <% if @counter < 1 %>
+          <% if false %>
+            <% p formname_length = i.formname.split(",") %>
+            <% if i.formname.blank? %>
+              <td></td>
+              <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+              <td><%= @timesent %></td>
+              <td></td>
               <td><%= link_to "Resend", edit_appointment_path(i) %></td>
+
+            <% elsif formname_length.length ==1 %>
+              <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
+
+              <td>
+                <% @appformjoins.each do |j| %>
+                  <% if j.iform_id %>
+                    <% @iform = Iform.find(j.iform_id) %>
+                  <% end %>
+                  <%= j.formname %>
+                <% end %>
+              </td>
+
+              <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+              <td><%= @timesent %></td>
+              <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
+              <% @appformjoins.each do |j| %>
+                <% if j.formsubmittedtime %>
+                  <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %>
+                  <% formsubmittedtime_date = j.formsubmittedtime.strftime("%Y-%m-%d") %>
+                  <% formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
+                  <% formsubmittedtime_min = j.formsubmittedtime.strftime("%M") %>
+                  <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %>
+                  <% var = 12 %>
+                  <% if var<=formsubmittedtime_hrs_int %>
+                    <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
+                    <% am_pm = "PM" %>
+                    <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                  <% else %>
+                    <% am_pm = "AM" %>
+                    <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm %>
+                  <% end %>
+                <% end %>
+                <% if j.iform_id %>
+                  <% @iform = Iform.find(j.iform_id) %>
+                <% end %>
+                <% if j.status == "submitted" || j.status == "updated" %>
+                  <td><%= @formsubmittedtime %></td>
+                  <td> <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %></td>
+                <% elsif j.status == "in progress" %>
+                  <td>
+                    <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
+          In Progress
+                </span>
+                    In Progress
+                  </td>
+                  <td><%= link_to "Resend", edit_appointment_path(i) %></td>
+                <% elsif j.status == "pending" %>
+                  <td>
+                    <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
+          Pending
+                </span>
+                  </td>
+                  <td><%= link_to "Resend", edit_appointment_path(i) %></td>
+                <% else %>
+                  <td></td>
+                  <td></td>
+                <% end %>
+              <% end %>
+
+
             <% else %>
-              <td><%= link_to "View PDF", i %></td>
+              <td>Multiple Forms</td>
+              <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
+              <td><%= @timesent %></td>
+              <td></td>
+              <% @counter = 0 %>
+              <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
+              <% @appformjoins.each do |j| %>
+                <% if j.status == "submitted" || j.status == "updated" %>
+                  <% @counter += 1 %>
+                <% end %>
+              <% end %>
+              <% if @counter < 1 %>
+                <td><%= link_to "Resend", edit_appointment_path(i) %></td>
+              <% else %>
+                <td><%= link_to "View PDF", i %></td>
+              <% end %>
             <% end %>
             </tr>
           <% end %>

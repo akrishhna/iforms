@@ -1,11 +1,12 @@
 class DoctorsController < ApplicationController
-  before_filter :set_service_provider
+  before_filter :set_service_provider,:checking_user_status
   before_filter :doctor_profile_exists?, :except => [:new,:create]
   def index
     session["consumer_tab_index"] = 1
-    @iforms = Iform.all
-    @doctor = Doctor.all(:conditions => ['user_id = ?', current_user.id]).first
-    @appointments = Appointment.where('doctor_id = ? and date = ?', @doctor.id,params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id])
+   # @iforms = Iform.all
+    @doctor = Doctor.find_by_user_id(current_user.id)
+    @appointments = Appointment.where('doctor_user_id = ? and service_provider_id=? and date = ?', @doctor.user_id,session[:user_service_provider],params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
+    #raise @appointments.to_yaml
     render :layout => false if request.xhr?
   end
 
@@ -16,6 +17,7 @@ class DoctorsController < ApplicationController
   def create
     @doctor = Doctor.new(params[:doctor])
     @doctor.user_id = current_user.id
+    @doctor.service_provider_id = session[:user_service_provider]
     @doctor.doctorname = @doctor.firstname + " " + @doctor.lastname
     respond_to do |format|
     if @doctor.save
@@ -53,8 +55,18 @@ class DoctorsController < ApplicationController
   private
 
   def set_service_provider
-    session[:user_service_provider] = 1
+    session[:user_service_provider] = 1 if params[:sp_id] == '1'
+    session[:user_service_provider] = 4 if params[:sp_id] == '4'
   end
 
+
+  def checking_user_status
+    status = current_user.service_providers.where('user_service_providers.status=? and user_service_providers.service_provider_id in (?)',true, [session[:user_service_provider],params[:sp_id]]).first
+    if status
+    else
+      flash[:error] = "You do not have permissions to access"
+      redirect_to consumer_index_path
+    end
+  end
 
 end

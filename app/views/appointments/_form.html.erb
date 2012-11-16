@@ -1,106 +1,196 @@
-
-<%= form_for @appointment do |f| %>
+<%= form_for @appointment, :html => {:class => 'form-horizontal new_appointment_form', :multipart => true} do |f| %>
   <% if @appointment.errors.any? %>
     <div id="error_explanation">
-    <ul>
-      <% @appointment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <ul>
+        <% @appointment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong> 1. Create a New Appointment For:<br><br></strong>
+
+  <div class="control-group">
+    <%= f.label :firstname, "First Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :firstname %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :preferred_name, "(Optional) - Preferred First Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :preferred_name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :lastname, "Last Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lastname %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, "Email Address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :responsible_party, "(Optional) - Responsible Party", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :responsible_party %>
+    </div>
+  </div>
+
+  <strong>2. With:</strong>
+  <% if session[:user_service_provider] == 1 %>
+    <div class="control-group">
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag '', '', :checked => 'checked' %> James R. Waters, DDS, MSD, PA
+        <% end %>
+      </div>
+    </div>
+
+    <strong>3. At Location:</strong>
+    <div class="control-group">
+      <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :location, 'Bastrop' %>Bastrop
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :location, 'Central Austin' %>Central Austin
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :location, 'Steiner Ranch' %>Steiner Ranch
+        <% end %>
+
+      </div>
+    </div>
+  <% elsif session[:user_service_provider] == 4 %>
+    <div class="control-group">
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag '', '', :checked => 'checked' %> Karen Naples D.D.S. P.A.
+        <% end %>
+      </div>
+    </div>
+
+    <strong>3. At Location:</strong>
+    <div class="control-group">
+      <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :location, 'Cedar Park', :checked => 'checked' %>Cedar Park
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <strong>4. On This Date/Time:</strong>
+
+  <div class="control-group">
+    <%= f.label :date, "Date", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :date, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.date %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :time_hrs, "Time", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :time_hrs, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+      <strong> : </strong>
+      <%= f.select :time_min, {"00" => "0", "05" => "5", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :AM_PM, "AM", :checked => 'checked' %> AM
       <% end %>
-    </ul> 
-    </div> 
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :AM_PM, "PM" %> PM
+      <% end %>
+    </div>
+  </div>
+
+  <strong>5. With These Forms:</strong>
+  <% if false %>
+    <% @doctor = Doctor.first %>
+    <% a=[] %>
+    <% @forms = @doctor.forms %>
+    <% @forms.each do |i| %>
+      <% a<< i.formname %>
+    <% end %>
+    <% for form in @forms %>
+      <%= check_box_tag "form_ids[]", form.id %>
+      <%= form.formname %>
+      <br>
+    <% end %>
+
+    <div style="margin: 12px 17%;">
+      <% for form in @forms %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "form_ids[]", form.id %>
+          <%= form.formname %>
+        <% end %>
+        <br>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if session[:user_service_provider] == 1 %>
+    <div class="control-group">
+      <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'adult' %>Adult New Patient
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'child' %>Child New Patient
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'none' %>None
+        <% end %>
+      </div>
+    </div>
+  <% elsif session[:user_service_provider] == 4 %>
+    <div class="control-group">
+      <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'new_patient' %>New Patient / Smile Evaluation
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'none' %>None
+        <% end %>
+      </div>
+    </div>
   <% end %>
   <br>
-1. Create a New Appointment For:</br></br>
+  6. And Lastly:
 
-  <div class="field">
-    <div class = "labelcss">First Name </div>
-    <%= f.text_field :firstname %>
-  </div>
-  <div class="field">
-    <div class = "labelcss">(Optional) - Preferred First Name </div>
-    <%= f.text_field :preferred_name %>
-  </div>
-  <div class="field">
-    <div class = "labelcss">Last Name </div>
-    <%= f.text_field :lastname %>
-  </div>
-  <div class="field">
-    <div class = "labelcss">Email Address</div>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <div class = "labelcss">(Optional) - Responsible Party </div>
-    <%= f.text_field :responsible_party %>
-  </div>
-  
-
-2. With:
-    <%= radio_button_tag '','' , :checked => 'checked'%>
-    James Waters
-<br><br>
-
-3. At Location:
-<br><br>
-  <%= f.radio_button :location,'Bastrop' %>Bastrop</br>
-  <%= f.radio_button :location,'Central Austin' %>Central Austin</br>
-  <%= f.radio_button :location,'Steiner Ranch' %>Steiner Ranch
-<br><br>
-
-4. On This Date/Time:
-<br><br>
- <div class="field">
-    Date:
-    <%#= f.date_select :date, :start_year => Date.current.year, :end_year => 2014 %>
-   <%= f.text_field :date, :class => "appointments_date_selector" %>
- </div>
- <div class="field" id = "tasks">
-     Time:
-     <%= f.select :time_hrs, [1,2,3,4,5,6,7,8,9,10,11,"12"], :include_blank => true %> :
-     <%= f.select :time_min, ["00","05",10,15,20,25,30,35,40,45,50,55], :include_blank => true %>
-     <%= f.radio_button :AM_PM, "AM" %> AM
-     <%= f.radio_button :AM_PM, "PM" %> PM
-  </div>
-
-5. With These Forms:
-<br><br>
-  <% @doctor = Doctor.first%>
-	<% a=[]%>
-	<% @forms = @doctor.forms %>
-	<% @forms.each do |i|%>
-	<%a<< i.formname %>
-	<%end %>
-
- <div class = "labelcss">
-  <% for form in @forms %>	    
-	 <%= check_box_tag "form_ids[]", form.id %>
-	 <%= form.formname %><br>
-  <% end%>
- </div>
-<br>
-6. And Lastly:
-  
- 
-
- 
-
-			
-
-
-<% if false %>
-<!-- <%#= link_to_function "Adult forms" do |page|
+  <% if false %>
+    <!-- <%#= link_to_function "Adult forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'adultform_checkboxes' 
 end %> |
 
 <%#= link_to_function "Child forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes' 
 end %> -->
-<% end %>
+  <% end %>
 
-<br><br>
-<div class="actions">
-    <%= f.submit 'Create Appointment and Send Email Confirmation'%>
-</div>
-<br>
+  <br><br>
+
+  <div class="actions">
+    <% if f.object.new_record? %>
+    <%= f.submit 'Create Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+      <% else %>
+      <%= f.submit 'Update Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+      <% end %>
+  </div>
+  <br>
 
 <% end %>
 

@@ -1,140 +1,144 @@
-<div class = "form_container">
-<h3>Resend Appointment Details</h3><br />
-
-<%= form_for @appointment do |f| %>
-  <% if @appointment.errors.any? %>
-    <div id="error_explanation">
-    <ul>
-      <% @appointment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="form_container">
+  <h3>Resend Appointment Details</h3><br/>
+  <%= render 'form' %>
+  <% if false %>
+    <%= form_for @appointment do |f| %>
+      <% if @appointment.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @appointment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-    </ul> 
-    </div> 
-  <% end %>
-</br>
-  1. Create a New Appointment For:</br></br>
-        <div class="field">
-      <div class = "labelcss">First Name </div>
-      <%= f.text_field :firstname %>
-    </div>
-    <div class="field">
-      <div class = "labelcss">(Optional) - Preferred First Name </div>
-      <%= f.text_field :preferred_name %>
-    </div>
-    <div class="field">
-      <div class = "labelcss">Last Name </div>
-      <%= f.text_field :lastname %>
-    </div>
-    <div class="field">
-      <div class = "labelcss">Email Address</div>
-      <%= f.text_field :email %>
-    </div>
-    <div class="field">
-      <div class = "labelcss">(Optional) - Responsible Party </div>
-      <%= f.text_field :responsible_party %>
-    </div>
+      </br>
+      1. Create a New Appointment For:</br></br>
+      <div class="field">
+        <div class="labelcss">First Name</div>
+        <%= f.text_field :firstname %>
+      </div>
+      <div class="field">
+        <div class="labelcss">(Optional) - Preferred First Name</div>
+        <%= f.text_field :preferred_name %>
+      </div>
+      <div class="field">
+        <div class="labelcss">Last Name</div>
+        <%= f.text_field :lastname %>
+      </div>
+      <div class="field">
+        <div class="labelcss">Email Address</div>
+        <%= f.text_field :email %>
+      </div>
+      <div class="field">
+        <div class="labelcss">(Optional) - Responsible Party</div>
+        <%= f.text_field :responsible_party %>
+      </div>
 
 
-  2. With:
-      <%= radio_button_tag '','' , :checked => 'checked'%>
+      2. With:
+      <%= radio_button_tag '', '', :checked => 'checked' %>
       James Waters
-  </br></br>
+      </br></br>
 
-  3. At Location:
-  </br></br>
-    <%= f.radio_button :location,'Bastrop' %>Bastrop</br>
-    <%= f.radio_button :location,'Central Austin' %>Central Austin</br>
-    <%= f.radio_button :location,'Steiner Ranch' %>Steiner Ranch
-  <br><br>
+      3. At Location:
+      </br></br>
+      <%= f.radio_button :location, 'Bastrop' %>Bastrop</br>
+      <%= f.radio_button :location, 'Central Austin' %>Central Austin</br>
+      <%= f.radio_button :location, 'Steiner Ranch' %>Steiner Ranch
+      <br><br>
 
-  4. On This Date/Time:
-  </br></br>
-   <div class="field">
-      Date:
-      <%#= f.date_select :date, :start_year => Date.current.year, :end_year => 2014  %>
-     <%= f.text_field :date, :class => "appointments_date_selector" %>
+      4. On This Date/Time:
+      </br></br>
+      <div class="field">
+        Date:
+        <%#= f.date_select :date, :start_year => Date.current.year, :end_year => 2014  %>
+        <%= f.text_field :date, :class => "appointments_date_selector" %>
 
-   </div>
-   <div class="field" id = "tasks">
-       Time:
-       <%= f.select :time_hrs, [1,2,3,4,5,6,7,8,9,10,11,"12"], :include_blank => true %> :
-       <%= f.select :time_min, ["00","05",10,15,20,25,30,35,40,45,50,55], :include_blank => true %>
-       <%= f.radio_button :AM_PM, "AM" %> AM
-       <%= f.radio_button :AM_PM, "PM" %> PM
-    </div>
+      </div>
+      <div class="field" id="tasks">
+        Time:
+        <%= f.select :time_hrs, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, "12"], :include_blank => true %> :
+        <%= f.select :time_min, ["00", "05", 10, 15, 20, 25, 30, 35, 40, 45, 50, 55], :include_blank => true %>
+        <%= f.radio_button :AM_PM, "AM" %> AM
+        <%= f.radio_button :AM_PM, "PM" %> PM
+      </div>
 
-    5. With These Forms:
-    <br><br>
-      <% @doctor = Doctor.first%>
-			<% a=[]%>
-			<% @forms = @doctor.forms %>
-			<% @forms.each do |i|%>
-			<%a<< i.formname %>
-			<%end %>
-			
-			<% p p = @appointment.formname.split(",")%>
+      5. With These Forms:
+      <br><br>
+      <% @doctor = Doctor.first %>
+      <% a=[] %>
+      <% @forms = @doctor.forms %>
+      <% @forms.each do |i| %>
+        <% a<< i.formname %>
+      <% end %>
 
-		<div class = "labelcss">
-			
-			
-			<% for i in (0...p.length) %>			
-			<% for form in @forms %>
-			<% if form.formname.include?("Adult")%>		    
-			<% if p[i]== form.formname %>
-			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
-			<%= form.formname %><br>
-			<% end%>
-			<%end%>			
-			<%end%>
-			<%end%>
-			
-			<% for form in @forms %>
-			<% unless form.formname== p[0] || form.formname== p[1] || form.formname== p[2] || form.formname== p[3] || form.formname== p[4] || form.formname== p[5] %>
-			<%= check_box_tag "form_ids[]", form.id %>
-			<%= form.formname %><br>
-			<% end%>
-			<% end%>
-			
-			<% for i in (0...p.length) %>			
-			<% for form in @forms %>
-			<% if form.formname.include?("Child")%>		    
-			<% if p[i]== form.formname %>
-			<%= check_box_tag "form_ids[]", form.id, :checked => true %>
-			<%= form.formname %><br>
-			<% end%>
-			<%end%>			
-			<%end%>
-			<%end%>
-		
-	    </div>
-    <br>
-    6. And Lastly:
+      <% p p = @appointment.formname.split(",") %>
 
-			
+      <div class="labelcss">
 
 
-<% if false %>
-<!-- <%#= link_to_function "Adult forms" do |page|
+        <% for i in (0...p.length) %>
+          <% for form in @forms %>
+            <% if form.formname.include?("Adult") %>
+              <% if p[i]== form.formname %>
+                <%= check_box_tag "form_ids[]", form.id, :checked => true %>
+                <%= form.formname %>
+                <br>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% for form in @forms %>
+          <% unless form.formname== p[0] || form.formname== p[1] || form.formname== p[2] || form.formname== p[3] || form.formname== p[4] || form.formname== p[5] %>
+            <%= check_box_tag "form_ids[]", form.id %>
+            <%= form.formname %>
+            <br>
+          <% end %>
+        <% end %>
+
+        <% for i in (0...p.length) %>
+          <% for form in @forms %>
+            <% if form.formname.include?("Child") %>
+              <% if p[i]== form.formname %>
+                <%= check_box_tag "form_ids[]", form.id, :checked => true %>
+                <%= form.formname %>
+                <br>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+      </div>
+      <br>
+      6. And Lastly:
+
+
+
+
+      <% if false %>
+        <!-- <%#= link_to_function "Adult forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'adultform_checkboxes' 
 end %> |
 
 <%#= link_to_function "Child forms" do |page|
 page.insert_html :bottom, :tasks, :partial => 'childform_checkboxes'
 end %> -->
-<% end %>
+      <% end %>
 
-<br><br>
-<div class="actions">
-    <%= f.submit "Resend" %>
-</div>
-<br>
+      <br><br>
 
-<% end %>
+      <div class="actions">
+        <%= f.submit "Resend" %>
+      </div>
+      <br>
 
-
+    <% end %>
+  <% end %>
 
 
 </div>
 <%= javascript_tag do %>
-	var appointment = <%= raw @appointment.to_json %>;
+  var appointment = <%= raw @appointment.to_json %>;
 <% end %>
