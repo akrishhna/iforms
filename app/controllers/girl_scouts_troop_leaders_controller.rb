@@ -3,7 +3,6 @@ class GirlScoutsTroopLeadersController < ApplicationController
   before_filter :set_service_provider,:reset_activity, :girls_scouts_activities, :checking_user_status
 
   def index
-    session[:sp_id] = params[:sp_id]
     @girls_activity = current_user.girl_scouts_activities.where("activity_date_begin >= ? and service_provider_id=?", Date.today, session[:user_service_provider]).order('activity_date_begin ').first
     id = @girls_activity.id rescue nil
     id = session[:selected_activity_id] if session[:selected_activity_id].present?
@@ -327,13 +326,13 @@ class GirlScoutsTroopLeadersController < ApplicationController
   private
 
   def reset_activity
-    if session[:sp_id] != params[:sp_id]
+    if session[:user_service_provider] != params[:sp_id]
       session[:selected_activity_id] = ''
     end
   end
 
   def checking_user_status
-    status = current_user.service_providers.where('user_service_providers.status=? and user_service_providers.service_provider_id in (?)',true, [session[:sp_id],params[:sp_id]]).first
+    status = current_user.service_providers.where('user_service_providers.status=? and user_service_providers.service_provider_id in (?)',true, [session[:user_service_provider],params[:sp_id]]).first
   if status
   else
     flash[:error] = "You do not have permissions to access"
