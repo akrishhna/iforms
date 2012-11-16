@@ -41,7 +41,7 @@
           <td><%= i.formname %></td>
           <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min %>  <%= i.AM_PM %></td>
           <td><%= @timesent %></td>
-          <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id) %>
+          <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id).limit(1) %>
           <% @appformjoins.each do |j| %>
             <% if j.formsubmittedtime %>
               <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %>
