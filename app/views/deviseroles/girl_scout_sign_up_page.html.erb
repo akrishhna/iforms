@@ -81,7 +81,7 @@
 <% end %>
 
 <script type="text/javascript">
-  $('#user_username, #user_email , #user_password, #user_password_confirmation').keydown(function(){
+  $('#user_username, #user_email , #user_password, #user_password_confirmation').keyup(function(){
     var field = "username";
     if($(this).attr('id') == "user_email") {
       field = "email";
