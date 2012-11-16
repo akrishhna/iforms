@@ -1,47 +1,40 @@
-
-<% if current_user.role == 'doctor'%>
-<% @doctor = Doctor.find(@appointment.doctor_id) %>
-<% if current_user.id == @doctor.user_id %>
-<div class = "breadcrumbs_iform_show">
-<ul class = "breadcrumbs">
-<li>	<%= link_to 'My Appointments',doctors_path %>></li> 
-<li>	<%= link_to 'View in PDF format', @iform.path %>></li>
-<li> <%= link_to 'New appointment', new_appointment_path %>></li>
-<li>	<%= link_to 'Back', :back %>></li>
-</ul>
-
-</br>
-</br>
-</div>
-<div class = "labelcss">
-FirstName:
-<%= @iform.Self_Name_First%></br>
-Lastname:
-<%= @iform.Self_Name_Last%>
-</div>
+<% if false %>
+  <% if current_user.role == 'doctor' %>
+    <% @doctor = Doctor.find(@appointment.doctor_id) %>
+    <% if current_user.id == @doctor.user_id %>
+      <div class="breadcrumbs_iform_show">
+        <ul class="breadcrumbs">
+          <li>  <%= link_to 'My Appointments', doctors_path %>></li>
+          <li>  <%= link_to 'View in PDF format', @iform.path %>></li>
+          <li> <%= link_to 'New appointment', new_appointment_path %>></li>
+          <li>  <%= link_to 'Back', :back %>></li>
+        </ul>
+      </div>
+      <div class="labelcss">
+        FirstName:
+        <%= @iform.Self_Name_First %>
+        Lastname:
+        <%= @iform.Self_Name_Last %>
+      </div>
+    <% end %>
+  <% end %>
+  <% if current_user.role == 'patient' %>
+    <% @patient = Patient.find(@appointment.patient_id) %>
+    <% if current_user.id == @patient.user_id %>
+      <div class="breadcrumbs_iform_show">
+        <ul class="breadcrumbs">
+          <li><%= link_to 'My Appointments', patients_path %>></li>
+          <li><%= link_to 'Edit', edit_iform_path(@iform) %>></li>
+          <li><%= link_to 'View in PDF format', @iform.path %>></li>
+          <li><%= link_to 'Back', :back %>></li>
+        </ul>
+      </div>
+      <div class="labelcss">
+        FirstName:
+        <%= @iform.Self_Name_First %>
+        Lastname:
+        <%= @iform.Self_Name_Last %>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
-<% end %>
-</br>
-
-<% if current_user.role == 'patient'%>
-<% @patient = Patient.find(@appointment.patient_id) %>
-<% if current_user.id == @patient.user_id %>
-<div class = "breadcrumbs_iform_show">
-<ul class = "breadcrumbs">
-<li><%= link_to 'My Appointments', patients_path %>></li>
-<li><%= link_to 'Edit', edit_iform_path(@iform) %>></li>
-<li><%= link_to 'View in PDF format', @iform.path %>></li>
-<li><%= link_to 'Back', :back %>></li>
-</ul>
-</br>
-</br>
-</div>
-<div class = "labelcss">
-FirstName:
-<%= @iform.Self_Name_First%></br>
-Lastname:
-<%= @iform.Self_Name_Last%>
-</div>
-<% end %>
-<% end %>
-
