@@ -1,9 +1,9 @@
 class IformsController < ApplicationController
 
   before_filter :authenticate_user! #, :except => [:index]
-#  before_filter :is_patient?, :except => [:show, :get_iform]
+                                    #  before_filter :is_patient?, :except => [:show, :get_iform]
 
-   def index
+  def index
     # @iform = Iform.all
     respond_to do |format|
       format.html { redirect_to patients_path }
@@ -23,25 +23,25 @@ class IformsController < ApplicationController
   # GET /iform/1
   # GET /iform/1.xml
   def show
-    session[:appointment_id_show] = params[:appointment_id]
-    if session[:appointment_id_show]
-      @appointment = Appointment.find(session[:appointment_id_show])
-      @iform = @appointment.iform
-    else
-      @iform = Iform.find(params[:id])
-      @appointment = Appointment.find(@iform.appointment_id)
-    end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml { render :xml => @iform }
-    end
+    redirect_to consumer_index_path
+    #session[:appointment_id_show] = params[:appointment_id]
+    #if session[:appointment_id_show]
+    #  @appointment = Appointment.find(session[:appointment_id_show])
+    #  @iform = @appointment.iform
+    #else
+    #  @iform = Iform.find(params[:id])
+    #  @appointment = Appointment.find(@iform.appointment_id)
+    #end
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.xml { render :xml => @iform }
+    #end
   end
 
   def new
     @iform = Iform.new
     session[:formname] = params[:name]
     session[:appointment_id] = params[:appointment_id]
-
     @iform.formname = params[:name]
     @iform.appointment_id = params[:appointment_id]
     @iform.save(:validate => false)
@@ -146,14 +146,15 @@ class IformsController < ApplicationController
   def edit
     @iform = Iform.find(params[:id])
     @appointment = Appointment.find(@iform.appointment_id)
-    @doctor = Doctor.find(@appointment.doctor_id)
+    #@doctor = Doctor.find(@appointment.doctor_id)
+    @doctor = Doctor.find_by_user_id(@appointment.doctor_user_id)
     @appform = Appformjoin.find_by_appointment_id(@appointment.id)
-    @appform = Appformjoin.find_by_appointment_id_and_id(@appointment.id,params[:appform_id]) if params[:appform_id].present?
-      if @appform.status == 'submitted' || @appform.status == 'updated'
-        @appform.status = 'submitted'
-      else
-        @appform.status = 'in progress'
-      end
+    @appform = Appformjoin.find_by_appointment_id_and_id(@appointment.id, params[:appform_id]) if params[:appform_id].present?
+    if @appform.status == 'submitted' || @appform.status == 'updated'
+      @appform.status = 'submitted'
+    else
+      @appform.status = 'in progress'
+    end
     @appform.save
   end
 
@@ -162,6 +163,9 @@ class IformsController < ApplicationController
   def update
     p "with in update"
     @iform = Iform.find(params[:id])
+    app_form = Appformjoin.find_by_iform_id(@iform.id)
+    appointment = Appointment.find(app_form.appointment_id)
+    @service_provider_id = appointment.service_provider_id
     respond_to do |format|
       if @iform.update_attributes(params[:iform])
         @iform.Date_Time_Form_Submitted_By_Consumer_To_Service_Provider = Date.today
@@ -169,14 +173,20 @@ class IformsController < ApplicationController
         @iform.Self_Age = @You_Age
         @iform.path = iform_file_name(@iform)
         @iform.save
-        if @iform.formname.include?("Adult")
-          @iform.save
-          adultform_control_conditions(@iform)
-          adultform_controls_mapping(@iform.path, @iform)
-        end
-        if @iform.formname.include?("Child")
-          childform_control_conditions(@iform)
-          childform_controls_mapping(@iform.path, @iform)
+        if @service_provider_id == 1
+          if @iform.formname.include?("Adult")
+            @iform.save
+            adultform_control_conditions(@iform)
+            adultform_controls_mapping(@iform.path, @iform)
+          end
+          if @iform.formname.include?("Child")
+            childform_control_conditions(@iform)
+            childform_controls_mapping(@iform.path, @iform)
+          end
+        elsif @service_provider_id == 4
+          Iform.karen_naples_1_form_generator(@iform)
+          #karnel_naples_1_form(@iform.path, @iform)
+        else
         end
 
         appformjoin = Appformjoin.where(:iform_id => @iform.id).first
@@ -195,6 +205,7 @@ class IformsController < ApplicationController
         format.xml { render :xml => @iform.errors, :status => :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /iform/1
@@ -232,6 +243,15 @@ class IformsController < ApplicationController
 
     render :json => {:status => 'ok'}
   end
+
+  def iform_all_fields_update
+    iform = Iform.find(params[:iform_id])
+    iform.update_attributes params[:iform]
+
+    render :json => {:status => 'ok'}
+  end
+
+
 
   protected
   def submit_childform
