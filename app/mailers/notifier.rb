@@ -1,8 +1,9 @@
 class Notifier < ActionMailer::Base
   default :from => "iforms-noreply@ifor.ms"
-  def appointment_confirmation_notification(appointment, doctor)
+  def appointment_confirmation_notification(appointment, doctor,user_service_provider)
       @appointment = appointment
       @doctor = doctor
+      @user_service_provider = user_service_provider
       @preferred_name = @appointment.preferred_name
       @login_url = new_user_session_url
       @registration_url = user_registration_url
