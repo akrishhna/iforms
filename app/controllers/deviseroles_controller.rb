@@ -11,35 +11,22 @@ class DeviserolesController < ApplicationController
         redirect_to :controller => "consumer", :action => "index"
       end
 
-    elsif @service_provider.id == 1
+    elsif @service_provider.id == 1 || @service_provider.id == 4
       @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
-        redirect_to '/doctor/new?sp_id=1'
+        redirect_to "/doctor/new?sp_id=#{@service_provider.id}"
       else
-        redirect_to '/doctor/appointments?sp_id=1'
+        redirect_to "/doctor/appointments?sp_id=#{@service_provider.id}"
       end
 
-    elsif @service_provider.id == 2
-      #@profile = Profile.find_by_user_id(current_user.id)
-      #if @profile.nil?
-      #  redirect_to :controller => "profiles", :action => "new"
-      #else
-      redirect_to '/girl_scouts_troop_leaders?sp_id=2'
-      # end
-
-    elsif @service_provider.id == 3
-      redirect_to '/girl_scouts_troop_leaders?sp_id=3'
-
-    elsif @service_provider.id == 4
-      @doctor = Doctor.find_by_user_id(current_user.id)
-      if @doctor.nil?
-        redirect_to '/doctor/new?sp_id=4'
+    elsif @service_provider.id == 2 || @service_provider.id == 3
+      @troop_leader = GirlScoutTroopLeaderProfile.find_by_user_id(current_user.id)
+      if @troop_leader.nil?
+        redirect_to :controller => "girl_scout_troop_leader_profiles", :action => "new"
       else
-        redirect_to '/doctor/appointments?sp_id=4'
-      end
-
+      redirect_to "/girl_scouts_troop_leaders?sp_id=#{@service_provider.id}"
+       end
     else
-
     end
 
     #case current_user.role

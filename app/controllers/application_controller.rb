@@ -25,13 +25,11 @@ class ApplicationController < ActionController::Base
     service_provider = current_user.service_providers.first
     if service_provider.nil?
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
-    elsif service_provider.id == 2
+    elsif service_provider.id == 1 || service_provider.id == 4
+      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
+    elsif service_provider.id == 2 || service_provider.id == 3
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
-    elsif service_provider.id == 1
-      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
-    elsif service_provider.id == 4
-      (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
-    else
+     else
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     end
   end

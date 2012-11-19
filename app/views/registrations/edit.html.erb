@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put,:class => "form-horizontal"}) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :class => "form-horizontal"}) do |f| %>
     <% if resource.errors.any? %>
       <div id="error_explanation">
         <ul>
@@ -47,17 +47,29 @@
   <% end %>
   <% if @service_provider.nil? %>
     <% @profile = Profile.find_by_user_id(current_user.id) %>
-    <%= link_to 'Update Profile Information', edit_profile_path(@profile) %>
+    <% if @profile %>
+      <%= link_to 'Update Profile Information', edit_profile_path(@profile) %>
+    <% else %>
+      <%= link_to 'Update Profile Information', new_profile_path %>
+    <% end %>
     <br><br>
     <%= link_to "Back", consumer_index_path %>
-  <% elsif @service_provider.id == 2 %>
+  <% elsif @service_provider.id == 2 || @service_provider.id == 3 %>
     <% @profile = GirlScoutTroopLeaderProfile.find_by_user_id(current_user.id) %>
-    <%= link_to 'Update Profile Information', edit_profile_path(@profile) %>
+    <% if @profile %>
+      <%= link_to 'Update Profile Information', edit_girl_scout_troop_leader_profile_path(@profile) %>
+    <% else %>
+      <%= link_to 'Update Profile Information', new_girl_scout_troop_leader_profile_path %>
+    <% end %>
     <br><br>
     <%= link_to "Back", consumer_index_path %>
-  <% elsif @service_provider.id == 1 %>
+  <% elsif @service_provider.id == 1 || @service_provider.id == 4 %>
     <% @doctor = Doctor.find_by_user_id(current_user.id) %>
-    <%= link_to 'Update Profile Information', edit_doctor_path(@doctor) %>
+    <% if @doctor %>
+      <%= link_to 'Update Profile Information', edit_doctor_path(@doctor) %>
+    <% else %>
+      <%= link_to 'Update Profile Information', new_doctor_path %>
+    <% end %>
     <br><br>
     <%= link_to "Back", doctors_path %>
   <% else %>

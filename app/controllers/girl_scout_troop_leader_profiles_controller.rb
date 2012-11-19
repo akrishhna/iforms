@@ -1,11 +1,11 @@
-class ProfilesController < ApplicationController
+class GirlScoutTroopLeaderProfilesController < ApplicationController
 
   def new
-    @profile = Profile.new
+    @profile = GirlScoutTroopLeaderProfile.new
   end
 
   def create
-    @profile = Profile.new(params[:profile])
+    @profile = GirlScoutTroopLeaderProfile.new(params[:girl_scout_troop_leader_profile])
     @profile.user_id = current_user.id
     if @profile.save
       flash[:success] = 'Profile saved successfully'
@@ -16,12 +16,12 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = Profile.find(params[:id]) rescue nil
+    @profile = GirlScoutTroopLeaderProfile.find(params[:id])
   end
 
   def update
-    @profile = Profile.find(params[:id])
-    if @profile.update_attributes(params[:profile])
+    @profile = GirlScoutTroopLeaderProfile.find(params[:id])
+    if @profile.update_attributes(params[:girl_scout_troop_leader_profile])
       flash[:success] = 'Profile Updated successfully'
       redirect_to homepage_url
     else

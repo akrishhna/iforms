@@ -1,5 +1,7 @@
 Iforms::Application.routes.draw do
 
+  resources :girl_scout_troop_leader_profiles
+
   namespace :admin do
     resources :users do
       collection do
