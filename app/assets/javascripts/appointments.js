@@ -7,10 +7,27 @@ $(function () {
     $('#appointment_responsible_party').val(old_appointment['responsible_party']);
     $('[name="appointment[location]"][value="' + old_appointment['location'] + '"]').attr('checked', 'checked');
 
+
+
+    /*if($('.appointment_forms').val(old_appointment.formname.split(' ')[0]) == 'Child'){
+$('.child').attr('checked','checked')
+    }else{
+      $('.adult').attr('checked','checked')
+    } */
     /* form checked in next appt
      for(id in ids){
      $('[name="form_ids[]"][value="'+ids[id]+'"]').attr('checked', 'checked');
      }*/
+  } else {
+    if(appointment.formname.search(/Child/) == 0) {
+      $('#radio_buttons_child').attr('checked', 'checked');
+    }else if(appointment.formname.search(/Adult/) == 0) {
+      $('#radio_buttons_adult').attr('checked', 'checked');
+    }else if(appointment.formname.search(/Karen/) == 0) {
+      $('#radio_buttons_new_patient').attr('checked', 'checked');
+    }else{
+      $('#radio_buttons_none').attr('checked', 'checked');
+    }
   }
 
   $(window).load(function () {
