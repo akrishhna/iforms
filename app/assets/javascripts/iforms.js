@@ -109,17 +109,3 @@ function billing_details_info() {
   }
 }
 
-//$('#iform_Self_Social_Security_Number').live('keydown', function (e) {
-//  if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 46 || e.keyCode == 17 || e.keyCode == 86) {
-//  } else {
-//    e.preventDefault();
-//  }
-//});
-//
-//$('#iform_Self_Social_Security_Number').live('blur', function () {
-//  if ($(this).val().length < 9) {
-//    $(this).val('');
-//  } else {
-//    $(this).mask('999-99-9999').unmask();
-//  }
-//});
