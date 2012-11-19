@@ -1,0 +1,85 @@
+<% @user = User.where("email =?", @appointment.email).first %>
+<p><img src="<%= "#{NOTIFIER_PATH}/assets/karen_naples_header.jpg" %>" width="100%"/></p>
+<% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>
+    :<%= @appointment.time_min %>  <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
+    Texas 78613.
+  </p>
+<% elsif @appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>
+    :<%= @appointment.time_min %>  <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
+    Texas 78613.
+  </p>
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
+  <p>
+    Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.And Smile Evaluation forms.</p>
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
+  <p>
+    Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form. And Smile Evaluation forms.</p>
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>
+    :<%= @appointment.time_min %>  <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
+    Texas 78613.
+  </p>
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>
+    :<%= @appointment.time_min %>  <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
+    Texas 78613.
+  </p>
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form. And Smile Evaluation forms.
+  </p>
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form. And Smile Evaluation forms.
+  </p>
+<% end %>
+<p>You may contact us at (512) 249-8488 Monday through Thursday 8 a.m. to 5 p.m.</p>
+
+<p>Kind Regards,</p>
+
+<p>Karen Naples D.D.S. P.A.</p>
+<p>
+  <span style="margin-left: 44%"><img src="<%= "#{NOTIFIER_PATH}/assets/karen_naples_footer_2.jpg" %>" height="102" width="100"/></span>
+  <span style="float: right;"><img src="<%= "#{NOTIFIER_PATH}/assets/karen_naples_footer_1.jpg" %>" height="102" width="100"/></span>
+</p>
+
