@@ -125,7 +125,7 @@ class AppointmentsController < ApplicationController
         end
       end
       if @appointment.update_attributes(params[:appointment])
-        Notifier.appointment_confirmation_notification(@appointment, @doctor).deliver
+        Notifier.appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
         format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }
         format.xml { head :ok }
       else
