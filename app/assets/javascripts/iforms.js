@@ -63,13 +63,14 @@ $('.karnel_naples_1_billing').live('change', function () {
 
 
 function update_all_fields() {
-  $('input[name=_method]').val('post');
-  var params = $('.edit_karen_naples_1_iform').serializeArray();
   if ($('.karnel_naples_1_billing:checked').val() == 'self') {
+    $('input[name=_method]').val('post');
+    var params = $('.edit_karen_naples_1_iform').serializeArray();
     $.post('/iforms/iform_all_fields_update', params, function () {
       $('.karnel_naples_1_billing_details_info').attr('readonly', true);
     });
   }
+  $('input[name=_method]').val('put');
 }
 
 function billing_details_info() {
@@ -103,7 +104,6 @@ function billing_details_info() {
     $('#iform_billing_details_employer_phone_1').val($('#iform_employer_phone_1').val());
     $('#iform_billing_details_employer_phone_2').val($('#iform_employer_phone_2').val());
     $('#iform_billing_details_employer_phone_3').val($('#iform_employer_phone_3').val());
-
   }
 }
 
