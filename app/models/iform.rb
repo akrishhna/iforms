@@ -19,7 +19,7 @@ class Iform < ActiveRecord::Base
         @You_Age = @You_Age - 1
       end
     end
-
+   @smile_obj = {"a" => "Love It","b" => "Acceptable","c" => "Could Be Better","d" => "Don't Like It","e" => "Don't Like It At All","np" => "Not A Probleam"}
     @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
       "BestPhoneNumberDuringDay" => iform.best_number_to_reach,
       "HowDidYouHearAboutOurOffice" => iform.how_did_you_hear_about_office,
@@ -40,13 +40,13 @@ class Iform < ActiveRecord::Base
       "PatientSpouseName" => iform.Spouse_Name_First.to_s + ' ' + iform.Spouse_Name_Last.to_s,
       "PatientSpouseEmployer" => iform.Spouse_Employer_Name,
       "PatientEmergencyContactNameAndPhone" => iform.Emergency_Contact_Name_First.to_s + ' ' + iform.Emergency_Contact_Name_Last.to_s + '  ' + iform.emergency_contact_phone_1.to_s + '-' + iform.emergency_contact_phone_2.to_s + '-' + iform.emergency_contact_phone_3.to_s,
-      "SmileWhiteness" => iform.smile_evaluation_whiteness,
-      "SmileStainingDiscoloration" => iform.smile_evaluation_staining,
-      "SmileAlignmentOfTeeth" => iform.smile_evaluation_alignment_of_test,
-      "SmileChippingCracking" => iform.smile_evaluation_chipping,
-      "SmileExistingDentalWork" => iform.smile_evaluation_existing_dental_work,
-      "SmileGumHealthAppearance" => iform.smile_evaluation_gum_health,
-      "SmileSmileLine" => iform.smile_evaluation_smile_line,
+      "SmileWhiteness" => @smile_obj[iform.smile_evaluation_whiteness],
+      "SmileStainingDiscoloration" => @smile_obj[iform.smile_evaluation_staining],
+      "SmileAlignmentOfTeeth" => @smile_obj[iform.smile_evaluation_alignment_of_test],
+      "SmileChippingCracking" => @smile_obj[iform.smile_evaluation_chipping],
+      "SmileExistingDentalWork" => @smile_obj[iform.smile_evaluation_existing_dental_work],
+      "SmileGumHealthAppearance" => @smile_obj[iform.smile_evaluation_gum_health],
+      "SmileSmileLine" => @smile_obj[iform.smile_evaluation_smile_line],
       "IsThereAnythingElse" => iform.anything_else_about_smile,
       "Date" => iform.updated_at.strftime('%Y') + '-' + iform.updated_at.strftime('%m') + '-' + iform.updated_at.strftime('%d'),
       "PersonResponsibleForAccountRelationToPatient" => iform.relationship_to_patient,
