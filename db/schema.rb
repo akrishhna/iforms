@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115053951) do
+ActiveRecord::Schema.define(:version => 20121120052147) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -811,6 +811,9 @@ ActiveRecord::Schema.define(:version => 20121115053951) do
     t.integer  "billing_details_employer_phone_1"
     t.integer  "billing_details_employer_phone_2"
     t.integer  "billing_details_employer_phone_3"
+    t.integer  "billing_details_ssn_1"
+    t.integer  "billing_details_ssn_2"
+    t.integer  "billing_details_ssn_3"
   end
 
   create_table "patients", :force => true do |t|
