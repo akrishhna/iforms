@@ -46,7 +46,6 @@ $('.karnel_naples_1_billing').live('change', function () {
     $('#iform_billing_details_cell_phone_1').val('');
     $('#iform_billing_details_cell_phone_2').val('');
     $('#iform_billing_details_cell_phone_3').val('');
-    $('#iform_billing_details_ssn').val('');
     $('#iform_billing_details_driving_licence_state').val('');
     $('#iform_billing_details_driving_licence_number').val('');
     $('#iform_billing_details_employer_name').val('');
@@ -93,7 +92,6 @@ function billing_details_info() {
     $('#iform_billing_details_cell_phone_1').val($('#iform_cell_phone_1').val());
     $('#iform_billing_details_cell_phone_2').val($('#iform_cell_phone_2').val());
     $('#iform_billing_details_cell_phone_3').val($('#iform_cell_phone_3').val());
-    $('#iform_billing_details_ssn').val($('#iform_Self_Social_Security_Number').val());
     $('#iform_billing_details_driving_licence_state').val($('#iform_Self_Driver_License_State').val());
     $('#iform_billing_details_driving_licence_number').val($('#iform_Self_Driver_License_Number').val());
     $('#iform_billing_details_employer_name').val($('#iform_Self_Employer_Name').val());
