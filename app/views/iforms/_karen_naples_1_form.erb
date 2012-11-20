@@ -5,7 +5,7 @@
 </div>
 <% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
-<%= form_for @iform, :method => :put, :html => {:id => "dd_dd", :class => 'form-horizontal edit_karen_naples_1_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
+<%= form_for @iform, :html => {:method => :put, :id => "dd_dd", :class => 'form-horizontal edit_karen_naples_1_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
   <% if @iform.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
@@ -336,9 +336,13 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :billing_details_ssn, 'Social Security Number', :class => 'control-label' %>
+      <%= f.label :billing_details_ssn_1, 'Social Security Number', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_ssn, :class => 'karnel_naples_1_billing_details_info' %>
+        <%= f.text_field :billing_details_ssn_1, :style => 'width:30px', :placeholder => "###" %>
+        -
+        <%= f.text_field :billing_details_ssn_2, :style => 'width:30px', :placeholder => "##" %>
+        -
+        <%= f.text_field :billing_details_ssn_3, :style => 'width:40px', :placeholder => " ####" %>
       </div>
     </div>
     <div class="control-group">
