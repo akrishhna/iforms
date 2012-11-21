@@ -814,6 +814,7 @@ ActiveRecord::Schema.define(:version => 20121120052147) do
     t.integer  "billing_details_ssn_1"
     t.integer  "billing_details_ssn_2"
     t.integer  "billing_details_ssn_3"
+    t.date     "billing_birth_date"
   end
 
   create_table "patients", :force => true do |t|
