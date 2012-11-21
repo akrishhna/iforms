@@ -19,20 +19,20 @@ class AppointmentsController < ApplicationController
         @appointment.doctor_user_id = current_user.id
         @appointment.service_provider_id = session[:user_service_provider]
         if @appointment.location == 'Bastrop'
-          @appointment.formname = 'Adult Bastrop' if params[:radio_buttons] == 'adult'
-          @appointment.formname = 'Child Bastrop' if params[:radio_buttons] == 'child'
-          @appointment.formname = '' if params[:radio_buttons] == 'none'
+          @appointment.formname = 'Adult Bastrop' if params[:radio_buttons] == 'Adult'
+          @appointment.formname = 'Child Bastrop' if params[:radio_buttons] == 'Child'
+          @appointment.formname = '' if params[:radio_buttons] == 'None'
         elsif @appointment.location == 'Central Austin'
-          @appointment.formname = 'Adult Central Austin' if params[:radio_buttons] == 'adult'
-          @appointment.formname = 'Child Central Austin' if params[:radio_buttons] == 'child'
-          @appointment.formname = '' if params[:radio_buttons] == 'none'
+          @appointment.formname = 'Adult Central Austin' if params[:radio_buttons] == 'Adult'
+          @appointment.formname = 'Child Central Austin' if params[:radio_buttons] == 'Child'
+          @appointment.formname = '' if params[:radio_buttons] == 'None'
         elsif @appointment.location == 'Steiner Ranch'
-          @appointment.formname = 'Adult Steiner Ranch' if params[:radio_buttons] == 'adult'
-          @appointment.formname = 'Child Steiner Ranch' if params[:radio_buttons] == 'child'
-          @appointment.formname = '' if params[:radio_buttons] == 'none'
+          @appointment.formname = 'Adult Steiner Ranch' if params[:radio_buttons] == 'Adult'
+          @appointment.formname = 'Child Steiner Ranch' if params[:radio_buttons] == 'Child'
+          @appointment.formname = '' if params[:radio_buttons] == 'None'
         elsif @appointment.location == 'Cedar Park'
-          @appointment.formname = 'Karen Naples 1'
-          @appointment.formname = '' if params[:radio_buttons] == 'none'
+          @appointment.formname = 'New Patient'
+          @appointment.formname = '' if params[:radio_buttons] == 'None'
         else
           @appointment.formname = ''
         end
@@ -55,7 +55,7 @@ class AppointmentsController < ApplicationController
           @appointment.doctorname = @doctor_details.doctorname
           @appointment.timesent = Time.now
           @appointment.save
-          if params[:radio_buttons] != 'none' and @appointment.formname != ''
+          if params[:radio_buttons] != 'None' and @appointment.formname != ''
             form = Form.find_by_formname(@appointment.formname)
             @appformjoin = Appformjoin.create(:appointment_id => @appointment.id, :form_id => form.id, :formname => form.formname, :status => "pending", :doctor_user_id => current_user.id)
             if @user
@@ -97,22 +97,24 @@ class AppointmentsController < ApplicationController
       @appointment.timesent = Time.now
 
       if params[:appointment][:location] == 'Bastrop'
-        @appointment.formname = 'Adult Bastrop' if params[:radio_buttons] == 'adult'
-        @appointment.formname = 'Child Bastrop' if params[:radio_buttons] == 'child'
-        @appointment.formname = '' if params[:radio_buttons] == 'none'
+        @appointment.formname = 'Adult Bastrop' if params[:radio_buttons] == 'Adult'
+        @appointment.formname = 'Child Bastrop' if params[:radio_buttons] == 'Child'
+        @appointment.formname = '' if params[:radio_buttons] == 'None'
       elsif params[:appointment][:location] == 'Central Austin'
-        @appointment.formname = 'Adult Central Austin' if params[:radio_buttons] == 'adult'
-        @appointment.formname = 'Child Central Austin' if params[:radio_buttons] == 'child'
-        @appointment.formname = '' if params[:radio_buttons] == 'none'
+        @appointment.formname = 'Adult Central Austin' if params[:radio_buttons] == 'Adult'
+        @appointment.formname = 'Child Central Austin' if params[:radio_buttons] == 'Child'
+        @appointment.formname = '' if params[:radio_buttons] == 'None'
       elsif params[:appointment][:location] == 'Steiner Ranch'
-        @appointment.formname = 'Adult Steiner Ranch' if params[:radio_buttons] == 'adult'
-        @appointment.formname = 'Child Steiner Ranch' if params[:radio_buttons] == 'child'
-        @appointment.formname = '' if params[:radio_buttons] == 'none'
+        @appointment.formname = 'Adult Steiner Ranch' if params[:radio_buttons] == 'Adult'
+        @appointment.formname = 'Child Steiner Ranch' if params[:radio_buttons] == 'Child'
+        @appointment.formname = '' if params[:radio_buttons] == 'None'
+      elsif @appointment.location == 'Cedar Park'
+        @appointment.formname = 'New Patient'
+        @appointment.formname = '' if params[:radio_buttons] == 'None'
       else
         @appointment.formname = ''
       end
-
-      if params[:radio_buttons] != 'none' and @appointment.formname != ''
+      if params[:radio_buttons] != 'None' and @appointment.formname != ''
         app_delete = Appformjoin.where("appointment_id =?", @appointment.id)
         app_delete.delete_all
         @user = User.find_by_email(@appointment.email)

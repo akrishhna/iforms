@@ -13,13 +13,13 @@ $(function () {
      }*/
   } else {
     if(appointment.formname.search(/Child/) == 0) {
-      $('#radio_buttons_child').attr('checked', 'checked');
+      $('#radio_buttons_Child').attr('checked', 'checked');
     }else if(appointment.formname.search(/Adult/) == 0) {
-      $('#radio_buttons_adult').attr('checked', 'checked');
-    }else if(appointment.formname.search(/Karen/) == 0) {
-      $('#radio_buttons_new_patient').attr('checked', 'checked');
+      $('#radio_buttons_Adult').attr('checked', 'checked');
+    }else if(appointment.formname.search(/New Patient/) == 0) {
+      $('#radio_buttons_New_Patient').attr('checked', 'checked');
     }else{
-      $('#radio_buttons_none').attr('checked', 'checked');
+      $('#radio_buttons_None').attr('checked', 'checked');
     }
   }
 
