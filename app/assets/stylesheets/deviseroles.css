@@ -22,3 +22,6 @@
 .username_status.error, .email_status.error, .password_status.error, .password_confirmation_status.error {
   color: red;
 }
+.not_valid{
+  color: red;
+}

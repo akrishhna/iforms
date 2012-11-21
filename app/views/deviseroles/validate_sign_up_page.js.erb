@@ -1,6 +1,3 @@
-//$('.email_status').hide();
-//$('.username_status').hide();
-
 
 <% if params[:field] == "username" && !@user_username %>
   $('.username_status.default').hide();
@@ -24,15 +21,21 @@
   $('.email_status.default').hide();
   $('.email_status.ok').hide();
   $('.email_status.error').hide();
+  $('.email_status.not_valid').hide();
   if ($('#new_user input#user_email').val() == ""){
     $('.email_status.default').show();
   }
   else{
+  <% if @mail_validate =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/ %>
     $('.email_status.ok').show();
+  <% else %>
+    $('.email_status.not_valid').show();
+    <% end %>
   }
 <% elsif params[:field] == "email" %>
   $('.email_status.default').hide();
   $('.email_status.ok').hide();
+  $('.email_status.not_valid').hide();
   $('.email_status.error').show();
 <% else %>
 <% end %>
@@ -56,9 +59,10 @@
   $('.password_confirmation_status.error').hide();
   if ($('#new_user input#user_password').val() == ""){}
   else if ($('#new_user input#user_password_confirmation').val() == $('#new_user input#user_password').val() ){
-  $('.password_confirmation_status.ok').show();
-}else{
-  $('.password_confirmation_status.error').show();
-}
+    $('.password_confirmation_status.ok').show();
+  }else{
+    $('.password_confirmation_status.error').show();
+  }
 <% else %>
 <% end %>
+

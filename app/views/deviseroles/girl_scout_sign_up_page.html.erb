@@ -30,6 +30,7 @@
       <span class="email_status default">What’s your email address?</span>
       <span class="email_status ok">Available</span>
       <span class="email_status error">Not Available</span>
+      <span class="email_status not_valid">Enter Valid Email</span>
     </div>
   </div>
   <%= f.fields_for :girl_scout_troop_leader_profile do |builder| %>
@@ -55,7 +56,7 @@
   <div class="control-group">
     <%= f.label :password, "Password", :class => 'control-label' %>
     <div class="controls">
-      <%= f.password_field :password %> &nbsp;&nbsp;
+      <%= f.password_field :password %>&nbsp;&nbsp;
       <span class="password_status default">6 characters or more! Be tricky.</span>
       <span class="password_status ok">Password is okay!</span>
       <span class="password_status error">Password must be at least 6 characters.</span>
