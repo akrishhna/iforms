@@ -28,7 +28,7 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    form.And Smile Evaluation forms.</p>
+    and Smile Evaluation Forms.</p>
 <% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
   <p>
@@ -43,7 +43,7 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    form. And Smile Evaluation forms.</p>
+    and Smile Evaluation Forms.</p>
 <% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
@@ -71,8 +71,7 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    form. And Smile Evaluation forms.
-  </p>
+    and Smile Evaluation Forms.</p>
 <% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
@@ -86,8 +85,7 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    form. And Smile Evaluation forms.
-  </p>
+    and Smile Evaluation Forms.</p>
 <% end %>
 <p>You may contact us at (512) 249-8488 Monday through Thursday 8 a.m. to 5 p.m.</p>
 
