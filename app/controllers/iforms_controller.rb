@@ -184,8 +184,7 @@ class IformsController < ApplicationController
             childform_controls_mapping(@iform.path, @iform)
           end
         elsif @service_provider_id == 4
-          Iform.karen_naples_1_form_generator(@iform)
-          #karnel_naples_1_form(@iform.path, @iform)
+          Iform.new_patient_form_generator(@iform)
         else
         end
 
