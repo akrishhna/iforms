@@ -179,6 +179,7 @@ class DeviserolesController < ApplicationController
   def validate_sign_up_page
     @user_username = User.find_by_username(params[:user_name])
     @user_email = User.find_by_email(params[:email])
+    @mail_validate = params[:email]
   end
 
 end
