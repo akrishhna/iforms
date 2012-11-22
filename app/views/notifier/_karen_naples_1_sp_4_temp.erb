@@ -47,21 +47,21 @@
 <% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
 <% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %>  <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %>  <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
 <% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
@@ -75,7 +75,7 @@
 <% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms your appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.to_i < 10 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
