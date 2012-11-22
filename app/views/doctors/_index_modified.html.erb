@@ -37,7 +37,7 @@
         <% end %>
         <tr>
           <td><%= link_to "Next Appt", new_appointment_path(:appointment_id => i.id), :class => "next_appointment", :title => "Next Appointment" %></td>
-          <td><%= i.firstname + " " + i.lastname %></td>
+          <td><%= i.firstname.to_s + " " + i.lastname.to_s %></td>
           <td><%= i.email %></td>
           <% if i.formname.blank? %>
             <td></td>

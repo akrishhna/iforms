@@ -147,6 +147,8 @@ class IformsController < ApplicationController
     @iform = Iform.find(params[:id])
     @appointment = Appointment.find(@iform.appointment_id)
     #@doctor = Doctor.find(@appointment.doctor_id)
+    @iform.Self_Name_First = @appointment.firstname
+    @iform.Self_Name_Last = @appointment.lastname
     @doctor = Doctor.find_by_user_id(@appointment.doctor_user_id)
     @appform = Appformjoin.find_by_appointment_id(@appointment.id)
     @appform = Appformjoin.find_by_appointment_id_and_id(@appointment.id, params[:appform_id]) if params[:appform_id].present?
@@ -238,7 +240,15 @@ class IformsController < ApplicationController
 
   def iform_field_update
     iform = Iform.find(params[:iform_id])
+    appointment = Appointment.find(iform.appointment_id)
     iform.update_attributes(params[:iform])
+    if params[:iform][:Self_Name_First]
+      appointment.firstname = params[:iform][:Self_Name_First]
+    elsif params[:iform][:Self_Name_Last]
+      appointment.lastname = params[:iform][:Self_Name_Last]
+    else
+    end
+    appointment.save(:validate => false)
 
     render :json => {:status => 'ok'}
   end
@@ -249,7 +259,6 @@ class IformsController < ApplicationController
 
     render :json => {:status => 'ok'}
   end
-
 
 
   protected
