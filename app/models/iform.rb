@@ -11,13 +11,8 @@ class Iform < ActiveRecord::Base
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
     @pdf_form = iform.formname.gsub(' ', '_')
     if iform.Self_Birthdate
-      @You_Age = Date.today.year - iform.Self_Birthdate.year
-      if Date.today.month < iform.Self_Birthdate.month
-        @You_Age = @You_Age - 1
-      end
-      if Date.today.month == iform.Self_Birthdate.month and Date.today.day < iform.Self_Birthdate.day
-        @You_Age = @You_Age - 1
-      end
+      @You_Age = Date.today.strftime('%Y%m%d').to_i - iform.Self_Birthdate.strftime('%Y%m%d').to_i
+      @You_Age = @You_Age.to_s.split('')
     end
     @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
       "Date" => iform.updated_at.strftime('%m') + '-' + iform.updated_at.strftime('%d') + '-' + iform.updated_at.strftime('%Y'),
@@ -26,32 +21,32 @@ class Iform < ActiveRecord::Base
       "PatientBirthDateDay" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%d') : '',
       "PatientBirthDateYear" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%y') : '',
       "PatientBirthDateMonth" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m') : '',
-      "PatientAge" => @You_Age,
+      "PatientAge" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' :'',
       "PatientMaritalStatus" => iform.Self_Marital_Status,
       "PatientSocialSecurityNumber" => iform.ssn_1.to_s + '-' + iform.ssn_2.to_s + '-' + iform.ssn_3.to_s,
       "PatientDriversLicenseStateAndNumber" => iform.Self_Driver_License_State.to_s + ' ' + iform.Self_Driver_License_Number.to_s,
       "PatientDriversLicense" => iform.Self_Driver_License_Number,
-      "PatientAddress" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ',')) + (iform.Self_Home_Address2.empty? ? ' ' : (iform.Self_Home_Address2.to_s + ',')) + iform.Self_Home_City.to_s + ' ' + iform.Self_Home_State.to_s + ' ' + iform.Self_Home_Postal_Code.to_s,
+      "PatientAddress" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ',')) + (iform.Self_Home_Address2.empty? ? ' ' : (iform.Self_Home_Address2.to_s + ', ')) + iform.Self_Home_City.to_s + ' ' + iform.Self_Home_State.to_s + ' ' + iform.Self_Home_Postal_Code.to_s,
       "PatientHomePhone" => iform.home_phone_1.to_s + '-' + iform.home_phone_2.to_s + '-' + iform.home_phone_3.to_s,
       "PatientWorkPhone" => iform.work_phone_1.to_s + '-' + iform.work_phone_2.to_s + '-' + iform.work_phone_3.to_s,
       "PatientCellPhone" => iform.cell_phone_1.to_s + '-' + iform.cell_phone_2.to_s + '-' + iform.cell_phone_3.to_s,
       "BestPhoneNumberDuringDay" => iform.best_number_to_reach,
       "PatientEmployer" => iform.Self_Employer_Name,
-      "PatientEmployerAddressAndPhone" => (iform.Self_Employer_Address1.empty? ? ' ' : (iform.Self_Employer_Address1.to_s + ',')) + (iform.Self_Employer_Address2.empty? ? ' ' : (iform.Self_Employer_Address2.to_s + ',')) + iform.Self_Employer_City.to_s + ' ' + iform.Self_Employer_State.to_s + ' ' + iform.Self_Employer_Postal_Code.to_s + '  ' + iform.employer_phone_1.to_s + '-'+ iform.employer_phone_2.to_s + '-'+ iform.employer_phone_3.to_s,
+      "PatientEmployerAddressAndPhone" => (iform.Self_Employer_Address1.empty? ? ' ' : (iform.Self_Employer_Address1.to_s + ',')) + (iform.Self_Employer_Address2.empty? ? ' ' : (iform.Self_Employer_Address2.to_s + ','+ ' ')) + iform.Self_Employer_City.to_s + ' ' + iform.Self_Employer_State.to_s + ' ' + iform.Self_Employer_Postal_Code.to_s + '  ' + iform.employer_phone_1.to_s + '-'+ iform.employer_phone_2.to_s + '-'+ iform.employer_phone_3.to_s,
       "PatientSpouseName" => iform.Spouse_Name_First.to_s + ' ' + iform.Spouse_Name_Last.to_s,
       "PatientSpouseEmployer" => iform.Spouse_Employer_Name,
       "PatientEmergencyContactNameAndPhone" => iform.Emergency_Contact_Name_First.to_s + ' ' + iform.Emergency_Contact_Name_Last.to_s + '  ' + iform.emergency_contact_phone_1.to_s + '-' + iform.emergency_contact_phone_2.to_s + '-' + iform.emergency_contact_phone_3.to_s,
-      "PersonResponsibleForAccountRelationToPatient" => iform.person_responsible_for_ac,
+      "PersonResponsibleForAccountRelationToPatient" => iform.person_responsible_for_ac == 'Other' ? iform.relationship_to_patient : 'Self',
       "PersonResponsibleForAccountName" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_first_name.to_s + ' ' + iform.billing_details_last_name.to_s) : ' ',
-      "PersonResponsibleForAccountAddress" => iform.person_responsible_for_ac == 'Other' ? ((iform.billing_details_address1.empty? ? ' ' : (iform.billing_details_address1.to_s + ',')) + (iform.billing_details_address2.empty? ? ' ' : (iform.billing_details_address2.to_s + ',')) + iform.billing_details_address_city.to_s + ' ' + iform.billing_details_address_state.to_s + ' ' + iform.billing_details_address_postal_code.to_s) : '',
+      "PersonResponsibleForAccountAddress" => iform.person_responsible_for_ac == 'Other' ? ((iform.billing_details_address1.empty? ? ' ' : (iform.billing_details_address1.to_s + ',')) + (iform.billing_details_address2.empty? ? ' ' : (iform.billing_details_address2.to_s + ',' + ' ')) + iform.billing_details_address_city.to_s + ' ' + iform.billing_details_address_state.to_s + ' ' + iform.billing_details_address_postal_code.to_s) : '',
       "PersonResponsibleForAccountHomePhone" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_home_phone_1.to_s + ' ' + iform.billing_details_home_phone_2.to_s + ' ' + iform.billing_details_home_phone_3.to_s) : ' ',
       "PersonResponsibleForAccountWorkPhone" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_work_phone_1.to_s + ' ' + iform.billing_details_work_phone_2.to_s + ' ' + iform.billing_details_work_phone_3.to_s) : ' ',
       "PersonResponsibleForAccountCellPhone" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_cell_phone_1.to_s + ' ' + iform.billing_details_cell_phone_2.to_s + ' ' + iform.billing_details_cell_phone_3.to_s) : ' ',
       "PersonResponsibleForAccountSocialSecurityNumber" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_ssn_1.to_s + '-' + iform.billing_details_ssn_2.to_s + '-' + iform.billing_details_ssn_3.to_s) : ' ',
       "PersonResponsibleForAccountDriversLicenseStateAndNumber" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_driving_licence_state.to_s + ' ' + iform.billing_details_driving_licence_number.to_s) : ' ',
-      "PersonResponsibleForAccountBirthDate" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_birth_date.strftime('%m-%d-%Y')) : ' ',
+      "PersonResponsibleForAccountBirthDate" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_birth_date ? iform.billing_birth_date.strftime('%m-%d-%Y') : '') : ' ',
       "PersonResponsibleForAccountEmployer" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_employer_name) : ' ',
-      "PersonResponsibleForAccountEmployerAddressAndPhone" => iform.person_responsible_for_ac == 'Other' ? ((iform.billing_details_employer_address1.empty? ? ' ' : (iform.billing_details_employer_address1.to_s + ',')) + (iform.billing_details_employer_address2.empty? ? ' ' : (iform.billing_details_employer_address2.to_s + ',')) + iform.billing_details_employer_address_city.to_s + ' ' + iform.billing_details_employer_address_state.to_s + ' ' + iform.billing_details_employer_address_postal_code.to_s) : ' ',
+      "PersonResponsibleForAccountEmployerAddressAndPhone" => iform.person_responsible_for_ac == 'Other' ? ((iform.billing_details_employer_address1.empty? ? ' ' : (iform.billing_details_employer_address1.to_s + ',')) + (iform.billing_details_employer_address2.empty? ? ' ' : (iform.billing_details_employer_address2.to_s + ','+ ' ')) + iform.billing_details_employer_address_city.to_s + ' ' + iform.billing_details_employer_address_state.to_s + ' ' + iform.billing_details_employer_address_postal_code.to_s) : ' ',
       "HowDidYouHearAboutOurOffice" => iform.how_did_you_hear_about_office,
       "SmileWhiteness" => iform.smile_evaluation_whiteness,
       "SmileStainingDiscoloration" => iform.smile_evaluation_staining,
