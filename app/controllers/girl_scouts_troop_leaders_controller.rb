@@ -104,9 +104,15 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def create_activity
     @activity = GirlScoutsActivity.find_or_initialize_by_id(params[:girl_scouts_activity][:id])
+
+    @is_new_activity = @activity.new_record?
+
     @activity.user_id = current_user.id
     @activity.attributes = params[:girl_scouts_activity]
     @activity.service_provider_id = session[:user_service_provider]
+
+    @is_activity_name_changed = @activity.activity_name_changed?
+
     @activity.save(:validate => false)
     session[:selected_activity_id] = @activity.id
   end

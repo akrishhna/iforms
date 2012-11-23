@@ -418,7 +418,7 @@
 
 <div id="delete_activity_alert_box" class="hide" style="width:200px;text-align: center;">
   <p style="font-size:18px;margin: 10px 0 15px 0; ">
-    Delete <%= @girls_activity.activity_name ? @girls_activity.activity_name : "Activity #"+@girls_activity.id.to_s %>
+    Delete <span id="delete_activity_name"><%= @girls_activity.activity_name ? @girls_activity.activity_name : "Activity #"+@girls_activity.id.to_s %></span>
     Activity?</p>
   <%= link_to "Yes", "#", :class => "btn btn-danger delete_activity_yes", :id => "delete_activity_yes" %>&nbsp;&nbsp;
   <%= link_to "No", "#", :class => "btn btn-primary", :id => "delete_activity_no", :onclick => "$.fancybox.close();" %>

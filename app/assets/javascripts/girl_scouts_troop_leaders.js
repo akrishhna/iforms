@@ -135,9 +135,13 @@ $(function () {
   $('.delete_activity').click(function () {
     var id = $('.girl_scouts_activity_form #girl_scouts_activity_id').val();
     if (id != '') {
+      var activity_name =  $('#girls_scouts_activities option:selected').text();
       $.fancybox({
         href:'#delete_activity_alert_box',
-        closeBtn:false
+        closeBtn:false,
+        beforeShow: function(){
+          $('#delete_activity_name').text(activity_name);
+        }
       });
     }
     return false;

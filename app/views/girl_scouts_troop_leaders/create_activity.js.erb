@@ -7,10 +7,14 @@ $('.view_permission_form_btn').attr('href', '<%= activity_permission_form_pdf_pa
 
 $('.notification_email_to_parent_text').html(" <%= escape_javascript render :partial => 'parents_email_notification', :locals => {:girls_activity => @activity, :girl_scout => @girls_scout }  %>");
 
-<% if  @activity.activity_name.to_s != '' %>
-$('select#girls_scouts_activities option:selected').text('<%= @activity.activity_name %>');
-<% else %>
-$('select#girls_scouts_activities option:selected').text('Activity #' + + <%= @activity.id %>);
+
+<% if @is_new_activity %>
+  $('select#girls_scouts_activities').append($('<option></option>').val('<%= @activity.id%>').html('<%=  @activity.activity_name%>'));
+  $('select#girls_scouts_activities').val('<%= @activity.id%>');
+<% end %>
+
+<% if @is_activity_name_changed %>
+  $('select#girls_scouts_activities option:selected').text('<%=  @activity.activity_name%>');
 <% end %>
 
 <% if session[:user_service_provider] == 2 %>
