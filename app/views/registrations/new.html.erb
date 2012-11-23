@@ -63,19 +63,8 @@
 
 <script type="text/javascript">
   $('#user_username, #user_email , #user_password, #user_password_confirmation').keyup(function(){
-    var field = "username";
-    if($(this).attr('id') == "user_email") {
-      field = "email";
-    }else if($(this).attr('id') == "user_password") {
-      field = "password";
-    }else if($(this).attr('id') == "user_password_confirmation") {
-      field = "password_confirmation";
-    }else{}
-    $.post('/deviseroles/validate_sign_up_page',
-      {user_name:$('#user_username').val(),
-        email:$('#user_email').val(),
-        field:field}
-    );
+    var params = $('#new_user').serializeArray();
+    $.post('/registration/validate_users_sign_up_page',params );
     return false;
   });
 </script>

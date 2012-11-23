@@ -80,4 +80,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def validate_users_sign_up_page
+    @user_username = User.find_by_username(params[:user][:username])
+    @user_email = User.find_by_email(params[:user][:email])
+    @mail_validate = params[:user][:email]
+  end
+
 end

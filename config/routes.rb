@@ -1,5 +1,9 @@
 Iforms::Application.routes.draw do
 
+  devise_scope :user do
+    match '/registration/validate_users_sign_up_page' => 'registrations#validate_users_sign_up_page'
+  end
+
   resources :girl_scout_troop_leader_profiles
 
   namespace :admin do
@@ -120,7 +124,7 @@ Iforms::Application.routes.draw do
       get 'user_details'
       get 'forgot_username'
       post 'sending_username'
-      post 'validate_sign_up_page'
+      post 'validate_girl_scout_sign_up_page'
     end
   end
   match 'girl_scouts/sign_up' => 'deviseroles#girl_scout_sign_up_page'

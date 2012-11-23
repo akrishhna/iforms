@@ -1,0 +1,97 @@
+var username_available = false
+var email_available = false
+var password_ok = false
+var password_confirmation_ok = false
+
+<% if params[:user][:username] && !@user_username %>
+$('.username_status.default').hide();
+$('.username_status.ok').hide();
+$('.username_status.error').hide();
+if ($('#new_user input#user_username').val() == ""){
+  username_available = false
+  $('.username_status.default').show();
+}
+else{
+  username_available = true
+  $('.username_status.ok').show();
+}
+
+<% elsif params[:user][:username] %>
+username_available = false
+$('.username_status.default').hide();
+$('.username_status.ok').hide();
+$('.username_status.error').show();
+<% else %>
+<% end %>
+
+<% if params[:user][:email] && !@user_email %>
+$('.email_status.default').hide();
+$('.email_status.ok').hide();
+$('.email_status.error').hide();
+$('.email_status.not_valid').hide();
+if ($('#new_user input#user_email').val() == ""){
+  email_available = false
+  $('.email_status.default').show();
+}
+else{
+<% if @mail_validate =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/ %>
+  email_available = true
+  $('.email_status.ok').show();
+<% else %>
+  email_available = false
+  $('.email_status.not_valid').show();
+<% end %>
+}
+<% elsif params[:user][:email] %>
+email_available = false
+$('.email_status.default').hide();
+$('.email_status.ok').hide();
+$('.email_status.not_valid').hide();
+$('.email_status.error').show();
+<% else %>
+<% end %>
+
+<% if params[:user][:password] %>
+
+$('.password_status.default').hide();
+$('.password_status.ok').hide();
+$('.password_status.error').hide();
+if ($('#new_user input#user_password').val() == ""){
+  password_ok = false
+  $('.password_status.default').show();
+}else if ($('#new_user input#user_password').val().length < 6){
+  password_ok = false
+  $('.password_status.error').show();
+}else{
+  password_ok = true
+  $('.password_status.ok').show();
+}
+<% else %>
+<% end %>
+
+<% if params[:user][:password_confirmation] != '' %>
+$('.password_confirmation_status.ok').hide();
+$('.password_confirmation_status.error').hide();
+if ($('#new_user input#user_password').val() == ""){
+  password_confirmation_ok = false
+}
+else if ($('#new_user input#user_password_confirmation').val() == $('#new_user input#user_password').val() ){
+  password_confirmation_ok = true
+  $('.password_confirmation_status.ok').show();
+}else{
+  password_confirmation_ok = false
+  $('.password_confirmation_status.error').show();
+}
+<% else %>
+<% end %>
+
+if (username_available && email_available && password_ok && password_confirmation_ok){
+  $('.users_submit').attr('disabled', false);
+
+}else{
+  $('.users_submit').attr('disabled', "disabled");
+}
+
+
+
+
