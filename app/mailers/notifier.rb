@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
       @user_service_provider = user_service_provider
       @preferred_name = @appointment.preferred_name
       @login_url = new_user_session_url
-      @registration_url = user_registration_url
+      @registration_url =  user_registration_url(:id => @appointment.id)
       mail(:to => @appointment.email, :subject => "Appointment confirmation")
   end
   
