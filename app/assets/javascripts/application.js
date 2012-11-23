@@ -5,6 +5,7 @@
 //= require jquery.fancybox
 //= require 'jquery.maskedinput'
 //= require formToWizard
+//= require jquery.autotab-1.1b
 //= require_self
 
 $(document).ready(function(){

@@ -95,11 +95,11 @@
     <div class="control-group">
       <%= f.label :ssn_1, 'Social Security Number', :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :ssn_1, :style => 'width:30px', :placeholder => "###" %>
+          <%= f.text_field :ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
           -
-          <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##" %>
+          <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
           -
-          <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####" %>
+          <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength =>4  %>
         </div>
     </div>
     <div class="control-group">
@@ -131,31 +131,31 @@
     <div class="control-group">
       <%= f.label :home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :home_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :home_phone_1, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :home_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :home_phone_2, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+        <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :work_phone_1, "Work Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :work_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :work_phone_1, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :work_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :work_phone_2, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+        <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :cell_phone_1, "Cell Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :cell_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :cell_phone_1, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :cell_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :cell_phone_2, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+        <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
@@ -201,11 +201,11 @@
     <div class="control-group">
       <%= f.label :employer_phone_1, " Employer Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :employer_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :employer_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :employer_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :employer_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :employer_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+        <%= f.text_field :employer_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="karen_naples_new_patient_iforms_footer_links">
@@ -251,11 +251,11 @@
     <div class="control-group">
       <%= f.label :emergency_contact_phone_1, "Emergency Contact", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :emergency_contact_phone_1, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :emergency_contact_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :emergency_contact_phone_2, :style => 'width:30px', :placeholder => "###" %>
+        <%= f.text_field :emergency_contact_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :emergency_contact_phone_3, :style => 'width:40px', :placeholder => " ####" %>
+        <%= f.text_field :emergency_contact_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="karen_naples_new_patient_iforms_footer_links">
@@ -308,41 +308,41 @@
     <div class="control-group">
       <%= f.label :billing_details_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_home_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karen_naples_new_patient_billing_details_info'%>
+        <%= f.text_field :billing_details_home_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3%>
         -
-        <%= f.text_field :billing_details_home_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_home_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_home_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_home_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info', :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :billing_details_work_phone_1, "Work Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_work_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karen_naples_new_patient_billing_details_info'%>
+        <%= f.text_field :billing_details_work_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_work_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_work_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_work_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_work_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info', :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :billing_details_cell_phone_1, "Cell Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_cell_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_cell_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_cell_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_cell_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_cell_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_cell_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info', :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :billing_details_ssn_1, 'Social Security Number', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_ssn_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_ssn_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_ssn_2, :style => 'width:30px', :placeholder => "##", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_ssn_2, :style => 'width:30px', :placeholder => "##", :class => 'karen_naples_new_patient_billing_details_info', :size => 2, :maxlength => 2 %>
         -
-        <%= f.text_field :billing_details_ssn_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_ssn_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info', :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
@@ -386,11 +386,11 @@
     <div class="control-group">
       <%= f.label :billing_details_employer_phone_1, "Employer Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_employer_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_employer_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_employer_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_employer_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :billing_details_employer_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_details_employer_phone_3, :style => 'width:40px', :placeholder => " ####", :class => 'karen_naples_new_patient_billing_details_info', :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
@@ -686,5 +686,35 @@
 <% end %>
 
 <script type="text/javascript">
-  function unmask_str() {}
+  function unmask_str() { }
+</script>
+<script>
+  jQuery(function ($) {
+    $('#iform_ssn_1, #iform_ssn_2, #iform_ssn_3, #iform_home_phone_1, #iform_home_phone_2,' +
+      '#iform_home_phone_3,#iform_work_phone_1, #iform_work_phone_2, #iform_work_phone_3,' +
+      '#iform_cell_phone_1, #iform_cell_phone_2, #iform_cell_phone_3, #iform_employer_phone_1,' +
+      '#iform_employer_phone_2, #iform_employer_phone_3, #iform_emergency_contact_phone_1, ' +
+      '#iform_emergency_contact_phone_2, #iform_emergency_contact_phone_3, #iform_billing_details_home_phone_1' +
+      '#iform_billing_details_home_phone_2, #iform_billing_details_home_phone_3, #iform_billing_details_work_phone_1' +
+      '#iform_billing_details_work_phone_2, #iform_billing_details_work_phone_3, #iform_billing_details_cell_phone_1' +
+      '#iform_billing_details_cell_phone_2, #iform_billing_details_cell_phone_3, #iform_billing_details_ssn_1' +
+      '#iform_billing_details_ssn_2, #iform_billing_details_ssn_3, #iform_billing_details_employer_phone_1' +
+      '#iform_billing_details_employer_phone_2,  #iform_billing_details_employer_phone_3').autotab_filter('numeric');
+
+    $('#iform_ssn_1, #iform_ssn_2, #iform_ssn_3, #iform_Self_Driver_License_State').autotab_magic();
+
+    $('#iform_home_phone_1, #iform_home_phone_2, #iform_home_phone_3, #iform_work_phone_1,' +
+      ' #iform_work_phone_2, #iform_work_phone_3, #iform_cell_phone_1, #iform_cell_phone_2,' +
+      ' #iform_cell_phone_3, #iform_best_number_to_reach_home').autotab_magic();
+
+    $('#iform_employer_phone_1, #iform_employer_phone_2, #iform_employer_phone_3').autotab_magic();
+
+    $('#iform_emergency_contact_phone_1, #iform_emergency_contact_phone_2, #iform_emergency_contact_phone_3').autotab_magic();
+
+    $('#iform_billing_details_home_phone_1, #iform_billing_details_home_phone_2, #iform_billing_details_home_phone_3, #iform_billing_details_work_phone_1,' +
+      '#iform_billing_details_work_phone_2, #iform_billing_details_work_phone_3, #iform_billing_details_cell_phone_1, #iform_billing_details_cell_phone_2,' +
+      '#iform_billing_details_cell_phone_3, #iform_billing_details_ssn_1, #iform_billing_details_ssn_2, #iform_billing_details_ssn_3, #iform_billing_birth_date_1i').autotab_magic();
+
+    $('#iform_billing_details_employer_phone_1, #iform_billing_details_employer_phone_2, #iform_billing_details_employer_phone_3, #iform_how_did_you_hear_about_office').autotab_magic();
+  });
 </script>
