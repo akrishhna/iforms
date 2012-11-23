@@ -14,7 +14,7 @@ class DeviserolesController < ApplicationController
     elsif @service_provider.id == 1 || @service_provider.id == 4
       @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
-        redirect_to "/doctor/new?sp_id=#{@service_provider.id}"
+        redirect_to "/doctors/new?sp_id=#{@service_provider.id}"
       else
         redirect_to "/doctor/appointments?sp_id=#{@service_provider.id}"
       end
