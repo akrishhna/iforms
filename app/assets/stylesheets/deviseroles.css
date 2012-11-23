@@ -6,16 +6,16 @@
   width: auto;
 }
 
-.username_status, .email_status, .password_status, .password_confirmation_status {
+.username_status, .email_status, .password_status, .password_confirmation_status, .council_type_status {
   display: none;
 }
 
-.username_status.default, .email_status.default, .password_status.default {
+.username_status.default, .email_status.default, .password_status.default, .council_type_status.default {
   display: inline;
   color: #9A9A9A;
 }
 
-.username_status.ok, .email_status.ok, .password_status.ok, .password_confirmation_status.ok {
+.username_status.ok, .email_status.ok, .password_status.ok, .password_confirmation_status.ok, .council_type_status.ok {
   color: green;
 }
 

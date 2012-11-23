@@ -49,7 +49,9 @@
     <div class="control-group">
       <%= builder.label :council_type, "Council", :class => 'control-label' %>
       <div class="controls">
-         <%= builder.select :council_type,options_for_select(StaticData.sign_up_service_type),{:include_blank => true} %>
+         <%= builder.select :council_type,options_for_select(StaticData.sign_up_service_type),{:include_blank => true} %>&nbsp;&nbsp;
+        <span class="council_type_status default">Select council type here.</span>
+        <span class="council_type_status ok">Council is okay!</span>
       </div>
     </div>
   <% end %>
@@ -72,30 +74,25 @@
   </div>
   <div class="control-group">
     <div class="controls">
-      <%= @ayah.get_publisher_html.html_safe if !current_user.present? %>
+      <%#= @ayah.get_publisher_html.html_safe if !current_user.present? %>
     </div>
   </div>
   <div class="form-actions">
-    <%= f.submit "Sign Up",:class => 'btn btn-primary btn-large span3 girl_scout_sign_up_form_submit',:disabled => "disabled" %>
+    <%= f.submit "Sign Up",:class => 'btn btn-primary btn-large span3 users_submit',:disabled => "disabled" %>
   </div>
 
 <% end %>
 
 <script type="text/javascript">
   $('#user_username, #user_email , #user_password, #user_password_confirmation').keyup(function(){
-    var field = "username";
-    if($(this).attr('id') == "user_email") {
-      field = "email";
-    }else if($(this).attr('id') == "user_password") {
-      field = "password";
-    }else if($(this).attr('id') == "user_password_confirmation") {
-      field = "password_confirmation";
-    }else{}
-    $.post('/deviseroles/validate_sign_up_page',
-      {user_name:$('#user_username').val(),
-        email:$('#user_email').val(),
-        field:field}
-    );
+    var params = $('#new_user').serializeArray();
+    $.post('/deviseroles/validate_girl_scout_sign_up_page',params );
+    return false;
+  });
+
+  $('select#user_girl_scout_troop_leader_profile_attributes_council_type').change(function(){
+    var params = $('#new_user').serializeArray();
+    $.post('/deviseroles/validate_girl_scout_sign_up_page',params );
     return false;
   });
 </script>

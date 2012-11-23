@@ -176,10 +176,10 @@ class DeviserolesController < ApplicationController
     end
   end
 
-  def validate_sign_up_page
-    @user_username = User.find_by_username(params[:user_name])
-    @user_email = User.find_by_email(params[:email])
-    @mail_validate = params[:email]
+  def validate_girl_scout_sign_up_page
+    @user_username = User.find_by_username(params[:user][:username])
+    @user_email = User.find_by_email(params[:user][:email])
+    @mail_validate = params[:user][:email]
   end
 
 end
