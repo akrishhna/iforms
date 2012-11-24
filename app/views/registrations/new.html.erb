@@ -1,7 +1,9 @@
 <div class="container">
   <h2>Sign up</h2>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <% if @appointment %>
     <%= hidden_field_tag :appointment_id, @appointment.id %>
+      <% end %>
     <% if false %>
     <% if resource.errors.any? %>
       <div id="error_explanation">
@@ -68,6 +70,8 @@
     return false;
   });
 
-  $('#user_email').val('<%= @appointment.email %>')
+  <% if @appointment %>
+  $('#user_email').val('<%= @appointment.email %>');
+  <% end %>
 </script>
 

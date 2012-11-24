@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     # super
-    @appointment = Appointment.find(params[:id])
+    @appointment = Appointment.find(params[:id]) if params[:id]
     @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
   end
 
