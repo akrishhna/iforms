@@ -7,7 +7,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-   # @appointment = Appointment.find(params[:appointment_id])
+    @appointment = Appointment.find(params[:appointment_id])
+    @appointment.email = params[:user][:email]
+    @appointment.save(:validate => false)
     username = params[:user][:username]
     email = params[:user][:email]
     password = params[:user][:password]
