@@ -23,6 +23,6 @@ class StaticData < ActiveRecord::Base
   end
 
   def self.sign_up_service_type
-    [['Central Texas','2'],['Diamonds of AR, OK, and TX','3']]
+    [['James Waters','1'],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Karen Naples','4']]
   end
 end
