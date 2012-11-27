@@ -198,9 +198,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def activity_permission_form
     if params[:activity_id] == 'new'
       if session[:user_service_provider] == 2
-        form_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
+        form_path = CENTRAL_TEXAS_READ_ONLY_FORM_PATH
       elsif session[:user_service_provider] == 3
-        form_path = "#{PDFFILES_PATH}Parent_Permission_Diamonds.pdf"
+        form_path = DIAMONDS_READ_ONLY_FORM_PATH
       else
       end
       send_file form_path,
