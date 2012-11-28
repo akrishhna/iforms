@@ -41,13 +41,13 @@
           <td><%= i.email %></td>
           <% if i.formname.blank? %>
             <td></td>
-            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.to_i < 10 ? "0" + i.time_min.to_s  : i.time_min %>  <%= i.AM_PM %></td>
+            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
             <td><%= @timesent %></td>
             <td></td>
             <td><%= link_to "Resend", edit_appointment_path(i) %></td>
           <% else %>
             <td><%= i.formname %></td>
-            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.to_i < 10 ? "0" + i.time_min.to_s  : i.time_min %>  <%= i.AM_PM %></td>
+            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
             <td><%= @timesent %></td>
             <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
             <% @appformjoins.each do |j| %>
