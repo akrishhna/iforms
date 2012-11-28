@@ -15,8 +15,8 @@ class RegistrationsController < Devise::RegistrationsController
     password = params[:user][:password]
     password_confirmation = params[:user][:password_confirmation]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
-    ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
-    if !username.empty? && !email.empty? && ayah_passed && (password == password_confirmation)
+    #ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+    if !username.empty? && !email.empty? && (password == password_confirmation) # && ayah_passed
       username_present = User.find_by_username(username)
       email_present = User.find_by_email(email)
       if username_present
@@ -26,17 +26,18 @@ class RegistrationsController < Devise::RegistrationsController
         flash.now[:notice] = "Email #{email} is unavailable"
         render :new
       else
-        if ayah_passed
+        #if ayah_passed
           super
-        else
-          build_resource
-          clean_up_passwords(resource)
-          flash.now[:alert] = "There was an error, Please re-enter."
-          render_with_scope :new
-        end
+        #else
+         # build_resource
+         # clean_up_passwords(resource)
+         # flash.now[:alert] = "There was an error, Please re-enter."
+         # render_with_scope :new
+       # end
       end
     else
-      flash[:error] = 'Please fill all the fields and Play the game'
+      #flash[:error] = 'Please fill all the fields and Play the game'
+      flash.now[:error] = "There was an error, Please re-enter."
       redirect_to :back
     end
   end
