@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120052147) do
+ActiveRecord::Schema.define(:version => 20121126063800) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -817,6 +817,107 @@ ActiveRecord::Schema.define(:version => 20121120052147) do
     t.date     "billing_birth_date"
   end
 
+  create_table "medical_patient_forms", :force => true do |t|
+    t.string   "first_name",                                   :limit => 50
+    t.string   "last_name",                                    :limit => 50
+    t.string   "middle_name",                                  :limit => 50
+    t.string   "address_1",                                    :limit => 50
+    t.string   "address_2",                                    :limit => 50
+    t.string   "address_apt",                                  :limit => 50
+    t.string   "address_city",                                 :limit => 50
+    t.string   "address_state",                                :limit => 50
+    t.integer  "address_zip"
+    t.integer  "home_phone_1",                                 :limit => 8
+    t.integer  "home_phone_2",                                 :limit => 8
+    t.integer  "home_phone_3",                                 :limit => 8
+    t.integer  "work_phone_1",                                 :limit => 8
+    t.integer  "work_phone_2",                                 :limit => 8
+    t.integer  "work_phone_3",                                 :limit => 8
+    t.integer  "cell_phone_1",                                 :limit => 8
+    t.integer  "cell_phone_2",                                 :limit => 8
+    t.integer  "cell_phone_3",                                 :limit => 8
+    t.string   "sex",                                          :limit => 10
+    t.date     "birth_date"
+    t.string   "marital_status",                               :limit => 15
+    t.integer  "ssn_1",                                        :limit => 8
+    t.integer  "ssn_2",                                        :limit => 8
+    t.integer  "ssn_3",                                        :limit => 8
+    t.string   "employer",                                     :limit => 50
+    t.string   "employer_occupation",                          :limit => 50
+    t.string   "employer_address_1",                           :limit => 50
+    t.string   "employer_address_2",                           :limit => 50
+    t.string   "employer_address_city",                        :limit => 50
+    t.string   "employer_address_state",                       :limit => 50
+    t.integer  "employer_address_zip"
+    t.string   "spouse_first_name",                            :limit => 50
+    t.string   "spouse_last_name",                             :limit => 50
+    t.integer  "spouse_home_phone_1",                          :limit => 8
+    t.integer  "spouse_home_phone_2",                          :limit => 8
+    t.integer  "spouse_home_phone_3",                          :limit => 8
+    t.integer  "spouse_work_phone_1",                          :limit => 8
+    t.integer  "spouse_work_phone_2",                          :limit => 8
+    t.integer  "spouse_work_phone_3",                          :limit => 8
+    t.string   "emergency_contact_first_name",                 :limit => 50
+    t.string   "emergency_contact_last_name",                  :limit => 50
+    t.string   "emergency_contact_relationship",               :limit => 50
+    t.integer  "emergency_contact_phone_1",                    :limit => 8
+    t.integer  "emergency_contact_phone_2",                    :limit => 8
+    t.integer  "emergency_contact_phone_3",                    :limit => 8
+    t.string   "emergency_contact_who_referred_you",           :limit => 50
+    t.string   "primary_insurance_company_name",               :limit => 50
+    t.string   "primary_insurance_address_1",                  :limit => 50
+    t.string   "primary_insurance_address_2",                  :limit => 50
+    t.string   "primary_insurance_address_city",               :limit => 50
+    t.string   "primary_insurance_address_state",              :limit => 50
+    t.string   "primary_insurance_address_zip",                :limit => 50
+    t.integer  "primary_insurance_phone_1",                    :limit => 8
+    t.integer  "primary_insurance_phone_2",                    :limit => 8
+    t.integer  "primary_insurance_phone_3",                    :limit => 8
+    t.integer  "primary_insurance_id"
+    t.string   "primary_insurance_group",                      :limit => 50
+    t.string   "primary_insurance_policy_holder",              :limit => 10
+    t.string   "primary_insurance_policy_holder_first_name",   :limit => 50
+    t.string   "primary_insurance_policy_holder_last_name",    :limit => 50
+    t.string   "primary_insurance_relationship",               :limit => 50
+    t.date     "primary_insurance_birth_date"
+    t.integer  "primary_insurance_ssn_1",                      :limit => 8
+    t.integer  "primary_insurance_ssn_2",                      :limit => 8
+    t.integer  "primary_insurance_ssn_3",                      :limit => 8
+    t.string   "primary_insurance_policy_holder_employer",     :limit => 50
+    t.string   "secondary_insurance_company_name",             :limit => 50
+    t.string   "secondary_insurance_address_1",                :limit => 50
+    t.string   "secondary_insurance_address_2",                :limit => 50
+    t.string   "secondary_insurance_address_city",             :limit => 50
+    t.string   "secondary_insurance_address_state",            :limit => 50
+    t.integer  "secondary_insurance_address_zip"
+    t.integer  "secondary_insurance_phone_1",                  :limit => 8
+    t.integer  "secondary_insurance_phone_2",                  :limit => 8
+    t.integer  "secondary_insurance_phone_3",                  :limit => 8
+    t.integer  "secondary_insurance_id"
+    t.string   "secondary_insurance_group",                    :limit => 50
+    t.string   "secondary_insurance_policy_holder",            :limit => 10
+    t.string   "secondary_insurance_policy_holder_first_name", :limit => 50
+    t.string   "secondary_insurance_policy_holder_last_name",  :limit => 50
+    t.string   "secondary_insurance_relationship",             :limit => 50
+    t.date     "secondary_insurance_birth_date"
+    t.integer  "secondary_insurance_ssn_1",                    :limit => 8
+    t.integer  "secondary_insurance_ssn_2",                    :limit => 8
+    t.integer  "secondary_insurance_ssn_3",                    :limit => 8
+    t.string   "secondary_insurance_policy_holder_employer",   :limit => 50
+    t.string   "patient_consent_first_name_1",                 :limit => 50
+    t.string   "patient_consent_last_name_1",                  :limit => 50
+    t.string   "patient_consent_relation_ship_to_patient_1",   :limit => 50
+    t.string   "patient_consent_first_name_2",                 :limit => 50
+    t.string   "patient_consent_last_name_2",                  :limit => 50
+    t.string   "patient_consent_relation_ship_to_patient_2",   :limit => 50
+    t.string   "patient_consent_first_name_3",                 :limit => 50
+    t.string   "patient_consent_last_name_3",                  :limit => 50
+    t.string   "patient_consent_relation_ship_to_patient_3",   :limit => 50
+    t.boolean  "patient_authorization_for_voice_mail"
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+  end
+
   create_table "patients", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -843,14 +944,6 @@ ActiveRecord::Schema.define(:version => 20121120052147) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "role"
-    t.string   "description"
-    t.boolean  "disabled",    :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-  end
-
   create_table "service_providers", :force => true do |t|
     t.string   "name"
     t.string   "title"
@@ -865,23 +958,6 @@ ActiveRecord::Schema.define(:version => 20121120052147) do
     t.string   "useremail_afterupdate",  :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-  end
-
-  create_table "static_data", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.string   "data_type"
-    t.integer  "data_order"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "user_roles", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.boolean  "deleted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "user_service_providers", :force => true do |t|
@@ -909,10 +985,10 @@ ActiveRecord::Schema.define(:version => 20121120052147) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                                   :null => false
     t.datetime "updated_at",                                                   :null => false
-    t.string   "password_salt"
     t.string   "role",                                  :default => "patient", :null => false
-    t.string   "username"
     t.string   "edit_confirmed"
+    t.string   "password_salt"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

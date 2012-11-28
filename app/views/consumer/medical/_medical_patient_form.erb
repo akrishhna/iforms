@@ -1,0 +1,489 @@
+<%= form_for @medical, :url => "/edit_medical_form", :html => {:class => 'form-horizontal edit_medical_patient_form', :multipart => true} do |f| %>
+  <%= f.hidden_field :id %>
+
+  <div class="tabbable tabs-left iforms-tabs-left">
+  <ul class="nav nav-tabs" id="medical_patient_form_tab_links">
+    <li class="active">
+      <%= link_to "Patient", '#patient', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Employer", '#employer', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Spouse", '#spouse', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Emergency Contact", '#emergency_contact', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Insurance Primary", '#insurance_primary', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Insurance Secondary", '#insurance_secondary', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Patient Consent", '#patient_consent', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Medical History", '#medical_history', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Family History", '#family_history', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Social History", '#social_history', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Review Of Systems", '#review_of_systems', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Health Maintenance", '#health_maintenance', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Submit Form To Doctor", '#submit_form_to_doctor', "data-toggle" => "tab" %>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+  <div class="tab-pane active" id="patient">
+    <div class="control-group">
+      <%= f.label :first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :last_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :address_1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :address_1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :address_2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
+        <br>
+        <%= f.select :address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                      'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.text_field :address_zip, :placeholder => "Postal / Zip Code" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :home_phone_1, "Home Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :work_phone_1, "Work Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :cell_phone_1, "Cell Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :cell_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :cell_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :sex, 'Gender', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :sex, "f" %>Female
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :sex, "m" %>Male
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :birth_date, 'Birth Date', :class => 'control-label' %>
+      <div class="controls ">
+        <%#= f.date_select :birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :marital_status, 'Marital Status', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :marital_status, "Divorced" %>Divorced
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :marital_status, "Married" %>Married
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :marital_status, "Partnered" %>Partnered
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :marital_status, "Separated" %>Separated
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :marital_status, "Single" %>Single
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :marital_status, "Widowed" %>Widowed
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :ssn_1, 'Social Security Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
+        -
+        <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="medical_patient_form_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "1" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="employer">
+    <div class="control-group">
+      <%= f.label :employer, 'Employer', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :employer %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :employer_occupation, 'Occupation', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :employer_occupation %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :employer_address_1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :employer_address_1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :employer_address_2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :employer_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
+        <br>
+        <%= f.select :employer_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                               'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.text_field :employer_address_zip, :placeholder => "Postal / Zip Code" %>
+      </div>
+    </div>
+    <div class="medical_patient_form_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "0" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "2" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="spouse">
+    <div class="control-group">
+      <%= f.label :spouse_first_name, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :spouse_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :spouse_first_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :spouse_home_phone_1, "Home Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :spouse_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :spouse_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :spouse_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :spouse_work_phone_1, "Work Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :spouse_work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :spouse_work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :spouse_work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="medical_patient_form_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "1" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "3" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="emergency_contact">
+    <div class="control-group">
+      <%= f.label :emergency_contact_first_name, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_contact_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :emergency_contact_first_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :emergency_contact_relationship, ' Relatinship ', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_contact_relationship %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :emergency_contact_phone_1, "Home Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_contact_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :emergency_contact_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :emergency_contact_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="medical_patient_form_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "2" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "4" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="insurance_primary">
+    <div class="control-group">
+      <%= f.label :primary_insurance_company_name, 'Primary Insurance Company Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_company_name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :employer_address_1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_address_1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :primary_insurance_address_1, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :primary_insurance_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
+        <br>
+        <%= f.select :primary_insurance_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                        'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.text_field :primary_insurance_address_zip, :placeholder => "Postal / Zip Code" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_phone_1, "Phone Number", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :primary_insurance_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :primary_insurance_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_id, 'Primary Insurance Id', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_id %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_group, 'Primary Insurance Group', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_group %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_policy_holder, 'Policy Holder', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :primary_insurance_policy_holder, "Self", :class => 'medical_patient_policy' %>Self
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :primary_insurance_policy_holder, "Other", :class => 'medical_patient_policy' %>Other
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_policy_holder_first_name, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_policy_holder_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :primary_insurance_policy_holder_last_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_relationship, 'Relationship', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_relationship %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_ssn_1, 'Social Security Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :primary_insurance_ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
+        -
+        <%= f.text_field :primary_insurance_ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :primary_insurance_policy_holder_employer, 'Employer', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :primary_insurance_policy_holder_employer %>
+      </div>
+    </div>
+    <div class="medical_patient_form_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "3" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "5" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="insurance_secondary">
+    <div class="control-group">
+      <%= f.label :secondary_insurance_company_name, 'Primary Insurance Company Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_company_name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_address_1, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_address_1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :secondary_insurance_address_2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :secondary_insurance_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
+        <br>
+        <%= f.select :secondary_insurance_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
+                                                          'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.text_field :secondary_insurance_address_zip, :placeholder => "Postal / Zip Code" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_phone_1, "Phone Number", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :secondary_insurance_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :secondary_insurance_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_id, 'Primary Insurance Id', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_id %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_group, 'Primary Insurance Group', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_group %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_policy_holder, 'Policy Holder', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :secondary_insurance_policy_holder, "Self", :class => 'medical_patient_policy' %>Self
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :secondary_insurance_policy_holder, "Other", :class => 'medical_patient_policy' %>Other
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_policy_holder_first_name, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_policy_holder_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :secondary_insurance_policy_holder_last_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_relationship, 'Relationship', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_relationship %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
+      <div class="controls ">
+        <%= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_ssn_1, 'Social Security Number', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :secondary_insurance_ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
+        -
+        <%= f.text_field :secondary_insurance_ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_insurance_policy_holder_employer, 'Employer', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :secondary_insurance_policy_holder_employer %>
+      </div>
+    </div>
+    <div class="medical_patient_form_footer_links">
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "4" do %>
+        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+      <% end %>
+      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "6" do %>
+        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane active" id="patient_consent">
+    <div><p>I hereby authorize Capital Medical Clinic to share my personal health information with named persons
+      below until further written notice from me:</p></div>
+    <div class="control-group">
+      <%= f.label :patient_consent_first_name_1, 'Name', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_consent_first_name_1, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :patient_consent_last_name_1, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :patient_consent_relation_ship_to_patient_1, ' Relatinship ', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_consent_relation_ship_to_patient_1 %>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  </div>
+<% end %>
+
+<script>
+
+  $(".medical_Patient_form_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+
+  $('.medical_patient_form_nav_link').live('click', function () {
+    // console.log($(this).attr('data_tab_index'));
+    var tab_index = parseInt($(this).attr('data_tab_index'));
+    $("#medical_patient_form_tab_links a:eq(" + tab_index + ")").tab('show');
+    // return false;
+  });
+
+</script>
