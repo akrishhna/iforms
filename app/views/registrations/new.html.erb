@@ -72,6 +72,8 @@
 
   <% if @appointment %>
   $('#user_email').val('<%= @appointment.email %>');
+  var params = $('#new_user').serializeArray();
+  $.post('/registration/validate_users_sign_up_page',params );
   <% end %>
 </script>
 
