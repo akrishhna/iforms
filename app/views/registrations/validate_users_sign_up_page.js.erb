@@ -34,7 +34,7 @@ if ($('#new_user input#user_email').val() == ""){
   $('.email_status.default').show();
 }
 else{
-<% if @mail_validate =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/ %>
+<% if @mail_validate =~ /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/ %>
   email_available = true
   $('.email_status.ok').show();
 <% else %>
