@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   helper :all
-  helper_method :current_user_name
+  helper_method :current_user_name, :set_mailer_settings
   helper_method :user_service_provider_list, :set_service_provider, :homepage_url
   #helper_method :patient_profile_exists
 
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
     elsif service_provider.id == 2 || service_provider.id == 3
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
-     else
+    else
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     end
   end
@@ -123,5 +123,46 @@ class ApplicationController < ActionController::Base
       format.html { render template: 'errors/error_500', layout: 'layouts/application', status: 500 }
       format.all { render nothing: true, status: 500 }
     end
+  end
+
+  def set_mailer_settings
+
+    service_provider_id = session[:user_service_provider]
+
+    return false if service_provider_id != 4
+
+    smpt_options = {
+      '1' => {
+        :address   => "aa",
+        :port      => "aaa",
+        :domain    => "aaaa",
+        :authentication => :plain,
+        :user_name => "aaaa",
+        :password  => "aaaa"
+      },
+      '4' => {
+        :address   => "smtp.gmail.com",
+        :port      => 587,
+        :domain    => "gmail.com",
+        :authentication => :plain,
+        :user_name => "dr.karen.naples.dds.pa.ifor.ms@gmail.com",
+        :password  => "CqT4mMal"
+      }
+    }
+
+    options = smpt_options[service_provider_id.to_s]
+
+    #raise options.to_yaml
+
+    ActionMailer::Base.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address => options[:address],
+      :port => options[:port],
+      :domain => options[:domain],
+      :authentication => options[:authentication],
+      :user_name => options[:user_name],
+      :password => options[:password]
+    }
+
   end
 end

@@ -63,6 +63,8 @@ class AppointmentsController < ApplicationController
               @appformjoin.save
             end
           end
+
+          set_mailer_settings()
           Notifier.appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
           format.html { redirect_to(doctors_path, :id => nil, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}") }
           format.xml { render :xml => @appointment, :status => :created, :location => @appointment }
@@ -126,6 +128,7 @@ class AppointmentsController < ApplicationController
         end
       end
       if @appointment.update_attributes(params[:appointment])
+        set_mailer_settings()
         Notifier.appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
         format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }
         format.xml { head :ok }
