@@ -56,7 +56,7 @@
       <%= f.text_field :emergency_contact_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
       <%#= f.text_field :emergency_contact_address_country, :placeholder => "country", :style => 'margin-bottom:10px;' %>
       <br>
-      <%= f.select :emergency_contact_address_state, options_for_select(StaticData.diamond_activity_state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
+      <%= f.select :emergency_contact_address_state, options_for_select(StaticData.state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
       <%= f.text_field :emergency_contact_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
