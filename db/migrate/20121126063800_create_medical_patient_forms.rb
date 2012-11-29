@@ -173,7 +173,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.date :medical_history_previous_illnesses_diagnosis_2
       t.string :medical_history_previous_illnesses_illness_3, :limit => 50
       t.date :medical_history_previous_illnesses_diagnosis_3
-      t.string :medical_history_previous_illness_illness_4, :limit => 50
+      t.string :medical_history_previous_illnesses_illness_4, :limit => 50
       t.date :medical_history_previous_illnesses_diagnosis_4
       t.string :medical_history_previous_illnesses_illness_5, :limit => 50
       t.date :medical_history_previous_illnesses_diagnosis_5
@@ -199,16 +199,19 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.integer :family_history_age_at_diagnosis_2, :limit => 25
       t.string :family_history_illnesses_illness_3, :limit => 50
       t.integer :family_history_age_at_diagnosis_3, :limit => 25
-      t.string :family_history_siblings_1, :limit => 25
-      t.integer :family_history_siblings_age_1, :limit => 25
-      t.string :family_history_siblings_2, :limit => 25
-      t.integer :family_history_siblings_age_2, :limit => 25
-      t.string :family_history_siblings_3, :limit => 25
-      t.integer :family_history_siblings_age_3, :limit => 25
       t.string :family_history_illnesses_illness_4, :limit => 50
       t.integer :family_history_age_at_diagnosis_4, :limit => 25
       t.string :family_history_illnesses_illness_5, :limit => 50
       t.integer :family_history_age_at_diagnosis_5, :limit => 25
+      t.string :family_history_siblings_1, :limit => 25
+      t.string :family_history_siblings_living_deceased_1, :limit => 25
+      t.integer :family_history_siblings_age_1, :limit => 25
+      t.string :family_history_siblings_2, :limit => 25
+      t.string :family_history_siblings_living_deceased_2, :limit => 25
+      t.integer :family_history_siblings_age_2, :limit => 25
+      t.string :family_history_siblings_3, :limit => 25
+      t.string :family_history_siblings_living_deceased_3, :limit => 25
+      t.integer :family_history_siblings_age_3, :limit => 25
 
      #Social History
       t.string :social_history_live, :limit => 15
@@ -222,8 +225,29 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.string :social_history_smoking_tobacco, :limit => 50
       t.integer :social_history_smoking_packs_per_day, :limit => 10
       t.string :social_history_smoking_no_of_years, :limit => 50
+      t.string :social_history_smoking_quit_years, :limit => 50
       t.integer :social_history_drink, :limit =>10
       t.string :social_history_drink_alcoholic_beverage, :limit =>25
+      t.string :social_history_have_used_recreational_drugs, :limit =>25
+      t.string :social_history_yes_i_have_used_recreational_drugs, :limit =>50
+      t.string :social_history_have_recently_traveled, :limit =>25
+      t.string :social_history_yes_i_recently_traveled, :limit =>50
+
+      #Review Of System
+      t.boolean :review_of_sym_general_fatigue
+      t.boolean :review_of_sym_general_fever
+      t.boolean :review_of_sym_general_night_sweats
+      t.boolean :review_of_sym_general_heat_or_cold
+      t.string :review_of_sym_i_have, :limit =>25
+      t.string :review_of_sym_i_have_many_pounds, :limit =>25
+      t.string :review_of_sym_i_have_time_periods, :limit =>25
+      t.boolean :review_of_sym_skin_rash
+      t.boolean :review_of_sym_skin_hair_loss
+      t.boolean :review_of_sym_skin_easy_bruising
+      t.boolean :review_of_sym_skin_toenail_inflection
+
+
+
 
 
       t.timestamps
