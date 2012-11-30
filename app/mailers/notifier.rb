@@ -9,9 +9,9 @@ class Notifier < ActionMailer::Base
     @login_url = new_user_session_url
     @registration_url = user_registration_url(:id => @appointment.id)
     if @user_service_provider == 1
-      from_name = 'James Waters'
+      from_name = 'James Waters iforms-noreply@ifor.ms'
     elsif @user_service_provider == 4
-      from_name = 'Karen Naples'
+      from_name = 'Karen Naples <iforms-noreply@ifor.ms>'
     else
       from_name =  "iforms-noreply@ifor.ms"
     end
