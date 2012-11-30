@@ -226,7 +226,7 @@ class IformsController < ApplicationController
     iform_status = params[:iform_status]
     iform_name = params[:iform_name].gsub(' ', '_') rescue nil
     if iform_status
-      send_file "#{PDFFILES_PATH}#{iform_name}.pdf",
+      send_file "#{PDFFILES_PATH}#{iform_name}_Read_Only.pdf",
                 :filename => "#{iform_name}.pdf",
                 :disposition => "inline",
                 :type => "application/pdf"

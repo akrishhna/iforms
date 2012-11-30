@@ -11,7 +11,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
     @girl_scouts_permission_form = girl_scouts_permission_form
     @girl_scout = @girl_scouts_permission_form.girls_scout
     #@girl_scouts_permission_form = girl_scouts_permission_form
-    form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
+    form_pdf_path = "#{CENTRAL_TEXAS_FORM_PATH}"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       "ServiceUnit" => @activity.troop_service_unit,
@@ -80,7 +80,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
     @girl_scouts_permission_form = girl_scouts_permission_form
     @girl_scout = @girl_scouts_permission_form.girls_scout
     #@girl_scouts_permission_form = girl_scouts_permission_form
-    form_pdf_path = "#{PDFFILES_PATH}Parent_Permission_Diamonds.pdf"
+    form_pdf_path = "#{DIAMONDS_FORM_PATH}"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       "TroopNumber" => @activity.troop_number,

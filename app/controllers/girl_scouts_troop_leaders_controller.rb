@@ -169,6 +169,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
           pf.status = "Pending"
           pf.girl_scout_attending = "?"
           pf.save
+          set_mailer_settings()
           Notifier.send_parent_email_notification(@activity, girl_scout).deliver
           @counter += 1
         end
@@ -198,9 +199,9 @@ class GirlScoutsTroopLeadersController < ApplicationController
   def activity_permission_form
     if params[:activity_id] == 'new'
       if session[:user_service_provider] == 2
-        form_path = "#{PDFFILES_PATH}Parent_Permission_iForms.pdf"
+        form_path = CENTRAL_TEXAS_READ_ONLY_FORM_PATH
       elsif session[:user_service_provider] == 3
-        form_path = "#{PDFFILES_PATH}Parent_Permission_Diamonds.pdf"
+        form_path = DIAMONDS_READ_ONLY_FORM_PATH
       else
       end
       send_file form_path,
@@ -271,6 +272,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @girl_scouts_activity_permission_forms.each do |pf|
       @girl_scout = current_user.girls_scouts.find_by_id_and_service_provider_id(pf.girls_scout_id, session[:user_service_provider])
       @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(pf.girl_scouts_activity_id, session[:user_service_provider])
+      set_mailer_settings()
       Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
       @counter += 1
     end

@@ -28,7 +28,7 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    and Smile Evaluation Forms.</p>
+    form.</p>
 <% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
   <p>
@@ -43,25 +43,25 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    and Smile Evaluation Forms.</p>
+    form.</p>
 <% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
 <% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %>  <%= @appointment.AM_PM %>
+    This message confirms <%= @preferred_name %> <%= @appointment.lastname %>'s appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %>  <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
 <% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
@@ -71,11 +71,11 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    and Smile Evaluation Forms.</p>
+    form.</p>
 <% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %> appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @preferred_name %> <%= @appointment.lastname %>'s appointment with Karen Naples D.D.S. P.A. at <%= @appointment.time_hrs %>:<%=  (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at 200 S. Bell Blvd., Ste E2, Cedar Park,
     Texas 78613.
   </p>
@@ -85,7 +85,7 @@
     <% else %>
       <%= link_to 'New Patient', @registration_url %>
     <% end %>
-    and Smile Evaluation Forms.</p>
+    form.</p>
 <% end %>
 <p>You may contact us at (512) 249-8488 Monday through Thursday 8 a.m. to 5 p.m.</p>
 

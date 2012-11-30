@@ -48,6 +48,12 @@ Iforms::Application.routes.draw do
         get 'index'
       end
     end
+    resources :medical do
+      collection do
+        get 'index'
+        get 'edit_medical_form'
+      end
+    end
   end
 
   resources :consumer do

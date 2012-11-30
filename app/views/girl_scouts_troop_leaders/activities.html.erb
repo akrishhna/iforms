@@ -364,7 +364,7 @@
           <%= f.text_field :troop_leader_emergency_contact_name_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
           <%#= f.text_field :troop_leader_emergency_contact_name_address_state, :placeholder => "Country", :style => 'margin-bottom:10px;' %>
           <br>
-          <%= f.select :troop_leader_emergency_contact_name_address_state, options_for_select(StaticData.diamond_activity_state, f.object.troop_leader_emergency_contact_name_address_state), :include_blank => true %> &nbsp;
+          <%= f.select :troop_leader_emergency_contact_name_address_state, options_for_select(StaticData.state, f.object.troop_leader_emergency_contact_name_address_state), :include_blank => true %> &nbsp;
           <%= f.text_field :troop_leader_emergency_contact_name_address_zip, :placeholder => "Postal / Zip Code" %>
         </div>
       </div>

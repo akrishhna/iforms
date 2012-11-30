@@ -16,13 +16,17 @@ class StaticData < ActiveRecord::Base
     ["Daisy", "Brownie", "Junior", "Cadette", "Senior"]
   end
 
-  def self.diamond_activity_state
+  def self.state
     ['AL','AK','AS','AZ','AR','CA','CO','CT','DE','DC','FM','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MH','MD',
      'MA','MI','MN','MS','MO''MT','NE','NV','NH','NJ','NM','NY','NC','ND','MP','OH','OK','OR','PW','PA','PR','RI','SC','SD','TN',
      'TX','UT','VT','VI','VA','WA','WV','WI','WY']
   end
 
-  def self.sign_up_service_type
+  def self.girl_scouts_sign_up_service_type
     [['Central Texas','2'],['Diamonds of AR, OK, and TX','3']]
+  end
+
+  def self.user_service_types
+    [['James Waters','1'],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Karen Naples','4']]
   end
 end

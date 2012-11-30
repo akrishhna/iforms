@@ -1,0 +1,13 @@
+<div class="index" xmlns="http://www.w3.org/1999/html">
+  <div class="well">
+    Appointment Date : <%= text_field_tag :date, "", :class => "appointments_date_selector",:style => 'margin:0' %> &nbsp;
+    <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+      <%= check_box_tag :all_appointments, 1, (true if !params[:appointment_date].present?), :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
+      All Appointments
+    <% end %>
+  </div>
+  <% javascript 'pagination' %>
+  <div id="appointmets">
+    <%= render 'medical_list' %>
+  </div>
+</div>
