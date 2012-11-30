@@ -245,10 +245,97 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.boolean :review_of_sym_skin_hair_loss
       t.boolean :review_of_sym_skin_easy_bruising
       t.boolean :review_of_sym_skin_toenail_inflection
+      t.boolean :review_of_sym_eye_redness
+      t.boolean :review_of_sym_eye_pain
+      t.boolean :review_of_sym_eye_discharge
+      t.boolean :review_of_sym_eye_dryness
+      t.boolean :review_of_sym_eye_visual_changes
+      t.boolean :review_of_sym_nose_bleed
+      t.boolean :review_of_sym_nose_nasal_discharge
+      t.boolean :review_of_sym_nose_sinus_pain
+      t.boolean :review_of_sym_nose_sinus_congestion
+      t.boolean :review_of_sym_mouth_oral_lesions
+      t.boolean :review_of_sym_mouth_white_patches
+      t.boolean :review_of_sym_mouth_bleeding_gums
+      t.boolean :review_of_sym_mouth_toothache
+      t.boolean :review_of_sym_throat_hoarseness
+      t.boolean :review_of_sym_throat_sore_throat
+      t.boolean :review_of_sym_throat_pain_with_swallowing
+      t.boolean :review_of_sym_throat_difficultly_swallowing
+      t.boolean :review_of_sym_respiratory_cough
+      t.boolean :review_of_sym_respiratory_coughing_blood
+      t.boolean :review_of_sym_respiratory_shortness_of_breath_at_rest
+      t.boolean :review_of_sym_respiratory_shortness_of_breath_on_exertion
+      t.boolean :review_of_sym_respiratory_wheezing
+      t.boolean :review_of_sym_cardiovascular_chest_discomfort
+      t.boolean :review_of_sym_cardiovascular_palpitations
+      t.boolean :review_of_sym_cardiovascular_ankle_swelling
+      t.boolean :review_of_sym_cardiovascular_fast_heart_beat
+      t.boolean :review_of_sym_cardiovascular_difficulty_breathing
+      t.boolean :review_of_sym_cardiovascular_awakening_short_of_breath
+      t.boolean :review_of_sym_urinary_pain_with_urination
+      t.boolean :review_of_sym_urinary_urinating_frequently
+      t.boolean :review_of_sym_urinary_incontinence
+      t.boolean :review_of_sym_urinary_urinating_before_bathroom
+      t.boolean :review_of_sym_urinary_urination_at_night
+      t.boolean :review_of_sym_urinary_difficulty_starting_a_urine_stream
+      t.boolean :review_of_sym_urinary_blood_in_urine
+      t.boolean :review_of_sym_gastrointestinal_nausea
+      t.boolean :review_of_sym_gastrointestinal_diarrhea
+      t.boolean :review_of_sym_gastrointestinal_blood_in_the_stool
+      t.boolean :review_of_sym_gastrointestinal_black_tarry_stool
+      t.boolean :review_of_sym_gastrointestinal_heartburn
+      t.boolean :review_of_sym_gastrointestinal_constipation
+      t.boolean :review_of_sym_sexual_decreased_libido
+      t.boolean :review_of_sym_sexual_difficulty_achieving_and_maintaining
+      t.boolean :review_of_sym_musculoskeletal_joint_pain_or_stiffness
+      t.boolean :review_of_sym_musculoskeletal_joint_swelling_or_redness
+      t.boolean :review_of_sym_musculoskeletal_back_pain
+      t.boolean :review_of_sym_musculoskeletal_muscle_pain
+      t.string :review_of_sym_joints_that_are_painful_or_stiff, :limit => 50
+      t.string :review_of_sym_joints_that_are_swelling_or_have_redness, :limit => 50
+      t.boolean :review_of_sym_neurological_difficulty_with_memory
+      t.boolean :review_of_sym_neurological_fainting
+      t.boolean :review_of_sym_neurological_weakness
+      t.boolean :review_of_sym_neurological_muscle_painSeizures
+      t.boolean :review_of_sym_neurological_severe_or_frequent_headaches
+      t.boolean :review_of_sym_neurological_difficulty_with_balance
+      t.boolean :review_of_sym_neurological_difficulty_walking
+      t.boolean :review_of_sym_neurological_lightheadedness
+      t.boolean :review_of_sym_neurological_vertigo
+      t.boolean :review_of_sym_psychological_depression
+      t.boolean :review_of_sym_psychological_lack_of_interest
+      t.boolean :review_of_sym_psychological_decreased_sense_of_self_worth
+      t.boolean :review_of_sym_psychological_difficulty_focusing
+      t.boolean :review_of_sym_psychological_desire_to_end_your_life
+      t.boolean :review_of_sym_psychological_disabling_anxiety
+      t.boolean :review_of_sym_psychological_panic_attacks
+      t.boolean :review_of_sym_sleep_difficulty_getting_to_sleep
+      t.boolean :review_of_sym_sleep_difficulty_difficulty_staying_asleep
+      t.boolean :review_of_sym_sleep_difficulty_snoring
+      t.boolean :review_of_sym_sleep_difficulty_cessation_of_breathing
 
-
-
-
+      #Health Maintenance
+      t.date :health_maintenance_bone_density_test
+      t.date :health_maintenance_skin_cancer_screening
+      t.date :health_maintenance_test_date
+      t.string :health_maintenance_total_cholesterol, :limit => 50
+      t.string :health_maintenance_LDL, :limit => 50
+      t.string :health_maintenance_HDL, :limit => 50
+      t.string :health_maintenance_triglycerides, :limit => 50
+      t.date :health_maintenance_most_recent_tetanus_vaccine_booster
+      t.date :health_maintenance_shingles_vaccine
+      t.date :health_maintenance_pneumovax
+      t.date :health_maintenance_flu_vaccine
+      t.date :health_maintenance_colonoscopy
+      t.string :health_maintenance_colonoscopy_test_results, :limit => 25
+      t.string :health_maintenance_description_of_abnormal_test_results, :limit => 50
+      t.date :health_maintenance_most_recent_mammogram
+      t.date :health_maintenance_most_recent_pap_smear
+      t.date :health_maintenance_abnormal_pap_smear
+      t.date :health_maintenance_hysterectomy
+      t.string :health_maintenance_why_was_hysterectomy_performed, :limit => 50
+      t.date :health_maintenance_digital_rectal_exam_and_psa_checked
 
       t.timestamps
     end
