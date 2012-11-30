@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   helper :all
-  helper_method :current_user_name, :set_mailer_settings
+  helper_method :current_user_name #, :set_mailer_settings
   helper_method :user_service_provider_list, :set_service_provider, :homepage_url
   #helper_method :patient_profile_exists
 
