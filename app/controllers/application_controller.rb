@@ -3,9 +3,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   helper :all
-  helper_method :current_user_name #, :set_mailer_settings
+  helper_method :current_user_name
   helper_method :user_service_provider_list, :set_service_provider, :homepage_url
-  #helper_method :patient_profile_exists
 
   #http://ramblinglabs.com/blog/2012/01/rails-3-1-adding-custom-404-and-500-error-pages
   unless Rails.application.config.consider_all_requests_local
@@ -151,8 +150,6 @@ class ApplicationController < ActionController::Base
     }
 
     options = smpt_options[service_provider_id.to_s]
-
-    #raise options.to_yaml
 
     ActionMailer::Base.smtp_settings = {
       :enable_starttls_auto => true,
