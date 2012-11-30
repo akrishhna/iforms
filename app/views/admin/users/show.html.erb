@@ -48,7 +48,7 @@
     <div class="control-group">
       <%= label_tag :service, "Service", :class => 'control-label' %>
       <div class="controls">
-        <%= select_tag :service,options_for_select(StaticData.sign_up_service_type),{:include_blank => true} %>
+        <%= select_tag :service,options_for_select(StaticData.user_service_types),{:include_blank => true} %>
       </div>
     </div>
     <div class="control-group">
