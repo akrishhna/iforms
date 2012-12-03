@@ -1,5 +1,7 @@
 Iforms::Application.routes.draw do
 
+  resources :medical_appointments
+
   devise_scope :user do
     match '/registration/validate_users_sign_up_page' => 'registrations#validate_users_sign_up_page'
   end
