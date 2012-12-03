@@ -6,6 +6,7 @@
 //= require 'jquery.maskedinput'
 //= require formToWizard
 //= require jquery.autotab-1.1b
+//= require jquery-ui-timepicker-addon
 //= require_self
 
 $(document).ready(function(){
