@@ -11,7 +11,7 @@ class DeviserolesController < ApplicationController
         redirect_to :controller => "consumer", :action => "index"
       end
 
-    elsif @service_provider.id == 1 || @service_provider.id == 4
+    elsif @service_provider.id == 1 || @service_provider.id == 4 || @service_provider.id == 5
       @doctor = Doctor.find_by_user_id(current_user.id)
       if @doctor.nil?
         redirect_to "/doctors/new?sp_id=#{@service_provider.id}"

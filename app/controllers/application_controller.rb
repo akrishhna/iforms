@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     service_provider = current_user.service_providers.first
     if service_provider.nil?
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
-    elsif service_provider.id == 1 || service_provider.id == 4
+    elsif service_provider.id == 1 || service_provider.id == 4 || service_provider.id == 5
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
     elsif service_provider.id == 2 || service_provider.id == 3
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
@@ -94,8 +94,10 @@ class ApplicationController < ActionController::Base
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=2'
     elsif session[:user_service_provider] == 3
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=3'
-    elsif session[:user_service_provider] == 1
+    elsif session[:user_service_provider] == 4
       @homepage_url = '/doctor/appointments?sp_id=4'
+    elsif session[:user_service_provider] == 5
+      @homepage_url = '/medical_appointments?sp_id=5'
     elsif session[:user_service_provider] == 0
       @homepage_url = '/consumer'
     else

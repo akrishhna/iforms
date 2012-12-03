@@ -63,7 +63,7 @@
     <% end %>
     <br><br>
     <%= link_to "Back", consumer_index_path %>
-  <% elsif @service_provider.id == 1 || @service_provider.id == 4 %>
+  <% elsif @service_provider.id == 1 || @service_provider.id == 4 || @service_provider.id == 5%>
     <% @doctor = Doctor.find_by_user_id(current_user.id) %>
     <% if @doctor %>
       <%= link_to 'Update Profile Information', edit_doctor_path(@doctor) %>
