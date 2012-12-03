@@ -2,7 +2,7 @@ class MedicalAppointmentsController < ApplicationController
 
   def index
     @doctor = Doctor.find_by_user_id(current_user.id)
-    @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and DATE_FORMAT(appointment_date_time, '%Y-%m-%d') = ?", @doctor.user_id, session[:user_service_provider], params['appointment_date'] ? params['appointment_date'] : Date.today.to_s).order("firstname ASC") if @doctor
+    @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and DATE_FORMAT(appointment_date_time, '%Y-%m-%d') = ?", @doctor.user_id, session[:user_service_provider], params['appointment_date'] ? params['appointment_date'] : Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
   end
 
   def new

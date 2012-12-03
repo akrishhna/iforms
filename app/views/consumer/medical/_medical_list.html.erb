@@ -1,4 +1,4 @@
-<% if @appointments.blank? %>
+<% if !@appointments.blank? %>
   <table class="table table-bordered table-header-bg">
     <tr>
       <th>Name</th>
@@ -7,30 +7,92 @@
       <th>Appointment</th>
       <th>Received</th>
       <th>Status</th>
-      <th>Action</th>
+      <th colspan="2">Action</th>
     </tr>
-    <tr>
-      <td>
-        <%= link_to "Edit", edit_medical_form_consumer_medical_index_path %>
-      </td>
-    </tr>
+    <% @appointments.each do |appointment| %>
+      <% if appointment.timesent %>
+        <% appointment.timesent = appointment.timesent.to_datetime %>
+        <% timesent_date = appointment.timesent.strftime("%Y-%m-%d") %>
+        <% timesent_hrs = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+        <% timesent_min = appointment.timesent.strftime("%M") %>
+        <% timesent_hrs_int = timesent_hrs.to_i %>
+        <% var = 12 %>
+        <% if var<=timesent_hrs_int %>
+          <% timesent_hrs = (timesent_hrs_int - var).to_s %>
+          <% am_pm = "PM" %>
+          <% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+        <% else %>
+          <% am_pm = "AM" %>
+          <% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+        <% end %>
+      <% end %>
+      <tr>
+        <td><%= appointment.firstname.to_s + " " + appointment.lastname.to_s %></td>
+        <td><%= appointment.doctorname %></td>
+        <% if appointment.formname.blank? %>
+          <td></td>
+          <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= @timesent %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        <% else %>
+          <td><%= appointment.formname %></td>
+          <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= @timesent %></td>
+          <% if appointment.status == "Updated" %>
+            <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="User submitted an updated form on this <%= @formsubmittedtime %>">
+            Updated <%= appointment.timereceived %>
+                </span>
+            </td>
+
+          <% elsif appointment.status == "Submitted" %>
+            <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= @formsubmittedtime %>">
+           Submitted <%= appointment.timereceived %>
+                </span>
+            </td>
+
+          <% elsif appointment.status == "In Progress" %>
+            <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
+             In Progress
+                </span>
+            </td>
+
+          <% else %>
+            <td>
+                 <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
+              Pending
+                </span>
+            </td>
+            <td>
+              <%= link_to "Edit", edit_medical_form_consumer_medical_index_path(:id => appointment.id) %> |
+              <%= link_to "Update", '#' %>
+            </td>
+            <td>
+              <%= link_to "View PDF", '#', :target => '_blank' %>
+            </td>
+
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
   </table>
   <br/>
-  <%#= will_paginate @appointments, :renderer => BootstrapPagination::Rails %>
+  <%= will_paginate @appointments, :renderer => BootstrapPagination::Rails %>
 <% else %>
   <p>No Appointments On This Day </p>
 <% end %>
-
-
-
 <script>
-  $(".appointments_date_selector").datepicker({
+
+  $(".date_selector").datepicker({
     onSelect:function (dateText, inst) {
-      $('#dental').load('/consumer/dental?appointment_date=' + dateText);
+      $('#medical').load('/consumer/medical?appointment_date=' + dateText);
     }
   }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');
 
-  $("span").tooltip({
-  });
+  $("span").tooltip({ });
 
 </script>
