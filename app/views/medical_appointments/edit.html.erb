@@ -1,0 +1,4 @@
+<%= render 'form' %>
+<%= javascript_tag do %>
+  var appointment = <%= raw @appointment.to_json %>;
+<% end %>

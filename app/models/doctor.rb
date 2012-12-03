@@ -3,6 +3,7 @@ class Doctor < ActiveRecord::Base
   has_many :forms
   has_many :patients
   has_many :appointments
+  has_many :medical_appointments
   
   validates_presence_of :firstname, :lastname
  # validates_format_of :firstname, :lastname, :with => /^[A-Za-z .-]+$/ , :unless => "firstname.blank? or lastname.blank?"

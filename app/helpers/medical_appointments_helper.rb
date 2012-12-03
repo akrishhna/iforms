@@ -1,0 +1,2 @@
+module MedicalAppointmentsHelper
+end

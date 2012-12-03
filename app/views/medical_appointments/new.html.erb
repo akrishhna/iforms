@@ -1,0 +1,9 @@
+
+<div class = "form_container">
+<h3>Make A New Appointment</h3></br>
+<%= render "form" %>
+</div>
+
+<%= javascript_tag do %>
+  var old_appointment = <%= raw @old_appointment.to_json %>;
+<% end %>

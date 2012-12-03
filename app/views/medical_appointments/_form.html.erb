@@ -1,0 +1,109 @@
+<%= form_for @appointment, :html => {:class => 'form-horizontal new_appointment_form', :multipart => true} do |f| %>
+  <% if @appointment.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @appointment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <strong> 1. Create a New Appointment For:<br><br></strong>
+
+  <div class="control-group">
+    <%= f.label :firstname, "First Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :firstname %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :preferred_name, "(Optional) - Preferred First Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :preferred_name %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :lastname, "Last Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lastname %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, "Email Address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :responsible_party, "(Optional) - Responsible Party", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :responsible_party %>
+    </div>
+  </div>
+
+  <strong>2. With:</strong>
+  <div class="control-group">
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= radio_button_tag '', '', :checked => 'checked' %> Tony R. Aventa, M.D.
+      <% end %>
+    </div>
+  </div>
+  <strong>3. At Location:</strong>
+  <div class="control-group">
+    <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :location, '38th Street', :checked => 'checked' %>38th Street
+      <% end %>
+    </div>
+  </div>
+
+  <strong>4. On This Date/Time:</strong>
+
+  <div class="control-group">
+    <%= f.label :appointment_date_time, "Date", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :appointment_date_time, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.appointment_date_time %>
+    </div>
+  </div>
+
+   <strong>5. With These Forms:</strong>
+
+  <div class="control-group">
+    <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= radio_button_tag "radio_buttons", 'New_Medical_Patient' %>New Patient Registration and History
+      <% end %>
+      <br>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= radio_button_tag "radio_buttons", 'None', true %>None
+      <% end %>
+    </div>
+  </div>
+
+  <br>
+  6. And Lastly:
+  <div class="actions">
+    <% if f.object.new_record? %>
+      <%= f.submit 'Create Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+    <% else %>
+      <%= f.submit 'Update Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <br>
+
+<% end %>
+
+<script type="text/javascript">
+ // $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+  $('.appointments_date_selector').datetimepicker({
+    controlType: 'select',
+    timeFormat: 'hh:mm tt'
+  });
+
+</script>
+
+

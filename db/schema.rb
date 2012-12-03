@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126063800) do
+ActiveRecord::Schema.define(:version => 20121203045620) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -815,6 +815,27 @@ ActiveRecord::Schema.define(:version => 20121126063800) do
     t.integer  "billing_details_ssn_2"
     t.integer  "billing_details_ssn_3"
     t.date     "billing_birth_date"
+  end
+
+  create_table "medical_appointments", :force => true do |t|
+    t.integer  "doctor_id"
+    t.integer  "service_provider_id"
+    t.integer  "doctor_user_id"
+    t.integer  "patient_user_id"
+    t.string   "firstname"
+    t.string   "preferred_name"
+    t.string   "email"
+    t.string   "lastname"
+    t.string   "responsible_party"
+    t.string   "doctorname"
+    t.string   "location"
+    t.datetime "appointment_date_time"
+    t.string   "formname"
+    t.string   "timesent"
+    t.string   "timereceived"
+    t.string   "status"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "medical_patient_forms", :force => true do |t|
