@@ -224,25 +224,25 @@
       <div class="control-group">
         <%= f.label :leader_day_phone_1, "Day Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_day_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_day_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_day_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_day_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_day_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_day_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :leader_evening_phone_1, "Evening Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_evening_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_evening_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_evening_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_evening_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :leader_cell_phone_1, "Cell Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_cell_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_cell_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_cell_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_cell_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_cell_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_cell_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
         </div>
       </div>
     <% elsif session[:user_service_provider] == 3 %>
@@ -256,17 +256,17 @@
       <div class="control-group">
         <%= f.label :leader_advisor_1_phone_1, "Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_advisor_1_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_1_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_1_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_advisor_1_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_1_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_1_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :leader_advisor_1_cell_1, "Cell", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_advisor_1_cell_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_1_cell_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_1_cell_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_advisor_1_cell_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_1_cell_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_1_cell_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
         </div>
       </div>
       <div class="control-group">
@@ -279,17 +279,17 @@
       <div class="control-group">
         <%= f.label :leader_advisor_2_phone_1, "Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_advisor_2_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_2_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_2_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_advisor_2_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_2_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_2_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :leader_advisor_2_cell_1, "Cell", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :leader_advisor_2_cell_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_2_cell_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :leader_advisor_2_cell_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :leader_advisor_2_cell_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_2_cell_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
+          <%= f.text_field :leader_advisor_2_cell_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
         </div>
       </div>
     <% end %>
@@ -314,17 +314,17 @@
       <div class="control-group">
         <%= f.label :emergency_day_phone_1, "Day Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :emergency_day_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :emergency_day_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :emergency_day_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :emergency_day_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
+          <%= f.text_field :emergency_day_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
+          <%= f.text_field :emergency_day_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :emergency_evening_phone_1, "Evening Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :emergency_evening_phone_1, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :emergency_evening_phone_2, :class => "activity_phone", :placeholder => "###" %> -
-          <%= f.text_field :emergency_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :emergency_evening_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
+          <%= f.text_field :emergency_evening_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
+          <%= f.text_field :emergency_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
         </div>
       </div>
     <% elsif session[:user_service_provider] == 3 %>
@@ -338,21 +338,21 @@
       <div class="control-group">
         <%= f.label :troop_leader_emergency_contact_phone_number_1, "Phone", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :troop_leader_emergency_contact_phone_number_1, :class => "activity_phone", :placeholder => "###" %>
+          <%= f.text_field :troop_leader_emergency_contact_phone_number_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
           -
-          <%= f.text_field :troop_leader_emergency_contact_phone_number_2, :class => "activity_phone", :placeholder => "###" %>
+          <%= f.text_field :troop_leader_emergency_contact_phone_number_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
           -
-          <%= f.text_field :troop_leader_emergency_contact_phone_number_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :troop_leader_emergency_contact_phone_number_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :troop_leader_emergency_contact_cell_number_1, "Cell", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :troop_leader_emergency_contact_cell_number_1, :class => "activity_phone", :placeholder => "###" %>
+          <%= f.text_field :troop_leader_emergency_contact_cell_number_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
           -
-          <%= f.text_field :troop_leader_emergency_contact_cell_number_2, :class => "activity_phone", :placeholder => "###" %>
+          <%= f.text_field :troop_leader_emergency_contact_cell_number_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
           -
-          <%= f.text_field :troop_leader_emergency_contact_cell_number_3, :class => "activity_phone_last", :placeholder => " ####" %>
+          <%= f.text_field :troop_leader_emergency_contact_cell_number_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
         </div>
       </div>
       <div class="control-group">
