@@ -2,6 +2,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
   def change
     create_table :medical_patient_forms do |t|
 
+      t.integer :medical_appointment_id
       # Patient
       t.string :first_name, :limit => 50
       t.string :last_name, :limit => 50

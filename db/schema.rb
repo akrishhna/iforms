@@ -839,6 +839,7 @@ ActiveRecord::Schema.define(:version => 20121203045620) do
   end
 
   create_table "medical_patient_forms", :force => true do |t|
+    t.integer  "medical_appointment_id"
     t.string   "first_name",                                                :limit => 50
     t.string   "last_name",                                                 :limit => 50
     t.string   "middle_name",                                               :limit => 50
@@ -1138,7 +1139,7 @@ ActiveRecord::Schema.define(:version => 20121203045620) do
     t.date     "health_maintenance_pneumovax"
     t.date     "health_maintenance_flu_vaccine"
     t.date     "health_maintenance_colonoscopy"
-    t.string   "health_maintenance_colonoscopy_test_results",               :limit => 50
+    t.string   "health_maintenance_colonoscopy_test_results",               :limit => 25
     t.string   "health_maintenance_description_of_abnormal_test_results",   :limit => 50
     t.date     "health_maintenance_most_recent_mammogram"
     t.date     "health_maintenance_most_recent_pap_smear"
