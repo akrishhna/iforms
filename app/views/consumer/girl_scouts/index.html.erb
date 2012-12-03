@@ -7,7 +7,7 @@
     <th>Due Date</th>
     <th>Attending</th>
     <th>Status</th>
-    <th>Action</th>
+    <th colspan="2">Action</th>
   </tr>
   <% @results.each_with_index do |result, i| %>
     <tr style="text-align: center;">
@@ -44,8 +44,14 @@
           <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun"><%= result[:status] %></span>
         <% end %>
       </td>
-      <td><%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
-        | <%= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %></td>
+      <td>
+        <%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %> |
+        <%= link_to "Update", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
+        <%#= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
+      </td>
+      <td>
+        <%= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
+      </td>
     </tr>
   <% end %>
 </table>
