@@ -1,0 +1,7 @@
+<p style="text-align: center;font-size:18px ">
+  Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
+</p>
+<div style="margin: 0 auto;width:80px;">
+  <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
+</div>
+<%= render 'medical_patient_form' %>
