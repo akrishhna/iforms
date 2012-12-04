@@ -1,5 +1,20 @@
 $(function () {
 
+  $('form.edit_medical_patient_form input, form.edit_medical_patient_form select').live('change', function () {
+    var id = $('#medical_patient_form_id').val();
+    if (id == '' || id == undefined) {
+      return false;
+    }
+    $('input[name=_method]').val('post');
+    var field = $(this).attr('name');
+    var field_val = $(this).val();
+    var params = {'id':id};
+    params[field] = field_val;
+    $.post('/consumer/medical/medical_patient_form_field_update', params);
+    $('input[name=_method]').val('put');
+  });
+
+
   $(".medical_Patient_form_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
 
   $('.medical_patient_form_nav_link').live('click', function () {
@@ -56,7 +71,7 @@ $(function () {
   $('.medical_patient_form_recreational_drug').live('change', function () {
     if ($('.medical_patient_form_recreational_drug:checked').val() == "Yes") {
       $('#medical_patient_form_social_history_yes_i_have_used_recreational_drugs').attr('readonly', false);
-    }else{
+    } else {
       $('#medical_patient_form_social_history_yes_i_have_used_recreational_drugs').val('');
       $('#medical_patient_form_social_history_yes_i_have_used_recreational_drugs').attr('readonly', true);
     }
@@ -65,7 +80,7 @@ $(function () {
   $('.medical_patient_form_recently_traveled').live('change', function () {
     if ($('.medical_patient_form_recently_traveled:checked').val() == "Yes") {
       $('#medical_patient_form_social_history_yes_i_recently_traveled').attr('readonly', false);
-    }else{
+    } else {
       $('#medical_patient_form_social_history_yes_i_recently_traveled').val('');
       $('#medical_patient_form_social_history_yes_i_recently_traveled').attr('readonly', true);
     }
@@ -74,25 +89,25 @@ $(function () {
   $('.medical_patient_form_gender').live('change', function () {
     if ($('.medical_patient_form_gender:checked').val() == "Male") {
       $('#medical_patient_form_review_of_sym_sexual_difficulty_achieving_and_maintaining').attr('readonly', false);
-    }else{
+    } else {
       $('#medical_patient_form_review_of_sym_sexual_difficulty_achieving_and_maintaining').attr('checked', false);
       $('#medical_patient_form_review_of_sym_sexual_difficulty_achieving_and_maintaining').attr('readonly', true);
     }
   });
 
-  $('#medical_patient_form_review_of_sym_musculoskeletal_joint_pain_or_stiffness').live('click',function(){
+  $('#medical_patient_form_review_of_sym_musculoskeletal_joint_pain_or_stiffness').live('click', function () {
     if ($(this).is(':checked')) {
       $('#medical_patient_form_review_of_sym_joints_that_are_painful_or_stiff').attr('readonly', false);
-    }else{
+    } else {
       $('#medical_patient_form_review_of_sym_joints_that_are_painful_or_stiff').val('');
       $('#medical_patient_form_review_of_sym_joints_that_are_painful_or_stiff').attr('readonly', true);
     }
   });
 
-  $('#medical_patient_form_review_of_sym_musculoskeletal_joint_swelling_or_redness').live('click',function(){
+  $('#medical_patient_form_review_of_sym_musculoskeletal_joint_swelling_or_redness').live('click', function () {
     if ($(this).is(':checked')) {
       $('#medical_patient_form_review_of_sym_joints_that_are_swelling_or_have_redness').attr('readonly', false);
-    }else{
+    } else {
       $('#medical_patient_form_review_of_sym_joints_that_are_swelling_or_have_redness').val('');
       $('#medical_patient_form_review_of_sym_joints_that_are_swelling_or_have_redness').attr('readonly', true);
     }
@@ -101,17 +116,17 @@ $(function () {
   $('.medical_patient_form_colonoscopy_test').live('change', function () {
     if ($('.medical_patient_form_colonoscopy_test:checked').val() == "Abnormal") {
       $('#medical_patient_form_health_maintenance_description_of_abnormal_test_results').attr('readonly', false);
-    }else{
+    } else {
       $('#medical_patient_form_health_maintenance_description_of_abnormal_test_results').val('');
       $('#medical_patient_form_health_maintenance_description_of_abnormal_test_results').attr('readonly', true);
     }
   });
 
   $('#medical_patient_form_health_maintenance_hysterectomy').live('change', function () {
-if ($('#medical_patient_form_health_maintenance_hysterectomy').val() == "") {
+    if ($('#medical_patient_form_health_maintenance_hysterectomy').val() == "") {
       $('#medical_patient_form_health_maintenance_why_was_hysterectomy_performed').val('');
       $('#medical_patient_form_health_maintenance_why_was_hysterectomy_performed').attr('readonly', true);
-    }else{
+    } else {
       $('#medical_patient_form_health_maintenance_why_was_hysterectomy_performed').attr('readonly', false);
     }
   });
@@ -119,12 +134,12 @@ if ($('#medical_patient_form_health_maintenance_hysterectomy').val() == "") {
 
   // pre populating fields
 
-  $('#insurance_primary').live('click', function () {
+  $('#insurance_primary_tab').live('click', function () {
     primary_insurance_details_info();
     update_all_fields();
   });
 
-  $('#insurance_secondary').live('click', function () {
+  $('#insurance_secondary_tab').live('click', function () {
     secondary_insurance_details_info();
     update_all_fields();
   });
@@ -194,7 +209,11 @@ if ($('#medical_patient_form_health_maintenance_hysterectomy').val() == "") {
   }
 
   function update_all_fields() {
-
+    $('input[name=_method]').val('post');
+    var params = $('.edit_medical_patient_form').serializeArray();
+    $.post('/consumer/medical/medical_patient_form_all_fields_update', params, function () {
+    });
+    $('input[name=_method]').val('put');
   }
 
 
