@@ -47,11 +47,14 @@ $(document).ready(function(){
     else if($(this).val() == 3){
       window.location = '/girl_scouts_troop_leaders?sp_id=3'
     }
-    else if($(this).val() == 0){
-      window.location = '/consumer'
-    }
     else if($(this).val() == 4){
       window.location = '/doctor/appointments?sp_id=4'
+    }
+    else if($(this).val() == 5){
+      window.location = '/medical_appointments?sp_id=5'
+    }
+    else if($(this).val() == 0){
+      window.location = '/consumer'
     }
     else{
       window.location = '/'
