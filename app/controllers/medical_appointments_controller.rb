@@ -22,14 +22,12 @@ class MedicalAppointmentsController < ApplicationController
     if @appointment.save
       @user = User.find_by_email(@appointment.email)
       if @user
-        @patient = Patient.find_by_user_id(@user.id)
-      end
-      if @patient
-        @appointment.patient_user_id = @patient.user_id
+        @appointment.patient_user_id = @user.id
       end
       @doctor_details = @appointment.doctor
       @appointment.doctorname = @doctor_details.doctorname
       @appointment.timesent = Time.now
+      @appointment.medical_patient_forms.build({:service_provider_id  => @appointment.service_provider_id, :doctor_user_id => @appointment.doctor_user_id, :patient_user_id =>     @appointment.patient_user_id})
       @appointment.save
       #Notifier.appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
       redirect_to :medical_appointments
