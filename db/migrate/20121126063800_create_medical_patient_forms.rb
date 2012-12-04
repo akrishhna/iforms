@@ -2,7 +2,10 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
   def change
     create_table :medical_patient_forms do |t|
 
+      t.integer :service_provider_id
       t.integer :medical_appointment_id
+      t.integer :doctor_user_id
+      t.integer :patient_user_id
       # Patient
       t.string :first_name, :limit => 50
       t.string :last_name, :limit => 50
@@ -28,7 +31,8 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.integer :ssn_1, :limit => 5
       t.integer :ssn_2, :limit => 5
       t.integer :ssn_3, :limit => 5
-
+      t.string :referred_to_our_office_by,:limit => 25
+      t.string :referral_name,:limit => 25
       #Employer
       t.string :employer, :limit => 50
       t.string :employer_occupation, :limit => 50

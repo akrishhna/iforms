@@ -839,7 +839,10 @@ ActiveRecord::Schema.define(:version => 20121203045620) do
   end
 
   create_table "medical_patient_forms", :force => true do |t|
+    t.integer  "service_provider_id"
     t.integer  "medical_appointment_id"
+    t.integer  "doctor_user_id"
+    t.integer  "patient_user_id"
     t.string   "first_name",                                                :limit => 50
     t.string   "last_name",                                                 :limit => 50
     t.string   "middle_name",                                               :limit => 50
@@ -864,6 +867,8 @@ ActiveRecord::Schema.define(:version => 20121203045620) do
     t.integer  "ssn_1",                                                     :limit => 8
     t.integer  "ssn_2",                                                     :limit => 8
     t.integer  "ssn_3",                                                     :limit => 8
+    t.string   "referred_to_our_office_by",                                 :limit => 25
+    t.string   "referral_name",                                             :limit => 25
     t.string   "employer",                                                  :limit => 50
     t.string   "employer_occupation",                                       :limit => 50
     t.string   "employer_address_1",                                        :limit => 50
