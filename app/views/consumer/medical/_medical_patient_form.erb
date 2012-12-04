@@ -1,7 +1,6 @@
-<%# submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
-<% submit_tag_text = "Submit" %>
+<% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
-<%= form_for @medical, :url => "/edit_medical_form", :html => {:class => 'form-horizontal edit_medical_patient_form', :multipart => true} do |f| %>
+<%= form_for @medical,:url => consumer_medical_path, :html => {:method => :put,:class => 'form-horizontal edit_medical_patient_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
 
   <div class="tabbable tabs-left iforms-tabs-left">
@@ -19,10 +18,10 @@
       <%= link_to "Emergency Contact", '#emergency_contact', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Insurance Primary", '#insurance_primary', "data-toggle" => "tab" %>
+      <%= link_to "Insurance Primary", '#insurance_primary', "data-toggle" => "tab",:id => 'insurance_primary_tab' %>
     </li>
     <li>
-      <%= link_to "Insurance Secondary", '#insurance_secondary', "data-toggle" => "tab" %>
+      <%= link_to "Insurance Secondary", '#insurance_secondary', "data-toggle" => "tab",:id => 'insurance_secondary_tab' %>
     </li>
     <li>
       <%= link_to "Patient Consent", '#patient_consent', "data-toggle" => "tab" %>
@@ -112,7 +111,8 @@
     <div class="control-group">
       <%= f.label :birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
+        <%= f.date_select :birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
       </div>
     </div>
     <div class="control-group">
@@ -146,6 +146,32 @@
         <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
         -
         <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :referred_to_our_office_by, ' Referred to Our Office By ', :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :referred_to_our_office_by, "Family" %>Family
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :referred_to_our_office_by, "Friend" %>Friend
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :referred_to_our_office_by, "Physician" %>Physician
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :referred_to_our_office_by, "Advertisement" %>Advertisement
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :referred_to_our_office_by, "Website" %>Website
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :referral_name, "Referral Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :referral_name %>
       </div>
     </div>
     <div class="medical_patient_form_footer_links">
@@ -269,7 +295,7 @@
       <%= f.label :employer_address_1, "Address", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :primary_insurance_address_1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
-        <%= f.text_field :primary_insurance_address_1, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
+        <%= f.text_field :primary_insurance_address_2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
         <br>
         <%= f.text_field :primary_insurance_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
         <br>
@@ -1531,7 +1557,7 @@
       <% end %>
     </div>
     <div class="actions">
-      <%= f.submit submit_tag_text, :class => 'btn btn-primary span4 btn-large', :style => 'font-size:28px'   %>
+      <%= f.submit submit_tag_text, :class => 'btn btn-primary btn-large', :style => 'font-size:28px'   %>
     </div>
   </div>
   </div>

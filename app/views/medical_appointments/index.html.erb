@@ -49,7 +49,7 @@
             <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
             <td><%= @timesent %></td>
             <% if appointment.status == "Submitted" || appointment.status == "Updated" %>
-              <td><%= appointment.timereceived %></td>
+              <td><%= appointment.timereceived.to_date.strftime("%m-%d-%Y %I:%M %p") %></td>
               <td> <%= link_to "View PDF", "#", :target => '_blank' %></td>
             <% elsif appointment.status == "In Progress" %>
               <td>
