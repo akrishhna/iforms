@@ -52,8 +52,9 @@ Iforms::Application.routes.draw do
     end
     resources :medical do
       collection do
-        get 'index'
-        get 'edit_medical_form'
+        get 'get_medical_patient_form'
+        post 'medical_patient_form_field_update'
+        post 'medical_patient_form_all_fields_update'
       end
     end
   end
