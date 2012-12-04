@@ -1,6 +1,7 @@
 class MedicalAppointment < ActiveRecord::Base
 
   belongs_to :doctor
+  belongs_to :user
   has_many :medical_patient_forms
   validates_presence_of :firstname, :lastname, :email,:location
   validates_presence_of :appointment_date_time, :message => "is not valid"
