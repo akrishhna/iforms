@@ -61,8 +61,8 @@ $(function () {
     else if ($('.medical_patient_form_smoking:checked').val() == "I did, but I quit") {
       $('#medical_patient_form_social_history_smoking_packs_per_day').val('');
       $('#medical_patient_form_social_history_smoking_no_of_years').val('');
-      $('#medical_patient_form_social_history_smoking_packs_per_day').attr('readonly', true);
-      $('#medical_patient_form_social_history_smoking_no_of_years').attr('readonly', true);
+      $('#medical_patient_form_social_history_smoking_packs_per_day').attr('readonly', false);
+      $('#medical_patient_form_social_history_smoking_no_of_years').attr('readonly', false);
       $('#medical_patient_form_social_history_smoking_quit_years').attr('readonly', false);
     } else {
     }
@@ -113,6 +113,15 @@ $(function () {
     }
   });
 
+  $('#medical_patient_form_review_of_sym_neurological_weakness').live('click', function () {
+    if ($(this).is(':checked')) {
+      $('#medical_patient_form_review_of_sym_neurological_weakness_which_part_of_body').attr('readonly', false);
+    } else {
+      $('#medical_patient_form_review_of_sym_neurological_weakness_which_part_of_body').val('');
+      $('#medical_patient_form_review_of_sym_neurological_weakness_which_part_of_body').attr('readonly', true);
+    }
+  });
+
   $('.medical_patient_form_colonoscopy_test').live('change', function () {
     if ($('.medical_patient_form_colonoscopy_test:checked').val() == "Abnormal") {
       $('#medical_patient_form_health_maintenance_description_of_abnormal_test_results').attr('readonly', false);
@@ -153,7 +162,9 @@ $(function () {
       $('#medical_patient_form_primary_insurance_policy_holder_first_name').val('');
       $('#medical_patient_form_primary_insurance_policy_holder_last_name').val('');
       $('#medical_patient_form_primary_insurance_relationship').val('');
-      $('#medical_patient_form_primary_insurance_birth_date').val('');
+      $('#medical_patient_form_primary_insurance_birth_date_1i').val('').attr('disabled',false);
+      $('#medical_patient_form_primary_insurance_birth_date_2i').val('').attr('disabled',false);
+      $('#medical_patient_form_primary_insurance_birth_date_3i').val('').attr('disabled',false);
       $('#medical_patient_form_primary_insurance_ssn_1').val('');
       $('#medical_patient_form_primary_insurance_ssn_2').val('');
       $('#medical_patient_form_primary_insurance_ssn_3').val('');
@@ -168,7 +179,9 @@ $(function () {
       $('#medical_patient_form_primary_insurance_policy_holder_first_name').val($('#medical_patient_form_first_name').val());
       $('#medical_patient_form_primary_insurance_policy_holder_last_name').val($('#medical_patient_form_last_name').val());
       $('#medical_patient_form_primary_insurance_relationship').val('Self');
-      $('#medical_patient_form_primary_insurance_birth_date').val($('#medical_patient_form_birth_date').val());
+      $('#medical_patient_form_primary_insurance_birth_date_1i').val($('#medical_patient_form_birth_date_1i').val()).attr('disabled',true);
+      $('#medical_patient_form_primary_insurance_birth_date_2i').val($('#medical_patient_form_birth_date_2i').val()).attr('disabled',true);
+      $('#medical_patient_form_primary_insurance_birth_date_3i').val($('#medical_patient_form_birth_date_3i').val()).attr('disabled',true);
       $('#medical_patient_form_primary_insurance_ssn_1').val($('#medical_patient_form_ssn_1').val());
       $('#medical_patient_form_primary_insurance_ssn_2').val($('#medical_patient_form_ssn_2').val());
       $('#medical_patient_form_primary_insurance_ssn_3').val($('#medical_patient_form_ssn_3').val());
@@ -185,7 +198,12 @@ $(function () {
       $('#medical_patient_form_secondary_insurance_policy_holder_first_name').val('');
       $('#medical_patient_form_secondary_insurance_policy_holder_last_name').val('');
       $('#medical_patient_form_secondary_insurance_relationship').val('');
-      $('#medical_patient_form_secondary_insurance_birth_date').val('');
+      $('#medical_patient_form_secondary_insurance_birth_date_1i').val('');
+      $('#medical_patient_form_secondary_insurance_birth_date_2i').val('');
+      $('#medical_patient_form_secondary_insurance_birth_date_3i').val('');
+      $('#medical_patient_form_secondary_insurance_birth_date_1i').val('').attr('disabled',false);
+      $('#medical_patient_form_secondary_insurance_birth_date_2i').val('').attr('disabled',false);
+      $('#medical_patient_form_secondary_insurance_birth_date_3i').val('').attr('disabled',false);
       $('#medical_patient_form_secondary_insurance_ssn_1').val('');
       $('#medical_patient_form_secondary_insurance_ssn_2').val('');
       $('#medical_patient_form_secondary_insurance_ssn_3').val('');
@@ -200,7 +218,9 @@ $(function () {
       $('#medical_patient_form_secondary_insurance_policy_holder_first_name').val($('#medical_patient_form_first_name').val());
       $('#medical_patient_form_secondary_insurance_policy_holder_last_name').val($('#medical_patient_form_last_name').val());
       $('#medical_patient_form_secondary_insurance_relationship').val('Self');
-      $('#medical_patient_form_secondary_insurance_birth_date').val($('#medical_patient_form_birth_date').val());
+      $('#medical_patient_form_secondary_insurance_birth_date_1i').val($('#medical_patient_form_birth_date_1i').val()).attr('disabled',true);
+      $('#medical_patient_form_secondary_insurance_birth_date_2i').val($('#medical_patient_form_birth_date_2i').val()).attr('disabled',true);
+      $('#medical_patient_form_secondary_insurance_birth_date_3i').val($('#medical_patient_form_birth_date_3i').val()).attr('disabled',true);
       $('#medical_patient_form_secondary_insurance_ssn_1').val($('#medical_patient_form_ssn_1').val());
       $('#medical_patient_form_secondary_insurance_ssn_2').val($('#medical_patient_form_ssn_2').val());
       $('#medical_patient_form_secondary_insurance_ssn_3').val($('#medical_patient_form_ssn_3').val());
