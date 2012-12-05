@@ -1,6 +1,7 @@
 class MedicalAppointmentsController < ApplicationController
-
+  before_filter :set_service_provider
   def index
+    session["consumer_tab_index"] = 5
     @doctor = Doctor.find_by_user_id(current_user.id)
     @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and DATE_FORMAT(appointment_date_time, '%Y-%m-%d') = ?", @doctor.user_id, session[:user_service_provider], params['appointment_date'] ? params['appointment_date'] : Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
   end
@@ -29,8 +30,8 @@ class MedicalAppointmentsController < ApplicationController
       @appointment.timesent = Time.now
       @appointment.medical_patient_forms.build({:service_provider_id  => @appointment.service_provider_id, :doctor_user_id => @appointment.doctor_user_id, :patient_user_id =>     @appointment.patient_user_id})
       @appointment.save
-      #Notifier.appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
-      redirect_to :medical_appointments
+      Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
+      redirect_to :medical_appointments, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
     else
       render :new, :notice => 'Something wrong plese try again'
     end
@@ -47,7 +48,7 @@ class MedicalAppointmentsController < ApplicationController
     @appointment.status = 'Pending'
     @appointment.timesent = Time.now
     if @appointment.update_attributes(params[:medical_appointment])
-      #Notifier.appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
+      Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
       redirect_to :medical_appointments
     else
       render :new, :notice => 'Something wrong plese try again'
@@ -60,6 +61,11 @@ class MedicalAppointmentsController < ApplicationController
       format.html { redirect_to doctors_url }
       format.xml { head :ok }
     end
+  end
+
+  private
+  def set_service_provider
+    session[:user_service_provider] = 5 if params[:sp_id] == '5'
   end
 
 end

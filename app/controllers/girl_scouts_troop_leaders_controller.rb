@@ -169,7 +169,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
           pf.status = "Pending"
           pf.girl_scout_attending = "?"
           pf.save
-          Notifier.send_parent_email_notification(@activity, girl_scout).deliver
+          Notifier.send_parent_email_notification(@activity, girl_scout,session[:user_service_provider]).deliver
           @counter += 1
         end
       end
@@ -271,7 +271,7 @@ class GirlScoutsTroopLeadersController < ApplicationController
     @girl_scouts_activity_permission_forms.each do |pf|
       @girl_scout = current_user.girls_scouts.find_by_id_and_service_provider_id(pf.girls_scout_id, session[:user_service_provider])
       @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(pf.girl_scouts_activity_id, session[:user_service_provider])
-      Notifier.send_parent_email_notification(@activity, @girl_scout).deliver
+      Notifier.send_parent_email_notification(@activity, @girl_scout,session[:user_service_provider]).deliver
       @counter += 1
     end
   end

@@ -35,8 +35,8 @@ class Consumer::MedicalController < ApplicationController
       end
       @appointment.timereceived = Time.now
       @appointment.save
-      #Notifier.edit_form_submission_notification(@iform.appointment, @iform.formname, @iform).deliver
-      redirect_to :consumer_index
+      Notifier.capital_medical_clinic_form_submission_notification(@appointment,@medical_patient_form).deliver
+      redirect_to :consumer_index,:notice => "Form Submitted successfully"
     else
       render :edit, :notice => 'Something wrong plese try again'
     end
