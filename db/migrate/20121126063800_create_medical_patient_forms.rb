@@ -12,7 +12,6 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.string :middle_name, :limit => 50
       t.string :address_1, :limit => 50
       t.string :address_2, :limit => 50
-      t.string :address_apt, :limit => 50
       t.string :address_city, :limit => 50
       t.string :address_state, :limit => 50
       t.integer :address_zip, :limit => 10
@@ -33,6 +32,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.integer :ssn_3, :limit => 5
       t.string :referred_to_our_office_by,:limit => 25
       t.string :referral_name,:limit => 25
+
       #Employer
       t.string :employer, :limit => 50
       t.string :employer_occupation, :limit => 50
@@ -71,7 +71,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.integer :primary_insurance_phone_1, :limit => 5
       t.integer :primary_insurance_phone_2, :limit => 5
       t.integer :primary_insurance_phone_3, :limit => 5
-      t.integer :primary_insurance_id, :limit => 25
+      t.string :primary_insurance_id, :limit => 25
       t.string :primary_insurance_group, :limit => 50
       t.string :primary_insurance_policy_holder, :limit => 10
       t.string :primary_insurance_policy_holder_first_name, :limit => 50
@@ -93,7 +93,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.integer :secondary_insurance_phone_1, :limit => 5
       t.integer :secondary_insurance_phone_2, :limit => 5
       t.integer :secondary_insurance_phone_3, :limit => 5
-      t.integer :secondary_insurance_id, :limit => 25
+      t.string :secondary_insurance_id, :limit => 25
       t.string :secondary_insurance_group, :limit => 50
       t.string :secondary_insurance_policy_holder, :limit => 10
       t.string :secondary_insurance_policy_holder_first_name, :limit => 50
@@ -198,24 +198,32 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.string :family_history_mother_living_or_deceased, :limit => 25
       t.integer :family_history_father_age, :limit => 25
       t.string :family_history_father_living_or_deceased, :limit => 25
-      t.string :family_history_illnesses_illness_1, :limit => 50
-      t.integer :family_history_age_at_diagnosis_1, :limit => 25
-      t.string :family_history_illnesses_illness_2, :limit => 50
-      t.integer :family_history_age_at_diagnosis_2, :limit => 25
-      t.string :family_history_illnesses_illness_3, :limit => 50
-      t.integer :family_history_age_at_diagnosis_3, :limit => 25
-      t.string :family_history_illnesses_illness_4, :limit => 50
-      t.integer :family_history_age_at_diagnosis_4, :limit => 25
-      t.string :family_history_illnesses_illness_5, :limit => 50
-      t.integer :family_history_age_at_diagnosis_5, :limit => 25
+      t.string :family_history_illnesses_mother_illness_1, :limit => 50
+      t.integer :family_history_illnesses_mother_age_at_diagnosis_1, :limit => 25
+      t.string :family_history_illnesses_mother_illness_2, :limit => 50
+      t.integer :family_history_illnesses_mother_age_at_diagnosis_2, :limit => 25
+      t.string :family_history_illnesses_mother_illness_3, :limit => 50
+      t.integer :family_history_illnesses_mother_age_at_diagnosis_3, :limit => 25
+      t.string :family_history_illnesses_father_illness_1, :limit => 50
+      t.integer :family_history_illnesses_father_age_at_diagnosis_1, :limit => 25
+      t.string :family_history_illnesses_father_illness_2, :limit => 50
+      t.integer :family_history_illnesses_father_age_at_diagnosis_2, :limit => 25
+      t.string :family_history_illnesses_father_illness_3, :limit => 50
+      t.integer :family_history_illnesses_father_age_at_diagnosis_3, :limit => 25
       t.string :family_history_siblings_1, :limit => 25
       t.string :family_history_siblings_living_deceased_1, :limit => 25
+      t.string :family_history_siblings_1_illness_1, :limit => 50
+      t.string :family_history_siblings_1_illness_2, :limit => 50
       t.integer :family_history_siblings_age_1, :limit => 25
       t.string :family_history_siblings_2, :limit => 25
       t.string :family_history_siblings_living_deceased_2, :limit => 25
+      t.string :family_history_siblings_2_illness_1, :limit => 50
+      t.string :family_history_siblings_2_illness_2, :limit => 50
       t.integer :family_history_siblings_age_2, :limit => 25
       t.string :family_history_siblings_3, :limit => 25
       t.string :family_history_siblings_living_deceased_3, :limit => 25
+      t.string :family_history_siblings_3_illness_1, :limit => 50
+      t.string :family_history_siblings_3_illness_2, :limit => 50
       t.integer :family_history_siblings_age_3, :limit => 25
 
      #Social History
@@ -302,6 +310,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.boolean :review_of_sym_neurological_difficulty_with_memory
       t.boolean :review_of_sym_neurological_fainting
       t.boolean :review_of_sym_neurological_weakness
+      t.string :review_of_sym_neurological_weakness_which_part_of_body, :limit => 50
       t.boolean :review_of_sym_neurological_muscle_painSeizures
       t.boolean :review_of_sym_neurological_severe_or_frequent_headaches
       t.boolean :review_of_sym_neurological_difficulty_with_balance
