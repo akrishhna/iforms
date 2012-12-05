@@ -9,11 +9,11 @@ class Notifier < ActionMailer::Base
     @login_url = new_user_session_url
     @registration_url = user_registration_url(:id => @appointment.id)
     if @user_service_provider == 1
-      from_name = 'James Waters iforms-noreply@ifor.ms'
+      from_name = 'James R. Waters, DDS, MSD, PA <iforms-noreply@ifor.ms>'
     elsif @user_service_provider == 4
-      from_name = 'Karen Naples <iforms-noreply@ifor.ms>'
+      from_name = 'Karen Naples D.D.S. P.A. <iforms-noreply@ifor.ms>'
     else
-      from_name =  "iforms-noreply@ifor.ms"
+      from_name = "iforms-noreply@ifor.ms"
     end
     mail(:to => @appointment.email, :subject => "Appointment confirmation", :from => from_name)
   end
@@ -62,13 +62,21 @@ class Notifier < ActionMailer::Base
     mail(:to => @user.email, :subject => "Your username")
   end
 
-  def send_parent_email_notification(activity, girl_scout)
+  def send_parent_email_notification(activity, girl_scout, user_service_provider)
     @activity = activity
     @girl_scout = girl_scout
+    @user_service_provider = user_service_provider
     @permission_form = GirlScoutsActivityPermissionForm.find_by_girl_scouts_activity_id_and_girls_scout_id(@activity.id, @girl_scout.id)
     @user = User.find_by_email(@girl_scout.email)
     @registration_url = user_registration_url
-    mail(:to => @girl_scout.email, :subject => "Activity Permission Form")
+    if @user_service_provider == 2
+      from_name = "#{@activity.leader_first_name} #{@activity.leader_last_name} <iforms-noreply@ifor.ms>"
+    elsif @user_service_provider == 3
+      from_name = "#{@activity.leader_advisor_1_first_name} #{@activity.leader_advisor_1_last_name} <iforms-noreply@ifor.ms>"
+    else
+      from_name = "iforms-noreply@ifor.ms"
+    end
+    mail(:to => @girl_scout.email, :subject => "Activity Permission Form", :from => from_name)
   end
 
   def send_permission_form_to_tl_notification(activity, girl_scout, user)
@@ -76,5 +84,28 @@ class Notifier < ActionMailer::Base
     @girl_scout = girl_scout
     @user = user
     mail(:to => @user.email, :subject => "Parent Permission Granted Form")
+  end
+
+  def capital_medical_clinic_appointment_confirmation_notification(appointment, doctor, user_service_provider)
+    @appointment = appointment
+    @doctor = doctor
+    @user_service_provider = user_service_provider
+    @preferred_name = @appointment.preferred_name
+    @login_url = new_user_session_url
+    @registration_url = user_registration_url(:id => @appointment.id)
+    if @user_service_provider == 5
+      from_name = 'Tony R. Aventa, M.D. <iforms-noreply@ifor.ms>'
+    else
+      from_name = "iforms-noreply@ifor.ms"
+    end
+    mail(:to => @appointment.email, :subject => "Appointment confirmation", :from => from_name)
+  end
+
+  def capital_medical_clinic_form_submission_notification(appointment, medical_patient_form)
+    @appointment = appointment
+    @medical_patient_form = medical_patient_form
+    @doctor = @appointment.doctor
+    @user = User.find(@doctor.user_id)
+    mail(:to => @user.email, :subject => "Form submitted by #{@appointment.firstname} #{@appointment.lastname}")
   end
 end

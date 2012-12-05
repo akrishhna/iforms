@@ -1,0 +1,100 @@
+<% @user = User.where("email =?", @appointment.email).first %>
+<div style="background: #87ceeb ">
+ <img src="<%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %>" width="100%"/>
+</div>
+<% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS"  %>
+  </p>
+<% elsif @appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS"  %>
+  </p>
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS" %>
+  </p>
+  <p>
+    Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS" %>
+  </p>
+  <p>
+    Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS"  %>
+  </p>
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @preferred_name %> <%= @appointment.lastname %>'s appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS"  %>
+  </p>
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS"  %>
+  </p>
+  <p>Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @preferred_name %> <%= @appointment.lastname %>'s appointment with Tony R. Aventa, M.D. at <%= @appointment.appointment_date_time.strftime('%I:%M %p') %>
+    on <%= @appointment.appointment_date_time.strftime("%A %B %d, %Y") %> at our office located at <%= link_to "1301 W. 38th Street, Suite 601, Austin TX 78705-1069.", "http://goo.gl/maps/zO9HS"  %>
+  </p>
+  <p>Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% end %>
+
+<p>Kind Regards,</p>
+
+<p>Tony R. Aventa, M.D.</p>
+<div style=" background: none repeat scroll 0 0 #E7E4DD;
+  border-top: 6px solid #DED9CE;
+  font-size: 14px;
+  width: 958px;
+  margin: 0 auto 10px;
+  padding-top: 10px;
+  text-align: center;">
+  <span><img src="<%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg" %>"/></span>
+  <span style="  float: right;font-size: 16px;margin: 61px;">Capital Medical Clinic  •  1301 W. 38th Street, Suite 601  •   Austin Texas 78705-1069  •  512-454-5171</span>
+</div>
+
+
+
