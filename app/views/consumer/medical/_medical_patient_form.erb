@@ -1,6 +1,6 @@
 <% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
-<%= form_for @medical,:url => consumer_medical_path, :html => {:method => :put,:class => 'form-horizontal edit_medical_patient_form', :multipart => true} do |f| %>
+<%= form_for @medical, :url => consumer_medical_path, :html => {:method => :put, :class => 'form-horizontal edit_medical_patient_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
 
   <div class="tabbable tabs-left iforms-tabs-left">
@@ -18,10 +18,10 @@
       <%= link_to "Emergency Contact", '#emergency_contact', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Insurance Primary", '#insurance_primary', "data-toggle" => "tab",:id => 'insurance_primary_tab' %>
+      <%= link_to "Insurance Primary", '#insurance_primary', "data-toggle" => "tab", :id => 'insurance_primary_tab' %>
     </li>
     <li>
-      <%= link_to "Insurance Secondary", '#insurance_secondary', "data-toggle" => "tab",:id => 'insurance_secondary_tab' %>
+      <%= link_to "Insurance Secondary", '#insurance_secondary', "data-toggle" => "tab", :id => 'insurance_secondary_tab' %>
     </li>
     <li>
       <%= link_to "Patient Consent", '#patient_consent', "data-toggle" => "tab" %>
@@ -51,8 +51,9 @@
     <div class="control-group">
       <%= f.label :first_name, "Name", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :first_name, :placeholder => "First Name", :style => "width:150px" %>
-        <%= f.text_field :last_name, :placeholder => "Last Name", :style => "width:150px" %>
+        <%= f.text_field :first_name, :placeholder => "First Name", :style => "width:132px" %>
+        <%= f.text_field :last_name, :placeholder => "Last Name", :style => "width:132px" %>
+        <%= f.text_field :middle_name, :placeholder => "Middle Name", :style => "width:132px" %>
       </div>
     </div>
     <div class="control-group">
@@ -119,16 +120,10 @@
       <%= f.label :marital_status, 'Marital Status', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :marital_status, "Divorced" %>Divorced
-        <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :marital_status, "Married" %>Married
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :marital_status, "Partnered" %>Partnered
-        <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :marital_status, "Separated" %>Separated
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :marital_status, "Single" %>Single
@@ -219,7 +214,7 @@
       <%= f.label :spouse_first_name, 'Name', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :spouse_first_name, :placeholder => "First Name", :class => "input-small" %>
-        <%= f.text_field :spouse_first_name, :placeholder => "Last Name", :class => "input-small" %>
+        <%= f.text_field :spouse_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
     <div class="control-group">
@@ -256,7 +251,7 @@
       <%= f.label :emergency_contact_first_name, 'Name', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :emergency_contact_first_name, :placeholder => "First Name", :class => "input-small" %>
-        <%= f.text_field :emergency_contact_first_name, :placeholder => "Last Name", :class => "input-small" %>
+        <%= f.text_field :emergency_contact_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
     <div class="control-group">
@@ -354,7 +349,8 @@
     <div class="control-group">
       <%= f.label :primary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector  medical_patient_primary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%= f.date_select :primary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => "medical_patient_primary_insurance_policy_details" %>
+        <%#= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector  medical_patient_primary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
       </div>
     </div>
     <div class="control-group">
@@ -452,7 +448,8 @@
     <div class="control-group">
       <%= f.label :secondary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector medical_patient_secondary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%= f.date_select :secondary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector medical_patient_secondary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
       </div>
     </div>
     <div class="control-group">
@@ -775,6 +772,20 @@
       </div>
     </div>
     <div class="control-group">
+      <%= f.label :family_history_illnesses_mother_illness_1, raw('&nbsp'), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :family_history_illnesses_mother_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_illnesses_mother_age_at_diagnosis_1, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :family_history_illnesses_mother_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_illnesses_mother_age_at_diagnosis_2, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :family_history_illnesses_mother_illness_3, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_illnesses_mother_age_at_diagnosis_3, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
+        <br>
+      </div>
+    </div>
+    <div class="control-group">
       <%= f.label :family_history_father_age, 'Father Age', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :family_history_father_age %>
@@ -792,25 +803,16 @@
       </div>
     </div>
     <div class="control-group">
-      <strong style="font-size: 18px">Illnesses </strong>
-    </div>
-    <div class="control-group">
-      <%= f.label :family_history_illnesses_illness_1, raw('&nbsp'), :class => 'control-label' %>
+      <%= f.label :family_history_illnesses_father_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :family_history_illnesses_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :family_history_age_at_diagnosis_1, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_illnesses_father_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_illnesses_father_age_at_diagnosis_1, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
-        <%= f.text_field :family_history_illnesses_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :family_history_age_at_diagnosis_2, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_illnesses_father_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_illnesses_father_age_at_diagnosis_2, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
-        <%= f.text_field :family_history_illnesses_illness_3, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :family_history_age_at_diagnosis_3, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :family_history_illnesses_illness_4, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :family_history_age_at_diagnosis_4, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :family_history_illnesses_illness_5, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :family_history_age_at_diagnosis_5, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_illnesses_father_illness_3, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_illnesses_father_age_at_diagnosis_3, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
       </div>
     </div>
@@ -841,6 +843,15 @@
       </div>
     </div>
     <div class="control-group">
+      <%= f.label :family_history_siblings_1_illness_1, raw('&nbsp'), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :family_history_siblings_1_illness_1, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :family_history_siblings_1_illness_2, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <br>
+      </div>
+    </div>
+    <div class="control-group">
       <%= f.label :family_history_siblings_2, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -864,6 +875,15 @@
       </div>
     </div>
     <div class="control-group">
+      <%= f.label :family_history_siblings_2_illness_1, raw('&nbsp'), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :family_history_siblings_2_illness_1, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :family_history_siblings_2_illness_2, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <br>
+      </div>
+    </div>
+    <div class="control-group">
       <%= f.label :family_history_siblings_3, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -884,6 +904,15 @@
           <%= f.radio_button :family_history_siblings_living_deceased_3, "Deceased" %>Deceased
         <% end %>
         <%= f.text_field :family_history_siblings_age_3, :placeholder => 'Age', :style => 'width:150px;margin-left:25px;' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :family_history_siblings_3_illness_1, raw('&nbsp'), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :family_history_siblings_3_illness_1, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :family_history_siblings_3_illness_2, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <br>
       </div>
     </div>
     <div class="medical_patient_form_footer_links">
@@ -1270,7 +1299,8 @@
         <%= f.check_box :review_of_sym_sexual_decreased_libido %>Decreased libido
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :review_of_sym_sexual_difficulty_achieving_and_maintaining, :readonly => true  %>Difficulty achieving and maintaining an erection
+        <%= f.check_box :review_of_sym_sexual_difficulty_achieving_and_maintaining, :readonly => true %>Difficulty
+        achieving and maintaining an erection
       <% end %>
     </div>
   </div>
@@ -1300,7 +1330,7 @@
   <div class="control-group">
     <%= f.label :review_of_sym_joints_that_are_swelling_or_have_redness, 'Joints that are swelling or have redness', :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :review_of_sym_joints_that_are_swelling_or_have_redness, :readonly => true  %>
+      <%= f.text_field :review_of_sym_joints_that_are_swelling_or_have_redness, :readonly => true %>
     </div>
   </div>
   <div class="control-group">
@@ -1333,6 +1363,12 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_neurological_vertigo %>Vertigo (world spinning around you)
       <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :review_of_sym_neurological_weakness_which_part_of_body, 'Weakness Which part of body', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :review_of_sym_neurological_weakness_which_part_of_body, :readonly => true %>
     </div>
   </div>
   <div class="control-group">
@@ -1481,10 +1517,12 @@
       <%= f.label :health_maintenance_colonoscopy_test_results, 'Colonoscopy Test Results', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :health_maintenance_colonoscopy_test_results, "Normal", :class => 'medical_patient_form_colonoscopy_test' %>Normal
+          <%= f.radio_button :health_maintenance_colonoscopy_test_results, "Normal", :class => 'medical_patient_form_colonoscopy_test' %>
+          Normal
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :health_maintenance_colonoscopy_test_results, "Abnormal", :class => 'medical_patient_form_colonoscopy_test' %>Abnormal
+          <%= f.radio_button :health_maintenance_colonoscopy_test_results, "Abnormal", :class => 'medical_patient_form_colonoscopy_test' %>
+          Abnormal
         <% end %>
       </div>
     </div>
@@ -1526,7 +1564,7 @@
     <div class="control-group">
       <%= f.label :health_maintenance_why_was_hysterectomy_performed, 'Why Was Hysterectomy Performed?', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_why_was_hysterectomy_performed,:readonly => true ,:style => 'width:450px' %>
+        <%= f.text_field :health_maintenance_why_was_hysterectomy_performed, :readonly => true, :style => 'width:450px' %>
       </div>
     </div>
     <div class="control-group">
@@ -1557,7 +1595,7 @@
       <% end %>
     </div>
     <div class="actions">
-      <%= f.submit submit_tag_text, :class => 'btn btn-primary btn-large', :style => 'font-size:28px'   %>
+      <%= f.submit submit_tag_text, :class => 'btn btn-primary btn-large', :style => 'font-size:28px' %>
     </div>
   </div>
   </div>
