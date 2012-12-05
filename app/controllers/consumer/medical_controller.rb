@@ -71,18 +71,19 @@ class Consumer::MedicalController < ApplicationController
   def get_medical_patient_form
      @medical_patient_form = MedicalPatientForm.find(params[:id])
      appointment = MedicalAppointment.find(@medical_patient_form.medical_appointment_id)
-    if appointment.status == 'Pending' || appointment.status == 'In Progress'
-      send_file CAPITAL_MEDICAL_CLINIC_PATH,
-                :filename => "CapitalMedical_Clinic.pdf",
-                :disposition => "inline",
-                :type => "application/pdf"
-    else
+    if appointment.status == 'Submitted' || appointment.status == 'Updated'
       file_name = "#{@medical_patient_form.first_name.gsub(' ', '-')}_#{@medical_patient_form.first_name.gsub(' ', '-')}_capital_medical_clinic"
       permission_form_path = "#{PDFFILES_PATH}#{file_name}"
       send_file permission_form_path,
                 :filename => "#{file_name}",
                 :disposition => "inline",
                 :type => "application/pdf"
+    else
+      send_file CAPITAL_MEDICAL_CLINIC_READ_ONLY_FORM_PATH,
+                :filename => "Capital_Medical_Clinic.pdf",
+                :disposition => "inline",
+                :type => "application/pdf"
+
     end
 
   end
