@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
 
   def resolve_patient_user_id
     appointments = Appointment.where('email=?', self.email)
+    medical_appointments  = MedicalAppointment.where('email=?', self.email)
     appointments.each do |appointment|
       appformjoins = Appformjoin.where('appointment_id=? and patient_user_id IS NULL', appointment.id)
       appformjoins.each do |appformjoin|
@@ -54,5 +55,15 @@ class User < ActiveRecord::Base
         appformjoin.save
       end
     end
+
+    medical_appointments.each do|appointment|
+      medical_patient_form = MedicalPatientForm.find_by_medical_appointment_id(appointment.id)
+      appointment.patient_user_id = self.id
+      medical_patient_form.patient_user_id = self.id
+      appointment.save(:validate => false)
+      medical_patient_form.save(:validate => false)
+    end
+
   end
+
 end

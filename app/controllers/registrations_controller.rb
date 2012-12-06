@@ -3,13 +3,21 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     # super
     @appointment = Appointment.find(params[:id]) if params[:id]
+    @medical_appointment = MedicalAppointment.find(params[:medical_app_id]) if params[:medical_app_id]
     @ayah = AYAH::Integration.new("c4767d34bc724283166728cdf6e6da245f7b16fd", "d4309f6c8672a358b1267060be9fd75f39731fef")
   end
 
   def create
-    @appointment = Appointment.find(params[:appointment_id])
-    @appointment.email = params[:user][:email]
-    @appointment.save(:validate => false)
+    if params[:appointment_id]
+      @appointment = Appointment.find(params[:appointment_id])
+      @appointment.email = params[:user][:email]
+      @appointment.save(:validate => false)
+    end
+    if params[:medical_appointment_id]
+      @appointment = MedicalAppointment.find(params[:medical_appointment_id])
+      @appointment.email = params[:user][:email]
+      @appointment.save(:validate => false)
+    end
     username = params[:user][:username]
     email = params[:user][:email]
     password = params[:user][:password]

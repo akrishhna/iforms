@@ -4,6 +4,9 @@
     <% if @appointment %>
     <%= hidden_field_tag :appointment_id, @appointment.id %>
       <% end %>
+    <% if @medical_appointment %>
+      <%= hidden_field_tag :medical_appointment_id, @medical_appointment.id %>
+    <% end %>
     <% if false %>
     <% if resource.errors.any? %>
       <div id="error_explanation">
@@ -57,7 +60,7 @@
       </div>
     </div>
     <div class="form-actions">
-      <%= f.submit "SIgn Up",:class => 'btn btn-primary btn-large span3 users_submit',:disabled => "disabled"  %>
+      <%= f.submit "Sign Up",:class => 'btn btn-primary btn-large span3 users_submit',:disabled => "disabled"  %>
     </div>
   <% end %>
   <%= render :partial => "devise/shared/links" %>
@@ -72,6 +75,12 @@
 
   <% if @appointment %>
   $('#user_email').val('<%= @appointment.email %>');
+  var params = $('#new_user').serializeArray();
+  $.post('/registration/validate_users_sign_up_page',params );
+  <% end %>
+
+  <% if @medical_appointment %>
+  $('#user_email').val('<%= @medical_appointment.email %>');
   var params = $('#new_user').serializeArray();
   $.post('/registration/validate_users_sign_up_page',params );
   <% end %>
