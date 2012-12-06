@@ -5,7 +5,7 @@ class MedicalPatientForm < ActiveRecord::Base
     @medical_patient_form = medical_patient_form
     @appointment = appointment
     form_pdf_path = "#{CAPITAL_MEDICAL_CLINIC_FORM_PATH}"
-    file_name = "#{@medical_patient_form.first_name.gsub(' ', '-')}_#{@medical_patient_form.first_name.gsub(' ', '-')}_capital_medical_clinic"
+    file_name = "#{@medical_patient_form.first_name.gsub(' ', '-')}_#{@medical_patient_form.last_name.gsub(' ', '-')}_capital_medical_clinic.pdf"
     permission_form_path = "#{PDFFILES_PATH}#{file_name}"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
 
