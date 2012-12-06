@@ -380,7 +380,7 @@
   </div>
   <div class="tab-pane" id="insurance_secondary">
     <div class="control-group">
-      <%= f.label :secondary_insurance_company_name, 'Primary Insurance Company Name', :class => 'control-label' %>
+      <%= f.label :secondary_insurance_company_name, 'Secondary Insurance Company Name', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_company_name %>
       </div>
@@ -408,13 +408,13 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :secondary_insurance_id, 'Primary Insurance Id', :class => 'control-label' %>
+      <%= f.label :secondary_insurance_id, 'Secondary Insurance Id', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_id %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :secondary_insurance_group, 'Primary Insurance Group', :class => 'control-label' %>
+      <%= f.label :secondary_insurance_group, 'Secondary Insurance Group', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_group %>
       </div>
@@ -929,17 +929,17 @@
       <%= f.label :social_history_live, 'I Live', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_live, "Alone" %>Alone
+          <%= f.radio_button :social_history_live, "Alone", :class => 'medical_patient_form_social_history_live' %>Alone
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_live, "With Other(s)" %>With Other(s)
+          <%= f.radio_button :social_history_live, "With Other(s)", :class => 'medical_patient_form_social_history_live' %>With Other(s)
         <% end %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :social_history_live_with_whom, "Live With Whom", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_live_with_whom %>
+        <%= f.text_field :social_history_live_with_whom, :readonly => true %>
       </div>
     </div>
     <div class="control-group">
@@ -951,7 +951,7 @@
     <div class="control-group">
       <%= f.label :social_history_age_of_children, "Ages of Children", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_age_of_children %>
+        <%= f.text_field :social_history_age_of_children, :readonly => true %>
       </div>
     </div>
     <div class="control-group">
@@ -963,13 +963,13 @@
     <div class="control-group">
       <%= f.label :social_history_ex_minutes_per_day, "For This Many Minutes Per Day", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_ex_minutes_per_day %>
+        <%= f.text_field :social_history_ex_minutes_per_day, :readonly => true %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :social_history_exercise_type, "Exercise Type", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_exercise_type %>
+        <%= f.text_field :social_history_exercise_type, :readonly => true %>
       </div>
     </div>
     <div class="control-group">
@@ -1529,7 +1529,7 @@
     <div class="control-group">
       <%= f.label :health_maintenance_description_of_abnormal_test_results, 'Description of abnormal test results', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_description_of_abnormal_test_results, :style => 'width:450px' %>
+        <%= f.text_field :health_maintenance_description_of_abnormal_test_results, :readonly => true, :style => 'width:450px' %>
       </div>
     </div>
     <div class="control-group">

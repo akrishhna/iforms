@@ -140,6 +140,14 @@ $(function () {
     }
   });
 
+  $('.medical_patient_form_social_history_live').live('change', function () {
+    if ($('.medical_patient_form_social_history_live:checked').val() == "Alone") {
+      $('#medical_patient_form_social_history_live_with_whom').val('');
+      $('#medical_patient_form_social_history_live_with_whom').attr('readonly', true);
+    } else {
+      $('#medical_patient_form_social_history_live_with_whom').attr('readonly', false);
+    }
+  });
 
   // pre populating fields
 
@@ -239,17 +247,22 @@ $(function () {
 
   // auto tab js
   // adding filter numeric
-  $('#medical_patient_form_home_phone_1, #medical_patient_form_home_phone_2, #medical_patient_form_home_phone_3,' +
+  $('#medical_patient_form_address_zip,#medical_patient_form_home_phone_1, #medical_patient_form_home_phone_2, #medical_patient_form_home_phone_3,' +
     '#medical_patient_form_work_phone_1, #medical_patient_form_work_phone_2, #medical_patient_form_work_phone_3,' +
     '#medical_patient_form_cell_phone_1, #medical_patient_form_cell_phone_2, #medical_patient_form_cell_phone_3,' +
-    '#medical_patient_form_ssn_1, #medical_patient_form_ssn_2, #medical_patient_form_ssn_3, #medical_patient_form_spouse_home_phone_1,' +
+    '#medical_patient_form_ssn_1, #medical_patient_form_ssn_2, #medical_patient_form_ssn_3,#medical_patient_form_employer_address_zip, #medical_patient_form_spouse_home_phone_1,' +
     '#medical_patient_form_spouse_home_phone_2, #medical_patient_form_spouse_home_phone_3, #medical_patient_form_spouse_work_phone_1,' +
     '#medical_patient_form_spouse_work_phone_2, #medical_patient_form_spouse_work_phone_3, #medical_patient_form_emergency_contact_phone_1,' +
-    '#medical_patient_form_emergency_contact_phone_2, #medical_patient_form_emergency_contact_phone_3, #medical_patient_form_primary_insurance_phone_1,' +
+    '#medical_patient_form_emergency_contact_phone_2, #medical_patient_form_emergency_contact_phone_3, #medical_patient_form_primary_insurance_address_zip, #medical_patient_form_primary_insurance_phone_1,' +
     '#medical_patient_form_primary_insurance_phone_2, #medical_patient_form_primary_insurance_phone_3, #medical_patient_form_primary_insurance_ssn_1,' +
-    '#medical_patient_form_primary_insurance_ssn_2, #medical_patient_form_primary_insurance_ssn_3, #medical_patient_form_secondary_insurance_phone_1,' +
+    '#medical_patient_form_primary_insurance_ssn_2, #medical_patient_form_primary_insurance_ssn_3, #medical_patient_form_secondary_insurance_address_zip, #medical_patient_form_secondary_insurance_phone_1,' +
     '#medical_patient_form_secondary_insurance_phone_2, #medical_patient_form_secondary_insurance_phone_3, #medical_patient_form_secondary_insurance_ssn_1,' +
-    '#medical_patient_form_secondary_insurance_ssn_2, #medical_patient_form_secondary_insurance_ssn_3, #medical_patient_form_social_history_no_of_children').autotab_filter('numeric');
+    '#medical_patient_form_secondary_insurance_ssn_2, #medical_patient_form_secondary_insurance_ssn_3, #medical_patient_form_social_history_no_of_children,' +
+    '#medical_patient_form_family_history_illnesses_mother_age_at_diagnosis_1, #medical_patient_form_family_history_illnesses_mother_age_at_diagnosis_2, #medical_patient_form_family_history_illnesses_mother_age_at_diagnosis_1,' +
+    'medical_patient_form_family_history_illnesses_father_age_at_diagnosis_1, #medical_patient_form_family_history_illnesses_father_age_at_diagnosis_1, #medical_patient_form_family_history_illnesses_father_age_at_diagnosis_1,' +
+    '#medical_patient_form_family_history_siblings_age_1, #medical_patient_form_family_history_siblings_age_2, #medical_patient_form_family_history_siblings_age_3,' +
+    '#medical_patient_form_social_history_ex_minutes_per_day, #medical_patient_form_social_history_smoking_packs_per_day, #medical_patient_form_social_history_smoking_no_of_years,' +
+    '#medical_patient_form_social_history_smoking_quit_years, #medical_patient_form_social_history_drink').autotab_filter('numeric');
 
   // adding autotab magic
 
