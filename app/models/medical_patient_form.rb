@@ -42,7 +42,7 @@ class MedicalPatientForm < ActiveRecord::Base
       #Employer tab
       "EmployerName" => @medical_patient_form.employer,
       "Occupation" => @medical_patient_form.employer_occupation,
-      "EmployerAddress" => (@medical_patient_form.employer_address_1.empty? ? '' : (@medical_patient_form.employer_address_1.to_s + ',')) + @medical_patient_form.employer_address_2.to_s,
+      "EmployerAddress" => (@medical_patient_form.employer_address_1.empty? ? '' : (@medical_patient_form.employer_address_1.to_s + ', ')) + @medical_patient_form.employer_address_2.to_s,
       "EmployerCity" => @medical_patient_form.employer_address_city,
       "EmployerState" => @medical_patient_form.employer_address_state,
       "EmployerZip" => @medical_patient_form.employer_address_zip,
@@ -59,7 +59,7 @@ class MedicalPatientForm < ActiveRecord::Base
 
       #Primary Insurance tab
       "PrimaryInsuranceName" => @medical_patient_form.primary_insurance_company_name,
-      "PrimaryInsuranceAddress" => (@medical_patient_form.primary_insurance_address_1.empty? ? '' : (@medical_patient_form.primary_insurance_address_1.to_s + ',')) + (@medical_patient_form.primary_insurance_address_2.empty? ? '' : (@medical_patient_form.primary_insurance_address_2.to_s + ',')) + @medical_patient_form.primary_insurance_address_city.to_s + @medical_patient_formprimary_insurance_address_state.to_s,
+      "PrimaryInsuranceAddress" => (@medical_patient_form.primary_insurance_address_1.empty? ? '' : (@medical_patient_form.primary_insurance_address_1.to_s + ', ')) + (@medical_patient_form.primary_insurance_address_2.empty? ? '' : (@medical_patient_form.primary_insurance_address_2.to_s + ', ')) + @medical_patient_form.primary_insurance_address_city.to_s + @medical_patient_formprimary_insurance_address_state.to_s,
       "PrimaryInsuranceStateZip" => @medical_patient_form.primary_insurance_address_zip,
       "PrimaryInsurancePhone" => (@medical_patient_form.primary_insurance_phone_1 ? (@medical_patient_form.primary_insurance_phone_1.to_s + '-') : '') + (@medical_patient_form.primary_insurance_phone_2 ? (@medical_patient_form.primary_insurance_phone_2.to_s + '-') : '') + @medical_patient_form.primary_insurance_phone_3.to_s,
       "PrimaryInsuranceID" => @medical_patient_form.primary_insurance_id,
@@ -72,7 +72,7 @@ class MedicalPatientForm < ActiveRecord::Base
 
       #Secondary Insurance tab
       "SecondaryInsuranceName" => @medical_patient_form.secondary_insurance_company_name,
-      "SecondaryInsuranceAddress" => (@medical_patient_form.secondary_insurance_address_1.empty? ? '' : (@medical_patient_form.secondary_insurance_address_1.to_s + ',')) + (@medical_patient_form.secondary_insurance_address_2.empty? ? '' : (@medical_patient_form.secondary_insurance_address_2.to_s + ',')) + @medical_patient_form.secondary_insurance_address_city.to_s + @medical_patient_form.secondary_insurance_address_state.to_s,
+      "SecondaryInsuranceAddress" => (@medical_patient_form.secondary_insurance_address_1.empty? ? '' : (@medical_patient_form.secondary_insurance_address_1.to_s + ', ')) + (@medical_patient_form.secondary_insurance_address_2.empty? ? '' : (@medical_patient_form.secondary_insurance_address_2.to_s + ', ')) + @medical_patient_form.secondary_insurance_address_city.to_s + @medical_patient_form.secondary_insurance_address_state.to_s,
       "SecondaryInsuranceStateZip" => @medical_patient_form.secondary_insurance_address_zip,
       "SecondaryInsurancePhoneNumber" => (@medical_patient_form.secondary_insurance_phone_1 ? (@medical_patient_form.secondary_insurance_phone_1.to_s + '-') : '') + (@medical_patient_form.secondary_insurance_phone_2 ? (@medical_patient_form.secondary_insurance_phone_2.to_s + '-') : '') + @medical_patient_form.secondary_insurance_phone_3.to_s,
       "SecondaryInsuranceID" => @medical_patient_form.secondary_insurance_id,
@@ -288,7 +288,7 @@ class MedicalPatientForm < ActiveRecord::Base
 
       "DifficultyWithMemory" => @medical_patient_form.review_of_sym_neurological_difficulty_with_memory ? 'Yes' : 'No',
       "FaintingLosingConsciousness" => @medical_patient_form.review_of_sym_neurological_fainting ? 'Yes' : 'No',
-      "Weakness" => @medical_patient_form.review_of_sym_neurological_weakness ? 'Yes' : 'No',
+      "Weakness:" => @medical_patient_form.review_of_sym_neurological_weakness ? 'Yes' : 'No',
       "WeaknessWhichPartOfYourBody" => @medical_patient_form.review_of_sym_neurological_weakness_which_part_of_body,
       "Seizures" => @medical_patient_form.review_of_sym_neurological_muscle_painSeizures ? 'Yes' : 'No',
       "SevereOrFrequentHeadaches" => @medical_patient_form.review_of_sym_neurological_severe_or_frequent_headaches ? 'Yes' : 'No',
@@ -333,7 +333,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "HaveYouHadAColonoscopy" => @medical_patient_form.health_maintenance_colonoscopy ? 'Yes' : 'No',
       "LastColonoscopyDate" => @medical_patient_form.health_maintenance_colonoscopy,
       "WasYourColonoscopyNormal" => @medical_patient_form.health_maintenance_colonoscopy_test_results ? (@medical_patient_form.health_maintenance_colonoscopy_test_results == "Normal" ? 'Yes' : 'No') : '',
-      "IfColonoscopyWasAbnormalWhatWasFound" => @medical_patient_form.health_maintenance_colonoscopy == "Abnormal" ? @medical_patient_form.health_maintenance_description_of_abnormal_test_results : '',
+      "IfColonoscopyWasAbnormalWhatWasFound" => @medical_patient_form.health_maintenance_colonoscopy_test_results == "Abnormal" ? @medical_patient_form.health_maintenance_description_of_abnormal_test_results : '',
 
       "WhenWasYourLastMammogram" => @medical_patient_form.health_maintenance_most_recent_mammogram,
       "WhenWasYourLastPapSmear" => @medical_patient_form.health_maintenance_most_recent_pap_smear,
