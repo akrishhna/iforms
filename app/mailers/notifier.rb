@@ -70,11 +70,13 @@ class Notifier < ActionMailer::Base
     @user = User.find_by_email(@girl_scout.email)
     @registration_url = user_registration_url
     if @user_service_provider == 2
-      #from_name = "#{@activity.leader_first_name} #{@activity.leader_last_name} <iforms-noreply@ifor.ms>"
-      from_name = "iforms-noreply@ifor.ms"
+      first_name = @activity.leader_first_name.gsub(/[^0-9A-Za-z]/, '')
+      last_name = @activity.leader_last_name.gsub(/[^0-9A-Za-z]/, '')
+      from_name = "#{first_name} #{last_name} <iforms-noreply@ifor.ms>"
     elsif @user_service_provider == 3
-      #from_name = "#{@activity.leader_advisor_1_first_name} #{@activity.leader_advisor_1_last_name} <iforms-noreply@ifor.ms>"
-      from_name = "iforms-noreply@ifor.ms"
+      first_name = @activity.leader_advisor_1_first_name.gsub(/[^0-9A-Za-z]/, '')
+      last_name = @activity.leader_advisor_1_last_name.gsub(/[^0-9A-Za-z]/, '')
+      from_name = "#{first_name} #{last_name} <iforms-noreply@ifor.ms>"
     else
       from_name = "iforms-noreply@ifor.ms"
     end
