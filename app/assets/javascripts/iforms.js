@@ -18,12 +18,13 @@ $('.karen_naples_new_patient_iforms_nav_link').live('click', function () {
 });
 
 $('#billing_tab').live('click', function () {
-  billing_details_info();
   update_all_fields();
+  billing_details_info();
 });
 
 
 $('.karnel_naples_new_patient_billing').live('change', function () {
+  update_all_fields();
   if ($('.karnel_naples_new_patient_billing:checked').val() == 'Self') {
     billing_details_info();
   }
@@ -64,7 +65,6 @@ $('.karnel_naples_new_patient_billing').live('change', function () {
     $('#iform_billing_birth_date_2i').val('').attr('disabled',false);
     $('#iform_billing_birth_date_3i').val('').attr('disabled',false);
   }
-  update_all_fields();
 });
 
 
