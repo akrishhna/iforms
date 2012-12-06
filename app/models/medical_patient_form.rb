@@ -312,7 +312,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "CessationOfBreathingDuringSleep" => @medical_patient_form.review_of_sym_sleep_difficulty_cessation_of_breathing ? 'Yes' : 'No',
 
       #Helth Maintainance Tab
-      "HaveYouHadABoneDensityTest" => @medical_patient_form.health_maintenance_bone_density_test ? 'Yes' : 'No',
+      "HaveYouHadABoneDensityTest" => @medical_patient_form.health_maintenance_bone_density_test ? (@medical_patient_form.health_maintenance_bone_density_test ? 'Yes' : 'No') : '',
       "LastBoneDensityTestDate" => @medical_patient_form.health_maintenance_bone_density_test,
       "HaveYouHadASkinCancerScreeningCheckedByADermatologistNo" => @medical_patient_form.health_maintenance_skin_cancer_screening ? (@medical_patient_form.health_maintenance_skin_cancer_screening ? 'No' : 'Yes') : '',
       "HaveYouHadASkinCancerScreeningCheckedByADermatologistYes" => @medical_patient_form.health_maintenance_skin_cancer_screening ? (@medical_patient_form.health_maintenance_skin_cancer_screening ? 'Yes' : 'No') : '',
@@ -325,9 +325,9 @@ class MedicalPatientForm < ActiveRecord::Base
       "CholesterolTestTriglycerides" => @medical_patient_form.health_maintenance_triglycerides,
 
       "TetanusVaccineBoosterDate" => @medical_patient_form.health_maintenance_most_recent_tetanus_vaccine_booster,
-      "HaveYouReceivedShinglesVaccine" => @medical_patient_form.health_maintenance_shingles_vaccine ? 'Yes' : 'No',
+      "HaveYouReceivedShinglesVaccine" => @medical_patient_form.health_maintenance_shingles_vaccine ? (@medical_patient_form.health_maintenance_shingles_vaccine ? 'Yes' : 'No') : '',
       "PneumovaxVaccineDate" => @medical_patient_form.health_maintenance_pneumovax,
-      "HaveYouReceivedPneumovasVaccine" => @medical_patient_form.health_maintenance_pneumovax ? 'Yes' : 'No',
+      "HaveYouReceivedPneumovasVaccine" => @medical_patient_form.health_maintenance_pneumovax ? (@medical_patient_form.health_maintenance_pneumovax ? 'Yes' : 'No') : '',
       "HaveYouReceivedTheFluVaccine" => @medical_patient_form.health_maintenance_flu_vaccine ? 'Yes' : 'No',
 
       "HaveYouHadAColonoscopy" => @medical_patient_form.health_maintenance_colonoscopy ? 'Yes' : 'No',
