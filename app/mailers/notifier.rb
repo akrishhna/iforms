@@ -9,9 +9,9 @@ class Notifier < ActionMailer::Base
     @login_url = new_user_session_url
     @registration_url = user_registration_url(:id => @appointment.id)
     if @user_service_provider == 1
-      from_name = 'James R. Waters, DDS, MSD, PA <iforms-noreply@ifor.ms>'
+      from_name = "James R Waters DDS MSD PA <iforms-noreply@ifor.ms>"
     elsif @user_service_provider == 4
-      from_name = 'Karen Naples D.D.S. P.A. <iforms-noreply@ifor.ms>'
+      from_name = 'Karen Naples DDS PA <iforms-noreply@ifor.ms>'
     else
       from_name = "iforms-noreply@ifor.ms"
     end
@@ -70,9 +70,11 @@ class Notifier < ActionMailer::Base
     @user = User.find_by_email(@girl_scout.email)
     @registration_url = user_registration_url
     if @user_service_provider == 2
-      from_name = "#{@activity.leader_first_name} #{@activity.leader_last_name} <iforms-noreply@ifor.ms>"
+      #from_name = "#{@activity.leader_first_name} #{@activity.leader_last_name} <iforms-noreply@ifor.ms>"
+      from_name = "iforms-noreply@ifor.ms"
     elsif @user_service_provider == 3
-      from_name = "#{@activity.leader_advisor_1_first_name} #{@activity.leader_advisor_1_last_name} <iforms-noreply@ifor.ms>"
+      #from_name = "#{@activity.leader_advisor_1_first_name} #{@activity.leader_advisor_1_last_name} <iforms-noreply@ifor.ms>"
+      from_name = "iforms-noreply@ifor.ms"
     else
       from_name = "iforms-noreply@ifor.ms"
     end
@@ -92,9 +94,9 @@ class Notifier < ActionMailer::Base
     @user_service_provider = user_service_provider
     @preferred_name = @appointment.preferred_name
     @login_url = new_user_session_url
-    @registration_url = user_registration_url(:id => @appointment.id)
+    @registration_url = user_registration_url(:medical_app_id => @appointment.id)
     if @user_service_provider == 5
-      from_name = 'Tony R. Aventa, M.D. <iforms-noreply@ifor.ms>'
+      from_name = 'Tony R Aventa MD <iforms-noreply@ifor.ms>'
     else
       from_name = "iforms-noreply@ifor.ms"
     end
