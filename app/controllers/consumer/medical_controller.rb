@@ -18,7 +18,7 @@ class Consumer::MedicalController < ApplicationController
     else
       @appointment.status = 'In Progress'
     end
-    @appointment.save
+    @appointment.save(:validate => false)
   end
 
   def update
@@ -34,7 +34,7 @@ class Consumer::MedicalController < ApplicationController
         @appointment.status = "Submitted"
       end
       @appointment.timereceived = Time.now
-      @appointment.save
+      @appointment.save(:validate => false)
       Notifier.capital_medical_clinic_form_submission_notification(@appointment,@medical_patient_form).deliver
       redirect_to :consumer_index,:notice => "Form Submitted successfully"
     else
