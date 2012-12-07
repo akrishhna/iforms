@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :girl_scout_diamond_activity_permission_forms
   has_one :admin_user
   has_many :medical_appointments
+  has_many :boy_scouts_rosters
+  has_many :boy_scouts_activities
+  has_many :boy_scouts_activity_consent_forms
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable, :timeoutable and :activatable
