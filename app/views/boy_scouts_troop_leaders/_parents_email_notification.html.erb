@@ -1,0 +1,8 @@
+
+<p> Dear
+
+  <%= boy_scout.present? ? (boy_scout.parent_first_name.to_s != '' ||  boy_scout.parent_last_name.to_s != '') ? boy_scout.parent_first_name.to_s + " " + boy_scout.parent_last_name.to_s : "Parent":'Parent' %>,</p>
+
+
+<p>The <b><%= boy_activity.activity_name.to_s != '' ? (link_to boy_activity.activity_name, boy_activity.id.present? ? boy_activity_permission_form_pdf_url(boy_activity.id) : "#", :target => '_blank') : "[Activity Name]" %></b> Permission Forms are now available. Please complete and submit by <b><%= boy_activity.activity_signed_permission_due_date.to_s !='' ? boy_activity.activity_signed_permission_due_date : "[Signed Permission Form Due Date]" %></b>.</p>
+<p>Thank You,<br><b><%= (boy_activity.leader_first_name.to_s !='' || boy_activity.leader_last_name.to_s != '') ? boy_activity.leader_first_name.to_s + " " + boy_activity.leader_last_name.to_s : "[Troop Leader Name]" %></b></p>

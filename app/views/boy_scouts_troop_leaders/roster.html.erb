@@ -1,0 +1,33 @@
+<div class="boy_scouts_troop_leaders_nav_links">
+  <%= link_to "Activities", activities_boy_scouts_troop_leaders_path %> <strong> | </strong>
+  <%= link_to "Activity Consent Forms", permission_forms_boy_scouts_troop_leaders_path %> <strong> | </strong>
+  <strong>Roster</strong>
+</div>
+<div>&nbsp;</div>
+<div>
+  <%= link_to "Add Scout", "#", :class => "btn btn-primary", :id => "add_boy_scout" %>
+  <%= link_to "Delete Selected Scout(s)", "#alert_box_text", :class => "btn btn-danger delete_boys_scouts", :id => "delete_boy_scouts", :disabled => "disabled" %>
+</div>
+<div class="boy_scouts_div">
+  <table class="table table-bordered table-hover" id="boy_scouts_table">
+    <tr>
+      <th class="boy_scout_check_box">
+        <%= check_box_tag :select_all, 1, false, :class => "select_all_check_box" %>
+      </th>
+      <th>Scout</th>
+      <th>Parent</th>
+      <th>Email Address</th>
+    </tr>
+    <%= render :partial => "boy_scout", :collection => @boy_scouts %>
+  </table>
+  <div id="alert_box_text" class="hide" style="text-align: center;">
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Delete Selected Scouts?</p>
+    <%= link_to "Yes", "#alert_box_error", :class => "btn btn-danger delete_yes", :id => "delete_yes" %>&nbsp;&nbsp;
+    <%= link_to "No", "#", :class => "btn btn-primary", :id => "delete_no", :onclick => "$.fancybox.close();" %>
+  </div>
+
+  <div id="alert_box_success" class="hide" style="text-align: center">
+    <p style="font-size:18px;margin: 10px 0 15px 0; "> Deleted Selected scouts. </p>
+    <%= link_to "Ok", "#", :class => "btn btn-primary", :onclick => "$.fancybox.close();" %>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="boy_scouts_troop_leaders_nav_links">
+  <%= link_to "Activities", activities_boy_scouts_troop_leaders_path %> <strong> | </strong>
+  <strong>Activity Consent Forms</strong> <strong> | </strong>
+  <%= link_to "Roster", roster_boy_scouts_troop_leaders_path %>
+</div>
+<div>&nbsp;</div>
+<div>
+  <p style="margin: 0 ">Select an Activity</p>
+  <%= select_tag("boy_scout_permission_form", options_for_select(@boy_scouts_activities.collect {|a| [truncate(a[0], :length => 30), a[1], :title => a[0]]}, session[:selected_activity_id]), :prompt =>'') %>
+  <%= hidden_field_tag :selected_activity_id, session[:selected_activity_id]%>
+  <%= link_to "Print Form(s)",  "#", :class => "btn btn-info ", :id => 'permission_form_print_forms_btn', :disabled => "disabled", "data-activity-id" => (@activity.id rescue "") %> &nbsp;
+  <%= link_to "Send Email Reminder to Pending", "#", :class => "btn btn-primary", :id => 'permission_form_send_email_btn' %>
+  <span style="margin-left: 90px;background-color:#d3d3d3;" class="resend_mail_success_notification hide"><span class="resend_mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
+</div>
+<div class="clear" style="margin-top: 20px;">&nbsp;</div>
+<div>
+  <table class="table table-bordered table-hover" id="boy_scouts_permission_form_table">
+    <tr>
+      <th class="boy_scout_check_box">
+        <%= check_box_tag :select_all_ch_box, 1, false, :class => "pf_select_all_check_box" %>
+      </th>
+      <th>Scout</th>
+      <th>Attending?</th>
+      <th>Activity Consent Form Status</th>
+    </tr>
+
+    <% @results.each do |result| %>
+      <tr>
+        <td class="boy_scout_check_box"><%= check_box_tag :check_box_row, '', false, "data-id" => result[:id],"data-status" => result[:status] %></td>
+        <td><%= result[:boy_scout] %></td>
+        <td>
+          <%= result[:boy_scout_attending] %>
+          <% if result[:boy_scout_attending] == 'Yes' %>
+            <% @yes_counter += 1 %>
+          <% elsif result[:boy_scout_attending] == 'No' %>
+            <% @no_counter += 1 %>
+          <% else %>
+            <% @other_counter += 1 %>
+          <% end %>
+        </td>
+        <td>
+          <% if result[:status] == "Updated" %>
+            <span data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= result[:updated_at] %>">Updated <%= result[:updated_at] %></span>
+          <% elsif result[:status] == "Submitted" || result[:status] == "Sent"%>
+            <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= result[:updated_at] %>">Submitted <%= result[:updated_at] %></span>
+          <% elsif result[:status] == 'In Progress' %>
+            <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">In Progress</span>
+          <% else %>
+            <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun"><%= result[:status] %></span>
+          <% end %>
+        </td>
+        </tr>
+    <% end %>
+    <% if @results != [] %>
+      <tr>
+        <td></td>
+        <td>Totals:</td>
+         <td>
+          Yes= <%= @yes_counter %>, No= <%= @no_counter %>, ?= <%= @other_counter %>
+         </td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<script>
+  $("span").tooltip({
+  });
+</script>

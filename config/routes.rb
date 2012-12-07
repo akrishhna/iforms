@@ -1,5 +1,25 @@
 Iforms::Application.routes.draw do
 
+  match 'boy_scouts_troop_leaders/activity_permission_form/:activity_id' => "boy_scouts_troop_leaders#activity_permission_form", :as => "boy_activity_permission_form_pdf"
+  match 'boy_scouts_troop_leaders/activity/:activity_id' => 'boy_scouts_troop_leaders#show_activity', :as => 'boy_scouts_activity'
+ resources :boy_scouts_troop_leaders do
+    collection do
+      get 'show_all_permission_forms_pdf'
+      get 'pdf_merging'
+      get 'permission_forms'
+      get 'activities'
+      get 'roster'
+      get 'get_boy_scouts_row'
+      post 'boy_scouts_roster'
+      post 'delete_boy_scouts'
+      post 'create_activity'
+      post 'send_notification_email'
+      post 'delete_activity'
+      post 'resend_permission_form'
+      post 'change_welcome_message_status'
+    end
+  end
+
   resources :medical_appointments
 
   devise_scope :user do
@@ -82,7 +102,7 @@ Iforms::Application.routes.draw do
       get 'roster'
       get 'get_girl_scouts_row'
       post 'girl_scouts_roster'
-      post 'delete_girl_scouts'
+      post 'delete_boy_scouts'
       post 'create_activity'
       post 'send_notification_email'
       post 'delete_activity'

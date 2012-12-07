@@ -1,0 +1,7 @@
+
+$('#permission_form_send_email_btn').attr('disabled', false);
+$('#permission_form_send_email_btn').text('Send Email Remainder to Pending');
+
+$('.resend_mail_counter').text(<%=@counter%>);
+$('.resend_mail_success_notification').fadeIn('slow');
+$('.resend_mail_success_notification').delay(3000).fadeOut('slow');
