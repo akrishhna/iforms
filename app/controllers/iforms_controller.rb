@@ -257,6 +257,12 @@ class IformsController < ApplicationController
     iform = Iform.find(params[:iform_id])
     iform.update_attributes params[:iform]
 
+    if params[:iform][:person_responsible_for_ac] == "Self"
+      iform.billing_birth_date = iform.Self_Birthdate
+    end
+
+    iform.save(:validate => false)
+
     render :json => {:status => 'ok'}
   end
 

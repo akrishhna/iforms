@@ -64,7 +64,13 @@ class Consumer::MedicalController < ApplicationController
   def medical_patient_form_all_fields_update
     medical_patient_form = MedicalPatientForm.find(params[:medical_patient_form][:id])
     medical_patient_form.update_attributes params[:medical_patient_form]
-
+    if params[:medical_patient_form][:primary_insurance_policy_holder] == "Self"
+    medical_patient_form.primary_insurance_birth_date = medical_patient_form.birth_date
+    end
+    if params[:medical_patient_form][:secondary_insurance_policy_holder] == "Self"
+    medical_patient_form.secondary_insurance_birth_date = medical_patient_form.birth_date
+    end
+    medical_patient_form.save(:validate => false)
     render :json => {:status => 'ok'}
   end
 

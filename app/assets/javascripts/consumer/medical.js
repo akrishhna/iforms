@@ -152,17 +152,16 @@ $(function () {
   // pre populating fields
 
   $('#insurance_primary_tab').live('click', function () {
-    update_all_fields();
     primary_insurance_details_info();
+    update_all_fields();
   });
 
   $('#insurance_secondary_tab').live('click', function () {
-    update_all_fields();
     secondary_insurance_details_info();
+    update_all_fields();
   });
 
   $('.medical_patient_primary_insurance_policy').live('change', function () {
-    update_all_fields();
     if ($('.medical_patient_primary_insurance_policy:checked').val() == 'Self') {
       primary_insurance_details_info();
     }
@@ -179,6 +178,7 @@ $(function () {
       $('#medical_patient_form_primary_insurance_ssn_3').val('');
       $('#medical_patient_form_primary_insurance_policy_holder_employer').val('');
     }
+    update_all_fields();
   });
 
   function primary_insurance_details_info() {
@@ -198,7 +198,6 @@ $(function () {
   }
 
   $('.medical_patient_secondary_insurance_policy').live('change', function () {
-    update_all_fields();
     if ($('.medical_patient_secondary_insurance_policy:checked').val() == 'Self') {
       secondary_insurance_details_info();
     }
@@ -218,6 +217,7 @@ $(function () {
       $('#medical_patient_form_secondary_insurance_ssn_3').val('');
       $('#medical_patient_form_secondary_insurance_policy_holder_employer').val('');
     }
+    update_all_fields();
   });
 
   function secondary_insurance_details_info() {
