@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
     elsif service_provider.id == 2 || service_provider.id == 3
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
+    elsif service_provider.id == 6
+      (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'Troop Leader'
     else
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     end
@@ -98,6 +100,8 @@ class ApplicationController < ActionController::Base
       @homepage_url = '/doctor/appointments?sp_id=4'
     elsif session[:user_service_provider] == 5
       @homepage_url = '/medical_appointments?sp_id=5'
+    elsif session[:user_service_provider] == 3
+      @homepage_url = '/boy_scouts_troop_leaders?sp_id=6'
     elsif session[:user_service_provider] == 0
       @homepage_url = '/consumer'
     else

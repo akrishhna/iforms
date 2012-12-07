@@ -25,7 +25,14 @@ class DeviserolesController < ApplicationController
         redirect_to :controller => "girl_scout_troop_leader_profiles", :action => "new"
       else
       redirect_to "/girl_scouts_troop_leaders?sp_id=#{@service_provider.id}"
-       end
+      end
+    elsif @service_provider.id == 6
+      @profile = Profile.find_by_user_id(current_user.id)
+      if @profile.nil?
+        redirect_to :controller => "profiles", :action => "new"
+      else
+        redirect_to "/boy_scouts_troop_leaders?sp_id=#{@service_provider.id}"
+      end
     else
     end
 
