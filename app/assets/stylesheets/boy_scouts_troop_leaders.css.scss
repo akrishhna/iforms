@@ -1,3 +1,92 @@
 // Place all the styles related to the BoyScoutsTroopLeaders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Place all the styles related to the boyScoutsTroopLeaders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.boy_scouts_troop_leaders_nav_links {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.boy_scouts_div {
+  margin-top: 15px;
+}
+
+/* roster */
+
+table.boy_scouts_table {
+
+}
+
+th.boy_scout_check_box, td.boy_scout_check_box {
+  width: 40px;
+  text-align: center;
+
+  input[type=checkbox] {
+    margin-bottom: 2px;
+  }
+}
+
+td.boy_scout_check_box {
+  input[type=checkbox] {
+    margin-top: 8px;
+  }
+}
+
+tr.boy_scout_row {
+
+  input[type=text] {
+    margin: 0;
+  }
+
+}
+
+/* end roster*/
+
+/* Activity */
+
+
+
+#boy_scouts_activities, #boy_scout_permission_form {
+  margin: 1px 30px 1px 0;
+}
+
+.notification_email_to_parent_text {
+  padding: 23px 18px;
+  margin-right: 10px;
+}
+
+.activity_footer_links {
+  text-align: right;
+  margin: 10px 10px 0 0;
+}
+
+.activity_phone {
+  width: 30px;
+}
+
+.activity_phone_last {
+  width: 40px;
+}
+
+.boy_scouts_activity_form {
+
+  margin: 10px 0 0 0;
+
+  .controls {
+    margin-left: 240px;
+  }
+
+  .control-label {
+    width: 225px;
+  }
+
+  .form_errors {
+    margin: 10px 0;
+  }
+}
+
+/* end ACtivity */
