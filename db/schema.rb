@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203045620) do
+ActiveRecord::Schema.define(:version => 20121207051018) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -58,6 +58,59 @@ ActiveRecord::Schema.define(:version => 20121203045620) do
     t.integer  "service_provider_id"
     t.integer  "doctor_user_id"
     t.integer  "patient_user_id"
+  end
+
+  create_table "boy_scouts_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "service_provider_id"
+    t.string   "activity_name"
+    t.date     "activity_date_begin"
+    t.date     "activity_date_end"
+    t.date     "activity_signed_permission_due_date"
+    t.string   "leader_first_name"
+    t.string   "leader_last_name"
+    t.string   "leader_email"
+    t.integer  "leader_phone_1"
+    t.integer  "leader_phone_2"
+    t.integer  "leader_phone_3"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "boy_scouts_activity_consent_forms", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "boy_scout_id"
+    t.integer  "boy_scout_activity_id"
+    t.string   "attending"
+    t.string   "status"
+    t.string   "bacf_restriction"
+    t.string   "bacf_spcl_considerations_for_restriction"
+    t.date     "bacf_birthdate"
+    t.string   "bacf_address_1"
+    t.string   "bacf_address_2"
+    t.string   "bacf_address_city"
+    t.string   "bacf_address_state"
+    t.string   "bacf_address_zip"
+    t.string   "bacf_parent_first_name"
+    t.string   "bacf_parent_last_name"
+    t.integer  "bacf_parent_phone_1"
+    t.integer  "bacf_parent_phone_2"
+    t.integer  "bacf_parent_phone_3"
+    t.string   "email"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "boy_scouts_rosters", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "service_provider_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_name"
+    t.string   "parent_first_name"
+    t.string   "email"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "childforms", :force => true do |t|

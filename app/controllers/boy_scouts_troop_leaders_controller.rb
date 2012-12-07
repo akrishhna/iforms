@@ -1,0 +1,2 @@
+class BoyScoutsTroopLeadersController < ApplicationController
+end

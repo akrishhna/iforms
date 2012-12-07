@@ -1,0 +1,2 @@
+module BoyScoutsTroopLeadersHelper
+end
