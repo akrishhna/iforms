@@ -8,7 +8,7 @@ class CreateBoyScoutsRosters < ActiveRecord::Migration
       t.string :last_name
       t.string :middle_name
       t.string :parent_first_name
-      t.string :parent_first_name
+      t.string :parent_last_name
       t.string :email
 
       t.timestamps

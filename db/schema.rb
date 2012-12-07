@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20121207051018) do
 
   create_table "boy_scouts_activity_consent_forms", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "boy_scout_id"
+    t.integer  "boy_scouts_roster_id"
     t.integer  "boy_scout_activity_id"
     t.string   "attending"
     t.string   "status"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20121207051018) do
     t.string   "last_name"
     t.string   "middle_name"
     t.string   "parent_first_name"
+    t.string   "parent_last_name"
     t.string   "email"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
