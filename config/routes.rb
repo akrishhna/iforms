@@ -77,6 +77,15 @@ Iforms::Application.routes.draw do
         post 'medical_patient_form_all_fields_update'
       end
     end
+    resources :boy_scouts  do
+      collection do
+        get 'view_boy_scout_permission_form'
+        post 'boy_scout_attending_val_change'
+        get 'consumer_view_pdf'
+        post 'send_permission_form_to_troop_leader'
+        post 'boy_scouts_permission_form'
+      end
+    end
   end
 
   resources :consumer do
