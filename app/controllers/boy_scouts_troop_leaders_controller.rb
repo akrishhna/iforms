@@ -112,10 +112,10 @@ class BoyScoutsTroopLeadersController < ApplicationController
         email = boy_scout.email
         if email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
           @user = User.find_by_email(email)
-          pf = BoyScoutsActivityConsentForm.find_or_initialize_by_boy_scouts_roster_id_and_boy_scout_activity_id(boy_scout.id, @activity.id)
+          pf = BoyScoutsActivityConsentForm.find_or_initialize_by_boy_scouts_roster_id_and_boy_scouts_activity_id(boy_scout.id, @activity.id)
           pf.user_id = @user.id if @user
           pf.boy_scouts_roster_id = boy_scout.id
-          pf.boy_scout_activity_id = @activity.id
+          pf.boy_scouts_activity_id = @activity.id
           pf.status = "Pending"
           pf.attending = "?"
           pf.save(:validate => false)
@@ -129,7 +129,7 @@ class BoyScoutsTroopLeadersController < ApplicationController
 
   def delete_activity
     BoyScoutsActivity.delete(params[:id])
-    permissionforms = BoyScoutsActivityConsentForm.where('boy_scout_activity_id = ?', params[:id])
+    permissionforms = BoyScoutsActivityConsentForm.where('boy_scouts_activity_id = ?', params[:id])
     permissionforms.each do |pf|
       BoyScoutsActivityConsentForm.delete(pf.id)
     end
@@ -172,7 +172,7 @@ class BoyScoutsTroopLeadersController < ApplicationController
       activity_id = session[:selected_activity_id]
       @activity = BoyScoutsActivity.find_by_id(session[:selected_activity_id])
     end
-    @boy_scout_permission_forms = BoyScoutsActivityConsentForm.joins(:boy_scouts_roster).where("boy_scout_activity_id = ? and service_provider_id=?", activity_id, session[:user_service_provider]).order("boy_scouts_rosters.first_name")
+    @boy_scout_permission_forms = BoyScoutsActivityConsentForm.joins(:boy_scouts_roster).where("boy_scouts_activity_id = ? and service_provider_id=?", activity_id, session[:user_service_provider]).order("boy_scouts_rosters.first_name")
     @results = []
     @yes_counter = 0
     @no_counter = 0
@@ -197,10 +197,10 @@ class BoyScoutsTroopLeadersController < ApplicationController
 
   def resend_permission_form
     @counter = 0
-    @boy_scouts_activity_permission_forms = BoyScoutsActivityConsentForm.where('boy_scout_activity_id=? and status in (?) and attending in (?)', params[:activity_id], ['Pending', 'In Progress'], ['Yes', '?'])
+    @boy_scouts_activity_permission_forms = BoyScoutsActivityConsentForm.where('boy_scouts_activity_id=? and status in (?) and attending in (?)', params[:activity_id], ['Pending', 'In Progress'], ['Yes', '?'])
     @boy_scouts_activity_permission_forms.each do |pf|
       @boy_scout = current_user.boy_scouts_rosters.find_by_id_and_service_provider_id(pf.boy_scouts_roster_id, session[:user_service_provider])
-      @activity = current_user.boy_scouts_activities.find_by_id_and_service_provider_id(pf.boy_scout_activity_id, session[:user_service_provider])
+      @activity = current_user.boy_scouts_activities.find_by_id_and_service_provider_id(pf.boy_scouts_activity_id, session[:user_service_provider])
       Notifier.send_boy_scout_parent_email_notification(@activity, @boy_scout,session[:user_service_provider]).deliver
       @counter += 1
     end
@@ -218,7 +218,7 @@ class BoyScoutsTroopLeadersController < ApplicationController
         @boy_scout = @boy_scouts_permission_form.boy_scouts_roster
         permission_form_name = activity_name + '-activity-consent-form-of-id-' + @boy_scout.id.to_s + "-sp_id-#{session[:user_service_provider]}" rescue ''
         permission_form_path = "#{PDFFILES_PATH}#{permission_form_name}.pdf"
-          BoyScoutsActivityConsentForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @boy_scouts_permission_form, permission_form_path)
+          BoyScoutsActivityConsentForm.activity_parent_permission_form_pdf_generater(@activity, @boy_scouts_permission_form, permission_form_path)
         @files << Rails.root.join("#{PDFFILES_PATH}#{permission_form_name}.pdf")
       end
     end
