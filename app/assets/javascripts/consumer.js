@@ -11,10 +11,11 @@ $(function () {
         var tab_index = parseInt(consumer_tab_index);
         $("#consumer_tab_links a:eq(" + tab_index + ")").tab('show');
       } else {
-        // $("#boy_scouts").attr('data-is_loaded', 'true');
+         $("#boy_scouts").attr('data-is_loaded', 'true');
         //$("#boy_scouts").load('/consumer/boy_scouts_list');
-        $("#dental").attr('data-is_loaded', 'true');
-        $("#dental").load('/consumer/dental');
+        $("#boy_scouts").load('/consumer/boy_scouts');
+      //  $("#dental").attr('data-is_loaded', 'true');
+       // $("#dental").load('/consumer/dental');
       }
     });
 
@@ -27,6 +28,14 @@ $(function () {
     });
   }
 
+  /* Boys Scout Tab */
+  $('.boy_scout_attending').live('change', function () {
+    var selected_val = $(this).attr('data-value');
+    var id = $(this).attr('data-id');
+    $.post("/consumer/boy_scouts/boy_scout_attending_val_change", {id:id,selected_val:selected_val})
+  });
+
+  /* end Girl Scout Tab */
   /* Girl Scout Tab */
 
   $('.girl_scout_attending').live('change', function () {
