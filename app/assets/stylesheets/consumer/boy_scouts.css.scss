@@ -1,0 +1,45 @@
+// Place all the styles related to the consumer/BoyScouts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.permission_form {
+
+  table {
+    float: left;
+    margin-right: 20px;
+    width: 47%;
+
+    td, th {
+      border: 0;
+    }
+  }
+}
+
+.boy_scout_permission_form {
+
+  .controls {
+    margin-left: 240px;
+  }
+
+  .control-label {
+    width: 225px;
+  }
+
+  .form_errors {
+    margin: 10px 0;
+  }
+
+  select {
+    width: 110px;
+  }
+}
+
+.table td.boy_scout_check_box {
+  width: 40px;
+  text-align: center;
+
+  input[type="checkbox"] {
+    margin-left: 2px;
+  }
+}
+
