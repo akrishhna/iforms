@@ -1,0 +1,2 @@
+<p><%= @activity.leader_first_name %> <%= @activity.leader_last_name %>,</p>
+<p><%= @boy_scout.parent_first_name %> <%= @boy_scout.parent_last_name %> submitted the <%= link_to @activity.activity_name,permission_forms_boy_scouts_troop_leaders_url(:id => @activity.id) %> Parent Permission Form for <%= @boy_scout.first_name %> <%= @boy_scout.last_name %>.

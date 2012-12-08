@@ -117,7 +117,7 @@ class Notifier < ActionMailer::Base
     @activity = activity
     @boy_scout = boy_scout
     @user_service_provider = user_service_provider
-    @permission_form = BoyScoutsActivityConsentForm.find_by_boy_scout_activity_id_and_boy_scouts_roster_id(@activity.id, @boy_scout.id)
+    @permission_form = BoyScoutsActivityConsentForm.find_by_boy_scouts_activity_id_and_boy_scouts_roster_id(@activity.id, @boy_scout.id)
     @user = User.find_by_email(@boy_scout.email)
     @registration_url = user_registration_url
       first_name = @activity.leader_first_name.gsub(/[^0-9A-Za-z]/, '')
@@ -126,9 +126,9 @@ class Notifier < ActionMailer::Base
     mail(:to => @boy_scout.email, :subject => "Activity Permission Form", :from => from_name)
   end
 
-  def send_boy_scout_activity_consent_form_to_tl_notification(activity, girl_scout, user)
+  def send_boy_scout_activity_consent_form_to_tl_notification(activity, boy_scout, user)
     @activity = activity
-    @girl_scout = girl_scout
+    @boy_scout = boy_scout
     @user = user
     mail(:to => @user.email, :subject => "Parent Permission Granted Form")
   end

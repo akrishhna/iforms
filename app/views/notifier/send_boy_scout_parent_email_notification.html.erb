@@ -3,7 +3,7 @@
   <%= @boy_scout.present? ? (@boy_scout.parent_first_name.to_s != '' ||  @boy_scout.parent_last_name.to_s != '') ? @boy_scout.parent_first_name.to_s + " " + @boy_scout.parent_last_name.to_s : "Parent":'Parent' %>,</p>
 
 
-<p>The <b><%= link_to @activity.activity_name, @user.present? ? '#' : @registration_url %></b> Permission Forms are now available. Please complete and submit by <b><%= @activity.activity_signed_permission_due_date %></b>.</p>
+<p>The <b><%= link_to @activity.activity_name, @user.present? ? view_boy_scout_permission_form_consumer_boy_scouts_url(:id => @permission_form.id) : @registration_url %></b> Permission Forms are now available. Please complete and submit by <b><%= @activity.activity_signed_permission_due_date %></b>.</p>
 
 <p>Thank You,<br><b><%= @activity.leader_first_name.to_s + " " + @activity.leader_last_name.to_s %></b></p>
 
