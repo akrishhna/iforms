@@ -4,7 +4,7 @@ class CreateBoyScoutsActivityConsentForms < ActiveRecord::Migration
 
       t.integer :user_id
       t.integer :boy_scouts_roster_id
-      t.integer :boy_scout_activity_id
+      t.integer :boy_scouts_activity_id
       t.string :attending
       t.string :status
 

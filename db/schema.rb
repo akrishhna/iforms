@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20121207051018) do
   create_table "boy_scouts_activity_consent_forms", :force => true do |t|
     t.integer  "user_id"
     t.integer  "boy_scouts_roster_id"
-    t.integer  "boy_scout_activity_id"
+    t.integer  "boy_scouts_activity_id"
     t.string   "attending"
     t.string   "status"
     t.string   "bacf_restriction"
