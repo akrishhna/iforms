@@ -1,0 +1,40 @@
+<div class="permission_form">
+  <table class="table">
+    <tr>
+      <th colspan="2"><u>Activity</u></th>
+    </tr>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><%= @activity.activity_name %></td>
+    </tr>
+    <tr>
+      <td><strong>Date Begin</strong></td>
+      <td><%= @activity.activity_date_begin.strftime("%m/%d/%Y") rescue '' %></td>
+    </tr>
+    <tr>
+      <td><strong>Date End</strong></td>
+      <td><%= @activity.activity_date_end.strftime("%m/%d/%Y") rescue '' %></td>
+    </tr>
+    <tr>
+      <td><strong>Signed Permission Form Due</strong></td>
+      <td><%= @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") rescue '' %></td>
+    </tr>
+  </table>
+  <table class="table">
+    <tr>
+      <th colspan="2" ><u>Tour</u></th>
+    </tr>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><%= @activity.leader_first_name %> <%= @activity.leader_last_name %></td>
+    </tr>
+    <tr>
+      <td><strong>Email</strong></td>
+      <td><%= @activity.leader_email %></td>
+    </tr>
+    <tr>
+      <td><strong>Phone</strong></td>
+      <td><%= @activity.leader_phone_1 %>-<%= @activity.leader_phone_2 %>-<%= @activity.leader_phone_3 %></td>
+    </tr>
+  </table>
+</div>

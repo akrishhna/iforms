@@ -1,0 +1,64 @@
+<%= form_for @boy_scouts_permission_form, :url => "/view_boy_scout_permission_form", :html => {:class => 'form-horizontal boy_scout_permission_form', :multipart => true} do |f| %>
+  <%= f.hidden_field :id %>
+
+  <div class="control-group">
+    <%= f.label :bacf_restriction, ' Restrictions ', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :bacf_restriction, "without_restrictions", :class => 'boy_scout_activity_consent_form_restrictions' %>Without Restrictions
+      <% end %> <br>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :bacf_restriction, "with_restrictions", :class => 'boy_scout_activity_consent_form_restrictions' %>With Special considerations or restrictions
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bacf_spcl_considerations_for_restriction, "Special considerations or restrictions", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :bacf_spcl_considerations_for_restriction %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bacf_birthdate, 'Birth Date', :class => 'control-label' %>
+    <div class="controls ">
+      <%= f.date_select :bacf_birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :style => 'width:145px' %>
+      <%#= f.text_field :bacf_birthdate, :class => "boy_scout_activity_consent_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.bacf_birthdate %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bacf_address_1, "Address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :bacf_address_1, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :bacf_address_2, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :bacf_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
+      <br>
+      <%= f.select :bacf_address_state, options_for_select(StaticData.state, f.object.bacf_address_state), :include_blank => true %> &nbsp;
+      <%= f.text_field :bacf_address_zip, :placeholder => "Postal / Zip Code" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bacf_parent_first_name, " Parent/guardian", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :bacf_parent_first_name, :placeholder => "First Name", :class => "input-small" %>
+      <%= f.text_field :bacf_parent_last_name, :placeholder => "Last Name", :class => "input-small" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bacf_parent_phone_1, "Phone Number", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :bacf_parent_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3  %>
+      -
+      <%= f.text_field :bacf_parent_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3  %>
+      -
+      <%= f.text_field :bacf_parent_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4  %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, "Email", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+<% end %>
+
