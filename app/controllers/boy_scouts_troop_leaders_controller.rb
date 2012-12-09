@@ -142,7 +142,7 @@ class BoyScoutsTroopLeadersController < ApplicationController
 
   def activity_permission_form
     if params[:activity_id] == 'new'
-       form_path = "#{BOY_SCOUTS_ACTIVITY_CONSENT_FORM}"
+       form_path = "#{BOY_SCOUTS_ACTIVITY_CONSENT_READ_ONLY_FORM_PATH}"
       send_file form_path,
                 :filename => "Boy Scouts Activity Consent From.pdf",
                 :disposition => "inline",

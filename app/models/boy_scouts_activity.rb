@@ -4,7 +4,7 @@ class BoyScoutsActivity < ActiveRecord::Base
 
   def self.activity_activity_consent_form_pdf_generater(activity, permission_form_path)
     @activity = activity
-    form_pdf_path = "#{BOY_SCOUTS_ACTIVITY_CONSENT_FORM}"
+    form_pdf_path = "#{BOY_SCOUTS_ACTIVITY_CONSENT_FORM_PATH}"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       "Adult_Tour_Leader" => @activity.leader_first_name.to_s + ' ' + @activity.leader_last_name.to_s,

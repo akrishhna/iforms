@@ -9,7 +9,7 @@ class BoyScoutsActivityConsentForm < ActiveRecord::Base
     @activity = activity
     @boy_scouts_permission_form = boy_scouts_permission_form
     @boy_scout = @boy_scouts_permission_form.boy_scouts_roster
-    form_pdf_path = "#{BOY_SCOUTS_ACTIVITY_CONSENT_FORM}"
+    form_pdf_path = "#{BOY_SCOUTS_ACTIVITY_CONSENT_FORM_PATH}"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
 
     if @boy_scouts_permission_form.bacf_birthdate
