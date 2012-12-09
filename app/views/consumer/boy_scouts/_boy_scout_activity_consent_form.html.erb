@@ -21,7 +21,7 @@
   <div class="control-group">
     <%= f.label :bacf_birthdate, 'Birth Date', :class => 'control-label' %>
     <div class="controls ">
-      <%= f.date_select :bacf_birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :style => 'width:145px' %>
+      <%= f.date_select :bacf_birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
       <%#= f.text_field :bacf_birthdate, :class => "boy_scout_activity_consent_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.bacf_birthdate %>
     </div>
   </div>
@@ -33,7 +33,7 @@
       <br>
       <%= f.text_field :bacf_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
       <br>
-      <%= f.select :bacf_address_state, options_for_select(StaticData.state, f.object.bacf_address_state), :include_blank => true %> &nbsp;
+      <%= f.select :bacf_address_state, options_for_select(StaticData.state, f.object.bacf_address_state), {:include_blank => true}, {:style => "width:222px;"}  %> &nbsp;
       <%= f.text_field :bacf_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
