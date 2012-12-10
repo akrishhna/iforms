@@ -6,7 +6,7 @@
     <th>Due Date</th>
     <th>Attending</th>
     <th>Status</th>
-    <th colspan="2">Action</th>
+    <th>Action</th>
   </tr>
   <% @results.each_with_index do |result, i| %>
     <tr style="text-align: center;">
@@ -42,11 +42,11 @@
         <% end %>
       </td>
       <td>
-        <%= link_to "Edit", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %> |
-        <%= link_to "Update", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %>
-        <%#= link_to "View PDF", consumer_view_pdf_consumer_boy_scouts_path(:id => result[:id]), :target => '_blank' %>
-      </td>
-      <td>
+        <% if result[:status] == 'Updated' || result[:status] == 'Submitted' %>
+          <%= link_to "Update", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %>
+          <% else %>
+          <%= link_to "Edit", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %> |
+          <% end %>
         <%= link_to "View PDF", consumer_view_pdf_consumer_boy_scouts_path(:id => result[:id]), :target => '_blank' %>
       </td>
     </tr>

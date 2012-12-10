@@ -7,7 +7,7 @@ $(function () {
 
   if ($('.page').attr('data-page') == "consumer_index") {
     $(window).load(function () {
-      if (consumer_tab_index != '' && consumer_tab_index != "1") {
+      if (consumer_tab_index != '' && consumer_tab_index != "0") {
         var tab_index = parseInt(consumer_tab_index);
         $("#consumer_tab_links a:eq(" + tab_index + ")").tab('show');
       } else {

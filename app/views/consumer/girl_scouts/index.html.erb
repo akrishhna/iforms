@@ -18,7 +18,6 @@
       <td><%= result[:dollars].present? ? number_to_currency(result[:price]) : "Free!" %></td>
       <td><%= result[:due_date].strftime("%m/%d/%Y") rescue '' %></td>
       <td style="text-align: center;">
-        <%#= debug result[:girl_scout_attending] == 'Yes' %>
         <%= label_tag "radio_buttons", :class => 'radio inline girl_scout_attending', 'data-value' => 'Yes', 'data-id' => result[:id] do %>
           <%= radio_button_tag "girl_scout_attending_#{i}", "Yes", (true if result[:girl_scout_attending] == 'Yes') %>
           Yes
@@ -35,7 +34,7 @@
         <% if result[:status] == 'Updated' %>
           <span data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">
             Updated <%= result[:updated_at].strftime("%m/%d/%Y") %></span>
-        <% elsif result[:status] == 'Submitted' || result[:status] == 'Sent'%>
+        <% elsif result[:status] == 'Submitted' || result[:status] == 'Sent' %>
           <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= result[:updated_at].strftime("%m/%d/%Y") %>">Submitted <%= result[:updated_at].strftime("%m/%d/%Y") %></span>
         <% elsif result[:status] == 'In Progress' %>
           <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">In
@@ -45,13 +44,16 @@
         <% end %>
       </td>
       <td>
-        <%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %> |
-        <%= link_to "Update", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
-        <%#= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
-      </td>
-      <td>
+        <% if result[:status] == 'Updated' || result[:status] == 'Submitted' || result[:status] == 'Sent' %>
+          <%= link_to "Update", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %> |
+          <%#= link_to "Update", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
+        <% else %>
+          <%#= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %> |
+          <%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
+        <% end %>
         <%= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
       </td>
+      <%#= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
     </tr>
   <% end %>
 </table>

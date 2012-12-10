@@ -1,7 +1,7 @@
 class Consumer::BoyScoutsController < ApplicationController
 
   def index
-    session["consumer_tab_index"] = 1
+    session["consumer_tab_index"] = 0
     @results = []
     @boy_scouts_activity_permission_forms = current_user.boy_scouts_activity_consent_forms.order("updated_at DESC")
     @boy_scouts_activity_permission_forms.each do |pf|
@@ -21,7 +21,7 @@ class Consumer::BoyScoutsController < ApplicationController
   end
 
   def view_boy_scout_permission_form
-    session["consumer_tab_index"] = 1
+    session["consumer_tab_index"] = 0
     @boy_scouts_permission_form = BoyScoutsActivityConsentForm.find_by_id(params[:id])
     @activity = @boy_scouts_permission_form.boy_scouts_activity
     @boy_scout = @boy_scouts_permission_form.boy_scouts_roster
