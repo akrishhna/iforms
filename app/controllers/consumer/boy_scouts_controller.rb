@@ -32,15 +32,16 @@ class Consumer::BoyScoutsController < ApplicationController
     end
 
     @boy_scouts_permission_form.save(:validate => false)
-    @boy_scouts_permission_form.email = @boy_scout.email
+   # @boy_scouts_permission_form.email = @boy_scout.email
     @recent_submitted_form = current_user.boy_scouts_activity_consent_forms.where('status in (?) and boy_scouts_roster_id=?', ['Sent', 'Submitted', 'Updated'], @boy_scout.id).order('updated_at').last
     if @recent_submitted_form
       @boy_scouts_permission_form.attributes.each do |attr_name, attr_val|
         unless attr_val
           @boy_scouts_permission_form[attr_name] = @recent_submitted_form[attr_name]
-          @boy_scouts_permission_form[:email] = @boy_scout.email
         end
       end
+    else
+      @boy_scouts_permission_form.email = @boy_scout.email
     end
   end
 
