@@ -25,12 +25,21 @@ $(function(){
   $(".boy_scout_activity_consent_form_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
   $('#boy_scouts_activity_consent_form_bacf_birthdate').datepicker("setDate", $('#boy_scouts_activity_consent_form_bacf_birthdate').attr('data-value'));
 
-  $('.boy_scout_activity_consent_form_restrictions').live('change', function () {
-    if ($('.boy_scout_activity_consent_form_restrictions:checked').val() == "without_restrictions") {
-      $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').attr('readonly', false);
-    } else {
+  $('.boy_scout_activity_consent_form_restrictions').change(function () {
+    if($('.boy_scout_activity_consent_form_restrictions:checked').val() == "without_restrictions") {
       $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').val('');
       $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').attr('readonly', true);
+    }else{
+      $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').attr('readonly', false);
+    }
+  });
+
+  $('#parent_permission_tab').click(function() {
+    if($('.boy_scout_activity_consent_form_restrictions:checked').val() == "without_restrictions") {
+      $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').val('');
+      $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').attr('readonly', true);
+    }else{
+      $('#boy_scouts_activity_consent_form_bacf_spcl_considerations_for_restriction').attr('readonly', false);
     }
   });
 
