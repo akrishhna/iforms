@@ -1,9 +1,17 @@
 class MedicalAppointmentsController < ApplicationController
   before_filter :set_service_provider
+
   def index
     session["consumer_tab_index"] = 5
     @doctor = Doctor.find_by_user_id(current_user.id)
-    @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and DATE_FORMAT(appointment_date_time, '%Y-%m-%d') = ?", @doctor.user_id, session[:user_service_provider], params['appointment_date'] ? params['appointment_date'] : Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
+    if  params['appointment_date']
+      begin_date = params['appointment_date'].beginning_of_day
+      end_date = params['appointment_date'].end_of_day
+    else
+      begin_date = Date.today.beginning_of_day
+      end_date = Date.today.end_of_day
+    end
+    @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and appointment_date_time BETWEEN ? and ?", @doctor.user_id, session[:user_service_provider],begin_date,end_date).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
   end
 
   def new
@@ -28,9 +36,9 @@ class MedicalAppointmentsController < ApplicationController
       @doctor_details = @appointment.doctor
       @appointment.doctorname = @doctor_details.doctorname
       @appointment.timesent = Time.now
-      @appointment.medical_patient_forms.build({:service_provider_id  => @appointment.service_provider_id, :doctor_user_id => @appointment.doctor_user_id, :patient_user_id =>     @appointment.patient_user_id})
+      @appointment.medical_patient_forms.build({:service_provider_id => @appointment.service_provider_id, :doctor_user_id => @appointment.doctor_user_id, :patient_user_id => @appointment.patient_user_id})
       @appointment.save
-      Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
+      Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
       redirect_to :medical_appointments, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
     else
       render :new, :notice => 'Something wrong plese try again'
@@ -48,12 +56,13 @@ class MedicalAppointmentsController < ApplicationController
     @appointment.status = 'Pending'
     @appointment.timesent = Time.now
     if @appointment.update_attributes(params[:medical_appointment])
-      Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor,session[:user_service_provider]).deliver
+      Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
       redirect_to :medical_appointments
     else
       render :new, :notice => 'Something wrong plese try again'
     end
   end
+
   def destroy
     @appointment = MedicalAppointment.find(params[:id])
     @appointment.destroy
