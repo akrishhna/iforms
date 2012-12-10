@@ -9,5 +9,6 @@ $('#notification_email_to_parent').text('Send Notification Email to Parents');
 $('.mail_counter').text(<%=@counter%>);
 $('.mail_success_notification').fadeIn('slow');
 $('.mail_success_notification').delay(3000).fadeOut('slow');
-window.location.reload();
+//window.location.reload();
+window.location = '/boy_scouts_troop_leaders/activities?id=' + $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
 <% end %>
