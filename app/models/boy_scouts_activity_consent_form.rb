@@ -29,9 +29,9 @@ class BoyScoutsActivityConsentForm < ActiveRecord::Base
       "Last_name" => @boy_scout.last_name,
       "Birthdate_Month" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%m') : '',
       "Birthdate_Day" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%d') : '',
-      "Birthdate_Year" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%Y') : '',
-      "Age_during_activity" => @You_Age ? @You_Age[0].to_s + @You_Age[1].to_s + 'Y' + ' ' + @You_Age[2].to_s + @You_Age[3].to_s + 'M' : '',
-      "Address" => (@boy_scouts_permission_form.bacf_address_1 ? (@boy_scouts_permission_form.bacf_address_1.to_s + ', ') : '') + @boy_scouts_permission_form.bacf_address_2.to_s,
+      "Birthdate_Year" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%y') : '',
+      "Age_during_activity" => @You_Age ? @You_Age[0].to_s + @You_Age[1].to_s + 'Y' : '',
+      "Address" => (@boy_scouts_permission_form.bacf_address_1 ? @boy_scouts_permission_form.bacf_address_1.to_s : '') + (@boy_scouts_permission_form.bacf_address_2 ? ',' + @boy_scouts_permission_form.bacf_address_2.to_s : ''),
       "City" => @boy_scouts_permission_form.bacf_address_city,
       "State" => @boy_scouts_permission_form.bacf_address_state,
       "Zip" => @boy_scouts_permission_form.bacf_address_zip,
@@ -40,7 +40,7 @@ class BoyScoutsActivityConsentForm < ActiveRecord::Base
       "With_Restrictions" => @boy_scouts_permission_form.bacf_restriction ? (@boy_scouts_permission_form.bacf_restriction == 'with_restrictions' ? 'Yes' : 'No') : '',
       "Parentguardian_printed_name" => @boy_scouts_permission_form.bacf_parent_first_name.to_s + ' ' + @boy_scouts_permission_form.bacf_parent_last_name.to_s,
       "Area_code_and_telephone_number_best_contact_and_emergency_contact" => @boy_scouts_permission_form.bacf_parent_phone_1.to_s + '-' + @boy_scouts_permission_form.bacf_parent_phone_2.to_s + '-' + @boy_scouts_permission_form.bacf_parent_phone_3.to_s,
-      "Parentguardian_Email" => @boy_scouts_permission_form.email
+      "Parentguardian_Email" => @boy_scouts_permission_form.email ? @boy_scouts_permission_form.email : @boy_scout.email
     })
     # raise @pdftk.fields(form_pdf_path).to_yaml
   end
