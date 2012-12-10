@@ -181,7 +181,8 @@ class BoyScoutsTroopLeadersController < ApplicationController
       item = {}
      boy_scout_first_name = pf.boy_scouts_roster.first_name.present? ? pf.boy_scouts_roster.first_name : ""
       boy_scout_last_name = pf.boy_scouts_roster.last_name.present? ? pf.boy_scouts_roster.last_name : ""
-      item[:boy_scout] = boy_scout_first_name + ' ' + boy_scout_last_name
+      boy_scout_middle_name = pf.boy_scouts_roster.middle_name.present? ? pf.boy_scouts_roster.middle_name : ""
+      item[:boy_scout] = boy_scout_first_name + ' ' + boy_scout_middle_name + ' ' + boy_scout_last_name
       item[:id] = pf.id
       item[:boy_scout_attending] = pf.attending.nil? ? '?' : pf.attending
       item[:status] = pf.status
