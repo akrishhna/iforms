@@ -12,14 +12,16 @@ $(function () {
      $('[name="form_ids[]"][value="'+ids[id]+'"]').attr('checked', 'checked');
      }*/
   } else {
-    if(appointment.formname.search(/Child/) == 0) {
-      $('#radio_buttons_Child').attr('checked', 'checked');
-    }else if(appointment.formname.search(/Adult/) == 0) {
-      $('#radio_buttons_Adult').attr('checked', 'checked');
-    }else if(appointment.formname.search(/New Patient/) == 0) {
-      $('#radio_buttons_New_Patient').attr('checked', 'checked');
-    }else{
-      $('#radio_buttons_None').attr('checked', 'checked');
+    if ($('.page').attr('data-page') != 'appointments_new') {
+      if (appointment.formname.search(/Child/) == 0) {
+        $('#radio_buttons_Child').attr('checked', 'checked');
+      } else if (appointment.formname.search(/Adult/) == 0) {
+        $('#radio_buttons_Adult').attr('checked', 'checked');
+      } else if (appointment.formname.search(/New Patient/) == 0) {
+        $('#radio_buttons_New_Patient').attr('checked', 'checked');
+      } else {
+        $('#radio_buttons_None').attr('checked', 'checked');
+      }
     }
   }
 
@@ -39,7 +41,7 @@ $(function () {
 
   if ($('div[data-page-controller=appointments][data-page-action=edit]').size()) {
     $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', appointment["date"]);
-  }else {
+  } else {
     $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
   }
 

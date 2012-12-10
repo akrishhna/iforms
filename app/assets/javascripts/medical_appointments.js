@@ -21,11 +21,13 @@ $(function () {
     $('[name="medical_appointment[location]"][value="' + old_appointment['location'] + '"]').attr('checked', 'checked');
 
   } else {
+    if($('.page').attr('data-page') != 'medical_appointments_index' && $('.page').attr('data-page') != 'medical_appointments_new'){
      if(appointment.formname.search(/New_Medical/) == 0) {
       $('#radio_buttons_New_Medical_Patient').attr('checked', 'checked');
     }else{
       $('#radio_buttons_None').attr('checked', 'checked');
     }
+    }else{}
   }
 
 
