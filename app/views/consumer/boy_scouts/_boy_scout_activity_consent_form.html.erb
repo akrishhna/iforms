@@ -1,5 +1,6 @@
 <%= form_for @boy_scouts_permission_form, :url => "/view_boy_scout_permission_form", :html => {:class => 'form-horizontal boy_scout_permission_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
+  <p><strong><%= @boy_scout.first_name %> <%= @boy_scout.middle_name %> <%= @boy_scout.last_name %></strong>, has approval to participate in XXX.</p>
 
   <div class="control-group">
     <%= f.label :bacf_restriction, ' Restrictions ', :class => 'control-label' %>
