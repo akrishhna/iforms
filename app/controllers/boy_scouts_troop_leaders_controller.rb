@@ -9,7 +9,7 @@ class BoyScoutsTroopLeadersController < ApplicationController
     session[:selected_activity_id] = id
 
     #checking default message
-    display_message = current_user.display_messages.where("message_type = 'welcome_msg_boy_scouts_troop_leaders'").first
+    display_message = current_user.display_messages.where("message_type = 'welcome_msg_boy_scouts_leaders'").first
 
     unless display_message && display_message.status
       @display_message = DisplayMessage.new
