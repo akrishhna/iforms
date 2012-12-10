@@ -43,7 +43,7 @@
       </td>
       <td>
         <% if result[:status] == 'Updated' || result[:status] == 'Submitted' %>
-          <%= link_to "Update", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %>
+          <%= link_to "Update", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %> |
           <% else %>
           <%= link_to "Edit", view_boy_scout_permission_form_consumer_boy_scouts_path(:id => result[:id]) %> |
           <% end %>
