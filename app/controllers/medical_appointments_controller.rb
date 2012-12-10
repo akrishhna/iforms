@@ -5,8 +5,8 @@ class MedicalAppointmentsController < ApplicationController
     session["consumer_tab_index"] = 5
     @doctor = Doctor.find_by_user_id(current_user.id)
     if  params['appointment_date']
-      begin_date = params['appointment_date'].beginning_of_day
-      end_date = params['appointment_date'].end_of_day
+      begin_date = params['appointment_date'].to_date.beginning_of_day
+      end_date = params['appointment_date'].to_date.end_of_day
     else
       begin_date = Date.today.beginning_of_day
       end_date = Date.today.end_of_day
