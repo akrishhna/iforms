@@ -1,5 +1,5 @@
 $('.boy_scouts_activity_form #boy_scouts_activity_id').val(<%= @activity.id %>);
-$('.view_permission_form_btn').attr('href', '<%= activity_permission_form_pdf_path(:activity_id => @activity.id)%>');
+$('.view_permission_form_btn').attr('href', '<%= boy_activity_permission_form_pdf_path(:activity_id => @activity.id)%>');
 
 <% if params[:boy_scouts_activity][:activity_name].present? || params[:boy_scouts_activity][:leader_first_name].present? || params[:boy_scouts_activity][:leader_last_name].present? || params[:boy_scouts_activity][:activity_signed_permission_due_date].present? %>
 
