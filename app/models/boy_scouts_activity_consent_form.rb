@@ -13,10 +13,9 @@ class BoyScoutsActivityConsentForm < ActiveRecord::Base
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
 
     if @boy_scouts_permission_form.bacf_birthdate
-      @You_Age = Date.today.strftime('%Y%m%d').to_i - @boy_scouts_permission_form.bacf_birthdate.strftime('%Y%m%d').to_i
-      @You_Age = @You_Age.to_s.split('')
+      @You_Age = Date.today.strftime('%Y').to_i - @boy_scouts_permission_form.bacf_birthdate.strftime('%Y').to_i
+      #@You_Age = @You_Age.to_s.split('')
     end
-
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       "Adult_Tour_Leader" => @activity.leader_first_name.to_s + ' ' + @activity.leader_last_name.to_s,
       "Adult_Tour_Leader_Phone" => (@activity.leader_phone_1 ? (@activity.leader_phone_1.to_s + '-') : '') + (@activity.leader_phone_2 ? (@activity.leader_phone_2.to_s + '-') : '') + @activity.leader_phone_3.to_s,
@@ -30,7 +29,7 @@ class BoyScoutsActivityConsentForm < ActiveRecord::Base
       "Birthdate_Month" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%m') : '',
       "Birthdate_Day" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%d') : '',
       "Birthdate_Year" => @boy_scouts_permission_form.bacf_birthdate ? @boy_scouts_permission_form.bacf_birthdate.strftime('%y') : '',
-      "Age_during_activity" => @You_Age ? @You_Age[0].to_s + @You_Age[1].to_s : '',
+      "Age_during_activity" => @You_Age ? @You_Age : '',
       "Address" => (@boy_scouts_permission_form.bacf_address_1 || @boy_scouts_permission_form.bacf_address_2) ? (!@boy_scouts_permission_form.bacf_address_1.empty? ? (!@boy_scouts_permission_form.bacf_address_2.empty? ? @boy_scouts_permission_form.bacf_address_1.to_s + ', ' + @boy_scouts_permission_form.bacf_address_2.to_s : @boy_scouts_permission_form.bacf_address_1.to_s) : (!@boy_scouts_permission_form.bacf_address_2.empty? ? @boy_scouts_permission_form.bacf_address_2.to_s : '' )) : '',
       #"Address" => (@boy_scouts_permission_form.bacf_address_1 ? @boy_scouts_permission_form.bacf_address_1.to_s : '') + (@boy_scouts_permission_form.bacf_address_1.empty? ? @boy_scouts_permission_form.bacf_address_2.to_s : (', ' + @boy_scouts_permission_form.bacf_address_2.to_s)),
       "City" => @boy_scouts_permission_form.bacf_address_city,
