@@ -43,6 +43,7 @@ class Consumer::BoyScoutsController < ApplicationController
     else
       @boy_scouts_permission_form.email = @boy_scout.email
     end
+    @boy_scouts_permission_form.save(:validate => false)
   end
 
   def boy_scouts_permission_form

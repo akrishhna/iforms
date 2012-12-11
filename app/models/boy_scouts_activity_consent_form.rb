@@ -40,7 +40,7 @@ class BoyScoutsActivityConsentForm < ActiveRecord::Base
       "With_Restrictions" => @boy_scouts_permission_form.bacf_restriction ? (@boy_scouts_permission_form.bacf_restriction == 'with_restrictions' ? 'Yes' : 'No') : '',
       "Parentguardian_printed_name" => @boy_scouts_permission_form.bacf_parent_first_name.to_s + ' ' + @boy_scouts_permission_form.bacf_parent_last_name.to_s,
       "Area_code_and_telephone_number_best_contact_and_emergency_contact" => @boy_scouts_permission_form.bacf_parent_phone_1.to_s + '-' + @boy_scouts_permission_form.bacf_parent_phone_2.to_s + '-' + @boy_scouts_permission_form.bacf_parent_phone_3.to_s,
-      "Parentguardian_Email" => @boy_scouts_permission_form.email ? @boy_scouts_permission_form.email : @boy_scout.email
+      "Parentguardian_Email" => @boy_scouts_permission_form.email ? @boy_scouts_permission_form.email : ''
     })
     # raise @pdftk.fields(form_pdf_path).to_yaml
   end
