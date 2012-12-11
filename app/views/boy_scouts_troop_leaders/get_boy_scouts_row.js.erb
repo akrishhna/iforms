@@ -1,4 +1,4 @@
-console.log(<%= @row_index%>);
+//console.log(<%= @row_index%>);
 var new_boy_scout = "<%= escape_javascript render :partial => 'boy_scout', :locals => {:boy_scout_counter => @row_index, :boy_scout => @boy_scout} %>";
 $('#boy_scouts_table').append(new_boy_scout);
 $('#first_name_<%= @row_index + 1 %>').focus();

@@ -31,7 +31,7 @@ $(function () {
     enable_delete_all_bs_btn();
   });
 
-  $('#boy_scouts_table  input[name=check_box_row]').change(function () {
+  $('#boy_scouts_table  input[name=check_box_row]').live('change',function () {
     enable_delete_all_bs_btn();
   });
 

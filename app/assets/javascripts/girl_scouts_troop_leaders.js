@@ -37,7 +37,7 @@ $(function () {
     enable_delete_all_gs_btn();
   });
 
-  $('#girl_scouts_table  input[name=check_box_row]').change(function () {
+  $('#girl_scouts_table  input[name=check_box_row]').live('change', function () {
     enable_delete_all_gs_btn();
   });
 

@@ -111,7 +111,7 @@ Iforms::Application.routes.draw do
       get 'roster'
       get 'get_girl_scouts_row'
       post 'girl_scouts_roster'
-      post 'delete_boy_scouts'
+      post 'delete_girl_scouts'
       post 'create_activity'
       post 'send_notification_email'
       post 'delete_activity'
