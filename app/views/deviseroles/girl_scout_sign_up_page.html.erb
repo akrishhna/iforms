@@ -1,7 +1,13 @@
+<%= javascript_tag do %>
+  var girl_scouts_council_options = '<%= escape_javascript options_for_select(StaticData.girl_scouts_sign_up_service_type) %>';
+  var boy_scouts_council_options = '<%= escape_javascript options_for_select(StaticData.boy_scouts_sign_up_service_type) %>';
+<% end %>
+
 <div class="hide">
   <%= title 'Sign Up For Your FREE 90-day Girl Scouts Troop Leader Trial Account!' %>
 </div>
-<h3> Sign Up For Your FREE 90-day Girl Scouts Troop Leader Trial Account! </h3>
+<h3> Sign Up For Your FREE 90-day Boy or Girl Scouts Troop Leader Trial Account! </h3>
+
 <%= form_for @user, :url => deviseroles_girl_scouts_sign_up_path, :html => {:class => 'form-horizontal girl_scout_sign_up_form', :multipart => true} do |f| %>
 
   <% if @user.errors.any? %>
@@ -13,6 +19,18 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="control-group">
+    <%= label_tag :select_type, '', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= radio_button_tag :select_type, "girl_scouts", true, :class => "select_council_type_for_sign_up" %> Girl Scouts
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= radio_button_tag :select_type, "boy_scouts", false, :class => "select_council_type_for_sign_up" %> Boy Scouts
+      <% end %>
+    </div>
+  </div>
 
   <div class="control-group">
     <%= f.label :username, "User Name", :class => 'control-label' %>
@@ -49,7 +67,7 @@
     <div class="control-group">
       <%= builder.label :council_type, "Council", :class => 'control-label' %>
       <div class="controls">
-         <%= builder.select :council_type,options_for_select(StaticData.girl_scouts_sign_up_service_type),{:include_blank => true} %>&nbsp;&nbsp;
+        <%= builder.select :council_type,options_for_select(StaticData.girl_scouts_sign_up_service_type), :class => 'boy_scout_list' %> &nbsp;&nbsp;
         <span class="council_type_status default">Select council type here.</span>
         <span class="council_type_status ok">Council is okay!</span>
       </div>
