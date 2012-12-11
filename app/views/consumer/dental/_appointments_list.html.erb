@@ -7,7 +7,7 @@
       <th>Appointment</th>
       <th>Received</th>
       <th>Status</th>
-      <th>Action</th>
+      <th colspan="2">Action</th>
     </tr>
     <% count = 1 %>
     <% @appointments.each do |i| %>
@@ -33,13 +33,16 @@
         <td><%= i.doctorname %></td>
         <% if i.formname.blank? %>
           <td></td>
-          <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
+          <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>
+            :<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
           <td><%= @timesent %></td>
+          <td></td>
           <td></td>
           <td></td>
         <% else %>
           <td><%= i.formname %></td>
-          <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
+          <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>
+            :<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
           <td><%= @timesent %></td>
           <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id).limit(1) %>
           <% if @appformjoins == [] %>
@@ -58,10 +61,10 @@
                 <% if var<=formsubmittedtime_hrs_int %>
                   <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
                   <% am_pm = "PM" %>
-                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm         %>
+                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm          %>
                 <% else %>
                   <% am_pm = "AM" %>
-                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm         %>
+                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm          %>
                 <% end %>
               <% end %>
               <% if j.iform_id %>
@@ -75,7 +78,9 @@
                 </td>
                 <td>
                   <%#= link_to "Edit", edit_iform_path(:id => @iform.id) %>
-                  <%= link_to "Update", edit_iform_path(:id => @iform.id) %> |
+                  <%= link_to "Update", edit_iform_path(:id => @iform.id) %>
+                </td>
+                <td>
                   <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %>
                 </td>
               <% elsif j.status == "submitted" %>
@@ -86,7 +91,9 @@
                 </td>
                 <td>
                   <%#= link_to "Edit", edit_iform_path(:id => @iform.id) %>
-                  <%= link_to "Update", edit_iform_path(:id => @iform.id) %> |
+                  <%= link_to "Update", edit_iform_path(:id => @iform.id) %>
+                </td>
+                <td>
                   <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id), :target => '_blank' %>
                 </td>
               <% elsif j.status == "in progress" && j.iform_id %>
@@ -96,8 +103,10 @@
                 </span>
                 </td>
                 <td>
-                  <%= link_to "Edit", edit_iform_path(:id => @iform.id) %> |
+                  <%= link_to "Edit", edit_iform_path(:id => @iform.id) %>
                   <%#= link_to "update", edit_iform_path(:id => @iform.id) %>
+                </td>
+                <td>
                   <%= link_to "View PDF", get_iform_iforms_path(:iform_id => @iform.id, :iform_status => j.status, :iform_name => j.formname), :target => '_blank' %>
                 </td>
               <% else %>
@@ -107,8 +116,10 @@
                 </span>
                 </td>
                 <td>
-                  <%= link_to "Edit", new_iform_path(:name => j.formname, :appointment_id => i) %> |
+                  <%= link_to "Edit", new_iform_path(:name => j.formname, :appointment_id => i) %>
                   <%#= link_to "Update", new_iform_path(:name => j.formname, :appointment_id => i) %>
+                </td>
+                <td>
                   <%= link_to "View PDF", get_iform_iforms_path(:iform_status => j.status, :iform_name => j.formname), :target => '_blank' %>
                 </td>
               <% end %>
@@ -137,10 +148,10 @@
                 <% if var<=formsubmittedtime_hrs_int %>
                   <% formsubmittedtime_hrs = (formsubmittedtime_hrs_int - var).to_s %>
                   <% am_pm = "PM" %>
-                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm         %>
+                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm          %>
                 <% else %>
                   <% am_pm = "AM" %>
-                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm         %>
+                  <% @formsubmittedtime = formsubmittedtime_date.to_date.strftime("%m-%d-%Y")#+" "+formsubmittedtime_hrs+":"+formsubmittedtime_min+" "+am_pm          %>
                 <% end %>
               <% end %>
               <% if j.iform_id %>

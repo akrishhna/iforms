@@ -45,10 +45,12 @@
       </td>
       <td>
         <% if result[:status] == 'Updated' || result[:status] == 'Submitted' || result[:status] == 'Sent' %>
-          <%= link_to "Update", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %> |
+          <%= link_to "Update", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %>
         <% else %>
           <%= link_to "Edit", view_girl_scout_permission_form_consumer_girl_scouts_path(:id => result[:id]) %> |
         <% end %>
+      </td>
+      <td>
         <%= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
       </td>
       <%#= link_to "View PDF", consumer_view_pdf_consumer_girl_scouts_path(:id => result[:id]), :target => '_blank' %>
