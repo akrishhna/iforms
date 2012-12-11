@@ -23,7 +23,7 @@ class StaticData < ActiveRecord::Base
   end
 
   def self.user_service_types
-    [['James Waters','1'],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Karen Naples','4'],['Capital Medical Clinic','5']]
+    [['James Waters','1'],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Karen Naples','4'],['Capital Medical Clinic','5'],['Boy Scouts Leader','6']]
   end
 
   def self.girl_scouts_sign_up_service_type
