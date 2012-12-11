@@ -52,6 +52,7 @@ class Consumer::GirlScoutsController < ConsumerController
         end
       end
     end
+    @girl_scouts_permission_form.save(:validate => false)
   end
 
   def girl_scouts_permission_form
