@@ -1,6 +1,7 @@
 <% @user = User.where("email =?", @appointment.email).first %>
-<div style="background: #87ceeb ">
- <img src="<%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %>" width="100%"/>
+<div style="background: #87ceeb">
+  <a href="http://www.capitalmedicalclinic.com/" target="_blank"><img src="http://localhost:3000/assets/capital_medical_clinic_header.png" width="86%"/></a>
+  <img src="http://localhost:3000/assets/dr-aventa-127.jpg"/>
 </div>
 <% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
@@ -87,13 +88,13 @@
 <p>Tony R. Aventa, M.D.</p>
 <div style=" background: none repeat scroll 0 0 #E7E4DD;
   border-top: 6px solid #DED9CE;
-  font-size: 14px;
-  width: 958px;
+  height: 50px;
+  font-size: 18px;
   margin: 0 auto 10px;
-  padding-top: 10px;
-  text-align: center;">
-  <span><img src="<%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg" %>"/></span>
-  <span style="  float: right;font-size: 16px;margin: 61px;">Capital Medical Clinic  •  1301 W. 38th Street, Suite 601  •   Austin Texas 78705-1069  •  512-454-5171</span>
+  padding-top: 30px;
+  text-align: center;
+  width: 958px;">
+  <span>Capital Medical Clinic 1301 W. 38th Street, Suite 601 Austin Texas 78705-1069 512-454-5171</span>
 </div>
 
 
