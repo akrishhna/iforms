@@ -1,10 +1,5 @@
 $(function () {
 
-  $('.appointments_date_selector').datetimepicker({
-    controlType:'select',
-    timeFormat:'hh:mm tt'
-  });
-
   if ($('div[data-page-controller=medical_appointments][data-page-action=edit]').size()) {
     var date_time = appointment["appointment_date_time"];
     var date = date_time.split('T')[0];
