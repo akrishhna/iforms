@@ -59,6 +59,9 @@ $(document).ready(function(){
     else if($(this).val() == 6){
       window.location = '/boy_scouts_troop_leaders?sp_id=6'
     }
+    else if($(this).val() == 7){
+      window.location = '/doctor/appointments?sp_id=7'
+    }
     else{
       window.location = '/'
     }

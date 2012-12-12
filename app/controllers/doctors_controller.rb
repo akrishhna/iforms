@@ -4,7 +4,7 @@ class DoctorsController < ApplicationController
   def index
     session["consumer_tab_index"] = 1
    # @iforms = Iform.all
-    if session[:user_service_provider] == 1 || session[:user_service_provider] == 4
+    if session[:user_service_provider] == 1 || session[:user_service_provider] == 4 || session[:user_service_provider] == 7
       @doctor = Doctor.find_by_user_id(current_user.id)
     @appointments = Appointment.where('doctor_user_id = ? and service_provider_id=? and date = ?', @doctor.user_id,session[:user_service_provider],params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
     else
@@ -61,6 +61,7 @@ class DoctorsController < ApplicationController
     session[:user_service_provider] = 1 if params[:sp_id] == '1'
     session[:user_service_provider] = 4 if params[:sp_id] == '4'
     session[:user_service_provider] = 5 if params[:sp_id] == '5'
+    session[:user_service_provider] = 7 if params[:sp_id] == '7'
   end
 
 
