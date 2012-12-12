@@ -13,7 +13,6 @@ class MedicalPatientForm < ActiveRecord::Base
       @You_Age = Date.today.strftime('%Y%m%d').to_i - @medical_patient_form.birth_date.strftime('%Y%m%d').to_i
       @You_Age = @You_Age.to_s.split('')
     end
-    # raise  Date.today.strftime('%Y%m%d').to_i.to_yaml
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       #Patient tab
       "FirstName" => @medical_patient_form.first_name,
@@ -65,7 +64,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "PrimaryInsuranceID" => @medical_patient_form.primary_insurance_id,
       "PrimaryInsuranceGroup" => @medical_patient_form.primary_insurance_group,
       "PrimaryInsurancePolicyHolderEmployer" => @medical_patient_form.primary_insurance_policy_holder_employer,
-      "PrimaryInsurancePolicyHolderDateofBirth" => @medical_patient_form.primary_insurance_birth_date.strftime('%m-%d-%Y'),
+      "PrimaryInsurancePolicyHolderDateofBirth" => @medical_patient_form.primary_insurance_birth_date ? @medical_patient_form.primary_insurance_birth_date.strftime('%m-%d-%Y') : '',
       "PrimaryInsurancePolicyHolderRelationship" => @medical_patient_form.primary_insurance_relationship,
       "PrimaryInsurancePolicyHolderName" => @medical_patient_form.primary_insurance_policy_holder_first_name.to_s + ' ' + @medical_patient_form.primary_insurance_policy_holder_last_name.to_s,
       "PrimaryInsurancePolicyHolderSocialSecurityNumber" => (@medical_patient_form.primary_insurance_ssn_1 ? (@medical_patient_form.primary_insurance_ssn_1.to_s + '-') : '') + (@medical_patient_form.primary_insurance_ssn_2 ? (@medical_patient_form.primary_insurance_ssn_2.to_s + '-') :'') + @medical_patient_form.primary_insurance_ssn_3.to_s,
@@ -78,7 +77,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "SecondaryInsuranceID" => @medical_patient_form.secondary_insurance_id,
       "SecondaryInsuranceGroup" => @medical_patient_form.secondary_insurance_group,
       "SecondaryInsurancePolicyHolderEmployer" => @medical_patient_form.secondary_insurance_policy_holder_employer,
-      "SecondaryInsurancePolicyHolderDateofBirth" => @medical_patient_form.secondary_insurance_birth_date.strftime('%m-%d-%Y'),
+      "SecondaryInsurancePolicyHolderDateofBirth" => @medical_patient_form.secondary_insurance_birth_date ? @medical_patient_form.secondary_insurance_birth_date.strftime('%m-%d-%Y') : '',
       "SecondaryInsurancePolicyHolderRelationship" => @medical_patient_form.secondary_insurance_relationship,
       "SecondaryInsurancePolicyHolderName" => @medical_patient_form.secondary_insurance_policy_holder_first_name.to_s + ' ' + @medical_patient_form.secondary_insurance_policy_holder_last_name.to_s,
       "SecondaryInsurancePolicyHolderSocialSecurityNumber" => (@medical_patient_form.secondary_insurance_ssn_1 ? (@medical_patient_form.secondary_insurance_ssn_1.to_s + '-') : '') + (@medical_patient_form.secondary_insurance_ssn_2 ? (@medical_patient_form.secondary_insurance_ssn_2.to_s + '-') : '') + @medical_patient_form.secondary_insurance_ssn_3.to_s,
@@ -92,8 +91,8 @@ class MedicalPatientForm < ActiveRecord::Base
       "ConsentToSharePersonalHealthInformationName3RelationshiptoPatient" => @medical_patient_form.patient_consent_relation_ship_to_patient_3,
       "Name" => @medical_patient_form.first_name.to_s + ' ' + @medical_patient_form.last_name.to_s,
       "Referredby" => @medical_patient_form.referral_name,
-      "DateofBirth" => @medical_patient_form.birth_date.strftime('%m-%d-%Y'),
-      "DateofExam" => @appointment.appointment_date_time.strftime('%m-%d-%Y'),
+      "DateofBirth" => @medical_patient_form.birth_date ? @medical_patient_form.birth_date.strftime('%m-%d-%Y') : '',
+      "DateofExam" => @appointment.appointment_date_time ? @appointment.appointment_date_time.strftime('%m-%d-%Y') : '',
 
       #medical History tab
       "ReasonForVisit" => @medical_patient_form.medical_history_reason_for_visit_1,
@@ -117,23 +116,23 @@ class MedicalPatientForm < ActiveRecord::Base
       "MedicationAllergyReactionB" => @medical_patient_form.medical_history_medication_allergies_medication_2.to_s + ' ' + @medical_patient_form.medical_history_medication_allergies_reaction_2.to_s,
       "MedicationAllergyReactionC" => @medical_patient_form.medical_history_medication_allergies_medication_3.to_s + ' ' + @medical_patient_form.medical_history_medication_allergies_reaction_3.to_s,
 
-      "OpeartionAndDateA" => @medical_patient_form.medical_history_operations_operation_1.to_s + ' ' + @medical_patient_form.medical_history_operations_operation_date_1.strftime('%m-%d-%Y').to_s,
-      "OpeartionAndDateB" => @medical_patient_form.medical_history_operations_operation_2.to_s + ' ' + @medical_patient_form.medical_history_operations_operation_date_2.strftime('%m-%d-%Y').to_s,
-      "OpeartionAndDateC" => @medical_patient_form.medical_history_operations_operation_3.to_s + ' ' + @medical_patient_form.medical_history_operations_operation_date_3.strftime('%m-%d-%Y').to_s,
-      "OpeartionAndDateD" => @medical_patient_form.medical_history_operations_operation_4.to_s + ' ' + @medical_patient_form.medical_history_operations_operation_date_4.strftime('%m-%d-%Y').to_s,
-      "OpeartionAndDateE" => @medical_patient_form.medical_history_operations_operation_5.to_s + ' ' + @medical_patient_form.medical_history_operations_operation_date_5.strftime('%m-%d-%Y').to_s,
-      "OpeartionAndDateF" => @medical_patient_form.medical_history_operations_operation_6.to_s + ' ' + @medical_patient_form.medical_history_operations_operation_date_6.strftime('%m-%d-%Y').to_s,
+      "OpeartionAndDateA" => @medical_patient_form.medical_history_operations_operation_1.to_s + ' ' + (@medical_patient_form.medical_history_operations_operation_date_1 ? @medical_patient_form.medical_history_operations_operation_date_1.strftime('%m-%d-%Y').to_s : ''),
+      "OpeartionAndDateB" => @medical_patient_form.medical_history_operations_operation_2.to_s + ' ' + (@medical_patient_form.medical_history_operations_operation_date_1 ? @medical_patient_form.medical_history_operations_operation_date_2.strftime('%m-%d-%Y').to_s : ''),
+      "OpeartionAndDateC" => @medical_patient_form.medical_history_operations_operation_3.to_s + ' ' + (@medical_patient_form.medical_history_operations_operation_date_1 ? @medical_patient_form.medical_history_operations_operation_date_3.strftime('%m-%d-%Y').to_s : ''),
+      "OpeartionAndDateD" => @medical_patient_form.medical_history_operations_operation_4.to_s + ' ' + (@medical_patient_form.medical_history_operations_operation_date_1 ? @medical_patient_form.medical_history_operations_operation_date_4.strftime('%m-%d-%Y').to_s : ''),
+      "OpeartionAndDateE" => @medical_patient_form.medical_history_operations_operation_5.to_s + ' ' + (@medical_patient_form.medical_history_operations_operation_date_1 ? @medical_patient_form.medical_history_operations_operation_date_5.strftime('%m-%d-%Y').to_s : ''),
+      "OpeartionAndDateF" => @medical_patient_form.medical_history_operations_operation_6.to_s + ' ' + (@medical_patient_form.medical_history_operations_operation_date_1 ? @medical_patient_form.medical_history_operations_operation_date_6.strftime('%m-%d-%Y').to_s : ''),
 
-      "IllnessAndDiagnosisDateA" => @medical_patient_form.medical_history_previous_illnesses_illness_1.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_1.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateB" => @medical_patient_form.medical_history_previous_illnesses_illness_2.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_2.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateC" => @medical_patient_form.medical_history_previous_illnesses_illness_3.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_3.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateD" => @medical_patient_form.medical_history_previous_illnesses_illness_4.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_4.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateE" => @medical_patient_form.medical_history_previous_illnesses_illness_5.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_5.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateF" => @medical_patient_form.medical_history_previous_illnesses_illness_6.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_6.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateG" => @medical_patient_form.medical_history_previous_illnesses_illness_7.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_7.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateH" => @medical_patient_form.medical_history_previous_illnesses_illness_8.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_8.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateI" => @medical_patient_form.medical_history_previous_illnesses_illness_9.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_9.strftime('%m-%d-%Y').to_s,
-      "IllnessAndDiagnosisDateJ" => @medical_patient_form.medical_history_previous_illnesses_illness_10.to_s + ' ' + @medical_patient_form.medical_history_previous_illnesses_diagnosis_10.strftime('%m-%d-%Y').to_s,
+      "IllnessAndDiagnosisDateA" => @medical_patient_form.medical_history_previous_illnesses_illness_1.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_1 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_1.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateB" => @medical_patient_form.medical_history_previous_illnesses_illness_2.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_2 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_2.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateC" => @medical_patient_form.medical_history_previous_illnesses_illness_3.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_3 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_3.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateD" => @medical_patient_form.medical_history_previous_illnesses_illness_4.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_4 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_4.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateE" => @medical_patient_form.medical_history_previous_illnesses_illness_5.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_5 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_5.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateF" => @medical_patient_form.medical_history_previous_illnesses_illness_6.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_6 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_6.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateG" => @medical_patient_form.medical_history_previous_illnesses_illness_7.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_7 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_7.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateH" => @medical_patient_form.medical_history_previous_illnesses_illness_8.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_8 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_8.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateI" => @medical_patient_form.medical_history_previous_illnesses_illness_9.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_9 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_9.strftime('%m-%d-%Y').to_s : ''),
+      "IllnessAndDiagnosisDateJ" => @medical_patient_form.medical_history_previous_illnesses_illness_10.to_s + ' ' + (@medical_patient_form.medical_history_previous_illnesses_diagnosis_10 ? @medical_patient_form.medical_history_previous_illnesses_diagnosis_10.strftime('%m-%d-%Y').to_s : ''),
 
       #Family History Tab
       "MotherLiving" => @medical_patient_form.family_history_mother_living_or_deceased == 'Living' ? 'Yes' : 'No',
@@ -313,25 +312,25 @@ class MedicalPatientForm < ActiveRecord::Base
 
       #Helth Maintainance Tab
       "HaveYouHadABoneDensityTest" => @medical_patient_form.health_maintenance_bone_density_test ? (@medical_patient_form.health_maintenance_bone_density_test ? 'Yes' : 'No') : '',
-      "LastBoneDensityTestDate" => @medical_patient_form.health_maintenance_bone_density_test.strftime('%m-%d-%Y'),
+      "LastBoneDensityTestDate" => (@medical_patient_form.health_maintenance_bone_density_test ? @medical_patient_form.health_maintenance_bone_density_test.strftime('%m-%d-%Y') : ''),
       "HaveYouHadASkinCancerScreeningCheckedByADermatologistNo" => @medical_patient_form.health_maintenance_skin_cancer_screening ? (@medical_patient_form.health_maintenance_skin_cancer_screening ? 'No' : 'Yes') : '',
       "HaveYouHadASkinCancerScreeningCheckedByADermatologistYes" => @medical_patient_form.health_maintenance_skin_cancer_screening ? (@medical_patient_form.health_maintenance_skin_cancer_screening ? 'Yes' : 'No') : '',
-      "SkinCancerScreeningCheckDate" => @medical_patient_form.health_maintenance_skin_cancer_screening.strftime('%m-%d-%Y'),
+      "SkinCancerScreeningCheckDate" => (@medical_patient_form.health_maintenance_skin_cancer_screening ? @medical_patient_form.health_maintenance_skin_cancer_screening.strftime('%m-%d-%Y') : ''),
 
-      "CholesterolTestDate" => @medical_patient_form.health_maintenance_test_date.strftime('%m-%d-%Y'),
+      "CholesterolTestDate" => (@medical_patient_form.health_maintenance_test_date ? @medical_patient_form.health_maintenance_test_date.strftime('%m-%d-%Y') : ''),
       "CholesterolTestTotalCholesterol" => @medical_patient_form.health_maintenance_total_cholesterol,
       "CholesterolTestLDL" => @medical_patient_form.health_maintenance_LDL,
       "CholesterolTestHDL" => @medical_patient_form.health_maintenance_HDL,
       "CholesterolTestTriglycerides" => @medical_patient_form.health_maintenance_triglycerides,
 
-      "TetanusVaccineBoosterDate" => @medical_patient_form.health_maintenance_most_recent_tetanus_vaccine_booster.strftime('%m-%d-%Y'),
+      "TetanusVaccineBoosterDate" => (@medical_patient_form.health_maintenance_most_recent_tetanus_vaccine_booster ? @medical_patient_form.health_maintenance_most_recent_tetanus_vaccine_booster.strftime('%m-%d-%Y') : ''),
       "HaveYouReceivedShinglesVaccine" => @medical_patient_form.health_maintenance_shingles_vaccine ? (@medical_patient_form.health_maintenance_shingles_vaccine ? 'Yes' : 'No') : '',
-      "PneumovaxVaccineDate" => @medical_patient_form.health_maintenance_pneumovax.strftime('%m-%d-%Y'),
+      "PneumovaxVaccineDate" => (@medical_patient_form.health_maintenance_pneumovax ? @medical_patient_form.health_maintenance_pneumovax.strftime('%m-%d-%Y') : ''),
       "HaveYouReceivedPneumovasVaccine" => @medical_patient_form.health_maintenance_pneumovax ? (@medical_patient_form.health_maintenance_pneumovax ? 'Yes' : 'No') : '',
       "HaveYouReceivedTheFluVaccine" => @medical_patient_form.health_maintenance_flu_vaccine ? 'Yes' : 'No',
 
       "HaveYouHadAColonoscopy" => @medical_patient_form.health_maintenance_colonoscopy ? 'Yes' : 'No',
-      "LastColonoscopyDate" => @medical_patient_form.health_maintenance_colonoscopy.strftime('%m-%d-%Y'),
+      "LastColonoscopyDate" => (@medical_patient_form.health_maintenance_colonoscopy ? @medical_patient_form.health_maintenance_colonoscopy.strftime('%m-%d-%Y') : ''),
       "WasYourColonoscopyNormal" => @medical_patient_form.health_maintenance_colonoscopy_test_results ? (@medical_patient_form.health_maintenance_colonoscopy_test_results == "Normal" ? 'Yes' : 'No') : '',
       "IfColonoscopyWasAbnormalWhatWasFound" => @medical_patient_form.health_maintenance_colonoscopy_test_results == "Abnormal" ? @medical_patient_form.health_maintenance_description_of_abnormal_test_results : '',
 
@@ -339,10 +338,10 @@ class MedicalPatientForm < ActiveRecord::Base
       "WhenWasYourLastPapSmear" => @medical_patient_form.health_maintenance_most_recent_pap_smear,
       "HaveYouEverHadAnAbnormalPapSmearYes" => @medical_patient_form.health_maintenance_abnormal_pap_smear ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? 'Yes' : 'No') : '',
       "HaveYouEverHadAnAbnormalPapSmearNo" => @medical_patient_form.health_maintenance_abnormal_pap_smear ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? 'No' : 'Yes') : '',
-      "AbnormalPapSmearDate" => @medical_patient_form.health_maintenance_abnormal_pap_smear.strftime('%m-%d-%Y'),
+      "AbnormalPapSmearDate" => (@medical_patient_form.health_maintenance_abnormal_pap_smear ? @medical_patient_form.health_maintenance_abnormal_pap_smear.strftime('%m-%d-%Y') : ''),
       "HaveYouHadAHysterectomyYes" => @medical_patient_form.health_maintenance_hysterectomy ? (@medical_patient_form.health_maintenance_hysterectomy ? 'Yes' : 'No') : '',
       "HaveYouHadAHysterectomyNo" => @medical_patient_form.health_maintenance_hysterectomy ? (@medical_patient_form.health_maintenance_hysterectomy ? 'No' : 'Yes') : '',
-      "HysterectomyDate" => @medical_patient_form.health_maintenance_hysterectomy.strftime('%m-%d-%Y'),
+      "HysterectomyDate" => (@medical_patient_form.health_maintenance_hysterectomy ? @medical_patient_form.health_maintenance_hysterectomy.strftime('%m-%d-%Y') : ''),
       "HysterectomyReason" => @medical_patient_form.health_maintenance_why_was_hysterectomy_performed,
 
       "WhenDidYouHaveYourLastDigitalRectalExamAndPSAChecked" => @medical_patient_form.health_maintenance_digital_rectal_exam_and_psa_checked
