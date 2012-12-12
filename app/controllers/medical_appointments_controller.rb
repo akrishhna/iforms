@@ -51,7 +51,7 @@ class MedicalAppointmentsController < ApplicationController
 
   def update
     @appointment = MedicalAppointment.find(params[:id])
-    @appointment.formname = 'New_Medical_Patient'
+    @appointment.formname = 'New Patient'
     @appointment.formname = '' if params[:radio_buttons] == 'None'
     @appointment.status = 'Pending'
     @appointment.timesent = Time.now
