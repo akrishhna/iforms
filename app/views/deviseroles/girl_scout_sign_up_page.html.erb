@@ -64,7 +64,7 @@
         <%= builder.text_field :last_name %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group council_type ">
       <%= builder.label :council_type, "Council", :class => 'control-label' %>
       <div class="controls">
         <%= builder.select :council_type,options_for_select(StaticData.girl_scouts_sign_up_service_type), :class => 'boy_scout_list' %> &nbsp;&nbsp;
@@ -100,17 +100,3 @@
   </div>
 
 <% end %>
-
-<script type="text/javascript">
-  $('#user_username, #user_email , #user_password, #user_password_confirmation').keyup(function(){
-    var params = $('#new_user').serializeArray();
-    $.post('/deviseroles/validate_girl_scout_sign_up_page',params );
-    return false;
-  });
-
-  $('select#user_girl_scout_troop_leader_profile_attributes_council_type').change(function(){
-    var params = $('#new_user').serializeArray();
-    $.post('/deviseroles/validate_girl_scout_sign_up_page',params );
-    return false;
-  });
-</script>

@@ -98,6 +98,10 @@ else if ($('#new_user input#user_password_confirmation').val() == $('#new_user i
   }
 <% end %>
 
+<% if params[:select_type] == "boy_scouts" %>
+council_type_ok = true
+<% end %>
+
 if (username_available && email_available && password_ok && password_confirmation_ok && council_type_ok){
   $('.users_submit').attr('disabled', false);
 
