@@ -54,7 +54,7 @@
     <% end %>
     <br><br>
     <%= link_to "Back", consumer_index_path %>
-  <% elsif @service_provider.id == 2 || @service_provider.id == 3 %>
+  <% elsif @service_provider.id == 2 || @service_provider.id == 3 || @service_provider.id == 6 %>
     <% @profile = GirlScoutTroopLeaderProfile.find_by_user_id(current_user.id) %>
     <% if @profile %>
       <%= link_to 'Update Profile Information', edit_girl_scout_troop_leader_profile_path(@profile) %>
@@ -63,7 +63,7 @@
     <% end %>
     <br><br>
     <%= link_to "Back", consumer_index_path %>
-  <% elsif @service_provider.id == 1 || @service_provider.id == 4 || @service_provider.id == 5%>
+  <% elsif @service_provider.id == 1 || @service_provider.id == 4 || @service_provider.id == 5 || @service_provider.id == 7 %>
     <% @doctor = Doctor.find_by_user_id(current_user.id) %>
     <% if @doctor %>
       <%= link_to 'Update Profile Information', edit_doctor_path(@doctor) %>
