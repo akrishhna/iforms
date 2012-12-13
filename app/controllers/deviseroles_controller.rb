@@ -24,12 +24,12 @@ class DeviserolesController < ApplicationController
       if @troop_leader.nil?
         redirect_to :controller => "girl_scout_troop_leader_profiles", :action => "new"
       else
-      redirect_to "/girl_scouts_troop_leaders?sp_id=#{@service_provider.id}"
+        redirect_to "/girl_scouts_troop_leaders?sp_id=#{@service_provider.id}"
       end
     elsif @service_provider.id == 6
-      @profile = Profile.find_by_user_id(current_user.id)
-      if @profile.nil?
-        redirect_to :controller => "profiles", :action => "new"
+      @troop_leader = GirlScoutTroopLeaderProfile.find_by_user_id(current_user.id)
+      if @troop_leader.nil?
+        redirect_to :controller => "girl_scout_troop_leader_profiles", :action => "new"
       else
         redirect_to "/boy_scouts_troop_leaders?sp_id=#{@service_provider.id}"
       end
@@ -161,16 +161,21 @@ class DeviserolesController < ApplicationController
   def girl_scout_sign_up
     username = params[:user][:username]
     email = params[:user][:email]
-    service_type = params[:user][:girl_scout_troop_leader_profile_attributes][:council_type]
     password = params[:user][:girl_scout_troop_leader_profile_attributes][:password]
     password_confirmation = params[:user][:girl_scout_troop_leader_profile_attributes][:password]
     @ayah = AYAH::Integration.new(PUBLISHER_KEY, SCORING_KEY)
-   # ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
-    if !username.empty? && !email.empty? && !service_type.empty? && (password == password_confirmation) # && ayah_passed
+    #service_type = params[:user][:girl_scout_troop_leader_profile_attributes][:council_type] if params[:select_type] == 'girl_scouts'
+    # ayah_passed = @ayah.score_result(params[:session_secret], request.remote_ip)
+    if !username.empty? && !email.empty? && (password == password_confirmation) # && !service_type.empty? && ayah_passed
       @user = User.new(params[:user])
-      service_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
+      if params[:select_type] == 'girl_scouts'
+        service_provider_type = ServiceProvider.find(params[:user][:girl_scout_troop_leader_profile_attributes][:council_type])
+      else
+        service_provider_type = ServiceProvider.find(6)
+        @user.girl_scout_troop_leader_profile.council_type = 6
+      end
       if @user.save
-        UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_type.id)
+        UserServiceProvider.create(:user_id => @user.id, :service_provider_id => service_provider_type.id)
         flash[:success] = "Confirmation message sent to #{params[:user][:email]}"
         redirect_to homepage_url
       else
@@ -178,7 +183,7 @@ class DeviserolesController < ApplicationController
         redirect_to :back
       end
     else
-    #  flash[:error] = 'Please fill all the fields and Play the game.'
+      #  flash[:error] = 'Please fill all the fields and Play the game.'
       flash[:error] = 'Something Wrong Please Try again.'
       redirect_to :back
     end
