@@ -12,6 +12,8 @@ class Notifier < ActionMailer::Base
       from_name = "James R Waters DDS MSD PA <iforms-noreply@ifor.ms>"
     elsif @user_service_provider == 4
       from_name = 'Karen Naples DDS PA <iforms-noreply@ifor.ms>'
+    elsif @user_service_provider == 7
+      from_name = 'Rising Stars Pediatric <iforms-noreply@ifor.ms>'
     else
       from_name = "iforms-noreply@ifor.ms"
     end

@@ -1,0 +1,10 @@
+<% @user = User.where("email =?", @appointment.email).first %>
+Dear,
+<p>
+This Message confirms your appointment with Rising Starts Pediatric Dentistry.please fill
+<% if @user %>
+  <%= link_to 'Rising Starts Pediatric', @login_url %>
+<% else %>
+  <%= link_to 'Rising Starts Pediatric', @registration_url %>
+<% end %>
+form.</p>

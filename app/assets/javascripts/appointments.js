@@ -19,6 +19,9 @@ $(function () {
         $('#radio_buttons_Adult').attr('checked', 'checked');
       } else if (appointment.formname.search(/New Patient/) == 0) {
         $('#radio_buttons_New_Patient').attr('checked', 'checked');
+      }
+      else if (appointment.formname.search(/Rising Stars/) == 0) {
+          $('#radio_buttons_Rising_Stars_Pediatric').attr('checked', 'checked');
       } else {
         $('#radio_buttons_None').attr('checked', 'checked');
       }

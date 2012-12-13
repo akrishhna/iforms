@@ -88,6 +88,25 @@
         <% end %>
       </div>
     </div>
+  <% elsif session[:user_service_provider] == 7 %>
+    <div class="control-group">
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag '', '', :checked => 'checked' %> Dental Name
+        <% end %>
+      </div>
+    </div>
+
+    <strong>3. At Location:</strong>
+    <div class="control-group">
+      <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :location, 'Location Name', :checked => 'checked' %>Location Name
+        <% end %>
+      </div>
+    </div>
+  <% else %>
   <% end %>
   <strong>4. On This Date/Time:</strong>
 
@@ -150,7 +169,7 @@
         <% end %>
         <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= radio_button_tag "radio_buttons", 'None',true %>None
+          <%= radio_button_tag "radio_buttons", 'None', true %>None
         <% end %>
       </div>
     </div>
@@ -167,6 +186,20 @@
         <% end %>
       </div>
     </div>
+  <% elsif session[:user_service_provider] == 7 %>
+    <div class="control-group">
+      <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'Rising_Stars_Pediatric' %>Rising Stars Pediatric
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= radio_button_tag "radio_buttons", 'None', true %>None
+        <% end %>
+      </div>
+    </div>
+  <% else %>
   <% end %>
   <br>
   6. And Lastly:
@@ -185,10 +218,10 @@ end %> -->
 
   <div class="actions">
     <% if f.object.new_record? %>
-    <%= f.submit 'Create Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
-      <% else %>
+      <%= f.submit 'Create Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+    <% else %>
       <%= f.submit 'Update Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
-      <% end %>
+    <% end %>
   </div>
   <br>
 
