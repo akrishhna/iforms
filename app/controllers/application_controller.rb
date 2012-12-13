@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     elsif service_provider.id == 2 || service_provider.id == 3
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
     elsif service_provider.id == 6
-      (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'af
+      (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
     else
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     end
