@@ -34,7 +34,7 @@ class AppointmentsController < ApplicationController
           @appointment.formname = 'New Patient'
           @appointment.formname = '' if params[:radio_buttons] == 'None'
         elsif @appointment.location == 'Lakeline' || @appointment.location == 'Steiner Ranch'
-          @appointment.formname = 'Rising Stars Pediatric'
+          @appointment.formname = 'Rising Stars Pediatric Dentistry'
           @appointment.formname = '' if params[:radio_buttons] == 'None'
         else
           @appointment.formname = ''
@@ -116,7 +116,7 @@ class AppointmentsController < ApplicationController
         @appointment.formname = 'New Patient'
         @appointment.formname = '' if params[:radio_buttons] == 'None'
       elsif @appointment.location == 'Lakeline' || @appointment.location == 'Steiner Ranch'
-        @appointment.formname = 'Rising Stars Pediatric'
+        @appointment.formname = 'Rising Stars Pediatric Dentistry'
         @appointment.formname = '' if params[:radio_buttons] == 'None'
       else
         @appointment.formname = ''
