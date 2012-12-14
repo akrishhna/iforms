@@ -90,9 +90,19 @@
     </div>
   <% elsif session[:user_service_provider] == 7 %>
     <div class="control-group">
+      <%= f.label :doctorname, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= radio_button_tag '', '', :checked => 'checked' %> Dental Name
+          <%= f.radio_button :doctorname, 'Dr. Michelle L. Freeze, D.M.D.' %> Dr. Michelle L. Freeze, D.M.D.
+        <% end %> <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :doctorname, 'Dr. Shiny Thomas, D.D.S.' %> Dr. Shiny Thomas, D.D.S.
+        <% end %><br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :doctorname, 'Dr. Jeff Gregerson, D.M.D.' %>Dr. Jeff Gregerson, D.M.D.
+        <% end %><br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :doctorname, 'Dr. Pru Aurora, D.D.S.' %> Dr. Pru Aurora, D.D.S.
         <% end %>
       </div>
     </div>
@@ -102,7 +112,7 @@
       <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :location, 'Location Name', :checked => 'checked' %>Location Name
+          <%= f.radio_button :location, 'Lakeline Steiner Ranch', :checked => 'checked' %>Lakeline Steiner Ranch
         <% end %>
       </div>
     </div>

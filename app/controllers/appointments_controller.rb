@@ -33,7 +33,7 @@ class AppointmentsController < ApplicationController
         elsif @appointment.location == 'Cedar Park'
           @appointment.formname = 'New Patient'
           @appointment.formname = '' if params[:radio_buttons] == 'None'
-        elsif @appointment.location == 'Location Name'
+        elsif @appointment.location == 'Lakeline Steiner Ranch'
           @appointment.formname = 'Rising Stars Pediatric'
           @appointment.formname = '' if params[:radio_buttons] == 'None'
         else
@@ -115,7 +115,7 @@ class AppointmentsController < ApplicationController
       elsif @appointment.location == 'Cedar Park'
         @appointment.formname = 'New Patient'
         @appointment.formname = '' if params[:radio_buttons] == 'None'
-      elsif @appointment.location == 'Location Name'
+      elsif @appointment.location == 'Lakeline Steiner Ranch'
         @appointment.formname = 'Rising Stars Pediatric'
         @appointment.formname = '' if params[:radio_buttons] == 'None'
       else
@@ -132,7 +132,11 @@ class AppointmentsController < ApplicationController
           @appformjoin.save
         end
       end
+
       if @appointment.update_attributes(params[:appointment])
+        @doctor_details = @appointment.doctor
+        @appointment.doctorname = @doctor_details.doctorname
+        @appointment.save(:validate => false)
         Notifier.appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
         format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }
         format.xml { head :ok }
