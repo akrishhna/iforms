@@ -33,7 +33,7 @@
     <div class="control-group">
       <%= f.label :activity_name, "Name", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_name %>
+        <%= f.text_field :activity_name, :placeholder => params[:id] == 'new' ? 'New Activity Name' : '' %>
       </div>
     </div>
     <div class="control-group">
