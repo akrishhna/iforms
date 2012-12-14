@@ -97,10 +97,12 @@
         <% end %> <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :doctorname, 'Dr. Shiny Thomas, D.D.S.' %> Dr. Shiny Thomas, D.D.S.
-        <% end %><br>
+        <% end %>
+        <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :doctorname, 'Dr. Jeff Gregerson, D.M.D.' %>Dr. Jeff Gregerson, D.M.D.
-        <% end %><br>
+        <% end %>
+        <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :doctorname, 'Dr. Pru Aurora, D.D.S.' %> Dr. Pru Aurora, D.D.S.
         <% end %>
@@ -112,7 +114,11 @@
       <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :location, 'Lakeline Steiner Ranch', :checked => 'checked' %>Lakeline Steiner Ranch
+          <%= f.radio_button :location, 'Lakeline' %> Lakeline
+        <% end %>
+        <br>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :location, 'Steiner Ranch' %> Steiner Ranch
         <% end %>
       </div>
     </div>
