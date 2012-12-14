@@ -1,10 +1,168 @@
 <% @user = User.where("email =?", @appointment.email).first %>
-Dear,
-<p>
-This Message confirms your appointment with Rising Starts Pediatric Dentistry.please fill
-<% if @user %>
-  <%= link_to 'Rising Starts Pediatric', @login_url %>
-<% else %>
-  <%= link_to 'Rising Starts Pediatric', @registration_url %>
+<div style="text-align:center; font-family: 'Josefin Slab',serif;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: #DCD8D8;
+  height:70px;
+line-height: 2em">
+ <p><%= link_to "Rising Stars Pediatric Dentistry", "http://smilelikeastar.com/", :target => "_blank", :style => 'text-decoration: none;color:#747474' %></p>
+</div>
+<% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Rising Stars Pediatric Dentistry
+    at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+<% elsif @appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Rising Stars Pediatric Dentistry
+    at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Rising Stars Pediatric Dentistry
+    at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+  <p>
+    Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% elsif @appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @preferred_name %> <%= @appointment.lastname %>,</p>
+  <p>
+    This message confirms your appointment with Rising Stars Pediatric Dentistry
+    at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+  <p>
+    Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Rising Stars
+    Pediatric Dentistry at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+<% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @preferred_name %> <%= @appointment.lastname %>'s appointment with Rising Stars Pediatric
+    Dentistry
+    at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Rising Stars
+    Pediatric Dentistry at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+  <p>Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
+<% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and !@preferred_name.empty? %>
+  <p>Dear <%= @appointment.responsible_party %>,</p>
+  <p>
+    This message confirms <%= @preferred_name %> <%= @appointment.lastname %>'s appointment with Rising Stars Pediatric
+    Dentistry
+    at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
+    at
+    <% if @appointment.location == 'Lakeline' %>
+      <%= link_to "14005 N Hwy 183, Ste 800, Austin, TX 7871.", "http://goo.gl/maps/QxagF" %>
+    <% else %>
+      <%= link_to "4308 N Quinlan Park Rd, Ste 201, Austin, TX 78732.", "http://goo.gl/maps/PMzqd" %>
+    <% end %>
+  </p>
+  <p>Prior to your appointment, please complete our online
+    <% if @user %>
+      <%= link_to 'New Patient', @login_url %>
+    <% else %>
+      <%= link_to 'New Patient', @registration_url %>
+    <% end %>
+    form.</p>
 <% end %>
-form.</p>
+
+<p>Kind Regards,</p>
+
+<p>Rising Stars Pediatric Dentistry</p>
+<div id="pageFooter" style="text-align:center;border-top: 1px dotted #D4D4D4;
+  color: #A4A4A4;
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 25px;">
+  Austin Texas Pediatric Dentists Voted Best Pediatric Dentist | 512&nbsp;266-7200
+  <div style="width:100%;">
+    <div style="text-align:center; margin: auto; width: 20%; font-size:150%;"><br>
+      <img width="200" src="http://smilelikeastar.com/storage/images/rspd-logo-web.png">
+    </div>
+  </div>
+</div>
+
+
+
+
