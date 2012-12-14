@@ -14,8 +14,6 @@ $(function () {
          $("#boy_scouts").attr('data-is_loaded', 'true');
         //$("#boy_scouts").load('/consumer/boy_scouts_list');
         $("#boy_scouts").load('/consumer/boy_scouts');
-      //  $("#dental").attr('data-is_loaded', 'true');
-       // $("#dental").load('/consumer/dental');
       }
     });
 
@@ -49,7 +47,7 @@ $(function () {
   /* Dental */
 
   $(".show_all").live('change', function () {
-    window.location = '/consumer';
+    //window.location = '/consumer';
   });
 
   $('.pagination a').live("click", function () {
@@ -61,5 +59,24 @@ $(function () {
     return false;
   });
   /* end  Dental Tab */
+
+  //medical appointment
+  $('#medical_select_tab').click(function(){
+    $('#medical_appointment_date').datepicker('setDate', new Date());
+    $('#all_medical_appointments').prop('checked', false);
+    var date = $('#medical_appointment_date').val();
+    var show_all = $('#all_medical_appointments').is(':checked');
+    $('#medical').load('/consumer/medical?appointment_date=' + date + '&show_all=' + show_all);
+  });
+
+  //dental appointment
+  $('#dental_select_tab').click(function(){
+    $('#dental_appointment_date').datepicker('setDate', new Date());
+    $('#all_dental_appointments').prop('checked', false);
+    var date = $('#dental_appointment_date').val();
+    var show_all = $('#all_dental_appointments').is(':checked');
+    $('#dental').load('/consumer/dental?appointment_date=' + date + '&show_all=' + show_all);
+  })
+
 
 });

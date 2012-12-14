@@ -105,13 +105,11 @@
   <p>No Appointments On This Day </p>
 <% end %>
 <script>
-
-  $(".date_selector").datepicker({
+  /*$(".date_selector").datepicker({
     onSelect:function (dateText, inst) {
       $('#medical').load('/consumer/medical?appointment_date=' + dateText);
     }
-  }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');
+  }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');*/
 
   $("span").tooltip({ });
-
 </script>

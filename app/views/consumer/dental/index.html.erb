@@ -1,8 +1,8 @@
 <div class="index" xmlns="http://www.w3.org/1999/html">
   <div class="well">
-    Appointment Date : <%= text_field_tag :date, "", :class => "appointments_date_selector",:style => 'margin:0' %> &nbsp;
+    Appointment Date : <%= text_field_tag :dental_appointment_date, "", :class => "appointments_date_selector",:style => 'margin:0' %> &nbsp;
     <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
-      <%= check_box_tag :all_appointments, 1, (true if !params[:appointment_date].present?), :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
+      <%= check_box_tag :all_dental_appointments, 1,  @check_show_all, :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
       All Appointments
     <% end %>
   </div>
@@ -11,3 +11,42 @@
     <%= render 'appointments_list' %>
   </div>
 </div>
+
+<script>
+  var selected_date = '<%= @appointment_date%>';
+  if (selected_date == "") {
+    var selected_date = new Date();
+  }
+
+  $('#dental_appointment_date').livequery(function(){
+    $(this).datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+  });
+
+  if($('#all_dental_appointments').is(':checked') ==  false) {
+    $('#dental_appointment_date').datepicker('setDate', selected_date);
+  }
+
+
+
+  //dental appointments
+  $('#dental_appointment_date').bind('change', function(){
+    selected_date = $(this).val();
+    $('#all_dental_appointments').prop('checked', false);
+    load_dental_appointments();
+  });
+
+  $('#all_dental_appointments').bind('change', function(){
+    if($(this).is(':checked')) {
+      $('#dental_appointment_date').val('');
+    } else {
+      $('#dental_appointment_date').datepicker("setDate", selected_date);
+    }
+    load_dental_appointments();
+  });
+
+  function load_dental_appointments() {
+    var date = $('#dental_appointment_date').val();
+    var show_all = $('#all_dental_appointments').is(':checked');
+    $('#dental').load('/consumer/dental?appointment_date=' + date + '&show_all=' + show_all);
+  }
+</script>

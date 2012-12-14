@@ -1,15 +1,30 @@
 class Consumer::MedicalController < ApplicationController
+
   def index
+
     session["consumer_tab_index"] = 5
-    if  params['appointment_date']
+
+    if params['appointment_date'] && params['appointment_date'] != ''
       begin_date = params['appointment_date'].to_date.beginning_of_day
       end_date = params['appointment_date'].to_date.end_of_day
     else
       begin_date = Date.today.beginning_of_day
       end_date = Date.today.end_of_day
     end
+
     @appointments = MedicalAppointment.where("email = ? and appointment_date_time BETWEEN ? and ?", current_user.email,begin_date,end_date).order("timesent DESC").paging(params[:page], params[:appointment_id])
-    @appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id]) if !params['appointment_date'].present?
+    #@appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id]) if params['show']
+
+    @appointment_date = params[:appointment_date]
+    @check_show_all = false
+    if params[:show_all] == 'true'
+      @check_show_all = true
+      @appointment_date = ''
+      @appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id])
+    elsif params[:show_all] == 'false'
+      @check_show_all = false
+    end
+
     render :layout => false if request.xhr?
   end
 
