@@ -7,8 +7,6 @@ $(function () {
     var time_h = time_split.split(':')[0];
     var time_m = time_split.split(':')[1];
     var app_date_time = date + ' ' + time_h + ':' + time_m + ' ';
-    console.log(app_date_time);
-    console.log('2000-01-01 12:41 ');
     $(window).load(function () {
       $("#medical_appointment_appointment_date_time").datetimepicker().datetimepicker("option", "dateFormat", "yy-mm-dd").datetimepicker('setDate', app_date_time);
     });
@@ -29,7 +27,7 @@ $(function () {
     $('[name="medical_appointment[location]"][value="' + old_appointment['location'] + '"]').attr('checked', 'checked');
   } else {
     if ($('.page').attr('data-page') != 'medical_appointments_index' && $('.page').attr('data-page') != 'medical_appointments_new') {
-      if (appointment.formname.search(/New_Medical/) == 0) {
+      if (appointment.formname.search(/New Patient/) == 0 || appointment.formname.search(/New_Medical/) == 0) {
         $('#radio_buttons_New_Medical_Patient').attr('checked', 'checked');
       } else {
         $('#radio_buttons_None').attr('checked', 'checked');
