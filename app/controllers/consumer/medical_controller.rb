@@ -99,8 +99,8 @@ class Consumer::MedicalController < ApplicationController
   def get_medical_patient_form
      @medical_patient_form = MedicalPatientForm.find(params[:id])
      appointment = MedicalAppointment.find(@medical_patient_form.medical_appointment_id)
-     MedicalPatientForm.capital_medical_clinic_generate_pdf(@medical_patient_form, appointment)
     if appointment.status == 'Submitted' || appointment.status == 'Updated'
+      MedicalPatientForm.capital_medical_clinic_generate_pdf(@medical_patient_form, appointment)
       file_name = "#{@medical_patient_form.first_name.gsub(' ', '-')}_#{@medical_patient_form.last_name.gsub(' ', '-')}_capital_medical_clinic.pdf"
       permission_form_path = "#{PDFFILES_PATH}#{file_name}"
       send_file permission_form_path,

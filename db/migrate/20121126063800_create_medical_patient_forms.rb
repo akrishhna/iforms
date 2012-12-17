@@ -212,19 +212,26 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.integer :family_history_illnesses_father_age_at_diagnosis_3, :limit => 25
       t.string :family_history_siblings_1, :limit => 25
       t.string :family_history_siblings_living_deceased_1, :limit => 25
-      t.string :family_history_siblings_1_illness_1, :limit => 50
-      t.string :family_history_siblings_1_illness_2, :limit => 50
       t.integer :family_history_siblings_age_1, :limit => 25
+      t.string :family_history_siblings_1_illness_1, :limit => 50
+      t.string :family_history_siblings_1_age_at_diagnosis_1, :limit => 50
+      t.string :family_history_siblings_1_illness_2, :limit => 50
+      t.string :family_history_siblings_1_age_at_diagnosis_2, :limit => 50
       t.string :family_history_siblings_2, :limit => 25
       t.string :family_history_siblings_living_deceased_2, :limit => 25
-      t.string :family_history_siblings_2_illness_1, :limit => 50
-      t.string :family_history_siblings_2_illness_2, :limit => 50
       t.integer :family_history_siblings_age_2, :limit => 25
+      t.string :family_history_siblings_2_illness_1, :limit => 50
+      t.string :family_history_siblings_2_age_at_diagnosis_1, :limit => 50
+      t.string :family_history_siblings_2_illness_2, :limit => 50
+      t.string :family_history_siblings_2_age_at_diagnosis_2, :limit => 50
       t.string :family_history_siblings_3, :limit => 25
       t.string :family_history_siblings_living_deceased_3, :limit => 25
-      t.string :family_history_siblings_3_illness_1, :limit => 50
-      t.string :family_history_siblings_3_illness_2, :limit => 50
       t.integer :family_history_siblings_age_3, :limit => 25
+      t.string :family_history_siblings_3_illness_1, :limit => 50
+      t.string :family_history_siblings_3_age_at_diagnosis_1, :limit => 50
+      t.string :family_history_siblings_3_illness_2, :limit => 50
+      t.string :family_history_siblings_3_age_at_diagnosis_2, :limit => 50
+
 
      #Social History
       t.string :social_history_live, :limit => 15
@@ -311,7 +318,7 @@ class CreateMedicalPatientForms < ActiveRecord::Migration
       t.boolean :review_of_sym_neurological_fainting
       t.boolean :review_of_sym_neurological_weakness
       t.string :review_of_sym_neurological_weakness_which_part_of_body, :limit => 50
-      t.boolean :review_of_sym_neurological_muscle_painSeizures
+      t.boolean :review_of_sym_neurological_seizures
       t.boolean :review_of_sym_neurological_severe_or_frequent_headaches
       t.boolean :review_of_sym_neurological_difficulty_with_balance
       t.boolean :review_of_sym_neurological_difficulty_walking

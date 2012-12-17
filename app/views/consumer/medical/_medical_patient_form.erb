@@ -845,9 +845,11 @@
     <div class="control-group">
       <%= f.label :family_history_siblings_1_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :family_history_siblings_1_illness_1, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_siblings_1_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_siblings_1_age_at_diagnosis_1, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
-        <%= f.text_field :family_history_siblings_1_illness_2, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_siblings_1_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_siblings_1_age_at_diagnosis_2, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
       </div>
     </div>
@@ -877,9 +879,11 @@
     <div class="control-group">
       <%= f.label :family_history_siblings_2_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :family_history_siblings_2_illness_1, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_siblings_2_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_siblings_2_age_at_diagnosis_1, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
-        <%= f.text_field :family_history_siblings_2_illness_2, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_siblings_2_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_siblings_2_age_at_diagnosis_2, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
       </div>
     </div>
@@ -909,9 +913,11 @@
     <div class="control-group">
       <%= f.label :family_history_siblings_3_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :family_history_siblings_3_illness_1, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_siblings_3_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_siblings_3_age_at_diagnosis_1, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
-        <%= f.text_field :family_history_siblings_3_illness_2, :placeholder => 'Illness', :style => 'width: 333px;margin-bottom:10px;' %>
+        <%= f.text_field :family_history_siblings_3_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :family_history_siblings_3_age_at_diagnosis_2, :placeholder => 'Age At Diagnosis', :style => 'width:150px;margin-bottom:10px;' %>
         <br>
       </div>
     </div>
@@ -932,7 +938,8 @@
           <%= f.radio_button :social_history_live, "Alone", :class => 'medical_patient_form_social_history_live' %>Alone
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_live, "With Other(s)", :class => 'medical_patient_form_social_history_live' %>With Other(s)
+          <%= f.radio_button :social_history_live, "With Other(s)", :class => 'medical_patient_form_social_history_live' %>
+          With Other(s)
         <% end %>
       </div>
     </div>
@@ -1015,12 +1022,13 @@
     <div class="control-group">
       <%= f.label :social_history_drink_alcoholic_beverage, 'I Drink', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_drink, :placeholder => 'Number', :style => 'width:150px;margin-right:25px;' %>
+        <%= f.text_field :social_history_drink, :placeholder => 'Number', :class => 'input-mini', :style => 'height:13px' %>&nbsp;&nbsp;Alcoholic
+        Beverages&nbsp;&nbsp;
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_drink_alcoholic_beverage, "Day" %>Day
+          <%= f.radio_button :social_history_drink_alcoholic_beverage, "Day", :style => 'margin-bottom:10px' %>per Day
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_drink_alcoholic_beverage, "Week" %>Week
+          <%= f.radio_button :social_history_drink_alcoholic_beverage, "Week", :style => 'margin-bottom:9px' %>per Week
         <% end %>
       </div>
     </div>
@@ -1101,15 +1109,10 @@
         <%= f.radio_button :review_of_sym_i_have, "Gained" %>Gained
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :review_of_sym_i_have, "Loss" %>Loss
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :review_of_sym_i_have_many_pounds, raw('&nbsp'), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :review_of_sym_i_have_many_pounds, :class => 'input-small', :placeholder => "No Of Pounds" %>
-      <%= f.text_field :review_of_sym_i_have_time_periods, :class => 'input-small', :placeholder => "Time Period" %>
+        <%= f.radio_button :review_of_sym_i_have, "Lost" %>Lost
+      <% end %>&nbsp;&nbsp;&nbsp;
+      <%= f.text_field :review_of_sym_i_have_many_pounds, :class => 'input-small', :placeholder => "No Of Pounds", :style => 'height:13px' %>&nbsp;&nbsp;
+      <%= f.text_field :review_of_sym_i_have_time_periods, :class => 'input-small', :placeholder => "Time Period", :style => 'height:13px' %>
     </div>
   </div>
   <div class="control-group">
@@ -1145,7 +1148,7 @@
         <%= f.check_box :review_of_sym_eye_dryness %>Dryness
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :review_of_sym_eye_visual_changes %>Visual changesn
+        <%= f.check_box :review_of_sym_eye_visual_changes %>Visual changes
       <% end %>
     </div>
   </div>
@@ -1298,8 +1301,8 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_sexual_decreased_libido %>Decreased libido
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :review_of_sym_sexual_difficulty_achieving_and_maintaining, :readonly => true %>Difficulty
+      <%= label_tag "check_boxes", :class => 'checkbox inline review_of_sym_sexual_difficulty' do %>
+        <%= f.check_box :review_of_sym_sexual_difficulty_achieving_and_maintaining %>Difficulty
         achieving and maintaining an erection
       <% end %>
     </div>
@@ -1346,7 +1349,7 @@
         <%= f.check_box :review_of_sym_neurological_weakness %>Weakness:
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :review_of_sym_neurological_muscle_painSeizures %>Muscle painSeizures
+        <%= f.check_box :review_of_sym_neurological_seizures %>Seizures
       <% end %>  <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_neurological_severe_or_frequent_headaches %>Severe or frequent headaches
@@ -1532,51 +1535,44 @@
         <%= f.text_field :health_maintenance_description_of_abnormal_test_results, :readonly => true, :style => 'width:450px' %>
       </div>
     </div>
-    <div class="control-group">
-      <strong>
-        NOTE: THESE NEXT QUESTIONS ARE ONLY ASKED IF GENDER = FEMALE
-      </strong>
-    </div>
-    <div class="control-group">
-      <%= f.label :health_maintenance_most_recent_mammogram, ' Most Recent Mammogram', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :health_maintenance_most_recent_mammogram, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_mammogram %>
+    <div class="only_for_female">
+      <div class="control-group">
+        <%= f.label :health_maintenance_most_recent_mammogram, ' Most Recent Mammogram', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :health_maintenance_most_recent_mammogram, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_mammogram %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :health_maintenance_most_recent_pap_smear, ' Most Recent Pap Smear ', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :health_maintenance_most_recent_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_pap_smear %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :health_maintenance_abnormal_pap_smear, ' Abnormal Pap Smear ', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :health_maintenance_abnormal_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_abnormal_pap_smear %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :health_maintenance_hysterectomy, ' Hysterectomy ', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :health_maintenance_hysterectomy, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_hysterectomy %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :health_maintenance_why_was_hysterectomy_performed, 'Why Was Hysterectomy Performed?', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :health_maintenance_why_was_hysterectomy_performed, :readonly => true, :style => 'width:450px' %>
+        </div>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :health_maintenance_most_recent_pap_smear, ' Most Recent Pap Smear ', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :health_maintenance_most_recent_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_pap_smear %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :health_maintenance_abnormal_pap_smear, ' Abnormal Pap Smear ', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :health_maintenance_abnormal_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_abnormal_pap_smear %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :health_maintenance_hysterectomy, ' Hysterectomy ', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :health_maintenance_hysterectomy, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_hysterectomy %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :health_maintenance_why_was_hysterectomy_performed, 'Why Was Hysterectomy Performed?', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :health_maintenance_why_was_hysterectomy_performed, :readonly => true, :style => 'width:450px' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <strong>
-
-        NOTE: THIS NEXT QUESTION IS ONLY ASKED IF GENDER = MALE
-      </strong>
-    </div>
-    <div class="control-group">
-      <%= f.label :health_maintenance_digital_rectal_exam_and_psa_checked, 'Digital Rectal Exam and PSA Checked', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :health_maintenance_digital_rectal_exam_and_psa_checked, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_digital_rectal_exam_and_psa_checked %>
+    <div class="only_for_male">
+      <div class="control-group">
+        <%= f.label :health_maintenance_digital_rectal_exam_and_psa_checked, 'Digital Rectal Exam and PSA Checked', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :health_maintenance_digital_rectal_exam_and_psa_checked, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_digital_rectal_exam_and_psa_checked %>
+        </div>
       </div>
     </div>
     <div class="medical_patient_form_footer_links">
@@ -1595,7 +1591,7 @@
       <% end %>
     </div>
     <div class="actions">
-      <%= f.submit submit_tag_text, :class => 'btn btn-primary btn-large', :style => 'font-size:28px' %>
+      <%= f.submit submit_tag_text, :class => 'btn btn-primary' %>
     </div>
   </div>
   </div>
