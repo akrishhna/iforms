@@ -13,6 +13,9 @@ $(function () {
   }
 
   $(".appointments_date_selector").datepicker({
+    changeMonth: true,
+    changeYear: true
+  }).datepicker({
     onSelect:function (dateText, inst) {
       window.location = '/medical_appointments' + '?appointment_date=' + dateText;
     }

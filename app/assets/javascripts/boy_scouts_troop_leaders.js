@@ -18,7 +18,7 @@ $(function () {
     var boy_scout_parent_last_name = $('#parent_last_name_' + row_index).val();
     var boy_scout_email = $('#email_' + row_index).val();
     $.post("/boy_scouts_troop_leaders/boy_scouts_roster",
-      {row_index:row_index, id:id, first_name:boy_scout_first_name, last_name:boy_scout_last_name,middle_name:boy_scout_middle_name, parent_first_name:boy_scout_parent_first_name, parent_last_name:boy_scout_parent_last_name, email:boy_scout_email});
+      {row_index:row_index, id:id, first_name:boy_scout_first_name, last_name:boy_scout_last_name, middle_name:boy_scout_middle_name, parent_first_name:boy_scout_parent_first_name, parent_last_name:boy_scout_parent_last_name, email:boy_scout_email});
   });
 
   $('.select_all_check_box').click(function () {
@@ -31,7 +31,7 @@ $(function () {
     enable_delete_all_bs_btn();
   });
 
-  $('#boy_scouts_table  input[name=check_box_row]').live('change',function () {
+  $('#boy_scouts_table  input[name=check_box_row]').live('change', function () {
     enable_delete_all_bs_btn();
   });
 
@@ -77,76 +77,78 @@ $(function () {
 
 // activity tabs
 
-$(".boy_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
-$('#boy_scouts_activity_activity_date_begin').datepicker("setDate", $('#boy_scouts_activity_activity_date_begin').attr('data-value'));
-$('#boy_scouts_activity_activity_date_end').datepicker("setDate", $('#boy_scouts_activity_activity_date_end').attr('data-value'));
-$('#boy_scouts_activity_activity_signed_permission_due_date').datepicker("setDate", $('#boy_scouts_activity_activity_signed_permission_due_date').attr('data-value'));
+  $(".boy_scout_activity_date_selector").datepicker({
+    changeMonth:true,
+    changeYear:true
+  }).datepicker("option", "dateFormat", "yy-mm-dd");
+  $('#boy_scouts_activity_activity_date_begin').datepicker("setDate", $('#boy_scouts_activity_activity_date_begin').attr('data-value'));
+  $('#boy_scouts_activity_activity_date_end').datepicker("setDate", $('#boy_scouts_activity_activity_date_end').attr('data-value'));
+  $('#boy_scouts_activity_activity_signed_permission_due_date').datepicker("setDate", $('#boy_scouts_activity_activity_signed_permission_due_date').attr('data-value'));
 
 
-
-$('.activity_nav_link').click(function () {
-  var tab_index = parseInt($(this).attr('data_tab_index'));
-  $("#activity_tab_links a:eq(" + tab_index + ")").tab('show');
-  return false;
-});
-
-$('select#boy_scouts_activities').change(function () {
-  if ($(this).val() == 0) {
-  } else {
-    window.location = '/boy_scouts_troop_leaders/activities?id=' + $(this).val();
-  }
-});
-
-$('.create_new_activity').click(function(){
-  window.location = '/boy_scouts_troop_leaders/activities?id=' + 'new';
-});
-
-$('.boy_scouts_activity_form input,.boy_scouts_activity_form select').change(function () {
-  $('input[name=_method]').val('post');
-  var params = $('.boy_scouts_activity_form').serializeArray();
-  $.post('/boy_scouts_troop_leaders/create_activity', params);
-  return false;
-});
-
-$('#notification_email_to_parent').click(function () {
-  if ($(this).attr('disabled') == "disabled") {
+  $('.activity_nav_link').click(function () {
+    var tab_index = parseInt($(this).attr('data_tab_index'));
+    $("#activity_tab_links a:eq(" + tab_index + ")").tab('show');
     return false;
-  }
-  $(this).attr('disabled', "disabled");
-  $(this).text('Sending Email...');
-  var id = $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
-  $.post('/boy_scouts_troop_leaders/send_notification_email', {id:id});
-  return false;
-});
+  });
 
-$('.delete_activity').click(function () {
-  var id = $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
-  if (id != '') {
-    var activity_name =  $('#boy_scouts_activities option:selected').text();
-    $.fancybox({
-      href:'#delete_activity_alert_box',
-      closeBtn:false,
-      beforeShow: function(){
-        $('#delete_activity_name').text(activity_name);
-      }
-    });
-  }
-  return false;
-});
+  $('select#boy_scouts_activities').change(function () {
+    if ($(this).val() == 0) {
+    } else {
+      window.location = '/boy_scouts_troop_leaders/activities?id=' + $(this).val();
+    }
+  });
 
-$('#delete_activity_yes').click(function () {
-  var id = $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
-  $.post('/boy_scouts_troop_leaders/delete_activity', {id:id});
-  return false;
-});
+  $('.create_new_activity').click(function () {
+    window.location = '/boy_scouts_troop_leaders/activities?id=' + 'new';
+  });
 
-$('#boy_scouts_activities option:first').hide();
+  $('.boy_scouts_activity_form input,.boy_scouts_activity_form select').change(function () {
+    $('input[name=_method]').val('post');
+    var params = $('.boy_scouts_activity_form').serializeArray();
+    $.post('/boy_scouts_troop_leaders/create_activity', params);
+    return false;
+  });
 
-$('#boy_scouts_activity_leader_phone_1, #boy_scouts_activity_leader_phone_2, #boy_scouts_activity_leader_phone_3').autotab_filter('numeric');
+  $('#notification_email_to_parent').click(function () {
+    if ($(this).attr('disabled') == "disabled") {
+      return false;
+    }
+    $(this).attr('disabled', "disabled");
+    $(this).text('Sending Email...');
+    var id = $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
+    $.post('/boy_scouts_troop_leaders/send_notification_email', {id:id});
+    return false;
+  });
 
-$('#boy_scouts_activity_leader_phone_1, #boy_scouts_activity_leader_phone_2, #boy_scouts_activity_leader_phone_3').autotab_magic();
-  
-  
+  $('.delete_activity').click(function () {
+    var id = $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
+    if (id != '') {
+      var activity_name = $('#boy_scouts_activities option:selected').text();
+      $.fancybox({
+        href:'#delete_activity_alert_box',
+        closeBtn:false,
+        beforeShow:function () {
+          $('#delete_activity_name').text(activity_name);
+        }
+      });
+    }
+    return false;
+  });
+
+  $('#delete_activity_yes').click(function () {
+    var id = $('.boy_scouts_activity_form #boy_scouts_activity_id').val();
+    $.post('/boy_scouts_troop_leaders/delete_activity', {id:id});
+    return false;
+  });
+
+  $('#boy_scouts_activities option:first').hide();
+
+  $('#boy_scouts_activity_leader_phone_1, #boy_scouts_activity_leader_phone_2, #boy_scouts_activity_leader_phone_3').autotab_filter('numeric');
+
+  $('#boy_scouts_activity_leader_phone_1, #boy_scouts_activity_leader_phone_2, #boy_scouts_activity_leader_phone_3').autotab_magic();
+
+
   // Permission Forms Tab
 
   $('.pf_select_all_check_box').click(function () {
@@ -166,9 +168,9 @@ $('#boy_scouts_activity_leader_phone_1, #boy_scouts_activity_leader_phone_2, #bo
   function enable_pf_btns() {
     var checkbox_count = $('#boy_scouts_permission_form_table  input[name=check_box_row]').length;
     var checked_checkbox_count = $('#boy_scouts_permission_form_table  input[name=check_box_row]:checked').length;
-    var checked_checkbox_status =false;
-    $('#boy_scouts_permission_form_table  input[name=check_box_row]:checked').each(function(){
-      if($(this).attr('data-status') == 'Submitted' || $(this).attr('data-status') == 'Updated'){
+    var checked_checkbox_status = false;
+    $('#boy_scouts_permission_form_table  input[name=check_box_row]:checked').each(function () {
+      if ($(this).attr('data-status') == 'Submitted' || $(this).attr('data-status') == 'Updated') {
         checked_checkbox_status = true;
       }
     });
@@ -224,12 +226,10 @@ $('#boy_scouts_activity_leader_phone_1, #boy_scouts_activity_leader_phone_2, #bo
   });
 
 
-
-
   //permission forms
-  if($('.page').attr('data-page') == 'boy_scouts_troop_leaders_permission_forms') {
+  if ($('.page').attr('data-page') == 'boy_scouts_troop_leaders_permission_forms') {
     $('#boy_scout_permission_form option:first').hide();
-    if(params["id"] == undefined && $('#selected_activity_id') == "") {
+    if (params["id"] == undefined && $('#selected_activity_id') == "") {
       $('#boy_scout_permission_form').val('');
     }
   }

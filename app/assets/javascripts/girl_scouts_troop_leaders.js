@@ -84,7 +84,10 @@ $(function () {
 
   // activity tabs
 
-  $(".girls_scout_activity_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+  $(".girls_scout_activity_date_selector").datepicker({
+    changeMonth: true,
+    changeYear: true
+  }).datepicker("option", "dateFormat", "yy-mm-dd");
   $('#girl_scouts_activity_activity_date_begin').datepicker("setDate", $('#girl_scouts_activity_activity_date_begin').attr('data-value'));
   $('#girl_scouts_activity_activity_date_end').datepicker("setDate", $('#girl_scouts_activity_activity_date_end').attr('data-value'));
   $('#girl_scouts_activity_activity_signed_permission_due_date').datepicker("setDate", $('#girl_scouts_activity_activity_signed_permission_due_date').attr('data-value'));

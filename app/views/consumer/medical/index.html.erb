@@ -19,11 +19,17 @@
   }
 
   $('#medical_appointment_date').livequery(function(){
-    $(this).datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+    $(this).datepicker({
+      changeMonth: true,
+      changeYear: true
+    }).datepicker("option", "dateFormat", "yy-mm-dd");
   });
 
   if($('#all_medical_appointments').is(':checked') ==  false) {
-    $('#medical_appointment_date').datepicker('setDate', selected_date);
+    $('#medical_appointment_date').datepicker({
+      changeMonth: true,
+      changeYear: true
+    }).datepicker('setDate', selected_date);
   }
 
   //medical appointments
@@ -37,7 +43,10 @@
     if($(this).is(':checked')) {
       $('#medical_appointment_date').val('');
     } else {
-      $('#medical_appointment_date').datepicker("setDate", selected_date);
+      $('#medical_appointment_date').datepicker({
+        changeMonth: true,
+        changeYear: true
+      }).datepicker("setDate", selected_date);
     }
     load_medical_appointments();
   });
