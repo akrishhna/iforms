@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207051018) do
+ActiveRecord::Schema.define(:version => 20121213092028) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -869,6 +869,198 @@ ActiveRecord::Schema.define(:version => 20121207051018) do
     t.integer  "billing_details_ssn_2"
     t.integer  "billing_details_ssn_3"
     t.date     "billing_birth_date"
+    t.integer  "patient_other_phone_1"
+    t.integer  "patient_other_phone_2"
+    t.integer  "patient_other_phone_3"
+    t.string   "patient_previously_siblings",                                     :limit => 15
+    t.string   "patient_previously_siblings_list",                                :limit => 100
+    t.boolean  "patient_guardian_father"
+    t.boolean  "patient_guardian_step_father"
+    t.boolean  "patient_guardian_father_guardian"
+    t.boolean  "patient_guardian_father_other"
+    t.string   "patient_guardian_father_other_name",                              :limit => 50
+    t.string   "patient_guardian_father_first_name",                              :limit => 50
+    t.string   "patient_guardian_father_last_name",                               :limit => 50
+    t.date     "patient_guardian_father_birth_date"
+    t.integer  "patient_guardian_father_ssn_1"
+    t.integer  "patient_guardian_father_ssn_2"
+    t.integer  "patient_guardian_father_ssn_3"
+    t.string   "patient_guardian_father_address_1",                               :limit => 50
+    t.string   "patient_guardian_father_address_2",                               :limit => 50
+    t.string   "patient_guardian_father_address_city",                            :limit => 50
+    t.string   "patient_guardian_father_address_state",                           :limit => 50
+    t.string   "patient_guardian_father_address_zip",                             :limit => 50
+    t.string   "patient_guardian_father_employment_place",                        :limit => 50
+    t.integer  "patient_guardian_father_home_phone_1"
+    t.integer  "patient_guardian_father_home_phone_2"
+    t.integer  "patient_guardian_father_home_phone_3"
+    t.integer  "patient_guardian_father_work_phone_1"
+    t.integer  "patient_guardian_father_work_phone_2"
+    t.integer  "patient_guardian_father_work_phone_3"
+    t.integer  "patient_guardian_father_cell_phone_1"
+    t.integer  "patient_guardian_father_cell_phone_2"
+    t.integer  "patient_guardian_father_cell_phone_3"
+    t.string   "patient_guardian_father_email",                                   :limit => 50
+    t.boolean  "patient_guardian_mother"
+    t.boolean  "patient_guardian_step_mother"
+    t.boolean  "patient_guardian_mother_guardian"
+    t.boolean  "patient_guardian_mother_other"
+    t.string   "patient_guardian_mother_other_name",                              :limit => 50
+    t.string   "patient_guardian_mother_first_name",                              :limit => 50
+    t.string   "patient_guardian_mother_last_name",                               :limit => 50
+    t.date     "patient_guardian_mother_birth_date"
+    t.integer  "patient_guardian_mother_ssn_1"
+    t.integer  "patient_guardian_mother_ssn_2"
+    t.integer  "patient_guardian_mother_ssn_3"
+    t.string   "patient_guardian_mother_address_1",                               :limit => 50
+    t.string   "patient_guardian_mother_address_2",                               :limit => 50
+    t.string   "patient_guardian_mother_address_city",                            :limit => 50
+    t.string   "patient_guardian_mother_address_state",                           :limit => 50
+    t.string   "patient_guardian_mother_address_zip",                             :limit => 50
+    t.string   "patient_guardian_mother_employment_place",                        :limit => 50
+    t.integer  "patient_guardian_mother_home_phone_1"
+    t.integer  "patient_guardian_mother_home_phone_2"
+    t.integer  "patient_guardian_mother_home_phone_3"
+    t.integer  "patient_guardian_mother_work_phone_1"
+    t.integer  "patient_guardian_mother_work_phone_2"
+    t.integer  "patient_guardian_mother_work_phone_3"
+    t.integer  "patient_guardian_mother_cell_phone_1"
+    t.integer  "patient_guardian_mother_cell_phone_2"
+    t.integer  "patient_guardian_mother_cell_phone_3"
+    t.string   "patient_guardian_mother_email",                                   :limit => 50
+    t.boolean  "insurance_do_you_have_dental_insurance"
+    t.boolean  "insurance_do_you_have_more_than_one_dental_insurance"
+    t.string   "insurance_person_first_name",                                     :limit => 50
+    t.string   "insurance_person_last_name",                                      :limit => 50
+    t.string   "insurance_relation_ship_to_patient",                              :limit => 50
+    t.string   "insurance_place_of_employment",                                   :limit => 50
+    t.string   "insurance_member_id",                                             :limit => 50
+    t.string   "insurance_company_name",                                          :limit => 50
+    t.integer  "insurance_phone_1"
+    t.integer  "insurance_phone_2"
+    t.integer  "insurance_phone_3"
+    t.string   "insurance_group",                                                 :limit => 50
+    t.string   "insurance_claim_mail_address",                                    :limit => 50
+    t.string   "dental_history_why_is_your_child_here_today"
+    t.string   "dental_history_child_first_time_to_visit",                        :limit => 15
+    t.date     "dental_history_child_last_visiting_date"
+    t.boolean  "dental_history_child_behave_today_friendly"
+    t.boolean  "dental_history_child_behave_today_happy"
+    t.boolean  "dental_history_child_behave_today_timid"
+    t.boolean  "dental_history_child_behave_today_afraid"
+    t.boolean  "dental_history_child_behave_today_resistance"
+    t.string   "dental_history_child_receive_fluoride_in_any_form",               :limit => 15
+    t.string   "dental_history_child_receive_fluoride_in_any_form_description",   :limit => 15
+    t.string   "dental_history_child_inherited_any_dental_characteristics",       :limit => 50
+    t.string   "dental_history_child_have_any_injuries",                          :limit => 50
+    t.boolean  "dental_history_cavities"
+    t.boolean  "dental_history_crooked_teeth"
+    t.boolean  "dental_history_sensitive_to_hot_or_cold"
+    t.boolean  "dental_history_loose_teeth"
+    t.boolean  "dental_history_toothache"
+    t.boolean  "dental_history_sensitive_to_sweets"
+    t.boolean  "dental_history_frequent_headaches"
+    t.boolean  "dental_history_teeth_bumped"
+    t.boolean  "dental_history_bad_breath"
+    t.boolean  "dental_history_patient_bleeding_gums"
+    t.boolean  "dental_history_discolored_teeth"
+    t.boolean  "dental_history_tmj_popping_or_clicking"
+    t.boolean  "dental_history_jaw_pain_from_joint"
+    t.boolean  "dental_history_thumb_sucking"
+    t.boolean  "dental_history_pacifier_use"
+    t.boolean  "dental_history_lip_biting"
+    t.boolean  "dental_history_teeth_grinding"
+    t.boolean  "dental_history_other"
+    t.string   "dental_history_other_description",                                :limit => 50
+    t.string   "dental_history_does_child_brush_teeth",                           :limit => 50
+    t.boolean  "dental_history_does_child_brush_teeth_electric_tooth_brush"
+    t.string   "dental_history_does_child_flosh_teeth",                           :limit => 25
+    t.string   "dental_history_age_at_stop_bottle",                               :limit => 25
+    t.string   "dental_history_age_at_stop_bottle_sippy_cup",                     :limit => 25
+    t.string   "medical_history_child_physician",                                 :limit => 50
+    t.string   "medical_history_address_1",                                       :limit => 50
+    t.string   "medical_history_address_2",                                       :limit => 50
+    t.string   "medical_history_address_city",                                    :limit => 50
+    t.string   "medical_history_address_state",                                   :limit => 50
+    t.string   "medical_history_address_zip",                                     :limit => 50
+    t.integer  "medical_history_home_phone_1"
+    t.integer  "medical_history_home_phone_2"
+    t.integer  "medical_history_home_phone_3"
+    t.boolean  "medical_history_good_general_health"
+    t.string   "medical_history_good_general_health_description",                 :limit => 50
+    t.boolean  "medical_history_child_physical_disabilities"
+    t.string   "medical_history_child_physical_disabilities_description",         :limit => 50
+    t.boolean  "medical_history_booster_shoot_up_to_date"
+    t.boolean  "medical_history_child_surgical_operations"
+    t.string   "medical_history_child_surgical_operations_description",           :limit => 50
+    t.boolean  "medical_history_child_ever_been_hospitalized"
+    t.string   "medical_history_child_ever_been_hospitalized_description",        :limit => 50
+    t.boolean  "medical_history_latex_allergies"
+    t.boolean  "medical_history_seasonal_allergies"
+    t.string   "medical_history_food_allergies",                                  :limit => 50
+    t.string   "medical_history_drug_allergies",                                  :limit => 50
+    t.string   "medical_history_asthama_or_breathing_prob",                       :limit => 50
+    t.string   "medical_history_er_for_asthma_attack",                            :limit => 50
+    t.string   "medical_history_induces_breathing_prob",                          :limit => 50
+    t.string   "medical_history_asthma_medication",                               :limit => 50
+    t.string   "medical_history_autism_spectrum",                                 :limit => 10
+    t.string   "medical_history_sensory_integration_issues",                      :limit => 10
+    t.string   "medical_history_add_or_adhd",                                     :limit => 10
+    t.string   "medical_history_heart_trouble_or_heart_murmur",                   :limit => 10
+    t.string   "medical_history_rheumatic_heart_disease_or_fever",                :limit => 10
+    t.string   "medical_history_blood_diseases_or_anemia",                        :limit => 10
+    t.string   "medical_history_aids_virus",                                      :limit => 10
+    t.string   "medical_history_herpes_virus_or_shingles",                        :limit => 10
+    t.string   "medical_history_diabetes",                                        :limit => 10
+    t.string   "medical_history_ear_eye_nose_or_throat_trouble",                  :limit => 10
+    t.string   "medical_history_stomach_ulcers",                                  :limit => 10
+    t.string   "medical_history_hearing_or_vision_impairment",                    :limit => 10
+    t.string   "medical_history_eating_disorders",                                :limit => 10
+    t.string   "medical_history_abnormal_bleeding_or_bruising",                   :limit => 10
+    t.string   "medical_history_prolonged_bleeding_or_transfusions",              :limit => 10
+    t.string   "medical_history_birth_defects",                                   :limit => 10
+    t.string   "medical_history_kidney_disease",                                  :limit => 10
+    t.string   "medical_history_cleft_lip_or_palate",                             :limit => 10
+    t.string   "medical_history_scarlet_fever_or_high_fever",                     :limit => 10
+    t.string   "medical_history_high_or_low_blood_pressure",                      :limit => 10
+    t.string   "medical_history_liver_disease",                                   :limit => 10
+    t.string   "medical_history_Jaundice_or_hepatitis",                           :limit => 10
+    t.string   "medical_history_steroids_therapy_or_chemotherapy",                :limit => 10
+    t.string   "medical_history_nervous_or_emotional_disorders",                  :limit => 10
+    t.string   "medical_history_Convulsions_or_seizures",                         :limit => 10
+    t.date     "medical_history_date_of_last_seizure"
+    t.string   "medical_history_frequent_diarrhea_or_vomiting",                   :limit => 10
+    t.string   "medical_history_mumps_measles_or_chickenpox",                     :limit => 10
+    t.string   "medical_history_cancer_tumors_growths_or_cysts",                  :limit => 10
+    t.string   "medical_history_sinus_problems_or_drainage",                      :limit => 10
+    t.string   "medical_history_tuberculosis_or_tb_exposure",                     :limit => 10
+    t.string   "medical_history_problems_with_anesthesia",                        :limit => 10
+    t.string   "medical_history_thyroid_disease",                                 :limit => 10
+    t.string   "medical_history_current_medication_name_1",                       :limit => 50
+    t.string   "medical_history_current_medication_how_often_1",                  :limit => 50
+    t.string   "medical_history_current_medication_reason_1",                     :limit => 50
+    t.string   "medical_history_current_medication_name_2",                       :limit => 50
+    t.string   "medical_history_current_medication_how_often_2",                  :limit => 50
+    t.string   "medical_history_current_medication_reason_2",                     :limit => 50
+    t.string   "medical_history_current_medication_name_3",                       :limit => 50
+    t.string   "medical_history_current_medication_how_often_3",                  :limit => 50
+    t.string   "medical_history_current_medication_reason_3",                     :limit => 50
+    t.string   "medical_history_current_medication_name_4",                       :limit => 50
+    t.string   "medical_history_current_medication_how_often_4",                  :limit => 50
+    t.string   "medical_history_current_medication_reason_4",                     :limit => 50
+    t.boolean  "social_history_child_have_problems_speech"
+    t.boolean  "social_history_child_have_problems_hearing"
+    t.boolean  "social_history_child_have_problems_vision"
+    t.boolean  "social_history_child_have_problems_sleep"
+    t.boolean  "social_history_consider_ur_child_adv_in_learning"
+    t.boolean  "social_history_consider_ur_child_progressing_normally"
+    t.boolean  "social_history_consider_ur_child_slow_learner"
+    t.string   "social_history_child_adopted",                                    :limit => 5
+    t.string   "social_history_child_adopted_age",                                :limit => 20
+    t.string   "social_history_child_tolerate",                                   :limit => 50
+    t.string   "social_history_child_favorites",                                  :limit => 50
+    t.string   "social_history_child_first_lang",                                 :limit => 50
+    t.string   "social_history_child_second_lang",                                :limit => 50
   end
 
   create_table "medical_appointments", :force => true do |t|
@@ -1082,19 +1274,25 @@ ActiveRecord::Schema.define(:version => 20121207051018) do
     t.integer  "family_history_illnesses_father_age_at_diagnosis_3"
     t.string   "family_history_siblings_1",                                 :limit => 25
     t.string   "family_history_siblings_living_deceased_1",                 :limit => 25
-    t.string   "family_history_siblings_1_illness_1",                       :limit => 50
-    t.string   "family_history_siblings_1_illness_2",                       :limit => 50
     t.integer  "family_history_siblings_age_1"
+    t.string   "family_history_siblings_1_illness_1",                       :limit => 50
+    t.string   "family_history_siblings_1_age_at_diagnosis_1",              :limit => 50
+    t.string   "family_history_siblings_1_illness_2",                       :limit => 50
+    t.string   "family_history_siblings_1_age_at_diagnosis_2",              :limit => 50
     t.string   "family_history_siblings_2",                                 :limit => 25
     t.string   "family_history_siblings_living_deceased_2",                 :limit => 25
-    t.string   "family_history_siblings_2_illness_1",                       :limit => 50
-    t.string   "family_history_siblings_2_illness_2",                       :limit => 50
     t.integer  "family_history_siblings_age_2"
+    t.string   "family_history_siblings_2_illness_1",                       :limit => 50
+    t.string   "family_history_siblings_2_age_at_diagnosis_1",              :limit => 50
+    t.string   "family_history_siblings_2_illness_2",                       :limit => 50
+    t.string   "family_history_siblings_2_age_at_diagnosis_2",              :limit => 50
     t.string   "family_history_siblings_3",                                 :limit => 25
     t.string   "family_history_siblings_living_deceased_3",                 :limit => 25
-    t.string   "family_history_siblings_3_illness_1",                       :limit => 50
-    t.string   "family_history_siblings_3_illness_2",                       :limit => 50
     t.integer  "family_history_siblings_age_3"
+    t.string   "family_history_siblings_3_illness_1",                       :limit => 50
+    t.string   "family_history_siblings_3_age_at_diagnosis_1",              :limit => 50
+    t.string   "family_history_siblings_3_illness_2",                       :limit => 50
+    t.string   "family_history_siblings_3_age_at_diagnosis_2",              :limit => 50
     t.string   "social_history_live",                                       :limit => 15
     t.string   "social_history_live_with_whom",                             :limit => 50
     t.integer  "social_history_no_of_children"
@@ -1177,7 +1375,7 @@ ActiveRecord::Schema.define(:version => 20121207051018) do
     t.boolean  "review_of_sym_neurological_fainting"
     t.boolean  "review_of_sym_neurological_weakness"
     t.string   "review_of_sym_neurological_weakness_which_part_of_body",    :limit => 50
-    t.boolean  "review_of_sym_neurological_muscle_painSeizures"
+    t.boolean  "review_of_sym_neurological_seizures"
     t.boolean  "review_of_sym_neurological_severe_or_frequent_headaches"
     t.boolean  "review_of_sym_neurological_difficulty_with_balance"
     t.boolean  "review_of_sym_neurological_difficulty_walking"

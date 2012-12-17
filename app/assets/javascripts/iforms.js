@@ -17,6 +17,14 @@ $('.karen_naples_new_patient_iforms_nav_link').live('click', function () {
   // return false;
 });
 
+$('.rising_stars_pediatric_iforms_nav_link').live('click', function () {
+  // console.log($(this).attr('data_tab_index'));
+  var tab_index = parseInt($(this).attr('data_tab_index'));
+  $("#rising_stars_pediatric_iforms_tab_links a:eq(" + tab_index + ")").tab('show');
+  // return false;
+});
+
+
 $('#billing_tab').live('click', function () {
   billing_details_info();
   update_all_fields();

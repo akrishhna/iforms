@@ -13,6 +13,8 @@
   <% session[:formname]=nil %>
 <% end %>
 
-<% elsif @appointment.service_provider_id = 4 %>
+<% elsif @appointment.service_provider_id == 4 %>
   <%= render 'karen_naples_new_patient_form' %>
+<% elsif @appointment.service_provider_id == 7 %>
+  <%= render 'rising_stars_pediatric_form' %>
 <% end %>
