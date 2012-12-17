@@ -30,7 +30,7 @@ group :assets do
 end
 
 gem 'execjs'
-gem 'jquery-rails'
+gem "jquery-rails", "~> 2.1.4"
 gem 'therubyracer'
 
 # To use ActiveModel has_secure_password
