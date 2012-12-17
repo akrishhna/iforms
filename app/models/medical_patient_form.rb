@@ -289,7 +289,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "FaintingLosingConsciousness" => @medical_patient_form.review_of_sym_neurological_fainting ? 'Yes' : 'No',
       "Weakness:" => @medical_patient_form.review_of_sym_neurological_weakness ? 'Yes' : 'No',
       "WeaknessWhichPartOfYourBody" => @medical_patient_form.review_of_sym_neurological_weakness_which_part_of_body,
-      "Seizures" => @medical_patient_form.review_of_sym_neurological_Seizures ? 'Yes' : 'No',
+      "Seizures" => @medical_patient_form.review_of_sym_neurological_seizures ? 'Yes' : 'No',
       "SevereOrFrequentHeadaches" => @medical_patient_form.review_of_sym_neurological_severe_or_frequent_headaches ? 'Yes' : 'No',
       "DifficultyWithBalance" => @medical_patient_form.review_of_sym_neurological_difficulty_with_balance ? 'Yes' : 'No',
       "DifficultyWalking" => @medical_patient_form.review_of_sym_neurological_difficulty_walking ? 'Yes' : 'No',
