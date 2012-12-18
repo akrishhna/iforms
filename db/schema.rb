@@ -872,13 +872,7 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.integer  "patient_other_phone_1"
     t.integer  "patient_other_phone_2"
     t.integer  "patient_other_phone_3"
-    t.string   "patient_previously_siblings",                                     :limit => 15
     t.string   "patient_previously_siblings_list",                                :limit => 100
-    t.boolean  "patient_guardian_father"
-    t.boolean  "patient_guardian_step_father"
-    t.boolean  "patient_guardian_father_guardian"
-    t.boolean  "patient_guardian_father_other"
-    t.string   "patient_guardian_father_other_name",                              :limit => 50
     t.string   "patient_guardian_father_first_name",                              :limit => 50
     t.string   "patient_guardian_father_last_name",                               :limit => 50
     t.date     "patient_guardian_father_birth_date"
@@ -890,7 +884,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "patient_guardian_father_address_city",                            :limit => 50
     t.string   "patient_guardian_father_address_state",                           :limit => 50
     t.string   "patient_guardian_father_address_zip",                             :limit => 50
-    t.string   "patient_guardian_father_employment_place",                        :limit => 50
     t.integer  "patient_guardian_father_home_phone_1"
     t.integer  "patient_guardian_father_home_phone_2"
     t.integer  "patient_guardian_father_home_phone_3"
@@ -901,11 +894,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.integer  "patient_guardian_father_cell_phone_2"
     t.integer  "patient_guardian_father_cell_phone_3"
     t.string   "patient_guardian_father_email",                                   :limit => 50
-    t.boolean  "patient_guardian_mother"
-    t.boolean  "patient_guardian_step_mother"
-    t.boolean  "patient_guardian_mother_guardian"
-    t.boolean  "patient_guardian_mother_other"
-    t.string   "patient_guardian_mother_other_name",                              :limit => 50
     t.string   "patient_guardian_mother_first_name",                              :limit => 50
     t.string   "patient_guardian_mother_last_name",                               :limit => 50
     t.date     "patient_guardian_mother_birth_date"
@@ -917,7 +905,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "patient_guardian_mother_address_city",                            :limit => 50
     t.string   "patient_guardian_mother_address_state",                           :limit => 50
     t.string   "patient_guardian_mother_address_zip",                             :limit => 50
-    t.string   "patient_guardian_mother_employment_place",                        :limit => 50
     t.integer  "patient_guardian_mother_home_phone_1"
     t.integer  "patient_guardian_mother_home_phone_2"
     t.integer  "patient_guardian_mother_home_phone_3"
@@ -928,31 +915,16 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.integer  "patient_guardian_mother_cell_phone_2"
     t.integer  "patient_guardian_mother_cell_phone_3"
     t.string   "patient_guardian_mother_email",                                   :limit => 50
-    t.boolean  "insurance_do_you_have_dental_insurance"
     t.boolean  "insurance_do_you_have_more_than_one_dental_insurance"
     t.string   "insurance_person_first_name",                                     :limit => 50
     t.string   "insurance_person_last_name",                                      :limit => 50
     t.string   "insurance_relation_ship_to_patient",                              :limit => 50
-    t.string   "insurance_place_of_employment",                                   :limit => 50
     t.string   "insurance_member_id",                                             :limit => 50
     t.string   "insurance_company_name",                                          :limit => 50
     t.integer  "insurance_phone_1"
     t.integer  "insurance_phone_2"
     t.integer  "insurance_phone_3"
     t.string   "insurance_group",                                                 :limit => 50
-    t.string   "insurance_claim_mail_address",                                    :limit => 50
-    t.string   "dental_history_why_is_your_child_here_today"
-    t.string   "dental_history_child_first_time_to_visit",                        :limit => 15
-    t.date     "dental_history_child_last_visiting_date"
-    t.boolean  "dental_history_child_behave_today_friendly"
-    t.boolean  "dental_history_child_behave_today_happy"
-    t.boolean  "dental_history_child_behave_today_timid"
-    t.boolean  "dental_history_child_behave_today_afraid"
-    t.boolean  "dental_history_child_behave_today_resistance"
-    t.string   "dental_history_child_receive_fluoride_in_any_form",               :limit => 15
-    t.string   "dental_history_child_receive_fluoride_in_any_form_description",   :limit => 15
-    t.string   "dental_history_child_inherited_any_dental_characteristics",       :limit => 50
-    t.string   "dental_history_child_have_any_injuries",                          :limit => 50
     t.boolean  "dental_history_cavities"
     t.boolean  "dental_history_crooked_teeth"
     t.boolean  "dental_history_sensitive_to_hot_or_cold"
@@ -971,7 +943,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.boolean  "dental_history_lip_biting"
     t.boolean  "dental_history_teeth_grinding"
     t.boolean  "dental_history_other"
-    t.string   "dental_history_other_description",                                :limit => 50
     t.string   "dental_history_does_child_brush_teeth",                           :limit => 50
     t.boolean  "dental_history_does_child_brush_teeth_electric_tooth_brush"
     t.string   "dental_history_does_child_flosh_teeth",                           :limit => 25
@@ -1061,6 +1032,29 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "social_history_child_favorites",                                  :limit => 50
     t.string   "social_history_child_first_lang",                                 :limit => 50
     t.string   "social_history_child_second_lang",                                :limit => 50
+    t.string   "patient_guardian_father_employer",                                :limit => 50
+    t.string   "patient_guardian_father",                                         :limit => 25
+    t.string   "patient_guardian_mother",                                         :limit => 25
+    t.string   "patient_guardian_mother_employer",                                :limit => 50
+    t.string   "insurance_insured"
+    t.string   "insurance_employer",                                              :limit => 50
+    t.string   "insurance_address_1",                                             :limit => 50
+    t.string   "insurance_address_2",                                             :limit => 50
+    t.string   "insurance_address_city",                                          :limit => 50
+    t.string   "insurance_address_state",                                         :limit => 50
+    t.string   "insurance_address_zip",                                           :limit => 50
+    t.string   "dental_history_why_patient_here_today"
+    t.string   "dental_history_patient_first_time_to_visit",                      :limit => 15
+    t.date     "dental_history_patient_last_visiting_date"
+    t.boolean  "dental_history_patient_behave_today_friendly"
+    t.boolean  "dental_history_patient_behave_today_happy"
+    t.boolean  "dental_history_patient_behave_today_timid"
+    t.boolean  "dental_history_patient_behave_today_afraid"
+    t.boolean  "dental_history_patient_behave_today_resistance"
+    t.string   "dental_history_patient_receive_fluoride_in_any_form",             :limit => 15
+    t.string   "dental_history_patient_receive_fluoride_in_any_form_description", :limit => 15
+    t.string   "dental_history_patient_inherited_any_dental_characteristics",     :limit => 50
+    t.string   "dental_history_patient_have_any_injuries",                        :limit => 50
   end
 
   create_table "medical_appointments", :force => true do |t|
