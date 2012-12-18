@@ -1,7 +1,7 @@
 <% @user = User.where("email =?", @appointment.email).first %>
-<div style="background: #87ceeb;height: 136px" >
-  <a href="http://www.capitalmedicalclinic.com/" target="_blank"><img src=" <%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %> " width="86%"/></a>
-  <img src=" <%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg" %>"/>
+<div style="background: #87ceeb;height: 128px" >
+  <a href="http://www.capitalmedicalclinic.com/" target="_blank"><img src=" <%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %> " width="81%"/></a>
+  <img src=" <%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg" %>" style="position: absolute;right: 0px;top: 0px"/>
 </div>
 <% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
@@ -90,9 +90,9 @@
   border-top: 6px solid #DED9CE;
   font-size: 18px;
   padding: 10px;
-  text-align: center; ">
+  text-align: center;
+width: 100%   ">
   <span>Capital Medical Clinic 1301 W. 38th Street, Suite 601 Austin Texas 78705-1069 512-454-5171</span>
 </div>
-
 
 
