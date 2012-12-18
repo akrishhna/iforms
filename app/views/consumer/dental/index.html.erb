@@ -2,7 +2,7 @@
   <div class="well">
     Appointment Date : <%= text_field_tag :dental_appointment_date, "", :class => "appointments_date_selector",:style => 'margin:0' %> &nbsp;
     <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
-      <%= check_box_tag :all_dental_appointments, 1,  @check_show_all, :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
+      <%= check_box_tag :all_dental_appointments, 1, @check_show_all, :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
       All Appointments
     <% end %>
   </div>
@@ -15,7 +15,7 @@
 <script>
   var selected_date = '<%= @appointment_date%>';
   if (selected_date == "") {
-    var selected_date = new Date();
+  //  var selected_date = new Date();
   }
 
   $('#dental_appointment_date').livequery(function(){
@@ -30,6 +30,9 @@
       changeMonth: true,
       changeYear: true
     }).datepicker('setDate', selected_date);
+    if(selected_date == ''){
+      $('#all_dental_appointments').prop('checked', true);//added extra for checkbox checked
+    }
   }
 
 

@@ -15,7 +15,7 @@
 <script>
   var selected_date = '<%= @appointment_date%>';
   if (selected_date == "") {
-    var selected_date = new Date();
+   // var selected_date = new Date();
   }
 
   $('#medical_appointment_date').livequery(function(){
@@ -30,6 +30,9 @@
       changeMonth: true,
       changeYear: true
     }).datepicker('setDate', selected_date);
+    if(selected_date == ''){
+      $('#all_medical_appointments').prop('checked', true);//added extra for checkbox checked
+    }
   }
 
   //medical appointments

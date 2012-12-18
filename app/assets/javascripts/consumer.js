@@ -62,20 +62,20 @@ $(function () {
 
   //medical appointment
   $('#medical_select_tab').click(function(){
-    $('#medical_appointment_date').datepicker('setDate', new Date());
-    $('#all_medical_appointments').prop('checked', false);
-    var date = $('#medical_appointment_date').val();
+   // $('#medical_appointment_date').datepicker('setDate', new Date());
+    $('#all_medical_appointments').prop('checked', true);
+  //  var date = $('#medical_appointment_date').val();
     var show_all = $('#all_medical_appointments').is(':checked');
-    $('#medical').load('/consumer/medical?appointment_date=' + date + '&show_all=' + show_all);
+    $('#medical').load('/consumer/medical?appointment_date=' + '&show_all=' + show_all);
   });
 
   //dental appointment
   $('#dental_select_tab').click(function(){
-    $('#dental_appointment_date').datepicker('setDate', new Date());
-    $('#all_dental_appointments').prop('checked', false);
-    var date = $('#dental_appointment_date').val();
+  //  $('#dental_appointment_date').datepicker('setDate', new Date());
+    $('#all_dental_appointments').prop('checked', true);
+   // var date = $('#dental_appointment_date').val();
     var show_all = $('#all_dental_appointments').is(':checked');
-    $('#dental').load('/consumer/dental?appointment_date=' + date + '&show_all=' + show_all);
+    $('#dental').load('/consumer/dental?appointment_date=' + '&show_all=' + show_all);
   })
 
 

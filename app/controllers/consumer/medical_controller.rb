@@ -13,14 +13,14 @@ class Consumer::MedicalController < ApplicationController
     end
 
     @appointments = MedicalAppointment.where("email = ? and appointment_date_time BETWEEN ? and ?", current_user.email,begin_date,end_date).order("timesent DESC").paging(params[:page], params[:appointment_id])
-    #@appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id]) if params['show']
+    @appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id]) if !params['appointment_date'].present?
 
     @appointment_date = params[:appointment_date]
-    @check_show_all = false
+    @check_show_all = true
     if params[:show_all] == 'true'
       @check_show_all = true
       @appointment_date = ''
-      @appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id])
+    #  @appointments = MedicalAppointment.where('email = ?', current_user.email).order("timesent DESC").paging(params[:page], params[:appointment_id])
     elsif params[:show_all] == 'false'
       @check_show_all = false
     end
