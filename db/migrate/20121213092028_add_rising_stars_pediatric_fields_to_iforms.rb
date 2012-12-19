@@ -56,7 +56,7 @@ class AddRisingStarsPediatricFieldsToIforms < ActiveRecord::Migration
     add_column :iforms, :patient_guardian_mother_email, :string, :limit => 50
 
     #Insurance
-    add_column :iforms, :insurance_do_you_have_more_than_one_dental_insurance, :boolean
+    add_column :iforms, :insurance_do_you_have_more_than_one_dental_insurance,:string, :limit => 10
     add_column :iforms, :insurance_insured, :string, :limt => 20
     add_column :iforms, :insurance_person_first_name, :string, :limit => 50
     add_column :iforms, :insurance_person_last_name, :string, :limit => 50
@@ -111,7 +111,7 @@ class AddRisingStarsPediatricFieldsToIforms < ActiveRecord::Migration
     add_column :iforms, :dental_history_other, :boolean
 
     add_column :iforms, :dental_history_does_child_brush_teeth, :string, :limit => 50
-    add_column :iforms, :dental_history_does_child_brush_teeth_electric_tooth_brush, :boolean
+    add_column :iforms, :dental_history_does_child_brush_teeth_electric_tooth_brush, :string, :limit => 10
     add_column :iforms, :dental_history_does_child_flosh_teeth, :string, :limit => 25
     add_column :iforms, :dental_history_age_at_stop_bottle, :string, :limit => 25
     add_column :iforms, :dental_history_age_at_stop_bottle_sippy_cup, :string, :limit => 25
@@ -126,14 +126,14 @@ class AddRisingStarsPediatricFieldsToIforms < ActiveRecord::Migration
     add_column :iforms, :medical_history_home_phone_1, :integer
     add_column :iforms, :medical_history_home_phone_2, :integer
     add_column :iforms, :medical_history_home_phone_3, :integer
-    add_column :iforms, :medical_history_patient_good_general_health, :boolean
+    add_column :iforms, :medical_history_patient_good_general_health, :string, :limit => 10
     add_column :iforms, :medical_history_patient_good_general_health_description, :string, :limit => 50
-    add_column :iforms, :medical_history_patient_physical_disabilities, :boolean
+    add_column :iforms, :medical_history_patient_physical_disabilities, :string, :limit => 10
     add_column :iforms, :medical_history_patient_physical_disabilities_description, :string, :limit => 50
-    add_column :iforms, :medical_history_patient_booster_shoot_up_to_date, :boolean
-    add_column :iforms, :medical_history_patient_surgical_operations, :boolean
+    add_column :iforms, :medical_history_patient_booster_shoot_up_to_date, :string, :limit => 10
+    add_column :iforms, :medical_history_patient_surgical_operations, :string, :limit => 10
     add_column :iforms, :medical_history_patient_surgical_operations_description, :string, :limit => 50
-    add_column :iforms, :medical_history_patient_ever_been_hospitalized, :boolean
+    add_column :iforms, :medical_history_patient_ever_been_hospitalized, :string, :limit => 10
     add_column :iforms, :medical_history_patient_ever_been_hospitalized_description, :string, :limit => 50
 
     add_column :iforms, :medical_history_latex_allergies, :boolean
@@ -330,7 +330,7 @@ class AddRisingStarsPediatricFieldsToIforms < ActiveRecord::Migration
     remove_column :iforms, :dental_history_other
 
     remove_column :iforms, :dental_history_does_child_brush_teeth
-    remove_column :iforms, :dental_history_does_child_brush_teeth_electric_tooth_brush
+   remove_column :iforms, :dental_history_does_child_brush_teeth_electric_tooth_brush
     remove_column :iforms, :dental_history_does_child_flosh_teeth
     remove_column :iforms, :dental_history_age_at_stop_bottle
     remove_column :iforms, :dental_history_age_at_stop_bottle_sippy_cup
@@ -435,6 +435,6 @@ class AddRisingStarsPediatricFieldsToIforms < ActiveRecord::Migration
     remove_column :iforms, :social_history_patient_adopted_age
     remove_column :iforms, :social_history_patient_tolerate
     remove_column :iforms, :social_history_patient_favorites
-
+#
   end
 end

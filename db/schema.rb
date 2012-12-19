@@ -915,7 +915,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.integer  "patient_guardian_mother_cell_phone_2"
     t.integer  "patient_guardian_mother_cell_phone_3"
     t.string   "patient_guardian_mother_email",                                   :limit => 50
-    t.boolean  "insurance_do_you_have_more_than_one_dental_insurance"
     t.string   "insurance_person_first_name",                                     :limit => 50
     t.string   "insurance_person_last_name",                                      :limit => 50
     t.string   "insurance_relation_ship_to_patient",                              :limit => 50
@@ -944,7 +943,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.boolean  "dental_history_teeth_grinding"
     t.boolean  "dental_history_other"
     t.string   "dental_history_does_child_brush_teeth",                           :limit => 50
-    t.boolean  "dental_history_does_child_brush_teeth_electric_tooth_brush"
     t.string   "dental_history_does_child_flosh_teeth",                           :limit => 25
     t.string   "dental_history_age_at_stop_bottle",                               :limit => 25
     t.string   "dental_history_age_at_stop_bottle_sippy_cup",                     :limit => 25
@@ -1029,14 +1027,9 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "dental_history_patient_inherited_any_dental_characteristics",     :limit => 50
     t.string   "dental_history_patient_have_any_injuries",                        :limit => 50
     t.string   "medical_history_physician",                                       :limit => 50
-    t.boolean  "medical_history_patient_good_general_health"
     t.string   "medical_history_patient_good_general_health_description",         :limit => 50
-    t.boolean  "medical_history_patient_physical_disabilities"
     t.string   "medical_history_patient_physical_disabilities_description",       :limit => 50
-    t.boolean  "medical_history_patient_booster_shoot_up_to_date"
-    t.boolean  "medical_history_patient_surgical_operations"
     t.string   "medical_history_patient_surgical_operations_description",         :limit => 50
-    t.boolean  "medical_history_patient_ever_been_hospitalized"
     t.string   "medical_history_patient_ever_been_hospitalized_description",      :limit => 50
     t.boolean  "medical_history_food_allergies"
     t.boolean  "medical_history_drug_allergies"
@@ -1059,6 +1052,13 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "medical_history_er_for_asthma_attack",                            :limit => 25
     t.string   "medical_history_asthama_or_breathing_prob_description",           :limit => 50
     t.string   "medical_history_er_for_asthma_attack_description",                :limit => 50
+    t.string   "insurance_do_you_have_more_than_one_dental_insurance",            :limit => 10
+    t.string   "medical_history_patient_good_general_health",                     :limit => 10
+    t.string   "medical_history_patient_physical_disabilities",                   :limit => 10
+    t.string   "medical_history_patient_booster_shoot_up_to_date",                :limit => 10
+    t.string   "medical_history_patient_surgical_operations",                     :limit => 10
+    t.string   "medical_history_patient_ever_been_hospitalized",                  :limit => 10
+    t.string   "dental_history_does_child_brush_teeth_electric_tooth_brush",      :limit => 10
   end
 
   create_table "medical_appointments", :force => true do |t|
