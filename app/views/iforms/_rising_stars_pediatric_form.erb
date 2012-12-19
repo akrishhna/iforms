@@ -754,12 +754,12 @@
       <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :medical_history_food_allergies %> Food Allergies &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px', :class => f.object.medical_history_food_allergies ? '' : 'hide' %>
+        <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 307px;height:15px', :class => f.object.medical_history_food_allergies ? '' : 'hide' %>
       <% end %>
       <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :medical_history_drug_allergies %> Drug Allergies &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px', :class => f.object.medical_history_drug_allergies ? '' : 'hide' %>
+        <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 307px;height:15px', :class => f.object.medical_history_drug_allergies ? '' : 'hide' %>
       <% end %>
 
     </div>
@@ -1383,17 +1383,20 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_is_adv_in_learning, ' Patient is ', :class => 'control-label ' %>
+      <%= f.label :social_history_patient_is, ' Patient is ', :class => 'control-label ' %>
       <div class="controls">
-        <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_patient_is_adv_in_learning %>Advanced in learning
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :social_history_patient_is, 'Advanced in learning' %>Advanced in learning
         <% end %>
-        <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_patient_is_progressing_normally %>Progressing normally
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :social_history_patient_is,'Progressing normally' %>Progressing normally
         <% end %>
-        <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_patient_is_slow_learner %>A slow learner
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :social_history_patient_is, 'A slow learner' %>A slow learner
         <% end %>
+
       </div>
     </div>
     <div class="control-group">
@@ -1465,24 +1468,27 @@
       '#iform_insurance_phone_1, #iform_insurance_phone_2, #iform_insurance_phone_3, #iform_medical_history_address_zip,' +
       '#iform_insurance_address_zip, #iform_medical_history_home_phone_1, #iform_medical_history_home_phone_2, #iform_medical_history_home_phone_3, #iform_social_history_patient_adopted_age').autotab_filter('numeric');
 
-    $('#iform_Self_Home_Postal_Code,#iform_home_phone_1, #iform_home_phone_2, #iform_home_phone_3,' +
-      '#iform_patient_other_phone_1, #iform_patient_other_phone_2, #iform_patient_other_phone_3').autotab_magic();
+    $('#iform_home_phone_1, #iform_home_phone_2, #iform_home_phone_3,' +
+      '#iform_patient_other_phone_1, #iform_patient_other_phone_2, #iform_patient_other_phone_3, #iform_patient_previously_siblings_list').autotab_magic();
 
-    $('#iform_patient_guardian_father_ssn_1,#iform_patient_guardian_father_ssn_2, #iform_patient_guardian_father_ssn_3').autotab_magic();
+    $('#iform_patient_guardian_father_ssn_1,#iform_patient_guardian_father_ssn_2, #iform_patient_guardian_father_ssn_3, #iform_patient_guardian_father_employer').autotab_magic();
+
+    $('#iform_patient_guardian_father_work_phone_1,#iform_patient_guardian_father_work_phone_2, #iform_patient_guardian_father_work_phone_3, #iform_patient_guardian_father_address_1').autotab_magic();
 
     $('#iform_patient_guardian_father_home_phone_1, #iform_patient_guardian_father_home_phone_2, #iform_patient_guardian_father_home_phone_3,' +
-      '#iform_patient_guardian_father_work_phone_1, #iform_patient_guardian_father_work_phone_2, #iform_patient_guardian_father_work_phone_3,' +
-      '#iform_patient_guardian_father_cell_phone_1, #iform_patient_guardian_father_cell_phone_2, #iform_patient_guardian_father_cell_phone_3').autotab_magic();
+      '#iform_patient_guardian_father_cell_phone_1, #iform_patient_guardian_father_cell_phone_2, #iform_patient_guardian_father_cell_phone_3, #iform_patient_guardian_father_email').autotab_magic();
 
-    $('#iform_patient_guardian_mother_ssn_1,#iform_patient_guardian_mother_ssn_2, #iform_patient_guardian_mother_ssn_3').autotab_magic();
+    $('#iform_patient_guardian_mother_ssn_1,#iform_patient_guardian_mother_ssn_2, #iform_patient_guardian_mother_ssn_3, #iform_patient_guardian_mother_employer').autotab_magic();
+
+    $('#iform_patient_guardian_mother_work_phone_1,#iform_patient_guardian_mother_work_phone_2, #iform_patient_guardian_mother_work_phone_3, #iform_patient_guardian_mother_address_1').autotab_magic();
 
     $('#iform_patient_guardian_mother_home_phone_1, #iform_patient_guardian_mother_home_phone_2, #iform_patient_guardian_mother_home_phone_3,' +
-      '#iform_patient_guardian_mother_work_phone_1, #iform_patient_guardian_mother_work_phone_2, #iform_patient_guardian_mother_work_phone_3,' +
-      '#iform_patient_guardian_mother_cell_phone_1, #iform_patient_guardian_mother_cell_phone_2, #iform_patient_guardian_mother_cell_phone_3').autotab_magic();
+      '#iform_patient_guardian_mother_cell_phone_1, #iform_patient_guardian_mother_cell_phone_2, #iform_patient_guardian_mother_cell_phone_3, #iform_patient_guardian_mother_email').autotab_magic();
 
-    $('#iform_insurance_phone_1,#iform_insurance_phone_2, #iform_insurance_phone_3').autotab_magic();
+    $('#iform_insurance_phone_1,#iform_insurance_phone_2, #iform_insurance_phone_3, #iform_insurance_address_1').autotab_magic();
 
-    $('#iform_medical_history_home_phone_1,#iform_medical_history_home_phone_2, #iform_medical_history_home_phone_3').autotab_magic();
+
+    $('#iform_medical_history_home_phone_1, #iform_medical_history_home_phone_, #iform_medical_history_home_phone_3').autotab_magic();
 
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
