@@ -697,21 +697,20 @@
         <%= f.radio_button :medical_history_patient_good_general_health, "No", :class => 'rising_stars_good_gen_health' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_patient_good_general_health_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+      <%= f.text_field :medical_history_patient_good_general_health_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => (f.object.medical_history_patient_good_general_health == 'Yes' ? 'hide' : '') %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :medical_history_patient_physical_disabilities, ' Patient has physical disabilities/developmental delays', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_patient_physical_disabilities, "Yes", :class => 'rising_stars_physical_dev' %>
-        Yes
+        <%= f.radio_button :medical_history_patient_physical_disabilities, "Yes", :class => 'rising_stars_physical_dev' %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_physical_disabilities, "No", :class => 'rising_stars_physical_dev' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_patient_physical_disabilities_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+      <%= f.text_field :medical_history_patient_physical_disabilities_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_patient_physical_disabilities == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
   <div class="control-group">
@@ -725,7 +724,7 @@
         <%= f.radio_button :medical_history_patient_surgical_operations, "No", :class => 'rising_stars_surgical_operations' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_patient_surgical_operations_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+<%= f.text_field :medical_history_patient_surgical_operations_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' , :class => f.object.medical_history_patient_surgical_operations == 'Yes' ? '' : 'hide'%>
     </div>
   </div>
   <div class="control-group">
@@ -739,7 +738,7 @@
         <%= f.radio_button :medical_history_patient_ever_been_hospitalized, "No", :class => 'rising_stars_patient_hosp' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_patient_ever_been_hospitalized_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+      <%= f.text_field :medical_history_patient_ever_been_hospitalized_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_patient_ever_been_hospitalized == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
   <div class="control-group">
@@ -755,12 +754,12 @@
       <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :medical_history_food_allergies %> Food Allergies &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px' %>
+        <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px', :class => f.object.medical_history_food_allergies ? '' : 'hide' %>
       <% end %>
       <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :medical_history_drug_allergies %> Drug Allergies &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px' %>
+        <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px', :class => f.object.medical_history_drug_allergies ? '' : 'hide' %>
       <% end %>
 
     </div>
@@ -776,10 +775,10 @@
         <%= f.radio_button :medical_history_asthama_or_breathing_prob, "No", :class => 'rising_stars_asthama_or_breath' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_asthama_or_breathing_prob_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+      <%= f.text_field :medical_history_asthama_or_breathing_prob_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
-  <div class="control-group rising_stars_asthama_yes">
+  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>" >
     <%= f.label :medical_history_er_for_asthma_attack, ' Patient went to the ER for an asthma attack', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -790,16 +789,16 @@
         <%= f.radio_button :medical_history_er_for_asthma_attack, "No", :class => 'rising_stars_er_asthama' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_er_for_asthma_attack_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+      <%= f.text_field :medical_history_er_for_asthma_attack_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_er_for_asthma_attack == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
-  <div class="control-group rising_stars_asthama_yes">
+  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>" >
     <%= f.label :medical_history_induces_breathing_prob, ' What induces the breathing problems', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_induces_breathing_prob, :style => 'width: 435px;' %>
     </div>
   </div>
-  <div class="control-group rising_stars_asthama_yes">
+  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>" >
     <%= f.label :medical_history_asthma_medication, ' Asthma medication ', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_asthma_medication, :style => 'width: 435px;' %>
@@ -1291,7 +1290,7 @@
       <% end %>
     </td>
   </tr>
-  <tr class="rising_stars_seizures_date">
+  <tr class="rising_stars_seizures_date + <%= f.object.medical_history_Convulsions_or_seizures == 'Yes' ? '' : 'hide' %>" >
     <td>
       Date of last seizure
     </td>
@@ -1483,25 +1482,12 @@
 
     $('#iform_insurance_phone_1,#iform_insurance_phone_2, #iform_insurance_phone_3').autotab_magic();
 
+    $('#iform_medical_history_home_phone_1,#iform_medical_history_home_phone_2, #iform_medical_history_home_phone_3').autotab_magic();
+
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
       changeYear:true
     }).datepicker('option', 'format', 'yy-mm-dd')
   });
-
-  $('#iform_medical_history_patient_good_general_health_description').hide();
-  $('#iform_medical_history_patient_physical_disabilities_description').hide();
-  $('#iform_medical_history_patient_surgical_operations_description').hide();
-  $('#iform_medical_history_patient_ever_been_hospitalized_description').hide();
-
-  $('#iform_medical_history_food_allergies_description').hide();
-  $('#iform_medical_history_drug_allergies_description').hide();
-
-  $('#iform_medical_history_asthama_or_breathing_prob_description').hide();
-  $('#iform_medical_history_er_for_asthma_attack_description').hide();
-
-  $('.rising_stars_asthama_yes').hide();
-
-  $('.rising_stars_seizures_date').hide();
 
 </script>

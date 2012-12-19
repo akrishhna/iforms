@@ -133,32 +133,20 @@ function billing_details_info() {
 /* End Karen Naples */
 
 /* Rising stars */
-$('#iform_medical_history_patient_good_general_health_description').hide();
-$('#iform_medical_history_patient_physical_disabilities_description').hide();
-$('#iform_medical_history_patient_surgical_operations_description').hide();
-$('#iform_medical_history_patient_ever_been_hospitalized_description').hide();
-
-$('#iform_medical_history_food_allergies_description').hide();
-$('#iform_medical_history_drug_allergies_description').hide();
-
-$('#iform_medical_history_asthama_or_breathing_prob_description').hide();
-$('#iform_medical_history_er_for_asthma_attack_description').hide();
-
-$('.rising_stars_asthama_yes').hide();
-
-$('.rising_stars_seizures_date').hide();
 
 $('.rising_stars_good_gen_health').live('change', function () {
   if ($(this).val() == 'Yes') {
     $('#iform_medical_history_patient_good_general_health_description').hide()
   }
   else {
+    $('#iform_medical_history_patient_good_general_health_description').val('');
     $('#iform_medical_history_patient_good_general_health_description').show()
   }
 });
 
 $('.rising_stars_physical_dev').live('change', function () {
   if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_physical_disabilities_description').val('');
     $('#iform_medical_history_patient_physical_disabilities_description').show()
   }
   else {
@@ -168,6 +156,7 @@ $('.rising_stars_physical_dev').live('change', function () {
 
 $('.rising_stars_surgical_operations').live('change', function () {
   if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_surgical_operations_description').val('');
     $('#iform_medical_history_patient_surgical_operations_description').show()
   }
   else {
@@ -177,6 +166,7 @@ $('.rising_stars_surgical_operations').live('change', function () {
 
 $('.rising_stars_patient_hosp').live('change', function () {
   if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_ever_been_hospitalized_description').val('');
     $('#iform_medical_history_patient_ever_been_hospitalized_description').show()
   }
   else {
@@ -186,6 +176,7 @@ $('.rising_stars_patient_hosp').live('change', function () {
 
 $('#iform_medical_history_food_allergies').live('change', function () {
   if ($(this).is(':checked')) {
+    $('#iform_medical_history_food_allergies_description').val('');
     $('#iform_medical_history_food_allergies_description').show();
   } else {
     $('#iform_medical_history_food_allergies_description').hide();
@@ -195,6 +186,7 @@ $('#iform_medical_history_food_allergies').live('change', function () {
 
 $('#iform_medical_history_drug_allergies').live('change', function () {
   if ($(this).is(':checked')) {
+    $('#iform_medical_history_drug_allergies_description').val('');
     $('#iform_medical_history_drug_allergies_description').show();
   } else {
     $('#iform_medical_history_drug_allergies_description').hide();
@@ -203,6 +195,7 @@ $('#iform_medical_history_drug_allergies').live('change', function () {
 
 $('.rising_stars_asthama_or_breath').live('change',function(){
   if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_asthama_or_breathing_prob_description').val('');
     $('#iform_medical_history_asthama_or_breathing_prob_description').show();
     $('.rising_stars_asthama_yes').show()
   }else{
@@ -213,6 +206,7 @@ $('.rising_stars_asthama_or_breath').live('change',function(){
 
 $('.rising_stars_er_asthama').live('change',function(){
   if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_er_for_asthma_attack_description').val('');
     $('#iform_medical_history_er_for_asthma_attack_description').show();
   }else{
     $('#iform_medical_history_er_for_asthma_attack_description').hide();
@@ -222,6 +216,7 @@ $('.rising_stars_er_asthama').live('change',function(){
 $('.rising_stars_seizures').live('change',function(){
   console.log($(this).val());
   if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_date_of_last_seizure').val('');
     $('.rising_stars_seizures_date').show();
   }else{
     $('.rising_stars_seizures_date').hide();
