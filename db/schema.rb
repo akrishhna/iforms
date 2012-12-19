@@ -948,7 +948,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "dental_history_does_child_flosh_teeth",                           :limit => 25
     t.string   "dental_history_age_at_stop_bottle",                               :limit => 25
     t.string   "dental_history_age_at_stop_bottle_sippy_cup",                     :limit => 25
-    t.string   "medical_history_child_physician",                                 :limit => 50
     t.string   "medical_history_address_1",                                       :limit => 50
     t.string   "medical_history_address_2",                                       :limit => 50
     t.string   "medical_history_address_city",                                    :limit => 50
@@ -957,21 +956,8 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.integer  "medical_history_home_phone_1"
     t.integer  "medical_history_home_phone_2"
     t.integer  "medical_history_home_phone_3"
-    t.boolean  "medical_history_good_general_health"
-    t.string   "medical_history_good_general_health_description",                 :limit => 50
-    t.boolean  "medical_history_child_physical_disabilities"
-    t.string   "medical_history_child_physical_disabilities_description",         :limit => 50
-    t.boolean  "medical_history_booster_shoot_up_to_date"
-    t.boolean  "medical_history_child_surgical_operations"
-    t.string   "medical_history_child_surgical_operations_description",           :limit => 50
-    t.boolean  "medical_history_child_ever_been_hospitalized"
-    t.string   "medical_history_child_ever_been_hospitalized_description",        :limit => 50
     t.boolean  "medical_history_latex_allergies"
     t.boolean  "medical_history_seasonal_allergies"
-    t.string   "medical_history_food_allergies",                                  :limit => 50
-    t.string   "medical_history_drug_allergies",                                  :limit => 50
-    t.string   "medical_history_asthama_or_breathing_prob",                       :limit => 50
-    t.string   "medical_history_er_for_asthma_attack",                            :limit => 50
     t.string   "medical_history_induces_breathing_prob",                          :limit => 50
     t.string   "medical_history_asthma_medication",                               :limit => 50
     t.string   "medical_history_autism_spectrum",                                 :limit => 10
@@ -1019,19 +1005,6 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "medical_history_current_medication_name_4",                       :limit => 50
     t.string   "medical_history_current_medication_how_often_4",                  :limit => 50
     t.string   "medical_history_current_medication_reason_4",                     :limit => 50
-    t.boolean  "social_history_child_have_problems_speech"
-    t.boolean  "social_history_child_have_problems_hearing"
-    t.boolean  "social_history_child_have_problems_vision"
-    t.boolean  "social_history_child_have_problems_sleep"
-    t.boolean  "social_history_consider_ur_child_adv_in_learning"
-    t.boolean  "social_history_consider_ur_child_progressing_normally"
-    t.boolean  "social_history_consider_ur_child_slow_learner"
-    t.string   "social_history_child_adopted",                                    :limit => 5
-    t.string   "social_history_child_adopted_age",                                :limit => 20
-    t.string   "social_history_child_tolerate",                                   :limit => 50
-    t.string   "social_history_child_favorites",                                  :limit => 50
-    t.string   "social_history_child_first_lang",                                 :limit => 50
-    t.string   "social_history_child_second_lang",                                :limit => 50
     t.string   "patient_guardian_father_employer",                                :limit => 50
     t.string   "patient_guardian_father",                                         :limit => 25
     t.string   "patient_guardian_mother",                                         :limit => 25
@@ -1055,6 +1028,37 @@ ActiveRecord::Schema.define(:version => 20121213092028) do
     t.string   "dental_history_patient_receive_fluoride_in_any_form_description", :limit => 15
     t.string   "dental_history_patient_inherited_any_dental_characteristics",     :limit => 50
     t.string   "dental_history_patient_have_any_injuries",                        :limit => 50
+    t.string   "medical_history_physician",                                       :limit => 50
+    t.boolean  "medical_history_patient_good_general_health"
+    t.string   "medical_history_patient_good_general_health_description",         :limit => 50
+    t.boolean  "medical_history_patient_physical_disabilities"
+    t.string   "medical_history_patient_physical_disabilities_description",       :limit => 50
+    t.boolean  "medical_history_patient_booster_shoot_up_to_date"
+    t.boolean  "medical_history_patient_surgical_operations"
+    t.string   "medical_history_patient_surgical_operations_description",         :limit => 50
+    t.boolean  "medical_history_patient_ever_been_hospitalized"
+    t.string   "medical_history_patient_ever_been_hospitalized_description",      :limit => 50
+    t.boolean  "medical_history_food_allergies"
+    t.boolean  "medical_history_drug_allergies"
+    t.string   "medical_history_food_allergies_description",                      :limit => 50
+    t.string   "medical_history_drug_allergies_description",                      :limit => 50
+    t.boolean  "social_history_patient_have_problems_speech"
+    t.boolean  "social_history_patient_have_problems_hearing"
+    t.boolean  "social_history_patient_have_problems_vision"
+    t.boolean  "social_history_patient_have_problems_sleep"
+    t.boolean  "social_history_patient_is_adv_in_learning"
+    t.boolean  "social_history_patient_is_progressing_normally"
+    t.boolean  "social_history_patient_is_slow_learner"
+    t.string   "social_history_patient_first_lang",                               :limit => 50
+    t.string   "social_history_patient_second_lang",                              :limit => 50
+    t.string   "social_history_patient_adopted",                                  :limit => 5
+    t.string   "social_history_patient_adopted_age",                              :limit => 20
+    t.string   "social_history_patient_tolerate",                                 :limit => 50
+    t.string   "social_history_patient_favorites",                                :limit => 50
+    t.string   "medical_history_asthama_or_breathing_prob",                       :limit => 25
+    t.string   "medical_history_er_for_asthma_attack",                            :limit => 25
+    t.string   "medical_history_asthama_or_breathing_prob_description",           :limit => 50
+    t.string   "medical_history_er_for_asthma_attack_description",                :limit => 50
   end
 
   create_table "medical_appointments", :force => true do |t|
