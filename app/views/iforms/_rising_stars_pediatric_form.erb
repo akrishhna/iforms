@@ -373,8 +373,8 @@
     <div class="control-group">
       <%= f.label :insurance_person_first_name, 'Name', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :insurance_person_first_name, :placeholder => "First Name", :class => "input-small",:style => 'width:95px' %>
-        <%= f.text_field :insurance_person_last_name, :placeholder => "Last Name", :class => "input-small",:style => 'width:95px' %>
+        <%= f.text_field :insurance_person_first_name, :placeholder => "First Name", :class => "input-small", :style => 'width:95px' %>
+        <%= f.text_field :insurance_person_last_name, :placeholder => "Last Name", :class => "input-small", :style => 'width:95px' %>
       </div>
     </div>
     <div class="control-group">
@@ -514,81 +514,84 @@
   <div class="control-group">
     <%= f.label :dental_history_cavities, ' Does Patient now, or has Patient ever, had any of these problems ', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_cavities %>Cavities
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_crooked_teeth %>Crooked teeth
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_sensitive_to_hot_or_cold %>Sensitive to hot/cold
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_loose_teeth %>Loose teeth
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_toothache %>Toothache
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_sensitive_to_sweets %>Sensitive to sweets
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_frequent_headaches %>Frequent headaches
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_teeth_bumped %>Teeth bumped
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_bad_breath %>Bad breath
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_patient_bleeding_gums %>Bleeding gums
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_discolored_teeth %>Discolored teeth
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_tmj_popping_or_clicking %>TMJ popping/clicking
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_jaw_pain_from_joint %>Jaw pain from joint
       <% end %>
+
     </div>
   </div>
   <div class="control-group">
     <%= f.label :dental_history_thumb_sucking, ' Oral Habits ', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_thumb_sucking %>Thumb sucking
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_pacifier_use %>Lip biting
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_lip_biting %>Teeth Grinding
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_teeth_grinding %>Pacifier Use
       <% end %>
-      <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+
+      <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_other %>Other
       <% end %>
+
     </div>
   </div>
   <div class="control-group">
@@ -645,9 +648,9 @@
   </div>
   <div class="tab-pane" id="medical_history">
   <div class="control-group">
-    <%= f.label :medical_history_child_physician, 'Child’s Physician', :class => 'control-label' %>
+    <%= f.label :medical_history_physician, 'Physician', :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :medical_history_child_physician, :style => 'width: 435px;' %>
+      <%= f.text_field :medical_history_physician, :style => 'width: 435px;' %>
     </div>
   </div>
   <div class="control-group">
@@ -663,7 +666,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_home_phone_1, "phone", :class => 'control-label' %>
+    <%= f.label :medical_history_home_phone_1, "Phone Number", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
       -
@@ -673,624 +676,766 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_good_general_health, 'Is your child in good general health?', :class => 'control-label' %>
+    <%= f.label :medical_history_patient_booster_shoot_up_to_date, "Patient's immunizations and booster shots up to date", :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_good_general_health, "Yes" %>Yes
+        <%= f.radio_button :medical_history_patient_booster_shoot_up_to_date, "Yes" %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_good_general_health, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_good_general_health_description, 'Please describe', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_good_general_health_description, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_child_physical_disabilities, 'Does your child have any physical disabilities/developmental delays?', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_child_physical_disabilities, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_child_physical_disabilities, "No" %>No
+        <%= f.radio_button :medical_history_patient_booster_shoot_up_to_date, "No" %>No
       <% end %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_child_physical_disabilities_description, 'Please describe', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_child_physical_disabilities_description, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_booster_shoot_up_to_date, 'Are your child’s immunizations and booster shots up to date?', :class => 'control-label' %>
+    <%= f.label :medical_history_patient_good_general_health, 'Patient is in good general health ', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_booster_shoot_up_to_date, "Yes" %>Yes
+        <%= f.radio_button :medical_history_patient_good_general_health, "Yes", :class => 'rising_stars_good_gen_health' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_booster_shoot_up_to_date, "No" %>No
-      <% end %>
+        <%= f.radio_button :medical_history_patient_good_general_health, "No", :class => 'rising_stars_good_gen_health' %>
+        No
+      <% end %> &nbsp;&nbsp;
+      <%= f.text_field :medical_history_patient_good_general_health_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_child_surgical_operations, 'Has your child had any surgical operations?', :class => 'control-label' %>
+    <%= f.label :medical_history_patient_physical_disabilities, ' Patient has physical disabilities/developmental delays', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_child_surgical_operations, "Yes" %>Yes
+        <%= f.radio_button :medical_history_patient_physical_disabilities, "Yes", :class => 'rising_stars_physical_dev' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_child_surgical_operations, "No" %>No
-      <% end %>
+        <%= f.radio_button :medical_history_patient_physical_disabilities, "No", :class => 'rising_stars_physical_dev' %>
+        No
+      <% end %> &nbsp;&nbsp;
+      <%= f.text_field :medical_history_patient_physical_disabilities_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_child_surgical_operations_description, 'For what?', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_child_surgical_operations_description, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_child_ever_been_hospitalized, 'Has your child ever been hospitalized?', :class => 'control-label' %>
+    <%= f.label :medical_history_patient_surgical_operations, ' Patient had surgical operations ', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_child_ever_been_hospitalized, "Yes" %>Yes
+        <%= f.radio_button :medical_history_patient_surgical_operations, "Yes", :class => 'rising_stars_surgical_operations' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_child_ever_been_hospitalized, "No" %>No
-      <% end %>
+        <%= f.radio_button :medical_history_patient_surgical_operations, "No", :class => 'rising_stars_surgical_operations' %>
+        No
+      <% end %> &nbsp;&nbsp;
+      <%= f.text_field :medical_history_patient_surgical_operations_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_child_ever_been_hospitalized_description, 'For what?', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_child_ever_been_hospitalized_description, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <strong>
-      Has your child had or does he/she now have:
-    </strong>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_latex_allergies, 'Latex Allergies', :class => 'control-label' %>
+    <%= f.label :medical_history_patient_ever_been_hospitalized, ' Patient was hospitalized', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_latex_allergies, "Yes" %>Yes
+        <%= f.radio_button :medical_history_patient_ever_been_hospitalized, "Yes", :class => 'rising_stars_patient_hosp' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_latex_allergies, "No" %>No
-      <% end %>
+        <%= f.radio_button :medical_history_patient_ever_been_hospitalized, "No", :class => 'rising_stars_patient_hosp' %>
+        No
+      <% end %> &nbsp;&nbsp;
+      <%= f.text_field :medical_history_patient_ever_been_hospitalized_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_seasonal_allergies, 'Seasonal Allergies', :class => 'control-label' %>
+    <%= f.label :medical_history_latex_allergies, ' Does Patient now, or has he/she ever had', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+        <%= f.check_box :medical_history_latex_allergies %>Latex Allergies
+      <% end %>
+      <br>
+      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+        <%= f.check_box :medical_history_seasonal_allergies %>Seasonal Allergies
+      <% end %>
+      <br>
+      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+        <%= f.check_box :medical_history_food_allergies %> Food Allergies &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px' %>
+      <% end %>
+      <br>
+      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+        <%= f.check_box :medical_history_drug_allergies %> Drug Allergies &nbsp;&nbsp;&nbsp;
+        <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 304px;height:15px' %>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :medical_history_asthama_or_breathing_prob, 'Patient has a history of asthma or breathing problems', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_seasonal_allergies, "Yes" %>Yes
+        <%= f.radio_button :medical_history_asthama_or_breathing_prob, "Yes", :class => 'rising_stars_asthama_or_breath' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_seasonal_allergies, "No" %>No
+        <%= f.radio_button :medical_history_asthama_or_breathing_prob, "No", :class => 'rising_stars_asthama_or_breath' %>
+        No
+      <% end %> &nbsp;&nbsp;
+      <%= f.text_field :medical_history_asthama_or_breathing_prob_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
+    </div>
+  </div>
+  <div class="control-group rising_stars_asthama_yes">
+    <%= f.label :medical_history_er_for_asthma_attack, ' Patient went to the ER for an asthma attack', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_er_for_asthma_attack, "Yes", :class => 'rising_stars_er_asthama' %>
+        Yes
       <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_er_for_asthma_attack, "No", :class => 'rising_stars_er_asthama' %>
+        No
+      <% end %> &nbsp;&nbsp;
+      <%= f.text_field :medical_history_er_for_asthma_attack_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :medical_history_food_allergies, 'Food Allergies', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_food_allergies, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_drug_allergies, 'Drug Allergies', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_drug_allergies, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_asthama_or_breathing_prob, 'Has your child had any history of asthma or breathing problems?', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_asthama_or_breathing_prob, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_er_for_asthma_attack, 'Has your child been to the ER for an asthma attack?', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_er_for_asthma_attack, :style => 'width: 435px;' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_induces_breathing_prob, 'What induces the breathing problems?', :class => 'control-label' %>
+  <div class="control-group rising_stars_asthama_yes">
+    <%= f.label :medical_history_induces_breathing_prob, ' What induces the breathing problems', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_induces_breathing_prob, :style => 'width: 435px;' %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :medical_history_asthma_medication, 'What asthma medication does your child take? ', :class => 'control-label' %>
+  <div class="control-group rising_stars_asthama_yes">
+    <%= f.label :medical_history_asthma_medication, ' Asthma medication ', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_asthma_medication, :style => 'width: 435px;' %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :medical_history_autism_spectrum, 'Autism Spectrum', :class => 'control-label' %>
-    <div class="controls">
+  <table class="table table-bordered rising_stars_pediatric_table" style="width:60%;margin-left: 16%">
+  <tr>
+    <th style=""></th>
+    <th style="text-align: center;width:20%">Yes</th>
+    <th style="text-align: center;width:20%">No</th>
+  </tr>
+  <tr>
+    <td>
+      Autism Spectrum
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_autism_spectrum, "Yes" %>Yes
+        <%= f.radio_button :medical_history_autism_spectrum, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_autism_spectrum, "No" %>No
+        <%= f.radio_button :medical_history_autism_spectrum, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_sensory_integration_issues, 'Sensory Integration Issues', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Sensory Integration Issues
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_sensory_integration_issues, "Yes" %>Yes
+        <%= f.radio_button :medical_history_sensory_integration_issues, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_sensory_integration_issues, "No" %>No
+        <%= f.radio_button :medical_history_sensory_integration_issues, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_add_or_adhd, 'ADD/ADHD', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      ADD/ADHD
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_add_or_adhd, "Yes" %>Yes
+        <%= f.radio_button :medical_history_add_or_adhd, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_add_or_adhd, "No" %>No
+        <%= f.radio_button :medical_history_add_or_adhd, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_heart_trouble_or_heart_murmur, 'Heart Trouble or heart murmur', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Heart Trouble or heart murmur
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_heart_trouble_or_heart_murmur, "Yes" %>Yes
+        <%= f.radio_button :medical_history_heart_trouble_or_heart_murmur, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_heart_trouble_or_heart_murmur, "No" %>No
+        <%= f.radio_button :medical_history_heart_trouble_or_heart_murmur, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_rheumatic_heart_disease_or_fever, 'Rheumatic heart disease or fever', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Rheumatic heart disease or fever
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_rheumatic_heart_disease_or_fever, "Yes" %>Yes
+        <%= f.radio_button :medical_history_rheumatic_heart_disease_or_fever, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_rheumatic_heart_disease_or_fever, "No" %>No
+        <%= f.radio_button :medical_history_rheumatic_heart_disease_or_fever, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_blood_diseases_or_anemia, 'Blood diseases or anemia', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Blood diseases or anemia
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_blood_diseases_or_anemia, "Yes" %>Yes
+        <%= f.radio_button :medical_history_blood_diseases_or_anemia, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_blood_diseases_or_anemia, "No" %>No
+        <%= f.radio_button :medical_history_blood_diseases_or_anemia, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_aids_virus, 'AIDS virus', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      AIDS virus
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_aids_virus, "Yes" %>Yes
+        <%= f.radio_button :medical_history_aids_virus, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_aids_virus, "No" %>No
+        <%= f.radio_button :medical_history_aids_virus, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_herpes_virus_or_shingles, 'Herpes virus or shingles', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Herpes virus or shingles
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_herpes_virus_or_shingles, "Yes" %>Yes
+        <%= f.radio_button :medical_history_herpes_virus_or_shingles, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_herpes_virus_or_shingles, "No" %>No
+        <%= f.radio_button :medical_history_herpes_virus_or_shingles, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_diabetes, 'Diabetes', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Diabetes
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_diabetes, "Yes" %>Yes
+        <%= f.radio_button :medical_history_diabetes, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_diabetes, "No" %>No
+        <%= f.radio_button :medical_history_diabetes, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_ear_eye_nose_or_throat_trouble, 'Ear, eye, nose or throat trouble', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Ear, eye, nose or throat trouble
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_ear_eye_nose_or_throat_trouble, "Yes" %>Yes
+        <%= f.radio_button :medical_history_ear_eye_nose_or_throat_trouble, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_ear_eye_nose_or_throat_trouble, "No" %>No
+        <%= f.radio_button :medical_history_ear_eye_nose_or_throat_trouble, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_stomach_ulcers, 'Stomach ulcers', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Stomach ulcers
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_stomach_ulcers, "Yes" %>Yes
+        <%= f.radio_button :medical_history_stomach_ulcers, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_stomach_ulcers, "No" %>No
+        <%= f.radio_button :medical_history_stomach_ulcers, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_hearing_or_vision_impairment, 'Hearing/Vision Impairment', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Hearing/Vision Impairment
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_hearing_or_vision_impairment, "Yes" %>Yes
+        <%= f.radio_button :medical_history_hearing_or_vision_impairment, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_hearing_or_vision_impairment, "No" %>No
+        <%= f.radio_button :medical_history_hearing_or_vision_impairment, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_eating_disorders, 'Eating disorders', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Eating disorders
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_eating_disorders, "Yes" %>Yes
+        <%= f.radio_button :medical_history_eating_disorders, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_eating_disorders, "No" %>No
+        <%= f.radio_button :medical_history_eating_disorders, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_abnormal_bleeding_or_bruising, 'Abnormal Bleeding or bruising', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Abnormal Bleeding or bruising
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_abnormal_bleeding_or_bruising, "Yes" %>Yes
+        <%= f.radio_button :medical_history_abnormal_bleeding_or_bruising, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_abnormal_bleeding_or_bruising, "No" %>No
+        <%= f.radio_button :medical_history_abnormal_bleeding_or_bruising, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_prolonged_bleeding_or_transfusions, 'Prolonged Bleeding /Transfusions', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Prolonged Bleeding /Transfusions
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_prolonged_bleeding_or_transfusions, "Yes" %>Yes
+        <%= f.radio_button :medical_history_prolonged_bleeding_or_transfusions, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_prolonged_bleeding_or_transfusions, "No" %>No
+        <%= f.radio_button :medical_history_prolonged_bleeding_or_transfusions, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_birth_defects, 'Birth Defects', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Birth Defects
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_birth_defects, "Yes" %>Yes
+        <%= f.radio_button :medical_history_birth_defects, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_birth_defects, "No" %>No
+        <%= f.radio_button :medical_history_birth_defects, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_kidney_disease, 'Kidney Disease', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Kidney Disease
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_kidney_disease, "Yes" %>Yes
+        <%= f.radio_button :medical_history_kidney_disease, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_kidney_disease, "No" %>No
+        <%= f.radio_button :medical_history_kidney_disease, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_cleft_lip_or_palate, 'Cleft lip or palate', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Cleft lip or palate
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_cleft_lip_or_palate, "Yes" %>Yes
+        <%= f.radio_button :medical_history_cleft_lip_or_palate, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_cleft_lip_or_palate, "No" %>No
+        <%= f.radio_button :medical_history_cleft_lip_or_palate, "No" %>
       <% end %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :medical_history_scarlet_fever_or_high_fever, 'Scarlet fever or high fever', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Scarlet fever or high fever
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_scarlet_fever_or_high_fever, "Yes" %>Yes
+        <%= f.radio_button :medical_history_scarlet_fever_or_high_fever, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_scarlet_fever_or_high_fever, "No" %>No
+        <%= f.radio_button :medical_history_scarlet_fever_or_high_fever, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_high_or_low_blood_pressure, 'High or low blood pressure', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      High or low blood pressure
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_high_or_low_blood_pressure, "Yes" %>Yes
+        <%= f.radio_button :medical_history_high_or_low_blood_pressure, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_high_or_low_blood_pressure, "No" %>No
+        <%= f.radio_button :medical_history_high_or_low_blood_pressure, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_liver_disease, 'Liver disease', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Liver disease
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_liver_disease, "Yes" %>Yes
+        <%= f.radio_button :medical_history_liver_disease, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_liver_disease, "No" %>No
+        <%= f.radio_button :medical_history_liver_disease, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_Jaundice_or_hepatitis, 'Jaundice or hepatitis', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Jaundice or hepatitis
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_Jaundice_or_hepatitis, "Yes" %>Yes
+        <%= f.radio_button :medical_history_Jaundice_or_hepatitis, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_Jaundice_or_hepatitis, "No" %>No
+        <%= f.radio_button :medical_history_Jaundice_or_hepatitis, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_steroids_therapy_or_chemotherapy, 'Steroids therapy or chemotherapy', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Steroids therapy or chemotherapy
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_birth_defects, "Yes" %>Yes
+        <%= f.radio_button :medical_history_birth_defects, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_birth_defects, "No" %>No
+        <%= f.radio_button :medical_history_birth_defects, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_nervous_or_emotional_disorders, 'Nervous or emotional disorders', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Nervous or emotional disorders
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_nervous_or_emotional_disorders, "Yes" %>Yes
+        <%= f.radio_button :medical_history_nervous_or_emotional_disorders, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_nervous_or_emotional_disorders, "No" %>No
+        <%= f.radio_button :medical_history_nervous_or_emotional_disorders, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_Convulsions_or_seizures, 'Convulsions or seizures', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Frequent diarrhea or vomiting
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_Convulsions_or_seizures, "Yes" %>Yes
+        <%= f.radio_button :medical_history_frequent_diarrhea_or_vomiting, "Yes" %>
       <% end %>
+    </td>
+    <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_Convulsions_or_seizures, "No" %>No
+        <%= f.radio_button :medical_history_frequent_diarrhea_or_vomiting, "No" %>
       <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_date_of_last_seizure, 'Date of last seizure', :class => 'control-label' %>
-    <div class="controls">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Mumps, measles, or chickenpox
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_mumps_measles_or_chickenpox, "Yes" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_mumps_measles_or_chickenpox, "No" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Cancer, tumors, growths or cysts
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_cancer_tumors_growths_or_cysts, "Yes" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_cancer_tumors_growths_or_cysts, "No" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Sinus problems or drainage
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_sinus_problems_or_drainage, "Yes" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_sinus_problems_or_drainage, "No" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Tuberculosis or TB exposure
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_tuberculosis_or_tb_exposure, "Yes" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_tuberculosis_or_tb_exposure, "No" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Problems with Anesthesia
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_problems_with_anesthesia, "Yes" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_problems_with_anesthesia, "No" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Thyroid disease
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_thyroid_disease, "Yes" %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_thyroid_disease, "No" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Convulsions or seizures
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_Convulsions_or_seizures, "Yes" , :class => 'rising_stars_seizures' %>
+      <% end %>
+    </td>
+    <td>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :medical_history_Convulsions_or_seizures, "No" , :class => 'rising_stars_seizures' %>
+      <% end %>
+    </td>
+  </tr>
+  <tr class="rising_stars_seizures_date">
+    <td>
+      Date of last seizure
+    </td>
+    <td colspan="2">
       <%= f.text_field :medical_history_date_of_last_seizure, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', "data-value" => f.object.medical_history_date_of_last_seizure %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_frequent_diarrhea_or_vomiting, 'Frequent diarrhea or vomiting', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_frequent_diarrhea_or_vomiting, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_frequent_diarrhea_or_vomiting, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_mumps_measles_or_chickenpox, 'Mumps, measles, or chickenpox', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_mumps_measles_or_chickenpox, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_mumps_measles_or_chickenpox, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_cancer_tumors_growths_or_cysts, 'Cancer, tumors, growths or cysts', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_cancer_tumors_growths_or_cysts, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_cancer_tumors_growths_or_cysts, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_sinus_problems_or_drainage, 'Sinus problems or drainage', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_sinus_problems_or_drainage, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_sinus_problems_or_drainage, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_tuberculosis_or_tb_exposure, 'Tuberculosis or TB exposure', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_tuberculosis_or_tb_exposure, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_tuberculosis_or_tb_exposure, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_problems_with_anesthesia, 'Problems with Anesthesia', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_problems_with_anesthesia, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_problems_with_anesthesia, "No" %>No
-      <% end %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :medical_history_thyroid_disease, 'Thyroid disease', :class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_thyroid_disease, "Yes" %>Yes
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_thyroid_disease, "No" %>No
-      <% end %>
-    </div>
-  </div>
+    </td>
+  </tr>
+  </table>
   <div class="control-group">
     <strong>
-      CURRENT MEDICATIONS:
+      MEDICATIONS:
     </strong>
   </div>
-  <div class="control-group">
-    <%= f.label :medical_history_current_medication_name_1, raw('&nbsp'), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :medical_history_current_medication_name_1, :placeholder => 'Name', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-      <%= f.text_field :medical_history_current_medication_how_often_1, :placeholder => 'How often?', :style => 'width:150px;margin-bottom:10px;' %>
-      <br>
-      <%= f.text_field :medical_history_current_medication_reason_1, :placeholder => 'Reason', :style => 'width:333px;margin-bottom:10px;' %>
-      <br>
-
-      <%= f.text_field :medical_history_current_medication_name_2, :placeholder => 'Name', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-      <%= f.text_field :medical_history_current_medication_how_often_2, :placeholder => 'How often?', :style => 'width:150px;margin-bottom:10px;' %>
-      <br>
-      <%= f.text_field :medical_history_current_medication_reason_2, :placeholder => 'Reason', :style => 'width:333px;margin-bottom:10px;' %>
-      <br>
-
-      <%= f.text_field :medical_history_current_medication_name_3, :placeholder => 'Name', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-      <%= f.text_field :medical_history_current_medication_how_often_3, :placeholder => 'How often?', :style => 'width:150px;margin-bottom:10px;' %>
-      <br>
-      <%= f.text_field :medical_history_current_medication_reason_3, :placeholder => 'Reason', :style => 'width:333px;margin-bottom:10px;' %>
-      <br>
-
-      <%= f.text_field :medical_history_current_medication_name_4, :placeholder => 'Name', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-      <%= f.text_field :medical_history_current_medication_how_often_4, :placeholder => 'How often?', :style => 'width:150px;margin-bottom:10px;' %>
-      <br>
-      <%= f.text_field :medical_history_current_medication_reason_4, :placeholder => 'Reason', :style => 'width:333px;margin-bottom:10px;' %>
-      <br>
-    </div>
-  </div>
+  <table class="table table-bordered rising_stars_pediatric_table" style="width:60%;margin-left: 16%">
+    <tr>
+      <th style="text-align: center">Name</th>
+      <th style="text-align: center">How Often</th>
+      <th style="text-align: center">Reason Taken</th>
+    </tr>
+    <tr>
+      <td>
+        <%= f.text_field :medical_history_current_medication_name_1 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_how_often_1 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_reason_1 %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.text_field :medical_history_current_medication_name_2 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_how_often_2 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_reason_2 %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.text_field :medical_history_current_medication_name_3 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_how_often_3 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_reason_3 %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.text_field :medical_history_current_medication_name_4 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_how_often_4 %>
+      </td>
+      <td>
+        <%= f.text_field :medical_history_current_medication_reason_4 %>
+      </td>
+    </tr>
+  </table>
   <div class="rising_stars_pediatric_iforms_footer_links">
-    <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "3" do %>
+    <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "4" do %>
       &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
     <% end %>
-    <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "5" do %>
+    <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "6" do %>
       Next&nbsp;<i class="icon-chevron-right icon-white"></i>
     <% end %>
   </div>
   </div>
   <div class="tab-pane" id="social_history">
     <div class="control-group">
-      <%= f.label :social_history_child_have_problems_speech, 'Does your child have problems with any of the following?', :class => 'control-label ' %>
+      <%= f.label :social_history_patient_have_problems_speech, ' Patient has problems with', :class => 'control-label ' %>
       <div class="controls">
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_child_have_problems_speech %>Speech
+          <%= f.check_box :social_history_patient_have_problems_speech %>Speech
         <% end %>
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_child_have_problems_hearing %>Hearing
+          <%= f.check_box :social_history_patient_have_problems_hearing %>Hearing
         <% end %>
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_child_have_problems_vision %>Vision
+          <%= f.check_box :social_history_patient_have_problems_vision %>Vision
         <% end %>
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_child_have_problems_sleep %>Sleep
+          <%= f.check_box :social_history_patient_have_problems_sleep %>Sleep
         <% end %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_consider_ur_child_adv_in_learning, 'Do you consider your child to be?', :class => 'control-label ' %>
+      <%= f.label :social_history_patient_is_adv_in_learning, ' Patient is ', :class => 'control-label ' %>
       <div class="controls">
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_consider_ur_child_adv_in_learning %>Advanced in learning
+          <%= f.check_box :social_history_patient_is_adv_in_learning %>Advanced in learning
         <% end %>
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_consider_ur_child_progressing_normally %>Progressing normally
+          <%= f.check_box :social_history_patient_is_progressing_normally %>Progressing normally
         <% end %>
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-          <%= f.check_box :social_history_consider_ur_child_slow_learner %>A slow learner
+          <%= f.check_box :social_history_patient_is_slow_learner %>A slow learner
         <% end %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_child_first_lang, 'Child’s first language?', :class => 'control-label' %>
+      <%= f.label :social_history_patient_first_lang, " Patient's first language", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_child_first_lang %>
+        <%= f.text_field :social_history_patient_first_lang %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_child_second_lang, 'Second or other languages?', :class => 'control-label' %>
+      <%= f.label :social_history_patient_second_lang, " Patient's second language", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_child_second_lang %>
+        <%= f.text_field :social_history_patient_second_lang %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_child_adopted, 'Is your child adopted?', :class => 'control-label' %>
+      <%= f.label :social_history_patient_adopted, 'Patient was adopted', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_child_adopted, "Yes" %>Yes
+          <%= f.radio_button :social_history_patient_adopted, "Yes" %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_child_adopted, "No" %>No
-        <% end %>
+          <%= f.radio_button :social_history_patient_adopted, "No" %>No
+        <% end %> &nbsp;&nbsp;
+        <%= f.text_field :social_history_patient_adopted_age, :placeholder => "What age", :style => 'width:100px' %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_child_adopted_age, 'what age?', :class => 'control-label' %>
+      <%= f.label :social_history_patient_tolerate, ' How well does Patient tolerate dental/medical care', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_child_adopted_age %>
+        <%= f.text_field :social_history_patient_tolerate %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_child_tolerate, 'How does your child tolerate dental/medical care?', :class => 'control-label' %>
+      <%= f.label :social_history_patient_favorites, "Patient's favorites (pet, toy, color, friend, hobby etc.) ", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :social_history_child_tolerate %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :social_history_child_favorites, 'Child’s favorites', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :social_history_child_favorites %>
+        <%= f.text_field :social_history_patient_favorites, :style => 'width:435px' %>
       </div>
     </div>
 
     <div class="rising_stars_pediatric_iforms_footer_links">
-      <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "4" do %>
+      <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "5" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
       <% end %>
     </div>
@@ -1319,7 +1464,7 @@
       '#iform_patient_guardian_mother_work_phone_1, #iform_patient_guardian_mother_work_phone_2, #iform_patient_guardian_mother_work_phone_3,' +
       '#iform_patient_guardian_mother_cell_phone_1, #iform_patient_guardian_mother_cell_phone_2, #iform_patient_guardian_mother_cell_phone_3,' +
       '#iform_insurance_phone_1, #iform_insurance_phone_2, #iform_insurance_phone_3, #iform_medical_history_address_zip,' +
-      '#iform_medical_history_home_phone_1, #iform_medical_history_home_phone_2, #iform_medical_history_home_phone_3').autotab_filter('numeric');
+      '#iform_insurance_address_zip, #iform_medical_history_home_phone_1, #iform_medical_history_home_phone_2, #iform_medical_history_home_phone_3, #iform_social_history_patient_adopted_age').autotab_filter('numeric');
 
     $('#iform_Self_Home_Postal_Code,#iform_home_phone_1, #iform_home_phone_2, #iform_home_phone_3,' +
       '#iform_patient_other_phone_1, #iform_patient_other_phone_2, #iform_patient_other_phone_3').autotab_magic();
@@ -1341,6 +1486,22 @@
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
       changeYear:true
-    }).datepicker('option','format', 'yy-mm-dd')
+    }).datepicker('option', 'format', 'yy-mm-dd')
   });
+
+  $('#iform_medical_history_patient_good_general_health_description').hide();
+  $('#iform_medical_history_patient_physical_disabilities_description').hide();
+  $('#iform_medical_history_patient_surgical_operations_description').hide();
+  $('#iform_medical_history_patient_ever_been_hospitalized_description').hide();
+
+  $('#iform_medical_history_food_allergies_description').hide();
+  $('#iform_medical_history_drug_allergies_description').hide();
+
+  $('#iform_medical_history_asthama_or_breathing_prob_description').hide();
+  $('#iform_medical_history_er_for_asthma_attack_description').hide();
+
+  $('.rising_stars_asthama_yes').hide();
+
+  $('.rising_stars_seizures_date').hide();
+
 </script>

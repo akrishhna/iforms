@@ -25,6 +25,9 @@ $('.rising_stars_pediatric_iforms_nav_link').live('click', function () {
 });
 
 
+/* Karen Naples */
+
+
 $('#billing_tab').live('click', function () {
   billing_details_info();
   update_all_fields();
@@ -68,9 +71,9 @@ $('.karnel_naples_new_patient_billing').live('change', function () {
     $('#iform_billing_details_ssn_1').val('');
     $('#iform_billing_details_ssn_2').val('');
     $('#iform_billing_details_ssn_3').val('');
-    $('#iform_billing_birth_date_1i').val('').attr('disabled',false);
-    $('#iform_billing_birth_date_2i').val('').attr('disabled',false);
-    $('#iform_billing_birth_date_3i').val('').attr('disabled',false);
+    $('#iform_billing_birth_date_1i').val('').attr('disabled', false);
+    $('#iform_billing_birth_date_2i').val('').attr('disabled', false);
+    $('#iform_billing_birth_date_3i').val('').attr('disabled', false);
   }
   update_all_fields();
 });
@@ -121,9 +124,109 @@ function billing_details_info() {
     $('#iform_billing_details_ssn_1').val($('#iform_ssn_1').val());
     $('#iform_billing_details_ssn_2').val($('#iform_ssn_2').val());
     $('#iform_billing_details_ssn_3').val($('#iform_ssn_3').val());
-    $('#iform_billing_birth_date_1i').val($('#iform_Self_Birthdate_1i').val()).attr('disabled',true);
-    $('#iform_billing_birth_date_2i').val($('#iform_Self_Birthdate_2i').val()).attr('disabled',true);
-    $('#iform_billing_birth_date_3i').val($('#iform_Self_Birthdate_3i').val()).attr('disabled',true);
+    $('#iform_billing_birth_date_1i').val($('#iform_Self_Birthdate_1i').val()).attr('disabled', true);
+    $('#iform_billing_birth_date_2i').val($('#iform_Self_Birthdate_2i').val()).attr('disabled', true);
+    $('#iform_billing_birth_date_3i').val($('#iform_Self_Birthdate_3i').val()).attr('disabled', true);
   }
 }
+
+/* End Karen Naples */
+
+/* Rising stars */
+$('#iform_medical_history_patient_good_general_health_description').hide();
+$('#iform_medical_history_patient_physical_disabilities_description').hide();
+$('#iform_medical_history_patient_surgical_operations_description').hide();
+$('#iform_medical_history_patient_ever_been_hospitalized_description').hide();
+
+$('#iform_medical_history_food_allergies_description').hide();
+$('#iform_medical_history_drug_allergies_description').hide();
+
+$('#iform_medical_history_asthama_or_breathing_prob_description').hide();
+$('#iform_medical_history_er_for_asthma_attack_description').hide();
+
+$('.rising_stars_asthama_yes').hide();
+
+$('.rising_stars_seizures_date').hide();
+
+$('.rising_stars_good_gen_health').live('change', function () {
+  if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_good_general_health_description').hide()
+  }
+  else {
+    $('#iform_medical_history_patient_good_general_health_description').show()
+  }
+});
+
+$('.rising_stars_physical_dev').live('change', function () {
+  if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_physical_disabilities_description').show()
+  }
+  else {
+    $('#iform_medical_history_patient_physical_disabilities_description').hide()
+  }
+});
+
+$('.rising_stars_surgical_operations').live('change', function () {
+  if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_surgical_operations_description').show()
+  }
+  else {
+    $('#iform_medical_history_patient_surgical_operations_description').hide()
+  }
+});
+
+$('.rising_stars_patient_hosp').live('change', function () {
+  if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_patient_ever_been_hospitalized_description').show()
+  }
+  else {
+    $('#iform_medical_history_patient_ever_been_hospitalized_description').hide()
+  }
+});
+
+$('#iform_medical_history_food_allergies').live('change', function () {
+  if ($(this).is(':checked')) {
+    $('#iform_medical_history_food_allergies_description').show();
+  } else {
+    $('#iform_medical_history_food_allergies_description').hide();
+  }
+});
+
+
+$('#iform_medical_history_drug_allergies').live('change', function () {
+  if ($(this).is(':checked')) {
+    $('#iform_medical_history_drug_allergies_description').show();
+  } else {
+    $('#iform_medical_history_drug_allergies_description').hide();
+  }
+});
+
+$('.rising_stars_asthama_or_breath').live('change',function(){
+  if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_asthama_or_breathing_prob_description').show();
+    $('.rising_stars_asthama_yes').show()
+  }else{
+    $('#iform_medical_history_asthama_or_breathing_prob_description').hide();
+    $('.rising_stars_asthama_yes').hide()
+  }
+});
+
+$('.rising_stars_er_asthama').live('change',function(){
+  if ($(this).val() == 'Yes') {
+    $('#iform_medical_history_er_for_asthma_attack_description').show();
+  }else{
+    $('#iform_medical_history_er_for_asthma_attack_description').hide();
+  }
+});
+
+$('.rising_stars_seizures').live('change',function(){
+  console.log($(this).val());
+  if ($(this).val() == 'Yes') {
+    $('.rising_stars_seizures_date').show();
+  }else{
+    $('.rising_stars_seizures_date').hide();
+  }
+});
+
+/* ENd Rising stars */
 
