@@ -74,6 +74,12 @@
         </tr>
       <% end %>
     </table>
+    <br/>
+    <%#= will_paginate @appointments %>
+    <%= will_paginate @appointments, :renderer => BootstrapPagination::Rails %>
+
+  <% else %>
+    <p>No Appointments On This Day</p>
   <% end %>
 </div>
 
