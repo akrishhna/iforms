@@ -33,12 +33,13 @@ class AppointmentsController < ApplicationController
         elsif @appointment.location == 'Cedar Park'
           @appointment.formname = 'New Patient'
           @appointment.formname = '' if params[:radio_buttons] == 'None'
-        elsif @appointment.location == 'Lakeline' || @appointment.location == 'Steiner Ranch'
-          @appointment.formname = 'Rising Stars Pediatric Dentistry'
-          @appointment.formname = '' if params[:radio_buttons] == 'None'
+          elsif @appointment.location == 'Lakeline' or @appointment.location == 'Rising Stars Steiner Ranch'
+            @appointment.formname = 'Rising Stars Pediatric Dentistry'
+            @appointment.formname = '' if params[:radio_buttons] == 'None'
         else
           @appointment.formname = ''
         end
+
         if !@appointment.time_hrs.empty? and !@appointment.AM_PM.nil? and !@appointment.time_min.empty?
           @appointment.appointment_time = @appointment.time_hrs+@appointment.AM_PM+@appointment.time_min
         end
