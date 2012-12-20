@@ -1,8 +1,7 @@
 $(function () {
   $(".appointments_date_selector").datepicker({
     changeMonth: true,
-    changeYear: true
-  }).datepicker({
+    changeYear: true,
     onSelect:function (dateText, inst) {
       window.location = '/doctor/appointments' + '?appointment_date=' + dateText;
     }
