@@ -54,8 +54,8 @@ class AppointmentsController < ApplicationController
             @appointment.patient_user_id = @patient.user_id
           end
           #changes end
-         # @doctor_details = @appointment.doctor
-         # @appointment.doctorname = @doctor_details.doctorname
+         @doctor_details = @appointment.doctor
+         @appointment.doctorname = @doctor_details.doctorname
           @appointment.timesent = Time.now
           @appointment.save
           if params[:radio_buttons] != 'None' and @appointment.formname != ''
@@ -134,8 +134,8 @@ class AppointmentsController < ApplicationController
       end
 
       if @appointment.update_attributes(params[:appointment])
-        #@doctor_details = @appointment.doctor
-        #@appointment.doctorname = @doctor_details.doctorname
+        @doctor_details = @appointment.doctor
+        @appointment.doctorname = @doctor_details.doctorname
         @appointment.save(:validate => false)
         Notifier.appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
         format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }

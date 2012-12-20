@@ -90,21 +90,21 @@
     </div>
   <% elsif session[:user_service_provider] == 7 %>
     <div class="control-group">
-      <%= f.label :doctorname, raw('&nbsp;'), :class => 'control-label' %>
+      <%= f.label :appointment_doctor_name, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :doctorname, 'Dr. Michelle L. Freeze, D.M.D.' %> Dr. Michelle L. Freeze, D.M.D.
+          <%= f.radio_button :appointment_doctor_name, 'Dr. Michelle L. Freeze, D.M.D.' %> Dr. Michelle L. Freeze, D.M.D.
         <% end %> <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :doctorname, 'Dr. Shiny Thomas, D.D.S.' %> Dr. Shiny Thomas, D.D.S.
+          <%= f.radio_button :appointment_doctor_name, 'Dr. Shiny Thomas, D.D.S.' %> Dr. Shiny Thomas, D.D.S.
         <% end %>
         <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :doctorname, 'Dr. Jeff Gregerson, D.M.D.' %>Dr. Jeff Gregerson, D.M.D.
+          <%= f.radio_button :appointment_doctor_name, 'Dr. Jeff Gregerson, D.M.D.' %>Dr. Jeff Gregerson, D.M.D.
         <% end %>
         <br>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :doctorname, 'Dr. Pru Aurora, D.D.S.' %> Dr. Pru Aurora, D.D.S.
+          <%= f.radio_button :appointment_doctor_name, 'Dr. Pru Aurora, D.D.S.' %> Dr. Pru Aurora, D.D.S.
         <% end %>
       </div>
     </div>
