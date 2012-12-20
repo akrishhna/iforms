@@ -134,6 +134,14 @@ function billing_details_info() {
 
 /* Rising stars */
 
+$('.rising_stars_first_tim_visit').live('change',function(){
+   if($('.rising_stars_first_tim_visit:checked').val() == 'Yes'){
+     $('.rising_stars_last_visit').hide();
+   }else{
+     $('.rising_stars_last_visit').show();
+   }
+});
+
 $('.rising_stars_good_gen_health').live('change', function () {
   if ($(this).val() == 'Yes') {
     $('#iform_medical_history_patient_good_general_health_description').hide()

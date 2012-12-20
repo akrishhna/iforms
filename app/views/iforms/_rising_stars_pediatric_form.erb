@@ -449,14 +449,14 @@
     <%= f.label :dental_history_patient_first_time_to_visit, ' Is this Patient’s first visit to the dentist ', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :dental_history_patient_first_time_to_visit, "Yes" %>Yes
+        <%= f.radio_button :dental_history_patient_first_time_to_visit, "Yes", :class => 'rising_stars_first_tim_visit' %>Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :dental_history_patient_first_time_to_visit, "No" %>No
+        <%= f.radio_button :dental_history_patient_first_time_to_visit, "No", :class => 'rising_stars_first_tim_visit' %>No
       <% end %>
     </div>
   </div>
-  <div class="control-group">
+  <div class="control-group rising_stars_last_visit">
     <%= f.label :dental_history_patient_last_visiting_date, 'Last Dental Visit', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_patient_last_visiting_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', "data-value" => f.object.dental_history_patient_last_visiting_date %>
@@ -1495,5 +1495,11 @@
       changeYear:true
     }).datepicker('option', 'format', 'yy-mm-dd')
   });
+
+  if($('.rising_stars_first_tim_visit:checked').val() == 'Yes'){
+    $('.rising_stars_last_visit').hide();
+  }else{
+    $('.rising_stars_last_visit').show();
+  }
 
 </script>
