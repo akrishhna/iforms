@@ -80,7 +80,7 @@ class Iform < ActiveRecord::Base
       "Name" => iform.Self_Name_First.to_s + ' ' + iform.Self_Name_Last,
       "BirthDate" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m-%d-%Y') : '',
       "Age" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' : '',
-      "PatientAddress" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ',')) + (iform.Self_Home_Address2.empty? ? ' ' : (iform.Self_Home_Address2.to_s + ', ')),
+      "Address" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ',')) + (iform.Self_Home_Address2.empty? ? ' ' : (iform.Self_Home_Address2.to_s + ', ')),
       "City" => iform.Self_Home_City,
       "State" => iform.Self_Home_State,
       "Zip" => iform.Self_Home_Postal_Code,
