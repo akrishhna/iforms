@@ -459,7 +459,7 @@
   <div class="control-group rising_stars_last_visit">
     <%= f.label :dental_history_patient_last_visiting_date, 'Last Dental Visit', :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :dental_history_patient_last_visiting_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', "data-value" => f.object.dental_history_patient_last_visiting_date %>
+      <%= f.text_field :dental_history_patient_last_visiting_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.dental_history_patient_last_visiting_date %>
     </div>
   </div>
   <div class="control-group">
@@ -697,7 +697,7 @@
         <%= f.radio_button :medical_history_patient_good_general_health, "No", :class => 'rising_stars_good_gen_health' %>
         No
       <% end %> &nbsp;&nbsp;
-      <%= f.text_field :medical_history_patient_good_general_health_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => (f.object.medical_history_patient_good_general_health == 'Yes' ? 'hide' : '') %>
+      <%= f.text_field :medical_history_patient_good_general_health_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => (f.object.medical_history_patient_good_general_health == 'No' ? '' : 'hide') %>
     </div>
   </div>
   <div class="control-group">
@@ -1187,7 +1187,7 @@
   </tr>
   <tr>
     <td>
-      Mumps, measles, or chickenpox
+      Mumps, measles, or oo
     </td>
     <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -1492,14 +1492,15 @@
 
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
-      changeYear:true
-    }).datepicker('option', 'format', 'yy-mm-dd')
+      changeYear:true,
+      dateFormat: 'yy-mm-dd'
+    })
   });
 
-  if($('.rising_stars_first_tim_visit:checked').val() == 'Yes'){
-    $('.rising_stars_last_visit').hide();
-  }else{
+  if($('.rising_stars_first_tim_visit:checked').val() == 'No'){
     $('.rising_stars_last_visit').show();
+  }else{
+    $('.rising_stars_last_visit').hide();
   }
 
 </script>
