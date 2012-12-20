@@ -2,7 +2,6 @@ class Iform < ActiveRecord::Base
   belongs_to :appointment
 
 
-
   def self.new_patient_form_generator(iform)
 
     pdftkpath = PDFTK_PATH
@@ -21,7 +20,7 @@ class Iform < ActiveRecord::Base
       "PatientBirthDateDay" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%d') : '',
       "PatientBirthDateYear" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%y') : '',
       "PatientBirthDateMonth" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m') : '',
-      "PatientAge" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' :'',
+      "PatientAge" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' : '',
       "PatientMaritalStatus" => iform.Self_Marital_Status,
       "PatientSocialSecurityNumber" => iform.ssn_1.to_s + '-' + iform.ssn_2.to_s + '-' + iform.ssn_3.to_s,
       "PatientDriversLicenseStateAndNumber" => iform.Self_Driver_License_State.to_s + ' ' + iform.Self_Driver_License_Number.to_s,
@@ -67,7 +66,105 @@ class Iform < ActiveRecord::Base
     File.delete(path)
   end
 
+  def self.rising_stars_pediatric_form_generator(iform)
+    pdftkpath = PDFTK_PATH
+    pdffilepath = PDFFILES_PATH
+    path = pdffilepath + "#{iform.path}.pdf"
+    @pdftk = PdftkForms::Wrapper.new(pdftkpath)
+    @pdf_form = iform.formname.gsub(' ', '_')
+    if iform.Self_Birthdate
+      @You_Age = Date.today.strftime('%Y%m%d').to_i - iform.Self_Birthdate.strftime('%Y%m%d').to_i
+      @You_Age = @You_Age.to_s.split('')
+    end
+    @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
+      "Name" => iform.Self_Name_First.to_s + ' ' + iform.Self_Name_Last,
+      "BirthDate" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m-%d-%Y') : '',
+      "Age" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' : '',
+      "PatientAddress" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ',')) + (iform.Self_Home_Address2.empty? ? ' ' : (iform.Self_Home_Address2.to_s + ', ')),
+      "City" => iform.Self_Home_City,
+      "State" => iform.Self_Home_State,
+      "Zip" => iform.Self_Home_Postal_Code,
+      "HomeTelephone" => iform.home_phone_1.to_s + '-' + iform.home_phone_2.to_s + '-' + iform.home_phone_3.to_s,
+      "OtherTelephoneNumber" => iform.patient_other_phone_1.to_s + '-' + iform.patient_other_phone_2.to_s + '-' + iform.patient_other_phone_3.to_s,
+      "SiblingsNames" => iform.patient_previously_siblings_list,
+      "ReferredBy" => iform.how_did_you_hear_about_office,
+      "FatherTypeOtherDescription" => '',
+      "FatherName" => iform.patient_guardian_father_first_name.to_s + ' ' + iform.patient_guardian_father_last_name.to_s,
+      "FatherBirthDate" => iform.patient_guardian_father_birth_date ? iform.patient_guardian_father_birth_date.strftime('%m-%d-%Y') : '',
+      "FatherSSN" => iform.patient_guardian_father_ssn_1.to_s + '-' + iform.patient_guardian_father_ssn_2.to_s + '-' + iform.patient_guardian_father_ssn_3.to_s,
+      "FatherAddress" => (iform.patient_guardian_father_address_1.empty? ? ' ' : (iform.patient_guardian_father_address_1.to_s + ',')) + (iform.patient_guardian_father_address_2.empty? ? ' ' : (iform.patient_guardian_father_address_2.to_s + ', ')) + iform.patient_guardian_father_address_city.to_s + ' ' + iform.patient_guardian_father_address_state.to_s + ' ' + iform.patient_guardian_father_address_zip.to_s,
+      "FatherEmployer" => iform.patient_guardian_father_employer,
+      "FatherWorkTelephoneNumber" => iform.patient_guardian_father_work_phone_1.to_s + '-' + iform.patient_guardian_father_work_phone_2.to_s + '-' + iform.patient_guardian_father_work_phone_3.to_s,
+      "FatherHomeTelephoneNumber" => iform.patient_guardian_father_home_phone_1.to_s + '-' + iform.patient_guardian_father_home_phone_2.to_s + '-' + iform.patient_guardian_father_home_phone_3.to_s,
+      "FatherCellTelephoneNumber" => iform.patient_guardian_father_cell_phone_1.to_s + '-' + iform.patient_guardian_father_cell_phone_2.to_s + '-' + iform.patient_guardian_father_cell_phone_3.to_s,
+      "FatherEmail" => iform.patient_guardian_father_email,
+      "MotherTypeOtherDescription" => '',
+      "MotherName" => iform.patient_guardian_mother_first_name.to_s + ' ' + iform.patient_guardian_mother_last_name.to_s,
+      "MotherBirthDate" => iform.patient_guardian_mother_birth_date ? iform.patient_guardian_mother_birth_date.strftime('%m-%d-%Y') : '',
+      "MotherSSN" => iform.patient_guardian_mother_ssn_1.to_s + '-' + iform.patient_guardian_mother_ssn_2.to_s + '-' + iform.patient_guardian_mother_ssn_3.to_s,
+      "MotherAddress" => (iform.patient_guardian_mother_address_1.empty? ? ' ' : (iform.patient_guardian_mother_address_1.to_s + ',')) + (iform.patient_guardian_mother_address_2.empty? ? ' ' : (iform.patient_guardian_mother_address_2.to_s + ', ')) + iform.patient_guardian_mother_address_city.to_s + ' ' + iform.patient_guardian_mother_address_state.to_s + ' ' + iform.patient_guardian_mother_address_zip.to_s,
+      "MotherEmployer" => iform.patient_guardian_mother_employer,
+      "MotherWorkTelephoneNumber" => iform.patient_guardian_mother_work_phone_1.to_s + '-' + iform.patient_guardian_mother_work_phone_2.to_s + '-' + iform.patient_guardian_mother_work_phone_3.to_s,
+      "MotherHomeTelephoneNumber" => iform.patient_guardian_mother_home_phone_1.to_s + '-' + iform.patient_guardian_mother_home_phone_2.to_s + '-' + iform.patient_guardian_mother_home_phone_3.to_s,
+      "MotherCellTelephoneNumber" => iform.patient_guardian_mother_cell_phone_1.to_s + '-' + iform.patient_guardian_mother_cell_phone_2.to_s + '-' + iform.patient_guardian_mother_cell_phone_3.to_s,
+      "MotherEmail" => iform.patient_guardian_mother_email,
+      "InsuredName" => iform.insurance_person_first_name.to_s + ' ' + iform.insurance_person_last_name,
+      "InsuredRelationshipToPatient" => iform.insurance_relation_ship_to_patient,
+      "InsuredEmployer" => iform.insurance_employer,
+      "InsuranceMemberID" => iform.insurance_member_id,
+      "InsuranceCompany" => iform.insurance_company_name,
+      "InsuranceTelephoneNumber" => iform.insurance_phone_1.to_s + '-' + iform.insurance_phone_2.to_s + '-' + iform.insurance_phone_3.to_s,
+      "InsuranceGroupNumber" => iform.insurance_group,
+      "InsuranceClaimsMailingAddress" => iform.insurance_insured == 'Father' ? iform.patient_guardian_father_email : (iform.insurance_insured == 'Mother' ? iform.patient_guardian_mother_email : ''),
+      "ReasonForVisit" => iform.dental_history_why_patient_here_today,
+      "DateOfLastVisit" => iform.dental_history_patient_last_visiting_date ? iform.dental_history_patient_last_visiting_date.strftime('%m-%d-%Y') : '',
+      "OralHabitsOtherDescription" => '',
+      "InheritedDentalCharacteristics" => iform.dental_history_patient_inherited_any_dental_characteristics,
+      "InjuriesToTeeth" => iform.dental_history_patient_have_any_injuries,
+      "HowOftenTeethBrushing" => iform.dental_history_does_child_brush_teeth,
+      "AgeGaveUpBottle" => iform.dental_history_age_at_stop_bottle,
+      "AgeGaveUpSippyCup" => iform.dental_history_age_at_stop_bottle_sippy_cup,
+      "Physician" => iform.medical_history_physician,
+      "PhysicianAddress" => (iform.medical_history_address_1.empty? ? ' ' : (iform.medical_history_address_1.to_s + ',')) + (iform.medical_history_address_2.empty? ? ' ' : (iform.medical_history_address_2.to_s + ', ')) + iform.medical_history_address_city.to_s + ' ' + iform.medical_history_address_state.to_s + ' ' + iform.medical_history_address_zip.to_s,
+      "PhysicianTelephoneNumber" => iform.medical_history_home_phone_1.to_s + '-' + iform.medical_history_home_phone_2.to_s + '-' + iform.medical_history_home_phone_3.to_s,
+      "NotInGoodHealthDescription" => iform.medical_history_patient_good_general_health_description,
+      "PhysicalDisabilitiesAndDevelopmentalDelaysDescription" => iform.medical_history_patient_physical_disabilities_description,
+      "OperationsDescription" => iform.medical_history_patient_surgical_operations_description,
+      "HospitalizationDescription" => iform.medical_history_patient_ever_been_hospitalized_description,
+      "FoodAllergiesDescription" => iform.medical_history_food_allergies_description,
+      "DrugAllergiesDescription" => iform.medical_history_drug_allergies_description,
+      "AsthmaBreathingProblemsDescription" => iform.medical_history_asthama_or_breathing_prob_description,
+      "ERForAsthmaAttackDescription" => iform.medical_history_er_for_asthma_attack_description,
+      "WhatInducesBreathingProblemsDescription" => iform.medical_history_induces_breathing_prob,
+      "AsthmaMedicationDesciption" => iform.medical_history_asthma_medication,
+      "LastSeizureDate" => iform.medical_history_date_of_last_seizure,
+      "Medication1" => iform.medical_history_current_medication_name_1,
+      "Medication2" => iform.medical_history_current_medication_name_2,
+      "Medication3" => iform.medical_history_current_medication_name_3,
+      "Medication4" => iform.medical_history_current_medication_name_4,
+      "Medication1HowOften" => iform.medical_history_current_medication_how_often_1,
+      "Medication2HowOften" => iform.medical_history_current_medication_how_often_2,
+      "Medication3HowOften" => iform.medical_history_current_medication_how_often_3,
+      "Medication4HowOften" => iform.medical_history_current_medication_how_often_4,
+      "Medication1Reason" => iform.medical_history_current_medication_reason_1,
+      "Medication2Reason" => iform.medical_history_current_medication_reason_2,
+      "Medication3Reason" => iform.medical_history_current_medication_reason_3,
+      "Medication4Reason" => iform.medical_history_current_medication_reason_4,
+      "FirstLanguage" => iform.social_history_patient_first_lang,
+      "SecondLanguage" => iform.social_history_patient_second_lang,
+      "AdoptedAge" => iform.social_history_patient_adopted_age,
+      "HowWellToleratesCare" => iform.social_history_patient_tolerate,
+      "Favorites" => iform.social_history_patient_favorites,
+      "SecondaryInsuranceCompany" => ''
+    })
+    #form_pdf_path = "#{PDFFILES_PATH}Karen_Naples_1.pdf"
+    #raise @pdftk.fields(form_pdf_path).to_yaml
+    iform_file = File.new(path, 'rb')
+    iform.pdffile_path = iform_file.read()
+    iform.save
 
+    File.delete(path)
+  end
 
   #def self_social_security_number
   #  self.Self_Social_Security_Number

@@ -187,6 +187,8 @@ class IformsController < ApplicationController
           end
         elsif @service_provider_id == 4
           Iform.new_patient_form_generator(@iform)
+        elsif @service_provider_id == 7
+          Iform.rising_stars_pediatric_form_generator(@iform)
         else
         end
 
