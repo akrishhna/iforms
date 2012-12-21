@@ -4,14 +4,15 @@ class MedicalAppointmentsController < ApplicationController
   def index
     session["consumer_tab_index"] = 5
     @doctor = Doctor.find_by_user_id(current_user.id)
-    if  params['appointment_date']
-      begin_date = params['appointment_date'].to_date.beginning_of_day
-      end_date = params['appointment_date'].to_date.end_of_day
-    else
-      begin_date = Date.today.beginning_of_day
-      end_date = Date.today.end_of_day
-    end
-    @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and appointment_date_time BETWEEN ? and ?", @doctor.user_id, session[:user_service_provider],begin_date,end_date).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
+    #if  params['appointment_date']
+    #  begin_date = params['appointment_date'].to_date.beginning_of_day
+    #  end_date = params['appointment_date'].to_date.end_of_day
+    #else
+    #  begin_date = Date.today.beginning_of_day
+    #  end_date = Date.today.end_of_day
+    #end
+    #@appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id=? and appointment_date_time BETWEEN ? and ?", @doctor.user_id, session[:user_service_provider],begin_date,end_date).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
+    @appointments = MedicalAppointment.where("doctor_user_id = ? and service_provider_id = ? and DATE_FORMAT(appointment_date_time, '%Y-%m-%d') = ?", @doctor.user_id, session[:user_service_provider],params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
   end
 
   def new
