@@ -40,7 +40,7 @@
           <td></td>
           <td></td>
         <% else %>
-          <td><%= i.formname %></td>
+          <td><%= i.formname == 'Rising Stars Pediatric Dentistry' ? 'New Patient' : i.formname  %></td>
           <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>
             :<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
           <td><%= @timesent %></td>
