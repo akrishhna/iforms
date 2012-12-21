@@ -79,8 +79,7 @@ line-height: 2em">
 <% elsif !@appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Rising Stars
-    Pediatric Dentistry at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with <%= @appointment.appointment_doctor_name %> at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
     at
     <% if @appointment.location == 'Lakeline' %>
@@ -106,8 +105,7 @@ line-height: 2em">
 <% elsif !@appointment.responsible_party.empty? and !@appointment.formname.empty? and @preferred_name.empty? %>
   <p>Dear <%= @appointment.responsible_party %>,</p>
   <p>
-    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with Rising Stars
-    Pediatric Dentistry at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
+    This message confirms <%= @appointment.firstname %> <%= @appointment.lastname %>'s appointment with <%= @appointment.appointment_doctor_name %> at <%= @appointment.time_hrs %>:<%= (@appointment.time_min.size == 1 ? '0' + @appointment.time_min : @appointment.time_min) %> <%= @appointment.AM_PM %>
     on <%= @appointment.date.strftime("%A %B %d, %Y") %> at our office located
     at
     <% if @appointment.location == 'Lakeline' %>
