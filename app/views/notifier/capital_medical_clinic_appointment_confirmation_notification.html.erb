@@ -1,7 +1,7 @@
 <% @user = User.where("email =?", @appointment.email).first %>
 <div style="background: #87ceeb;height: 76px" >
-  <a href="http://www.capitalmedicalclinic.com/" target="_blank"><img src=" <%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %> " width="81%" style="position:relative;margin:5px;"/></a>
-  <img src=" <%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg" %>" style="position: relative;right: 0px;top: 0px;width:6%"/>
+  <a href="http://www.capitalmedicalclinic.com/" target="_blank"><img src=" <%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %> " width="81%" height="63%" style="position:relative;margin:5px;"/></a>
+  <img src=" <%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg" %>" style="position: relative;right: 0px;top: 0px;width:8%"/>
 </div>
 <% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
   <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
