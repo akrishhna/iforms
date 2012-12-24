@@ -112,7 +112,7 @@
     <div class="control-group">
       <%= f.label :birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.date_select :birth_date, :start_year => 1900, :end_year => Date.current.year, :include_blank => true %>
         <%#= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
       </div>
     </div>
