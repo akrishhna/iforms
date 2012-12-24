@@ -129,6 +129,8 @@ class Iform < ActiveRecord::Base
 
       # Insurance
       "InsuranceClaimsMailingAddress" => iform.insurance_insured == 'Father' ? iform.patient_guardian_father_email : (iform.insurance_insured == 'Mother' ? iform.patient_guardian_mother_email : ''),
+      "DentalInsuranceNo" => iform.insurance_company_name == '' ? 'Yes' : '',
+      "DentalInsuranceYes" => iform.insurance_company_name == '' ? '' : 'Yes',
       "InsuranceCompany" => iform.insurance_company_name,
       "InsuranceGroupNumber" => iform.insurance_group,
       "InsuranceMemberID" => iform.insurance_member_id,
@@ -156,6 +158,7 @@ class Iform < ActiveRecord::Base
 
       # Dental History tab
       "LipBiting" => iform.dental_history_lip_biting ? 'Yes' : '',
+      "TeethGrinding" => iform.dental_history_teeth_grinding ? 'Yes' : '',
       "Afraid" => iform.dental_history_patient_behave_today_afraid ? 'Yes' : '',
       "GaveUpBottle" => iform.dental_history_age_at_stop_bottle == '' ? '' : 'Yes',
       "AgeGaveUpBottle" => iform.dental_history_age_at_stop_bottle,
@@ -306,12 +309,6 @@ class Iform < ActiveRecord::Base
       "TuberculosisOrTBExposureNo" => iform.medical_history_tuberculosis_or_tb_exposure == 'No' ? 'Yes' : '',
       "TuberculosisOrTBExposureYes" => iform.medical_history_tuberculosis_or_tb_exposure == 'Yes' ? 'Yes' : '',
       "WhatInducesBreathingProblemsDescription" => iform.medical_history_induces_breathing_prob,
-
-      # other
-
-      "DentalInsuranceNo" => '',
-      "DentalInsuranceYes" => '',
-      "TeethGrinding" => '',
 
     })
     #form_pdf_path = "#{PDFFILES_PATH}Karen_Naples_1.pdf"
