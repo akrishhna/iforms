@@ -142,6 +142,15 @@ $('.rising_stars_first_tim_visit').live('change',function(){
    }
 });
 
+
+$('.rising_stars_more_than_1_insurance').live('change',function(){
+  if($('.rising_stars_more_than_1_insurance:checked').val() == 'Yes'){
+    $('.rising_stars_second_company').show();
+  }else{
+    $('.rising_stars_second_company').hide();
+  }
+});
+
 $('.rising_stars_good_gen_health').live('change', function () {
   if ($(this).val() == 'Yes') {
     $('#iform_medical_history_patient_good_general_health_description').hide()
@@ -228,6 +237,35 @@ $('.rising_stars_seizures').live('change',function(){
     $('.rising_stars_seizures_date').show();
   }else{
     $('.rising_stars_seizures_date').hide();
+  }
+});
+
+$('#iform_dental_history_other').live('change', function () {
+  if ($(this).is(':checked')) {
+    $('#iform_dental_history_oral_habits_other_description').val('');
+    $('#iform_dental_history_oral_habits_other_description').show();
+  } else {
+    $('#iform_dental_history_oral_habits_other_description').hide();
+  }
+});
+
+$('.rising_stars_mother_type').live('change', function () {
+  if ($(this).val() == 'Other') {
+    $('#iform_patient_guardian_mother_other_description').val('');
+    $('#iform_patient_guardian_mother_other_description').show()
+  }
+  else {
+    $('#iform_patient_guardian_mother_other_description').hide()
+  }
+});
+
+$('.rising_stars_father_type').live('change', function () {
+  if ($(this).val() == 'Other') {
+    $('#iform_patient_guardian_father_other_description').val('');
+    $('#iform_patient_guardian_father_other_description').show()
+  }
+  else {
+    $('#iform_patient_guardian_father_other_description').hide()
   }
 });
 

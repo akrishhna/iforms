@@ -127,21 +127,28 @@
     <div class="control-group">
       <%= f.label :patient_guardian_father, raw('&nbsp;'), :class => 'control-label ' %>
       <div class="controls">
+
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Father" %>Father
+          <%= f.radio_button :patient_guardian_father, "Father", :class => 'rising_stars_father_type' %>Father
+        <% end %>
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :patient_guardian_father, "Stepfather", :class => 'rising_stars_father_type'  %>Stepfather
+        <% end %>
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :patient_guardian_father, "Guardian", :class => 'rising_stars_father_type'  %>Guardian
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Stepfather" %>Stepfather
+          <%= f.radio_button :patient_guardian_father, "None", :class => 'rising_stars_father_type'  %>None
         <% end %>
+
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Guardian" %>Guardian
+          <%= f.radio_button :patient_guardian_father, "Other", :class => 'rising_stars_father_type'  %>Other
+          &nbsp;&nbsp;
+          <%= f.text_field :patient_guardian_father_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_father == 'Other' ? '' : 'hide') %>
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Other" %>Other
-        <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "None" %>None
-        <% end %>
+
       </div>
     </div>
     <div class="control-group">
@@ -234,21 +241,29 @@
     <div class="control-group">
       <%= f.label :patient_guardian_mother, raw('&nbsp;'), :class => 'control-label ' %>
       <div class="controls">
+
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother, "Father" %>Mother
+          <%= f.radio_button :patient_guardian_mother, "Mother", :class => 'rising_stars_mother_type' %>Mother
+
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother, "Stepfather" %>Stepmother
+          <%= f.radio_button :patient_guardian_mother, "Stepmother", :class => 'rising_stars_mother_type' %>Stepmother
         <% end %>
+
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother, "Guardian" %>Guardian
+          <%= f.radio_button :patient_guardian_mother, "Guardian", :class => 'rising_stars_mother_type' %>Guardian
         <% end %>
+
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother, "Other" %>Other
+          <%= f.radio_button :patient_guardian_mother, "None", :class => 'rising_stars_mother_type' %>None
         <% end %>
+
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother, "None" %>None
+          <%= f.radio_button :patient_guardian_mother, "Other", :class => 'rising_stars_mother_type' %>Other
+          &nbsp;&nbsp;
+          <%= f.text_field :patient_guardian_mother_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_mother == 'Other' ? '' : 'hide') %>
         <% end %>
+
       </div>
     </div>
     <div class="control-group">
@@ -349,11 +364,17 @@
       <%= f.label :insurance_do_you_have_more_than_one_dental_insurance, 'Do you have more than one dental insurance?', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_do_you_have_more_than_one_dental_insurance, "Yes" %>Yes
+          <%= f.radio_button :insurance_do_you_have_more_than_one_dental_insurance, "Yes", :class => 'rising_stars_more_than_1_insurance' %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_do_you_have_more_than_one_dental_insurance, "No" %>No
+          <%= f.radio_button :insurance_do_you_have_more_than_one_dental_insurance, "No", :class => 'rising_stars_more_than_1_insurance' %>No
         <% end %>
+      </div>
+    </div>
+    <div class="control-group rising_stars_second_company">
+      <%= f.label :insurance_second_insurance_company_name, "Second insurance company name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :insurance_second_insurance_company_name %>
       </div>
     </div>
     <div class="control-group">
@@ -577,19 +598,21 @@
       <% end %>
 
       <%= label_tag "check_boxes", :class => '  checkbox' do %>
-        <%= f.check_box :dental_history_pacifier_use %>Lip biting
+        <%= f.check_box :dental_history_lip_biting %>Lip biting
       <% end %>
 
       <%= label_tag "check_boxes", :class => '  checkbox' do %>
-        <%= f.check_box :dental_history_lip_biting %>Teeth Grinding
+        <%= f.check_box :dental_history_teeth_grinding %>Teeth
       <% end %>
 
       <%= label_tag "check_boxes", :class => '  checkbox' do %>
-        <%= f.check_box :dental_history_teeth_grinding %>Pacifier Use
+        <%= f.check_box :dental_history_pacifier_use %>Pacifier Use
       <% end %>
 
       <%= label_tag "check_boxes", :class => '  checkbox' do %>
         <%= f.check_box :dental_history_other %>Other
+        &nbsp;&nbsp;
+        <%= f.text_field :dental_history_oral_habits_other_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => (f.object.dental_history_other ? '' : 'hide') %>
       <% end %>
 
     </div>
@@ -670,9 +693,9 @@
     <div class="controls">
       <%= f.text_field :medical_history_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
       -
-      <%= f.text_field :medical_history_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+      <%= f.text_field :medical_history_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
       -
-      <%= f.text_field :medical_history_home_phone_1, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      <%= f.text_field :medical_history_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
     </div>
   </div>
   <div class="control-group">
@@ -1146,12 +1169,12 @@
     </td>
     <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_birth_defects, "Yes" %>
+        <%= f.radio_button :medical_history_steroids_therapy_or_chemotherapy, "Yes" %>
       <% end %>
     </td>
     <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_birth_defects, "No" %>
+        <%= f.radio_button :medical_history_steroids_therapy_or_chemotherapy, "No" %>
       <% end %>
     </td>
   </tr>
@@ -1501,6 +1524,12 @@
     $('.rising_stars_last_visit').show();
   }else{
     $('.rising_stars_last_visit').hide();
+  }
+
+  if($('.rising_stars_more_than_1_insurance:checked').val() == 'No'){
+    $('.rising_stars_second_company').hide();
+  }else{
+    $('.rising_stars_second_company').show();
   }
 
 </script>
