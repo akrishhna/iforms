@@ -159,7 +159,7 @@ class IformsController < ApplicationController
     end
     @recent_app_form = Appformjoin.where('status in (?) and patient_user_id=?', ['Sent', 'Submitted', 'Updated'], @appointment.patient_user_id).order('updated_at').last
 
-    @recent_iform = Iform.find(@recent_app_form.iform_id)
+    @recent_iform = Iform.find(@recent_app_form.iform_id) rescue nil
 
     if @recent_iform
       # patient Tab
