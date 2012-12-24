@@ -157,6 +157,99 @@ class IformsController < ApplicationController
     else
       @appform.status = 'in progress'
     end
+    @recent_app_form = Appformjoin.where('status in (?) and patient_user_id=?', ['Sent', 'Submitted', 'Updated'], @appointment.patient_user_id).order('updated_at').last
+
+    @recent_iform = Iform.find(@recent_app_form.iform_id)
+
+    if @recent_iform
+      # patient Tab
+      @iform[:Self_Home_Address1] = @recent_iform['Self_Home_Address1']
+      @iform[:Self_Home_Address2] = @recent_iform['Self_Home_Address2']
+      @iform[:Self_Home_City] = @recent_iform['Self_Home_City']
+      @iform[:Self_Home_State] = @recent_iform['Self_Home_State']
+      @iform[:Self_Home_Postal_Code] = @recent_iform['Self_Home_Postal_Code']
+      @iform[:home_phone_1] = @recent_iform['home_phone_1']
+      @iform[:home_phone_2] = @recent_iform['home_phone_2']
+      @iform[:home_phone_3] = @recent_iform['home_phone_3']
+      @iform[:patient_other_phone_1] = @recent_iform['patient_other_phone_1']
+      @iform[:patient_other_phone_2] = @recent_iform['patient_other_phone_2']
+      @iform[:patient_other_phone_3] = @recent_iform['patient_other_phone_3']
+      @iform[:patient_previously_siblings_list] = @recent_iform['patient_previously_siblings_list']
+      @iform[:how_did_you_hear_about_office] = @recent_iform['how_did_you_hear_about_office']
+
+      # Father Tab
+      @iform[:patient_guardian_father] = @recent_iform['patient_guardian_father']
+      @iform[:patient_guardian_father_other_description] = @recent_iform['patient_guardian_father_other_description']
+      @iform[:patient_guardian_father_first_name] = @recent_iform['patient_guardian_father_first_name']
+      @iform[:patient_guardian_father_last_name] = @recent_iform['patient_guardian_father_last_name']
+      @iform[:patient_guardian_father_birth_date] = @recent_iform['patient_guardian_father_birth_date']
+      @iform[:patient_guardian_father_ssn_1] = @recent_iform['patient_guardian_father_ssn_1']
+      @iform[:patient_guardian_father_ssn_2] = @recent_iform['patient_guardian_father_ssn_2']
+      @iform[:patient_guardian_father_ssn_3] = @recent_iform['patient_guardian_father_ssn_3']
+      @iform[:patient_guardian_father_employer] = @recent_iform['patient_guardian_father_employer']
+      @iform[:patient_guardian_father_work_phone_1] = @recent_iform['patient_guardian_father_work_phone_1']
+      @iform[:patient_guardian_father_work_phone_2] = @recent_iform['patient_guardian_father_work_phone_2']
+      @iform[:patient_guardian_father_work_phone_3] = @recent_iform['patient_guardian_father_work_phone_3']
+      @iform[:patient_guardian_father_address_1] = @recent_iform['patient_guardian_father_address_1']
+      @iform[:patient_guardian_father_address_2] = @recent_iform['patient_guardian_father_address_2']
+      @iform[:patient_guardian_father_address_city] = @recent_iform['patient_guardian_father_address_city']
+      @iform[:patient_guardian_father_address_state] = @recent_iform['patient_guardian_father_address_state']
+      @iform[:patient_guardian_father_address_zip] = @recent_iform['patient_guardian_father_address_zip']
+      @iform[:patient_guardian_father_home_phone_1] = @recent_iform['patient_guardian_father_home_phone_1']
+      @iform[:patient_guardian_father_home_phone_2] = @recent_iform['patient_guardian_father_home_phone_2']
+      @iform[:patient_guardian_father_home_phone_3] = @recent_iform['patient_guardian_father_home_phone_3']
+      @iform[:patient_guardian_father_cell_phone_1] = @recent_iform['patient_guardian_father_cell_phone_1']
+      @iform[:patient_guardian_father_cell_phone_2] = @recent_iform['patient_guardian_father_cell_phone_2']
+      @iform[:patient_guardian_father_cell_phone_3] = @recent_iform['patient_guardian_father_cell_phone_3']
+      @iform[:patient_guardian_father_email] = @recent_iform['patient_guardian_father_email']
+
+      # Mother Tab
+      @iform[:patient_guardian_mother] = @recent_iform['patient_guardian_mother']
+      @iform[:patient_guardian_mother_other_description] = @recent_iform['patient_guardian_mother_other_description']
+      @iform[:patient_guardian_mother_first_name] = @recent_iform['patient_guardian_mother_first_name']
+      @iform[:patient_guardian_mother_last_name] = @recent_iform['patient_guardian_mother_last_name']
+      @iform[:patient_guardian_mother_birth_date] = @recent_iform['patient_guardian_mother_birth_date']
+      @iform[:patient_guardian_mother_ssn_1] = @recent_iform['patient_guardian_mother_ssn_1']
+      @iform[:patient_guardian_mother_ssn_2] = @recent_iform['patient_guardian_mother_ssn_2']
+      @iform[:patient_guardian_mother_ssn_3] = @recent_iform['patient_guardian_mother_ssn_3']
+      @iform[:patient_guardian_mother_employer] = @recent_iform['patient_guardian_mother_employer']
+      @iform[:patient_guardian_mother_work_phone_1] = @recent_iform['patient_guardian_mother_work_phone_1']
+      @iform[:patient_guardian_mother_work_phone_2] = @recent_iform['patient_guardian_mother_work_phone_2']
+      @iform[:patient_guardian_mother_work_phone_3] = @recent_iform['patient_guardian_mother_work_phone_3']
+      @iform[:patient_guardian_mother_address_1] = @recent_iform['patient_guardian_mother_address_1']
+      @iform[:patient_guardian_mother_address_2] = @recent_iform['patient_guardian_mother_address_2']
+      @iform[:patient_guardian_mother_address_city] = @recent_iform['patient_guardian_mother_address_city']
+      @iform[:patient_guardian_mother_address_state] = @recent_iform['patient_guardian_mother_address_state']
+      @iform[:patient_guardian_mother_address_zip] = @recent_iform['patient_guardian_mother_address_zip']
+      @iform[:patient_guardian_mother_home_phone_1] = @recent_iform['patient_guardian_mother_home_phone_1']
+      @iform[:patient_guardian_mother_home_phone_2] = @recent_iform['patient_guardian_mother_home_phone_2']
+      @iform[:patient_guardian_mother_home_phone_3] = @recent_iform['patient_guardian_mother_home_phone_3']
+      @iform[:patient_guardian_mother_cell_phone_1] = @recent_iform['patient_guardian_mother_cell_phone_1']
+      @iform[:patient_guardian_mother_cell_phone_2] = @recent_iform['patient_guardian_mother_cell_phone_2']
+      @iform[:patient_guardian_mother_cell_phone_3] = @recent_iform['patient_guardian_mother_cell_phone_3']
+      @iform[:patient_guardian_mother_email] = @recent_iform['patient_guardian_mother_email']
+
+      # Insurance Tab
+      @iform[:insurance_do_you_have_more_than_one_dental_insurance] = @recent_iform['insurance_do_you_have_more_than_one_dental_insurance']
+      @iform[:insurance_second_insurance_company_name] = @recent_iform['insurance_second_insurance_company_name']
+      @iform[:insurance_insured] = @recent_iform['insurance_insured']
+      @iform[:insurance_person_first_name] = @recent_iform['insurance_person_first_name']
+      @iform[:insurance_person_last_name] = @recent_iform['insurance_person_last_name']
+      @iform[:insurance_relation_ship_to_patient] = @recent_iform['insurance_relation_ship_to_patient']
+      @iform[:insurance_employer] = @recent_iform['insurance_employer']
+      @iform[:insurance_company_name] = @recent_iform['insurance_company_name']
+      @iform[:insurance_member_id] = @recent_iform['insurance_member_id']
+      @iform[:insurance_group] = @recent_iform['insurance_group']
+      @iform[:insurance_phone_1] = @recent_iform['insurance_phone_1']
+      @iform[:insurance_phone_2] = @recent_iform['insurance_phone_2']
+      @iform[:insurance_phone_3] = @recent_iform['insurance_phone_3']
+      @iform[:insurance_address_1] = @recent_iform['insurance_address_1']
+      @iform[:insurance_address_2] = @recent_iform['insurance_address_2']
+      @iform[:insurance_address_city] = @recent_iform['insurance_address_city']
+      @iform[:insurance_address_state] = @recent_iform['insurance_address_state']
+      @iform[:insurance_address_zip] = @recent_iform['insurance_address_zip']
+    end
+    @iform.save(:validate => false)
     @appform.save
   end
 
