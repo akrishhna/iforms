@@ -1061,6 +1061,10 @@ ActiveRecord::Schema.define(:version => 20121220043505) do
     t.string   "medical_history_patient_ever_been_hospitalized",                  :limit => 10
     t.string   "dental_history_does_child_brush_teeth_electric_tooth_brush",      :limit => 10
     t.string   "social_history_patient_is",                                       :limit => 20
+    t.string   "insurance_second_insurance_company_name",                         :limit => 50
+    t.string   "dental_history_oral_habits_other_description",                    :limit => 50
+    t.string   "patient_guardian_mother_other_description",                       :limit => 50
+    t.string   "patient_guardian_father_other_description",                       :limit => 50
   end
 
   create_table "medical_appointments", :force => true do |t|
