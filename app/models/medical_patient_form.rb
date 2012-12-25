@@ -93,6 +93,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "Referredby" => @medical_patient_form.referral_name,
       "DateofBirth" => @medical_patient_form.birth_date ? @medical_patient_form.birth_date.strftime('%m-%d-%Y') : '',
       "DateofExam" => @appointment.appointment_date_time ? @appointment.appointment_date_time.strftime('%m-%d-%Y') : '',
+      "DeclineAuthorizationForVoiceMail" => @medical_patient_form.patient_authorization_for_voice_mail ? (@medical_patient_form.patient_authorization_for_voice_mail == 'Yes' ? 'No' : 'Yes') : '',
 
       #medical History tab
       "ReasonForVisit" => @medical_patient_form.medical_history_reason_for_visit_1,
@@ -334,19 +335,19 @@ class MedicalPatientForm < ActiveRecord::Base
       "WasYourColonoscopyNormal" => @medical_patient_form.health_maintenance_colonoscopy_test_results ? (@medical_patient_form.health_maintenance_colonoscopy_test_results == "Normal" ? 'Yes' : 'No') : '',
       "IfColonoscopyWasAbnormalWhatWasFound" => @medical_patient_form.health_maintenance_colonoscopy_test_results == "Abnormal" ? @medical_patient_form.health_maintenance_description_of_abnormal_test_results : '',
 
-      "WhenWasYourLastMammogram" => @medical_patient_form.health_maintenance_most_recent_mammogram,
-      "WhenWasYourLastPapSmear" => @medical_patient_form.health_maintenance_most_recent_pap_smear,
-      "HaveYouEverHadAnAbnormalPapSmearYes" => @medical_patient_form.health_maintenance_abnormal_pap_smear ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? 'Yes' : 'No') : '',
-      "HaveYouEverHadAnAbnormalPapSmearNo" => @medical_patient_form.health_maintenance_abnormal_pap_smear ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? 'No' : 'Yes') : '',
-      "AbnormalPapSmearDate" => (@medical_patient_form.health_maintenance_abnormal_pap_smear ? @medical_patient_form.health_maintenance_abnormal_pap_smear.strftime('%m-%d-%Y') : ''),
-      "HaveYouHadAHysterectomyYes" => @medical_patient_form.health_maintenance_hysterectomy ? (@medical_patient_form.health_maintenance_hysterectomy ? 'Yes' : 'No') : '',
-      "HaveYouHadAHysterectomyNo" => @medical_patient_form.health_maintenance_hysterectomy ? (@medical_patient_form.health_maintenance_hysterectomy ? 'No' : 'Yes') : '',
-      "HysterectomyDate" => (@medical_patient_form.health_maintenance_hysterectomy ? @medical_patient_form.health_maintenance_hysterectomy.strftime('%m-%d-%Y') : ''),
-      "HysterectomyReason" => @medical_patient_form.health_maintenance_why_was_hysterectomy_performed,
+      "WhenWasYourLastMammogram" => @medical_patient_form.sex == 'Female' ? @medical_patient_form.health_maintenance_most_recent_mammogram : '',
+      "WhenWasYourLastPapSmear" => @medical_patient_form.sex == 'Female' ? @medical_patient_form.health_maintenance_most_recent_pap_smear : '',
+      "HaveYouEverHadAnAbnormalPapSmearYes" => @medical_patient_form.sex == 'Female' ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? 'Yes' : 'No') : '') : '',
+      "HaveYouEverHadAnAbnormalPapSmearNo" => @medical_patient_form.sex == 'Female' ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? 'No' : 'Yes') : '') : '',
+      "AbnormalPapSmearDate" => @medical_patient_form.sex == 'Female' ? (@medical_patient_form.health_maintenance_abnormal_pap_smear ? @medical_patient_form.health_maintenance_abnormal_pap_smear.strftime('%m-%d-%Y') : '') : '',
+      "HaveYouHadAHysterectomyYes" => @medical_patient_form.sex == 'Female' ? (@medical_patient_form.health_maintenance_hysterectomy ? (@medical_patient_form.health_maintenance_hysterectomy ? 'Yes' : 'No') : '') : '',
+      "HaveYouHadAHysterectomyNo" => @medical_patient_form.sex == 'Female' ? (@medical_patient_form.health_maintenance_hysterectomy ? (@medical_patient_form.health_maintenance_hysterectomy ? 'No' : 'Yes') : '') : '',
+      "HysterectomyDate" => @medical_patient_form.sex == 'Female' ? (@medical_patient_form.health_maintenance_hysterectomy ? @medical_patient_form.health_maintenance_hysterectomy.strftime('%m-%d-%Y') : '') : '',
+      "HysterectomyReason" => @medical_patient_form.sex == 'Female' ? @medical_patient_form.health_maintenance_why_was_hysterectomy_performed : '',
 
-      "WhenDidYouHaveYourLastDigitalRectalExamAndPSAChecked" => @medical_patient_form.health_maintenance_digital_rectal_exam_and_psa_checked
+      "WhenDidYouHaveYourLastDigitalRectalExamAndPSAChecked" => @medical_patient_form.sex == 'Male' ? @medical_patient_form.health_maintenance_digital_rectal_exam_and_psa_checked : ''
     })
-   # raise @pdftk.fields(form_pdf_path).to_yaml
+    #raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 end
