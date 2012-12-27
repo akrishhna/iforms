@@ -36,7 +36,7 @@ $(function(){
     '#girl_scouts_activity_permission_form_parent_phone_number_during_activity_2, #girl_scouts_activity_permission_form_parent_phone_number_during_activity_3,' +
     '#girl_scouts_activity_permission_form_emergency_contact_phone_number_1, #girl_scouts_activity_permission_form_emergency_contact_phone_number_2,' +
     '#girl_scouts_activity_permission_form_emergency_contact_phone_number_3, #girl_scouts_activity_permission_form_emergency_contact_cell_number_1,' +
-    '#girl_scouts_activity_permission_form_emergency_contact_cell_number_2, #girl_scouts_activity_permission_form_emergency_contact_cell_number_3,').autotab_filter('numeric');
+    '#girl_scouts_activity_permission_form_emergency_contact_cell_number_2, #girl_scouts_activity_permission_form_emergency_contact_cell_number_3').autotab_filter('numeric');
 
 
 
@@ -67,3 +67,4 @@ $(function(){
     '#girl_scouts_activity_permission_form_emergency_contact_address_street').autotab_magic();
 
 });
+
