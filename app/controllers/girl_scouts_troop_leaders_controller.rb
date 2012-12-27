@@ -301,13 +301,21 @@ class GirlScoutsTroopLeadersController < ApplicationController
         @girl_scout = @girl_scouts_permission_form.girls_scout
         permission_form_name = activity_name + '-permission-form-of-id-' + @girl_scout.id.to_s + "-sp_id-#{session[:user_service_provider]}" rescue ''
         permission_form_path = "#{PDFFILES_PATH}#{permission_form_name}.pdf"
-        if session[:user_service_provider] == 2
-          GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-        elsif session[:user_service_provider] == 3
-          GirlScoutsActivityPermissionForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-        else
-        end
+
+        @service_provider = ServiceProvider.find(session[:user_service_provider])
+        @fields = GirlScoutsFields.get_all_fields(@service_provider.id)
+        form_pdf_path = @service_provider.form_pdf_path
+
+        GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path,form_pdf_path,@fields)
+        #if session[:user_service_provider] == 2
+        #  GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+        #elsif session[:user_service_provider] == 3
+        #  GirlScoutsActivityPermissionForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+        #else
+        #end
+
         @files << Rails.root.join("#{PDFFILES_PATH}#{permission_form_name}.pdf")
+
       end
     end
     if !@files.empty?
