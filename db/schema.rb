@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220043505) do
+ActiveRecord::Schema.define(:version => 20121227095342) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -412,8 +412,8 @@ ActiveRecord::Schema.define(:version => 20121220043505) do
     t.integer  "emergency_evening_phone_3"
     t.text     "email_notification"
     t.boolean  "status"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
     t.integer  "service_provider_id"
     t.string   "mode_of_transportation"
     t.string   "leader_advisor_1_first_name"
@@ -446,6 +446,11 @@ ActiveRecord::Schema.define(:version => 20121220043505) do
     t.string   "troop_leader_emergency_contact_name_address_state"
     t.string   "troop_leader_emergency_contact_name_address_country"
     t.string   "troop_leader_emergency_contact_name_address_zip"
+    t.string   "form_name",                                           :limit => 50
+    t.string   "date_received",                                       :limit => 50
+    t.string   "date_submitted",                                      :limit => 50
+    t.string   "attending",                                           :limit => 50
+    t.string   "program_year",                                        :limit => 50
   end
 
   create_table "girl_scouts_activity_permission_forms", :force => true do |t|
@@ -514,6 +519,15 @@ ActiveRecord::Schema.define(:version => 20121220043505) do
     t.integer  "emergency_contact_address_zip"
     t.string   "emergency_contact_relationship_to_participant"
     t.text     "medications"
+  end
+
+  create_table "girl_scouts_fields", :force => true do |t|
+    t.string   "tab_name"
+    t.string   "field_name"
+    t.boolean  "central_texas"
+    t.boolean  "diamonds"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "girls_scouts", :force => true do |t|
@@ -1458,9 +1472,12 @@ ActiveRecord::Schema.define(:version => 20121220043505) do
     t.string   "name"
     t.string   "title"
     t.string   "description"
-    t.boolean  "status",      :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "status",                  :default => true
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "mapping_field_name"
+    t.string   "form_pdf_path"
+    t.string   "read_only_form_pdf_path"
   end
 
   create_table "sessionstores", :force => true do |t|

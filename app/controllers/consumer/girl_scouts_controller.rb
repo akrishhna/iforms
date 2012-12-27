@@ -32,6 +32,8 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scouts_permission_form = GirlScoutsActivityPermissionForm.find_by_id(params[:id])
     @activity = @girl_scouts_permission_form.girl_scouts_activity
     @girl_scout = @girl_scouts_permission_form.girls_scout
+    @service_provider = ServiceProvider.find(@activity.service_provider_id)
+    @fields = GirlScoutsFields.get_all_fields(@service_provider.id)
     if @girl_scouts_permission_form.status == "Submitted" || @girl_scouts_permission_form.status == "Updated"
       @girl_scouts_permission_form.status = "Submitted"
     else
@@ -88,12 +90,20 @@ class Consumer::GirlScoutsController < ConsumerController
     @girl_scout = @girl_scouts_permission_form.girls_scout
     activity_name = @activity.activity_name.gsub(' ', '-') + '-permission-form-of-id-' + @girl_scout.id.to_s + '-sp_id-' + @activity.service_provider_id.to_s
     permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-    if @activity.service_provider_id == 2
-      GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-    elsif @activity.service_provider_id == 3
-      GirlScoutsActivityPermissionForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
-    else
-    end
+
+    @service_provider = ServiceProvider.find(@activity.service_provider_id)
+    @fields = GirlScoutsFields.get_all_fields(@service_provider.id)
+    form_pdf_path = @service_provider.form_pdf_path
+
+    GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path,form_pdf_path,@fields)
+
+    #if @activity.service_provider_id == 2
+    #  GirlScoutsActivityPermissionForm.activity_parent_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+    #elsif @activity.service_provider_id == 3
+    #  GirlScoutsActivityPermissionForm.activity_parent_diamonds_permission_form_pdf_generater(@activity, @girl_scouts_permission_form, permission_form_path)
+    #else
+    #end
+
     send_file permission_form_path,
               :filename => "#{activity_name}.pdf",
               :disposition => "inline",

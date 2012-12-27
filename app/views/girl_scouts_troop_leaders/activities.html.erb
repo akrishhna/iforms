@@ -3,16 +3,19 @@
   <%= link_to "Permission Forms", permission_forms_girl_scouts_troop_leaders_path %> <strong> | </strong>
   <%= link_to "Roster", roster_girl_scouts_troop_leaders_path %>
 </div>
+
 <div>&nbsp;</div>
+
 <div>
   <p style="margin: 0">Select an Activity</p>
-  <%#= debug @girls_scouts_activities%>
   <%= select_tag("girls_scouts_activities", options_for_select(@girls_scouts_activities.collect { |a| [truncate(a[0], :length => 30), a[1], :title => a[0]] }, session[:selected_activity_id]), :include_blank => true) %>
   <%= link_to "Create New Activity", "#", :class => "btn btn-primary create_new_activity" %> &nbsp;
   <%= link_to "Delete This Activity", "#delete_activity_alert_box", :class => "btn btn-danger delete_activity" %> &nbsp;
   <%= link_to "View This Permission Form PDF", @girls_activity.new_record? ? activity_permission_form_pdf_path(:activity_id => 'new') : activity_permission_form_pdf_path(:activity_id => @girls_activity.id), :class => "btn btn-info view_permission_form_btn", :target => '_blank' %>
 </div>
+
 <div class="clear"></div>
+
 <%= form_for @girls_activity, :url => "/create_activity", :html => {:class => 'form-horizontal girl_scouts_activity_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
   <%= f.hidden_field :service_provider_id %>
@@ -36,49 +39,48 @@
   </ul>
   <div class="tab-content">
   <div class="tab-pane active" id="activity">
-    <div class="control-group">
+
+    <div class="control-group + <%= @fields['Activity Name'] ? '' : 'hide' %>">
       <%= f.label :activity_name, "Name", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_name, :style => "width:400px", :placeholder => params[:id] == 'new' ? 'New Activity Name' : '' %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['Activity Location'] ? '' : 'hide' %>">
       <%= f.label :activity_location, "Location", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_location, :style => "width:400px" %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['Activity Start Date'] ? '' : 'hide' %>">
       <%= f.label :activity_date_begin, "Date Begin", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_date_begin, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_begin %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['Activity End Date'] ? '' : 'hide' %>">
       <%= f.label :activity_date_end, "Date End", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_date_end, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_end %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['Signed Permission Forms Due Date'] ? '' : 'hide' %>">
       <%= f.label :activity_signed_permission_due_date, "Signed Permission Form Due Date", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_signed_permission_due_date, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_signed_permission_due_date %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['We Will Leave From'] ? '' : 'hide' %>">
       <%= f.label :activity_leave_from, "We Will Leave from", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_leave_from, :style => "width:400px" %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['We Will Leave At'] ? '' : 'hide' %>">
       <%= f.label :activity_leave_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
-        <%#= f.text_field :activity_leave_time_hh, :style => "width:30px;text-align:right", :placeholder => "HH",:id => 'activity_leave_time_hh' %>
         <%= f.select :activity_leave_time_hh, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
         <strong> : </strong>
-        <%#= f.text_field :activity_leave_time_mm, :style => "width:30px;text-align:right", :placeholder => "MM",:id => 'activity_leave_time_mm' %> &nbsp;
         <%= f.select :activity_leave_time_mm, {"00" => "0", "05" => "5", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :activity_leave_time_am_pm, "AM", :checked => 'checked' %> AM
@@ -86,23 +88,19 @@
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :activity_leave_time_am_pm, "PM" %> PM
         <% end %>
-
-        <%#= f.select :activity_leave_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['We Will Return To'] ? '' : 'hide' %>">
       <%= f.label :activity_return_to, "We Will Return To", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_return_to, :style => "width:400px" %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['We Will Return At'] ? '' : 'hide' %>">
       <%= f.label :activity_return_time_hh, "At This Time", :class => 'control-label' %>
       <div class="controls">
-        <%#= f.text_field :activity_return_time_hh, :style => "width:30px;text-align: right", :placeholder => "HH",:id => 'activity_return_time_hh'%>
         <%= f.select :activity_return_time_hh, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => "12"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
         <strong> : </strong>
-        <%#= f.text_field :activity_return_time_mm, :style => "width:30px;text-align: right", :placeholder => "MM",:id => 'activity_return_time_mm' %> &nbsp;
         <%= f.select :activity_return_time_mm, {"00" => "0", "05" => "5", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :activity_return_time_am_pm, "AM", :checked => 'checked' %> AM
@@ -110,10 +108,9 @@
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :activity_return_time_am_pm, "PM" %> PM
         <% end %>
-        <%#= f.select :activity_return_time_am_pm, options_for_select(["AM", "PM"]), {:selected => "AM"}, {:style => 'width:60px;'} %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group + <%= @fields['Activity Cost'] ? '' : 'hide' %>">
       <%= f.label :activity_cost_dollars, "Cost", :class => 'control-label' %>
       <div class="controls">
         $ <%= text_field_tag :activity_cost_dollars, f.object.activity_cost_dollars, :style => "width:100px;text-align: right", :placeholder => "Dollars", :id => 'activity_cost_dollars' %>
@@ -122,47 +119,40 @@
         <%= f.text_field :activity_cost_cents, :value => f.object.activity_cost_cents.to_s.rjust(2, "0"), :style => "width:20px;text-align: right", :placeholder => "", :id => 'activity_cost_cents' %>
       </div>
     </div>
-    <% if session[:user_service_provider] == 2 %>
-      <div class="control-group">
-        <%= f.label :girls_wear_checkbox, "Girls Should Wear", :class => 'control-label' %>
-        <div class="controls">
-          <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
-            <%= f.check_box :girls_wear_checkbox %>&nbsp;Uniforms
-          <% end %>
-        </div>
+
+    <div class="control-group + <%= @fields['Girls Should Wear Uniforms'] ? '' : 'hide' %>">
+      <%= f.label :girls_wear_checkbox, "Girls Should Wear", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+          <%= f.check_box :girls_wear_checkbox %>&nbsp;Uniforms
+        <% end %>
       </div>
-      <div class="control-group">
-        <%= f.label :activity_girls_wear_others, "Girls Should Wear - Other", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :activity_girls_wear_others, :style => 'width:400px' %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Girls Should Wear Other'] ? '' : 'hide' %>">
+      <%= f.label :activity_girls_wear_others, "Girls Should Wear - Other", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_girls_wear_others, :style => 'width:400px' %>
       </div>
-      <div class="control-group">
-        <%= f.label :activity_girls_bring, "Girls Should Bring", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :activity_girls_bring, :style => 'width:400px' %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Girls Should Bring'] ? '' : 'hide' %>">
+      <%= f.label :activity_girls_bring, "Girls Should Bring", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_girls_bring, :style => 'width:400px' %>
       </div>
-      <div class="control-group">
-        <%= f.label :activity_equipment, "Equipment Needed", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :activity_equipment, :style => 'width:400px' %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Mode of Transportation'] ? '' : 'hide' %>">
+      <%= f.label :mode_of_transportation, "Mode of Transportation", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :mode_of_transportation, :style => 'width:400px' %>
       </div>
-    <% elsif session[:user_service_provider] == 3 %>
-      <div class="control-group">
-        <%= f.label :mode_of_transportation, "Mode of Transportation", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :mode_of_transportation, :style => 'width:400px' %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Equipment Needed'] ? '' : 'hide' %>">
+      <%= f.label :activity_equipment, "Equipment Needed", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_equipment, :style => 'width:400px' %>
       </div>
-      <div class="control-group">
-        <%= f.label :activity_equipment, "Equipment Needed", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :activity_equipment, :style => 'width:400px' %>
-        </div>
-      </div>
-    <% end %>
+    </div>
+
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "1" do %>
         Next&nbsp;<i class="icon-chevron-right icon-white"></i>
@@ -170,33 +160,25 @@
     </div>
   </div>
   <div class="tab-pane" id="troop">
-    <% if session[:user_service_provider] == 2 %>
-      <div class="control-group">
-        <%= f.label :troop_service_unit, "Service Unit", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.select :troop_service_unit, options_for_select(StaticData.service_unit, f.object.troop_service_unit), {:include_blank => true}, {:style => 'width:400px;'} %>
-        </div>
+
+    <div class="control-group + <%= @fields['Service Unit'] ? '' : 'hide' %>">
+      <%= f.label :troop_service_unit, "Service Unit", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :troop_service_unit, options_for_select(StaticData.service_unit, f.object.troop_service_unit), {:include_blank => true}, {:style => 'width:400px;'} %>
       </div>
-      <div class="control-group">
-        <%= f.label :troop_pal, "PAL", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.select :troop_pal, options_for_select(StaticData.pal, f.object.troop_pal), :include_blank => true %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['PAL'] ? '' : 'hide' %>">
+      <%= f.label :troop_pal, "PAL", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :troop_pal, options_for_select(StaticData.pal, f.object.troop_pal), :include_blank => true %>
       </div>
-      <div class="control-group">
-        <%= f.label :troop_number, "Troop Number", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :troop_number, :class => "input-small" %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Number'] ? '' : 'hide' %>">
+      <%= f.label :troop_number, "Troop Number", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_number, :class => "input-small" %>
       </div>
-    <% elsif session[:user_service_provider] == 3 %>
-      <div class="control-group">
-        <%= f.label :troop_number, "Troop Number", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :troop_number, :class => "input-small" %>
-        </div>
-      </div>
-    <% end %>
+    </div>
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "0" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -207,92 +189,105 @@
     </div>
   </div>
   <div class="tab-pane" id="troop_leader">
-    <% if session[:user_service_provider] == 2 %>
-      <div class="control-group">
-        <%= f.label :leader_first_name, "Name", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_first_name, :placeholder => "First Name", :class => "input-small" %>
-          <%= f.text_field :leader_last_name, :placeholder => "Last Name", :class => "input-small" %>
-        </div>
+
+    <div class="control-group + <%= @fields['Troop Leader Name'] ? '' : 'hide' %>">
+      <%= f.label :leader_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :leader_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_email, "Email", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.email_field :leader_email, :style => 'width:400px' %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader Email Address'] ? '' : 'hide' %>">
+      <%= f.label :leader_email, "Email", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :leader_email, :style => 'width:400px' %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_day_phone_1, "Day Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_day_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_day_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_day_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader Day Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_day_phone_1, "Day Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_day_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_day_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_day_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_evening_phone_1, "Evening Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_evening_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_evening_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader Evening Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_evening_phone_1, "Evening Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_evening_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_evening_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_cell_phone_1, "Cell Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_cell_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_cell_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_cell_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader Cell Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_cell_phone_1, "Cell Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_cell_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_cell_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_cell_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-    <% elsif session[:user_service_provider] == 3 %>
-      <div class="control-group">
-        <%= f.label :leader_advisor_1_first_name, "Name", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_advisor_1_first_name, :placeholder => "First Name", :class => "input-small" %>
-          <%= f.text_field :leader_advisor_1_last_name, :placeholder => "Last Name", :class => "input-small" %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader advisor 1 Name'] ? '' : 'hide' %>">
+      <%= f.label :leader_advisor_1_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_advisor_1_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :leader_advisor_1_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_advisor_1_phone_1, "Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_advisor_1_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_1_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_1_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader advisor 1 Day Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_advisor_1_phone_1, "Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_advisor_1_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_1_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_1_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_advisor_1_cell_1, "Cell", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_advisor_1_cell_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_1_cell_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_1_cell_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader advisor 1 Cell Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_advisor_1_cell_1, "Cell", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_advisor_1_cell_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_1_cell_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_1_cell_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_advisor_2_first_name, "Name", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_advisor_2_first_name, :placeholder => "First Name", :class => "input-small" %>
-          <%= f.text_field :leader_advisor_2_last_name, :placeholder => "Last Name", :class => "input-small" %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader advisor 2 Name'] ? '' : 'hide' %>">
+      <%= f.label :leader_advisor_2_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_advisor_2_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :leader_advisor_2_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_advisor_2_phone_1, "Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_advisor_2_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_2_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_2_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader advisor 2 Day Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_advisor_2_phone_1, "Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_advisor_2_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_2_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_2_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :leader_advisor_2_cell_1, "Cell", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :leader_advisor_2_cell_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_2_cell_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3  %> -
-          <%= f.text_field :leader_advisor_2_cell_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4  %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader advisor 2 Cell Phone'] ? '' : 'hide' %>">
+      <%= f.label :leader_advisor_2_cell_1, "Cell", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :leader_advisor_2_cell_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_2_cell_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :leader_advisor_2_cell_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-    <% end %>
+    </div>
+
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "1" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -303,72 +298,76 @@
     </div>
   </div>
   <div class="tab-pane" id="troop_emergency_contact">
-    <% if session[:user_service_provider] == 2 %>
-      <div class="control-group">
-        <%= f.label :emergency_first_name, "Name", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :emergency_first_name, :placeholder => "First Name", :class => "input-small" %>
-          <%= f.text_field :emergency_last_name, :placeholder => "Last Name", :class => "input-small" %>
-        </div>
+
+    <div class="control-group + <%= @fields['Troop Emergency Name'] ? '' : 'hide' %>">
+      <%= f.label :emergency_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :emergency_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
-      <div class="control-group">
-        <%= f.label :emergency_day_phone_1, "Day Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :emergency_day_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
-          <%= f.text_field :emergency_day_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
-          <%= f.text_field :emergency_day_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Emergency Contact Name'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_emergency_contact_first_name, "Name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_leader_emergency_contact_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :troop_leader_emergency_contact_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
-      <div class="control-group">
-        <%= f.label :emergency_evening_phone_1, "Evening Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :emergency_evening_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
-          <%= f.text_field :emergency_evening_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %> -
-          <%= f.text_field :emergency_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Emergency Day Phone'] ? '' : 'hide' %>">
+      <%= f.label :emergency_day_phone_1, "Day Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_day_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :emergency_day_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :emergency_day_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-    <% elsif session[:user_service_provider] == 3 %>
-      <div class="control-group">
-        <%= f.label :troop_leader_emergency_contact_first_name, "Name", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :troop_leader_emergency_contact_first_name, :placeholder => "First Name", :class => "input-small" %>
-          <%= f.text_field :troop_leader_emergency_contact_last_name, :placeholder => "Last Name", :class => "input-small" %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Emergency Evening Phone'] ? '' : 'hide' %>">
+      <%= f.label :emergency_evening_phone_1, "Evening Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :emergency_evening_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :emergency_evening_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :emergency_evening_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :troop_leader_emergency_contact_phone_number_1, "Phone", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :troop_leader_emergency_contact_phone_number_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
-          -
-          <%= f.text_field :troop_leader_emergency_contact_phone_number_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
-          -
-          <%= f.text_field :troop_leader_emergency_contact_phone_number_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
-        </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Troop Emergency Contact Phone Number'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_emergency_contact_phone_number_1, "Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_leader_emergency_contact_phone_number_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :troop_leader_emergency_contact_phone_number_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :troop_leader_emergency_contact_phone_number_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :troop_leader_emergency_contact_cell_number_1, "Cell", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :troop_leader_emergency_contact_cell_number_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
-          -
-          <%= f.text_field :troop_leader_emergency_contact_cell_number_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
-          -
-          <%= f.text_field :troop_leader_emergency_contact_cell_number_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Emergency Contact Cell Phone'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_emergency_contact_cell_number_1, "Cell", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_leader_emergency_contact_cell_number_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :troop_leader_emergency_contact_cell_number_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :troop_leader_emergency_contact_cell_number_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
-      <div class="control-group">
-        <%= f.label :troop_leader_emergency_contact_name_address_street, "Address", :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :troop_leader_emergency_contact_name_address_street, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
-          <%= f.text_field :troop_leader_emergency_contact_name_address_line, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
-          <br>
-          <%= f.text_field :troop_leader_emergency_contact_name_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
-          <%#= f.text_field :troop_leader_emergency_contact_name_address_state, :placeholder => "Country", :style => 'margin-bottom:10px;' %>
-          <br>
-          <%= f.select :troop_leader_emergency_contact_name_address_state, options_for_select(StaticData.state, f.object.troop_leader_emergency_contact_name_address_state), :include_blank => true %> &nbsp;
-          <%= f.text_field :troop_leader_emergency_contact_name_address_zip, :placeholder => "Postal / Zip Code" %>
-        </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Emergency Contact Address'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_emergency_contact_name_address_street, "Address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_leader_emergency_contact_name_address_street, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
+        <%= f.text_field :troop_leader_emergency_contact_name_address_line, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
+        <br>
+        <%= f.text_field :troop_leader_emergency_contact_name_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
+        <%#= f.text_field :troop_leader_emergency_contact_name_address_state, :placeholder => "Country", :style => 'margin-bottom:10px;' %>
+        <br>
+        <%= f.select :troop_leader_emergency_contact_name_address_state, options_for_select(StaticData.state, f.object.troop_leader_emergency_contact_name_address_state), :include_blank => true %> &nbsp;
+        <%= f.text_field :troop_leader_emergency_contact_name_address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
-    <% end %>
+    </div>
+
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "2" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -379,7 +378,8 @@
     </div>
   </div>
   <div class="tab-pane" id="send_notification_email">
-    <% if session[:user_service_provider] == 2 %>
+
+    <% if @service_provider.mapping_field_name == 'central_texas' %>
       <% if @girls_activity.activity_name.to_s == "" ||
         @girls_activity.activity_signed_permission_due_date.to_s == "" ||
         @girls_activity.leader_first_name.to_s == "" ||
@@ -388,7 +388,8 @@
       <% else %>
         <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false, "data-loading-text" => "loading" %>
       <% end %>
-    <% elsif session[:user_service_provider] == 3 %>
+
+    <% elsif @service_provider.mapping_field_name == 'diamonds' %>
       <% if @girls_activity.activity_name.to_s == "" ||
         @girls_activity.activity_signed_permission_due_date.to_s == "" ||
         @girls_activity.leader_advisor_1_first_name.to_s == "" ||
@@ -397,10 +398,11 @@
       <% else %>
         <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false, "data-loading-text" => "loading" %>
       <% end %>
+
     <% end %>
     <span style="margin-left: 90px;background-color:#d3d3d3;" class="mail_success_notification hide"><span class="mail_counter"><%= @counter %></span>&nbsp;&nbsp;Messages sent</span>
     <br>
-    <%#= f.text_area :email_notification, :rows => 5, :cols => 100 %> <br>
+    <br>
 
     <div class='notification_email_to_parent_text radius-border'>
       <%= render :partial => 'parents_email_notification', :locals => {:girls_activity => @girls_activity, :girl_scout => @girl_scout} %>
@@ -418,7 +420,8 @@
 
 <div id="delete_activity_alert_box" class="hide" style="width:200px;text-align: center;">
   <p style="font-size:18px;margin: 10px 0 15px 0; ">
-    Delete <span id="delete_activity_name"><%= @girls_activity.activity_name ? @girls_activity.activity_name : "Activity #"+@girls_activity.id.to_s %></span>
+    Delete
+    <span id="delete_activity_name"><%= @girls_activity.activity_name ? @girls_activity.activity_name : "Activity #"+@girls_activity.id.to_s %></span>
     Activity?</p>
   <%= link_to "Yes", "#", :class => "btn btn-danger delete_activity_yes", :id => "delete_activity_yes" %>&nbsp;&nbsp;
   <%= link_to "No", "#", :class => "btn btn-primary", :id => "delete_activity_no", :onclick => "$.fancybox.close();" %>

@@ -59,6 +59,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def activities
     @girls_activity = GirlScoutsActivity.new()
+    @service_provider = ServiceProvider.find(session[:user_service_provider])
+   @fields = GirlScoutsFields.get_all_fields(@service_provider.id)
     if params[:id] == 'new'
       session[:selected_activity_id] = params[:id]
       @recent_activity = current_user.girl_scouts_activities.where("service_provider_id=?", session[:user_service_provider]).order('updated_at').last
@@ -197,28 +199,38 @@ class GirlScoutsTroopLeadersController < ApplicationController
 
   def activity_permission_form
     if params[:activity_id] == 'new'
-      if session[:user_service_provider] == 2
-        form_path = CENTRAL_TEXAS_READ_ONLY_FORM_PATH
-      elsif session[:user_service_provider] == 3
-        form_path = DIAMONDS_READ_ONLY_FORM_PATH
-      else
-      end
+      #if session[:user_service_provider] == 2
+      #  form_path = CENTRAL_TEXAS_READ_ONLY_FORM_PATH
+      #elsif session[:user_service_provider] == 3
+      #  form_path = DIAMONDS_READ_ONLY_FORM_PATH
+      #else
+      #end
+      @service_provider = ServiceProvider.find(session[:user_service_provider])
+      form_path = @service_provider.read_only_form_pdf_path
       send_file form_path,
                 :filename => "Parent_Permission_iForms.pdf",
                 :disposition => "inline",
                 :type => "application/pdf"
+
     elsif params[:activity_id].present?
-      # @activity = current_user.girl_scouts_activities.find(params[:activity_id])
+
       @activity = current_user.girl_scouts_activities.find_by_id_and_service_provider_id(params[:activity_id], session[:user_service_provider])
       activity_name = @activity.activity_name.gsub(' ', '-') + "-sp_id-#{session[:user_service_provider]}"
       activity_name = "Activity-#{@activity.id}" + "-sp_id-#{session[:user_service_provider]}" if !activity_name.present?
       permission_form_path = "#{PDFFILES_PATH}#{activity_name}.pdf"
-      if session[:user_service_provider] == 2
-        GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
-      elsif session[:user_service_provider] == 3
-        GirlScoutsActivity.activity_permission_diamonds_form_pdf_generater(@activity, permission_form_path)
-      else
-      end
+
+      @service_provider = ServiceProvider.find(@activity.service_provider_id)
+      @fields = GirlScoutsFields.get_all_fields(@service_provider.id)
+      form_pdf_path = @service_provider.form_pdf_path
+
+      GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path,form_pdf_path,@fields)
+
+      #if session[:user_service_provider] == 2
+      #  GirlScoutsActivity.activity_permission_form_pdf_generater(@activity, permission_form_path)
+      #elsif session[:user_service_provider] == 3
+      #  GirlScoutsActivity.activity_permission_diamonds_form_pdf_generater(@activity, permission_form_path)
+      #else
+      #end
       send_file permission_form_path,
                 :filename => "#{activity_name}.pdf",
                 :disposition => "inline",
