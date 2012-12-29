@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     elsif service_provider.id == 1 || service_provider.id == 4 || service_provider.id == 5 || service_provider.id == 7
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
-    elsif service_provider.id == 2 || service_provider.id == 3
+    elsif service_provider.id == 2 || service_provider.id == 3  || service_provider.id == 8
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
     elsif service_provider.id == 6
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'

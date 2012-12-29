@@ -63,6 +63,9 @@ $(document).ready(function(){
     else if($(this).val() == 7){
       window.location = '/doctor/appointments?sp_id=7'
     }
+    else if($(this).val() == 8){
+      window.location = '/girl_scouts_troop_leaders?sp_id=8'
+    }
     else{
       window.location = '/'
     }
