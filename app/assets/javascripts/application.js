@@ -66,6 +66,9 @@ $(document).ready(function(){
     else if($(this).val() == 8){
       window.location = '/girl_scouts_troop_leaders?sp_id=8'
     }
+    else if($(this).val() == 9){
+      window.location = '/girl_scouts_troop_leaders?sp_id=9'
+    }
     else{
       window.location = '/'
     }
