@@ -205,7 +205,7 @@
       <%= f.text_field :act_in_my_behalf_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
       <%#= f.text_field :emergency_contact_address_country, :placeholder => "country", :style => 'margin-bottom:10px;' %>
       <br>
-      <%= f.select :act_in_my_behalf_address_state, options_for_select(StaticData.state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
+      <%= f.select :act_in_my_behalf_address_state, options_for_select(StaticData.state, f.object.act_in_my_behalf_address_state), :include_blank => true %> &nbsp;
       <%= f.text_field :act_in_my_behalf_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
@@ -327,7 +327,7 @@
       <br>
       <%= f.text_field :gapf_parent_1_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
       <br>
-      <%= f.select :gapf_parent_1_address_state, options_for_select(StaticData.state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
+      <%= f.select :gapf_parent_1_address_state, options_for_select(StaticData.state, f.object.gapf_parent_1_address_state), :include_blank => true %> &nbsp;
       <%= f.text_field :gapf_parent_1_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
@@ -391,7 +391,7 @@
       <br>
       <%= f.text_field :gapf_parent_2_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
       <br>
-      <%= f.select :gapf_parent_2_address_state, options_for_select(StaticData.state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
+      <%= f.select :gapf_parent_2_address_state, options_for_select(StaticData.state, f.object.gapf_parent_2_address_state), :include_blank => true %> &nbsp;
       <%= f.text_field :gapf_parent_2_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
