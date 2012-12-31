@@ -1,5 +1,5 @@
 class CreateGirlScoutsFields < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :girl_scouts_fields do |t|
       t.string :tab_name
       t.string :field_name
@@ -8,8 +8,8 @@ class CreateGirlScoutsFields < ActiveRecord::Migration
 
       t.timestamps
     end
-    # generating fields of central texas and diamonds
 
+    # generating fields of central texas and diamonds
     GirlScoutsFields.create({:field_name => 'Form Name'})
     GirlScoutsFields.create({:field_name => 'Date Received'})
     GirlScoutsFields.create({:field_name => 'Date Submitted'})
@@ -82,7 +82,9 @@ class CreateGirlScoutsFields < ActiveRecord::Migration
     GirlScoutsFields.create({:tab_name => 'Parent Permission',:field_name => 'Address',:central_texas => false, :diamonds => true})
     GirlScoutsFields.create({:tab_name => 'Parent Permission',:field_name => 'Relationship To Patient',:central_texas => false, :diamonds => true})
     GirlScoutsFields.create({:tab_name => 'Parent Permission',:field_name => 'Medications',:central_texas => false, :diamonds => true})
+  end
 
-
+  def self.down
+    drop_table :girl_scouts_fields
   end
 end
