@@ -128,6 +128,12 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
     # form_pdf_path = "#{CENTRAL_TEXAS_FORM_PATH}"
 
+    if !@activity.activity_cost_cents.nil?
+      @cents = @activity.activity_cost_cents <= 9 ? ('0' + @activity.activity_cost_cents.to_s) : @activity.activity_cost_cents.to_s
+    else
+      @cents = '00'
+    end
+
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
 
