@@ -2,7 +2,9 @@ class GirlScoutsActivity < ActiveRecord::Base
   belongs_to :user
   has_many :girl_scouts_activity_permission_forms, :dependent => :destroy
 
-  validates_presence_of :activity_name, :activity_signed_permission_due_date #,:leader_first_name,:leader_last_name
+  validates_presence_of :activity_name, :activity_signed_permission_due_date
+
+  #,:leader_first_name,:leader_last_name
   # validates_presence_of :activity_name,:activity_location,:activity_date_begin,:activity_date_end,:activity_signed_permission_due_date,:activity_leave_from,:activity_leave_time_hh,:activity_leave_time_mm,:activity_leave_time_am_pm,:activity_return_to,:activity_return_time_hh,:activity_return_time_mm,:activity_return_time_am_pm,:activity_cost_dollars,:activity_cost_cents
   # validates_presence_of :troop_service_unit,:troop_pal,:troop_number
   # validates_presence_of :leader_first_name,:leader_last_name,:leader_day_phone_1,:leader_day_phone_2,:leader_day_phone_3
@@ -95,6 +97,7 @@ class GirlScoutsActivity < ActiveRecord::Base
   #  # raise @pdftk.fields(form_pdf_path).to_yaml
   #end
 
+
   def self.activity_permission_form_pdf_generater(activity, permission_form_path, form_pdf_path, fields)
 
     @activity = activity
@@ -116,17 +119,20 @@ class GirlScoutsActivity < ActiveRecord::Base
       "ActivityName" => @fields['Activity Name'] ? @activity.activity_name : '',
 
       "ActivityLocation" => @fields['Activity Location'] ? @activity.activity_location : '',
+      "ActivityLocationPhone" => @fields['Activity Location Phone Number'] ? (@activity.activity_location_phone_1.to_s + '-' + @activity.activity_location_phone_2.to_s + '-' + @activity.activity_location_phone_3.to_s) : '',
 
       "ActivityDateBeginMonth" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[1] : '',
       "ActivityDateBeginDay" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[2] : '',
       "ActivityDateBeginYear" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[0] : '',
-      "ActivityDate" => @fields['Activity Start Date'] ? @activity.activity_date_begin : '',
+      "ActivityDate" => @fields['Activity Start Date'] ? @activity.activity_date_begin.strftime('%m-%d-%Y') : '',
 
       "ActivityDateEndMonth" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[1] : '',
       "ActivityDateEndDay" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[2] : '',
       "ActivityDateEndYear" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[0] : '',
 
       "SignedPermissionFormDueDate" => @fields['Signed Permission Forms Due Date'] ? (@activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '') : '',
+
+      "ActivityTime" => @fields['Activity Time'] ? (@activity.activity_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_time_am_pm) : '',
 
       "WeWillLeaveFrom" => @fields['We Will Leave From'] ? @activity.activity_leave_from : '',
       "WeWillLeaveFromTime" => @fields['We Will Leave At'] ? (@activity.activity_leave_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0')) : '',
@@ -146,7 +152,10 @@ class GirlScoutsActivity < ActiveRecord::Base
       "GirlsShouldWearUniforms" => @fields['Girls Should Wear Uniforms'] ? (@activity.girls_wear_checkbox ? "Yes" : "Off") : '',
       "GirlsShouldWearOther" => @fields['Girls Should Wear Other'] ? @activity.activity_girls_wear_others : '',
       "GirlsShouldBring" => @fields['Girls Should Bring'] ? @activity.activity_girls_bring : '',
+
       "ModeOfTransportation" => @fields['Mode of Transportation'] ? @activity.mode_of_transportation : '',
+
+      "AdultsAccompanyingGirls" => @fields['Adults Accompanying Girls'] ? @activity.adults_accompanying_girls : '',
 
       "EquipmentNeeded" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
       "OtherEquipmentOrClothing" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
@@ -161,6 +170,7 @@ class GirlScoutsActivity < ActiveRecord::Base
 
       "TroopLeaderName" => @fields['Troop Leader Name'] ? (@activity.leader_first_name + " " + @activity.leader_last_name) : '',
       "TroopLeaderEmailAddress" => @fields['Troop Leader Email Address'] ? @activity.leader_email : '',
+      "TroopLeaderPhoneNumber" => @fields['Troop Leader Phone'] ? (@activity.troop_leader_phone_1.to_s + '-' + @activity.troop_leader_phone_2.to_s + '-' + @activity.troop_leader_phone_3.to_s) : '',
       "TroopLeaderDayPhoneAreaCode" => @fields['Troop Leader Day Phone'] ? @activity.leader_day_phone_1 : '',
       "TroopLeaderDayPhoneLocalNumber" => @fields['Troop Leader Day Phone'] ? (@activity.leader_day_phone_2.to_s + '-' + @activity.leader_day_phone_3.to_s) : '',
       "TroopLeaderEveningPhoneAreaCode" => @fields['Troop Leader Evening Phone'] ? @activity.leader_evening_phone_1 : '',
@@ -193,6 +203,7 @@ class GirlScoutsActivity < ActiveRecord::Base
       "ProgramYearTo" => @fields['Program Year Start'] ? (@activity.activity_date_begin ? (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0].to_i + 1 : @activity.activity_date_begin.to_s.split("-")[0] : '') : '',
 
     })
+    #raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 

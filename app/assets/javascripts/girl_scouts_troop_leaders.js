@@ -200,7 +200,9 @@ $(function () {
 
   $('#girls_scouts_activities option:first').hide();
 
-  $('#girl_scouts_activity_leader_day_phone_1, #girl_scouts_activity_leader_day_phone_2, #girl_scouts_activity_leader_day_phone_3,' +
+  $('#girl_scouts_activity_activity_location_phone_1, #girl_scouts_activity_activity_location_phone_2, #girl_scouts_activity_activity_location_phone_3,' +
+    '#girl_scouts_activity_troop_leader_phone_1, #girl_scouts_activity_troop_leader_phone_2, #girl_scouts_activity_troop_leader_phone_3,' +
+    '#girl_scouts_activity_leader_day_phone_1, #girl_scouts_activity_leader_day_phone_2, #girl_scouts_activity_leader_day_phone_3,' +
     '#girl_scouts_activity_leader_evening_phone_1, #girl_scouts_activity_leader_evening_phone_2, #girl_scouts_activity_leader_evening_phone_3,' +
     '#girl_scouts_activity_leader_cell_phone_1, #girl_scouts_activity_leader_cell_phone_2, #girl_scouts_activity_leader_cell_phone_3,' +
     '#girl_scouts_activity_emergency_day_phone_1, #girl_scouts_activity_emergency_day_phone_2, #girl_scouts_activity_emergency_day_phone_3,' +
@@ -214,6 +216,10 @@ $(function () {
     '#girl_scouts_activity_troop_leader_emergency_contact_cell_number_2, #girl_scouts_activity_troop_leader_emergency_contact_cell_number_3').autotab_filter('numeric');
 
 
+  $('#girl_scouts_activity_activity_location_phone_1, #girl_scouts_activity_activity_location_phone_2, #girl_scouts_activity_activity_location_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_troop_leader_phone_1, #girl_scouts_activity_troop_leader_phone_2, #girl_scouts_activity_troop_leader_phone_3').autotab_magic();
+
   $('#girl_scouts_activity_leader_day_phone_1, #girl_scouts_activity_leader_day_phone_2, #girl_scouts_activity_leader_day_phone_3,' +
     '#girl_scouts_activity_leader_evening_phone_1, #girl_scouts_activity_leader_evening_phone_2, #girl_scouts_activity_leader_evening_phone_3,' +
     '#girl_scouts_activity_leader_cell_phone_1, #girl_scouts_activity_leader_cell_phone_2, #girl_scouts_activity_leader_cell_phone_3').autotab_magic();
@@ -222,13 +228,13 @@ $(function () {
     '#girl_scouts_activity_emergency_evening_phone_1, #girl_scouts_activity_emergency_evening_phone_2, #girl_scouts_activity_emergency_evening_phone_3').autotab_magic();
 
   $('#girl_scouts_activity_leader_advisor_1_phone_1, #girl_scouts_activity_leader_advisor_1_phone_2, #girl_scouts_activity_leader_advisor_1_phone_3,' +
-    '#girl_scouts_activity_leader_advisor_1_cell_1, #girl_scouts_activity_leader_advisor_1_cell_2, #girl_scouts_activity_leader_advisor_1_cell_3, #girl_scouts_activity_leader_advisor_2_first_name').autotab_magic();
+    '#girl_scouts_activity_leader_advisor_1_cell_1, #girl_scouts_activity_leader_advisor_1_cell_2, #girl_scouts_activity_leader_advisor_1_cell_3').autotab_magic();
 
   $('#girl_scouts_activity_leader_advisor_2_phone_1, #girl_scouts_activity_leader_advisor_2_phone_2, #girl_scouts_activity_leader_advisor_2_phone_3,' +
     '#girl_scouts_activity_leader_advisor_2_cell_1, #girl_scouts_activity_leader_advisor_2_cell_2, #girl_scouts_activity_leader_advisor_2_cell_3').autotab_magic();
 
   $('#girl_scouts_activity_troop_leader_emergency_contact_phone_number_1, #girl_scouts_activity_troop_leader_emergency_contact_phone_number_2, #girl_scouts_activity_troop_leader_emergency_contact_phone_number_3,' +
-    '#girl_scouts_activity_troop_leader_emergency_contact_cell_number_1, #girl_scouts_activity_troop_leader_emergency_contact_cell_number_2, #girl_scouts_activity_troop_leader_emergency_contact_cell_number_3, #girl_scouts_activity_troop_leader_emergency_contact_name_address_street').autotab_magic();
+    '#girl_scouts_activity_troop_leader_emergency_contact_cell_number_1, #girl_scouts_activity_troop_leader_emergency_contact_cell_number_2, #girl_scouts_activity_troop_leader_emergency_contact_cell_number_3').autotab_magic();
 
   // Permission Forms Tab
 

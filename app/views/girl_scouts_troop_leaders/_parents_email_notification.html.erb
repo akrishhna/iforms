@@ -9,4 +9,6 @@
 <p>Thank You,<br><b><%= (girls_activity.leader_first_name.to_s !='' || girls_activity.leader_last_name.to_s != '') ? girls_activity.leader_first_name.to_s + " " + girls_activity.leader_last_name.to_s : "[Troop Leader Name]" %></b></p>
   <% elsif session[:user_service_provider] == 3 %>
   <p>Thank You ,<br><b><%= (girls_activity.leader_advisor_1_first_name.to_s !='' || girls_activity.leader_advisor_1_last_name.to_s != '') ? girls_activity.leader_advisor_1_first_name.to_s + " " + girls_activity.leader_advisor_1_last_name.to_s : "[Troop Leader Name]" %></b></p>
+<% elsif session[:user_service_provider] == 8 %>
+  <p>Thank You,<br><b><%= (girls_activity.leader_first_name.to_s !='' || girls_activity.leader_last_name.to_s != '') ? girls_activity.leader_first_name.to_s + " " + girls_activity.leader_last_name.to_s : "[Troop Leader Name]" %></b></p>
 <% end %>

@@ -33,8 +33,7 @@
 
   <div class="<%= @service_provider.mapping_field_name == 'central_texas' ? '' : 'hide' %>">
     <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>, has my
-      permission
-      to go to and participate in the <strong><%= @activity.activity_name %></strong>. I understand the cost
+      permission to go to and participate in the <strong><%= @activity.activity_name %></strong>. I understand the cost
       will be
       <strong><%= number_to_currency(@activity.activity_cost_dollars ? (@activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!') %></strong>.
     </p>
@@ -44,12 +43,19 @@
 
   <div class="<%= @service_provider.mapping_field_name == 'diamonds' ? '' : 'hide' %>">
     <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>,has permission
-      to participate
-      in the above named activity. In case of accident or injury she may be given emergency first aid treatment.
+      to participate in the above named activity. In case of accident or injury she may be given emergency first aid treatment.
     </p>
   </div>
 
-  <!-- central texas -->
+  <div class="<%= @service_provider.mapping_field_name == 'alaska' ? '' : 'hide' %>">
+    <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>,has permission
+      to participate in the <strong><%= @activity.activity_name %></strong>. She is in good physical condition and has not had any serious illness or operation since her last health examination.
+    </p>
+    <p>
+      I give the Council permission, for Girl Scout related purposes, to use photographs or videotapes of my child participating in Girl Scout
+      activities or accepting Girl Scout services.
+    </p>
+  </div>
 
   <div class="control-group + <%= @fields['Emergency Contact 1'] ? '' : 'hide' %>">
     <%= f.label :gapf_emergency_contact_1_first_name, "Emergency Contact 1", :class => 'control-label' %>
@@ -180,13 +186,24 @@
     </div>
   </div>
 
-  <!-- Diamonds -->
-
   <div class="control-group + <%= @fields['Authorize Behalf Name'] ? '' : 'hide' %>">
     <%= f.label :act_in_my_behalf_first_name, "In addition to the person in charge, I authorize this person to act in my behalf", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :act_in_my_behalf_first_name, :placeholder => "First Name", :class => "input-small" %>
       <%= f.text_field :act_in_my_behalf_last_name, :placeholder => "Last Name", :class => "input-small" %>
+    </div>
+  </div>
+  <div class="control-group + <%= @fields['Authorize Behalf Address'] ? '' : 'hide' %>">
+    <%= f.label :act_in_my_behalf_address_1, "Address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :act_in_my_behalf_address_1, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :act_in_my_behalf_address_2, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :act_in_my_behalf_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
+      <%#= f.text_field :emergency_contact_address_country, :placeholder => "country", :style => 'margin-bottom:10px;' %>
+      <br>
+      <%= f.select :act_in_my_behalf_address_state, options_for_select(StaticData.state, f.object.emergency_contact_address_state), :include_blank => true %> &nbsp;
+      <%= f.text_field :act_in_my_behalf_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
   <div class="control-group + <%= @fields['Phone Number During Activity'] ? '' : 'hide' %>">

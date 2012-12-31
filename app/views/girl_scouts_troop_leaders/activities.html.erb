@@ -52,6 +52,16 @@
         <%= f.text_field :activity_location, :style => "width:400px" %>
       </div>
     </div>
+    <div class="control-group + <%= @fields['Activity Location Phone Number'] ? '' : 'hide' %>">
+      <%= f.label :activity_location_phone_1, "Location Phone Number", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_location_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :activity_location_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :activity_location_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
     <div class="control-group + <%= @fields['Activity Start Date'] ? '' : 'hide' %>">
       <%= f.label :activity_date_begin, "Date Begin", :class => 'control-label' %>
       <div class="controls">
@@ -68,6 +78,20 @@
       <%= f.label :activity_signed_permission_due_date, "Signed Permission Form Due Date", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :activity_signed_permission_due_date, :class => "girls_scout_activity_date_selector input-small", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_signed_permission_due_date %>
+      </div>
+    </div>
+    <div class="control-group + <%= @fields['Activity Time'] ? '' : 'hide' %>">
+      <%= f.label :activity_time_hh, "Time", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :activity_time_hh, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <strong> : </strong>
+        <%= f.select :activity_time_mm, {"00" => "0", "05" => "5", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_time_am_pm, "AM", :checked => 'checked' %> AM
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_time_am_pm, "PM" %> PM
+        <% end %>
       </div>
     </div>
     <div class="control-group + <%= @fields['We Will Leave From'] ? '' : 'hide' %>">
@@ -146,6 +170,12 @@
         <%= f.text_field :mode_of_transportation, :style => 'width:400px' %>
       </div>
     </div>
+    <div class="control-group + <%= @fields['Adults Accompanying Girls'] ? '' : 'hide' %>">
+      <%= f.label :adults_accompanying_girls, "Adults Accompanying girls", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :adults_accompanying_girls, :style => 'width:400px' %>
+      </div>
+    </div>
     <div class="control-group + <%= @fields['Equipment Needed'] ? '' : 'hide' %>">
       <%= f.label :activity_equipment, "Equipment Needed", :class => 'control-label' %>
       <div class="controls">
@@ -201,6 +231,16 @@
       <%= f.label :leader_email, "Email", :class => 'control-label' %>
       <div class="controls">
         <%= f.email_field :leader_email, :style => 'width:400px' %>
+      </div>
+    </div>
+    <div class="control-group + <%= @fields['Troop Leader Phone'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_phone_1, "Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_leader_phone_1, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :troop_leader_phone_2, :class => "activity_phone", :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :troop_leader_phone_3, :class => "activity_phone_last", :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group + <%= @fields['Troop Leader Day Phone'] ? '' : 'hide' %>">
@@ -394,6 +434,16 @@
         @girls_activity.activity_signed_permission_due_date.to_s == "" ||
         @girls_activity.leader_advisor_1_first_name.to_s == "" ||
         @girls_activity.leader_advisor_1_last_name.to_s == "" %>
+        <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => "disabled" %>
+      <% else %>
+        <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false, "data-loading-text" => "loading" %>
+      <% end %>
+
+    <% elsif @service_provider.mapping_field_name == 'alaska' %>
+      <% if @girls_activity.activity_name.to_s == "" ||
+        @girls_activity.activity_signed_permission_due_date.to_s == "" ||
+        @girls_activity.leader_first_name.to_s == "" ||
+        @girls_activity.leader_last_name.to_s == "" %>
         <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => "disabled" %>
       <% else %>
         <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false, "data-loading-text" => "loading" %>

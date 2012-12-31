@@ -142,17 +142,20 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "ActivityName" => @fields['Activity Name'] ? @activity.activity_name : '',
 
       "ActivityLocation" => @fields['Activity Location'] ? @activity.activity_location : '',
+      "ActivityLocationPhone" => @fields['Activity Location Phone Number'] ? (@activity.activity_location_phone_1.to_s + '-' + @activity.activity_location_phone_2.to_s + '-' + @activity.activity_location_phone_3.to_s) : '',
 
       "ActivityDateBeginMonth" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[1] : '',
       "ActivityDateBeginDay" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[2] : '',
       "ActivityDateBeginYear" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[0] : '',
-      "ActivityDate" => @fields['Activity Start Date'] ? @activity.activity_date_begin : '',
+      "ActivityDate" => @fields['Activity Start Date'] ? @activity.activity_date_begin.strftime('%m-%d-%Y') : '',
 
       "ActivityDateEndMonth" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[1] : '',
       "ActivityDateEndDay" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[2] : '',
       "ActivityDateEndYear" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[0] : '',
 
       "SignedPermissionFormDueDate" => @fields['Signed Permission Forms Due Date'] ? (@activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '') : '',
+
+      "ActivityTime" => @fields['Activity Time'] ? (@activity.activity_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_time_am_pm) : '',
 
       "WeWillLeaveFrom" => @fields['We Will Leave From'] ? @activity.activity_leave_from : '',
       "WeWillLeaveFromTime" => @fields['We Will Leave At'] ? (@activity.activity_leave_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0')) : '',
@@ -172,7 +175,10 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "GirlsShouldWearUniforms" => @fields['Girls Should Wear Uniforms'] ? (@activity.girls_wear_checkbox ? "Yes" : "Off") : '',
       "GirlsShouldWearOther" => @fields['Girls Should Wear Other'] ? @activity.activity_girls_wear_others : '',
       "GirlsShouldBring" => @fields['Girls Should Bring'] ? @activity.activity_girls_bring : '',
+
       "ModeOfTransportation" => @fields['Mode of Transportation'] ? @activity.mode_of_transportation : '',
+
+      "AdultsAccompanyingGirls" => @fields['Adults Accompanying Girls'] ? @activity.adults_accompanying_girls : '',
 
       "EquipmentNeeded" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
       "OtherEquipmentOrClothing" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
@@ -187,6 +193,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
       "TroopLeaderName" => @fields['Troop Leader Name'] ? (@activity.leader_first_name + " " + @activity.leader_last_name) : '',
       "TroopLeaderEmailAddress" => @fields['Troop Leader Email Address'] ? @activity.leader_email : '',
+      "TroopLeaderPhoneNumber" => @fields['Troop Leader Phone'] ? (@activity.troop_leader_phone_1.to_s + '-' + @activity.troop_leader_phone_2.to_s + '-' + @activity.troop_leader_phone_3.to_s) : '',
       "TroopLeaderDayPhoneAreaCode" => @fields['Troop Leader Day Phone'] ? @activity.leader_day_phone_1 : '',
       "TroopLeaderDayPhoneLocalNumber" => @fields['Troop Leader Day Phone'] ? (@activity.leader_day_phone_2.to_s + '-' + @activity.leader_day_phone_3.to_s) : '',
       "TroopLeaderEveningPhoneAreaCode" => @fields['Troop Leader Evening Phone'] ? @activity.leader_evening_phone_1 : '',
@@ -227,6 +234,8 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "EmergencyContact1AlternatePhoneNumber" => @fields['Emergency Contact 1 Phone 2'] ? (@girl_scouts_permission_form.gapf_emergency_contact_1_phone_2_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_2_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_2_3.to_s) : '',
 
       "ActInMyBehalfName" => @fields['Authorize Behalf Name'] ? (@girl_scouts_permission_form.act_in_my_behalf_first_name.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_last_name.to_s) : '',
+      "ParentAddressDuringActivity" => @fields['Authorize Behalf Address'] ? (@girl_scouts_permission_form.act_in_my_behalf_address_1.to_s + (@girl_scouts_permission_form.act_in_my_behalf_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.act_in_my_behalf_address_2.to_s) +  ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_city.to_s + ' ' +  @girl_scouts_permission_form.act_in_my_behalf_address_state.to_s + ' ' +  @girl_scouts_permission_form.act_in_my_behalf_address_zip.to_s : ' ')) : '',
+
       "ParentPhoneNumberDuringActivity" => @fields['Phone Number During Activity'] ? (@girl_scouts_permission_form.parent_phone_number_during_activity_1.to_s + '-' + @girl_scouts_permission_form.parent_phone_number_during_activity_2.to_s + '-' + @girl_scouts_permission_form.parent_phone_number_during_activity_3.to_s) : '',
 
       "EmergencyContact2Name" => @fields['Emergency Contact 2'] ? (@girl_scouts_permission_form.gapf_emergency_contact_2_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_emergency_contact_2_last_name.to_s) : '',
@@ -244,12 +253,16 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "PhysicianName" => @fields['Physician Name'] ? (@girl_scouts_permission_form.gapf_physician_first_name.to_s + ' ' + @girl_scouts_permission_form.gapf_physician_last_name.to_s) : '',
       "PhysicianPhoneAreaCode" => @fields['Physician Phone'] ? @girl_scouts_permission_form.gapf_physician_phone_1 : '',
       "PhysicianPhoneLocalNumber" => @fields['Physician Phone'] ? (@girl_scouts_permission_form.gapf_physician_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_physician_phone_3.to_s) : '',
+      "PhysicianPhoneNumber" => @fields['Physician Phone'] ? (@girl_scouts_permission_form.gapf_physician_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_physician_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_physician_phone_3.to_s) : '',
+
       "MyInsuranceCarrier" => @fields['My Insurance Carrier'] ? @girl_scouts_permission_form.gapf_my_insurance_carrier : '',
       "MyInsuranceCarrierPolicyNumber" => @fields['Policy Number'] ? @girl_scouts_permission_form.gapf_policy : '',
 
       "EmergencyContactAddress" => @fields['Address'] ? (@girl_scouts_permission_form.emergency_contact_address_street.to_s + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? (', ' + @girl_scouts_permission_form.emergency_contact_address_line.to_s) : ' ')) : '',
       "EmergencyContactCity" => @fields['Address'] ? @girl_scouts_permission_form.emergency_contact_address_city.to_s : '',
       "EmergencyContactState" => @fields['Address'] ? @girl_scouts_permission_form.emergency_contact_address_state.to_s : '',
+      "EmergencyContactAddressCityStateZip" => @fields['Address'] ? (@girl_scouts_permission_form.emergency_contact_address_street.to_s + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? (', ' + @girl_scouts_permission_form.emergency_contact_address_line.to_s) +  ' ' + @girl_scouts_permission_form.emergency_contact_address_city.to_s + ' ' +  @girl_scouts_permission_form.emergency_contact_address_state.to_s + ' ' +  @girl_scouts_permission_form.emergency_contact_address_zip.to_s : ' ')) : '',
+
       "EmergencyContactRelationshipToParticipant" => @fields['Relationship To Patient'] ? @girl_scouts_permission_form.emergency_contact_relationship_to_participant.to_s : '',
 
 

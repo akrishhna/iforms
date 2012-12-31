@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227095342) do
+ActiveRecord::Schema.define(:version => 20121231044711) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -451,6 +451,16 @@ ActiveRecord::Schema.define(:version => 20121227095342) do
     t.string   "date_submitted",                                      :limit => 50
     t.string   "attending",                                           :limit => 50
     t.string   "program_year",                                        :limit => 50
+    t.integer  "activity_time_hh"
+    t.integer  "activity_time_mm"
+    t.string   "activity_time_am_pm"
+    t.string   "adults_accompanying_girls"
+    t.integer  "activity_location_phone_1"
+    t.integer  "activity_location_phone_2"
+    t.integer  "activity_location_phone_3"
+    t.integer  "troop_leader_phone_1"
+    t.integer  "troop_leader_phone_2"
+    t.integer  "troop_leader_phone_3"
   end
 
   create_table "girl_scouts_activity_permission_forms", :force => true do |t|
@@ -519,6 +529,11 @@ ActiveRecord::Schema.define(:version => 20121227095342) do
     t.integer  "emergency_contact_address_zip"
     t.string   "emergency_contact_relationship_to_participant"
     t.text     "medications"
+    t.string   "act_in_my_behalf_address_1"
+    t.string   "act_in_my_behalf_address_2"
+    t.string   "act_in_my_behalf_address_city"
+    t.string   "act_in_my_behalf_address_state"
+    t.string   "act_in_my_behalf_address_zip"
   end
 
   create_table "girl_scouts_fields", :force => true do |t|
@@ -528,6 +543,7 @@ ActiveRecord::Schema.define(:version => 20121227095342) do
     t.boolean  "diamonds"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.boolean  "alaska"
   end
 
   create_table "girls_scouts", :force => true do |t|
