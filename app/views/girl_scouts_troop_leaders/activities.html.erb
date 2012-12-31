@@ -94,6 +94,34 @@
         <% end %>
       </div>
     </div>
+    <div class="control-group + <%= @fields['Activity Start Time'] ? '' : 'hide' %>">
+      <%= f.label :activity_start_time_hh, " Activity Begin Time", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :activity_start_time_hh, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <strong> : </strong>
+        <%= f.select :activity_start_time_mm, {"00" => "0", "05" => "5", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_start_time_am_pm, "AM", :checked => 'checked' %> AM
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_start_time_am_pm, "PM" %> PM
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group + <%= @fields['Activity End Time'] ? '' : 'hide' %>">
+      <%= f.label :activity_end_time_hh, "Activity End Time", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :activity_end_time_hh, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <strong> : </strong>
+        <%= f.select :activity_end_time_mm, {"00" => "0", "05" => "5", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_end_time_am_pm, "AM", :checked => 'checked' %> AM
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_end_time_am_pm, "PM" %> PM
+        <% end %>
+      </div>
+    </div>
     <div class="control-group + <%= @fields['We Will Leave From'] ? '' : 'hide' %>">
       <%= f.label :activity_leave_from, "We Will Leave from", :class => 'control-label' %>
       <div class="controls">
@@ -143,7 +171,12 @@
         <%= f.text_field :activity_cost_cents, :value => f.object.activity_cost_cents.to_s.rjust(2, "0"), :style => "width:20px;text-align: right", :placeholder => "", :id => 'activity_cost_cents' %>
       </div>
     </div>
-
+    <div class="control-group + <%= @fields['Activity Cost Used For'] ? '' : 'hide' %>">
+      <%= f.label :activity_cost_used_for, "Cost used for", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_cost_used_for, :style => 'width:400px' %>
+      </div>
+    </div>
     <div class="control-group + <%= @fields['Girls Should Wear Uniforms'] ? '' : 'hide' %>">
       <%= f.label :girls_wear_checkbox, "Girls Should Wear", :class => 'control-label' %>
       <div class="controls">
@@ -407,6 +440,17 @@
         <%= f.text_field :troop_leader_emergency_contact_name_address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+    <div class="control-group + <%= @fields['Activity Will Involve Unusual Risk'] ? '' : 'hide' %>">
+      <%= f.label :activity_will_involve_unusual_risk, "Activity Will Involve Unusual Risk", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_will_involve_unusual_risk, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_will_involve_unusual_risk, "No" %> No
+        <% end %>
+      </div>
+    </div>
 
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "2" do %>
@@ -440,6 +484,16 @@
       <% end %>
 
     <% elsif @service_provider.mapping_field_name == 'alaska' %>
+      <% if @girls_activity.activity_name.to_s == "" ||
+        @girls_activity.activity_signed_permission_due_date.to_s == "" ||
+        @girls_activity.leader_first_name.to_s == "" ||
+        @girls_activity.leader_last_name.to_s == "" %>
+        <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => "disabled" %>
+      <% else %>
+        <%= link_to "Send Notification Email to Parents", "#", :class => "btn btn-primary", :id => "notification_email_to_parent", :disabled => false, "data-loading-text" => "loading" %>
+      <% end %>
+
+    <% elsif @service_provider.mapping_field_name == 'arizona_cactus_pine' %>
       <% if @girls_activity.activity_name.to_s == "" ||
         @girls_activity.activity_signed_permission_due_date.to_s == "" ||
         @girls_activity.leader_first_name.to_s == "" ||

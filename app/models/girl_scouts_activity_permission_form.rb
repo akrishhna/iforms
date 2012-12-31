@@ -156,6 +156,8 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "SignedPermissionFormDueDate" => @fields['Signed Permission Forms Due Date'] ? (@activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '') : '',
 
       "ActivityTime" => @fields['Activity Time'] ? (@activity.activity_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_time_am_pm) : '',
+      "ActivityStartTime" => @fields['Activity Start Time'] ? (@activity.activity_start_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_start_time_mm.to_s.rjust(2, '0')) : '',
+      "ActivityEndTime" => @fields['Activity End Time'] ? (@activity.activity_end_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_end_time_mm.to_s.rjust(2, '0')) : '',
 
       "WeWillLeaveFrom" => @fields['We Will Leave From'] ? @activity.activity_leave_from : '',
       "WeWillLeaveFromTime" => @fields['We Will Leave At'] ? (@activity.activity_leave_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0')) : '',
@@ -171,6 +173,8 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
       "Cost" => @fields['Activity Cost'] ? (@activity.activity_cost_dollars ? @activity.activity_cost_dollars.to_s + '.' + @cents.to_s : 'Free!') : '',
       "ForExpenses" => @fields['Activity Cost'] ? (@activity.activity_cost_dollars ? ('$' + @activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!') : '',
+
+      "CostUsedFor" => @fields['Activity Cost'] ? @activity.activity_cost_used_for : '',
 
       "GirlsShouldWearUniforms" => @fields['Girls Should Wear Uniforms'] ? (@activity.girls_wear_checkbox ? "Yes" : "Off") : '',
       "GirlsShouldWearOther" => @fields['Girls Should Wear Other'] ? @activity.activity_girls_wear_others : '',
@@ -220,6 +224,8 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "TroopLeaderEmergencyContactCellNumber" => @fields['Troop Emergency Contact Cell Phone'] ? (@activity.troop_leader_emergency_contact_cell_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_3.to_s) : '',
       "TroopLeaderEmergencyContactNameAddress" => @fields['Troop Emergency Contact Address'] ? (@activity.troop_leader_emergency_contact_name_address_street.to_s + ',' + (@activity.troop_leader_emergency_contact_name_address_line.to_s.present? ? (@activity.troop_leader_emergency_contact_name_address_line.to_s + ', ') : ' ') + @activity.troop_leader_emergency_contact_name_address_city.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_state.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_zip.to_s) : '',
 
+      "ActivityWillOrMayInvolveUnusualRisk" => @fields['Activity Will Involve Unusual Risk'] ? (@activity.activity_will_involve_unusual_risk == 'Yes' ? 'Yes' : 'No') : '',
+
       #others
 
       "ProgramYearFrom" => @fields['Program Year Start'] ? (@activity.activity_date_begin ? (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1 : '') : '',
@@ -266,9 +272,21 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "EmergencyContactRelationshipToParticipant" => @fields['Relationship To Patient'] ? @girl_scouts_permission_form.emergency_contact_relationship_to_participant.to_s : '',
 
 
-      "SpecialNeedsMedicationsComments" => @fields['Specific Needs'] ? @girl_scouts_permission_form.gapf_special_needs : '',
+      "SpecialNeedsMedicationsComments" => @girl_scouts_permission_form.gapf_special_needs,
       "Medications" => @fields['Medications'] ? @girl_scouts_permission_form.medications : '',
 
+      "ChangesToGeneralPermissionSlip" => @fields['Changes To General Permission Slip'] ? @girl_scouts_permission_form.gapf_changes_to_general_permission_slip : '',
+      "SpecialNeeds" => @fields['Special Needs'] ? (@girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'Yes' ? 'Yes' : 'No') : '',
+      "NoSpecialNeeds" => @fields['Special Needs'] ? (@girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'No' ? 'Yes' : 'No') : '',
+      "UnusualRiskAcknowledgement" => @fields['Unusual Risk Acknowledgement'] ? (@girl_scouts_permission_form.gapf_unusual_risk_acknowledgement == 'Yes' ? 'Yes' : 'No') : '',
+      "Parent1AddressCityStateZip" => @fields['Parent 1 Address'] ? (@girl_scouts_permission_form.gapf_parent_1_address_1.to_s + (@girl_scouts_permission_form.gapf_parent_1_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.gapf_parent_1_address_2.to_s) +  ' ' + @girl_scouts_permission_form.gapf_parent_1_address_city.to_s + ' ' +  @girl_scouts_permission_form.gapf_parent_1_address_state.to_s + ' ' +  @girl_scouts_permission_form.gapf_parent_1_address_zip.to_s : ' ')) : '',
+      "Parent1HomePhone" => @girl_scouts_permission_form.gapf_parent_1_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_home_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_1_work_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_work_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_work_phone_3.to_s,
+      "Parent1MobilePhone" => @girl_scouts_permission_form.gapf_parent_1_mobile_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_mobile_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_mobile_phone_3.to_s + '           ' + @girl_scouts_permission_form.gapf_parent_1_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_other_phone_3.to_s,
+      "Parent1EmailAddress" => @fields['Parent 1 Email Address'] ? @girl_scouts_permission_form.gapf_parent_1_email : '',
+      "Parent2AddressCityStateZip" => @fields['Parent 2 Address'] ? (@girl_scouts_permission_form.gapf_parent_2_address_1.to_s + (@girl_scouts_permission_form.gapf_parent_2_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.gapf_parent_2_address_2.to_s) +  ' ' + @girl_scouts_permission_form.gapf_parent_2_address_city.to_s + ' ' +  @girl_scouts_permission_form.gapf_parent_2_address_state.to_s + ' ' +  @girl_scouts_permission_form.gapf_parent_2_address_zip.to_s : ' ')) : '',
+      "Parent2HomePhone" => @girl_scouts_permission_form.gapf_parent_2_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_home_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_2_work_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_work_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_work_phone_3.to_s,
+      "Parent2MobilePhone" => @girl_scouts_permission_form.gapf_parent_2_mobile_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_mobile_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_mobile_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_2_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_other_phone_3.to_s,
+      "Parent2EmailAddress" => @fields['Parent 2 Email Address'] ? @girl_scouts_permission_form.gapf_parent_2_email : '',
     })
     # raise @pdftk.fields(form_pdf_path).to_yaml
   end

@@ -17,7 +17,7 @@ $('.notification_email_to_parent_text').html(" <%= escape_javascript render :par
   $('select#girls_scouts_activities option:selected').text('<%=  @activity.activity_name%>');
 <% end %>
 
-<% if session[:user_service_provider] == 2 %>
+<% if session[:user_service_provider] == 2 || session[:user_service_provider] == 8 || session[:user_service_provider] == 9 %>
 
   <% if @activity.activity_name.to_s == "" ||
       @activity.activity_signed_permission_due_date.to_s == "" ||
@@ -34,17 +34,6 @@ $('.notification_email_to_parent_text').html(" <%= escape_javascript render :par
       @activity.activity_signed_permission_due_date.to_s == "" ||
       @activity.leader_advisor_1_first_name.to_s == "" ||
       @activity.leader_advisor_1_last_name.to_s == "" %>
-      $('#notification_email_to_parent').attr('disabled', 'disabled');
-   <% else %>
-      $('#notification_email_to_parent').attr('disabled', false);
-   <% end %>
-
-<% elsif session[:user_service_provider] == 8 %>
-
-   <% if @activity.activity_name.to_s == "" ||
-      @activity.activity_signed_permission_due_date.to_s == "" ||
-      @activity.leader_first_name.to_s == "" ||
-      @activity.leader_last_name.to_s == "" %>
       $('#notification_email_to_parent').attr('disabled', 'disabled');
    <% else %>
       $('#notification_email_to_parent').attr('disabled', false);

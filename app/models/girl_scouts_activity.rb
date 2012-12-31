@@ -124,7 +124,7 @@ class GirlScoutsActivity < ActiveRecord::Base
       "ActivityDateBeginMonth" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[1] : '',
       "ActivityDateBeginDay" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[2] : '',
       "ActivityDateBeginYear" => @fields['Activity Start Date'] ? @activity.activity_date_begin.to_s.split("-")[0] : '',
-      "ActivityDate" => @fields['Activity Start Date'] ? @activity.activity_date_begin.strftime('%m-%d-%Y') : '',
+      "ActivityDate" => @fields['Activity Start Date'] ? (@activity.activity_date_begin ? @activity.activity_date_begin.strftime('%m-%d-%Y') : '') : '',
 
       "ActivityDateEndMonth" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[1] : '',
       "ActivityDateEndDay" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[2] : '',
@@ -133,6 +133,8 @@ class GirlScoutsActivity < ActiveRecord::Base
       "SignedPermissionFormDueDate" => @fields['Signed Permission Forms Due Date'] ? (@activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '') : '',
 
       "ActivityTime" => @fields['Activity Time'] ? (@activity.activity_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_time_am_pm) : '',
+      "ActivityStartTime" => @fields['Activity Start Time'] ? (@activity.activity_start_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_start_time_mm.to_s.rjust(2, '0')) : '',
+      "ActivityEndTime" => @fields['Activity End Time'] ? (@activity.activity_end_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_end_time_mm.to_s.rjust(2, '0')) : '',
 
       "WeWillLeaveFrom" => @fields['We Will Leave From'] ? @activity.activity_leave_from : '',
       "WeWillLeaveFromTime" => @fields['We Will Leave At'] ? (@activity.activity_leave_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0')) : '',
@@ -148,6 +150,8 @@ class GirlScoutsActivity < ActiveRecord::Base
 
       "Cost" => @fields['Activity Cost'] ? (@activity.activity_cost_dollars ? @activity.activity_cost_dollars.to_s + '.' + @cents.to_s : 'Free!') : '',
       "ForExpenses" => @fields['Activity Cost'] ? (@activity.activity_cost_dollars ? ('$' + @activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!') : '',
+
+      "CostUsedFor" => @fields['Activity Cost'] ? @activity.activity_cost_used_for : '',
 
       "GirlsShouldWearUniforms" => @fields['Girls Should Wear Uniforms'] ? (@activity.girls_wear_checkbox ? "Yes" : "Off") : '',
       "GirlsShouldWearOther" => @fields['Girls Should Wear Other'] ? @activity.activity_girls_wear_others : '',
@@ -197,13 +201,15 @@ class GirlScoutsActivity < ActiveRecord::Base
       "TroopLeaderEmergencyContactCellNumber" => @fields['Troop Emergency Contact Cell Phone'] ? (@activity.troop_leader_emergency_contact_cell_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_3.to_s) : '',
       "TroopLeaderEmergencyContactNameAddress" => @fields['Troop Emergency Contact Address'] ? (@activity.troop_leader_emergency_contact_name_address_street.to_s + ',' + (@activity.troop_leader_emergency_contact_name_address_line.to_s.present? ? (@activity.troop_leader_emergency_contact_name_address_line.to_s + ', ') : ' ') + @activity.troop_leader_emergency_contact_name_address_city.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_state.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_zip.to_s) : '',
 
+      "ActivityWillOrMayInvolveUnusualRisk" => @fields['Activity Will Involve Unusual Risk'] ? (@activity.activity_will_involve_unusual_risk == 'Yes' ? 'Yes' : 'No') : '',
+
       #others
 
       "ProgramYearFrom" => @fields['Program Year Start'] ? (@activity.activity_date_begin ? (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0] : @activity.activity_date_begin.to_s.split("-")[0].to_i - 1 : '') : '',
       "ProgramYearTo" => @fields['Program Year Start'] ? (@activity.activity_date_begin ? (@activity.activity_date_begin.to_s.split("-")[1].to_i == 10 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 11 || @activity.activity_date_begin.to_s.split("-")[1].to_i == 12) ? @activity.activity_date_begin.to_s.split("-")[0].to_i + 1 : @activity.activity_date_begin.to_s.split("-")[0] : '') : '',
 
     })
-    #raise @pdftk.fields(form_pdf_path).to_yaml
+    # raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 
