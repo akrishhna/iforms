@@ -1,0 +1,171 @@
+<%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
+  <%= f.hidden_field :id %>
+
+  <p><strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong> is my/our daughter or a child in my/our legal custody. I/we have previously
+    executed a “General Permission Slip” for her participation in activities of or sponsored by the GIRL SCOUTS–ARIZONA CACTUS-PINE
+    COUNCIL, INC. I/we adopt and incorporate the consents and information therein into this Specific Event Permission Slip, with the
+    following changes or corrections. If there are none write “None”, but be sure to fill in updating information such as a change of address
+    or phone number, the persons to contact in an emergency, more current medical information or a change of physician.
+  </p>
+
+  <div class="control-group">
+    <%= f.label :gapf_special_needs_yes_or_no, 'Child has special needs ', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :gapf_special_needs_yes_or_no, "Yes", :class => 'arizona_special_needs' %>Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :gapf_special_needs_yes_or_no, "No", :class => 'arizona_special_needs' %>No
+      <% end %> &nbsp; &nbsp;
+      <%= f.text_area :gapf_special_needs, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => (f.object.gapf_special_needs_yes_or_no == 'Yes' ? '' : 'hide') %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_unusual_risk_acknowledgement, 'Unusual risk acknowledgement', :class => 'control-label' %>
+    <div class="controls">
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :gapf_unusual_risk_acknowledgement, "Yes" %> Yes
+      <% end %>
+      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= f.radio_button :gapf_unusual_risk_acknowledgement, "No" %> No
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_1_address_1, "Parent 1 address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_1_address_1, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :gapf_parent_1_address_2, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :gapf_parent_1_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
+      <br>
+      <%= f.select :gapf_parent_1_address_state, options_for_select(StaticData.state, f.object.gapf_parent_1_address_state), :include_blank => true %> &nbsp;
+      <%= f.text_field :gapf_parent_1_address_zip, :placeholder => "Postal / Zip Code" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_1_home_phone_1, "Parent 1 home phonel", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_1_home_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_home_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_home_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_1_work_phone_1, "Parent 1 work phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_1_work_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_work_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_work_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_1_mobile_phone_1, "Parent 1 mobile phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_1_mobile_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_mobile_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_mobile_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_1_other_phone_1, "Parent 1 other phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_1_other_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_other_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_1_other_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_1_email, "Parent 1 email address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_1_email, :placeholder => "Email", :style => 'width:445px;margin-bottom:10px;' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_2_address_1, "Parent 2 address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_2_address_1, :placeholder => "Address 1", :style => 'width:445px;margin-bottom:10px;' %>
+      <%= f.text_field :gapf_parent_2_address_2, :placeholder => "Address 2", :style => 'width:445px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :gapf_parent_2_address_city, :placeholder => "City", :style => 'width:445px;margin-bottom:10px;' %> &nbsp;
+      <br>
+      <%= f.select :gapf_parent_2_address_state, options_for_select(StaticData.state, f.object.gapf_parent_2_address_state), :include_blank => true %> &nbsp;
+      <%= f.text_field :gapf_parent_2_address_zip, :placeholder => "Postal / Zip Code" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_2_home_phone_1, "Parent 2 home phonel", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_2_home_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_home_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_home_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_2_work_phone_1, "Parent 2 work phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_2_work_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_work_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_work_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_2_mobile_phone_1, "Parent 2 mobile phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_2_mobile_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_mobile_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_mobile_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_2_other_phone_1, "Parent 2 other phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_2_other_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_other_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_parent_2_other_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_parent_2_email, "Parent 2 email address", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_parent_2_email, :placeholder => "Email", :style => 'width:445px;margin-bottom:10px;' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_changes_to_general_permission_slip, "General permission slip", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :gapf_changes_to_general_permission_slip, :rows => 4, :style => "width:98%;" %>
+    </div>
+  </div>
+
+<% end %>

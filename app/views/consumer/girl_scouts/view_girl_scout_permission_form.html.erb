@@ -1,33 +1,41 @@
 <p style="text-align: center;font-size:18px "><%= @activity.activity_name %></p>
+
 <div style="margin: 0 auto;width:80px;">
   <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
 </div>
+
 <div class="tabbable tabs-left iforms-tabs-left">
-<ul class="nav nav-tabs">
-  <li class="active">
-    <%= link_to "Activity Details", '#activity_form', "data-toggle" => "tab" %>
-  </li>
-  <li><%= link_to "Parent Permission", "#parent_permission", "data-toggle" => "tab" %></li>
-</ul>
-<div class="tab-content">
-<div class="tab-pane active" id="activity_form">
-  <%= render :partial => "girl_scouts_troop_leaders/show_activity" %>
-</div>
-<div class="tab-pane" id="parent_permission">
-<div class="tab-pane active" id="parent_permissionx">
-<div class="girlscout_permission_form_submit" style="text-align:right;margin-right: 100px;margin-bottom: 20px;">
-  <span class="permission_form_tl_mail_success hide" style="margin-right: 100px;background-color:#d3d3d3;">Successfully Sent!</span>
-  <%= link_to "Submit to Troop Leader", "#", :class => "btn btn-primary", :id => "notification_email_to_troop_leader" %>
-</div>
-<%# if @service_provider.mapping_field_name == 'central_texas' %>
-<%#= render :partial => 'central_texas_permission_form' %>
-<%# elsif @service_provider.mapping_field_name == 'diamonds' %>
-<%#= render :partial => 'diamonds_permission_form' %>
-<%# else %>
-<%# end %>
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <%= link_to "Activity Details", '#activity_form', "data-toggle" => "tab" %>
+    </li>
+    <li>
+      <%= link_to "Parent Permission", "#parent_permission", "data-toggle" => "tab" %>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="activity_form">
+     <%= render :partial => "girl_scouts_troop_leaders/show_activity" %>
+    </div>
+    <div class="tab-pane" id="parent_permission">
+    <div class="tab-pane active" id="parent_permissionx">
+    <div class="girlscout_permission_form_submit" style="text-align:right;margin-right: 100px;margin-bottom: 20px;">
+      <span class="permission_form_tl_mail_success hide" style="margin-right: 100px;background-color:#d3d3d3;">Successfully Sent!</span>
+      <%= link_to "Submit to Troop Leader", "#", :class => "btn btn-primary", :id => "notification_email_to_troop_leader" %>
+    </div>
+  <% if @service_provider.mapping_field_name == 'central_texas' %>
+     <%= render :partial => 'central_texas_permission_form' %>
+  <% elsif @service_provider.mapping_field_name == 'diamonds' %>
+     <%= render :partial => 'diamonds_permission_form' %>
+  <% elsif @service_provider.mapping_field_name == 'alaska' %>
+     <%= render :partial => 'alaska_permission_form' %>
+  <% elsif @service_provider.mapping_field_name == 'arizona_cactus_pine' %>
+     <%= render :partial => 'arizona_cactus_pine_permission_form' %>
+  <% else %>
+  <% end %>
 
 <!-- Central Texas -->
-
+<% if false %>
 <%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
   <%= f.hidden_field :id %>
 
@@ -449,6 +457,7 @@
 
 
 <% end %>
+  <% end %>
 </div>
 </div>
 </div>
