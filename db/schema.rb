@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121231094740) do
+ActiveRecord::Schema.define(:version => 20130102062448) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -1143,6 +1143,9 @@ ActiveRecord::Schema.define(:version => 20121231094740) do
     t.string   "dental_history_oral_habits_other_description",                    :limit => 50
     t.string   "patient_guardian_mother_other_description",                       :limit => 50
     t.string   "patient_guardian_father_other_description",                       :limit => 50
+    t.string   "patient_guardian_father_address_type",                            :limit => 10
+    t.string   "patient_guardian_mother_address_type",                            :limit => 10
+    t.string   "patient_insurance_claim_email",                                   :limit => 10
   end
 
   create_table "medical_appointments", :force => true do |t|

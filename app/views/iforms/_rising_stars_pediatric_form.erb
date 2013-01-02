@@ -1,8 +1,11 @@
 <p style="text-align: center;font-size:18px "><%#= session[:formname] %>
+
   Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
+
 <div style="margin: 0 auto;width:80px;">
   <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
 </div>
+
 <% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
 <%= form_for @iform, :html => {:method => :put, :id => "dd_dd", :class => 'form-horizontal edit_rising_stars_pediatric_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
@@ -21,6 +24,7 @@
   <div class="hidden">
     <%= hidden_field_tag "iform_id", @iform.id %>
   </div>
+
   <div class="tabbable tabs-left iforms-tabs-left">
   <ul class="nav nav-tabs" id="rising_stars_pediatric_iforms_tab_links">
     <li class="active">
@@ -33,13 +37,13 @@
       <%= link_to "Mother", '#mother', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Insurance", '#insurance', "data-toggle" => "tab" %>
+      <%= link_to "Insurance", '#insurance', "data-toggle" => "tab", :id => 'insurance_tab' %>
     </li>
     <li>
       <%= link_to "Dental History", '#dental_history', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Medical History", '#medical_history', "data-toggle" => "tab", :id => 'billing_tab' %>
+      <%= link_to "Medical History", '#medical_history', "data-toggle" => "tab" %>
     </li>
     <li>
       <%= link_to "Social History", '#social_history', "data-toggle" => "tab" %>
@@ -47,6 +51,7 @@
 
 
   </ul>
+
   <div class="tab-content">
   <div class="tab-pane active" id="patient">
     <div class="control-group">
@@ -56,6 +61,7 @@
         <%= f.text_field :Self_Name_Last, :placeholder => "Last Name" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :Self_Sex, 'Gender', :class => 'control-label' %>
       <div class="controls">
@@ -67,12 +73,14 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
         <%= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :Self_Home_Address1, "Address", :class => 'control-label' %>
       <div class="controls">
@@ -85,6 +93,7 @@
         <%= f.text_field :Self_Home_Postal_Code, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :home_phone_1, "Home Phone Number", :class => 'control-label' %>
       <div class="controls">
@@ -95,6 +104,7 @@
         <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_other_phone_1, "Other Phone Number", :class => 'control-label' %>
       <div class="controls">
@@ -105,24 +115,28 @@
         <%= f.text_field :patient_other_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_previously_siblings_list, ' Names of siblings we have previously seen', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :patient_previously_siblings_list, :style => 'width:437px' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :how_did_you_hear_about_office, ' Whom may we thank for referring you to our office', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :how_did_you_hear_about_office, :style => 'width:437px' %>
       </div>
     </div>
+
     <div class="rising_stars_pediatric_iforms_footer_links">
       <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "1" do %>
         Next&nbsp;<i class="icon-chevron-right icon-white"></i>
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="father">
     <div class="control-group">
       <%= f.label :patient_guardian_father, raw('&nbsp;'), :class => 'control-label ' %>
@@ -133,24 +147,25 @@
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Stepfather", :class => 'rising_stars_father_type'  %>Stepfather
+          <%= f.radio_button :patient_guardian_father, "Stepfather", :class => 'rising_stars_father_type' %>Stepfather
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Guardian", :class => 'rising_stars_father_type'  %>Guardian
+          <%= f.radio_button :patient_guardian_father, "Guardian", :class => 'rising_stars_father_type' %>Guardian
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "None", :class => 'rising_stars_father_type'  %>None
+          <%= f.radio_button :patient_guardian_father, "None", :class => 'rising_stars_father_type' %>None
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father, "Other", :class => 'rising_stars_father_type'  %>Other
+          <%= f.radio_button :patient_guardian_father, "Other", :class => 'rising_stars_father_type' %>Other
           &nbsp;&nbsp;
           <%= f.text_field :patient_guardian_father_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_father == 'Other' ? '' : 'hide') %>
         <% end %>
 
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_father_first_name, "Name", :class => 'control-label' %>
       <div class="controls">
@@ -158,12 +173,14 @@
         <%= f.text_field :patient_guardian_father_last_name, :placeholder => "Last Name" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_father_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
         <%= f.date_select :patient_guardian_father_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_father_ssn_1, "Social Security Number ", :class => 'control-label' %>
       <div class="controls">
@@ -174,34 +191,36 @@
         <%= f.text_field :patient_guardian_father_ssn_3, :style => 'width:40px', :placeholder => " ###", :size => 3, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :patient_guardian_father_employer, "Employer", :class => 'control-label' %>
+      <%= f.label :patient_guardian_father_address_type, raw('&nbsp;'), :class => 'control-label ' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_father_employer, :style => 'width:437px' %>
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :patient_guardian_father_address_type, "Same", :class => 'rising_stars_father_address_type' %>Home address
+          same as <%= f.object.Self_Name_First %>
+        <% end %>
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :patient_guardian_father_address_type, "Other", :class => 'rising_stars_father_address_type' %>Other
+        <% end %>
+
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :patient_guardian_father_work_phone_1, "Work Phone", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :patient_guardian_father_work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
-        -
-        <%= f.text_field :patient_guardian_father_work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
-        -
-        <%= f.text_field :patient_guardian_father_work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
-      </div>
-    </div>
-    <div class="control-group">
+
+    <div class="control-group ">
       <%= f.label :patient_guardian_father_address_1, "Address", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_father_address_1, :placeholder => "Address 1", :style => 'width:437px;margin-bottom:10px;' %>
-        <%= f.text_field :patient_guardian_father_address_2, :placeholder => "Address 2", :style => 'width:437px;margin-bottom:10px;' %>
+        <%= f.text_field :patient_guardian_father_address_1, :placeholder => "Address 1", :style => 'width:437px;margin-bottom:10px;', :class => 'rising_stars_father_address' %>
+        <%= f.text_field :patient_guardian_father_address_2, :placeholder => "Address 2", :style => 'width:437px;margin-bottom:10px;', :class => 'rising_stars_father_address' %>
         <br>
-        <%= f.text_field :patient_guardian_father_address_city, :placeholder => "City", :style => 'width:437px;margin-bottom:10px;' %> &nbsp;
+        <%= f.text_field :patient_guardian_father_address_city, :placeholder => "City", :style => 'width:437px;margin-bottom:10px;', :class => 'rising_stars_father_address' %> &nbsp;
         <br>
-        <%= f.select :patient_guardian_father_address_state, options_for_select(StaticData.state, f.object.patient_guardian_father_address_state), {:include_blank => true}, {:style => "width:222px;"} %>
-        <%= f.text_field :patient_guardian_father_address_zip, :placeholder => "Postal / Zip Code" %>
+        <%= f.select :patient_guardian_father_address_state, options_for_select(StaticData.state, f.object.patient_guardian_father_address_state), {:include_blank => true}, :style => "width:222px;", :class => 'rising_stars_father_address' %>
+        <%= f.text_field :patient_guardian_father_address_zip, :placeholder => "Postal / Zip Code", :class => 'rising_stars_father_address' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_father_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
@@ -212,6 +231,7 @@
         <%= f.text_field :patient_guardian_father_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_father_cell_phone_1, "Cell Phone", :class => 'control-label' %>
       <div class="controls">
@@ -222,12 +242,32 @@
         <%= f.text_field :patient_guardian_father_cell_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_father_email, "Email", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :patient_guardian_father_email, :style => 'width:437px' %>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :patient_guardian_father_employer, "Employer", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_guardian_father_employer, :style => 'width:437px' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :patient_guardian_father_work_phone_1, "Work Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_guardian_father_work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :patient_guardian_father_work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :patient_guardian_father_work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+
     <div class="rising_stars_pediatric_iforms_footer_links">
       <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "0" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -237,6 +277,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="mother">
     <div class="control-group">
       <%= f.label :patient_guardian_mother, raw('&nbsp;'), :class => 'control-label ' %>
@@ -266,6 +307,7 @@
 
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_first_name, "Name", :class => 'control-label' %>
       <div class="controls">
@@ -273,12 +315,14 @@
         <%= f.text_field :patient_guardian_mother_last_name, :placeholder => "Last Name" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
         <%= f.date_select :patient_guardian_mother_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_ssn_1, "Social Secrity Number", :class => 'control-label' %>
       <div class="controls">
@@ -289,34 +333,36 @@
         <%= f.text_field :patient_guardian_mother_ssn_3, :style => 'width:40px', :placeholder => " ###", :size => 3, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :patient_guardian_mother_employer, "Employer", :class => 'control-label' %>
+      <%= f.label :patient_guardian_mother_address_type, raw('&nbsp;'), :class => 'control-label ' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_mother_employer, :style => 'width:437px' %>
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :patient_guardian_mother_address_type, "Same", :class => 'rising_stars_mother_address_type' %>Home address
+          same as <%= f.object.Self_Name_First %>
+        <% end %>
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :patient_guardian_mother_address_type, "Other", :class => 'rising_stars_mother_address_type' %>Other
+        <% end %>
+
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :patient_guardian_mother_work_phone_1, "Work Phone", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :patient_guardian_mother_work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
-        -
-        <%= f.text_field :patient_guardian_mother_work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
-        -
-        <%= f.text_field :patient_guardian_mother_work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
-      </div>
-    </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_address_1, "Address", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_mother_address_1, :placeholder => "Address 1", :style => 'width:437px;margin-bottom:10px;' %>
-        <%= f.text_field :patient_guardian_mother_address_2, :placeholder => "Address 2", :style => 'width:437px;margin-bottom:10px;' %>
+        <%= f.text_field :patient_guardian_mother_address_1, :placeholder => "Address 1", :style => 'width:437px;margin-bottom:10px;', :class => 'rising_stars_mother_address' %>
+        <%= f.text_field :patient_guardian_mother_address_2, :placeholder => "Address 2", :style => 'width:437px;margin-bottom:10px;', :class => 'rising_stars_mother_address' %>
         <br>
-        <%= f.text_field :patient_guardian_mother_address_city, :placeholder => "City", :style => 'width:437px;margin-bottom:10px;' %> &nbsp;
+        <%= f.text_field :patient_guardian_mother_address_city, :placeholder => "City", :style => 'width:437px;margin-bottom:10px;', :class => 'rising_stars_mother_address' %> &nbsp;
         <br>
-        <%= f.select :patient_guardian_mother_address_state, options_for_select(StaticData.state, f.object.patient_guardian_mother_address_state), {:include_blank => true}, {:style => "width:222px;"} %>
-        <%= f.text_field :patient_guardian_mother_address_zip, :placeholder => "Postal / Zip Code" %>
+        <%= f.select :patient_guardian_mother_address_state, options_for_select(StaticData.state, f.object.patient_guardian_mother_address_state), {:include_blank => true}, :style => "width:222px;", :class => 'rising_stars_mother_address' %>
+        <%= f.text_field :patient_guardian_mother_address_zip, :placeholder => "Postal / Zip Code", :class => 'rising_stars_mother_address' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
@@ -327,6 +373,7 @@
         <%= f.text_field :patient_guardian_mother_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_cell_phone_1, "Cell Phone", :class => 'control-label' %>
       <div class="controls">
@@ -337,12 +384,32 @@
         <%= f.text_field :patient_guardian_mother_cell_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_guardian_mother_email, "Email", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :patient_guardian_mother_email, :style => 'width:437px' %>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :patient_guardian_mother_employer, "Employer", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_guardian_mother_employer, :style => 'width:437px' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :patient_guardian_mother_work_phone_1, "Work Phone", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_guardian_mother_work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :patient_guardian_mother_work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :patient_guardian_mother_work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
+    </div>
+
     <div class="rising_stars_pediatric_iforms_footer_links">
       <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "1" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -352,6 +419,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="insurance">
     <div class="control-group">
       <p style="text-align: justify">
@@ -360,74 +428,72 @@
         information:
       </p>
     </div>
-    <div class="control-group">
-      <%= f.label :insurance_do_you_have_more_than_one_dental_insurance, 'Do you have more than one dental insurance?', :class => 'control-label' %>
-      <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_do_you_have_more_than_one_dental_insurance, "Yes", :class => 'rising_stars_more_than_1_insurance' %>Yes
-        <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_do_you_have_more_than_one_dental_insurance, "No", :class => 'rising_stars_more_than_1_insurance' %>No
-        <% end %>
-      </div>
-    </div>
-    <div class="control-group rising_stars_second_company">
-      <%= f.label :insurance_second_insurance_company_name, "Second insurance company name", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :insurance_second_insurance_company_name %>
-      </div>
-    </div>
+
     <div class="control-group">
       <%= f.label :insurance_insured, 'Insured', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_insured, "Father" %>Father
+          <%= f.radio_button :insurance_insured, "Father", :class => 'rising_stars_insured' %><span id="father_insurance_insured">Father</span>
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_insured, "Mother" %>Mother
+          <%= f.radio_button :insurance_insured, "Mother", :class => 'rising_stars_insured' %><span id="mother_insurance_insured">Mother</span>
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_insured, "Other" %>Other
+          <%= f.radio_button :insurance_insured, "Other", :class => 'rising_stars_insured' %>Other
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_person_first_name, 'Name', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :insurance_person_first_name, :placeholder => "First Name", :class => "input-small", :style => 'width:95px' %>
-        <%= f.text_field :insurance_person_last_name, :placeholder => "Last Name", :class => "input-small", :style => 'width:95px' %>
+        <%= f.text_field :insurance_person_first_name, :placeholder => "First Name", :class => "input-small rising_stars_insured_fields", :style => 'width:95px' %>
+        <%= f.text_field :insurance_person_last_name, :placeholder => "Last Name", :class => "input-small rising_stars_insured_fields", :style => 'width:95px' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_relation_ship_to_patient, ' Relationship to patient ', :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :insurance_relation_ship_to_patient %>
+        <%= f.text_field :insurance_relation_ship_to_patient, :class => 'rising_stars_insured_fields' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_employer, "Employer", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :insurance_employer %>
+        <%= f.text_field :insurance_employer, :class => 'rising_stars_insured_fields' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_company_name, "Insurance Company", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :insurance_company_name %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_member_id, "Member ID", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :insurance_member_id %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_group, "Group", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :insurance_group %>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :patient_insurance_claim_email, "Insurance claims mailing address", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :patient_insurance_claim_email %>
+      </div>
+    </div>
+
     <div class="control-group">
       <%= f.label :insurance_phone_1, "Phone Number", :class => 'control-label' %>
       <div class="controls">
@@ -438,6 +504,7 @@
         <%= f.text_field :insurance_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :insurance_address_1, "Address", :class => 'control-label' %>
       <div class="controls">
@@ -446,10 +513,18 @@
         <br>
         <%= f.text_field :insurance_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
         <br>
-        <%= f.select :insurance_address_state, options_for_select(StaticData.state, f.object.Self_Home_State), {:include_blank => true}, {:style => "width:222px;"} %>
+        <%= f.select :insurance_address_state, options_for_select(StaticData.state, f.object.insurance_address_state), {:include_blank => true}, {:style => "width:222px;"} %>
         <%= f.text_field :insurance_address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+
+    <div class="control-group rising_stars_second_company">
+      <%= f.label :insurance_second_insurance_company_name, "Second insurance company name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :insurance_second_insurance_company_name %>
+      </div>
+    </div>
+
     <div class="rising_stars_pediatric_iforms_footer_links">
       <%= link_to "#", :class => 'btn btn-primary rising_stars_pediatric_iforms_nav_link', :data_tab_index => "2" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -470,10 +545,12 @@
     <%= f.label :dental_history_patient_first_time_to_visit, ' Is this Patient’s first visit to the dentist ', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :dental_history_patient_first_time_to_visit, "Yes", :class => 'rising_stars_first_tim_visit' %>Yes
+        <%= f.radio_button :dental_history_patient_first_time_to_visit, "Yes", :class => 'rising_stars_first_tim_visit' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :dental_history_patient_first_time_to_visit, "No", :class => 'rising_stars_first_tim_visit' %>No
+        <%= f.radio_button :dental_history_patient_first_time_to_visit, "No", :class => 'rising_stars_first_tim_visit' %>
+        No
       <% end %>
     </div>
   </div>
@@ -727,7 +804,8 @@
     <%= f.label :medical_history_patient_physical_disabilities, ' Patient has physical disabilities/developmental delays', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_patient_physical_disabilities, "Yes", :class => 'rising_stars_physical_dev' %>Yes
+        <%= f.radio_button :medical_history_patient_physical_disabilities, "Yes", :class => 'rising_stars_physical_dev' %>
+        Yes
       <% end %>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_physical_disabilities, "No", :class => 'rising_stars_physical_dev' %>
@@ -747,7 +825,7 @@
         <%= f.radio_button :medical_history_patient_surgical_operations, "No", :class => 'rising_stars_surgical_operations' %>
         No
       <% end %> &nbsp;&nbsp;
-<%= f.text_field :medical_history_patient_surgical_operations_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px' , :class => f.object.medical_history_patient_surgical_operations == 'Yes' ? '' : 'hide'%>
+      <%= f.text_field :medical_history_patient_surgical_operations_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_patient_surgical_operations == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
   <div class="control-group">
@@ -801,7 +879,7 @@
       <%= f.text_field :medical_history_asthama_or_breathing_prob_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
-  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>" >
+  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>">
     <%= f.label :medical_history_er_for_asthma_attack, ' Patient went to the ER for an asthma attack', :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -815,13 +893,13 @@
       <%= f.text_field :medical_history_er_for_asthma_attack_description, :placeholder => 'Please Explain', :style => 'width: 326px;height:15px', :class => f.object.medical_history_er_for_asthma_attack == 'Yes' ? '' : 'hide' %>
     </div>
   </div>
-  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>" >
+  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>">
     <%= f.label :medical_history_induces_breathing_prob, ' What induces the breathing problems', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_induces_breathing_prob, :style => 'width: 435px;' %>
     </div>
   </div>
-  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>" >
+  <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>">
     <%= f.label :medical_history_asthma_medication, ' Asthma medication ', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :medical_history_asthma_medication, :style => 'width: 435px;' %>
@@ -1304,16 +1382,16 @@
     </td>
     <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_Convulsions_or_seizures, "Yes" , :class => 'rising_stars_seizures' %>
+        <%= f.radio_button :medical_history_Convulsions_or_seizures, "Yes", :class => 'rising_stars_seizures' %>
       <% end %>
     </td>
     <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :medical_history_Convulsions_or_seizures, "No" , :class => 'rising_stars_seizures' %>
+        <%= f.radio_button :medical_history_Convulsions_or_seizures, "No", :class => 'rising_stars_seizures' %>
       <% end %>
     </td>
   </tr>
-  <tr class="rising_stars_seizures_date + <%= f.object.medical_history_Convulsions_or_seizures == 'Yes' ? '' : 'hide' %>" >
+  <tr class="rising_stars_seizures_date + <%= f.object.medical_history_Convulsions_or_seizures == 'Yes' ? '' : 'hide' %>">
     <td>
       Date of last seizure
     </td>
@@ -1413,7 +1491,7 @@
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_patient_is,'Progressing normally' %>Progressing normally
+          <%= f.radio_button :social_history_patient_is, 'Progressing normally' %>Progressing normally
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -1516,20 +1594,86 @@
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
       changeYear:true,
-      dateFormat: 'yy-mm-dd'
+      dateFormat:'yy-mm-dd'
     })
   });
 
-  if($('.rising_stars_first_tim_visit:checked').val() == 'No'){
+  if ($('.rising_stars_first_tim_visit:checked').val() == 'No') {
     $('.rising_stars_last_visit').show();
-  }else{
+  } else {
     $('.rising_stars_last_visit').hide();
   }
 
-  if($('.rising_stars_more_than_1_insurance:checked').val() == 'No'){
-    $('.rising_stars_second_company').hide();
-  }else{
-    $('.rising_stars_second_company').show();
+  if ($(".rising_stars_father_type:checked").val() == 'Other') {
+     $('#father_insurance_insured').text($('#iform_patient_guardian_father_other_description').val());
   }
+  else {
+     $('#father_insurance_insured').text($('.rising_stars_father_type:checked').val());
+  }
+
+  if ($(".rising_stars_mother_type:checked").val() == 'Other') {
+    $('#mother_insurance_insured').text($('#iform_patient_guardian_mother_other_description').val());
+  }
+  else {
+    $('#mother_insurance_insured').text($('.rising_stars_mother_type:checked').val());
+  }
+
+  if($('.rising_stars_father_address_type:checked').val() == 'Same'){
+    $('.rising_stars_father_address').attr('readonly', true);
+    $('#iform_patient_guardian_father_address_1').val($('#iform_Self_Home_Address1').val());
+    $('#iform_patient_guardian_father_address_2').val($('#iform_Self_Home_Address2').val());
+    $('#iform_patient_guardian_father_address_city').val($('#iform_Self_Home_City').val());
+    $('#iform_patient_guardian_father_address_state').val($('#iform_Self_Home_State').val());
+    $('#iform_patient_guardian_father_address_zip').val($('#iform_Self_Home_Postal_Code').val());
+  }
+  else{
+    $('.rising_stars_father_address').attr('readonly', false);
+    $('#iform_patient_guardian_father_address_1').val('');
+    $('#iform_patient_guardian_father_address_2').val('');
+    $('#iform_patient_guardian_father_address_city').val('');
+    $('#iform_patient_guardian_father_address_state').val('');
+    $('#iform_patient_guardian_father_address_zip').val('');
+  }
+
+  if($('.rising_stars_mother_address_type:checked').val() == 'Same'){
+    $('.rising_stars_mother_address').attr('readonly', true);
+    $('#iform_patient_guardian_mother_address_1').val($('#iform_Self_Home_Address1').val());
+    $('#iform_patient_guardian_mother_address_2').val($('#iform_Self_Home_Address2').val());
+    $('#iform_patient_guardian_mother_address_city').val($('#iform_Self_Home_City').val());
+    $('#iform_patient_guardian_mother_address_state').val($('#iform_Self_Home_State').val());
+    $('#iform_patient_guardian_mother_address_zip').val($('#iform_Self_Home_Postal_Code').val());
+  }
+  else{
+    $('.rising_stars_mother_address').attr('readonly', false);
+    $('#iform_patient_guardian_mother_address_1').val('');
+    $('#iform_patient_guardian_mother_address_2').val('');
+    $('#iform_patient_guardian_mother_address_city').val('');
+    $('#iform_patient_guardian_mother_address_state').val('');
+    $('#iform_patient_guardian_mother_address_zip').val('');
+  }
+
+  if ($('.rising_stars_insured:checked').val() == 'Father') {
+    $('.rising_stars_insured_fields').attr('readonly',true);
+    $('#iform_insurance_person_first_name').val($('#iform_patient_guardian_father_first_name').val());
+    $('#iform_insurance_person_last_name').val($('#iform_patient_guardian_father_last_name').val());
+    $('#iform_insurance_relation_ship_to_patient').val($(".rising_stars_father_type:checked").val() == 'Other' ? $('#iform_patient_guardian_father_other_description').val() : $(".rising_stars_father_type:checked").val());
+    $('#iform_insurance_employer').val($('#iform_patient_guardian_father_employer').val());
+  }
+  else if ($('.rising_stars_insured:checked').val() == 'Mother') {
+    $('.rising_stars_insured_fields').attr('readonly',true);
+    $('#iform_insurance_person_first_name').val($('#iform_patient_guardian_mother_first_name').val());
+    $('#iform_insurance_person_last_name').val($('#iform_patient_guardian_mother_last_name').val());
+    $('#iform_insurance_relation_ship_to_patient').val($(".rising_stars_mother_type:checked").val() == 'Other' ? $('#iform_patient_guardian_mother_other_description').val() : $(".rising_stars_mother_type:checked").val());
+    $('#iform_insurance_employer').val($('#iform_patient_guardian_mother_employer').val());
+  }
+  else{
+    $('.rising_stars_insured_fields').attr('readonly',false);
+    $('#iform_insurance_person_first_name').val('');
+    $('#iform_insurance_person_last_name').val('');
+    $('#iform_insurance_relation_ship_to_patient').val('');
+    $('#iform_insurance_employer').val('');
+  }
+
+
 
 </script>

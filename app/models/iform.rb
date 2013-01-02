@@ -13,6 +13,7 @@ class Iform < ActiveRecord::Base
       @You_Age = Date.today.strftime('%Y%m%d').to_i - iform.Self_Birthdate.strftime('%Y%m%d').to_i
       @You_Age = @You_Age.to_s.split('')
     end
+
     @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
       "Date" => iform.updated_at.strftime('%m') + '-' + iform.updated_at.strftime('%d') + '-' + iform.updated_at.strftime('%Y'),
       "PatientName" => iform.Self_Name_First.to_s + ' ' + iform.Self_Name_Last,
@@ -80,7 +81,7 @@ class Iform < ActiveRecord::Base
 
       # Patient Tab
       "Name" => iform.Self_Name_First.to_s + ' ' + iform.Self_Name_Last,
-      "Address" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ',')) + (iform.Self_Home_Address2.empty? ? ' ' : iform.Self_Home_Address2.to_s),
+      "Address" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ', ')) + (iform.Self_Home_Address2.empty? ? ' ' : iform.Self_Home_Address2.to_s),
       "Age" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' : '',
       "BirthDate" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m-%d-%Y') : '',
       "City" => iform.Self_Home_City,
@@ -109,7 +110,7 @@ class Iform < ActiveRecord::Base
       "FatherHomeTelephoneNumber" => iform.patient_guardian_father_home_phone_1.to_s + '-' + iform.patient_guardian_father_home_phone_2.to_s + '-' + iform.patient_guardian_father_home_phone_3.to_s,
       "FatherSSN" => iform.patient_guardian_father_ssn_1.to_s + '-' + iform.patient_guardian_father_ssn_2.to_s + '-' + iform.patient_guardian_father_ssn_3.to_s,
       "FatherWorkTelephoneNumber" => iform.patient_guardian_father_work_phone_1.to_s + '-' + iform.patient_guardian_father_work_phone_2.to_s + '-' + iform.patient_guardian_father_work_phone_3.to_s,
-      "FatherOtherDescription" => iform.patient_guardian_father_other_description,
+      "FatherOtherDescription" => iform.patient_guardian_father == 'Other' ? iform.patient_guardian_father_other_description : '',
 
       # Mother Tab
       "MotherAddress" => (iform.patient_guardian_mother_address_1.empty? ? ' ' : (iform.patient_guardian_mother_address_1.to_s + ',')) + (iform.patient_guardian_mother_address_2.empty? ? ' ' : (iform.patient_guardian_mother_address_2.to_s + ', ')) + iform.patient_guardian_mother_address_city.to_s + ' ' + iform.patient_guardian_mother_address_state.to_s + ' ' + iform.patient_guardian_mother_address_zip.to_s,
@@ -125,11 +126,11 @@ class Iform < ActiveRecord::Base
       "MotherName" => iform.patient_guardian_mother_first_name.to_s + ' ' + iform.patient_guardian_mother_last_name.to_s,
       "MotherSSN" => iform.patient_guardian_mother_ssn_1.to_s + '-' + iform.patient_guardian_mother_ssn_2.to_s + '-' + iform.patient_guardian_mother_ssn_3.to_s,
       "MotherWorkTelephoneNumber" => iform.patient_guardian_mother_work_phone_1.to_s + '-' + iform.patient_guardian_mother_work_phone_2.to_s + '-' + iform.patient_guardian_mother_work_phone_3.to_s,
-      "MotherOtherDescription" => iform.patient_guardian_mother_other_description,
+      "MotherOtherDescription" =>  iform.patient_guardian_mother == 'Other' ? iform.patient_guardian_mother_other_description : '',
 
       # Insurance
-      "InsuranceClaimsMailingAddress" => iform.insurance_insured == 'Father' ? iform.patient_guardian_father_email : (iform.insurance_insured == 'Mother' ? iform.patient_guardian_mother_email : ''),
-      "DentalInsuranceNo" => iform.insurance_company_name == '' ? 'Yes' : '',
+      "InsuranceClaimsMailingAddress" => iform.patient_insurance_claim_email, #iform.insurance_insured == 'Father' ? iform.patient_guardian_father_email : (iform.insurance_insured == 'Mother' ? iform.patient_guardian_mother_email : ''),
+      "DentalInsuranceNo" => iform.insurance_company_name ? iform.insurance_company_name == '' ? 'Yes' : '' : '',
       "DentalInsuranceYes" => iform.insurance_company_name == '' ? '' : 'Yes',
       "InsuranceCompany" => iform.insurance_company_name,
       "InsuranceGroupNumber" => iform.insurance_group,
@@ -165,14 +166,14 @@ class Iform < ActiveRecord::Base
       "AgeGaveUpSippyCup" => iform.dental_history_age_at_stop_bottle_sippy_cup,
       "BadBreath" => iform.dental_history_bad_breath ? 'Yes' : '',
       "BleedingGums" => iform.dental_history_patient_bleeding_gums ? 'Yes' : '',
-      "BrushTeethDaily" => iform.dental_history_does_child_flosh_teeth == 'Daily' ? 'Yes' : '',
-      "BrushTeethSometimes" => iform.dental_history_does_child_flosh_teeth == 'Sometimes' ? 'Yes' : '',
-      "BrushTeethNever" => iform.dental_history_does_child_flosh_teeth == 'Never' ? 'Yes' : '',
+      "FlossTeethDaily" => iform.dental_history_does_child_flosh_teeth == 'Daily' ? 'Choice1' : '',
+      "FlossTeethSometimes" => iform.dental_history_does_child_flosh_teeth == 'Sometimes' ? 'Choice1' : '',
+      "FlossTeethNever" => iform.dental_history_does_child_flosh_teeth == 'Never' ? 'Choice1' : '',
       "Cavities" => iform.dental_history_cavities ? 'Yes' : '',
       "CrookedTeeth" => iform.dental_history_crooked_teeth ? 'Yes' : '',
-      "DateOfLastVisit" => iform.dental_history_patient_last_visiting_date,
-      "MoreThanOneDentalInsuranceNo" => iform.insurance_do_you_have_more_than_one_dental_insurance == 'No' ? 'Yes' : '',
-      "MoreThanOneDentalInsuranceYes" => iform.insurance_do_you_have_more_than_one_dental_insurance == 'Yes' ? 'Yes' : '',
+      "DateOfLastVisit" => iform.dental_history_patient_last_visiting_date ? iform.dental_history_patient_last_visiting_date.strftime('%m-%d-%Y') : '',
+      "MoreThanOneDentalInsuranceNo" => iform.insurance_second_insurance_company_name == '' ? 'Yes' : '',
+      "MoreThanOneDentalInsuranceYes" => iform.insurance_second_insurance_company_name == '' ? '' : 'Yes',
       "DiscoloredTeeth" => iform.dental_history_discolored_teeth ? 'Yes' : '',
       "ElectricToothbrushNo" => iform.dental_history_does_child_brush_teeth_electric_tooth_brush == 'No' ? 'Yes' : '',
       "ElectricToothbrushYes" => iform.dental_history_does_child_brush_teeth_electric_tooth_brush == 'Yes' ? 'Yes' : '',
@@ -184,9 +185,9 @@ class Iform < ActiveRecord::Base
       "Friendly" => iform.dental_history_patient_behave_today_friendly ? 'Yes' : '',
       "Happy" => iform.dental_history_patient_behave_today_happy ? 'Yes' : '',
       "HabitsOther" => iform.dental_history_other ? 'Yes' : '',
-      "HowOftenTeethBrushing" => iform.dental_history_does_child_brush_teeth ? 'Yes' : '',
+      "HowOftenTeethBrushing" => iform.dental_history_does_child_brush_teeth ? (iform.dental_history_does_child_brush_teeth ? 'Yes' : '') : '',
       "InheritedDentalCharacteristics" => iform.dental_history_patient_inherited_any_dental_characteristics,
-      "InjuriesToTeeth" => iform.dental_history_patient_have_any_injuries ? 'Yes' : '',
+      "InjuriesToTeeth" => iform.dental_history_patient_have_any_injuries ? (iform.dental_history_patient_have_any_injuries ? 'Yes' : '') : '',
       "JawPainFromJoint" => iform.dental_history_jaw_pain_from_joint ? 'Yes' : '',
       "KidneyDiseaseNo" => iform.medical_history_kidney_disease == 'No' ? 'Yes' : '',
       "KidneyDiseaseYes" => iform.medical_history_kidney_disease == 'Yes' ? 'Yes' : '',
@@ -194,8 +195,6 @@ class Iform < ActiveRecord::Base
       "LiverDiseaseNo" => iform.medical_history_liver_disease == 'No' ? 'Yes' : '',
       "LiverDiseaseYes" => iform.medical_history_liver_disease == 'Yes' ? 'Yes' : '',
       "LooseTeeth" => iform.dental_history_loose_teeth ? 'Yes' : '',
-      "MoreThanOneDentalInsuranceNo" => iform.medical_history_liver_disease == 'No' ? 'Yes' : '',
-      "MoreThanOneDentalInsuranceYes" => iform.medical_history_liver_disease == 'Yes' ? 'Yes' : '',
       "Pacifier" => iform.dental_history_pacifier_use ? 'Yes' : '',
       "ReasonForVisit" => iform.dental_history_why_patient_here_today,
       "ReceiveFluorideDescription" => iform.dental_history_patient_receive_fluoride_in_any_form_description,
@@ -311,7 +310,7 @@ class Iform < ActiveRecord::Base
       "WhatInducesBreathingProblemsDescription" => iform.medical_history_induces_breathing_prob,
 
     })
-    #form_pdf_path = "#{PDFFILES_PATH}Karen_Naples_1.pdf"
+    form_pdf_path = "#{PDFFILES_PATH}Rising_Stars_Pediatric_Dentistry.pdf"
     #raise @pdftk.fields(form_pdf_path).to_yaml
     iform_file = File.new(path, 'rb')
     iform.pdffile_path = iform_file.read()
