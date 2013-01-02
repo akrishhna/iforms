@@ -201,7 +201,7 @@ class GirlScoutsActivity < ActiveRecord::Base
       "TroopLeaderEmergencyContactCellNumber" => @fields['Troop Emergency Contact Cell Phone'] ? (@activity.troop_leader_emergency_contact_cell_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_cell_number_3.to_s) : '',
       "TroopLeaderEmergencyContactNameAddress" => @fields['Troop Emergency Contact Address'] ? (@activity.troop_leader_emergency_contact_name_address_street.to_s + ',' + (@activity.troop_leader_emergency_contact_name_address_line.to_s.present? ? (@activity.troop_leader_emergency_contact_name_address_line.to_s + ', ') : ' ') + @activity.troop_leader_emergency_contact_name_address_city.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_state.to_s + ' ' + @activity.troop_leader_emergency_contact_name_address_zip.to_s) : '',
 
-      "ActivityWillOrMayInvolveUnusualRisk" => @fields['Activity Will Involve Unusual Risk'] ? (@activity.activity_will_involve_unusual_risk == 'Yes' ? 'Yes' : 'No') : '',
+      "ActivityWillOrMayInvolve UnusualRisk" => @fields['Activity Will Involve Unusual Risk'] ? (@activity.activity_will_involve_unusual_risk == 'Yes' ? 'On' : 'Off') : '',
 
       #others
 

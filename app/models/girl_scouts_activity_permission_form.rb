@@ -276,9 +276,9 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "Medications" => @fields['Medications'] ? @girl_scouts_permission_form.medications : '',
 
       "ChangesToGeneralPermissionSlip" => @fields['Changes To General Permission Slip'] ? @girl_scouts_permission_form.gapf_changes_to_general_permission_slip : '',
-      "SpecialNeeds" => @fields['Special Needs'] ? (@girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'Yes' ? 'Yes' : 'No') : '',
-      "NoSpecialNeeds" => @fields['Special Needs'] ? (@girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'No' ? 'Yes' : 'No') : '',
-      "UnusualRiskAcknowledgement" => @fields['Unusual Risk Acknowledgement'] ? (@girl_scouts_permission_form.gapf_unusual_risk_acknowledgement == 'Yes' ? 'Yes' : 'No') : '',
+      "SpecialNeeds" => @fields['Special Needs Medications Comments'] ? (@girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'Yes' ? 'On' : 'Off') : '',
+      "NoSpecialNeeds" => @fields['Special Needs Medications Comments'] ? (@girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'No' ? 'Off' : 'On') : '',
+      "UnusualRiskAcknowledgement" => @fields['Unusual Risk Acknowledgement'] ? (@girl_scouts_permission_form.gapf_unusual_risk_acknowledgement == 'Yes' ? 'On' : 'Off') : '',
       "Parent1AddressCityStateZip" => @fields['Parent 1 Address'] ? (@girl_scouts_permission_form.gapf_parent_1_address_1.to_s + (@girl_scouts_permission_form.gapf_parent_1_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.gapf_parent_1_address_2.to_s) +  ' ' + @girl_scouts_permission_form.gapf_parent_1_address_city.to_s + ' ' +  @girl_scouts_permission_form.gapf_parent_1_address_state.to_s + ' ' +  @girl_scouts_permission_form.gapf_parent_1_address_zip.to_s : ' ')) : '',
       "Parent1HomePhone" => @girl_scouts_permission_form.gapf_parent_1_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_home_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_1_work_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_work_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_work_phone_3.to_s,
       "Parent1MobilePhone" => @girl_scouts_permission_form.gapf_parent_1_mobile_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_mobile_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_mobile_phone_3.to_s + '           ' + @girl_scouts_permission_form.gapf_parent_1_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_other_phone_3.to_s,
@@ -288,7 +288,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "Parent2MobilePhone" => @girl_scouts_permission_form.gapf_parent_2_mobile_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_mobile_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_mobile_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_2_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_other_phone_3.to_s,
       "Parent2EmailAddress" => @fields['Parent 2 Email Address'] ? @girl_scouts_permission_form.gapf_parent_2_email : '',
     })
-    # raise @pdftk.fields(form_pdf_path).to_yaml
+     #raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 
