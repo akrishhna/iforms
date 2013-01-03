@@ -8,7 +8,7 @@ class Appointment < ActiveRecord::Base
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :unless => "email.blank?"
 
 
- validate :validate_date
+ #validate :validate_date
 
   def validate_date
 
@@ -17,7 +17,7 @@ class Appointment < ActiveRecord::Base
     end
   end
 
-  validate :validate_time
+ # validate :validate_time
 
   def validate_time
     if !date.blank? and date<Date.today
