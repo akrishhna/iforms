@@ -9,7 +9,6 @@ class AddMoreRisingStarsFieldsToIforms < ActiveRecord::Migration
   def down
     remove_column :iforms, :patient_guardian_father_address_type
     remove_column :iforms, :patient_guardian_mother_address_type
-    #remove_column :iforms, :social_history_patient_adopted_age_years_months
-    remove_column :iforms, :patient_insurance_claim_email
+    remove_column :iforms, :social_history_patient_adopted_age_years_months
   end
 end
