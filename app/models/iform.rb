@@ -68,21 +68,19 @@ class Iform < ActiveRecord::Base
   end
 
   def self.rising_stars_pediatric_form_generator(iform)
+
     pdftkpath = PDFTK_PATH
     pdffilepath = PDFFILES_PATH
     path = pdffilepath + "#{iform.path}.pdf"
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
     @pdf_form = iform.formname.gsub(' ', '_')
-    if iform.Self_Birthdate
-      @You_Age = Date.today.strftime('%Y%m%d').to_i - iform.Self_Birthdate.strftime('%Y%m%d').to_i
-      @You_Age = @You_Age.to_s.split('')
-    end
+
     @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
 
       # Patient Tab
       "Name" => iform.Self_Name_First.to_s + ' ' + iform.Self_Name_Last,
       "Address" => (iform.Self_Home_Address1.empty? ? ' ' : (iform.Self_Home_Address1.to_s + ', ')) + (iform.Self_Home_Address2.empty? ? ' ' : iform.Self_Home_Address2.to_s),
-      "Age" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' : '',
+      "Age" => iform.Self_Birthdate ? (StaticData.age_calculation(iform.Self_Birthdate).to_s + ' Y' ): '',
       "BirthDate" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m-%d-%Y') : '',
       "City" => iform.Self_Home_City,
       "Female" => iform.Self_Sex == 'f' ? 'Yes' : '',
@@ -98,7 +96,7 @@ class Iform < ActiveRecord::Base
 
       # Father Tab
       "FatherName" => iform.patient_guardian_father_first_name.to_s + ' ' + iform.patient_guardian_father_last_name.to_s,
-      "FatherAddress" => (iform.patient_guardian_father_address_1.empty? ? ' ' : (iform.patient_guardian_father_address_1.to_s + ',')) + (iform.patient_guardian_father_address_2.empty? ? ' ' : (iform.patient_guardian_father_address_2.to_s + ', ')) + iform.patient_guardian_father_address_city.to_s + ' ' + iform.patient_guardian_father_address_state.to_s + ' ' + iform.patient_guardian_father_address_zip.to_s,
+      "FatherAddress" => iform.patient_guardian_mother_address_type == 'Same' ? 'Same' : (iform.patient_guardian_father_address_1.empty? ? ' ' : (iform.patient_guardian_father_address_1.to_s + ',')) + (iform.patient_guardian_father_address_2.empty? ? ' ' : (iform.patient_guardian_father_address_2.to_s + ', ')) + iform.patient_guardian_father_address_city.to_s + ' ' + iform.patient_guardian_father_address_state.to_s + ' ' + iform.patient_guardian_father_address_zip.to_s,
       "FatherBirthDate" => iform.patient_guardian_father_birth_date ? iform.patient_guardian_father_birth_date.strftime('%m-%d-%Y') : '',
       "FatherCellTelephoneNumber" => iform.patient_guardian_father_cell_phone_1.to_s + '-' + iform.patient_guardian_father_cell_phone_2.to_s + '-' + iform.patient_guardian_father_cell_phone_3.to_s,
       "FatherEmail" => iform.patient_guardian_father_email,
@@ -107,13 +105,13 @@ class Iform < ActiveRecord::Base
       "FatherGuardian" => iform.patient_guardian_father == 'Guardian' ? 'Yes' : '',
       "FatherOther" => iform.patient_guardian_father == 'Other' ? 'Yes' : '',
       "Stepfather" => iform.patient_guardian_father == 'Stepfather' ? 'Yes' : '',
-      "FatherHomeTelephoneNumber" => iform.patient_guardian_father_home_phone_1.to_s + '-' + iform.patient_guardian_father_home_phone_2.to_s + '-' + iform.patient_guardian_father_home_phone_3.to_s,
+      "FatherHomeTelephoneNumber" => iform.patient_guardian_father_address_type == 'Same' ? 'Same' : (iform.patient_guardian_father_home_phone_1.to_s + '-' + iform.patient_guardian_father_home_phone_2.to_s + '-' + iform.patient_guardian_father_home_phone_3.to_s),
       "FatherSSN" => iform.patient_guardian_father_ssn_1.to_s + '-' + iform.patient_guardian_father_ssn_2.to_s + '-' + iform.patient_guardian_father_ssn_3.to_s,
       "FatherWorkTelephoneNumber" => iform.patient_guardian_father_work_phone_1.to_s + '-' + iform.patient_guardian_father_work_phone_2.to_s + '-' + iform.patient_guardian_father_work_phone_3.to_s,
       "FatherOtherDescription" => iform.patient_guardian_father == 'Other' ? iform.patient_guardian_father_other_description : '',
 
       # Mother Tab
-      "MotherAddress" => (iform.patient_guardian_mother_address_1.empty? ? ' ' : (iform.patient_guardian_mother_address_1.to_s + ',')) + (iform.patient_guardian_mother_address_2.empty? ? ' ' : (iform.patient_guardian_mother_address_2.to_s + ', ')) + iform.patient_guardian_mother_address_city.to_s + ' ' + iform.patient_guardian_mother_address_state.to_s + ' ' + iform.patient_guardian_mother_address_zip.to_s,
+      "MotherAddress" => iform.patient_guardian_mother_address_type == 'Same' ? 'Same' : (iform.patient_guardian_mother_address_1.empty? ? ' ' : (iform.patient_guardian_mother_address_1.to_s + ',')) + (iform.patient_guardian_mother_address_2.empty? ? ' ' : (iform.patient_guardian_mother_address_2.to_s + ', ')) + iform.patient_guardian_mother_address_city.to_s + ' ' + iform.patient_guardian_mother_address_state.to_s + ' ' + iform.patient_guardian_mother_address_zip.to_s,
       "MotherBirthDate" => iform.patient_guardian_mother_birth_date ? iform.patient_guardian_mother_birth_date.strftime('%m-%d-%Y') : '',
       "MotherCellTelephoneNumber" => iform.patient_guardian_mother_cell_phone_1.to_s + '-' + iform.patient_guardian_mother_cell_phone_2.to_s + '-' + iform.patient_guardian_mother_cell_phone_3.to_s,
       "MotherEmail" => iform.patient_guardian_mother_email,
@@ -122,14 +120,14 @@ class Iform < ActiveRecord::Base
       "MotherGuardian" => iform.patient_guardian_mother == 'Guardian' ? 'Yes' : '',
       "Stepmother" => iform.patient_guardian_father == 'Stepmother' ? 'Yes' : '',
       "MotherOther" => iform.patient_guardian_mother == 'Other' ? 'Yes' : '',
-      "MotherHomeTelephoneNumber" => iform.patient_guardian_mother_home_phone_1.to_s + '-' + iform.patient_guardian_mother_home_phone_2.to_s + '-' + iform.patient_guardian_mother_home_phone_3.to_s,
+      "MotherHomeTelephoneNumber" => iform.patient_guardian_mother_address_type == 'Same' ? 'Same' : iform.patient_guardian_mother_home_phone_1.to_s + '-' + iform.patient_guardian_mother_home_phone_2.to_s + '-' + iform.patient_guardian_mother_home_phone_3.to_s,
       "MotherName" => iform.patient_guardian_mother_first_name.to_s + ' ' + iform.patient_guardian_mother_last_name.to_s,
       "MotherSSN" => iform.patient_guardian_mother_ssn_1.to_s + '-' + iform.patient_guardian_mother_ssn_2.to_s + '-' + iform.patient_guardian_mother_ssn_3.to_s,
       "MotherWorkTelephoneNumber" => iform.patient_guardian_mother_work_phone_1.to_s + '-' + iform.patient_guardian_mother_work_phone_2.to_s + '-' + iform.patient_guardian_mother_work_phone_3.to_s,
-      "MotherOtherDescription" =>  iform.patient_guardian_mother == 'Other' ? iform.patient_guardian_mother_other_description : '',
+      "MotherOtherDescription" => iform.patient_guardian_mother == 'Other' ? iform.patient_guardian_mother_other_description : '',
 
       # Insurance
-      "InsuranceClaimsMailingAddress" => iform.patient_insurance_claim_email, #iform.insurance_insured == 'Father' ? iform.patient_guardian_father_email : (iform.insurance_insured == 'Mother' ? iform.patient_guardian_mother_email : ''),
+      "InsuranceClaimsMailingAddress" => (iform.insurance_address_1.empty? ? ' ' : (iform.insurance_address_1.to_s + ', ')) + (iform.insurance_address_2.empty? ? ' ' : (iform.insurance_address_2.to_s + ' ')) + iform.insurance_address_city.to_s + ' ' + iform.insurance_address_state.to_s + ' ' + iform.insurance_address_zip.to_s,
       "DentalInsuranceNo" => iform.insurance_company_name ? iform.insurance_company_name == '' ? 'Yes' : '' : '',
       "DentalInsuranceYes" => iform.insurance_company_name == '' ? '' : 'Yes',
       "InsuranceCompany" => iform.insurance_company_name,
@@ -142,7 +140,7 @@ class Iform < ActiveRecord::Base
       "SecondaryInsuranceCompany" => iform.insurance_second_insurance_company_name,
 
       # Social History Tab
-      "AdoptedAge" => iform.social_history_patient_adopted_age,
+      "AdoptedAge" => iform.social_history_patient_adopted_age ? (iform.social_history_patient_adopted_age + " " + iform.social_history_patient_adopted_age_years_months) : '',
       "AdoptedNo" => iform.social_history_patient_adopted == 'No' ? 'Yes' : '',
       "AdoptedYes" => iform.social_history_patient_adopted == 'Yes' ? 'Yes' : '',
       "AdvancedLearning" => iform.social_history_patient_is == 'Advanced in learning' ? 'Yes' : '',
@@ -185,13 +183,13 @@ class Iform < ActiveRecord::Base
       "Friendly" => iform.dental_history_patient_behave_today_friendly ? 'Yes' : '',
       "Happy" => iform.dental_history_patient_behave_today_happy ? 'Yes' : '',
       "HabitsOther" => iform.dental_history_other ? 'Yes' : '',
-      "HowOftenTeethBrushing" => iform.dental_history_does_child_brush_teeth ? (iform.dental_history_does_child_brush_teeth ? 'Yes' : '') : '',
+      "HowOftenTeethBrushing" => !iform.dental_history_does_child_brush_teeth.empty? ? (iform.dental_history_does_child_brush_teeth ? 'Yes' : '') : '',
       "InheritedDentalCharacteristics" => iform.dental_history_patient_inherited_any_dental_characteristics,
-      "InjuriesToTeeth" => iform.dental_history_patient_have_any_injuries ? (iform.dental_history_patient_have_any_injuries ? 'Yes' : '') : '',
+      "InjuriesToTeeth" => !iform.dental_history_patient_have_any_injuries.empty? ? (iform.dental_history_patient_have_any_injuries ? 'Yes' : '') : '',
       "JawPainFromJoint" => iform.dental_history_jaw_pain_from_joint ? 'Yes' : '',
       "KidneyDiseaseNo" => iform.medical_history_kidney_disease == 'No' ? 'Yes' : '',
       "KidneyDiseaseYes" => iform.medical_history_kidney_disease == 'Yes' ? 'Yes' : '',
-      "LastSeizureDate" => iform.medical_history_date_of_last_seizure,
+      "LastSeizureDate" => iform.medical_history_date_of_last_seizure ? iform.medical_history_date_of_last_seizure.strftime('%m-%d-%Y') : '',
       "LiverDiseaseNo" => iform.medical_history_liver_disease == 'No' ? 'Yes' : '',
       "LiverDiseaseYes" => iform.medical_history_liver_disease == 'Yes' ? 'Yes' : '',
       "LooseTeeth" => iform.dental_history_loose_teeth ? 'Yes' : '',
@@ -261,8 +259,8 @@ class Iform < ActiveRecord::Base
       "HospitalizationDescription" => iform.medical_history_patient_ever_been_hospitalized_description,
       "ImmunizationsAndBoosterShotsUpToDateNo" => iform.medical_history_patient_booster_shoot_up_to_date == 'No' ? 'Yes' : '',
       "ImmunizationsAndBoosterShotsUpToDateYes" => iform.medical_history_patient_booster_shoot_up_to_date == 'Yes' ? 'Yes' : '',
-      "JaundiceOrHepatitisNo" => iform.medical_history_patient_booster_shoot_up_to_date == 'No' ? 'Yes' : '',
-      "JaundiceOrHepatitisYes" => iform.medical_history_patient_booster_shoot_up_to_date == 'Yes' ? 'Yes' : '',
+      "JaundiceOrHepatitisNo" => iform.medical_history_Jaundice_or_hepatitis == 'No' ? 'Yes' : '',
+      "JaundiceOrHepatitisYes" => iform.medical_history_Jaundice_or_hepatitis == 'Yes' ? 'Yes' : '',
       "Medication1" => iform.medical_history_current_medication_name_1,
       "Medication1HowOften" => iform.medical_history_current_medication_how_often_1,
       "Medication1Reason" => iform.medical_history_current_medication_reason_1,
@@ -275,10 +273,10 @@ class Iform < ActiveRecord::Base
       "Medication4" => iform.medical_history_current_medication_name_4,
       "Medication4HowOften" => iform.medical_history_current_medication_how_often_4,
       "Medication4Reason" => iform.medical_history_current_medication_reason_4,
-      "MumpsMeaslesOrChickenpoxNo" => iform.medical_history_patient_booster_shoot_up_to_date == 'No' ? 'Yes' : '',
-      "MumpsMeaslesOrChickenpoxYes" => iform.medical_history_patient_booster_shoot_up_to_date == 'Yes' ? 'Yes' : '',
-      "NervousOrEmotionalDisordersNo" => iform.medical_history_patient_booster_shoot_up_to_date == 'No' ? 'Yes' : '',
-      "NervousOrEmotionalDisordersYes" => iform.medical_history_patient_booster_shoot_up_to_date == 'Yes' ? 'Yes' : '',
+      "MumpsMeaslesOrChickenpoxNo" => iform.medical_history_mumps_measles_or_chickenpox == 'No' ? 'Yes' : '',
+      "MumpsMeaslesOrChickenpoxYes" => iform.medical_history_mumps_measles_or_chickenpox == 'Yes' ? 'Yes' : '',
+      "NervousOrEmotionalDisordersNo" => iform.medical_history_nervous_or_emotional_disorders == 'No' ? 'Yes' : '',
+      "NervousOrEmotionalDisordersYes" => iform.medical_history_nervous_or_emotional_disorders == 'Yes' ? 'Yes' : '',
       "NotInGoodHealthDescription" => iform.medical_history_patient_good_general_health_description,
       "OperationsDescription" => iform.medical_history_patient_surgical_operations_description,
       "PhysicalDisabilitiesAndDevelopmentalDelaysDescription" => iform.medical_history_patient_physical_disabilities_description,
@@ -303,8 +301,8 @@ class Iform < ActiveRecord::Base
       "StomachUlcersYes" => iform.medical_history_stomach_ulcers == 'Yes' ? 'Yes' : '',
       "SurgicalOperationsNo" => iform.medical_history_patient_surgical_operations == 'No' ? 'Yes' : '',
       "SurgicalOperationsYes" => iform.medical_history_patient_surgical_operations == 'Yes' ? 'Yes' : '',
-      "ThyroidDiseaseNo" => iform.medical_history_patient_surgical_operations == 'No' ? 'Yes' : '',
-      "ThyroidDiseaseYes" => iform.medical_history_patient_surgical_operations == 'Yes' ? 'Yes' : '',
+      "ThyroidDiseaseNo" => iform.medical_history_thyroid_disease == 'No' ? 'Yes' : '',
+      "ThyroidDiseaseYes" => iform.medical_history_thyroid_disease == 'Yes' ? 'Yes' : '',
       "TuberculosisOrTBExposureNo" => iform.medical_history_tuberculosis_or_tb_exposure == 'No' ? 'Yes' : '',
       "TuberculosisOrTBExposureYes" => iform.medical_history_tuberculosis_or_tb_exposure == 'Yes' ? 'Yes' : '',
       "WhatInducesBreathingProblemsDescription" => iform.medical_history_induces_breathing_prob,

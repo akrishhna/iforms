@@ -1145,7 +1145,7 @@ ActiveRecord::Schema.define(:version => 20130102062448) do
     t.string   "patient_guardian_father_other_description",                       :limit => 50
     t.string   "patient_guardian_father_address_type",                            :limit => 10
     t.string   "patient_guardian_mother_address_type",                            :limit => 10
-    t.string   "patient_insurance_claim_email",                                   :limit => 10
+    t.string   "social_history_patient_adopted_age_years_months",                 :limit => 10
   end
 
   create_table "medical_appointments", :force => true do |t|

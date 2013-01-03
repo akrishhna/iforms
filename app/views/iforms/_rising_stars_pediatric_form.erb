@@ -77,7 +77,8 @@
     <div class="control-group">
       <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :Self_Birthdate, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
       </div>
     </div>
 
@@ -177,7 +178,8 @@
     <div class="control-group">
       <%= f.label :patient_guardian_father_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :patient_guardian_father_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.date_select :patient_guardian_father_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :patient_guardian_father_birth_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.patient_guardian_father_birth_date %>
       </div>
     </div>
 
@@ -186,7 +188,7 @@
       <div class="controls">
         <%= f.text_field :patient_guardian_father_ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :patient_guardian_father_ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 3 %>
+        <%= f.text_field :patient_guardian_father_ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
         -
         <%= f.text_field :patient_guardian_father_ssn_3, :style => 'width:40px', :placeholder => " ###", :size => 3, :maxlength => 4 %>
       </div>
@@ -224,11 +226,11 @@
     <div class="control-group">
       <%= f.label :patient_guardian_father_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_father_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        <%= f.text_field :patient_guardian_father_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_father_address' %>
         -
-        <%= f.text_field :patient_guardian_father_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        <%= f.text_field :patient_guardian_father_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_father_address' %>
         -
-        <%= f.text_field :patient_guardian_father_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+        <%= f.text_field :patient_guardian_father_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4, :class => 'rising_stars_father_address' %>
       </div>
     </div>
 
@@ -319,16 +321,17 @@
     <div class="control-group">
       <%= f.label :patient_guardian_mother_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :patient_guardian_mother_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.date_select :patient_guardian_mother_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :patient_guardian_mother_birth_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.patient_guardian_mother_birth_date %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :patient_guardian_mother_ssn_1, "Social Secrity Number", :class => 'control-label' %>
+      <%= f.label :patient_guardian_mother_ssn_1, "Social Security Number", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :patient_guardian_mother_ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :patient_guardian_mother_ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 3 %>
+        <%= f.text_field :patient_guardian_mother_ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
         -
         <%= f.text_field :patient_guardian_mother_ssn_3, :style => 'width:40px', :placeholder => " ###", :size => 3, :maxlength => 4 %>
       </div>
@@ -366,11 +369,11 @@
     <div class="control-group">
       <%= f.label :patient_guardian_mother_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_mother_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        <%= f.text_field :patient_guardian_mother_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_mother_address'  %>
         -
-        <%= f.text_field :patient_guardian_mother_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        <%= f.text_field :patient_guardian_mother_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_mother_address'  %>
         -
-        <%= f.text_field :patient_guardian_mother_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+        <%= f.text_field :patient_guardian_mother_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4, :class => 'rising_stars_mother_address'  %>
       </div>
     </div>
 
@@ -488,13 +491,6 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :patient_insurance_claim_email, "Insurance claims mailing address", :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :patient_insurance_claim_email %>
-      </div>
-    </div>
-
-    <div class="control-group">
       <%= f.label :insurance_phone_1, "Phone Number", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :insurance_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
@@ -506,7 +502,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :insurance_address_1, "Address", :class => 'control-label' %>
+      <%= f.label :insurance_address_1, "Insurance claims mailing address", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :insurance_address_1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;' %>
         <%= f.text_field :insurance_address_2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;' %>
@@ -1288,7 +1284,7 @@
   </tr>
   <tr>
     <td>
-      Mumps, measles, or oo
+      Mumps, measles, or chickenpox
     </td>
     <td>
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -1516,12 +1512,21 @@
       <%= f.label :social_history_patient_adopted, 'Patient was adopted', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_patient_adopted, "Yes" %>Yes
+          <%= f.radio_button :social_history_patient_adopted, "Yes", :class => 'rising_stars_patient_adopted' %>Yes
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_patient_adopted, "No" %>No
+          <%= f.radio_button :social_history_patient_adopted, "No", :class => 'rising_stars_patient_adopted' %>No
         <% end %> &nbsp;&nbsp;
-        <%= f.text_field :social_history_patient_adopted_age, :placeholder => "What age", :style => 'width:100px' %>
+
+        <%= f.text_field :social_history_patient_adopted_age, :placeholder => "What age", :style => 'width:100px;height:15px', :class => 'rising_stars_patient_adopted_age' %> &nbsp;&nbsp;
+
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :social_history_patient_adopted_age_years_months, "years", :class => 'rising_stars_patient_adopted_age' %><span class = 'rising_stars_patient_adopted_age'>Years</span>
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :social_history_patient_adopted_age_years_months, "months", :class => 'rising_stars_patient_adopted_age' %><span class = 'rising_stars_patient_adopted_age'>Months</span>
+        <% end %>
+
       </div>
     </div>
     <div class="control-group">
@@ -1594,7 +1599,8 @@
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
       changeYear:true,
-      dateFormat:'yy-mm-dd'
+      dateFormat:'yy-mm-dd',
+      yearRange: '1940:' + new Date().getFullYear()
     })
   });
 
@@ -1625,6 +1631,10 @@
     $('#iform_patient_guardian_father_address_city').val($('#iform_Self_Home_City').val());
     $('#iform_patient_guardian_father_address_state').val($('#iform_Self_Home_State').val());
     $('#iform_patient_guardian_father_address_zip').val($('#iform_Self_Home_Postal_Code').val());
+
+    $('#iform_patient_guardian_father_home_phone_1').val($('#iform_home_phone_1').val());
+    $('#iform_patient_guardian_father_home_phone_2').val($('#iform_home_phone_2').val());
+    $('#iform_patient_guardian_father_home_phone_3').val($('#iform_home_phone_3').val());
   }
   else{
     $('.rising_stars_father_address').attr('readonly', false);
@@ -1633,6 +1643,10 @@
     $('#iform_patient_guardian_father_address_city').val('');
     $('#iform_patient_guardian_father_address_state').val('');
     $('#iform_patient_guardian_father_address_zip').val('');
+
+    $('#iform_patient_guardian_father_home_phone_1').val('');
+    $('#iform_patient_guardian_father_home_phone_2').val('');
+    $('#iform_patient_guardian_father_home_phone_3').val('');
   }
 
   if($('.rising_stars_mother_address_type:checked').val() == 'Same'){
@@ -1642,6 +1656,10 @@
     $('#iform_patient_guardian_mother_address_city').val($('#iform_Self_Home_City').val());
     $('#iform_patient_guardian_mother_address_state').val($('#iform_Self_Home_State').val());
     $('#iform_patient_guardian_mother_address_zip').val($('#iform_Self_Home_Postal_Code').val());
+
+    $('#iform_patient_guardian_mother_home_phone_1').val($('#iform_home_phone_1').val());
+    $('#iform_patient_guardian_mother_home_phone_2').val($('#iform_home_phone_2').val());
+    $('#iform_patient_guardian_mother_home_phone_3').val($('#iform_home_phone_3').val());
   }
   else{
     $('.rising_stars_mother_address').attr('readonly', false);
@@ -1650,6 +1668,10 @@
     $('#iform_patient_guardian_mother_address_city').val('');
     $('#iform_patient_guardian_mother_address_state').val('');
     $('#iform_patient_guardian_mother_address_zip').val('');
+
+    $('#iform_patient_guardian_mother_home_phone_1').val('');
+    $('#iform_patient_guardian_mother_home_phone_2').val('');
+    $('#iform_patient_guardian_mother_home_phone_3').val('');
   }
 
   if ($('.rising_stars_insured:checked').val() == 'Father') {
@@ -1674,6 +1696,12 @@
     $('#iform_insurance_employer').val('');
   }
 
+  if($('.rising_stars_patient_adopted:checked').val() == 'Yes'){
+    $('.rising_stars_patient_adopted_age').show();
+  }
+  else{
+    $('.rising_stars_patient_adopted_age').hide();
+  }
 
 
 </script>
