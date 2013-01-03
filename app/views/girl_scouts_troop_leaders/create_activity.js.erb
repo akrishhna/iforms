@@ -1,3 +1,5 @@
+<% sp_id =  session[:user_service_provider] %>
+
 $('.girl_scouts_activity_form #girl_scouts_activity_id').val(<%= @activity.id %>);
 $('.view_permission_form_btn').attr('href', '<%= activity_permission_form_pdf_path(:activity_id => @activity.id)%>');
 
@@ -17,7 +19,7 @@ $('.notification_email_to_parent_text').html(" <%= escape_javascript render :par
   $('select#girls_scouts_activities option:selected').text('<%=  @activity.activity_name%>');
 <% end %>
 
-<% if session[:user_service_provider] == 2 || session[:user_service_provider] == 8 || session[:user_service_provider] == 9 %>
+<% if sp_id == 2 || sp_id == 8 || sp_id == 9 || sp_id == 10 %>
 
   <% if @activity.activity_name.to_s == "" ||
       @activity.activity_signed_permission_due_date.to_s == "" ||
@@ -28,7 +30,7 @@ $('.notification_email_to_parent_text').html(" <%= escape_javascript render :par
      $('#notification_email_to_parent').attr('disabled', false);
   <% end %>
 
-<% elsif session[:user_service_provider] == 3 %>
+<% elsif sp_id == 3 %>
 
    <% if @activity.activity_name.to_s == "" ||
       @activity.activity_signed_permission_due_date.to_s == "" ||

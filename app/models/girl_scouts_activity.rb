@@ -151,7 +151,8 @@ class GirlScoutsActivity < ActiveRecord::Base
       "Cost" => @fields['Activity Cost'] ? (@activity.activity_cost_dollars ? @activity.activity_cost_dollars.to_s + '.' + @cents.to_s : 'Free!') : '',
       "ForExpenses" => @fields['Activity Cost'] ? (@activity.activity_cost_dollars ? ('$' + @activity.activity_cost_dollars.to_s + '.' + @cents.to_s) : 'Free!') : '',
 
-      "CostUsedFor" => @fields['Activity Cost'] ? @activity.activity_cost_used_for : '',
+      "CostUsedFor" => @fields['Activity Cost Used For'] ? @activity.activity_cost_used_for : '',
+      "AdditonalExpenses" => @fields['Additional Expenses'] ? @activity.activity_additional_expenses : '',
 
       "GirlsShouldWearUniforms" => @fields['Girls Should Wear Uniforms'] ? (@activity.girls_wear_checkbox ? "Yes" : "Off") : '',
       "GirlsShouldWearOther" => @fields['Girls Should Wear Other'] ? @activity.activity_girls_wear_others : '',
@@ -163,12 +164,13 @@ class GirlScoutsActivity < ActiveRecord::Base
 
       "EquipmentNeeded" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
       "OtherEquipmentOrClothing" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
-
+      "ClothingAndAdditionalItemsNeeded" => @fields['Equipment Needed'] ? @activity.activity_equipment : '',
       # Troop Tab
 
       "ServiceUnit" => @fields['Service Unit'] ? @activity.troop_service_unit : '',
       "PAL" => @fields['PAL'] ? @activity.troop_pal : '',
       "TroopNumber" => @fields['Troop Number'] ? @activity.troop_number : '',
+      "TroopGroup"  => @fields['Troop Number'] ? @activity.troop_number : '',
 
       # Troop Leader Tab
 
@@ -188,6 +190,8 @@ class GirlScoutsActivity < ActiveRecord::Base
       "LeaderAdvisor2Name" => @fields['Troop Leader advisor 2 Name'] ? (@activity.leader_advisor_2_first_name.to_s + ' ' + @activity.leader_advisor_2_last_name.to_s) : '',
       "LeaderAdvisor2Phone" => @fields['Troop Leader advisor 2 Day Phone'] ? (@activity.leader_advisor_2_phone_1.to_s + '-' + @activity.leader_advisor_2_phone_2.to_s + '-' + @activity.leader_advisor_2_phone_3.to_s) : '',
       "LeaderAdvisor2Cell" => @fields['Troop Leader advisor 2 Cell Phone'] ? (@activity.leader_advisor_2_cell_1.to_s + '-' + @activity.leader_advisor_2_cell_2.to_s + '-' + @activity.leader_advisor_2_cell_3.to_s) : '',
+
+      "LeadersAccompanyingGirls" => @fields['Leaders Accompanying Girls'] ? @activity.troop_leader_accompanying_girls : '',
 
       # Troop Emergency Tab
 
