@@ -21,6 +21,10 @@ ALASKA_READ_ONLY_PATH = "#{PDFFILES_PATH}Alaska_Read_Only.pdf"
 ARIZONA_CACTUS_PINE_FORM_PATH = "#{PDFFILES_PATH}Arizona_Cactus_Pine_Form.pdf"
 ARIZONA_CACTUS_PINE_READ_ONLY_PATH = "#{PDFFILES_PATH}Arizona_Cactus_Pine_Read_Only.pdf"
 
+BLACK_DIAMOND_FORM_PATH = "#{PDFFILES_PATH}Black_Diamond.pdf"
+BLACK_DIAMOND_READ_ONLY_PATH = "#{PDFFILES_PATH}Black_Diamond_Read_Only.pdf"
+
+
 # End  Girl Scouts Paths
 
 CAPITAL_MEDICAL_CLINIC_FORM_PATH = "#{PDFFILES_PATH}Capital_Medical_Clinic.pdf"
