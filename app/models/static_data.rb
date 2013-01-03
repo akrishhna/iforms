@@ -33,4 +33,8 @@ class StaticData < ActiveRecord::Base
   def self.boy_scouts_sign_up_service_type
     [[' ',''],['Boy Scouts Leader','6']]
   end
+
+  def self.age_calculation(date)
+    year = Date.today.year - date.strftime('%Y').to_i
+  end
 end

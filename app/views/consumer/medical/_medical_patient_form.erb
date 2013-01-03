@@ -112,8 +112,8 @@
     <div class="control-group">
       <%= f.label :birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :birth_date, :start_year => 1900, :end_year => Date.current.year, :include_blank => true %>
-        <%#= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
+        <%#= f.date_select :birth_date, :start_year => 1900, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
       </div>
     </div>
     <div class="control-group">
@@ -349,8 +349,8 @@
     <div class="control-group">
       <%= f.label :primary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :primary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => "medical_patient_primary_insurance_policy_details" %>
-        <%#= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector  medical_patient_primary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%#= f.date_select :primary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => "medical_patient_primary_insurance_policy_details" %>
+        <%= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector  medical_patient_primary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
       </div>
     </div>
     <div class="control-group">
@@ -448,8 +448,8 @@
     <div class="control-group">
       <%= f.label :secondary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :secondary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%#= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector medical_patient_secondary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%#= f.date_select :secondary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector medical_patient_secondary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
       </div>
     </div>
     <div class="control-group">

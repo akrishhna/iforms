@@ -9,10 +9,6 @@ class Iform < ActiveRecord::Base
     path = pdffilepath + "#{iform.path}.pdf"
     @pdftk = PdftkForms::Wrapper.new(pdftkpath)
     @pdf_form = iform.formname.gsub(' ', '_')
-    if iform.Self_Birthdate
-      @You_Age = Date.today.strftime('%Y%m%d').to_i - iform.Self_Birthdate.strftime('%Y%m%d').to_i
-      @You_Age = @You_Age.to_s.split('')
-    end
 
     @pdftk.fill_form(pdffilepath+"#{@pdf_form}.pdf", path, {
       "Date" => iform.updated_at.strftime('%m') + '-' + iform.updated_at.strftime('%d') + '-' + iform.updated_at.strftime('%Y'),
@@ -21,7 +17,7 @@ class Iform < ActiveRecord::Base
       "PatientBirthDateDay" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%d') : '',
       "PatientBirthDateYear" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%y') : '',
       "PatientBirthDateMonth" => iform.Self_Birthdate ? iform.Self_Birthdate.strftime('%m') : '',
-      "PatientAge" => @You_Age ? @You_Age[0] + @You_Age[1] + 'Y' + ' ' + @You_Age[2] + @You_Age[3] + 'M' : '',
+      "PatientAge" => iform.Self_Birthdate ? (StaticData.age_calculation(iform.Self_Birthdate).to_s + ' Y' ): '',
       "PatientMaritalStatus" => iform.Self_Marital_Status,
       "PatientSocialSecurityNumber" => iform.ssn_1.to_s + '-' + iform.ssn_2.to_s + '-' + iform.ssn_3.to_s,
       "PatientDriversLicenseStateAndNumber" => iform.Self_Driver_License_State.to_s + ' ' + iform.Self_Driver_License_Number.to_s,

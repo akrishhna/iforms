@@ -9,10 +9,6 @@ class MedicalPatientForm < ActiveRecord::Base
     permission_form_path = "#{PDFFILES_PATH}#{file_name}"
     @pdftk = PdftkForms::Wrapper.new(PDFTK_PATH)
 
-    if @medical_patient_form.birth_date
-      @You_Age = Date.today.strftime('%Y%m%d').to_i - @medical_patient_form.birth_date.strftime('%Y%m%d').to_i
-      @You_Age = @You_Age.to_s.split('')
-    end
     @pdftk.fill_form(form_pdf_path, permission_form_path, {
       #Patient tab
       "FirstName" => @medical_patient_form.first_name,
@@ -29,7 +25,7 @@ class MedicalPatientForm < ActiveRecord::Base
       "Male" => @medical_patient_form.sex == 'Male' ? 'Yes' : 'No',
       "Female" => @medical_patient_form.sex == 'Female' ? 'Yes' : 'No',
       "Date" => @medical_patient_form.birth_date ? @medical_patient_form.birth_date.strftime('%m-%d-%Y') : '',
-      "Age" => @You_Age ? @You_Age[0].to_s + @You_Age[1].to_s + 'Y' + ' ' + @You_Age[2].to_s + @You_Age[3].to_s + 'M' : '',
+      "Age" => @medical_patient_form.birth_date ? (StaticData.age_calculation(@medical_patient_form.birth_date).to_s + ' Y' ): '',
       "MaritalStatus" => @medical_patient_form.marital_status,
       "SocialSecurityNumber" => (@medical_patient_form.ssn_1 ? (@medical_patient_form.ssn_1.to_s + '-') : '') + (@medical_patient_form.ssn_2 ? (@medical_patient_form.ssn_2.to_s + '-') : '') + @medical_patient_form.ssn_3.to_s,
       "FamilyReferral" => @medical_patient_form.referred_to_our_office_by == 'Family' ? 'Yes' : 'No',

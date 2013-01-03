@@ -18,7 +18,8 @@ $(function () {
   $(".medical_Patient_form_date_selector").datepicker({
     changeMonth:true,
     changeYear:true,
-    dateFormat: 'yy-mm-dd'
+    dateFormat:'yy-mm-dd',
+    yearRange: '1940:' + new Date().getFullYear()
   });
 
   $('.medical_patient_form_nav_link').live('click', function () {
