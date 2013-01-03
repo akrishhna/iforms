@@ -136,7 +136,7 @@ class Iform < ActiveRecord::Base
       "SecondaryInsuranceCompany" => iform.insurance_second_insurance_company_name,
 
       # Social History Tab
-      "AdoptedAge" => iform.social_history_patient_adopted_age ? (iform.social_history_patient_adopted_age + " " + iform.social_history_patient_adopted_age_years_months) : '',
+      "AdoptedAge" => iform.social_history_patient_adopted_age ? (iform.social_history_patient_adopted_age.to_s + " " + iform.social_history_patient_adopted_age_years_months.to_s) : '',
       "AdoptedNo" => iform.social_history_patient_adopted == 'No' ? 'Yes' : '',
       "AdoptedYes" => iform.social_history_patient_adopted == 'Yes' ? 'Yes' : '',
       "AdvancedLearning" => iform.social_history_patient_is == 'Advanced in learning' ? 'Yes' : '',
