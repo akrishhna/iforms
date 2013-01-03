@@ -23,11 +23,11 @@ class StaticData < ActiveRecord::Base
   end
 
   def self.user_service_types
-    [['James Waters','1'],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Karen Naples','4'],['Capital Medical Clinic','5'],['Boy Scouts Leader','6']]
+    [['James Waters','1'],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Karen Naples','4'],['Capital Medical Clinic','5'],['Boy Scouts Leader','6'],['Rising Stars Pediatric Dentistry','7'],['Girl Scouts Alaska','8'],['Girl Scouts Arizona Cactus Pine','9']]
   end
 
   def self.girl_scouts_sign_up_service_type
-    [[' ',''],['Central Texas','2'],['Diamonds of AR, OK, and TX','3']]
+    [[' ',''],['Central Texas','2'],['Diamonds of AR, OK, and TX','3'],['Girl Scouts Alaska','8'],['Girl Scouts Arizona Cactus Pine','9']]
   end
 
   def self.boy_scouts_sign_up_service_type
