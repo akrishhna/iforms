@@ -1,0 +1,72 @@
+<%= form_for @girl_scouts_permission_form, :url => "/view_girl_scout_permission_form", :html => {:class => 'form-horizontal girl_scout_permission_form', :multipart => true} do |f| %>
+  <%= f.hidden_field :id %>
+
+  <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>, has my permission
+    to go to and participate in the <strong><%= @activity.activity_name %></strong>. She is in good physical condition
+    and has not had any serious illness or operation since her last health examination.
+  </p>
+
+  <div class="control-group">
+    <%= f.label :parent_phone_number_during_activity_1, "During the activity I may be reached at this number", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :parent_phone_number_during_activity_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :parent_phone_number_during_activity_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :parent_phone_number_during_activity_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :act_in_my_behalf_first_name, "In addition to the person in charge, I authorize this person to act in my behalf", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :act_in_my_behalf_first_name, :placeholder => "First Name", :class => "input-small" %>
+      <%= f.text_field :act_in_my_behalf_last_name, :placeholder => "Last Name", :class => "input-small" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_activity_my_behalf_relationship_to_participant, "Relationship to participant", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_activity_my_behalf_relationship_to_participant, :placeholder => "Relationship", :class => "input-xlarge" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_activity_my_behalf_phone_1, "Phone Number", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_activity_my_behalf_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_activity_my_behalf_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_activity_my_behalf_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_physician_first_name, "Physician Name", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_physician_first_name, :placeholder => "First Name", :class => "input-small" %>
+      <%= f.text_field :gapf_physician_last_name, :placeholder => "Last Name", :class => "input-small" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_physician_phone_1, "Physician Phone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gapf_physician_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_physician_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      -
+      <%= f.text_field :gapf_physician_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :gapf_additional_remarks, "Additional remarks", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :gapf_additional_remarks, :rows => 4, :style => "width:98%;" %>
+    </div>
+  </div>
+
+<% end %>
