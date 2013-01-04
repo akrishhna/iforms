@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103100709) do
+ActiveRecord::Schema.define(:version => 20130104170604) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -471,6 +471,11 @@ ActiveRecord::Schema.define(:version => 20130103100709) do
     t.string   "activity_will_involve_unusual_risk"
     t.string   "activity_additional_expenses",                        :limit => 100
     t.string   "troop_leader_accompanying_girls",                     :limit => 100
+    t.boolean  "troop_leader_certified_first_aider_not_needed"
+    t.boolean  "troop_leader_certified_first_aider_provided"
+    t.string   "troop_leader_first_aider_attending_first_name",       :limit => 50
+    t.string   "troop_leader_first_aider_attending_last_name",        :limit => 50
+    t.boolean  "troop_leader_certification_expiration_checked"
   end
 
   create_table "girl_scouts_activity_permission_forms", :force => true do |t|
@@ -600,6 +605,7 @@ ActiveRecord::Schema.define(:version => 20130103100709) do
     t.boolean  "alaska"
     t.boolean  "arizona_cactus_pine"
     t.boolean  "black_diamond"
+    t.boolean  "central_southern"
   end
 
   create_table "girls_scouts", :force => true do |t|

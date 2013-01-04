@@ -24,6 +24,9 @@ ARIZONA_CACTUS_PINE_READ_ONLY_PATH = "#{PDFFILES_PATH}Arizona_Cactus_Pine_Read_O
 BLACK_DIAMOND_FORM_PATH = "#{PDFFILES_PATH}Black_Diamond.pdf"
 BLACK_DIAMOND_READ_ONLY_PATH = "#{PDFFILES_PATH}Black_Diamond_Read_Only.pdf"
 
+CENTRAL_SOUTHERN_NEW_JERSEY_FORM_PATH = "#{PDFFILES_PATH}Central_Southern_New_Jersey_Form.pdf"
+CENTRAL_SOUTHERN_NEW_JERSEY_READ_ONLY_PATH = "#{PDFFILES_PATH}Central_Southern_New_Jersey_Read_Only.pdf"
+
 
 # End  Girl Scouts Paths
 
