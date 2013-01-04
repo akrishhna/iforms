@@ -2,14 +2,7 @@
   <%= f.hidden_field :id %>
 
   <p> My daughter <strong><%= @girl_scout.first_name %> <%= @girl_scout.last_name %></strong>, has my permission
-    to go to and participate in the <strong><%= @activity.activity_name %></strong>. She is in good physical condition
-    and has not had any serious illness or operation since her last health examination.
-  </p>
-
-  <p>
-    I give the Council permission, for Girl Scout related purposes, to use photographs or videotapes of my child
-    participating in Girl Scout
-    activities or accepting Girl Scout services.
+    to go to and participate in the <strong><%= @activity.activity_name %></strong>
   </p>
 
   <div class="control-group">
@@ -37,21 +30,21 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :emergency_contact_first_name, "Emergency Contact", :class => 'control-label' %>
+    <%= f.label :gapf_emergency_contact_1_first_name, "Emergency Contact 1", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :emergency_contact_first_name, :placeholder => "First Name", :class => "input-small" %>
-      <%= f.text_field :emergency_contact_last_name, :placeholder => "Last Name", :class => "input-small" %>
+      <%= f.text_field :gapf_emergency_contact_1_first_name, :placeholder => "First Name", :class => "input-small" %>
+      <%= f.text_field :gapf_emergency_contact_1_last_name, :placeholder => "Last Name", :class => "input-small" %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :emergency_contact_phone_number_1, "Emergency Contact Phone", :class => 'control-label' %>
+    <%= f.label :gapf_emergency_contact_1_phone_1_1, "Emergency Contact 1 Phone 1", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :emergency_contact_phone_number_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      <%= f.text_field :gapf_emergency_contact_1_phone_1_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3  %>
       -
-      <%= f.text_field :emergency_contact_phone_number_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
+      <%= f.text_field :gapf_emergency_contact_1_phone_1_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3  %>
       -
-      <%= f.text_field :emergency_contact_phone_number_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      <%= f.text_field :gapf_emergency_contact_1_phone_1_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4  %>
     </div>
   </div>
 
@@ -76,22 +69,9 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :gapf_physician_first_name, "Physician Name", :class => 'control-label' %>
+    <%= f.label :gapf_special_needs, "Please List Specific Needs, Medications, Comments", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :gapf_physician_first_name, :placeholder => "First Name", :class => "input-small" %>
-      <%= f.text_field :gapf_physician_last_name, :placeholder => "Last Name", :class => "input-small" %>
+      <%= f.text_area :gapf_special_needs, :rows => 4, :style => "width:98%;" %>
     </div>
   </div>
-
-  <div class="control-group">
-    <%= f.label :gapf_physician_phone_1, "Physician Phone", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :gapf_physician_phone_1, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
-      -
-      <%= f.text_field :gapf_physician_phone_2, :style => "width:30px;", :placeholder => "###", :size => 3, :maxlength => 3 %>
-      -
-      <%= f.text_field :gapf_physician_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4 %>
-    </div>
-  </div>
-
 <% end %>

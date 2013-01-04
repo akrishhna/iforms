@@ -273,6 +273,41 @@
       </div>
     </div>
 
+    <div class="control-group + <%= @fields['First Aider Attending Name'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_first_aider_attending_first_name, "First aider name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :troop_leader_first_aider_attending_first_name, :placeholder => "First Name", :class => "input-small" %>
+        <%= f.text_field :troop_leader_first_aider_attending_last_name, :placeholder => "Last Name", :class => "input-small" %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Certified First Aider Not Needed'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_certified_first_aider_not_needed, "Certified first aider", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+          <%= f.check_box :troop_leader_certified_first_aider_not_needed %>&nbsp;Not needed
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Certified First Aider Provided'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_certified_first_aider_provided, "Certified First Aiderr", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+          <%= f.check_box :troop_leader_certified_first_aider_provided %>&nbsp;Provided
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Certification Expiration Checked'] ? '' : 'hide' %>">
+      <%= f.label :troop_leader_certification_expiration_checked, "Certification expiration", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+          <%= f.check_box :troop_leader_certification_expiration_checked %>&nbsp;Checked
+        <% end %>
+      </div>
+    </div>
+
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "0" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
