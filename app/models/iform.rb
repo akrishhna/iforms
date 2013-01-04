@@ -34,7 +34,7 @@ class Iform < ActiveRecord::Base
       "PatientEmergencyContactNameAndPhone" => iform.Emergency_Contact_Name_First.to_s + ' ' + iform.Emergency_Contact_Name_Last.to_s + '  ' + iform.emergency_contact_phone_1.to_s + '-' + iform.emergency_contact_phone_2.to_s + '-' + iform.emergency_contact_phone_3.to_s,
       "PersonResponsibleForAccountRelationToPatient" => iform.person_responsible_for_ac == 'Other' ? iform.relationship_to_patient : 'Self',
       "PersonResponsibleForAccountName" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_first_name.to_s + ' ' + iform.billing_details_last_name.to_s) : ' ',
-      "PersonResponsibleForAccountAddress" => iform.person_responsible_for_ac == 'Other' ? ((iform.billing_details_address1.empty? ? ' ' : (iform.billing_details_address1.to_s + ',')) + (iform.billing_details_address2.empty? ? ' ' : (iform.billing_details_address2.to_s + ', ')) + iform.billing_details_address_city.to_s + ' ' + iform.billing_details_address_state.to_s + ' ' + iform.billing_details_address_postal_code.to_s) : '',
+      "PersonResponsibleForAccountAddress" => iform.person_responsible_for_ac == 'Other' ? ((iform.billing_details_address1.empty? ? ' ' : (iform.billing_details_address1.to_s + ', ')) + (iform.billing_details_address2.empty? ? ' ' : (iform.billing_details_address2.to_s + ', ')) + iform.billing_details_address_city.to_s + ' ' + iform.billing_details_address_state.to_s + ' ' + iform.billing_details_address_postal_code.to_s) : '',
       "PersonResponsibleForAccountHomePhone" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_home_phone_1.to_s + ' ' + iform.billing_details_home_phone_2.to_s + ' ' + iform.billing_details_home_phone_3.to_s) : ' ',
       "PersonResponsibleForAccountWorkPhone" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_work_phone_1.to_s + ' ' + iform.billing_details_work_phone_2.to_s + ' ' + iform.billing_details_work_phone_3.to_s) : ' ',
       "PersonResponsibleForAccountCellPhone" => iform.person_responsible_for_ac == 'Other' ? (iform.billing_details_cell_phone_1.to_s + ' ' + iform.billing_details_cell_phone_2.to_s + ' ' + iform.billing_details_cell_phone_3.to_s) : ' ',
@@ -92,7 +92,7 @@ class Iform < ActiveRecord::Base
 
       # Father Tab
       "FatherName" => iform.patient_guardian_father_first_name.to_s + ' ' + iform.patient_guardian_father_last_name.to_s,
-      "FatherAddress" => iform.patient_guardian_father_address_type == 'Same' ? 'Same' : (iform.patient_guardian_father_address_1.empty? ? ' ' : (iform.patient_guardian_father_address_1.to_s + ',')) + (iform.patient_guardian_father_address_2.empty? ? ' ' : (iform.patient_guardian_father_address_2.to_s + ', ')) + iform.patient_guardian_father_address_city.to_s + ' ' + iform.patient_guardian_father_address_state.to_s + ' ' + iform.patient_guardian_father_address_zip.to_s,
+      "FatherAddress" => iform.patient_guardian_father_address_type == 'Same' ? 'Same' : (iform.patient_guardian_father_address_1.empty? ? ' ' : (iform.patient_guardian_father_address_1.to_s + ', ')) + (iform.patient_guardian_father_address_2.empty? ? ' ' : (iform.patient_guardian_father_address_2.to_s + ', ')) + iform.patient_guardian_father_address_city.to_s + ' ' + iform.patient_guardian_father_address_state.to_s + ' ' + iform.patient_guardian_father_address_zip.to_s,
       "FatherBirthDate" => iform.patient_guardian_father_birth_date ? iform.patient_guardian_father_birth_date.strftime('%m-%d-%Y') : '',
       "FatherCellTelephoneNumber" => iform.patient_guardian_father_cell_phone_1.to_s + '-' + iform.patient_guardian_father_cell_phone_2.to_s + '-' + iform.patient_guardian_father_cell_phone_3.to_s,
       "FatherEmail" => iform.patient_guardian_father_email,
@@ -107,7 +107,7 @@ class Iform < ActiveRecord::Base
       "FatherOtherDescription" => iform.patient_guardian_father == 'Other' ? iform.patient_guardian_father_other_description : '',
 
       # Mother Tab
-      "MotherAddress" => iform.patient_guardian_mother_address_type == 'Same' ? 'Same' : (iform.patient_guardian_mother_address_1.empty? ? ' ' : (iform.patient_guardian_mother_address_1.to_s + ',')) + (iform.patient_guardian_mother_address_2.empty? ? ' ' : (iform.patient_guardian_mother_address_2.to_s + ', ')) + iform.patient_guardian_mother_address_city.to_s + ' ' + iform.patient_guardian_mother_address_state.to_s + ' ' + iform.patient_guardian_mother_address_zip.to_s,
+      "MotherAddress" => iform.patient_guardian_mother_address_type == 'Same' ? 'Same' : (iform.patient_guardian_mother_address_1.empty? ? ' ' : (iform.patient_guardian_mother_address_1.to_s + ', ')) + (iform.patient_guardian_mother_address_2.empty? ? ' ' : (iform.patient_guardian_mother_address_2.to_s + ', ')) + iform.patient_guardian_mother_address_city.to_s + ' ' + iform.patient_guardian_mother_address_state.to_s + ' ' + iform.patient_guardian_mother_address_zip.to_s,
       "MotherBirthDate" => iform.patient_guardian_mother_birth_date ? iform.patient_guardian_mother_birth_date.strftime('%m-%d-%Y') : '',
       "MotherCellTelephoneNumber" => iform.patient_guardian_mother_cell_phone_1.to_s + '-' + iform.patient_guardian_mother_cell_phone_2.to_s + '-' + iform.patient_guardian_mother_cell_phone_3.to_s,
       "MotherEmail" => iform.patient_guardian_mother_email,
