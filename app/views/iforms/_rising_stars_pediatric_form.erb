@@ -757,7 +757,7 @@
       <br>
       <%= f.text_field :medical_history_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' %> &nbsp;
       <br>
-      <%= f.select :medical_history_address_state, options_for_select(StaticData.state, f.object.Self_Home_State), {:include_blank => true}, {:style => "width:222px;"} %>
+      <%= f.select :medical_history_address_state, options_for_select(StaticData.state, f.object.medical_history_address_state), {:include_blank => true}, {:style => "width:222px;"} %>
       <%= f.text_field :medical_history_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
@@ -1594,7 +1594,7 @@
     $('#iform_insurance_phone_1,#iform_insurance_phone_2, #iform_insurance_phone_3, #iform_insurance_address_1').autotab_magic();
 
 
-    $('#iform_medical_history_home_phone_1, #iform_medical_history_home_phone_, #iform_medical_history_home_phone_3').autotab_magic();
+    $('#iform_medical_history_home_phone_1, #iform_medical_history_home_phone_2, #iform_medical_history_home_phone_3').autotab_magic();
 
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
