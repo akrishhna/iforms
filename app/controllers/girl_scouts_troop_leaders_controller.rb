@@ -345,6 +345,8 @@ class GirlScoutsTroopLeadersController < ApplicationController
     session[:user_service_provider] = 8 if params[:sp_id] == '8'
     session[:user_service_provider] = 9 if params[:sp_id] == '9'
     session[:user_service_provider] = 10 if params[:sp_id] == '10'
+    session[:user_service_provider] = 11 if params[:sp_id] == '11'
+    session[:user_service_provider] = 12 if params[:sp_id] == '12'
   end
 
   def girls_scouts_activities

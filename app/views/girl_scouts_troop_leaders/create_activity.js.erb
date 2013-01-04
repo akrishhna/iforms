@@ -19,7 +19,7 @@ $('.notification_email_to_parent_text').html(" <%= escape_javascript render :par
   $('select#girls_scouts_activities option:selected').text('<%=  @activity.activity_name%>');
 <% end %>
 
-<% if sp_id == 2 || sp_id == 8 || sp_id == 9 || sp_id == 10 %>
+<% if sp_id == 2 || sp_id == 8 || sp_id == 9 || sp_id == 10  || sp_id == 11 || sp_id == 12%>
 
   <% if @activity.activity_name.to_s == "" ||
       @activity.activity_signed_permission_due_date.to_s == "" ||

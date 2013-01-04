@@ -72,6 +72,12 @@ $(document).ready(function(){
     else if($(this).val() == 10){
       window.location = '/girl_scouts_troop_leaders?sp_id=10'
     }
+    else if($(this).val() == 11){
+      window.location = '/girl_scouts_troop_leaders?sp_id=11'
+    }
+    else if($(this).val() == 12){
+      window.location = '/girl_scouts_troop_leaders?sp_id=12'
+    }
     else{
       window.location = '/'
     }

@@ -521,7 +521,8 @@
 
   <div class="tab-pane" id="send_notification_email">
 
-    <% if @service_provider.mapping_field_name == 'central_texas' || @service_provider.mapping_field_name == 'alaska' || @service_provider.mapping_field_name == 'arizona_cactus_pine' || @service_provider.mapping_field_name == 'black_diamond' %>
+    <% if @service_provider.mapping_field_name == 'central_texas' || @service_provider.mapping_field_name == 'alaska' || @service_provider.mapping_field_name == 'arizona_cactus_pine' ||
+      @service_provider.mapping_field_name == 'black_diamond' || @service_provider.mapping_field_name == 'california_central_cost' || @service_provider.mapping_field_name == 'central_southern' %>
       <% if @girls_activity.activity_name.to_s == "" ||
         @girls_activity.activity_signed_permission_due_date.to_s == "" ||
         @girls_activity.leader_first_name.to_s == "" ||

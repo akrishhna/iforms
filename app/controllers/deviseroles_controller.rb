@@ -19,7 +19,7 @@ class DeviserolesController < ApplicationController
         redirect_to "/doctor/appointments?sp_id=#{@service_provider.id}"
       end
 
-    elsif @service_provider.id == 2 || @service_provider.id == 3 || @service_provider.id == 8 || @service_provider.id == 9 || @service_provider.id == 10
+    elsif @service_provider.id == 2 || @service_provider.id == 3 || @service_provider.id == 8 || @service_provider.id == 9 || @service_provider.id == 10 || @service_provider.id == 1 || @service_provider.id == 12
       @troop_leader = GirlScoutTroopLeaderProfile.find_by_user_id(current_user.id)
       if @troop_leader.nil?
         redirect_to :controller => "girl_scout_troop_leader_profiles", :action => "new"
