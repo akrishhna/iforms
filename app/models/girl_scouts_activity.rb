@@ -130,6 +130,8 @@ class GirlScoutsActivity < ActiveRecord::Base
       "ActivityDateEndDay" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[2] : '',
       "ActivityDateEndYear" => @fields['Activity End Date'] ? @activity.activity_date_end.to_s.split("-")[0] : '',
 
+      #"ActivityBeginEndDate" => @activity.activity_date_begin ? @activity.activity_date_begin.strftime('%m-%d-%Y') + @activity_date_end ? activity_date_end.strftime('%m-%d-%Y'): '' : '',
+
       "SignedPermissionFormDueDate" => @fields['Signed Permission Forms Due Date'] ? (@activity.activity_signed_permission_due_date ? @activity.activity_signed_permission_due_date.strftime("%m/%d/%Y") : '') : '',
 
       "ActivityTime" => @fields['Activity Time'] ? (@activity.activity_time_hh.to_s.rjust(2, '0') + ':' + @activity.activity_leave_time_mm.to_s.rjust(2, '0') + ' ' + @activity.activity_time_am_pm) : '',
@@ -172,6 +174,10 @@ class GirlScoutsActivity < ActiveRecord::Base
       "TroopNumber" => @fields['Troop Number'] ? @activity.troop_number : '',
       "TroopGroup"  => @fields['Troop Number'] ? @activity.troop_number : '',
 
+      "CertifiedFirstAiderNotNeeded" => @fields['Certified First Aider Not Needed'] ? (@activity.troop_leader_certified_first_aider_not_needed ? 'Yes' : 'Off') : '',
+      "CertifiedFirstAiderProvided" => @fields['Certified First Aider Provided'] ? (@activity.troop_leader_certified_first_aider_provided ? 'Yes' : 'Off') : '',
+      "FirstAiderAttendingName" => @fields['First Aider Attending Name'] ? (@activity.troop_leader_first_aider_attending_first_name + ' ' + @activity.troop_leader_first_aider_attending_last_name) : '',
+      "CertificationExpirationChecked" => @fields['Certification Expiration Checked'] ? (@activity.troop_leader_certification_expiration_checked ? 'Yes' : 'Off') : '',
       # Troop Leader Tab
 
       "TroopLeaderName" => @fields['Troop Leader Name'] ? (@activity.leader_first_name + " " + @activity.leader_last_name) : '',

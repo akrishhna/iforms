@@ -196,6 +196,11 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "TroopNumber" => @activity.troop_number,
       "TroopGroup" => @activity.troop_number,
 
+      "CertifiedFirstAiderNotNeeded" => @fields['Certified First Aider Not Needed'] ? (@activity.troop_leader_certified_first_aider_not_needed ? 'Yes' : 'Off') : '',
+      "CertifiedFirstAiderProvided" => @fields['Certified First Aider Provided'] ? (@activity.troop_leader_certified_first_aider_provided ? 'Yes' : 'Off') : '',
+      "FirstAiderAttendingName" => @fields['First Aider Attending Name'] ? (@activity.troop_leader_first_aider_attending_first_name + ' ' + @activity.troop_leader_first_aider_attending_last_name) : '',
+      "CertificationExpirationChecked" => @fields['Certification Expiration Checked'] ? (@activity.troop_leader_certification_expiration_checked ? 'Yes' : 'Off') : '',
+
       # Troop Leader Tab
 
       "TroopLeaderName" => @activity.leader_first_name + " " + @activity.leader_last_name,
