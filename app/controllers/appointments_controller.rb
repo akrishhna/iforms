@@ -52,7 +52,7 @@ class AppointmentsController < ApplicationController
           #-- recent changes
           if @patient
             @appointment.patient_id = @patient.id
-            @appointment.patient_user_id = @patient.user_id
+            @appointment.patient_user_id = @user.id
           end
           #changes end
          @doctor_details = @appointment.doctor

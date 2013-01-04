@@ -185,7 +185,7 @@ class Iform < ActiveRecord::Base
       "JawPainFromJoint" => iform.dental_history_jaw_pain_from_joint ? 'Yes' : '',
       "KidneyDiseaseNo" => iform.medical_history_kidney_disease == 'No' ? 'Yes' : '',
       "KidneyDiseaseYes" => iform.medical_history_kidney_disease == 'Yes' ? 'Yes' : '',
-      "LastSeizureDate" => iform.iform.medical_history_Convulsions_or_seizures == 'Yes' ? (iform.medical_history_date_of_last_seizure ? iform.medical_history_date_of_last_seizure.strftime('%m-%d-%Y') : '') : '',
+      "LastSeizureDate" => iform.medical_history_Convulsions_or_seizures == 'Yes' ? (iform.medical_history_date_of_last_seizure ? iform.medical_history_date_of_last_seizure.strftime('%m-%d-%Y') : '') : '',
       "LiverDiseaseNo" => iform.medical_history_liver_disease == 'No' ? 'Yes' : '',
       "LiverDiseaseYes" => iform.medical_history_liver_disease == 'Yes' ? 'Yes' : '',
       "LooseTeeth" => iform.dental_history_loose_teeth ? 'Yes' : '',

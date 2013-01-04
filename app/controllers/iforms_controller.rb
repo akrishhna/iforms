@@ -157,10 +157,10 @@ class IformsController < ApplicationController
     else
       @appform.status = 'in progress'
     end
-    @recent_app_form = Appformjoin.where('status in (?) and patient_user_id=?', ['Sent', 'Submitted', 'Updated'], @appointment.patient_user_id).order('updated_at').last
+    @recent_app_form = Appformjoin.where('status in (?) and patient_user_id=?', ['Sent', 'Submitted', 'Updated'], @appform.patient_user_id).order('updated_at').last
 
     @recent_iform = Iform.find(@recent_app_form.iform_id) rescue nil
-
+    #raise current_user.id.to_yaml
     if @recent_iform
       # patient Tab
       @iform[:Self_Home_Address1] = @recent_iform['Self_Home_Address1']
