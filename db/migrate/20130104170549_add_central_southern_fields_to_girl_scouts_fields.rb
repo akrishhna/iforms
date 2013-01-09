@@ -42,6 +42,6 @@ class AddCentralSouthernFieldsToGirlScoutsFields < ActiveRecord::Migration
   end
 
   def down
-
+    remove_column :girl_scouts_fields, :central_southern
   end
 end

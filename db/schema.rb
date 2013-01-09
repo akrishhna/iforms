@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104170604) do
+ActiveRecord::Schema.define(:version => 20130108051019) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -476,6 +476,18 @@ ActiveRecord::Schema.define(:version => 20130104170604) do
     t.string   "troop_leader_first_aider_attending_first_name",       :limit => 50
     t.string   "troop_leader_first_aider_attending_last_name",        :limit => 50
     t.boolean  "troop_leader_certification_expiration_checked"
+    t.string   "activity_chaperone_1_name",                           :limit => 50
+    t.string   "activity_chaperone_1_driver",                         :limit => 10
+    t.string   "activity_chaperone_1_registered",                     :limit => 10
+    t.string   "activity_chaperone_2_name",                           :limit => 50
+    t.string   "activity_chaperone_2_driver",                         :limit => 10
+    t.string   "activity_chaperone_2_registered",                     :limit => 10
+    t.string   "activity_chaperone_3_name",                           :limit => 50
+    t.string   "activity_chaperone_3_driver",                         :limit => 10
+    t.string   "activity_chaperone_3_registered",                     :limit => 10
+    t.string   "activity_chaperone_4_name",                           :limit => 50
+    t.string   "activity_chaperone_4_driver",                         :limit => 10
+    t.string   "activity_chaperone_4_registered",                     :limit => 10
   end
 
   create_table "girl_scouts_activity_permission_forms", :force => true do |t|
@@ -593,6 +605,25 @@ ActiveRecord::Schema.define(:version => 20130104170604) do
     t.integer  "gapf_activity_my_behalf_phone_2"
     t.integer  "gapf_activity_my_behalf_phone_3"
     t.text     "gapf_additional_remarks"
+    t.string   "gapf_parent_first_name",                              :limit => 50
+    t.string   "gapf_parent_last_name",                               :limit => 50
+    t.string   "gapf_parent_address_1",                               :limit => 50
+    t.string   "gapf_parent_address_2",                               :limit => 50
+    t.string   "gapf_parent_address_city",                            :limit => 50
+    t.string   "gapf_parent_address_state",                           :limit => 25
+    t.integer  "gapf_parent_address_zip"
+    t.integer  "gapf_parent_home_phone_1"
+    t.integer  "gapf_parent_home_phone_2"
+    t.integer  "gapf_parent_home_phone_3"
+    t.integer  "gapf_parent_cell_phone_1"
+    t.integer  "gapf_parent_cell_phone_2"
+    t.integer  "gapf_parent_cell_phone_3"
+    t.integer  "gapf_parent_other_phone_1"
+    t.integer  "gapf_parent_other_phone_2"
+    t.integer  "gapf_parent_other_phone_3"
+    t.string   "gapf_emergency_medical_treatment",                    :limit => 10
+    t.string   "gapf_publicity_photos",                               :limit => 10
+    t.string   "gapf_allergies",                                      :limit => 50
   end
 
   create_table "girl_scouts_fields", :force => true do |t|
@@ -600,12 +631,13 @@ ActiveRecord::Schema.define(:version => 20130104170604) do
     t.string   "field_name"
     t.boolean  "central_texas"
     t.boolean  "diamonds"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
     t.boolean  "alaska"
     t.boolean  "arizona_cactus_pine"
     t.boolean  "black_diamond"
     t.boolean  "central_southern"
+    t.boolean  "california_central_coast"
   end
 
   create_table "girls_scouts", :force => true do |t|
