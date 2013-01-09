@@ -438,7 +438,8 @@ class IformsController < ApplicationController
     else
       @Please_list_all_drugs_that_your_child_is_currently_taking = @iform.Med_His_Currently_Taking_Over_The_Counter_Drugs_List
     end
-    @Billing_Address = @iform.Person_Responsible_For_Account_Address1+" "+@iform.Person_Responsible_For_Account_Address2+" "+ @iform.Person_Responsible_For_Account_City+" "+ @iform.Person_Responsible_For_Account_State+" "+@iform.Person_Responsible_For_Account_Postal_Code
+    #@Billing_Address = @iform.Person_Responsible_For_Account_Address1+" "+@iform.Person_Responsible_For_Account_Address2+" "+ @iform.Person_Responsible_For_Account_City+" "+ @iform.Person_Responsible_For_Account_State+" "+@iform.Person_Responsible_For_Account_Postal_Code
+    @Billing_Address = (@iform.Person_Responsible_For_Account_Address1.empty? ? @iform.Person_Responsible_For_Account_Address1.to_s + ', ' : '') + (@iform.Person_Responsible_For_Account_Address2.empry? ? @iform.Person_Responsible_For_Account_Address2.to_s + ', ' : '') + @iform.Person_Responsible_For_Account_City.to_s + ' ' + @iform.Person_Responsible_For_Account_State.to_s + '' + @iform.Person_Responsible_For_Account_Postal_Code.to_s
     unless @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.blank?
       @Date_of_last_visit = @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.strftime("%m-%d-%Y")
     end
@@ -460,8 +461,10 @@ class IformsController < ApplicationController
     unless @iform.Insurance_Company_Primary_Insured_Birthdate.blank?
       @InsBday_1 = @iform.Insurance_Company_Primary_Insured_Birthdate.strftime("%m-%d-%Y")
     end
-    @Insurance_Co_Address = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
-    @Insurance_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
+    #@Insurance_Co_Address = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
+    #@Insurance_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
+    @Insurance_Co_Address = (@iform.Insurance_Company_Primary_Address1.empty? ? @iform.Insurance_Company_Primary_Address1.to_s + ', ' : '') + (@iform.Insurance_Company_Primary_Address2.empty? ? @iform.Insurance_Company_Primary_Address2.to_s + ', ' : '' ) + @iform.Insurance_Company_Primary_City.to_s + ' ' + @iform.Insurance_Company_Primary_State.to_s + ' ' + @iform.Insurance_Company_Primary_Postal_Code.to_s
+    @Insurance_Co_Address_2 = (@iform.Insurance_Company_Secondary_Address1.empty? ? @iform.Insurance_Company_Secondary_Address1.to_s + ', ' : '' ) + (@iform.Insurance_Company_Secondary_Address2.empty? ? @iform.Insurance_Company_Secondary_Address2.to_s + ', ' : '') + @iform.Insurance_Company_Secondary_City.to_s + ' ' + @iform.Insurance_Company_Secondary_State.to_s + ' ' + @iform.Insurance_Company_Secondary_Postal_Code.to_s
     if !@iform.Insurance_Company_Primary_Phone.blank? and @iform.Insurance_Company_Primary_Phone.length == 10
       @Insurance_Co_AreaCode = @iform.Insurance_Company_Primary_Phone.slice(0, 3)
       @Insurance_Co_Phone = @iform.Insurance_Company_Primary_Phone.slice(3, 3)+"-"+@iform.Insurance_Company_Primary_Phone.slice(6, 4)
@@ -547,13 +550,15 @@ class IformsController < ApplicationController
     @You_City = @iform.Self_Home_City
     @You_Drivers_License = @iform.Self_Driver_License_State + ": " + @iform.Self_Driver_License_Number
     @You_Employer = @iform.Self_Employer_Name
-    @You_Employer_8217_s_Address = @iform.Self_Employer_Address1 + " " + @iform.Self_Employer_Address2 + " " + @iform.Self_Employer_City + " " + @iform.Self_Employer_State + " " + @iform.Self_Employer_Postal_Code
+    #@You_Employer_8217_s_Address = @iform.Self_Employer_Address1 + " " + @iform.Self_Employer_Address2 + " " + @iform.Self_Employer_City + " " + @iform.Self_Employer_State + " " + @iform.Self_Employer_Postal_Code
+    @You_Employer_8217_s_Address = (@iform.Self_Employer_Address1.empty? ? @iform.Self_Employer_Address1.to_s + ', ' : '') + (@iform.Self_Employer_Address2.empty? ? @iform.Self_Employer_Address2.to_s + ', ' : '') + @iform.Self_Employer_City.to_s + ' ' + @iform.Self_Employer_State.to_s + ' ' + @iform.Self_Employer_Postal_Code.to_s
     @You_Ext = @iform.Self_Phone_Work_Extension
     if !@iform.Self_Phone_Home.blank? and @iform.Self_Phone_Home.length == 10
       @You_Hm = @iform.Self_Phone_Home.slice(3, 3) + "-" + @iform.Self_Phone_Home.slice(6, 4)
       @You_Hm_Area_Code = @iform.Self_Phone_Home.slice(0, 3)
     end
-    @You_Home_Address = @iform.Self_Home_Address1 + " " + @iform.Self_Home_Address2
+    #@You_Home_Address = @iform.Self_Home_Address1 + " " + @iform.Self_Home_Address2
+    @You_Home_Address = (@iform.Self_Home_Address1.empty? ? @iform.Self_Home_Address1.to_s + ', '  : '') + @iform.Self_Home_Address2.to_s
     if !@iform.Self_Phone_Mobile.blank? and @iform.Self_Phone_Mobile.length == 10
       @You_Pager_Other = @iform.Self_Phone_Mobile.slice(0, 3) + "-" + @iform.Self_Phone_Mobile.slice(3, 3) + "-" + @iform.Self_Phone_Mobile.slice(6, 4)
     end
@@ -1263,7 +1268,8 @@ class IformsController < ApplicationController
       @Appt_area_code_2 = @iform.Person_Responsible_For_Making_Appointments_Phone_Home.slice(0, 3)
     end
     if !@iform.Person_Responsible_For_Account_Address2.empty?
-      @Billing_Address_1 = @iform.Person_Responsible_For_Account_Address1 + ", " + @iform.Person_Responsible_For_Account_Address2
+      #@Billing_Address_1 = @iform.Person_Responsible_For_Account_Address1 + ", " + @iform.Person_Responsible_For_Account_Address2
+      @Billing_Address_1 = (@iform.Person_Responsible_For_Account_Address1.empty? ? @iform.Person_Responsible_For_Account_Address1.to_s + ', ' : '') + @iform.Person_Responsible_For_Account_Address2.to_s
     else
       @Billing_Address_1 = @iform.Person_Responsible_For_Account_Address1
     end
@@ -1271,7 +1277,7 @@ class IformsController < ApplicationController
     @Billing_State_2 = @iform.Person_Responsible_For_Account_State
     @Billing_Zipcode_2 = @iform.Person_Responsible_For_Account_Postal_Code
     if !@iform.Self_Home_Address2.empty?
-      @Child_Address = @iform.Self_Home_Address1 + ", " + @iform.Self_Home_Address2
+      @Child_Address = (@iform.Self_Home_Address1.empty? ? @iform.Self_Home_Address1.to_s + ', ' : '') + @iform.Self_Home_Address2.to_s
     else
       @Child_Address = @iform.Self_Home_Address1
     end
@@ -1323,7 +1329,8 @@ class IformsController < ApplicationController
       @Date_of_last_visit = @iform.Med_His_Personal_Physician_Date_Of_Last_Visit.strftime("%m-%d-%Y")
     end
     if !@iform.Neighbor_Or_Relative_Not_Living_With_You_Address2.empty?
-      @Friend_Address = @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1+ ", " +@iform.Neighbor_Or_Relative_Not_Living_With_You_Address2
+     # @Friend_Address = @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1+ ", " +@iform.Neighbor_Or_Relative_Not_Living_With_You_Address2
+      @Friend_Address = (@iform.Neighbor_Or_Relative_Not_Living_With_You_Address1.empty? ? @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1.to_s + ", " : '') + @iform.Neighbor_Or_Relative_Not_Living_With_You_Address2.to_s
     else
       @Friend_Address = @iform.Neighbor_Or_Relative_Not_Living_With_You_Address1
     end
@@ -1345,8 +1352,10 @@ class IformsController < ApplicationController
     end
     @Ins_Co_1_Relationship = @iform.Insurance_Company_Primary_Insured_Relationship
     @Ins_Co_2 = @iform.Insurance_Company_Secondary_Name
-    @Ins_Co_Address_1 = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
-    @Ins_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
+    #@Ins_Co_Address_1 = @iform.Insurance_Company_Primary_Address1 + " " + @iform.Insurance_Company_Primary_Address2 + " " + @iform.Insurance_Company_Primary_City + " " + @iform.Insurance_Company_Primary_State + " " + @iform.Insurance_Company_Primary_Postal_Code
+    #@Ins_Co_Address_2 = @iform.Insurance_Company_Secondary_Address1 + " " + @iform.Insurance_Company_Secondary_Address2 + " " + @iform.Insurance_Company_Secondary_City + " " + @iform.Insurance_Company_Secondary_State + " " + @iform.Insurance_Company_Secondary_Postal_Code
+    @Ins_Co_Address_1 = (@iform.Insurance_Company_Primary_Address1.empty? ? @iform.Insurance_Company_Primary_Address1.to_s + ', ' : '') + (@iform.Insurance_Company_Primary_Address2.empty? ? @iform.Insurance_Company_Primary_Address2.to_s + ', ': '') + @iform.Insurance_Company_Primary_City.to_s + " " + @iform.Insurance_Company_Primary_State.to_s + " " + @iform.Insurance_Company_Primary_Postal_Code.to_s
+    @Ins_Co_Address_2 = (@iform.Insurance_Company_Secondary_Address1.empty? ? @iform.Insurance_Company_Secondary_Address1.to_s + ', ' : '') + (@iform.Insurance_Company_Secondary_Address2.empty? ? iform.Insurance_Company_Secondary_Address2.to_s + ", " : '') + @iform.Insurance_Company_Secondary_City.to_s + " " + @iform.Insurance_Company_Secondary_State.to_s + " " + @iform.Insurance_Company_Secondary_Postal_Code.to_s
     if !@iform.Insurance_Company_Secondary_Phone.blank? and @iform.Insurance_Company_Secondary_Phone.length == 10
       @Ins_Co_2__area_code = @iform.Insurance_Company_Secondary_Phone.slice(0, 3)
       @Ins_Co_Phone_2 = @iform.Insurance_Company_Secondary_Phone.slice(3, 3) + "-" + @iform.Insurance_Company_Secondary_Phone.slice(6, 4)
@@ -1396,7 +1405,8 @@ class IformsController < ApplicationController
     end
     @Policy_Owners_Employer_1 = @iform.Insurance_Company_Primary_Insured_Employer_Name
     if !@iform.Person_Responsible_For_Account_Previous_Address2.empty?
-      @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1 + ", " + @iform.Person_Responsible_For_Account_Previous_Address2
+     # @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1 + ", " + @iform.Person_Responsible_For_Account_Previous_Address2
+      @Previous_Address_1 = (@iform.Person_Responsible_For_Account_Previous_Address1.empty? ? @iform.Person_Responsible_For_Account_Previous_Address1.to_s + ", " : '') + @iform.Person_Responsible_For_Account_Previous_Address2.to_s
     else
       @Previous_Address_1 = @iform.Person_Responsible_For_Account_Previous_Address1
     end
