@@ -189,6 +189,30 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "OtherEquipmentOrClothing" => @activity.activity_equipment,
       "ClothingAndAdditionalItemsNeeded" => @activity.activity_equipment,
 
+      "Chaperone1Name" => @activity.activity_chaperone_1_name,
+      "Chaperone1DriverNo" => @activity.activity_chaperone_1_driver == 'No' ? 'No_5' : '' ,
+      "Chaperone1DriverYes" => @activity.activity_chaperone_1_driver == 'Yes' ? 'Yes_5' : '' ,
+      "Chaperone1RegisteredNo" => @activity.activity_chaperone_1_registered == 'No' ? '1' : 'off' ,
+      "Chaperone1RegisteredYes" => @activity.activity_chaperone_1_registered == 'Yes' ? 'Yes' : 'off' ,
+
+      "Chaperone2Name" => @activity.activity_chaperone_2_name,
+      "Chaperone2DriverNo" => @activity.activity_chaperone_2_driver == 'No' ? 'No_6' : '' ,
+      "Chaperone2DriverYes" => @activity.activity_chaperone_2_driver == 'Yes' ? 'Yes_6' : '' ,
+      "Chaperone2RegisteredNo" => @activity.activity_chaperone_2_registered == 'No' ? 'No_2' : '' ,
+      "Chaperone2RegisteredYes" => @activity.activity_chaperone_2_registered == 'Yes' ? 'Yes_2' : '' ,
+
+      "Chaperone3Name" => @activity.activity_chaperone_3_name,
+      "Chaperone3DriverNo" => @activity.activity_chaperone_3_driver == 'No' ? 'No_7' : '' ,
+      "Chaperone3DriverYes" => @activity.activity_chaperone_3_driver == 'Yes' ? 'Yes_7' : '' ,
+      "Chaperone3RegisteredNo" => @activity.activity_chaperone_3_registered == 'No' ? 'No_3' : '' ,
+      "Chaperone3RegisteredYes" => @activity.activity_chaperone_3_registered == 'Yes' ? 'Yes_3' : '' ,
+
+      "Chaperone4Name" => @activity.activity_chaperone_4_name,
+      "Chaperone4DriverNo" => @activity.activity_chaperone_4_driver == 'No' ? 'No_8' : '' ,
+      "Chaperone4DriverYes" => @activity.activity_chaperone_4_driver == 'Yes' ? 'Yes_8' : '' ,
+      "Chaperone4RegisteredNo" => @activity.activity_chaperone_4_registered == 'No' ? 'No_4' : '' ,
+      "Chaperone4RegisteredYes" => @activity.activity_chaperone_4_registered == 'Yes' ? 'Yes_3' : '' ,
+
       # Troop Tab
 
       "ServiceUnit" => @activity.troop_service_unit,
@@ -222,6 +246,7 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
       "LeadersAccompanyingGirls" => @activity.troop_leader_accompanying_girls,
 
+      "TroopLeaderEmergencyContactNameAndPhoneNumber" => @activity.troop_leader_emergency_contact_first_name.to_s + ' ' +  @activity.troop_leader_emergency_contact_last_name.to_s + '    ' + @activity.troop_leader_emergency_contact_phone_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_3.to_s,
       # Troop Emergency Tab
 
       "TroopLeaderEmergencyContactName" => @fields['Troop Emergency Name'] ? (@activity.emergency_first_name + ' ' + @activity.emergency_last_name) : (@fields['Troop Emergency Contact Name'] ? (@activity.troop_leader_emergency_contact_first_name.to_s + ' ' + @activity.troop_leader_emergency_contact_last_name.to_s) : ''),
@@ -300,8 +325,19 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
       "ActInMyBehalfPhoneNumber" => @girl_scouts_permission_form.gapf_activity_my_behalf_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_activity_my_behalf_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_activity_my_behalf_phone_3.to_s,
       "AdditionalRemarks" => @girl_scouts_permission_form.gapf_additional_remarks,
+
+      "Allergies" => @girl_scouts_permission_form.gapf_allergies,
+
+      "EmergencyMedicalTreatmentYes" =>  @girl_scouts_permission_form.gapf_emergency_medical_treatment == 'Yes' ? 'Yes_9':'',
+      "EmergencyMedicalTreatmentNo" =>  @girl_scouts_permission_form.gapf_emergency_medical_treatment == 'No' ? 'No_9':'',
+      "ParentHomeCellOtherPhoneNumbers" => @girl_scouts_permission_form.gapf_parent_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_home_phone_3.to_s + '     ' + @girl_scouts_permission_form.gapf_parent_cell_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_cell_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_cell_phone_3.to_s + '    ' + @girl_scouts_permission_form.gapf_parent_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_other_phone_3.to_s,
+      "PublicityPhotosNo" => @girl_scouts_permission_form.gapf_publicity_photos == 'No' ? 'No_9':'',
+      "PublicityPhotosYes" => @girl_scouts_permission_form.gapf_publicity_photos == 'Yes' ? 'Yes_9':'',
+
+
+
     })
-    #raise @pdftk.fields(form_pdf_path).to_yaml
+   # raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 
