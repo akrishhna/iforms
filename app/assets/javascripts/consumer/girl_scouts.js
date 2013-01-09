@@ -38,7 +38,10 @@ $(function(){
     '#girl_scouts_activity_permission_form_emergency_contact_phone_number_3, #girl_scouts_activity_permission_form_emergency_contact_cell_number_1,' +
     '#girl_scouts_activity_permission_form_emergency_contact_cell_number_2, #girl_scouts_activity_permission_form_emergency_contact_cell_number_3,' +
     '#girl_scouts_activity_permission_form_emergency_contact_address_zip, #girl_scouts_activity_permission_form_act_in_my_behalf_address_zip, ' +
-    '#gapf_activity_my_behalf_phone_1, #gapf_activity_my_behalf_phone_2, #gapf_activity_my_behalf_phone_3').autotab_filter('numeric');
+    '#gapf_activity_my_behalf_phone_1, #gapf_activity_my_behalf_phone_2, #gapf_activity_my_behalf_phone_3, #girl_scouts_activity_permission_form_gapf_parent_home_phone_1,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_home_phone_3, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_1,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_cell_phone_2,#girl_scouts_activity_permission_form_gapf_parent_cell_phone_3, #girl_scouts_activity_permission_form_gapf_parent_other_phone_1,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_other_phone_3').autotab_filter('numeric');
 
 
 
@@ -63,4 +66,10 @@ $(function(){
     '#girl_scouts_activity_permission_form_emergency_contact_cell_number_2, #girl_scouts_activity_permission_form_emergency_contact_cell_number_3').autotab_magic();
 
 });
+
+$('#girl_scouts_activity_permission_form_gapf_parent_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_home_phone_3,#girl_scouts_activity_permission_form_gapf_parent_cell_phone_1').autotab_magic();
+
+$('#girl_scouts_activity_permission_form_gapf_parent_cell_phone_1, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_2, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_3,#girl_scouts_activity_permission_form_gapf_parent_other_phone_1').autotab_magic();
+
+$('#girl_scouts_activity_permission_form_gapf_parent_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_other_phone_3').autotab_magic();
 
