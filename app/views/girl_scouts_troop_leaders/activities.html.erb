@@ -243,6 +243,130 @@
       </div>
     </div>
 
+    <div class="control-group + <%= @fields['Chaperone 1 Name'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_1_name, "Chaperone 1 name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_chaperone_1_name, :placeholder => "First Name", :class => "input-small" %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 1 Driver'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_1_driver, "Chaperone 1 Driver", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_1_driver, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_1_driver, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 1 Registered'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_1_registered, "Chaperone 1 Registered", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_1_registered, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_1_registered, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 2 Name'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_2_name, "Chaperone 2 name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_chaperone_2_name, :placeholder => "First Name", :class => "input-small" %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 2 Driver'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_2_driver, "Chaperone 2 Driver", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_2_driver, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_2_driver, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 2 Registered'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_2_registered, "Chaperone 2 Registered", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_2_registered, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_2_registered, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 3 Name'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_3_name, "Chaperone 3 name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_chaperone_3_name, :placeholder => "First Name", :class => "input-small" %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 3 Driver'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_3_driver, "Chaperone 3 Driver", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_3_driver, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_3_driver, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 3 Registered'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_3_registered, "Chaperone 3 Registered", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_3_registered, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_3_registered, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 4 Name'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_4_name, "Chaperone 4 name", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :activity_chaperone_4_name, :placeholder => "First Name", :class => "input-small" %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 1 Driver'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_4_driver, "Chaperone 4 Driver", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_4_driver, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_4_driver, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
+    <div class="control-group + <%= @fields['Chaperone 4 Registered'] ? '' : 'hide' %>">
+      <%= f.label :activity_chaperone_4_registered, "Chaperone 4 Registered", :class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_4_registered, "Yes" %> Yes
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :activity_chaperone_4_registered, "No" %> No
+        <% end %>
+      </div>
+    </div>
+
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "1" do %>
         Next&nbsp;<i class="icon-chevron-right icon-white"></i>
@@ -557,7 +681,8 @@
   <div class="tab-pane" id="send_notification_email">
 
     <% if @service_provider.mapping_field_name == 'central_texas' || @service_provider.mapping_field_name == 'alaska' || @service_provider.mapping_field_name == 'arizona_cactus_pine' ||
-      @service_provider.mapping_field_name == 'black_diamond' || @service_provider.mapping_field_name == 'california_central_cost' || @service_provider.mapping_field_name == 'central_southern' %>
+      @service_provider.mapping_field_name == 'black_diamond' || @service_provider.mapping_field_name == 'california_central_cost' || @service_provider.mapping_field_name == 'central_southern' ||
+      @service_provider.mapping_field_name == 'california_central_coast' %>
       <% if @girls_activity.activity_name.to_s == "" ||
         @girls_activity.activity_signed_permission_due_date.to_s == "" ||
         @girls_activity.leader_first_name.to_s == "" ||
