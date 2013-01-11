@@ -1,5 +1,7 @@
 <p style="text-align: center;font-size:18px "><%#= session[:formname] %>
 
+
+
   Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
 
 <div style="margin: 0 auto;width:80px;">
@@ -54,6 +56,7 @@
 
   <div class="tab-content">
   <div class="tab-pane active" id="patient">
+
     <div class="control-group">
       <%= f.label :Self_Name_First, "Name", :class => 'control-label' %>
       <div class="controls">
@@ -199,12 +202,14 @@
       <div class="controls">
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father_address_type, "Same", :class => 'rising_stars_father_address_type' %>Home address
+          <%= f.radio_button :patient_guardian_father_address_type, "Same", :class => 'rising_stars_father_address_type' %>
+          Home address
           same as <%= f.object.Self_Name_First %>
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father_address_type, "Other", :class => 'rising_stars_father_address_type' %>Other
+          <%= f.radio_button :patient_guardian_father_address_type, "Other", :class => 'rising_stars_father_address_type' %>
+          Other
         <% end %>
 
       </div>
@@ -342,12 +347,14 @@
       <div class="controls">
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother_address_type, "Same", :class => 'rising_stars_mother_address_type' %>Home address
+          <%= f.radio_button :patient_guardian_mother_address_type, "Same", :class => 'rising_stars_mother_address_type' %>
+          Home address
           same as <%= f.object.Self_Name_First %>
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_mother_address_type, "Other", :class => 'rising_stars_mother_address_type' %>Other
+          <%= f.radio_button :patient_guardian_mother_address_type, "Other", :class => 'rising_stars_mother_address_type' %>
+          Other
         <% end %>
 
       </div>
@@ -369,11 +376,11 @@
     <div class="control-group">
       <%= f.label :patient_guardian_mother_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :patient_guardian_mother_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_mother_address'  %>
+        <%= f.text_field :patient_guardian_mother_home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_mother_address' %>
         -
-        <%= f.text_field :patient_guardian_mother_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_mother_address'  %>
+        <%= f.text_field :patient_guardian_mother_home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3, :class => 'rising_stars_mother_address' %>
         -
-        <%= f.text_field :patient_guardian_mother_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4, :class => 'rising_stars_mother_address'  %>
+        <%= f.text_field :patient_guardian_mother_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4, :class => 'rising_stars_mother_address' %>
       </div>
     </div>
 
@@ -436,10 +443,12 @@
       <%= f.label :insurance_insured, 'Insured', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_insured, "Father", :class => 'rising_stars_insured' %><span id="father_insurance_insured">Father</span>
+          <%= f.radio_button :insurance_insured, "Father", :class => 'rising_stars_insured' %>
+          <span id="father_insurance_insured">Father</span>
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :insurance_insured, "Mother", :class => 'rising_stars_insured' %><span id="mother_insurance_insured">Mother</span>
+          <%= f.radio_button :insurance_insured, "Mother", :class => 'rising_stars_insured' %>
+          <span id="mother_insurance_insured">Mother</span>
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :insurance_insured, "Other", :class => 'rising_stars_insured' %>Other
@@ -1521,10 +1530,12 @@
         <%= f.text_field :social_history_patient_adopted_age, :placeholder => "What age", :style => 'width:100px;height:15px', :class => 'rising_stars_patient_adopted_age' %> &nbsp;&nbsp;
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_patient_adopted_age_years_months, "years", :class => 'rising_stars_patient_adopted_age' %><span class = 'rising_stars_patient_adopted_age'>Years</span>
+          <%= f.radio_button :social_history_patient_adopted_age_years_months, "years", :class => 'rising_stars_patient_adopted_age' %>
+          <span class='rising_stars_patient_adopted_age'>Years</span>
         <% end %>
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_patient_adopted_age_years_months, "months", :class => 'rising_stars_patient_adopted_age' %><span class = 'rising_stars_patient_adopted_age'>Months</span>
+          <%= f.radio_button :social_history_patient_adopted_age_years_months, "months", :class => 'rising_stars_patient_adopted_age' %>
+          <span class='rising_stars_patient_adopted_age'>Months</span>
         <% end %>
 
       </div>
@@ -1600,7 +1611,7 @@
       changeMonth:true,
       changeYear:true,
       dateFormat:'yy-mm-dd',
-      yearRange: '1940:' + new Date().getFullYear()
+      yearRange:'1940:' + new Date().getFullYear()
     })
   });
 
@@ -1611,10 +1622,10 @@
   }
 
   if ($(".rising_stars_father_type:checked").val() == 'Other') {
-     $('#father_insurance_insured').text($('#iform_patient_guardian_father_other_description').val());
+    $('#father_insurance_insured').text($('#iform_patient_guardian_father_other_description').val());
   }
   else {
-     $('#father_insurance_insured').text($('.rising_stars_father_type:checked').val());
+    $('#father_insurance_insured').text($('.rising_stars_father_type:checked').val());
   }
 
   if ($(".rising_stars_mother_type:checked").val() == 'Other') {
@@ -1624,7 +1635,7 @@
     $('#mother_insurance_insured').text($('.rising_stars_mother_type:checked').val());
   }
 
-  if($('.rising_stars_father_address_type:checked').val() == 'Same'){
+  if ($('.rising_stars_father_address_type:checked').val() == 'Same') {
     $('.rising_stars_father_address').attr('readonly', true);
     $('#iform_patient_guardian_father_address_1').val($('#iform_Self_Home_Address1').val());
     $('#iform_patient_guardian_father_address_2').val($('#iform_Self_Home_Address2').val());
@@ -1636,7 +1647,7 @@
     $('#iform_patient_guardian_father_home_phone_2').val($('#iform_home_phone_2').val());
     $('#iform_patient_guardian_father_home_phone_3').val($('#iform_home_phone_3').val());
   }
-  else{
+  else {
     $('.rising_stars_father_address').attr('readonly', false);
     $('#iform_patient_guardian_father_address_1').val('');
     $('#iform_patient_guardian_father_address_2').val('');
@@ -1649,7 +1660,7 @@
     $('#iform_patient_guardian_father_home_phone_3').val('');
   }
 
-  if($('.rising_stars_mother_address_type:checked').val() == 'Same'){
+  if ($('.rising_stars_mother_address_type:checked').val() == 'Same') {
     $('.rising_stars_mother_address').attr('readonly', true);
     $('#iform_patient_guardian_mother_address_1').val($('#iform_Self_Home_Address1').val());
     $('#iform_patient_guardian_mother_address_2').val($('#iform_Self_Home_Address2').val());
@@ -1661,45 +1672,49 @@
     $('#iform_patient_guardian_mother_home_phone_2').val($('#iform_home_phone_2').val());
     $('#iform_patient_guardian_mother_home_phone_3').val($('#iform_home_phone_3').val());
   }
-  else{
-    $('.rising_stars_mother_address').attr('readonly', false);
-    $('#iform_patient_guardian_mother_address_1').val('');
-    $('#iform_patient_guardian_mother_address_2').val('');
-    $('#iform_patient_guardian_mother_address_city').val('');
-    $('#iform_patient_guardian_mother_address_state').val('');
-    $('#iform_patient_guardian_mother_address_zip').val('');
+  else {
+    if (<%= @appform.status == 'in progress' || @appform.status == 'pending' %>) {
 
-    $('#iform_patient_guardian_mother_home_phone_1').val('');
-    $('#iform_patient_guardian_mother_home_phone_2').val('');
-    $('#iform_patient_guardian_mother_home_phone_3').val('');
+    } else {
+      $('.rising_stars_mother_address').attr('readonly', false);
+      $('#iform_patient_guardian_mother_address_1').val('');
+      $('#iform_patient_guardian_mother_address_2').val('');
+      $('#iform_patient_guardian_mother_address_city').val('');
+      $('#iform_patient_guardian_mother_address_state').val('');
+      $('#iform_patient_guardian_mother_address_zip').val('');
+
+      $('#iform_patient_guardian_mother_home_phone_1').val('');
+      $('#iform_patient_guardian_mother_home_phone_2').val('');
+      $('#iform_patient_guardian_mother_home_phone_3').val('');
+    }
   }
 
   if ($('.rising_stars_insured:checked').val() == 'Father') {
-    $('.rising_stars_insured_fields').attr('readonly',true);
+    $('.rising_stars_insured_fields').attr('readonly', true);
     $('#iform_insurance_person_first_name').val($('#iform_patient_guardian_father_first_name').val());
     $('#iform_insurance_person_last_name').val($('#iform_patient_guardian_father_last_name').val());
     $('#iform_insurance_relation_ship_to_patient').val($(".rising_stars_father_type:checked").val() == 'Other' ? $('#iform_patient_guardian_father_other_description').val() : $(".rising_stars_father_type:checked").val());
     $('#iform_insurance_employer').val($('#iform_patient_guardian_father_employer').val());
   }
   else if ($('.rising_stars_insured:checked').val() == 'Mother') {
-    $('.rising_stars_insured_fields').attr('readonly',true);
+    $('.rising_stars_insured_fields').attr('readonly', true);
     $('#iform_insurance_person_first_name').val($('#iform_patient_guardian_mother_first_name').val());
     $('#iform_insurance_person_last_name').val($('#iform_patient_guardian_mother_last_name').val());
     $('#iform_insurance_relation_ship_to_patient').val($(".rising_stars_mother_type:checked").val() == 'Other' ? $('#iform_patient_guardian_mother_other_description').val() : $(".rising_stars_mother_type:checked").val());
     $('#iform_insurance_employer').val($('#iform_patient_guardian_mother_employer').val());
   }
-  else{
-    $('.rising_stars_insured_fields').attr('readonly',false);
+  else {
+    $('.rising_stars_insured_fields').attr('readonly', false);
     $('#iform_insurance_person_first_name').val('');
     $('#iform_insurance_person_last_name').val('');
     $('#iform_insurance_relation_ship_to_patient').val('');
     $('#iform_insurance_employer').val('');
   }
 
-  if($('.rising_stars_patient_adopted:checked').val() == 'Yes'){
+  if ($('.rising_stars_patient_adopted:checked').val() == 'Yes') {
     $('.rising_stars_patient_adopted_age').show();
   }
-  else{
+  else {
     $('.rising_stars_patient_adopted_age').hide();
   }
 
