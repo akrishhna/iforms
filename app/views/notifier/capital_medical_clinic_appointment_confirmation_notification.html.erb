@@ -14,7 +14,7 @@
     </td>
   </table>
  </div>
-<div style="margin: 20px 0;">
+<div>
   <% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
     <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
 
