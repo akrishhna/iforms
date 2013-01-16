@@ -1647,18 +1647,22 @@
     $('#iform_patient_guardian_father_home_phone_2').val($('#iform_home_phone_2').val());
     $('#iform_patient_guardian_father_home_phone_3').val($('#iform_home_phone_3').val());
   }
-  else {
-    $('.rising_stars_father_address').attr('readonly', false);
-    $('#iform_patient_guardian_father_address_1').val('');
-    $('#iform_patient_guardian_father_address_2').val('');
-    $('#iform_patient_guardian_father_address_city').val('');
-    $('#iform_patient_guardian_father_address_state').val('');
-    $('#iform_patient_guardian_father_address_zip').val('');
-
-    $('#iform_patient_guardian_father_home_phone_1').val('');
-    $('#iform_patient_guardian_father_home_phone_2').val('');
-    $('#iform_patient_guardian_father_home_phone_3').val('');
-  }
+//  else {
+//    if (<%= @appform.status == 'in progress' || @appform.status == 'pending' %>) {
+//}
+//    else {
+//    $('.rising_stars_father_address').attr('readonly', false);
+//    $('#iform_patient_guardian_father_address_1').val('');
+//    $('#iform_patient_guardian_father_address_2').val('');
+//    $('#iform_patient_guardian_father_address_city').val('');
+//    $('#iform_patient_guardian_father_address_state').val('');
+//    $('#iform_patient_guardian_father_address_zip').val('');
+//
+//    $('#iform_patient_guardian_father_home_phone_1').val('');
+//    $('#iform_patient_guardian_father_home_phone_2').val('');
+//    $('#iform_patient_guardian_father_home_phone_3').val('');
+//  }
+//  }
 
   if ($('.rising_stars_mother_address_type:checked').val() == 'Same') {
     $('.rising_stars_mother_address').attr('readonly', true);
@@ -1672,22 +1676,22 @@
     $('#iform_patient_guardian_mother_home_phone_2').val($('#iform_home_phone_2').val());
     $('#iform_patient_guardian_mother_home_phone_3').val($('#iform_home_phone_3').val());
   }
-  else {
-    if (<%= @appform.status == 'in progress' || @appform.status == 'pending' %>) {
-
-    } else {
-      $('.rising_stars_mother_address').attr('readonly', false);
-      $('#iform_patient_guardian_mother_address_1').val('');
-      $('#iform_patient_guardian_mother_address_2').val('');
-      $('#iform_patient_guardian_mother_address_city').val('');
-      $('#iform_patient_guardian_mother_address_state').val('');
-      $('#iform_patient_guardian_mother_address_zip').val('');
-
-      $('#iform_patient_guardian_mother_home_phone_1').val('');
-      $('#iform_patient_guardian_mother_home_phone_2').val('');
-      $('#iform_patient_guardian_mother_home_phone_3').val('');
-    }
-  }
+//  else {
+//    if (<%= @appform.status == 'in progress' || @appform.status == 'pending' %>) {
+//    }
+//    else {
+//      $('.rising_stars_mother_address').attr('readonly', false);
+//      $('#iform_patient_guardian_mother_address_1').val('');
+//      $('#iform_patient_guardian_mother_address_2').val('');
+//      $('#iform_patient_guardian_mother_address_city').val('');
+//      $('#iform_patient_guardian_mother_address_state').val('');
+//      $('#iform_patient_guardian_mother_address_zip').val('');
+//
+//      $('#iform_patient_guardian_mother_home_phone_1').val('');
+//      $('#iform_patient_guardian_mother_home_phone_2').val('');
+//      $('#iform_patient_guardian_mother_home_phone_3').val('');
+//    }
+  //}
 
   if ($('.rising_stars_insured:checked').val() == 'Father') {
     $('.rising_stars_insured_fields').attr('readonly', true);
