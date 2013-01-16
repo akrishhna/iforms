@@ -190,28 +190,28 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "ClothingAndAdditionalItemsNeeded" => @activity.activity_equipment,
 
       "Chaperone1Name" => @activity.activity_chaperone_1_name,
-      "Chaperone1DriverNo" => @activity.activity_chaperone_1_driver == 'No' ? 'No_5' : '' ,
-      "Chaperone1DriverYes" => @activity.activity_chaperone_1_driver == 'Yes' ? 'Yes_5' : '' ,
-      "Chaperone1RegisteredNo" => @activity.activity_chaperone_1_registered == 'No' ? '1' : 'off' ,
-      "Chaperone1RegisteredYes" => @activity.activity_chaperone_1_registered == 'Yes' ? 'Yes' : 'off' ,
+      "Chaperone1DriverNo" => @activity.activity_chaperone_1_driver == 'No' ? 'No_5' : '',
+      "Chaperone1DriverYes" => @activity.activity_chaperone_1_driver == 'Yes' ? 'Yes_5' : '',
+      "Chaperone1RegisteredNo" => @activity.activity_chaperone_1_registered == 'No' ? '1' : 'off',
+      "Chaperone1RegisteredYes" => @activity.activity_chaperone_1_registered == 'Yes' ? 'Yes' : 'off',
 
       "Chaperone2Name" => @activity.activity_chaperone_2_name,
-      "Chaperone2DriverNo" => @activity.activity_chaperone_2_driver == 'No' ? 'No_6' : '' ,
-      "Chaperone2DriverYes" => @activity.activity_chaperone_2_driver == 'Yes' ? 'Yes_6' : '' ,
-      "Chaperone2RegisteredNo" => @activity.activity_chaperone_2_registered == 'No' ? 'No_2' : '' ,
-      "Chaperone2RegisteredYes" => @activity.activity_chaperone_2_registered == 'Yes' ? 'Yes_2' : '' ,
+      "Chaperone2DriverNo" => @activity.activity_chaperone_2_driver == 'No' ? 'No_6' : '',
+      "Chaperone2DriverYes" => @activity.activity_chaperone_2_driver == 'Yes' ? 'Yes_6' : '',
+      "Chaperone2RegisteredNo" => @activity.activity_chaperone_2_registered == 'No' ? 'No_2' : '',
+      "Chaperone2RegisteredYes" => @activity.activity_chaperone_2_registered == 'Yes' ? 'Yes_2' : '',
 
       "Chaperone3Name" => @activity.activity_chaperone_3_name,
-      "Chaperone3DriverNo" => @activity.activity_chaperone_3_driver == 'No' ? 'No_7' : '' ,
-      "Chaperone3DriverYes" => @activity.activity_chaperone_3_driver == 'Yes' ? 'Yes_7' : '' ,
-      "Chaperone3RegisteredNo" => @activity.activity_chaperone_3_registered == 'No' ? 'No_3' : '' ,
-      "Chaperone3RegisteredYes" => @activity.activity_chaperone_3_registered == 'Yes' ? 'Yes_3' : '' ,
+      "Chaperone3DriverNo" => @activity.activity_chaperone_3_driver == 'No' ? 'No_7' : '',
+      "Chaperone3DriverYes" => @activity.activity_chaperone_3_driver == 'Yes' ? 'Yes_7' : '',
+      "Chaperone3RegisteredNo" => @activity.activity_chaperone_3_registered == 'No' ? 'No_3' : '',
+      "Chaperone3RegisteredYes" => @activity.activity_chaperone_3_registered == 'Yes' ? 'Yes_3' : '',
 
       "Chaperone4Name" => @activity.activity_chaperone_4_name,
-      "Chaperone4DriverNo" => @activity.activity_chaperone_4_driver == 'No' ? 'No_8' : '' ,
-      "Chaperone4DriverYes" => @activity.activity_chaperone_4_driver == 'Yes' ? 'Yes_8' : '' ,
-      "Chaperone4RegisteredNo" => @activity.activity_chaperone_4_registered == 'No' ? 'No_4' : '' ,
-      "Chaperone4RegisteredYes" => @activity.activity_chaperone_4_registered == 'Yes' ? 'Yes_3' : '' ,
+      "Chaperone4DriverNo" => @activity.activity_chaperone_4_driver == 'No' ? 'No_8' : '',
+      "Chaperone4DriverYes" => @activity.activity_chaperone_4_driver == 'Yes' ? 'Yes_8' : '',
+      "Chaperone4RegisteredNo" => @activity.activity_chaperone_4_registered == 'No' ? 'No_4' : '',
+      "Chaperone4RegisteredYes" => @activity.activity_chaperone_4_registered == 'Yes' ? 'Yes_3' : '',
 
       # Troop Tab
 
@@ -246,11 +246,11 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
       "LeadersAccompanyingGirls" => @activity.troop_leader_accompanying_girls,
 
-      "TroopLeaderEmergencyContactNameAndPhoneNumber" => @activity.troop_leader_emergency_contact_first_name.to_s + ' ' +  @activity.troop_leader_emergency_contact_last_name.to_s + '    ' + @activity.troop_leader_emergency_contact_phone_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_3.to_s,
+      "TroopLeaderEmergencyContactNameAndPhoneNumber" => @activity.troop_leader_emergency_contact_first_name.to_s + ' ' + @activity.troop_leader_emergency_contact_last_name.to_s + '    ' + @activity.troop_leader_emergency_contact_phone_number_1.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_2.to_s + '-' + @activity.troop_leader_emergency_contact_phone_number_3.to_s,
       # Troop Emergency Tab
 
       "TroopLeaderEmergencyContactName" => @fields['Troop Emergency Name'] ? (@activity.emergency_first_name + ' ' + @activity.emergency_last_name) : (@fields['Troop Emergency Contact Name'] ? (@activity.troop_leader_emergency_contact_first_name.to_s + ' ' + @activity.troop_leader_emergency_contact_last_name.to_s) : ''),
-      "TroopLeaderEmergencyContactDayPhoneAreaCode" =>  @activity.emergency_day_phone_1,
+      "TroopLeaderEmergencyContactDayPhoneAreaCode" => @activity.emergency_day_phone_1,
       "TroopLeaderEmergencyContactDayPhoneLocalNumber" => @activity.emergency_day_phone_2.to_s + '-' + @activity.emergency_day_phone_3.to_s,
       "TroopLeaderEmergencyContactEveningPhoneAreaCode" => @activity.emergency_evening_phone_1,
       "TroopLeaderEmergencyContactEveningPhoneLocalNumber" => @activity.emergency_evening_phone_2.to_s + '-' + @activity.emergency_evening_phone_3.to_s,
@@ -275,8 +275,8 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "EmergencyContact1AlternatePhoneNumber" => @girl_scouts_permission_form.gapf_emergency_contact_1_phone_2_1.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_2_2.to_s + '-' + @girl_scouts_permission_form.gapf_emergency_contact_1_phone_2_3.to_s,
 
       "ActInMyBehalfName" => @girl_scouts_permission_form.act_in_my_behalf_first_name.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_last_name.to_s,
-      "ParentAddressDuringActivity" => @girl_scouts_permission_form.act_in_my_behalf_address_1.to_s + (@girl_scouts_permission_form.act_in_my_behalf_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.act_in_my_behalf_address_2.to_s) + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_city.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_state.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_zip.to_s : ' '),
-      #"ParentAddressDuringActivity" => (@girl_scouts_permission_form.act_in_my_behalf_address_1.present? ? @girl_scouts_permission_form.act_in_my_behalf_address_1.to_s + ', ' : '') + (@girl_scouts_permission_form.act_in_my_behalf_address_2.present? ? @girl_scouts_permission_form.act_in_my_behalf_address_2.to_s + ', ' : '') + @girl_scouts_permission_form.act_in_my_behalf_address_city.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_state.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_zip.to_s,
+      # "ParentAddressDuringActivity" => @girl_scouts_permission_form.act_in_my_behalf_address_1.to_s + (@girl_scouts_permission_form.act_in_my_behalf_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.act_in_my_behalf_address_2.to_s) + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_city.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_state.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_zip.to_s : ' '),
+      "ParentAddressDuringActivity" => (@girl_scouts_permission_form.act_in_my_behalf_address_1.present? ? @girl_scouts_permission_form.act_in_my_behalf_address_1.to_s + ', ' : '') + (@girl_scouts_permission_form.act_in_my_behalf_address_2.present? ? @girl_scouts_permission_form.act_in_my_behalf_address_2.to_s + ', ' : '') + @girl_scouts_permission_form.act_in_my_behalf_address_city.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_state.to_s + ' ' + @girl_scouts_permission_form.act_in_my_behalf_address_zip.to_s,
 
       "ParentPhoneNumberDuringActivity" => @girl_scouts_permission_form.parent_phone_number_during_activity_1.to_s + '-' + @girl_scouts_permission_form.parent_phone_number_during_activity_2.to_s + '-' + @girl_scouts_permission_form.parent_phone_number_during_activity_3.to_s,
 
@@ -298,14 +298,14 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "PhysicianPhoneNumber" => @girl_scouts_permission_form.gapf_physician_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_physician_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_physician_phone_3.to_s,
 
       "MyInsuranceCarrier" => @girl_scouts_permission_form.gapf_my_insurance_carrier,
-      "MyInsuranceCarrierPolicyNumber" =>  @girl_scouts_permission_form.gapf_policy,
+      "MyInsuranceCarrierPolicyNumber" => @girl_scouts_permission_form.gapf_policy,
 
-      #"EmergencyContactAddress" => @girl_scouts_permission_form.emergency_contact_address_street.to_s + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? (', ' + @girl_scouts_permission_form.emergency_contact_address_line.to_s) : ' '),
-      "EmergencyContactAddress" => (@girl_scouts_permission_form.emergency_contact_address_street.present? ? @girl_scouts_permission_form.emergency_contact_address_street.to_s + ', ' : '') + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? @girl_scouts_permission_form.emergency_contact_address_line.to_s : ''),
+      "EmergencyContactAddress" => @girl_scouts_permission_form.emergency_contact_address_street.to_s + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? (', ' + @girl_scouts_permission_form.emergency_contact_address_line.to_s) : ' '),
+      # "EmergencyContactAddress" => (@girl_scouts_permission_form.emergency_contact_address_street.present? ? @girl_scouts_permission_form.emergency_contact_address_street.to_s + ', ' : '') + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? @girl_scouts_permission_form.emergency_contact_address_line.to_s + ', ' : ''),
       "EmergencyContactCity" => @girl_scouts_permission_form.emergency_contact_address_city.to_s,
       #"EmergencyContactState" => @girl_scouts_permission_form.emergency_contact_address_state.to_s,
       "EmergencyContactAddressCityStateZip" => @girl_scouts_permission_form.emergency_contact_address_street.to_s + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? (', ' + @girl_scouts_permission_form.emergency_contact_address_line.to_s) + ' ' + @girl_scouts_permission_form.emergency_contact_address_city.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_address_state.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_address_zip.to_s : ' '),
-      "EmergencyContactAddressCityStateZip" => (@girl_scouts_permission_form.emergency_contact_address_street.present? ? @girl_scouts_permission_form.emergency_contact_address_street.to_s + ', ' : '') + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? @girl_scouts_permission_form.emergency_contact_address_line.to_s + ', ' : '') + @girl_scouts_permission_form.emergency_contact_address_city.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_address_state.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_address_zip.to_s,
+      #"EmergencyContactAddressCityStateZip" => (@girl_scouts_permission_form.emergency_contact_address_street.present? ? @girl_scouts_permission_form.emergency_contact_address_street.to_s + ', ' : '') + (@girl_scouts_permission_form.emergency_contact_address_line.to_s.present? ? @girl_scouts_permission_form.emergency_contact_address_line.to_s + ', ' : '') + @girl_scouts_permission_form.emergency_contact_address_city.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_address_state.to_s + ' ' + @girl_scouts_permission_form.emergency_contact_address_zip.to_s,
 
       "EmergencyContactRelationshipToParticipant" => @girl_scouts_permission_form.emergency_contact_relationship_to_participant.to_s,
       "ActInMyBehalfRelationshipToParticipant" => @girl_scouts_permission_form.gapf_activity_my_behalf_relationship_to_participant.to_s,
@@ -314,16 +314,16 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
       "Medications" => @girl_scouts_permission_form.medications,
 
       "ChangesToGeneralPermissionSlip" => @girl_scouts_permission_form.gapf_changes_to_general_permission_slip,
-      "SpecialNeeds" => @girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'Yes' ? 'On' : 'Off' ,
+      "SpecialNeeds" => @girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'Yes' ? 'On' : 'Off',
       "NoSpecialNeeds" => @girl_scouts_permission_form.gapf_special_needs_yes_or_no == 'No' ? 'Off' : 'On',
       "UnusualRiskAcknowledgement" => @girl_scouts_permission_form.gapf_unusual_risk_acknowledgement == 'Yes' ? 'On' : 'Off',
       "Parent1AddressCityStateZip" => @girl_scouts_permission_form.gapf_parent_1_address_1.to_s + (@girl_scouts_permission_form.gapf_parent_1_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.gapf_parent_1_address_2.to_s) + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_city.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_state.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_zip.to_s : ' '),
-     #"Parent1AddressCityStateZip" => (@girl_scouts_permission_form.gapf_parent_1_address_1.present? ? @girl_scouts_permission_form.gapf_parent_1_address_1.to_s + ', ' : '') + (@girl_scouts_permission_form.gapf_parent_1_address_2.to_s.present? ? @girl_scouts_permission_form.gapf_parent_1_address_2.to_s + ', ' : '') + @girl_scouts_permission_form.gapf_parent_1_address_city.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_state.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_zip.to_s,
+      #"Parent1AddressCityStateZip" => (@girl_scouts_permission_form.gapf_parent_1_address_1.present? ? @girl_scouts_permission_form.gapf_parent_1_address_1.to_s + ', ' : '') + (@girl_scouts_permission_form.gapf_parent_1_address_2.to_s.present? ? @girl_scouts_permission_form.gapf_parent_1_address_2.to_s + ', ' : '') + @girl_scouts_permission_form.gapf_parent_1_address_city.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_state.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_1_address_zip.to_s,
       "Parent1HomePhone" => @girl_scouts_permission_form.gapf_parent_1_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_home_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_1_work_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_work_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_work_phone_3.to_s,
       "Parent1MobilePhone" => @girl_scouts_permission_form.gapf_parent_1_mobile_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_mobile_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_mobile_phone_3.to_s + '           ' + @girl_scouts_permission_form.gapf_parent_1_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_1_other_phone_3.to_s,
       "Parent1EmailAddress" => @girl_scouts_permission_form.gapf_parent_1_email,
       "Parent2AddressCityStateZip" => @girl_scouts_permission_form.gapf_parent_2_address_1.to_s + (@girl_scouts_permission_form.gapf_parent_2_address_2.to_s.present? ? (', ' + @girl_scouts_permission_form.gapf_parent_2_address_2.to_s) + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_city.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_state.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_zip.to_s : ' '),
-     #"Parent1AddressCityStateZip" => (@girl_scouts_permission_form.gapf_parent_2_address_1.present? ? @girl_scouts_permission_form.gapf_parent_2_address_1.to_s + ', ' : '') + (@girl_scouts_permission_form.gapf_parent_2_address_2.to_s.present? ? @girl_scouts_permission_form.gapf_parent_2_address_2.to_s + ', ' : '') + @girl_scouts_permission_form.gapf_parent_2_address_city.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_state.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_zip.to_s,
+      #"Parent1AddressCityStateZip" => (@girl_scouts_permission_form.gapf_parent_2_address_1.present? ? @girl_scouts_permission_form.gapf_parent_2_address_1.to_s + ', ' : '') + (@girl_scouts_permission_form.gapf_parent_2_address_2.to_s.present? ? @girl_scouts_permission_form.gapf_parent_2_address_2.to_s + ', ' : '') + @girl_scouts_permission_form.gapf_parent_2_address_city.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_state.to_s + ' ' + @girl_scouts_permission_form.gapf_parent_2_address_zip.to_s,
       "Parent2HomePhone" => @girl_scouts_permission_form.gapf_parent_2_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_home_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_2_work_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_work_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_work_phone_3.to_s,
       "Parent2MobilePhone" => @girl_scouts_permission_form.gapf_parent_2_mobile_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_mobile_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_mobile_phone_3.to_s + '            ' + @girl_scouts_permission_form.gapf_parent_2_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_2_other_phone_3.to_s,
       "Parent2EmailAddress" => @girl_scouts_permission_form.gapf_parent_2_email,
@@ -333,16 +333,15 @@ class GirlScoutsActivityPermissionForm < ActiveRecord::Base
 
       "Allergies" => @girl_scouts_permission_form.gapf_allergies,
 
-      "EmergencyMedicalTreatmentYes" =>  @girl_scouts_permission_form.gapf_emergency_medical_treatment == 'Yes' ? 'Yes_9':'',
-      "EmergencyMedicalTreatmentNo" =>  @girl_scouts_permission_form.gapf_emergency_medical_treatment == 'No' ? 'No_9':'',
+      "EmergencyMedicalTreatmentYes" => @girl_scouts_permission_form.gapf_emergency_medical_treatment == 'Yes' ? 'Yes_9' : '',
+      "EmergencyMedicalTreatmentNo" => @girl_scouts_permission_form.gapf_emergency_medical_treatment == 'No' ? 'No_9' : '',
       "ParentHomeCellOtherPhoneNumbers" => @girl_scouts_permission_form.gapf_parent_home_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_home_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_home_phone_3.to_s + '     ' + @girl_scouts_permission_form.gapf_parent_cell_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_cell_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_cell_phone_3.to_s + '    ' + @girl_scouts_permission_form.gapf_parent_other_phone_1.to_s + '-' + @girl_scouts_permission_form.gapf_parent_other_phone_2.to_s + '-' + @girl_scouts_permission_form.gapf_parent_other_phone_3.to_s,
-      "PublicityPhotosNo" => @girl_scouts_permission_form.gapf_publicity_photos == 'No' ? 'No_9':'',
-      "PublicityPhotosYes" => @girl_scouts_permission_form.gapf_publicity_photos == 'Yes' ? 'Yes_9':'',
-
+      "PublicityPhotosNo" => @girl_scouts_permission_form.gapf_publicity_photos == 'No' ? 'No_9' : '',
+      "PublicityPhotosYes" => @girl_scouts_permission_form.gapf_publicity_photos == 'Yes' ? 'Yes_9' : '',
 
 
     })
-   # raise @pdftk.fields(form_pdf_path).to_yaml
+    # raise @pdftk.fields(form_pdf_path).to_yaml
   end
 
 
