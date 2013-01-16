@@ -1,18 +1,19 @@
 <% @user = User.where("email =?", @appointment.email).first %>
 
-<div style="margin: 0 auto;width: 600px;min-height: 480px;border: 1px solid #cccccc;padding: 10px;">
-  <div style="background:#add8e6;border: 1px solid #d3d3d3;height: 85px;">
-    <div style="float: left;margin: 0;padding: 0;height: 80px;">
-      <a href="http://www.capitalmedicalclinic.com/" target="_blank"
-         style="text-decoration: none;height: 80px;width: 450px;">
-        <img src=" <%= "#{NOTIFIER_PATH}/assets/capital_medical_clinic_header.png" %> " style="height: 80px;width: 450px;">
-      </a>
-    </div>
-    <div style="float: right;margin: 0;padding: 0;height: 80px;">
-      <img src=" <%= "#{NOTIFIER_PATH}/assets/dr-aventa-127.jpg"%> " style="height: 75px;margin: 5px;width:72px"/>
-    </div>
-    <div style="clear: both;"></div>
-  </div>
+<div style="margin: 0 auto;width: 100%;min-height: 480px;border: 1px solid #cccccc;padding: 10px;">
+  <table style="background:#add8e6;border: 1px solid #d3d3d3;height: 85px;">
+     <td>
+       <a href="http://www.capitalmedicalclinic.com/" target="_blank"
+             style="text-decoration: none;height: 80px">
+       <img src=" <%= "http://50.57.138.165:8082/assets/capital_medical_clinic_header.png" %> " style="height: 80px;;width: 90%">
+     </a>
+     </td>
+      <td> <img src=" <%= "http://50.57.138.165:8082/assets/dr-aventa-127.jpg"%> " style="height: 75px;padding-right: 15px;width:100%;"/></td>
+
+
+
+
+  </table>
   <div style="margin: 20px 0;">
     <% if @appointment.responsible_party.empty? and @appointment.formname.empty? and @preferred_name.empty? %>
       <p> Dear <%= @appointment.firstname %> <%= @appointment.lastname %>,</p>
@@ -126,7 +127,7 @@
 
     <p>Tony R. Aventa, M.D.</p>
   </div>
-  <div style="background:none repeat scroll 0 0 #e7e4dd;border-top:6px solid #ded9ce;font-size:13px;padding:10px;text-align:center;width:580px">
+  <div style="background:none repeat scroll 0 0 #e7e4dd;border-top:6px solid #ded9ce;font-size:13px;padding:10px;text-align:center;width:auto">
     <span>Capital Medical Clinic 1301 W. 38th Street, Suite 601 Austin Texas 78705-1069 512-454-5171</span>
   </div>
 </div>
