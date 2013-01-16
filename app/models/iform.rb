@@ -204,7 +204,7 @@ class Iform < ActiveRecord::Base
       "Timid" => iform.dental_history_patient_behave_today_timid ? 'Yes' : '',
       "TMMJPoppingOrClicking" => iform.dental_history_tmj_popping_or_clicking ? 'Yes' : '',
       "Toothache" => iform.dental_history_toothache ? 'Yes' : '',
-      "OralHabitsOtherDescription" => iform.dental_history_oral_habits_other_description,
+      "OralHabitsOtherDescription" => iform.dental_history_other ? iform.dental_history_oral_habits_other_description : '',
 
       # Medical History tab
       "AbnormalBleedingOrBruisingNo" => iform.medical_history_abnormal_bleeding_or_bruising == 'No' ? 'Yes' : '',
@@ -213,8 +213,8 @@ class Iform < ActiveRecord::Base
       "ADDADHDYes" => iform.medical_history_add_or_adhd == 'Yes' ? 'Yes' : '',
       "AIDSVirusNo" => iform.medical_history_aids_virus == 'No' ? 'Yes' : '',
       "AIDSVirusYes" => iform.medical_history_aids_virus == 'Yes' ? 'Yes' : '',
-      "AsthmaBreathingProblemsDescription" => iform.medical_history_asthama_or_breathing_prob_description,
-      "AsthmaMedicationDesciption" => iform.medical_history_asthma_medication,
+      "AsthmaBreathingProblemsDescription" => iform.medical_history_asthama_or_breathing_prob == 'Yes' ? iform.medical_history_asthama_or_breathing_prob_description : '',
+      "AsthmaMedicationDesciption" => iform.medical_history_asthama_or_breathing_prob == 'Yes' ? iform.medical_history_asthma_medication : '',
       "AutismSpectrumNo" => iform.medical_history_autism_spectrum == 'No' ? 'Yes' : '',
       "AutismSpectrumYes" => iform.medical_history_autism_spectrum == 'Yes' ? 'Yes' : '',
       "BirthDefectsNo" => iform.medical_history_birth_defects == 'No' ? 'Yes' : '',
@@ -231,15 +231,15 @@ class Iform < ActiveRecord::Base
       "DiabetesYes" => iform.medical_history_diabetes == 'Yes' ? 'Yes' : '',
       "DisabilitiesOrDevelopmentalDelaysNo" => iform.medical_history_patient_physical_disabilities == 'No' ? 'Yes' : '',
       "DisabilitiesOrDevelopmentalDelaysYes" => iform.medical_history_patient_physical_disabilities == 'Yes' ? 'Yes' : '',
-      "DrugAllergiesDescription" => iform.medical_history_drug_allergies_description,
+      "DrugAllergiesDescription" => iform.medical_history_drug_allergies ? iform.medical_history_drug_allergies_description : '',
       "EarEyeNoseOrThroatTroubleNo" => iform.medical_history_ear_eye_nose_or_throat_trouble == 'No' ? 'Yes' : '',
       "EarEyeNoseOrThroatTroubleYes" => iform.medical_history_ear_eye_nose_or_throat_trouble == 'Yes' ? 'Yes' : '',
       "EatingDisordersNo" => iform.medical_history_eating_disorders == 'No' ? 'Yes' : '',
       "EatingDisordersYes" => iform.medical_history_eating_disorders == 'Yes' ? 'Yes' : '',
-      "ERForAsthmaAttackDescription" => iform.medical_history_er_for_asthma_attack_description,
+      "ERForAsthmaAttackDescription" => iform.medical_history_asthama_or_breathing_prob == 'Yes' && iform.medical_history_er_for_asthma_attack  ? iform.medical_history_er_for_asthma_attack_description : '',
       "EverHospitalizedNo" => iform.medical_history_patient_ever_been_hospitalized == 'No' ? 'Yes' : '',
       "EverHospitalizedYes" => iform.medical_history_patient_ever_been_hospitalized == 'Yes' ? 'Yes' : '',
-      "FoodAllergiesDescription" => iform.medical_history_food_allergies_description,
+      "FoodAllergiesDescription" => iform.medical_history_food_allergies ? iform.medical_history_food_allergies_description : '',
       "FrequentDiarrheaOrVomitingNo" => iform.medical_history_frequent_diarrhea_or_vomiting == 'No' ? 'Yes' : '',
       "FrequentDiarrheaOrVomitingYes" => iform.medical_history_frequent_diarrhea_or_vomiting == 'Yes' ? 'Yes' : '',
       "GoodGeneralHealthNo" => iform.medical_history_patient_good_general_health == 'No' ? 'Yes' : '',
@@ -301,7 +301,7 @@ class Iform < ActiveRecord::Base
       "ThyroidDiseaseYes" => iform.medical_history_thyroid_disease == 'Yes' ? 'Yes' : '',
       "TuberculosisOrTBExposureNo" => iform.medical_history_tuberculosis_or_tb_exposure == 'No' ? 'Yes' : '',
       "TuberculosisOrTBExposureYes" => iform.medical_history_tuberculosis_or_tb_exposure == 'Yes' ? 'Yes' : '',
-      "WhatInducesBreathingProblemsDescription" => iform.medical_history_induces_breathing_prob,
+      "WhatInducesBreathingProblemsDescription" => iform.medical_history_asthama_or_breathing_prob == 'Yes' ? iform.medical_history_induces_breathing_prob : '',
 
     })
     form_pdf_path = "#{PDFFILES_PATH}Rising_Stars_Pediatric_Dentistry.pdf"
