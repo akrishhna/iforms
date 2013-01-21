@@ -393,8 +393,17 @@ $('.rising_stars_insured').live('change', function () {
     }
   });
 
+$('#father_tab').live('click',function(){
+  var leng = $('#iform_Self_Name_First').val().length;
+  $('.patient_first_name').text($('#iform_Self_Name_First').val());
+  $('.home_address_same_as').css('width', + leng * 5 + 200);
+});
 
-
+$('#mother_tab').live('click',function(){
+  var leng = $('#iform_Self_Name_First').val().length;
+  $('.patient_first_name').text($('#iform_Self_Name_First').val());
+  $('.home_address_same_as').css('width', + leng * 5 + 200)
+});
 
 /* ENd Rising stars */
 

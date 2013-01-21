@@ -931,18 +931,20 @@
     </div>
   </div>
   <div class="tab-pane" id="social_history">
-    <div class="control-group">
+
+        <div class="control-group">
       <%= f.label :social_history_live, 'I Live', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :social_history_live, "Alone", :class => 'medical_patient_form_social_history_live' %>Alone
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:90px' do %>
           <%= f.radio_button :social_history_live, "With Other(s)", :class => 'medical_patient_form_social_history_live' %>
           With Other(s)
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_live_with_whom, "Live With Whom", :class => 'control-label' %>
       <div class="controls">
@@ -991,11 +993,11 @@
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :social_history_smoking_tobacco, "Never", :class => 'medical_patient_form_smoking' %>Never
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:100px' do %>
           <%= f.radio_button :social_history_smoking_tobacco, "I did, but I quit", :class => 'medical_patient_form_smoking' %>
           I did, but I quit
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:100px' do %>
           <%= f.radio_button :social_history_smoking_tobacco, "I smoke now", :class => 'medical_patient_form_smoking' %>
           I smoke now
         <% end %>
@@ -1024,10 +1026,10 @@
       <div class="controls">
         <%= f.text_field :social_history_drink, :placeholder => 'Number', :class => 'input-mini', :style => 'height:13px' %>&nbsp;&nbsp;Alcoholic
         Beverages&nbsp;&nbsp;
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:50px' do %>
           <%= f.radio_button :social_history_drink_alcoholic_beverage, "Day", :style => 'margin-bottom:10px' %>per Day
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:70px' do %>
           <%= f.radio_button :social_history_drink_alcoholic_beverage, "Week", :style => 'margin-bottom:9px' %>per Week
         <% end %>
       </div>
@@ -1094,10 +1096,10 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_general_fever %>Fever
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:90px' do %>
         <%= f.check_box :review_of_sym_general_night_sweats %>Night Sweats
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:160px' do %>
         <%= f.check_box :review_of_sym_general_heat_or_cold %>Heat Or Cold intolerance
       <% end %>
     </div>
@@ -1121,13 +1123,13 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_skin_rash %>Rash
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:60px' do %>
         <%= f.check_box :review_of_sym_skin_hair_loss %>Hair Loss
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:100px' do %>
         <%= f.check_box :review_of_sym_skin_easy_bruising %>Easy bruising
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_skin_toenail_inflection %>Toenail infection
       <% end %>
     </div>
@@ -1147,7 +1149,7 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_eye_dryness %>Dryness
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:100px' do %>
         <%= f.check_box :review_of_sym_eye_visual_changes %>Visual changes
       <% end %>
     </div>
@@ -1155,16 +1157,16 @@
   <div class="control-group">
     <%= f.label :review_of_sym_nose_bleed, 'Nose', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_nose_bleed %>Nose bleed
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:170px' do %>
         <%= f.check_box :review_of_sym_nose_nasal_discharge %>Nasal discharge/drainage
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_nose_sinus_pain %>Sinus pain
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_nose_sinus_congestion %>Sinus congestion
       <% end %>
     </div>
@@ -1172,13 +1174,13 @@
   <div class="control-group">
     <%= f.label :review_of_sym_skin_rash, 'Mouth', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_mouth_oral_lesions %>Oral lesions
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_mouth_white_patches %>White patches
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_mouth_bleeding_gums %>Bleeding gums
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
@@ -1192,13 +1194,13 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_throat_hoarseness %>Hoarseness
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_throat_sore_throat %>Sore Throat
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_throat_pain_with_swallowing %>Pain with swallowing
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_throat_difficultly_swallowing %>Difficulty swallowing
       <% end %>
     </div>
@@ -1209,13 +1211,13 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_respiratory_cough %>Cough
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_respiratory_coughing_blood %>Coughing blood
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:180px' do %>
         <%= f.check_box :review_of_sym_respiratory_shortness_of_breath_at_rest %>Shortness of breath at rest
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:200px' do %>
         <%= f.check_box :review_of_sym_respiratory_shortness_of_breath_on_exertion %>Shortness of breath on exertion
       <% end %>  <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
@@ -1226,22 +1228,22 @@
   <div class="control-group">
     <%= f.label :review_of_sym_cardiovascular_chest_discomfort, 'Cardiovascular', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_cardiovascular_chest_discomfort %>Chest discomfort
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:250px' do %>
         <%= f.check_box :review_of_sym_cardiovascular_palpitations %>Palpitations (Heart fluttering or racing)
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_cardiovascular_ankle_swelling %>Ankle swelling
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_cardiovascular_fast_heart_beat %>Fast heart beat
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:250px' do %>
         <%= f.check_box :review_of_sym_cardiovascular_difficulty_breathing %> Difficulty breathing when lying down
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:180px' do %>
         <%= f.check_box :review_of_sym_cardiovascular_awakening_short_of_breath %>Awakening short of breath
       <% end %>
     </div>
@@ -1249,25 +1251,25 @@
   <div class="control-group">
     <%= f.label :review_of_sym_urinary_pain_with_urination, 'Urinary', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_urinary_pain_with_urination %>Pain with urination
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_urinary_urinating_frequently %>Urinating frequently
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:450px' do %>
         <%= f.check_box :review_of_sym_urinary_incontinence %>Incontinence (losing your urine) with coughing/laughing
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:350px' do %>
         <%= f.check_box :review_of_sym_urinary_urinating_before_bathroom %>Urinating before you can get to the bathroom
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_urinary_urination_at_night %>Urination at night
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:250px' do %>
         <%= f.check_box :review_of_sym_urinary_difficulty_starting_a_urine_stream %>Difficulty starting a urine stream
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_urinary_blood_in_urine %>Blood in urine
       <% end %>
     </div>
@@ -1281,13 +1283,13 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_gastrointestinal_diarrhea %>Diarrhea
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_gastrointestinal_blood_in_the_stool %>Blood in the stool
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_gastrointestinal_black_tarry_stool %>Black, tarry stool
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_gastrointestinal_heartburn %>Heartburn/Reflux
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
@@ -1298,10 +1300,10 @@
   <div class="control-group">
     <%= f.label :review_of_sym_sexual_decreased_libido, 'Sexual', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_sexual_decreased_libido %>Decreased libido
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline review_of_sym_sexual_difficulty' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline review_of_sym_sexual_difficulty', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_sexual_difficulty_achieving_and_maintaining %>Difficulty
         achieving and maintaining an erection
       <% end %>
@@ -1310,16 +1312,16 @@
   <div class="control-group">
     <%= f.label :review_of_sym_musculoskeletal_joint_pain_or_stiffness, 'Musculoskeletal', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_musculoskeletal_joint_pain_or_stiffness %>Joint pain or stiffness
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:200px' do %>
         <%= f.check_box :review_of_sym_musculoskeletal_joint_swelling_or_redness %>Joint swelling or redness
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_musculoskeletal_back_pain %>Back pain
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_musculoskeletal_muscle_pain %>Muscle pain
       <% end %>
     </div>
@@ -1339,10 +1341,10 @@
   <div class="control-group">
     <%= f.label :review_of_sym_neurological_difficulty_with_memory, 'Neurological', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_neurological_difficulty_with_memory %>Difficulty with memory
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:200px' do %>
         <%= f.check_box :review_of_sym_neurological_fainting %>Fainting/Losing consciousness
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
@@ -1351,19 +1353,19 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_neurological_seizures %>Seizures
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:200px' do %>
         <%= f.check_box :review_of_sym_neurological_severe_or_frequent_headaches %>Severe or frequent headaches
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_neurological_difficulty_with_balance %>Difficulty with balance
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_neurological_difficulty_walking %>Difficulty walking
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :review_of_sym_neurological_lightheadedness %>Lightheadednesses
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
+        <%= f.check_box :review_of_sym_neurological_lightheadedness %>Light headednesses
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:250px' do %>
         <%= f.check_box :review_of_sym_neurological_vertigo %>Vertigo (world spinning around you)
       <% end %>
     </div>
@@ -1380,23 +1382,23 @@
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_psychological_depression %>Depression
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:550px' do %>
         <%= f.check_box :review_of_sym_psychological_lack_of_interest %>Lack of interest in and enjoyment of activities
         that used to bring pleasure/fulfillment
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:200px' do %>
         <%= f.check_box :review_of_sym_psychological_decreased_sense_of_self_worth %>Decreased sense of self-worth
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:250px' do %>
         <%= f.check_box :review_of_sym_psychological_difficulty_focusing %>Difficulty focusing and concentrating
       <% end %>  <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_psychological_desire_to_end_your_life %>Desire to end your life
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_psychological_disabling_anxiety %>Disabling anxiety
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_psychological_panic_attacks %>Panic attacks
       <% end %>
     </div>
@@ -1404,16 +1406,16 @@
   <div class="control-group">
     <%= f.label :review_of_sym_sleep_difficulty_getting_to_sleep, 'Sleep', :class => 'control-label ' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:200px' do %>
         <%= f.check_box :review_of_sym_sleep_difficulty_getting_to_sleep %>Difficulty getting to sleep
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:150px' do %>
         <%= f.check_box :review_of_sym_sleep_difficulty_difficulty_staying_asleep %>Difficulty staying asleep
       <% end %> <br>
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :review_of_sym_sleep_difficulty_snoring %>Snoring
       <% end %> <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:450px' do %>
         <%= f.check_box :review_of_sym_sleep_difficulty_cessation_of_breathing %>Cessation of breathing during sleep (as
         reported by bed partner)
       <% end %>

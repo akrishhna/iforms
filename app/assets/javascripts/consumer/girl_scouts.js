@@ -22,6 +22,14 @@ $(function(){
     return false;
   });
 
+  $('.arizona_special_needs').change(function(){
+   if($('.arizona_special_needs:checked').val() == 'Yes'){
+     $('#girl_scouts_activity_permission_form_gapf_special_needs').show()
+   }else{
+     $('#girl_scouts_activity_permission_form_gapf_special_needs').hide()
+   }
+  });
+
   $('#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_2,' +
     '#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_3, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_1,' +
     '#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_3,' +

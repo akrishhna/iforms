@@ -33,10 +33,10 @@
       <%= link_to "Patient", '#patient', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Father", '#father', "data-toggle" => "tab" %>
+      <%= link_to "Father", '#father', "data-toggle" => "tab", :id => 'father_tab' %>
     </li>
     <li>
-      <%= link_to "Mother", '#mother', "data-toggle" => "tab" %>
+      <%= link_to "Mother", '#mother', "data-toggle" => "tab", :id => 'mother_tab' %>
     </li>
     <li>
       <%= link_to "Insurance", '#insurance', "data-toggle" => "tab", :id => 'insurance_tab' %>
@@ -163,9 +163,8 @@
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :patient_guardian_father, "Other", :class => 'rising_stars_father_type' %>Other
-          &nbsp;&nbsp;
-          <%= f.text_field :patient_guardian_father_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_father == 'Other' ? '' : 'hide') %>
-        <% end %>
+        <% end %>&nbsp;&nbsp;
+        <%= f.text_field :patient_guardian_father_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_father == 'Other' ? '' : 'hide') %>
 
       </div>
     </div>
@@ -201,14 +200,13 @@
       <%= f.label :patient_guardian_father_address_type, raw('&nbsp;'), :class => 'control-label ' %>
       <div class="controls">
 
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline home_address_same_as' do %>
           <%= f.radio_button :patient_guardian_father_address_type, "Same", :class => 'rising_stars_father_address_type' %>
-          Home address
-          same as <%= f.object.Self_Name_First %>
+          Home address same as <span class="patient_first_name" ><%= f.object.Self_Name_First %></span>
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :patient_guardian_father_address_type, "Other", :class => 'rising_stars_father_address_type' %>
+          <%= f.radio_button :patient_guardian_father_address_type, "Other", :class => 'rising_stars_father_address_type'%>
           Other
         <% end %>
 
@@ -308,9 +306,8 @@
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :patient_guardian_mother, "Other", :class => 'rising_stars_mother_type' %>Other
-          &nbsp;&nbsp;
-          <%= f.text_field :patient_guardian_mother_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_mother == 'Other' ? '' : 'hide') %>
-        <% end %>
+           <% end %>&nbsp;&nbsp;
+        <%= f.text_field :patient_guardian_mother_other_description, :style => 'width: 235px;height:15px', :class => (f.object.patient_guardian_mother == 'Other' ? '' : 'hide') %>
 
       </div>
     </div>
@@ -346,10 +343,9 @@
       <%= f.label :patient_guardian_mother_address_type, raw('&nbsp;'), :class => 'control-label ' %>
       <div class="controls">
 
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline home_address_same_as' do %>
           <%= f.radio_button :patient_guardian_mother_address_type, "Same", :class => 'rising_stars_mother_address_type' %>
-          Home address
-          same as <%= f.object.Self_Name_First %>
+          Home address same as <span class="patient_first_name" ><%= f.object.Self_Name_First %></span>
         <% end %>
 
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -850,23 +846,23 @@
   <div class="control-group">
     <%= f.label :medical_history_latex_allergies, "Does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} now, or has he/she ever had", :class => 'control-label' %>
     <div class="controls">
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:100px' do %>
         <%= f.check_box :medical_history_latex_allergies %>Latex Allergies
       <% end %>
       <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:130px' do %>
         <%= f.check_box :medical_history_seasonal_allergies %>Seasonal Allergies
       <% end %>
       <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :medical_history_food_allergies %> Food Allergies &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 307px;height:15px', :class => f.object.medical_history_food_allergies ? '' : 'hide' %>
-      <% end %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:100px' do %>
+        <%= f.check_box :medical_history_food_allergies %> Food Allergies
+      <% end %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_food_allergies_description, :placeholder => 'Please Describe', :style => 'width: 307px;height:15px', :class => f.object.medical_history_food_allergies ? '' : 'hide' %>
       <br>
-      <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
-        <%= f.check_box :medical_history_drug_allergies %> Drug Allergies &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 307px;height:15px', :class => f.object.medical_history_drug_allergies ? '' : 'hide' %>
-      <% end %>
+      <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:100px' do %>
+        <%= f.check_box :medical_history_drug_allergies %> Drug Allergies
+      <% end %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_drug_allergies_description, :placeholder => 'Please Describe', :style => 'width: 307px;height:15px;margin-top:5px', :class => f.object.medical_history_drug_allergies ? '' : 'hide' %>
 
     </div>
   </div>
@@ -1491,15 +1487,15 @@
     <div class="control-group">
       <%= f.label :social_history_patient_is, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} is ", :class => 'control-label ' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-          <%= f.radio_button :social_history_patient_is, 'Advanced in learning' %>Advanced in learning
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:140px'  do %>
+          <%= f.radio_button :social_history_patient_is, 'Advanced in learning'%>Advanced in learning
         <% end %>
 
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:140px'  do %>
           <%= f.radio_button :social_history_patient_is, 'Progressing normally' %>Progressing normally
         <% end %>
 
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:140px' do %>
           <%= f.radio_button :social_history_patient_is, 'A slow learner' %>A slow learner
         <% end %>
 
@@ -1722,5 +1718,8 @@
     $('.rising_stars_patient_adopted_age').hide();
   }
 
+  var leng = $('#iform_Self_Name_First').val().length;
+  $('.home_address_same_as').css('width', + leng * 5 + 200)
+  $('.patient_first_name').text($('#iform_Self_Name_First').val());
 
 </script>
