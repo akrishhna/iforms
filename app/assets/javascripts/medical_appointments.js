@@ -1,7 +1,7 @@
 $(function () {
 
   $(window).load(function(){
-    if(params['appointment_date'] == undefined){
+    if(params['appointment_date'] == undefined && params['action'] == 'index'){
       var date = new Date();
       var year = date.getFullYear();
       var month = (date.getMonth() + 1);
