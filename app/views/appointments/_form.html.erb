@@ -46,7 +46,7 @@
   <% if session[:user_service_provider] == 1 %>
     <div class="control-group">
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= radio_button_tag '', '', :checked => 'checked' %> James R. Waters, DDS, MSD, PA
         <% end %>
       </div>
@@ -56,15 +56,15 @@
     <div class="control-group">
       <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= f.radio_button :location, 'Bastrop' %>Bastrop
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= f.radio_button :location, 'Central Austin' %>Central Austin
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= f.radio_button :location, 'Steiner Ranch' %>Steiner Ranch
         <% end %>
 
@@ -73,7 +73,7 @@
   <% elsif session[:user_service_provider] == 4 %>
     <div class="control-group">
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= radio_button_tag '', '', :checked => 'checked' %> Karen Naples D.D.S. P.A.
         <% end %>
       </div>
@@ -83,7 +83,7 @@
     <div class="control-group">
       <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= f.radio_button :location, 'Cedar Park', :checked => 'checked' %>Cedar Park
         <% end %>
       </div>
@@ -92,18 +92,18 @@
     <div class="control-group">
       <%= f.label :appointment_doctor_name, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= f.radio_button :appointment_doctor_name, 'Dr. Michelle L. Freeze, D.M.D.' %> Dr. Michelle L. Freeze, D.M.D.
         <% end %> <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= f.radio_button :appointment_doctor_name, 'Dr. Shiny Thomas, D.D.S.' %> Dr. Shiny Thomas, D.D.S.
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= f.radio_button :appointment_doctor_name, 'Dr. Jeff Gregerson, D.M.D.' %>Dr. Jeff Gregerson, D.M.D.
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= f.radio_button :appointment_doctor_name, 'Dr. Pru Aurora, D.D.S.' %> Dr. Pru Aurora, D.D.S.
         <% end %>
       </div>
@@ -113,11 +113,11 @@
     <div class="control-group">
       <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= f.radio_button :location, 'Lakeline' %> Lakeline
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= f.radio_button :location, 'Rising Stars Steiner Ranch' %> Steiner Ranch
         <% end %>
       </div>
@@ -176,15 +176,15 @@
     <div class="control-group">
       <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= radio_button_tag "radio_buttons", 'Adult' %>Adult New Patient
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= radio_button_tag "radio_buttons", 'Child' %>Child New Patient
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= radio_button_tag "radio_buttons", 'None', true %>None
         <% end %>
       </div>
@@ -193,11 +193,11 @@
     <div class="control-group">
       <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
           <%= radio_button_tag "radio_buttons", 'New_Patient' %>New Patient / Smile Evaluation
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= radio_button_tag "radio_buttons", 'None', true %>None
         <% end %>
       </div>
@@ -206,11 +206,11 @@
     <div class="control-group">
       <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= radio_button_tag "radio_buttons", 'Rising_Stars_Pediatric' %>New Patient
         <% end %>
         <br>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
           <%= radio_button_tag "radio_buttons", 'None', true %>None
         <% end %>
       </div>

@@ -45,7 +45,7 @@
   <strong>2. With:</strong>
   <div class="control-group">
     <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+      <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
         <%= radio_button_tag '', '', :checked => 'checked' %> Tony R. Aventa, M.D.
       <% end %>
     </div>
@@ -54,7 +54,7 @@
   <div class="control-group">
     <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
     <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+      <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
         <%= f.radio_button :location, '38th Street', :checked => 'checked' %>38th Street
       <% end %>
     </div>
@@ -74,11 +74,11 @@
   <div class="control-group">
     <%= label_tag "radio_buttons", raw('&nbsp;'), :class => 'control-label' %>
     <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+      <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
         <%= radio_button_tag "radio_buttons", 'New_Medical_Patient' %>New Patient Registration and History
       <% end %>
       <br>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+      <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
         <%= radio_button_tag "radio_buttons", 'None', true %>None
       <% end %>
     </div>

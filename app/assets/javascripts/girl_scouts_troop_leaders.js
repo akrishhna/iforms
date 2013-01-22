@@ -15,7 +15,7 @@ $(function () {
     return false;
   });
 
-  $('.girl_scout_name, .girl_scout_parent_name, .girl_scout_email').live('blur', function () {
+  $('.girl_scout_name, .girl_scout_parent_name, .girl_scout_email').live('change', function () {
     var row_index = $(this).parents('tr').attr('data_row_number');
     var id = $('#id_' + row_index).val();
     var girl_scout_first_name = $('#first_name_' + row_index).val();
