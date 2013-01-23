@@ -21,9 +21,12 @@
       <% @appointments.each do |i| %>
         <% if i.timesent %>
           <% i.timesent = i.timesent.to_datetime %>
-          <% timesent_date = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
-          <% timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
-          <% timesent_min = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
+          <%# timesent_date = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
+          <%# timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+          <%# timesent_min = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
+          <% timesent_date = i.timesent.strftime("%Y-%m-%d") %>
+          <% timesent_hrs = i.timesent.strftime("%H") %>
+          <% timesent_min = i.timesent.strftime("%M") %>
           <% timesent_hrs_int = timesent_hrs.to_i %>
           <% var = 12 %>
           <% if var<=timesent_hrs_int %>

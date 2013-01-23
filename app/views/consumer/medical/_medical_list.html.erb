@@ -13,7 +13,8 @@
       <% if appointment.timesent %>
         <% appointment.timesent = appointment.timesent.to_datetime %>
         <% timesent_date = appointment.timesent.strftime("%Y-%m-%d") %>
-        <% timesent_hrs = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+        <%# timesent_hrs = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+        <% timesent_hrs = appointment.timesent.strftime("%H") %>
         <% timesent_min = appointment.timesent.strftime("%M") %>
         <% timesent_hrs_int = timesent_hrs.to_i %>
         <% var = 12 %>
