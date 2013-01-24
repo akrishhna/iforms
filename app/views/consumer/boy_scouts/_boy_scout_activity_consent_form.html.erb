@@ -5,10 +5,10 @@
   <div class="control-group">
     <%= f.label :bacf_restriction, ' Restrictions ', :class => 'control-label' %>
     <div class="controls">
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+      <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:150px' do %>
         <%= f.radio_button :bacf_restriction, "without_restrictions", :class => 'boy_scout_activity_consent_form_restrictions' %>Without Restrictions
       <% end %> <br>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+      <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:300px' do %>
         <%= f.radio_button :bacf_restriction, "with_restrictions", :class => 'boy_scout_activity_consent_form_restrictions' %>With Special considerations or restrictions
       <% end %>
     </div>
