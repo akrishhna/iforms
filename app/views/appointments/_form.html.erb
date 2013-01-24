@@ -127,26 +127,34 @@
   <strong>4. On This Date/Time:</strong>
 
   <div class="control-group">
-    <%= f.label :date, "Date", :class => 'control-label' %>
+    <%= f.label :appointment_date_time, "Date", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :date, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.date %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :time_hrs, "Time", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :time_hrs, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
-      <strong> : </strong>
-      <%= f.select :time_min, {"00" => "00", "05" => "05", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :AM_PM, "AM", :checked => 'checked' %> AM
-      <% end %>
-      <%= label_tag "radio_buttons", :class => 'radio inline' do %>
-        <%= f.radio_button :AM_PM, "PM" %> PM
-      <% end %>
+      <%= f.text_field :appointment_date_time, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.appointment_date_time %>
     </div>
   </div>
 
+  <% if false %>
+    <div class="control-group">
+      <%= f.label :date, "Date", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :date, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.date %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :time_hrs, "Time", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :time_hrs, {"01" => "1", "02" => "2", "03" => "3", "04" => "4", "05" => "5", "06" => 6, "07" => 7, "08" => 8, "09" => 9, "10" => 10, "11" => 11, "12" => 12}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <strong> : </strong>
+        <%= f.select :time_min, {"00" => "00", "05" => "05", "10" => "10", "15" => "15", "20" => "20", "25" => "25", "30" => "30", "35" => "35", "40" => "40", "45" => "45", "50" => "50", "55" => "55"}, {:include_blank => true}, {:style => "width:60px;text-align:center"} %> &nbsp;
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :AM_PM, "AM", :checked => 'checked' %> AM
+        <% end %>
+        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+          <%= f.radio_button :AM_PM, "PM" %> PM
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <strong>5. With These Forms:</strong>
   <% if false %>
     <% @doctor = Doctor.first %>
@@ -243,12 +251,24 @@ end %> -->
 
 <% end %>
 
+<% if false %>
+  <script type="text/javascript">
+    $(".appointments_date_selector").datepicker({
+      changeMonth:true,
+      changeYear:true
+    }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+
+  </script>
+<% end %>
+
 <script type="text/javascript">
-  $(".appointments_date_selector").datepicker({
-    changeMonth: true,
-    changeYear: true
-  }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+  // $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+  $('.appointments_date_selector').datetimepicker({
+    changeMonth:true,
+    changeYear:true,
+    controlType:'select',
+    timeFormat:'hh:mm tt'
+  });
 
 </script>
-
 

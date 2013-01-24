@@ -408,7 +408,7 @@
     <div class="control-group + <%= @fields['Certified First Aider Not Needed'] ? '' : 'hide' %>">
       <%= f.label :troop_leader_certified_first_aider_not_needed, "Certified first aider", :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
+        <%= label_tag "checkboxs", :class => 'checkbox inline', :style => 'width:100px' do %>
           <%= f.check_box :troop_leader_certified_first_aider_not_needed %>&nbsp;Not needed
         <% end %>
       </div>

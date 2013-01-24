@@ -12,10 +12,11 @@
     <% @appointments.each do |appointment| %>
       <% if appointment.timesent %>
         <% appointment.timesent = appointment.timesent.to_datetime %>
-        <% timesent_date = appointment.timesent.strftime("%Y-%m-%d") %>
-        <%# timesent_hrs = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
-        <% timesent_hrs = appointment.timesent.strftime("%H") %>
-        <% timesent_min = appointment.timesent.strftime("%M") %>
+        <% timesent_date = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
+        <% timesent_hrs = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+        <% timesent_min = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
+        <%# timesent_hrs = appointment.timesent.strftime("%H") %>
+        <%# timesent_min = appointment.timesent.strftime("%M") %>
         <% timesent_hrs_int = timesent_hrs.to_i %>
         <% var = 12 %>
         <% if var<=timesent_hrs_int %>
@@ -32,20 +33,20 @@
         <td><%= appointment.doctorname %></td>
         <% if appointment.formname.blank? %>
           <td></td>
-          <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= appointment.appointment_date_time.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p") %></td>
           <td><%= @timesent %></td>
           <td></td>
           <td></td>
           <td></td>
         <% else %>
           <td><%= appointment.formname %></td>
-          <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= appointment.appointment_date_time.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p") %></td>
           <td><%= @timesent %></td>
           <% @medical_patient_form = MedicalPatientForm.find_by_medical_appointment_id(appointment.id) %>
           <% if appointment.status == "Updated" %>
             <td>
                  <span data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= @formsubmittedtime %>">
-            Updated <%= appointment.timereceived.to_date.strftime("%m-%d-%Y") %>
+            Updated <%= appointment.timereceived.to_date.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y") %>
                 </span>
             </td>
             <td>
@@ -58,7 +59,7 @@
           <% elsif appointment.status == "Submitted" %>
             <td>
                  <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= @formsubmittedtime %>">
-           Submitted <%= appointment.timereceived.to_date.strftime("%m-%d-%Y") %>
+           Submitted <%= appointment.timereceived.to_date.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y") %>
                 </span>
             </td>
             <td>

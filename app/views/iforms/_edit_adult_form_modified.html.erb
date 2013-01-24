@@ -252,7 +252,7 @@
   <div class="control-group">
     <%= f.label :Self_General_Dentist_Date_Last_Appointment, 'Last Visit Date', :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
     </div>
   </div>
   <div class="control-group">
@@ -743,7 +743,7 @@
   <div class="control-group">
     <%= f.label :Med_His_Personal_Physician_Date_Of_Last_Visit, "Date of last visit", :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 2002, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
       <%#= f.text_field :Med_His_Personal_Physician_Date_Of_Last_Visit, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
     </div>
   </div>

@@ -6,7 +6,8 @@ class DoctorsController < ApplicationController
    # @iforms = Iform.all
     if session[:user_service_provider] == 1 || session[:user_service_provider] == 4 || session[:user_service_provider] == 7
       @doctor = Doctor.find_by_user_id(current_user.id)
-    @appointments = Appointment.where('doctor_user_id = ? and service_provider_id=? and date = ?', @doctor.user_id,session[:user_service_provider],params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
+   # @appointments = Appointment.where('doctor_user_id = ? and service_provider_id=? and date = ?', @doctor.user_id,session[:user_service_provider],params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
+      @appointments = Appointment.where("doctor_user_id = ? and service_provider_id = ? and DATE_FORMAT(appointment_date_time, '%Y-%m-%d') = ?", @doctor.user_id, session[:user_service_provider],params['appointment_date']?params['appointment_date']:Date.today.to_s).order("firstname ASC").paging(params[:page], params[:appointment_id]) if @doctor
     else
       redirect_to :medical_appointments
     end

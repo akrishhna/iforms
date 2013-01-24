@@ -21,12 +21,12 @@
       <% @appointments.each do |i| %>
         <% if i.timesent %>
           <% i.timesent = i.timesent.to_datetime %>
-          <%# timesent_date = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
-          <%# timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
-          <%# timesent_min = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
-          <% timesent_date = i.timesent.strftime("%Y-%m-%d") %>
-          <% timesent_hrs = i.timesent.strftime("%H") %>
-          <% timesent_min = i.timesent.strftime("%M") %>
+          <% timesent_date = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
+          <% timesent_hrs = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+          <% timesent_min = i.timesent.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
+          <%# timesent_date = i.timesent.in_time_zone("Kolkata").strftime("%Y-%m-%d") %>
+          <%# timesent_hrs = i.timesent.in_time_zone("Kolkata").strftime("%H") %>
+          <%# timesent_min = i.timesent.in_time_zone("Kolkata").strftime("%M") %>
           <% timesent_hrs_int = timesent_hrs.to_i %>
           <% var = 12 %>
           <% if var<=timesent_hrs_int %>
@@ -44,21 +44,21 @@
           <td><%= i.email %></td>
           <% if i.formname.blank? %>
             <td></td>
-            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
+            <td><%= i.appointment_date_time.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p") %></td>
             <td><%= @timesent %></td>
             <td></td>
             <td><%= link_to "Resend", edit_appointment_path(i) %></td>
           <% else %>
             <td><%= i.formname == 'Rising Stars Pediatric Dentistry' ? 'New Patient' : i.formname  %></td>
-            <td><%= i.date.strftime("%m-%d-%Y") %> <%= i.time_hrs %>:<%= i.time_min.size == 1 ? "0" + i.time_min : i.time_min %>  <%= i.AM_PM %></td>
+            <td><%= i.appointment_date_time.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p") %></td>
             <td><%= @timesent %></td>
             <% @appformjoins = Appformjoin.where("appointment_id = ? and doctor_user_id = ?", i, current_user.id) %>
             <% @appformjoins.each do |j| %>
               <% if j.formsubmittedtime %>
                 <% j.formsubmittedtime = j.formsubmittedtime.to_datetime %>
-                <% formsubmittedtime_date = j.formsubmittedtime.strftime("%Y-%m-%d") %>
-                <% formsubmittedtime_hrs = j.formsubmittedtime.strftime("%H") %>
-                <% formsubmittedtime_min = j.formsubmittedtime.strftime("%M") %>
+                <% formsubmittedtime_date = j.formsubmittedtime.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
+                <% formsubmittedtime_hrs = j.formsubmittedtime.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
+                <% formsubmittedtime_min = j.formsubmittedtime.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
                 <% formsubmittedtime_hrs_int = formsubmittedtime_hrs.to_i %>
                 <% var = 12 %>
                 <% if var<=formsubmittedtime_hrs_int %>

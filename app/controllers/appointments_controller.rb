@@ -40,9 +40,9 @@ class AppointmentsController < ApplicationController
           @appointment.formname = ''
         end
 
-        if !@appointment.time_hrs.empty? and !@appointment.AM_PM.nil? and !@appointment.time_min.empty?
-          @appointment.appointment_time = @appointment.time_hrs+@appointment.AM_PM+@appointment.time_min
-        end
+        #if !@appointment.time_hrs.empty? and !@appointment.AM_PM.nil? and !@appointment.time_min.empty?
+        #  @appointment.appointment_time = @appointment.time_hrs+@appointment.AM_PM+@appointment.time_min
+        #end
 
         if @appointment.save
           @user = User.find_by_email(@appointment.email)

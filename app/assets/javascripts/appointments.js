@@ -42,11 +42,28 @@ $(function () {
   }
 
 
-  if ($('div[data-page-controller=appointments][data-page-action=edit]').size()) {
-    $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', appointment["date"]);
-  } else {
-    $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
-  }
+//  if ($('div[data-page-controller=appointments][data-page-action=edit]').size()) {
+//    $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', appointment["date"]);
+//  } else {
+//    $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+//  }
 
+  if ($('div[data-page-controller=appointments][data-page-action=edit]').size()) {
+    var date_time = appointment["appointment_date_time"];
+    var date = date_time.split('T')[0];
+    var time_split = date_time.split('T')[1];
+    var time_h = time_split.split(':')[0];
+    var time_m = time_split.split(':')[1];
+    var app_date_time = date + ' ' + time_h + ':' + time_m + ' ';
+    $(window).load(function () {
+      $("#appointment_appointment_date_time").datetimepicker().datetimepicker("option", "dateFormat", "yy-mm-dd").datetimepicker('setDate', app_date_time);
+    });
+  }
+  else {
+    $(window).load(function () {
+      $("#appointment_appointment_date_time").datetimepicker().datetimepicker("option", "dateFormat", "yy-mm-dd").datetimepicker('setDate', new Date());
+    });
+   // $(".appointments_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+  }
 
 });
