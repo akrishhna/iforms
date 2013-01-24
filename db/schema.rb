@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108051019) do
+ActiveRecord::Schema.define(:version => 20130124035726) do
 
   create_table "admin_users", :force => true do |t|
     t.integer  "user_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130108051019) do
     t.integer  "doctor_user_id"
     t.integer  "patient_user_id"
     t.string   "appointment_doctor_name", :limit => 50
+    t.datetime "appointment_date_time"
   end
 
   create_table "boy_scouts_activities", :force => true do |t|
