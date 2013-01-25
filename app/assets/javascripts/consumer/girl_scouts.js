@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$(function(){
+$(function () {
 
   $('.girl_scout_permission_form input, textarea').change(function () {
     $('input[name=_method]').val('post');
@@ -22,12 +22,12 @@ $(function(){
     return false;
   });
 
-  $('.arizona_special_needs').change(function(){
-   if($('.arizona_special_needs:checked').val() == 'Yes'){
-     $('#girl_scouts_activity_permission_form_gapf_special_needs').show()
-   }else{
-     $('#girl_scouts_activity_permission_form_gapf_special_needs').hide()
-   }
+  $('.arizona_special_needs').change(function () {
+    if ($('.arizona_special_needs:checked').val() == 'Yes') {
+      $('#girl_scouts_activity_permission_form_gapf_special_needs').show()
+    } else {
+      $('#girl_scouts_activity_permission_form_gapf_special_needs').hide()
+    }
   });
 
   $('#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_2,' +
@@ -49,35 +49,60 @@ $(function(){
     '#gapf_activity_my_behalf_phone_1, #gapf_activity_my_behalf_phone_2, #gapf_activity_my_behalf_phone_3, #girl_scouts_activity_permission_form_gapf_parent_home_phone_1,' +
     '#girl_scouts_activity_permission_form_gapf_parent_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_home_phone_3, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_1,' +
     '#girl_scouts_activity_permission_form_gapf_parent_cell_phone_2,#girl_scouts_activity_permission_form_gapf_parent_cell_phone_3, #girl_scouts_activity_permission_form_gapf_parent_other_phone_1,' +
-    '#girl_scouts_activity_permission_form_gapf_parent_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_other_phone_3').autotab_filter('numeric');
+    '#girl_scouts_activity_permission_form_gapf_parent_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_other_phone_3, #girl_scouts_activity_permission_form_gapf_parent_1_address_zip,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_1_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_home_phone_3,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_1_work_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_work_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_work_phone_3,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_1_mobile_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_mobile_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_mobile_phone_3,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_1_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_other_phone_3,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_2_address_zip, #girl_scouts_activity_permission_form_gapf_parent_2_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_home_phone_2,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_2_home_phone_3,#girl_scouts_activity_permission_form_gapf_parent_2_work_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_work_phone_2,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_2_work_phone_3,#girl_scouts_activity_permission_form_gapf_parent_2_mobile_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_mobile_phone_2,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_2_mobile_phone_3, #girl_scouts_activity_permission_form_gapf_parent_2_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_other_phone_2,' +
+    '#girl_scouts_activity_permission_form_gapf_parent_2_other_phone_3, #girl_scouts_activity_permission_form_gapf_activity_my_behalf_phone_1, #girl_scouts_activity_permission_form_gapf_activity_my_behalf_phone_2,' +
+    '#girl_scouts_activity_permission_form_gapf_activity_my_behalf_phone_3').autotab_filter('numeric');
 
 
+  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_2,#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_3').autotab_magic();
 
-  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_2,' +
-    '#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_1_3, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_1,' +
-    '#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_3').autotab_magic();
+  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_1,#girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_1_phone_2_3').autotab_magic();
 
-  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_1_2,' +
-    '#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_1_3, #girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_2_1,' +
-    '#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_2_3').autotab_magic();
+  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_1_2,#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_1_3').autotab_magic();
 
-  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_1_2,' +
-    '#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_1_3, #girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_2_1,' +
-    '#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_2_3').autotab_magic();
+  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_2_1,#girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_2_phone_2_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_1_1, #girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_1_2,#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_1_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_2_1,#girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_2_2, #girl_scouts_activity_permission_form_gapf_emergency_contact_3_phone_2_3').autotab_magic();
 
   $('#girl_scouts_activity_permission_form_gapf_physician_phone_1, #girl_scouts_activity_permission_form_gapf_physician_phone_2, #girl_scouts_activity_permission_form_gapf_physician_phone_3').autotab_magic();
 
   $('#girl_scouts_activity_permission_form_parent_phone_number_during_activity_1, #girl_scouts_activity_permission_form_parent_phone_number_during_activity_2, #girl_scouts_activity_permission_form_parent_phone_number_during_activity_3').autotab_magic();
 
-  $('#girl_scouts_activity_permission_form_emergency_contact_phone_number_1, #girl_scouts_activity_permission_form_emergency_contact_phone_number_2,' +
-    '#girl_scouts_activity_permission_form_emergency_contact_phone_number_3, #girl_scouts_activity_permission_form_emergency_contact_cell_number_1,' +
-    '#girl_scouts_activity_permission_form_emergency_contact_cell_number_2, #girl_scouts_activity_permission_form_emergency_contact_cell_number_3').autotab_magic();
+  $('#girl_scouts_activity_permission_form_emergency_contact_phone_number_1, #girl_scouts_activity_permission_form_emergency_contact_phone_number_2,#girl_scouts_activity_permission_form_emergency_contact_phone_number_3').autotab_magic();
 
+  $('#girl_scouts_activity_permission_form_emergency_contact_cell_number_1,#girl_scouts_activity_permission_form_emergency_contact_cell_number_2, #girl_scouts_activity_permission_form_emergency_contact_cell_number_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_home_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_cell_phone_1, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_2, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_other_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_1_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_home_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_1_work_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_work_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_work_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_1_mobile_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_mobile_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_mobile_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_1_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_1_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_1_other_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_2_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_2_home_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_2_work_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_work_phone_2, #girl_scouts_activity_permission_form_gapf_parent_2_work_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_2_mobile_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_mobile_phone_2, #girl_scouts_activity_permission_form_gapf_parent_2_mobile_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_parent_2_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_2_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_2_other_phone_3').autotab_magic();
+
+  $('#girl_scouts_activity_permission_form_gapf_activity_my_behalf_phone_1, #girl_scouts_activity_permission_form_gapf_activity_my_behalf_phone_2, #girl_scouts_activity_permission_form_gapf_activity_my_behalf_phone_3').autotab_magic();
 });
-
-$('#girl_scouts_activity_permission_form_gapf_parent_home_phone_1, #girl_scouts_activity_permission_form_gapf_parent_home_phone_2, #girl_scouts_activity_permission_form_gapf_parent_home_phone_3,#girl_scouts_activity_permission_form_gapf_parent_cell_phone_1').autotab_magic();
-
-$('#girl_scouts_activity_permission_form_gapf_parent_cell_phone_1, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_2, #girl_scouts_activity_permission_form_gapf_parent_cell_phone_3,#girl_scouts_activity_permission_form_gapf_parent_other_phone_1').autotab_magic();
-
-$('#girl_scouts_activity_permission_form_gapf_parent_other_phone_1, #girl_scouts_activity_permission_form_gapf_parent_other_phone_2, #girl_scouts_activity_permission_form_gapf_parent_other_phone_3').autotab_magic();
-

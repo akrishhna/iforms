@@ -19,7 +19,7 @@ $(function () {
     changeMonth:true,
     changeYear:true,
     dateFormat:'yy-mm-dd',
-    yearRange: '1940:' + new Date().getFullYear()
+    yearRange:'1940:' + new Date().getFullYear()
   });
 
   $('.medical_patient_form_nav_link').live('click', function () {
@@ -183,9 +183,7 @@ $(function () {
       $('#medical_patient_form_primary_insurance_policy_holder_first_name').val('');
       $('#medical_patient_form_primary_insurance_policy_holder_last_name').val('');
       $('#medical_patient_form_primary_insurance_relationship').val('');
-      $('#medical_patient_form_primary_insurance_birth_date_1i').val('').attr('disabled', false);
-      $('#medical_patient_form_primary_insurance_birth_date_2i').val('').attr('disabled', false);
-      $('#medical_patient_form_primary_insurance_birth_date_3i').val('').attr('disabled', false);
+      $('#medical_patient_form_primary_insurance_birth_date').val('').attr('disabled', false);
       $('#medical_patient_form_primary_insurance_ssn_1').val('');
       $('#medical_patient_form_primary_insurance_ssn_2').val('');
       $('#medical_patient_form_primary_insurance_ssn_3').val('');
@@ -200,9 +198,7 @@ $(function () {
       $('#medical_patient_form_primary_insurance_policy_holder_first_name').val($('#medical_patient_form_first_name').val());
       $('#medical_patient_form_primary_insurance_policy_holder_last_name').val($('#medical_patient_form_last_name').val());
       $('#medical_patient_form_primary_insurance_relationship').val('Self');
-      $('#medical_patient_form_primary_insurance_birth_date_1i').val($('#medical_patient_form_birth_date_1i').val()).attr('disabled', true);
-      $('#medical_patient_form_primary_insurance_birth_date_2i').val($('#medical_patient_form_birth_date_2i').val()).attr('disabled', true);
-      $('#medical_patient_form_primary_insurance_birth_date_3i').val($('#medical_patient_form_birth_date_3i').val()).attr('disabled', true);
+      $('#medical_patient_form_primary_insurance_birth_date').val($('#medical_patient_form_birth_date').val()).attr('disabled', true);
       $('#medical_patient_form_primary_insurance_ssn_1').val($('#medical_patient_form_ssn_1').val());
       $('#medical_patient_form_primary_insurance_ssn_2').val($('#medical_patient_form_ssn_2').val());
       $('#medical_patient_form_primary_insurance_ssn_3').val($('#medical_patient_form_ssn_3').val());
@@ -218,13 +214,7 @@ $(function () {
       $('.medical_patient_secondary_insurance_policy_details').attr('readonly', false);
       $('#medical_patient_form_secondary_insurance_policy_holder_first_name').val('');
       $('#medical_patient_form_secondary_insurance_policy_holder_last_name').val('');
-      $('#medical_patient_form_secondary_insurance_relationship').val('');
-      $('#medical_patient_form_secondary_insurance_birth_date_1i').val('');
-      $('#medical_patient_form_secondary_insurance_birth_date_2i').val('');
-      $('#medical_patient_form_secondary_insurance_birth_date_3i').val('');
-      $('#medical_patient_form_secondary_insurance_birth_date_1i').val('').attr('disabled', false);
-      $('#medical_patient_form_secondary_insurance_birth_date_2i').val('').attr('disabled', false);
-      $('#medical_patient_form_secondary_insurance_birth_date_3i').val('').attr('disabled', false);
+      $('#medical_patient_form_secondary_insurance_birth_date').val('').attr('disabled', false);
       $('#medical_patient_form_secondary_insurance_ssn_1').val('');
       $('#medical_patient_form_secondary_insurance_ssn_2').val('');
       $('#medical_patient_form_secondary_insurance_ssn_3').val('');
@@ -239,9 +229,7 @@ $(function () {
       $('#medical_patient_form_secondary_insurance_policy_holder_first_name').val($('#medical_patient_form_first_name').val());
       $('#medical_patient_form_secondary_insurance_policy_holder_last_name').val($('#medical_patient_form_last_name').val());
       $('#medical_patient_form_secondary_insurance_relationship').val('Self');
-      $('#medical_patient_form_secondary_insurance_birth_date_1i').val($('#medical_patient_form_birth_date_1i').val()).attr('disabled', true);
-      $('#medical_patient_form_secondary_insurance_birth_date_2i').val($('#medical_patient_form_birth_date_2i').val()).attr('disabled', true);
-      $('#medical_patient_form_secondary_insurance_birth_date_3i').val($('#medical_patient_form_birth_date_3i').val()).attr('disabled', true);
+      $('#medical_patient_form_secondary_insurance_birth_date').val($('#medical_patient_form_birth_date').val()).attr('disabled', true);
       $('#medical_patient_form_secondary_insurance_ssn_1').val($('#medical_patient_form_ssn_1').val());
       $('#medical_patient_form_secondary_insurance_ssn_2').val($('#medical_patient_form_ssn_2').val());
       $('#medical_patient_form_secondary_insurance_ssn_3').val($('#medical_patient_form_ssn_3').val());

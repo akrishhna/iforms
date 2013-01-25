@@ -89,7 +89,8 @@
     <div class="control-group">
       <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :Self_Birthdate, :class => "karen_naples_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
       </div>
     </div>
     <div class="control-group">
@@ -348,7 +349,8 @@
     <div class="control-group">
       <%= f.label :billing_birth_date, 'Birth Date', :class => 'control-label' %>
       <div class="controls ">
-        <%= f.date_select :billing_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%#= f.date_select :billing_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => 'karen_naples_new_patient_billing_details_info' %>
+        <%= f.text_field :billing_birth_date, :class => "karen_naples_form_date_selector karen_naples_new_patient_billing_details_info", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.billing_birth_date %>
       </div>
     </div>
     <div class="control-group">
@@ -687,6 +689,15 @@
 
 <script type="text/javascript">
   function unmask_str() {}
+
+  $('.karen_naples_form_date_selector').datepicker({
+    changeMonth:true,
+    changeYear:true,
+    dateFormat:'yy-mm-dd',
+    yearRange:'1940:' + new Date().getFullYear()
+  });
+
+
 </script>
 <script>
   jQuery(function ($) {
@@ -694,12 +705,13 @@
       '#iform_home_phone_3,#iform_work_phone_1, #iform_work_phone_2, #iform_work_phone_3,' +
       '#iform_cell_phone_1, #iform_cell_phone_2, #iform_cell_phone_3, #iform_employer_phone_1,' +
       '#iform_employer_phone_2, #iform_employer_phone_3, #iform_emergency_contact_phone_1, ' +
-      '#iform_emergency_contact_phone_2, #iform_emergency_contact_phone_3, #iform_billing_details_home_phone_1' +
-      '#iform_billing_details_home_phone_2, #iform_billing_details_home_phone_3, #iform_billing_details_work_phone_1' +
-      '#iform_billing_details_work_phone_2, #iform_billing_details_work_phone_3, #iform_billing_details_cell_phone_1' +
-      '#iform_billing_details_cell_phone_2, #iform_billing_details_cell_phone_3, #iform_billing_details_ssn_1' +
-      '#iform_billing_details_ssn_2, #iform_billing_details_ssn_3, #iform_billing_details_employer_phone_1' +
-      '#iform_billing_details_employer_phone_2,  #iform_billing_details_employer_phone_3').autotab_filter('numeric');
+      '#iform_emergency_contact_phone_2, #iform_emergency_contact_phone_3, #iform_billing_details_home_phone_1,' +
+      '#iform_billing_details_home_phone_2, #iform_billing_details_home_phone_3, #iform_billing_details_work_phone_1,' +
+      '#iform_billing_details_work_phone_2, #iform_billing_details_work_phone_3, #iform_billing_details_cell_phone_1,' +
+      '#iform_billing_details_cell_phone_2, #iform_billing_details_cell_phone_3, #iform_billing_details_ssn_1,' +
+      '#iform_billing_details_ssn_2, #iform_billing_details_ssn_3, #iform_billing_details_employer_phone_1,' +
+      '#iform_billing_details_employer_phone_2,  #iform_billing_details_employer_phone_3,#iform_Self_Home_Postal_Code,' +
+      '#iform_Self_Employer_Postal_Code').autotab_filter('numeric');
 
     $('#iform_ssn_1, #iform_ssn_2, #iform_ssn_3, #iform_Self_Driver_License_State').autotab_magic();
 

@@ -22,8 +22,8 @@
   <div class="control-group">
     <%= f.label :bacf_birthdate, 'Birth Date', :class => 'control-label' %>
     <div class="controls ">
-      <%= f.date_select :bacf_birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%#= f.text_field :bacf_birthdate, :class => "boy_scout_activity_consent_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.bacf_birthdate %>
+      <%#= f.date_select :bacf_birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.text_field :bacf_birthdate, :class => "boy_scout_activity_consent_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.bacf_birthdate %>
     </div>
   </div>
   <div class="control-group">

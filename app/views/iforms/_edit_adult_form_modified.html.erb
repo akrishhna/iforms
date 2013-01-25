@@ -96,8 +96,8 @@
   <div class="control-group">
     <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
     <div class="controls ">
-      <%= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
       <%#= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.text_field :Self_Birthdate, :class => "james_adult_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -252,7 +252,8 @@
   <div class="control-group">
     <%= f.label :Self_General_Dentist_Date_Last_Appointment, 'Last Visit Date', :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%#= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.text_field :Self_General_Dentist_Date_Last_Appointment, :class => "james_adult_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_General_Dentist_Date_Last_Appointment %>
     </div>
   </div>
   <div class="control-group">
@@ -309,8 +310,8 @@
     <div class="control-group">
       <%= f.label :Spouse_Birthdate, 'Birth Date', :class => 'control-label' %>
       <div class="controls">
-        <%#= f.text_field :Spouse_Birthdate, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
-        <%= f.date_select :Spouse_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%#= f.date_select :Spouse_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+        <%= f.text_field :Spouse_Birthdate, :class => "james_adult_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Spouse_Birthdate %>
       </div>
     </div>
     <div class="control-group">
@@ -536,8 +537,8 @@
   <div class="control-group">
     <%= f.label :Insurance_Company_Primary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :Insurance_Company_Primary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%#= f.text_field :Insurance_Company_Primary_Insured_Birthdate, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
+      <%#= f.date_select :Insurance_Company_Primary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.text_field :Insurance_Company_Primary_Insured_Birthdate, :class => "james_adult_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Insurance_Company_Primary_Insured_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -646,8 +647,8 @@
   <div class="control-group">
     <%= f.label :Insurance_Company_Secondary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :Insurance_Company_Secondary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%#= f.text_field :Insurance_Company_Secondary_Insured_Birthdate, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
+      <%#= f.date_select :Insurance_Company_Secondary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.text_field :Insurance_Company_Secondary_Insured_Birthdate, :class => "james_adult_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Insurance_Company_Secondary_Insured_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -743,8 +744,8 @@
   <div class="control-group">
     <%= f.label :Med_His_Personal_Physician_Date_Of_Last_Visit, "Date of last visit", :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%#= f.text_field :Med_His_Personal_Physician_Date_Of_Last_Visit, :class => 'iforms_date_selector', :placeholder => "YYYY-MM-DD" %>
+      <%#= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
+      <%= f.text_field :Med_His_Personal_Physician_Date_Of_Last_Visit, :class => "james_adult_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Med_His_Personal_Physician_Date_Of_Last_Visit %>
     </div>
   </div>
   <div class="control-group">
@@ -1742,6 +1743,14 @@
 </script>
 
 <script type="text/javascript">
+
+  $('.james_adult_form_date_selector').datepicker({
+    changeMonth:true,
+    changeYear:true,
+    dateFormat:'yy-mm-dd',
+    yearRange:'1940:' + new Date().getFullYear()
+  });
+
   function unmask_str() {
     jQuery(function ($) {
       $("#iform_Self_Phone_Home").mask("9999999999");

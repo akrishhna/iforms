@@ -71,9 +71,7 @@ $('.karnel_naples_new_patient_billing').live('change', function () {
     $('#iform_billing_details_ssn_1').val('');
     $('#iform_billing_details_ssn_2').val('');
     $('#iform_billing_details_ssn_3').val('');
-    $('#iform_billing_birth_date_1i').val('').attr('disabled', false);
-    $('#iform_billing_birth_date_2i').val('').attr('disabled', false);
-    $('#iform_billing_birth_date_3i').val('').attr('disabled', false);
+    $('#iform_billing_birth_date').val('').attr('disabled', false);
   }
   update_all_fields();
 });
@@ -124,9 +122,7 @@ function billing_details_info() {
     $('#iform_billing_details_ssn_1').val($('#iform_ssn_1').val());
     $('#iform_billing_details_ssn_2').val($('#iform_ssn_2').val());
     $('#iform_billing_details_ssn_3').val($('#iform_ssn_3').val());
-    $('#iform_billing_birth_date_1i').val($('#iform_Self_Birthdate_1i').val()).attr('disabled', true);
-    $('#iform_billing_birth_date_2i').val($('#iform_Self_Birthdate_2i').val()).attr('disabled', true);
-    $('#iform_billing_birth_date_3i').val($('#iform_Self_Birthdate_3i').val()).attr('disabled', true);
+    $('#iform_billing_birth_date').val($('#iform_Self_Birthdate').val()).attr('disabled', true);
   }
 }
 

@@ -2,7 +2,7 @@
   <div class="well">
     Appointment Date : <%= text_field_tag :medical_appointment_date, "", :class => "date_selector",:style => 'margin:0' %> &nbsp;
     <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
-      <%= check_box_tag :all_medical_appointments, 1, @check_show_all, :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
+      <%= check_box_tag :all_medical_appointments, 1, @check_show_all, :class => "show_all", :style => "margin-bottom: 7px;width:150px" %>&nbsp;Show
       All Appointments
     <% end %>
   </div>
@@ -21,14 +21,16 @@
   $('#medical_appointment_date').livequery(function(){
     $(this).datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+      yearRange:'1940:' + new Date().getFullYear()
     }).datepicker("option", "dateFormat", "yy-mm-dd");
   });
 
   if($('#all_medical_appointments').is(':checked') ==  false) {
     $('#medical_appointment_date').datepicker({
       changeMonth: true,
-      changeYear: true
+      changeYear: true,
+      yearRange:'1940:' + new Date().getFullYear()
     }).datepicker('setDate', selected_date);
     if(selected_date == ''){
       $('#all_medical_appointments').prop('checked', true);//added extra for checkbox checked
@@ -48,7 +50,8 @@
     } else {
       $('#medical_appointment_date').datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        yearRange:'1940:' + new Date().getFullYear()
       }).datepicker("setDate", selected_date);
     }
     load_medical_appointments();

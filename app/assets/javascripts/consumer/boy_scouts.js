@@ -22,7 +22,7 @@ $(function(){
     return false;
   });
 
-  $(".boy_scout_activity_consent_form_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
+//  $(".boy_scout_activity_consent_form_date_selector").datepicker().datepicker("option", "dateFormat", "yy-mm-dd");
   $('#boy_scouts_activity_consent_form_bacf_birthdate').datepicker("setDate", $('#boy_scouts_activity_consent_form_bacf_birthdate').attr('data-value'));
 
   $('.boy_scout_activity_consent_form_restrictions').change(function () {
@@ -43,13 +43,20 @@ $(function(){
     }
   });
 
+  $(".boy_scout_activity_consent_form_date_selector").datepicker({
+    changeMonth:true,
+    changeYear:true,
+    dateFormat:'yy-mm-dd',
+    yearRange: '1940:' + new Date().getFullYear()
+  });
+
 
 
   $('#boy_scouts_activity_consent_form_bacf_address_zip, #boy_scouts_activity_consent_form_bacf_parent_phone_1,' +
     '#boy_scouts_activity_consent_form_bacf_parent_phone_2, #boy_scouts_activity_consent_form_bacf_parent_phone_3').autotab_filter('numeric');
 
-  $('#boy_scouts_activity_consent_form_bacf_address_zip, #boy_scouts_activity_consent_form_bacf_parent_first_name').autotab_magic();
+//  $('#boy_scouts_activity_consent_form_bacf_address_zip, #boy_scouts_activity_consent_form_bacf_parent_first_name').autotab_magic();
 
   $('#boy_scouts_activity_consent_form_bacf_parent_phone_1, #boy_scouts_activity_consent_form_bacf_parent_phone_2,' +
-    '#boy_scouts_activity_consent_form_bacf_parent_phone_3, #boy_scouts_activity_consent_form_email').autotab_magic();
+    '#boy_scouts_activity_consent_form_bacf_parent_phone_3').autotab_magic();
 });
