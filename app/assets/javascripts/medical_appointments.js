@@ -28,6 +28,7 @@ $(function () {
   $(".appointments_date_selector").datepicker({
     changeMonth: true,
     changeYear: true,
+    yearRange:'1940:' + new Date().getFullYear(),
     onSelect:function (dateText, inst) {
       window.location = '/medical_appointments' + '?appointment_date=' + dateText;
     }

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   helper :all
-  helper_method :current_user_name
+  helper_method :current_user_name, :set_time_zone
   helper_method :user_service_provider_list, :set_service_provider, :homepage_url
 
   #http://ramblinglabs.com/blog/2012/01/rails-3-1-adding-custom-404-and-500-error-pages
@@ -140,6 +140,10 @@ class ApplicationController < ActionController::Base
       format.html { render template: 'errors/error_500', layout: 'layouts/application', status: 500 }
       format.all { render nothing: true, status: 500 }
     end
+  end
+
+  def set_time_zone
+    time_zone = "Central Time (US & Canada)"
   end
 
   def set_mailer_settings

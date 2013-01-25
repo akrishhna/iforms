@@ -1,5 +1,7 @@
 <% if !@appointments.blank? %>
+
   <table class="table table-bordered table-header-bg">
+
     <tr>
       <th>Name</th>
       <th>Service Provider</th>
@@ -9,12 +11,13 @@
       <th>Status</th>
       <th colspan="2">Action</th>
     </tr>
+
     <% @appointments.each do |appointment| %>
       <% if appointment.timesent %>
         <% appointment.timesent = appointment.timesent.to_datetime %>
-        <% timesent_date = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%Y-%m-%d") %>
-        <% timesent_hrs = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%H") %>
-        <% timesent_min = appointment.timesent.in_time_zone("Central Time (US & Canada)").strftime("%M") %>
+        <% timesent_date = appointment.timesent.in_time_zone(set_time_zone).strftime("%m-%d-%Y") %>
+        <% timesent_hrs = appointment.timesent.in_time_zone(set_time_zone).strftime("%H") %>
+        <% timesent_min = appointment.timesent.in_time_zone(set_time_zone).strftime("%M") %>
         <%# timesent_hrs = appointment.timesent.strftime("%H") %>
         <%# timesent_min = appointment.timesent.strftime("%M") %>
         <% timesent_hrs_int = timesent_hrs.to_i %>
@@ -22,79 +25,111 @@
         <% if var<=timesent_hrs_int %>
           <% timesent_hrs = (timesent_hrs_int - var).to_s %>
           <% am_pm = "PM" %>
-          <% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+          <% @timesent = timesent_date + " " + timesent_hrs + ":" + timesent_min + " " + am_pm %>
         <% else %>
           <% am_pm = "AM" %>
-          <% @timesent = timesent_date.to_date.strftime("%m-%d-%Y")+" "+timesent_hrs+":"+timesent_min+" "+am_pm %>
+          <% @timesent = timesent_date + " " + timesent_hrs + ":" + timesent_min + " " + am_pm %>
         <% end %>
       <% end %>
+
       <tr>
+
         <td><%= appointment.firstname.to_s + " " + appointment.lastname.to_s %></td>
+
         <td><%= appointment.doctorname %></td>
+
         <% if appointment.formname.blank? %>
+
           <td></td>
-          <td><%= appointment.appointment_date_time.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p") %></td>
+
+          <td><%= appointment.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+
           <td><%= @timesent %></td>
+
           <td></td>
+
           <td></td>
+
           <td></td>
+
         <% else %>
+
           <td><%= appointment.formname %></td>
-          <td><%= appointment.appointment_date_time.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y %I:%M %p") %></td>
+
+          <td><%= appointment.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+
           <td><%= @timesent %></td>
+
           <% @medical_patient_form = MedicalPatientForm.find_by_medical_appointment_id(appointment.id) %>
+
           <% if appointment.status == "Updated" %>
+
             <td>
-                 <span data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= @formsubmittedtime %>">
-            Updated <%= appointment.timereceived.to_date.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y") %>
+                 <span data-placement="top" rel="tooltip" data-original-title="User submitted and updated form on this <%= appointment.timereceived.to_datetime.in_time_zone(set_time_zone).strftime("%m-%d-%Y") %>">
+            Updated <%= appointment.timereceived.to_datetime.in_time_zone(set_time_zone).strftime("%m-%d-%Y") %>
                 </span>
             </td>
+
             <td>
               <%#= link_to "Edit", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
               <%= link_to "Update", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
             </td>
+
             <td>
               <%= link_to "View PDF", get_medical_patient_form_consumer_medical_index_path(:id => @medical_patient_form.id), :target => '_blank' %>
             </td>
+
           <% elsif appointment.status == "Submitted" %>
+
             <td>
-                 <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= @formsubmittedtime %>">
-           Submitted <%= appointment.timereceived.to_date.in_time_zone("Central Time (US & Canada)").strftime("%m-%d-%Y") %>
+                 <span data-placement="top" rel="tooltip" data-original-title="User submitted form on this <%= appointment.timereceived.to_datetime.in_time_zone(set_time_zone).strftime("%m-%d-%Y") %>">
+           Submitted <%= appointment.timereceived.to_datetime.in_time_zone(set_time_zone).strftime("%m-%d-%Y") %>
                 </span>
             </td>
+
             <td>
               <%#= link_to "Edit", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
               <%= link_to "Update", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
             </td>
+
             <td>
               <%= link_to "View PDF", get_medical_patient_form_consumer_medical_index_path(:id => @medical_patient_form.id), :target => '_blank' %>
             </td>
+
           <% elsif appointment.status == "In Progress" %>
+
             <td>
                  <span data-placement="top" rel="tooltip" data-original-title="Form editing has begun but is not complete">
              In Progress
                 </span>
             </td>
+
             <td>
               <%= link_to "Edit", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
               <%#= link_to "Update", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
             </td>
+
             <td>
               <%= link_to "View PDF", get_medical_patient_form_consumer_medical_index_path(:id => @medical_patient_form.id), :target => '_blank' %>
             </td>
+
           <% else %>
+
             <td>
                  <span data-placement="top" rel="tooltip" data-original-title="Form editing has not begun">
               Pending
                 </span>
             </td>
+
             <td>
               <%= link_to "Edit", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
               <%#= link_to "Update", edit_consumer_medical_path(:id => @medical_patient_form.id) %>
             </td>
+
             <td>
               <%= link_to "View PDF", get_medical_patient_form_consumer_medical_index_path(:id => @medical_patient_form.id), :target => '_blank' %>
             </td>
+
           <% end %>
 
         <% end %>
@@ -102,16 +137,21 @@
     <% end %>
   </table>
   <br/>
+
   <%= will_paginate @appointments, :renderer => BootstrapPagination::Rails %>
+
 <% else %>
+
   <p>No Appointments On This Day </p>
+
 <% end %>
+
 <script>
   /*$(".date_selector").datepicker({
-    onSelect:function (dateText, inst) {
-      $('#medical').load('/consumer/medical?appointment_date=' + dateText);
-    }
-  }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');*/
+   onSelect:function (dateText, inst) {
+   $('#medical').load('/consumer/medical?appointment_date=' + dateText);
+   }
+   }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : '');*/
 
   $("span").tooltip({ });
 </script>
