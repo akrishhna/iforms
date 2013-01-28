@@ -4,14 +4,24 @@ Iforms::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
   #ActionMailer::Base.perform_deliveries = true
   #ActionMailer::Base.raise_delivery_errors = true
+  #ActionMailer::Base.smtp_settings = {
+  #    :enable_starttls_auto => true,
+  #    :address => 'smtpout.secureserver.net',
+  #    :port => 80,
+  #    :domain => 'ifor.ms', #you can also use google.com
+  #    :authentication => :plain,
+  #    :user_name => 'iforms-noreply@ifor.ms',
+  #    :password => 'wK7W5cd6'
+  #}
+
   ActionMailer::Base.smtp_settings = {
-      :enable_starttls_auto => true,
-      :address => 'smtpout.secureserver.net',
-      :port => 80,
-      :domain => 'ifor.ms', #you can also use google.com
-      :authentication => :plain,
-      :user_name => 'iforms-noreply@ifor.ms',
-      :password => 'wK7W5cd6'
+    :enable_starttls_auto => true,
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :domain => 'gmail.com', #you can also use google.com
+    :authentication => :plain,
+    :user_name => 'noreply@ifor.ms',
+    :password => 'thisistheverybestpassword'
   }
 
   config.action_mailer.default_url_options = { :host => 'ifor.ms' }
