@@ -200,6 +200,9 @@ $('#iform_medical_history_drug_allergies').live('change', function () {
 $('.rising_stars_asthama_or_breath').live('change', function () {
   if ($(this).val() == 'Yes') {
     $('#iform_medical_history_asthama_or_breathing_prob_description').val('');
+    $('#iform_medical_history_er_for_asthma_attack_description').val('');
+    $('#iform_medical_history_induces_breathing_prob').val('');
+    $('#iform_medical_history_asthma_medication').val('');
     $('#iform_medical_history_asthama_or_breathing_prob_description').show();
     $('.rising_stars_asthama_yes').show()
   } else {
@@ -399,6 +402,15 @@ $('#mother_tab').live('click',function(){
   var leng = $('#iform_Self_Name_First').val().length;
   $('.patient_first_name').text($('#iform_Self_Name_First').val());
   $('.home_address_same_as').css('width', + leng * 5 + 200)
+});
+
+$('#iform_Self_Name_First').live('change',function(){
+  if($('#iform_Self_Name_First').val() == ''){
+    //  $('.replace_patient_with_first_name').text('Patient')
+  }else{
+    $('.replace_relationship_patient_with_first_name').text($('#iform_Self_Name_First').val());
+    $('.replace_patient_with_first_name').text($('#iform_Self_Name_First').val() + "'s");
+  }
 });
 
 /* ENd Rising stars */

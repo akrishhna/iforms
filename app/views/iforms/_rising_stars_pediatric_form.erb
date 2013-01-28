@@ -461,7 +461,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :insurance_relation_ship_to_patient, "Relationship to #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First}", :class => 'control-label' %>
+      <%= f.label :insurance_relation_ship_to_patient, raw("Relationship to <span class = 'replace_relationship_patient_with_first_name'>Patient</span>") , :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :insurance_relation_ship_to_patient, :class => 'rising_stars_insured_fields' %>
       </div>
@@ -537,13 +537,13 @@
   </div>
   <div class="tab-pane" id="dental_history">
   <div class="control-group">
-    <%= f.label :dental_history_why_patient_here_today, " Why is #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} here today", :class => 'control-label' %>
+    <%= f.label :dental_history_why_patient_here_today, raw("Why <span class = 'replace_patient_with_first_name'>Patient</span> here today"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_why_patient_here_today, :style => "width:355px;" %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_patient_first_time_to_visit, "Is this #{f.object.Self_Name_First.empty? ? "patient's" : f.object.Self_Name_First} first visit to the dentist", :class => 'control-label' %>
+    <%= f.label :dental_history_patient_first_time_to_visit, raw("Is this <span class = 'replace_patient_with_first_name'>Patient</span> first visit to the dentist"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :dental_history_patient_first_time_to_visit, "Yes", :class => 'rising_stars_first_tim_visit' %>
@@ -562,7 +562,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_patient_behave_today_friendly, "How do you think #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} will behave today", :class => 'control-label ' %>
+    <%= f.label :dental_history_patient_behave_today_friendly, raw("How do you think <span class = 'replace_patient_with_first_name'>Patient</span> will behave today"), :class => 'control-label ' %>
     <div class="controls">
       <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
         <%= f.check_box :dental_history_patient_behave_today_friendly %>Friendly
@@ -582,7 +582,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_patient_receive_fluoride_in_any_form, "Does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} receive fluoride in any form", :class => 'control-label' %>
+    <%= f.label :dental_history_patient_receive_fluoride_in_any_form, raw("Does <span class = 'replace_patient_with_first_name'>Patient</span> receive fluoride in any form"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :dental_history_patient_receive_fluoride_in_any_form, "Yes" %>Yes
@@ -593,25 +593,25 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_patient_receive_fluoride_in_any_form_description, "How does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} receive fluoride", :class => 'control-label' %>
+    <%= f.label :dental_history_patient_receive_fluoride_in_any_form_description, raw("How does <span class = 'replace_patient_with_first_name'>Patient</span> receive fluoride"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_patient_receive_fluoride_in_any_form_description, :style => 'width:363px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_patient_inherited_any_dental_characteristics, "What dental characteristics has #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} inherited", :class => 'control-label' %>
+    <%= f.label :dental_history_patient_inherited_any_dental_characteristics, raw("What dental characteristics has <span class = 'replace_patient_with_first_name'>Patient</span> inherited"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_patient_inherited_any_dental_characteristics, :style => 'width:363px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_patient_have_any_injuries, "Has #{f.object.Self_Name_First.empty? ? "patient's" : f.object.Self_Name_First} teeth been injured", :class => 'control-label' %>
+    <%= f.label :dental_history_patient_have_any_injuries, raw("Has <span class = 'replace_patient_with_first_name'>Patient</span> teeth been injured"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_patient_have_any_injuries, :style => 'width:363px' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_cavities, "Does #{f.object.Self_Name_First.empty? ? "patient's" : f.object.Self_Name_First} now, or has #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} ever, had any of these problems", :class => 'control-label ' %>
+    <%= f.label :dental_history_cavities, raw("Does <span class = 'replace_patient_with_first_name'>Patient</span> now, or has #{f.object.Self_Sex == 'f' ? 'her' : 'his'} ever, had any of these problems"), :class => 'control-label ' %>
     <div class="controls">
 
       <%= label_tag "check_boxes", :class => '  checkbox' do %>
@@ -696,7 +696,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_does_child_brush_teeth, "How often does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} brush his/her teeth", :class => 'control-label' %>
+    <%= f.label :dental_history_does_child_brush_teeth, raw("How often does <span class = 'replace_patient_with_first_name'>Patient</span> brush #{f.object.Self_Sex == 'f' ? 'her' : 'his'} teeth"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_does_child_brush_teeth %>
     </div>
@@ -713,7 +713,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_does_child_flosh_teeth, "How often does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} floss his/her teeth", :class => 'control-label' %>
+    <%= f.label :dental_history_does_child_flosh_teeth, raw("How often does <span class = 'replace_patient_with_first_name'>Patient</span> floss #{f.object.Self_Sex == 'f' ? 'her' : 'his'} teeth"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :dental_history_does_child_flosh_teeth, "Daily" %>Daily
@@ -727,13 +727,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_age_at_stop_bottle, "At what age did #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} stop using the bottle", :class => 'control-label' %>
+    <%= f.label :dental_history_age_at_stop_bottle, raw("At what age did <span class = 'replace_patient_with_first_name'>Patient</span> stop using the bottle"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_age_at_stop_bottle %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :dental_history_age_at_stop_bottle_sippy_cup, "At what age did #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} stop using the sippy cup", :class => 'control-label' %>
+    <%= f.label :dental_history_age_at_stop_bottle_sippy_cup, raw("At what age did <span class = 'replace_patient_with_first_name'>Patient</span> stop using the sippy cup"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :dental_history_age_at_stop_bottle_sippy_cup %>
     </div>
@@ -777,7 +777,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_patient_booster_shoot_up_to_date, "#{f.object.Self_Name_First.empty? ? "Patient's" : f.object.Self_Name_First} immunizations and booster shots up to date", :class => 'control-label' %>
+    <%= f.label :medical_history_patient_booster_shoot_up_to_date, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> immunizations and booster shots up to date"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_booster_shoot_up_to_date, "Yes" %>Yes
@@ -788,7 +788,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_patient_good_general_health, "#{f.object.Self_Name_First.empty? ? "Patient's" : f.object.Self_Name_First} is in good general health ", :class => 'control-label' %>
+    <%= f.label :medical_history_patient_good_general_health, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> is in good general health"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_good_general_health, "Yes", :class => 'rising_stars_good_gen_health' %>
@@ -802,7 +802,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_patient_physical_disabilities, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} has physical disabilities/developmental delays", :class => 'control-label' %>
+    <%= f.label :medical_history_patient_physical_disabilities, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> has physical disabilities/developmental delays"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_physical_disabilities, "Yes", :class => 'rising_stars_physical_dev' %>
@@ -816,7 +816,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_patient_surgical_operations, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} had surgical operations", :class => 'control-label' %>
+    <%= f.label :medical_history_patient_surgical_operations, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> had surgical operations"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_surgical_operations, "Yes", :class => 'rising_stars_surgical_operations' %>
@@ -830,7 +830,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_patient_ever_been_hospitalized, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} was hospitalized", :class => 'control-label' %>
+    <%= f.label :medical_history_patient_ever_been_hospitalized, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> was hospitalized"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_patient_ever_been_hospitalized, "Yes", :class => 'rising_stars_patient_hosp' %>
@@ -844,7 +844,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_latex_allergies, "Does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} now, or has he/she ever had", :class => 'control-label' %>
+    <%= f.label :medical_history_latex_allergies, raw("Does <span class = 'replace_patient_with_first_name'>Patient</span> now, or has #{f.object.Self_Sex == 'f' ? 'her' : 'his'} ever had"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "check_boxes", :class => 'checkbox inline', :style => 'width:100px' do %>
         <%= f.check_box :medical_history_latex_allergies %>Latex Allergies
@@ -867,7 +867,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :medical_history_asthama_or_breathing_prob, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} has a history of asthma or breathing problems", :class => 'control-label' %>
+    <%= f.label :medical_history_asthama_or_breathing_prob, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> has a history of asthma or breathing problems"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_asthama_or_breathing_prob, "Yes", :class => 'rising_stars_asthama_or_breath' %>
@@ -881,7 +881,7 @@
     </div>
   </div>
   <div class="control-group rising_stars_asthama_yes + <%= f.object.medical_history_asthama_or_breathing_prob == 'Yes' ? '' : 'hide' %>">
-    <%= f.label :medical_history_er_for_asthma_attack, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} went to the ER for an asthma attack", :class => 'control-label' %>
+    <%= f.label :medical_history_er_for_asthma_attack, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> went to the ER for an asthma attack"), :class => 'control-label' %>
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline' do %>
         <%= f.radio_button :medical_history_er_for_asthma_attack, "Yes", :class => 'rising_stars_er_asthama' %>
@@ -1468,7 +1468,7 @@
   </div>
   <div class="tab-pane" id="social_history">
     <div class="control-group">
-      <%= f.label :social_history_patient_have_problems_speech, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} has problems with", :class => 'control-label ' %>
+      <%= f.label :social_history_patient_have_problems_speech, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> has problems with"), :class => 'control-label ' %>
       <div class="controls">
         <%= label_tag "check_boxes", :class => 'checkbox inline' do %>
           <%= f.check_box :social_history_patient_have_problems_speech %>Speech
@@ -1485,7 +1485,7 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_is, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} is ", :class => 'control-label ' %>
+      <%= f.label :social_history_patient_is, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> is"), :class => 'control-label ' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:140px'  do %>
           <%= f.radio_button :social_history_patient_is, 'Advanced in learning'%>Advanced in learning
@@ -1502,19 +1502,19 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_first_lang, " #{f.object.Self_Name_First.empty? ? "Patient's" : f.object.Self_Name_First} first language", :class => 'control-label' %>
+      <%= f.label :social_history_patient_first_lang, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> first language"), :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_patient_first_lang %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_second_lang, " #{f.object.Self_Name_First.empty? ? "Patient's" : f.object.Self_Name_First} second language", :class => 'control-label' %>
+      <%= f.label :social_history_patient_second_lang, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> second language"), :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_patient_second_lang %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_adopted, "#{f.object.Self_Name_First.empty? ? "Patient" : f.object.Self_Name_First} was adopted", :class => 'control-label' %>
+      <%= f.label :social_history_patient_adopted, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> was adopted"), :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
           <%= f.radio_button :social_history_patient_adopted, "Yes", :class => 'rising_stars_patient_adopted' %>Yes
@@ -1537,13 +1537,13 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_tolerate, "How well does #{f.object.Self_Name_First.empty? ? "patient" : f.object.Self_Name_First} tolerate dental/medical care", :class => 'control-label' %>
+      <%= f.label :social_history_patient_tolerate, raw("How well does <span class = 'replace_patient_with_first_name'>Patient</span> tolerate dental/medical care"), :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_patient_tolerate %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :social_history_patient_favorites, "#{f.object.Self_Name_First.empty? ? "Patient's" : f.object.Self_Name_First} favorites (pet, toy, color, friend, hobby etc.) ", :class => 'control-label' %>
+      <%= f.label :social_history_patient_favorites, raw("<span class = 'replace_patient_with_first_name capitalize_first_letter'>Patient</span> favorites (pet, toy, color, friend, hobby etc.)"), :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_patient_favorites, :style => 'width:435px' %>
       </div>
@@ -1561,6 +1561,12 @@
   </div>
   </div>
 <% end %>
+
+<style type="text/css">
+  .capitalize_first_letter{
+    text-transform: capitalize;
+  }
+</style>
 
 <script type="text/javascript">
   function unmask_str() {
@@ -1719,7 +1725,15 @@
   }
 
   var leng = $('#iform_Self_Name_First').val().length;
-  $('.home_address_same_as').css('width', + leng * 5 + 200)
+  $('.home_address_same_as').css('width', + leng * 5 + 200);
   $('.patient_first_name').text($('#iform_Self_Name_First').val());
+
+  if($('#iform_Self_Name_First').val() == ''){
+   //  $('.replace_patient_with_first_name').text('Patient')
+  }else{
+    $('.replace_relationship_patient_with_first_name').text($('#iform_Self_Name_First').val());
+    $('.replace_patient_with_first_name').text($('#iform_Self_Name_First').val() + "'s");
+  }
+
 
 </script>
