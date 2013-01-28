@@ -4,21 +4,32 @@ Iforms::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
   #ActionMailer::Base.perform_deliveries = true
   #ActionMailer::Base.raise_delivery_errors = true
+  # ActionMailer::Base.smtp_settings = {
+  #   :enable_starttls_auto => true,
+  #   :address            => 'smtpout.secureserver.net',
+  #   :port               => 80,
+  #   :domain             => 'ifor.ms', #you can also use google.com
+  #   :authentication     => :plain,
+  #   :user_name          => 'iforms-noreply@ifor.ms',
+  #   :password           => 'wK7W5cd6'
+  #}
+
   ActionMailer::Base.smtp_settings = {
     :enable_starttls_auto => true,
-    :address            => 'smtpout.secureserver.net',
-    :port               => 80,
-    :domain             => 'ifor.ms', #you can also use google.com
-    :authentication     => :plain,
-    :user_name          => 'iforms-noreply@ifor.ms',
-    :password           => 'wK7W5cd6'
- }
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :domain => 'gmail.com', #you can also use google.com
+    :authentication => :plain,
+    :user_name => 'noreply@ifor.ms',
+    :password => 'thisistheverybestpassword'
+  }
+
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -89,7 +100,7 @@ Iforms::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => '50.57.138.165:8082' }
+  config.action_mailer.default_url_options = {:host => '50.57.138.165:8082'}
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
