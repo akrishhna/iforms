@@ -72,6 +72,7 @@ class Consumer::MedicalController < ApplicationController
     @medical_patient_form = MedicalPatientForm.find(params[:id])
     appointment = MedicalAppointment.find(@medical_patient_form.medical_appointment_id)
     @medical_patient_form.update_attributes(params[:medical_patient_form])
+
     if params[:medical_patient_form][:first_name]
       appointment.firstname = params[:medical_patient_form][:first_name]
     elsif params[:medical_patient_form][:last_name]

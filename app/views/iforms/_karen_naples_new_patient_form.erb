@@ -1,11 +1,15 @@
 <p style="text-align: center;font-size:18px "><%#= session[:formname] %>
- Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
+
+  Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
+
 <div style="margin: 0 auto;width:80px;">
   <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
 </div>
+
 <% submit_tag_text = "Submit form to #{@doctor.firstname} #{@doctor.lastname}" %>
 
 <%= form_for @iform, :html => {:method => :put, :id => "dd_dd", :class => 'form-horizontal edit_karen_naples_new_patient_iform', :multipart => true, :onsubmit => "unmask_str();"} do |f| %>
+
   <% if @iform.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@iform.errors.count, "error") %> prohibited this step from being saved:</h2>
@@ -23,6 +27,7 @@
   <div class="hidden">
     <%= hidden_field_tag "iform_id", @iform.id %>
   </div>
+
   <div class="tabbable tabs-left iforms-tabs-left">
   <ul class="nav nav-tabs" id="karen_naples_new_patient_iforms_tab_links">
     <li class="active">
@@ -38,14 +43,13 @@
       <%= link_to "Emergency Contact", '#emergency_contact', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Billing", '#billing', "data-toggle" => "tab",:id => 'billing_tab' %>
+      <%= link_to "Billing", '#billing', "data-toggle" => "tab", :id => 'billing_tab' %>
     </li>
     <li>
       <%= link_to "Smile Evaluation", '#smile_evaluation', "data-toggle" => "tab" %>
     </li>
-
-
   </ul>
+
   <div class="tab-content">
   <div class="tab-pane active" id="patient">
     <div class="control-group">
@@ -55,6 +59,7 @@
         <%= f.text_field :Self_Name_Last, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :Self_Sex, 'Gender', :class => 'control-label' %>
       <div class="controls">
@@ -66,6 +71,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :Self_Marital_Status, 'Marital Status', :class => 'control-label' %>
       <div class="controls">
@@ -86,22 +92,27 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_Self_Birthdate, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :Self_Birthdate, :class => "karen_naples_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
+        <%#= f.text_field :Self_Birthdate, :class => "karen_naples_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
+        <%= text_field_tag :displaying_date_Self_Birthdate, '', :class => "karen_naples_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Self_Birthdate %>
+        <%= f.hidden_field :Self_Birthdate %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :ssn_1, 'Social Security Number', :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
-          -
-          <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
-          -
-          <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength =>4  %>
-        </div>
+      <div class="controls">
+        <%= f.text_field :ssn_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
+        -
+        <%= f.text_field :ssn_2, :style => 'width:30px', :placeholder => "##", :size => 2, :maxlength => 2 %>
+        -
+        <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
+      </div>
     </div>
     <div class="control-group">
       <%= f.label :Self_Driver_License_State, 'Drivers License State', :class => 'control-label' %>
@@ -132,31 +143,31 @@
     <div class="control-group">
       <%= f.label :home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :home_phone_1, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
+        <%= f.text_field :home_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :home_phone_2, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
+        <%= f.text_field :home_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength => 4 %>
+        <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :work_phone_1, "Work Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :work_phone_1, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
+        <%= f.text_field :work_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :work_phone_2, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
+        <%= f.text_field :work_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength => 4 %>
+        <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :cell_phone_1, "Cell Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :cell_phone_1, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
+        <%= f.text_field :cell_phone_1, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :cell_phone_2, :style => 'width:30px', :placeholder => "###",:size => 3, :maxlength => 3 %>
+        <%= f.text_field :cell_phone_2, :style => 'width:30px', :placeholder => "###", :size => 3, :maxlength => 3 %>
         -
-        <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####",:size => 4, :maxlength => 4 %>
+        <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
     <div class="control-group">
@@ -299,17 +310,17 @@
         <%= f.text_field :billing_details_address1, :placeholder => "Address 1", :style => 'width:435px;margin-bottom:10px;', :class => 'karen_naples_new_patient_billing_details_info' %>
         <%= f.text_field :billing_details_address2, :placeholder => "Address 2", :style => 'width:435px;margin-bottom:10px;', :class => 'karen_naples_new_patient_billing_details_info' %>
         <br>
-        <%= f.text_field :billing_details_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;' , :class => 'karen_naples_new_patient_billing_details_info'%> &nbsp;
+        <%= f.text_field :billing_details_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;', :class => 'karen_naples_new_patient_billing_details_info' %> &nbsp;
         <br>
         <%= f.select :billing_details_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
-                                        'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;",:class => 'karen_naples_new_patient_billing_details_info' %>
+                                                      'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;", :class => 'karen_naples_new_patient_billing_details_info' %>
         <%= f.text_field :billing_details_address_postal_code, :placeholder => "Postal / Zip Code", :class => 'karen_naples_new_patient_billing_details_info' %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :billing_details_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_home_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3%>
+        <%= f.text_field :billing_details_home_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
         <%= f.text_field :billing_details_home_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
@@ -319,7 +330,7 @@
     <div class="control-group">
       <%= f.label :billing_details_work_phone_1, "Work Phone", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :billing_details_work_phone_1, :style => 'width:30px', :placeholder => "###" , :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
+        <%= f.text_field :billing_details_work_phone_1, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
         <%= f.text_field :billing_details_work_phone_2, :style => 'width:30px', :placeholder => "###", :class => 'karen_naples_new_patient_billing_details_info', :size => 3, :maxlength => 3 %>
         -
@@ -347,17 +358,20 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :billing_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :billing_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_billing_birth_date, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :billing_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => 'karen_naples_new_patient_billing_details_info' %>
-        <%= f.text_field :billing_birth_date, :class => "karen_naples_form_date_selector karen_naples_new_patient_billing_details_info", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.billing_birth_date %>
+        <%#= f.text_field :billing_birth_date, :class => "karen_naples_form_date_selector karen_naples_new_patient_billing_details_info", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.billing_birth_date %>
+        <%= text_field_tag :displaying_date_billing_birth_date, '', :class => "karen_naples_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.billing_birth_date %>
+        <%= f.hidden_field :billing_birth_date %>
       </div>
     </div>
     <div class="control-group">
       <%= f.label :billing_details_driving_licence_state, 'Drivers License State', :class => 'control-label' %>
       <div class="controls">
         <%= f.select :billing_details_driving_licence_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
-                                                  'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;",:class => 'karen_naples_new_patient_billing_details_info' %>
+                                                              'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;", :class => 'karen_naples_new_patient_billing_details_info' %>
       </div>
     </div>
     <div class='control-group'>
@@ -381,7 +395,7 @@
         <%= f.text_field :billing_details_employer_address_city, :placeholder => "City", :style => 'width:435px;margin-bottom:10px;', :class => 'karen_naples_new_patient_billing_details_info' %> &nbsp;
         <br>
         <%= f.select :billing_details_employer_address_state, ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MH', 'MA', 'MI', 'FM', 'MN',
-                                            'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;",:class => 'karen_naples_new_patient_billing_details_info' %>
+                                                               'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WV', 'WI', 'WY'], {:include_blank => true}, :style => "width:222px;", :class => 'karen_naples_new_patient_billing_details_info' %>
         <%= f.text_field :billing_details_employer_address_postal_code, :placeholder => "Postal / Zip Code", :class => 'karen_naples_new_patient_billing_details_info' %>
       </div>
     </div>
@@ -688,15 +702,21 @@
 <% end %>
 
 <script type="text/javascript">
-  function unmask_str() {}
+  function unmask_str() {
+  }
 
   $('.karen_naples_form_date_selector').datepicker({
     changeMonth:true,
     changeYear:true,
-    dateFormat:'yy-mm-dd',
+    dateFormat:'mm-dd-yy',
     yearRange:'1940:' + new Date().getFullYear()
   });
 
+  var Self_Birthdate = $('#displaying_date_Self_Birthdate').attr('data-value');
+  var billing_birth_date = $('#displaying_date_billing_birth_date').attr('data-value');
+
+  $('#displaying_date_Self_Birthdate').datepicker("setDate", Self_Birthdate ? change_date_format(Self_Birthdate) : '');
+  $('#displaying_date_billing_birth_date').datepicker("setDate", billing_birth_date ? change_date_format(billing_birth_date) : '');
 
 </script>
 <script>

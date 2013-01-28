@@ -1,38 +1,72 @@
+/* changing date format MM-DD-YYYY */
+var appointment_date = '';
+var month = parseInt(new Date().getMonth()) + 1;
+var date_value = (month < 10 ? '0' + month : month) + '-' + new Date().getDate() + '-' + new Date().getFullYear();
+var time_hours = (new Date().getHours() > 11) ? (new Date().getHours() - 12) : new Date().getHours();
+var time_min = new Date().getMinutes();
+var am_pm = (new Date().getHours() > 11) ? 'pm' : 'am';
+var today_date = '';
+
+if (params['appointment_date'] != undefined) {
+  appointment_date = change_date_format(params['appointment_date']);
+}
+
+if (new Date().getHours() == '12') {
+  time_hours = '12'
+}
+
+if (new Date().getHours() == '24') {
+  time_hours = '00'
+}
+today_date = date_value + ' ' + time_hours + ':' + time_min + ' ' + am_pm;
+/* End of date format MM-DD-YYYY */
+
 $(function () {
 
-  $(window).load(function(){
-    if(params['appointment_date'] == undefined && params['action'] == 'index'){
+  /* redirecting url with today date */
+
+  $(window).load(function () {
+    if (params['appointment_date'] == undefined && params['action'] == 'index') {
       var date = new Date();
       var year = date.getFullYear();
       var month = (date.getMonth() + 1);
       var today_date = date.getDate();
-      if (month <= 9){
+      if (month <= 9) {
         month = '0' + month
       }
-      window.location = '/medical_appointments?appointment_date='+ year + '-' + month + '-' + today_date
+      window.location = '/medical_appointments?appointment_date=' + year + '-' + month + '-' + today_date
     }
   });
+  /* End of redirecting url with today date */
+
+  /* changing Date to original format before create appointment */
+
+  $('.appointment_form_submit').live('click',function(){
+    var selected_date = $('#display_appointment_date_time').val().split(' ');
+    var date = set_default_date_format(selected_date[0]);
+    var time = selected_date[1] + ' ' + selected_date[2];
+    $('#medical_appointment_appointment_date_time').val(date + ' ' + time);
+  });
+
+  /* End of changing Date to original format before create appointment */
+
+  /* For resend appointment*/
 
   if ($('div[data-page-controller=medical_appointments][data-page-action=edit]').size()) {
     var date_time = appointment["appointment_date_time"];
-    var date = date_time.split('T')[0];
+    var date = change_date_format(date_time.split('T')[0]);
     var time_split = date_time.split('T')[1];
     var time_h = time_split.split(':')[0];
     var time_m = time_split.split(':')[1];
     var app_date_time = date + ' ' + time_h + ':' + time_m + ' ';
     $(window).load(function () {
-      $("#medical_appointment_appointment_date_time").datetimepicker().datetimepicker("option", "dateFormat", "yy-mm-dd").datetimepicker('setDate', app_date_time);
+      //$("#medical_appointment_appointment_date_time").datetimepicker().datetimepicker("option", "dateFormat", "mm-dd-yy").datetimepicker('setDate', app_date_time);
+      $("#display_appointment_date_time").datetimepicker().datetimepicker("option", "dateFormat", "mm-dd-yy").datetimepicker('setDate', app_date_time);
     });
   }
+  /* End of For resend appointment*/
 
-  $(".appointments_date_selector").datepicker({
-    changeMonth: true,
-    changeYear: true,
-    yearRange:'1940:' + new Date().getFullYear(),
-    onSelect:function (dateText, inst) {
-      window.location = '/medical_appointments' + '?appointment_date=' + dateText;
-    }
-  }).datepicker("option", "dateFormat", "yy-mm-dd").datepicker('setDate', params['appointment_date'] ? params['appointment_date'] : new Date());
+  /* For next appointment*/
 
   if (params['appointment_id'] != undefined) {
     $('#medical_appointment_email').val(old_appointment['email']);
@@ -51,5 +85,18 @@ $(function () {
     } else {
     }
   }
+  /* End of for next appointment*/
 
+  /* Date picker*/
+
+  $(".appointments_date_selector").datepicker({
+    changeMonth:true,
+    changeYear:true,
+    yearRange:'1940:' + new Date().getFullYear(),
+    onSelect:function (dateText, inst) {
+      window.location = '/medical_appointments' + '?appointment_date=' + set_default_date_format(dateText);
+    }
+  }).datepicker("option", "dateFormat", "mm-dd-yy").datepicker('setDate', appointment_date != '' ? appointment_date : today_date);
+
+  /* End of Date picker*/
 });

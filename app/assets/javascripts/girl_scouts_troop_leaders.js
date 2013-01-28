@@ -87,10 +87,19 @@ $(function () {
   $(".girls_scout_activity_date_selector").datepicker({
     changeMonth:true,
     changeYear:true
-  }).datepicker("option", "dateFormat", "yy-mm-dd");
-  $('#girl_scouts_activity_activity_date_begin').datepicker("setDate", $('#girl_scouts_activity_activity_date_begin').attr('data-value'));
-  $('#girl_scouts_activity_activity_date_end').datepicker("setDate", $('#girl_scouts_activity_activity_date_end').attr('data-value'));
-  $('#girl_scouts_activity_activity_signed_permission_due_date').datepicker("setDate", $('#girl_scouts_activity_activity_signed_permission_due_date').attr('data-value'));
+  }).datepicker("option", "dateFormat", "mm-dd-yy");
+
+//  $('#girl_scouts_activity_activity_date_begin').datepicker("setDate", $('#girl_scouts_activity_activity_date_begin').attr('data-value'));
+//  $('#girl_scouts_activity_activity_date_end').datepicker("setDate", $('#girl_scouts_activity_activity_date_end').attr('data-value'));
+//  $('#girl_scouts_activity_activity_signed_permission_due_date').datepicker("setDate", $('#girl_scouts_activity_activity_signed_permission_due_date').attr('data-value'));
+
+  var date_begin = $('#display_activity_date_begin').attr('data-value');
+  var date_end = $('#display_activity_date_end').attr('data-value');
+  var date_signed_permission = $('#display_activity_date_signed_permission').attr('data-value');
+
+  $('#display_activity_date_begin').datepicker("setDate", date_begin ? change_date_format(date_begin) : '');
+  $('#display_activity_date_end').datepicker("setDate", date_end ? change_date_format(date_end) : '');
+  $('#display_activity_date_signed_permission').datepicker("setDate", date_signed_permission ? change_date_format(date_signed_permission) : '');
 
 
   $('.activity_nav_link').click(function () {

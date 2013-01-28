@@ -1,4 +1,5 @@
 <%= form_for @appointment, :html => {:class => 'form-horizontal new_appointment_form', :multipart => true} do |f| %>
+
   <% if @appointment.errors.any? %>
     <div id="error_explanation">
       <ul>
@@ -17,24 +18,28 @@
       <%= f.text_field :firstname %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :preferred_name, "(Optional) - Preferred First Name", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :preferred_name %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :lastname, "Last Name", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :lastname %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :email, "Email Address", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :responsible_party, "(Optional) - Responsible Party", :class => 'control-label' %>
     <div class="controls">
@@ -43,6 +48,7 @@
   </div>
 
   <strong>2. With:</strong>
+
   <div class="control-group">
     <div class="controls">
       <%= label_tag "radio_buttons", :class => 'radio inline', :style => 'width:250px' do %>
@@ -50,7 +56,9 @@
       <% end %>
     </div>
   </div>
+
   <strong>3. At Location:</strong>
+
   <div class="control-group">
     <%= f.label :location, raw('&nbsp;'), :class => 'control-label' %>
     <div class="controls">
@@ -63,9 +71,12 @@
   <strong>4. On This Date/Time:</strong>
 
   <div class="control-group">
-    <%= f.label :appointment_date_time, "Date", :class => 'control-label' %>
+    <%#= f.label :appointment_date_time, "Date", :class => 'control-label' %>
+    <%= f.label :display_appointment_date_time, "Date", :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :appointment_date_time, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.appointment_date_time %>
+      <%#= f.text_field :appointment_date_time, :class => "appointments_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.appointment_date_time %>
+      <%= text_field_tag :display_appointment_date_time,'', :class => "appointments_date_selector", :placeholder => "MM-DD-YYYY", "data-value" => f.object.appointment_date_time %>
+      <%= f.hidden_field :appointment_date_time %>
     </div>
   </div>
 
@@ -91,9 +102,9 @@
 
   <div class="actions">
     <% if f.object.new_record? %>
-      <%= f.submit 'Create Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+      <%= f.submit 'Create Appointment and Send Email Confirmation', :class => 'btn btn-primary appointment_form_submit' %>
     <% else %>
-      <%= f.submit 'Update Appointment and Send Email Confirmation', :class => 'btn btn-primary' %>
+      <%= f.submit 'Update Appointment and Send Email Confirmation', :class => 'btn btn-primary appointment_form_submit' %>
     <% end %>
   </div>
   <br>

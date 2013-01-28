@@ -56,6 +56,7 @@
         <%= f.text_field :last_name, :placeholder => "Last Name", :style => "width:132px" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :address_1, "Address", :class => 'control-label' %>
       <div class="controls">
@@ -68,6 +69,7 @@
         <%= f.text_field :address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
@@ -78,6 +80,7 @@
         <%= f.text_field :home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :work_phone_1, "Work Phone", :class => 'control-label' %>
       <div class="controls">
@@ -88,6 +91,7 @@
         <%= f.text_field :work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :cell_phone_1, "Cell Phone", :class => 'control-label' %>
       <div class="controls">
@@ -98,6 +102,7 @@
         <%= f.text_field :cell_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :sex, 'Gender', :class => 'control-label' %>
       <div class="controls">
@@ -109,13 +114,18 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :birth_date, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :birth_date, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_birth_date, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :birth_date, :start_year => 1900, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
+        <%#= f.text_field :birth_date, :class => "medical_Patient_form_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.birth_date %>
+        <%= text_field_tag :displaying_date_birth_date, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.birth_date %>
+        <%= f.hidden_field :birth_date %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :marital_status, 'Marital Status', :class => 'control-label' %>
       <div class="controls">
@@ -133,6 +143,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :ssn_1, 'Social Security Number', :class => 'control-label' %>
       <div class="controls">
@@ -143,6 +154,7 @@
         <%= f.text_field :ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :referred_to_our_office_by, ' Referred to Our Office By ', :class => 'control-label' %>
       <div class="controls">
@@ -163,18 +175,21 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :referral_name, "Referral Name", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :referral_name %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "1" do %>
         Next&nbsp;<i class="icon-chevron-right icon-white"></i>
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="employer">
     <div class="control-group">
       <%= f.label :employer, 'Employer', :class => 'control-label' %>
@@ -182,12 +197,14 @@
         <%= f.text_field :employer %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :employer_occupation, 'Occupation', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :employer_occupation %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :employer_address_1, "Address", :class => 'control-label' %>
       <div class="controls">
@@ -200,6 +217,7 @@
         <%= f.text_field :employer_address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "0" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -209,6 +227,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="spouse">
     <div class="control-group">
       <%= f.label :spouse_first_name, 'Name', :class => 'control-label' %>
@@ -217,6 +236,7 @@
         <%= f.text_field :spouse_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :spouse_home_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
@@ -227,6 +247,7 @@
         <%= f.text_field :spouse_home_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :spouse_work_phone_1, "Work Phone", :class => 'control-label' %>
       <div class="controls">
@@ -237,6 +258,7 @@
         <%= f.text_field :spouse_work_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "1" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -246,6 +268,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="emergency_contact">
     <div class="control-group">
       <%= f.label :emergency_contact_first_name, 'Name', :class => 'control-label' %>
@@ -254,12 +277,14 @@
         <%= f.text_field :emergency_contact_last_name, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :emergency_contact_relationship, 'Relationship ', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :emergency_contact_relationship %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :emergency_contact_phone_1, "Home Phone", :class => 'control-label' %>
       <div class="controls">
@@ -270,6 +295,7 @@
         <%= f.text_field :emergency_contact_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "2" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -279,6 +305,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="insurance_primary">
     <div class="control-group">
       <%= f.label :primary_insurance_company_name, 'Primary Insurance Company Name', :class => 'control-label' %>
@@ -298,6 +325,7 @@
         <%= f.text_field :primary_insurance_address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_phone_1, "Phone Number", :class => 'control-label' %>
       <div class="controls">
@@ -308,18 +336,21 @@
         <%= f.text_field :primary_insurance_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_id, 'Primary Insurance Id', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :primary_insurance_id %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_group, 'Primary Insurance Group', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :primary_insurance_group %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_policy_holder, 'Policy Holder', :class => 'control-label' %>
       <div class="controls">
@@ -333,6 +364,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_policy_holder_first_name, 'Name', :class => 'control-label' %>
       <div class="controls">
@@ -340,19 +372,25 @@
         <%= f.text_field :primary_insurance_policy_holder_last_name, :placeholder => "Last Name", :class => "input-small medical_patient_primary_insurance_policy_details" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_relationship, 'Relationship', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :primary_insurance_relationship, :class => 'medical_patient_primary_insurance_policy_details' %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :primary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :primary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_primary_insurance_birth_date, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :primary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true, :class => "medical_patient_primary_insurance_policy_details" %>
-        <%= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector  medical_patient_primary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%#= f.text_field :primary_insurance_birth_date, :class => "medical_Patient_form_date_selector  medical_patient_primary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%= text_field_tag :displaying_date_primary_insurance_birth_date, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.primary_insurance_birth_date %>
+        <%= f.hidden_field :primary_insurance_birth_date %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_ssn_1, 'Social Security Number', :class => 'control-label' %>
       <div class="controls">
@@ -363,12 +401,14 @@
         <%= f.text_field :primary_insurance_ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4, :class => ' medical_patient_primary_insurance_policy_details' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :primary_insurance_policy_holder_employer, 'Employer', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :primary_insurance_policy_holder_employer, :class => ' medical_patient_primary_insurance_policy_details' %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "3" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -378,6 +418,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="insurance_secondary">
     <div class="control-group">
       <%= f.label :secondary_insurance_company_name, 'Secondary Insurance Company Name', :class => 'control-label' %>
@@ -385,6 +426,7 @@
         <%= f.text_field :secondary_insurance_company_name %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_address_1, "Address", :class => 'control-label' %>
       <div class="controls">
@@ -397,6 +439,7 @@
         <%= f.text_field :secondary_insurance_address_zip, :placeholder => "Postal / Zip Code" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_phone_1, "Phone Number", :class => 'control-label' %>
       <div class="controls">
@@ -407,18 +450,21 @@
         <%= f.text_field :secondary_insurance_phone_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_id, 'Secondary Insurance Id', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_id %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_group, 'Secondary Insurance Group', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_group %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_policy_holder, 'Policy Holder', :class => 'control-label' %>
       <div class="controls">
@@ -432,6 +478,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_policy_holder_first_name, 'Name', :class => 'control-label' %>
       <div class="controls">
@@ -439,19 +486,25 @@
         <%= f.text_field :secondary_insurance_policy_holder_last_name, :placeholder => "Last Name", :class => "input-small medical_patient_secondary_insurance_policy_details" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_relationship, 'Relationship', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_relationship, :class => 'medical_patient_secondary_insurance_policy_details' %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :secondary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :secondary_insurance_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_secondary_insurance_birth_date, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :secondary_insurance_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector medical_patient_secondary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%#= f.text_field :secondary_insurance_birth_date, :class => "medical_Patient_form_date_selector medical_patient_secondary_insurance_policy_details", :placeholder => "YYYY-MM-DD", "data-value" => f.object.primary_insurance_birth_date %>
+        <%= text_field_tag :displaying_date_secondary_insurance_birth_date, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.secondary_insurance_birth_date %>
+        <%= f.hidden_field :secondary_insurance_birth_date %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_ssn_1, 'Social Security Number', :class => 'control-label' %>
       <div class="controls">
@@ -462,12 +515,14 @@
         <%= f.text_field :secondary_insurance_ssn_3, :style => 'width:40px', :placeholder => " ####", :size => 4, :maxlength => 4, :class => 'medical_patient_secondary_insurance_policy_details' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :secondary_insurance_policy_holder_employer, 'Employer', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :secondary_insurance_policy_holder_employer, :class => 'medical_patient_secondary_insurance_policy_details' %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "4" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -477,6 +532,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="patient_consent">
     <div class="control-group">
       <p style="margin: 1px 0 0 314px;text-align: justify;">
@@ -484,6 +540,7 @@
         below until further written notice from me:
       </p>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_consent_first_name_1, 'Name', :class => 'control-label' %>
       <div class="controls">
@@ -491,12 +548,14 @@
         <%= f.text_field :patient_consent_last_name_1, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_consent_relation_ship_to_patient_1, ' Relationship ', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :patient_consent_relation_ship_to_patient_1 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_consent_first_name_2, 'Name', :class => 'control-label' %>
       <div class="controls">
@@ -504,12 +563,14 @@
         <%= f.text_field :patient_consent_last_name_2, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_consent_relation_ship_to_patient_2, ' Relationship ', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :patient_consent_relation_ship_to_patient_2 %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_consent_first_name_3, 'Name', :class => 'control-label' %>
       <div class="controls">
@@ -517,6 +578,7 @@
         <%= f.text_field :patient_consent_last_name_3, :placeholder => "Last Name", :class => "input-small" %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_consent_relation_ship_to_patient_3, ' Relationship ', :class => 'control-label' %>
       <div class="controls">
@@ -529,11 +591,13 @@
         Authorization for Voicemail Usage for PHI
       </p>
     </div>
+
     <div class="control-group">
       <p style="margin: 1px 0 0 314px;text-align: justify;">
         I hereby give permission to leave a message on my voicemail concerning my personal health information.
       </p>
     </div>
+
     <div class="control-group">
       <%= f.label :patient_authorization_for_voice_mail, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -545,6 +609,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <p style="margin: 1px 0 0 314px;text-align: justify;">
         I hereby give authorization for payment of insurance benefits to be made directly to Capital Medical Clinic,
@@ -554,11 +619,13 @@
         payment of benefits. I further agree that a photocopy of this Agreement is as valid as the original.
       </p>
     </div>
+
     <div class="control-group">
       <p style="margin: 1px 0 0 314px;text-align: justify;">
         Acknowledgement of Review of Notice of Privacy Practices
       </p>
     </div>
+
     <div class="control-group">
       <p style="margin: 1px 0 0 314px;text-align: justify;">
         I have been given the opportunity to review this office’s Notice of Privacy Practices, which explains
@@ -566,12 +633,14 @@
         of this document.
       </p>
     </div>
+
     <div class="control-group">
       <p style="margin: 1px 0 0 314px;text-align: justify;">
         Capital Medical Clinic reserves the right to charge $50.00 for any appointment cancelled without 24hr
         advanced notice and there is a $25.00 charge to your account for each returned che
       </p>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "5" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -581,178 +650,228 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="medical_history">
-    <div class="control-group">
-      <strong style="font-size: 18px">Reasons For Your Visit</strong>
+  <div class="control-group">
+    <strong style="font-size: 18px">Reasons For Your Visit</strong>
 
-      <p style="text-align: justify;">
-        Please list up to three of your chief complaints or concerns.
-      </p>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_reason_for_visit_1, 'Reason 1', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_reason_for_visit_1, :style => 'width:335px;' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_reason_for_visit_2, 'Reason 2', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_reason_for_visit_2, :style => 'width:335px;' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_reason_for_visit_3, 'Reason 3', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_reason_for_visit_3, :style => 'width:335px;' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <strong style="font-size: 18px">Specialists</strong>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_specialist_1, raw('&nbsp'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_specialist_1, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_speciality_1, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :medical_history_specialist_2, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_speciality_2, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :medical_history_specialist_3, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_speciality_3, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :medical_history_specialist_4, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_speciality_4, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <strong style="font-size: 18px">Medications</strong>
+    <p style="text-align: justify;">
+      Please list up to three of your chief complaints or concerns.
+    </p>
+  </div>
 
-      <p style="text-align: justify;">
-        All medications you are currently taking, including over the counter.
-      </p>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_specialist_1, raw('&nbsp'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_medication_medication_1, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_1, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_1, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_medication_2, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_2, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_2, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_medication_3, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_3, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_3, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_medication_4, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_4, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_4, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_medication_5, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_5, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_5, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_medication_6, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_6, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_6, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_medication_7, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_dosage_7, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_times_per_day_7, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-      </div>
-    </div>
-    <div class="control-group">
-      <strong style="font-size: 18px">Medication Allergies </strong>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_medication_allergies_medication_1, raw('&nbsp'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_medication_allergies_medication_1, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_allergies_reaction_1, :placeholder => 'Reaction', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :medical_history_medication_allergies_medication_2, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_allergies_reaction_2, :placeholder => 'Reaction', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-        <%= f.text_field :medical_history_medication_allergies_medication_3, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_medication_allergies_reaction_3, :placeholder => 'Reaction', :style => 'width:150px;margin-bottom:10px;' %>
-        <br>
-      </div>
-    </div>
-    <div class="control-group">
-      <strong style="font-size: 18px">Operations</strong>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_operations_operation_1, raw('&nbsp'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_operations_operation_1, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_operations_operation_date_1, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_1 %>
-        <br>
-        <%= f.text_field :medical_history_operations_operation_2, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_operations_operation_date_2, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_2 %>
-        <br>
-        <%= f.text_field :medical_history_operations_operation_3, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_operations_operation_date_3, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_3 %>
-        <br>
-        <%= f.text_field :medical_history_operations_operation_4, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_operations_operation_date_4, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_4 %>
-        <br>
-        <%= f.text_field :medical_history_operations_operation_5, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_operations_operation_date_5, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_5 %>
-        <br>
-        <%= f.text_field :medical_history_operations_operation_6, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_operations_operation_date_6, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_6 %>
-        <br>
-      </div>
-    </div>
-    <div class="control-group">
-      <strong style="font-size: 18px">Previous Illnesses </strong>
-
-      <p style="text-align: justify;">
-        (e.g. diabetes, hypertension, hospitalizations)
-      </p>
-    </div>
-    <div class="control-group">
-      <%= f.label :medical_history_previous_illnesses_illness_1, raw('&nbsp'), :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :medical_history_previous_illnesses_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_1, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_1 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_2, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_2 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_3, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_3, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_3 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_4, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_4, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_4 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_5, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_5, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_5 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_6, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_6, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_6 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_7, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_7, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_7 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_8, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_8, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_8 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_9, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_9, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_9 %>
-        <br>
-        <%= f.text_field :medical_history_previous_illnesses_illness_10, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
-        <%= f.text_field :medical_history_previous_illnesses_diagnosis_10, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_10 %>
-        <br>
-      </div>
-    </div>
-    <div class="medical_patient_form_footer_links">
-      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "6" do %>
-        &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
-      <% end %>
-      <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "8" do %>
-        Next&nbsp;<i class="icon-chevron-right icon-white"></i>
-      <% end %>
+  <div class="control-group">
+    <%= f.label :medical_history_reason_for_visit_1, 'Reason 1', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_reason_for_visit_1, :style => 'width:335px;' %>
     </div>
   </div>
+
+  <div class="control-group">
+    <%= f.label :medical_history_reason_for_visit_2, 'Reason 2', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_reason_for_visit_2, :style => 'width:335px;' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :medical_history_reason_for_visit_3, 'Reason 3', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_reason_for_visit_3, :style => 'width:335px;' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <strong style="font-size: 18px">Specialists</strong>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :medical_history_specialist_1, raw('&nbsp'), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_specialist_1, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_speciality_1, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :medical_history_specialist_2, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_speciality_2, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :medical_history_specialist_3, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_speciality_3, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :medical_history_specialist_4, :placeholder => 'Specialist', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_speciality_4, :placeholder => 'Speciality', :style => 'width:150px;margin-bottom:10px;' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <strong style="font-size: 18px">Medications</strong>
+
+    <p style="text-align: justify;">
+      All medications you are currently taking, including over the counter.
+    </p>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :medical_history_specialist_1, raw('&nbsp'), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_medication_medication_1, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_1, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_1, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_medication_2, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_2, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_2, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_medication_3, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_3, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_3, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_medication_4, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_4, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_4, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_medication_5, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_5, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_5, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_medication_6, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_6, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_6, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_medication_7, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_dosage_7, :placeholder => ' Dosage (Milligrams)', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_times_per_day_7, :placeholder => 'Times Per Day', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <div class="control-group">
+    <strong style="font-size: 18px">Medication Allergies </strong>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :medical_history_medication_allergies_medication_1, raw('&nbsp'), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_medication_allergies_medication_1, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_allergies_reaction_1, :placeholder => 'Reaction', :style => 'width:150px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :medical_history_medication_allergies_medication_2, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_allergies_reaction_2, :placeholder => 'Reaction', :style => 'width:150px;margin-bottom:10px;' %>
+      <br>
+      <%= f.text_field :medical_history_medication_allergies_medication_3, :placeholder => 'Medication', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%= f.text_field :medical_history_medication_allergies_reaction_3, :placeholder => 'Reaction', :style => 'width:150px;margin-bottom:10px;' %>
+      <br>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <strong style="font-size: 18px">Operations</strong>
+  </div>
+
+  <div class="control-group">
+    <%#= f.label :medical_history_operations_operation_1, raw('&nbsp'), :class => 'control-label' %>
+    <%= f.label :displaying_date_medical_history_operations_1, raw('&nbsp'), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_operations_operation_1, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_operations_operation_date_1, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_1 %>
+      <%= text_field_tag :displaying_date_medical_history_operations_2, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_operations_operation_date_1 %>
+      <%= f.hidden_field :medical_history_operations_operation_date_1 %>
+      <br>
+      <%= f.text_field :medical_history_operations_operation_2, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_operations_operation_date_2, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_2 %>
+      <%= text_field_tag :displaying_date_medical_history_operations_2, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_operations_operation_date_2 %>
+      <%= f.hidden_field :medical_history_operations_operation_date_2 %>
+      <br>
+      <%= f.text_field :medical_history_operations_operation_3, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_operations_operation_date_3, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_3 %>
+      <%= text_field_tag :displaying_date_medical_history_operations_3, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_operations_operation_date_3 %>
+      <%= f.hidden_field :medical_history_operations_operation_date_3 %>
+      <br>
+      <%= f.text_field :medical_history_operations_operation_4, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_operations_operation_date_4, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_4 %>
+      <%= text_field_tag :displaying_date_medical_history_operations_4, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_operations_operation_date_4 %>
+      <%= f.hidden_field :medical_history_operations_operation_date_4 %>
+      <br>
+      <%= f.text_field :medical_history_operations_operation_5, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_operations_operation_date_5, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_5 %>
+      <%= text_field_tag :displaying_date_medical_history_operations_5, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_operations_operation_date_5 %>
+      <%= f.hidden_field :medical_history_operations_operation_date_5 %>
+      <br>
+      <%= f.text_field :medical_history_operations_operation_6, :placeholder => 'Operation', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_operations_operation_date_6, :class => "medical_Patient_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_operations_operation_date_6 %>
+      <%= text_field_tag :displaying_date_medical_history_operations_6, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_operations_operation_date_6 %>
+      <%= f.hidden_field :medical_history_operations_operation_date_6 %>
+      <br>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <strong style="font-size: 18px">Previous Illnesses </strong>
+
+    <p style="text-align: justify;">
+      (e.g. diabetes, hypertension, hospitalizations)
+    </p>
+  </div>
+
+  <div class="control-group">
+    <%#= f.label :medical_history_previous_illnesses_illness_1, raw('&nbsp'), :class => 'control-label' %>
+    <%= f.label :displaying_date_medical_history_previous_illnesses_1, raw('&nbsp'), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :medical_history_previous_illnesses_illness_1, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_1, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_1 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_1, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_1 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_1 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_2, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_2, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_2 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_2, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_2 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_2 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_3, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_3, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_3 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_3, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_3 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_3 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_4, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_4, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_4 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_4, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_4 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_4 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_5, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_5, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_5 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_5, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_5 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_5 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_6, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_6, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_6 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_6, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_6 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_6 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_7, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_7, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_7 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_7, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_7 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_7 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_8, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_8, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_8 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_8, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_8 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_8 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_9, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_9, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_9 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_9, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_9 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_9 %>
+      <br>
+      <%= f.text_field :medical_history_previous_illnesses_illness_10, :placeholder => 'Illness', :style => 'width:150px;margin-bottom:10px;' %> &nbsp;&nbsp;&nbsp;
+      <%#= f.text_field :medical_history_previous_illnesses_diagnosis_10, :class => "medical_Patient_form_date_selector", :placeholder => 'Diagnosis Date', :style => 'width:150px;margin-bottom:10px;', "data-value" => f.object.medical_history_previous_illnesses_diagnosis_10 %>
+      <%= text_field_tag :displaying_date_medical_history_previous_illnesses_10, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_previous_illnesses_diagnosis_10 %>
+      <%= f.hidden_field :medical_history_previous_illnesses_diagnosis_10 %>
+      <br>
+    </div>
+  </div>
+
+  <div class="medical_patient_form_footer_links">
+    <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "6" do %>
+      &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
+    <% end %>
+    <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "8" do %>
+      Next&nbsp;<i class="icon-chevron-right icon-white"></i>
+    <% end %>
+  </div>
+  </div>
+
   <div class="tab-pane" id="family_history">
     <div class="control-group">
       <%= f.label :family_history_mother_age, 'Mother Age', :class => 'control-label' %>
@@ -760,6 +879,7 @@
         <%= f.text_field :family_history_mother_age %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_mother_living_or_deceased, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
@@ -771,6 +891,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_illnesses_mother_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -785,12 +906,14 @@
         <br>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_father_age, 'Father Age', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :family_history_father_age %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_father_living_or_deceased, raw('&nbsp;'), :class => 'control-label' %>
       <div class="controls">
@@ -802,6 +925,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_illnesses_father_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -816,9 +940,11 @@
         <br>
       </div>
     </div>
+
     <div class="control-group">
       <strong style="font-size: 18px">Siblings </strong>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -830,6 +956,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_living_deceased_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -842,6 +969,7 @@
         <%= f.text_field :family_history_siblings_age_1, :placeholder => 'Age', :style => 'width:150px;margin-left:25px;' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_1_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -853,6 +981,7 @@
         <br>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_2, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -864,6 +993,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_living_deceased_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -876,6 +1006,7 @@
         <%= f.text_field :family_history_siblings_age_2, :placeholder => 'Age', :style => 'width:150px;margin-left:25px;' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_2_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -887,6 +1018,7 @@
         <br>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_3, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -898,6 +1030,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_3, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -910,6 +1043,7 @@
         <%= f.text_field :family_history_siblings_age_3, :placeholder => 'Age', :style => 'width:150px;margin-left:25px;' %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :family_history_siblings_3_illness_1, raw('&nbsp'), :class => 'control-label' %>
       <div class="controls">
@@ -921,6 +1055,7 @@
         <br>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "7" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -930,9 +1065,9 @@
       <% end %>
     </div>
   </div>
-  <div class="tab-pane" id="social_history">
 
-        <div class="control-group">
+  <div class="tab-pane" id="social_history">
+    <div class="control-group">
       <%= f.label :social_history_live, 'I Live', :class => 'control-label' %>
       <div class="controls">
         <%= label_tag "radio_buttons", :class => 'radio inline' do %>
@@ -951,42 +1086,49 @@
         <%= f.text_field :social_history_live_with_whom, :readonly => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_no_of_children, "No Of Children", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_no_of_children %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_age_of_children, "Ages of Children", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_age_of_children, :readonly => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_exercise_approximately, "I Exercise Approximately This Many Days Per Week", :class => 'control-label' %>
       <div class="controls">
         <%= f.select :social_history_exercise_approximately, ['1', '2', '3', '4', '5', '6', '7'], {:include_blank => true}, {:style => "width:222px;"} %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_ex_minutes_per_day, "For This Many Minutes Per Day", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_ex_minutes_per_day, :readonly => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_exercise_type, "Exercise Type", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_exercise_type, :readonly => true %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_hobbies, "Hobbies", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_hobbies %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_smoking_tobacco, 'Smoking Tobacco', :class => 'control-label' %>
       <div class="controls">
@@ -1003,24 +1145,28 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_smoking_packs_per_day, "Packs Per Day", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_smoking_packs_per_day %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_smoking_no_of_years, "Number Of Years", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_smoking_no_of_years %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_smoking_quit_years, "I quit smoking in the year ", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_smoking_quit_years %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_drink_alcoholic_beverage, 'I Drink', :class => 'control-label' %>
       <div class="controls">
@@ -1034,6 +1180,7 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_have_used_recreational_drugs, 'Have you ever used recreational drugs ?', :class => 'control-label' %>
       <div class="controls">
@@ -1047,12 +1194,14 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_yes_i_have_used_recreational_drugs, "I have used these recreational drugs", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_yes_i_have_used_recreational_drugs %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_have_recently_traveled, 'Have you recently traveled out of the country ?', :class => 'control-label' %>
       <div class="controls">
@@ -1066,12 +1215,14 @@
         <% end %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :social_history_yes_i_recently_traveled, "I have traveled out of the country to", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :social_history_yes_i_recently_traveled %>
       </div>
     </div>
+
     <div class="medical_patient_form_footer_links">
       <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "8" do %>
         &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -1081,12 +1232,14 @@
       <% end %>
     </div>
   </div>
+
   <div class="tab-pane" id="review_of_systems">
   <div class="control-group">
     <strong>
       I Have Recently Had Problems With:
     </strong>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_general_fatigue, 'General', :class => 'control-label ' %>
     <div class="controls">
@@ -1104,6 +1257,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_i_have, 'I Have', :class => 'control-label' %>
     <div class="controls">
@@ -1117,6 +1271,7 @@
       <%= f.text_field :review_of_sym_i_have_time_periods, :class => 'input-small', :placeholder => "Time Period", :style => 'height:13px' %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_skin_rash, 'Skin', :class => 'control-label ' %>
     <div class="controls">
@@ -1134,6 +1289,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_eye_redness, 'Eyes', :class => 'control-label ' %>
     <div class="controls">
@@ -1154,6 +1310,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_nose_bleed, 'Nose', :class => 'control-label ' %>
     <div class="controls">
@@ -1171,6 +1328,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_skin_rash, 'Mouth', :class => 'control-label ' %>
     <div class="controls">
@@ -1188,6 +1346,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_throat_hoarseness, 'Throat', :class => 'control-label ' %>
     <div class="controls">
@@ -1205,6 +1364,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_respiratory_cough, 'Respiratory', :class => 'control-label ' %>
     <div class="controls">
@@ -1225,6 +1385,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_cardiovascular_chest_discomfort, 'Cardiovascular', :class => 'control-label ' %>
     <div class="controls">
@@ -1248,6 +1409,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_urinary_pain_with_urination, 'Urinary', :class => 'control-label ' %>
     <div class="controls">
@@ -1274,6 +1436,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_gastrointestinal_nausea, 'Gastrointestinal', :class => 'control-label ' %>
     <div class="controls">
@@ -1297,6 +1460,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_sexual_decreased_libido, 'Sexual', :class => 'control-label ' %>
     <div class="controls">
@@ -1309,6 +1473,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_musculoskeletal_joint_pain_or_stiffness, 'Musculoskeletal', :class => 'control-label ' %>
     <div class="controls">
@@ -1326,18 +1491,21 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_joints_that_are_painful_or_stiff, 'Joints that are painful or stiff', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :review_of_sym_joints_that_are_painful_or_stiff, :readonly => true %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_joints_that_are_swelling_or_have_redness, 'Joints that are swelling or have redness', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :review_of_sym_joints_that_are_swelling_or_have_redness, :readonly => true %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_neurological_difficulty_with_memory, 'Neurological', :class => 'control-label ' %>
     <div class="controls">
@@ -1370,12 +1538,14 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_neurological_weakness_which_part_of_body, 'Weakness Which part of body', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :review_of_sym_neurological_weakness_which_part_of_body, :readonly => true %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_psychological_depression, 'Psychological', :class => 'control-label ' %>
     <div class="controls">
@@ -1403,6 +1573,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :review_of_sym_sleep_difficulty_getting_to_sleep, 'Sleep', :class => 'control-label ' %>
     <div class="controls">
@@ -1421,6 +1592,7 @@
       <% end %>
     </div>
   </div>
+
   <div class="medical_patient_form_footer_links">
     <%= link_to "#", :class => 'btn btn-primary medical_patient_form_nav_link', :data_tab_index => "9" do %>
       &nbsp;<i class="icon-chevron-left icon-white"></i>Prev
@@ -1430,92 +1602,131 @@
     <% end %>
   </div>
   </div>
+
   <div class="tab-pane" id="health_maintenance">
     <div class="control-group">
-      <%= f.label :health_maintenance_bone_density_test, 'Bone Density Test', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_bone_density_test, 'Bone Density Test', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_bone_density_test, "Bone Density Test", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_bone_density_test, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_bone_density_test %>
+        <%#= f.text_field :health_maintenance_bone_density_test, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_bone_density_test %>
+        <%= text_field_tag :displaying_date_health_maintenance_bone_density_test, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_bone_density_test %>
+        <%= f.hidden_field :health_maintenance_bone_density_test %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_skin_cancer_screening, 'Skin Cancer Screening Check by a Dermatologist', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_skin_cancer_screening, 'Skin Cancer Screening Check by a Dermatologist', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_skin_cancer_screening, "Skin Cancer Screening Check by a Dermatologist", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_skin_cancer_screening, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_skin_cancer_screening %>
+        <%#= f.text_field :health_maintenance_skin_cancer_screening, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_skin_cancer_screening %>
+        <%= text_field_tag :displaying_date_health_maintenance_skin_cancer_screening, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_skin_cancer_screening %>
+        <%= f.hidden_field :health_maintenance_skin_cancer_screening %>
       </div>
     </div>
+
     <div class="control-group">
       <strong>
         Most Recent Cholesterol Test
       </strong>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_test_date, 'Test Date', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_test_date, 'Test Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_test_date, "Test Date", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_test_date, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_test_date %>
+        <%#= f.text_field :health_maintenance_test_date, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_test_date %>
+        <%= text_field_tag :displaying_date_health_maintenance_test_date, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_test_date %>
+        <%= f.hidden_field :health_maintenance_test_date %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :health_maintenance_total_cholesterol, 'Total Cholesterol', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :health_maintenance_total_cholesterol %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :health_maintenance_LDL, 'LDL', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :health_maintenance_LDL %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :health_maintenance_HDL, 'HDL', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :health_maintenance_HDL %>
       </div>
     </div>
+
     <div class="control-group">
       <%= f.label :health_maintenance_triglycerides, ' Triglycerides ', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :health_maintenance_triglycerides %>
       </div>
     </div>
+
     <div class="control-group">
       <strong>
         Vaccines
       </strong>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_most_recent_tetanus_vaccine_booster, 'Most Recent Tetanus Vaccine Booster', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_most_recent_tetanus_vaccine_booster, 'Most Recent Tetanus Vaccine Booster', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_most_recent_tetanus_vaccine_booster, "Most Recent Tetanus Vaccine Booster", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_most_recent_tetanus_vaccine_booster, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_tetanus_vaccine_booster %>
+        <%#= f.text_field :health_maintenance_most_recent_tetanus_vaccine_booster, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_tetanus_vaccine_booster %>
+        <%= text_field_tag :displaying_date_health_maintenance_most_recent_tetanus_vaccine_booster, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_most_recent_tetanus_vaccine_booster %>
+        <%= f.hidden_field :health_maintenance_most_recent_tetanus_vaccine_booster %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_shingles_vaccine, 'Shingles Vaccine', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_shingles_vaccine, 'Shingles Vaccine', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_shingles_vaccine, "Shingles Vaccine", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_shingles_vaccine, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_shingles_vaccine %>
+        <%#= f.text_field :health_maintenance_shingles_vaccine, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_shingles_vaccine %>
+        <%= text_field_tag :displaying_date_health_maintenance_shingles_vaccine, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_shingles_vaccine %>
+        <%= f.hidden_field :health_maintenance_shingles_vaccine %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_pneumovax, 'Pneumovax (pneumonia vaccine)', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_pneumovax, 'Pneumovax (pneumonia vaccine)', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_pneumovax, "Pneumovax (pneumonia vaccine)", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_pneumovax, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_pneumovax %>
+        <%#= f.text_field :health_maintenance_pneumovax, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_pneumovax %>
+        <%= text_field_tag :displaying_date_health_maintenance_pneumovax, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_pneumovax %>
+        <%= f.hidden_field :health_maintenance_pneumovax %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_flu_vaccine, 'Flu Vaccine', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_flu_vaccine, 'Flu Vaccine', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_flu_vaccine, "Pneumovax (pneumonia vaccine)", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_flu_vaccine, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_flu_vaccine %>
+        <%#= f.text_field :health_maintenance_flu_vaccine, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_flu_vaccine %>
+        <%= text_field_tag :displaying_date_health_maintenance_flu_vaccine, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_flu_vaccine %>
+        <%= f.hidden_field :health_maintenance_flu_vaccine %>
       </div>
     </div>
+
     <div class="control-group">
       <strong>
         Colon Cancer Screening
       </strong>
     </div>
+
     <div class="control-group">
-      <%= f.label :health_maintenance_colonoscopy, 'Colonoscopy', :class => 'control-label' %>
+      <%#= f.label :health_maintenance_colonoscopy, 'Colonoscopy', :class => 'control-label' %>
+      <%= f.label :displaying_date_health_maintenance_colonoscopy, "Colonoscopy", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :health_maintenance_colonoscopy, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_colonoscopy %>
+        <%#= f.text_field :health_maintenance_colonoscopy, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_colonoscopy %>
+        <%= text_field_tag :displaying_date_health_maintenance_colonoscopy, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_colonoscopy %>
+        <%= f.hidden_field :health_maintenance_colonoscopy %>
       </div>
     </div>
     <div class="control-group">

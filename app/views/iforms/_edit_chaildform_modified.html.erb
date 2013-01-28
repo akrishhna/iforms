@@ -1,4 +1,5 @@
-<p style="text-align: center;font-size:18px "><%= session[:formname] %> for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
+<p style="text-align: center;font-size:18px "><%= session[:formname] %>
+  for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
 <div style="margin: 0 auto;width:80px;">
   <%= link_to "My Forms", "/consumer", :style => 'font-size: 18px;' %>
 </div>
@@ -88,10 +89,13 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_Self_Birthdate, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :Self_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
+        <%#= f.text_field :Self_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
+        <%= text_field_tag :displaying_date_Self_Birthdate, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Self_Birthdate %>
+        <%= f.hidden_field :Self_Birthdate %>
       </div>
     </div>
     <div class="control-group">
@@ -216,10 +220,13 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :Self_Birthdate, 'Last Visit Date', :class => 'control-label' %>
+      <%#= f.label :Self_General_Dentist_Date_Last_Appointment, 'Last Visit Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_Self_General_Dentist_Date_Last_Appointment, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :Self_General_Dentist_Date_Last_Appointment, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :Self_General_Dentist_Date_Last_Appointment, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_General_Dentist_Date_Last_Appointment %>
+        <%#= f.text_field :Self_General_Dentist_Date_Last_Appointment, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_General_Dentist_Date_Last_Appointment %>
+        <%= text_field_tag :displaying_date_Self_General_Dentist_Date_Last_Appointment, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Self_General_Dentist_Date_Last_Appointment %>
+        <%= f.hidden_field :Self_General_Dentist_Date_Last_Appointment %>
       </div>
     </div>
     <div class="control-group">
@@ -290,10 +297,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :Mother_Birthdate, 'Birth Date', :class => 'control-label' %>
+    <%#= f.label :Mother_Birthdate, 'Birth Date', :class => 'control-label' %>
+    <%= f.label :displaying_date_Mother_Birthdate, "Birth Date", :class => 'control-label' %>
     <div class="controls ">
       <%#= f.date_select :Mother_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%= f.text_field :Mother_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Mother_Birthdate %>
+      <%#= f.text_field :Mother_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Mother_Birthdate %>
+      <%= text_field_tag :displaying_date_Mother_Birthdate, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Mother_Birthdate %>
+      <%= f.hidden_field :Mother_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -389,10 +399,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :Father_Birthdate, 'Birth Date', :class => 'control-label' %>
+    <%#= f.label :Father_Birthdate, 'Birth Date', :class => 'control-label' %>
+    <%= f.label :displaying_date_Father_Birthdate, "Birth Date", :class => 'control-label' %>
     <div class="controls ">
       <%#= f.date_select :Father_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%= f.text_field :Father_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Father_Birthdate %>
+      <%#= f.text_field :Father_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Father_Birthdate %>
+      <%= text_field_tag :displaying_date_Father_Birthdate, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Father_Birthdate %>
+      <%= f.hidden_field :Father_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -782,10 +795,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :Insurance_Company_Primary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
+    <%#= f.label :Insurance_Company_Primary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
+    <%= f.label :displaying_date_Insurance_Company_Primary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
     <div class="controls">
       <%#= f.date_select :Insurance_Company_Primary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%= f.text_field :Insurance_Company_Primary_Insured_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Insurance_Company_Primary_Insured_Birthdate %>
+      <%#= f.text_field :Insurance_Company_Primary_Insured_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Insurance_Company_Primary_Insured_Birthdate %>
+      <%= text_field_tag :displaying_date_Insurance_Company_Primary_Insured_Birthdate, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Insurance_Company_Primary_Insured_Birthdate %>
+      <%= f.hidden_field :Insurance_Company_Primary_Insured_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -892,10 +908,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :Insurance_Company_Secondary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
+    <%#= f.label :Insurance_Company_Secondary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
+    <%= f.label :displaying_date_Insurance_Company_Secondary_Insured_Birthdate, "Insured's Birth Date", :class => 'control-label' %>
     <div class="controls">
       <%#= f.date_select :Insurance_Company_Secondary_Insured_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%= f.text_field :Insurance_Company_Secondary_Insured_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Insurance_Company_Secondary_Insured_Birthdate %>
+      <%#= f.text_field :Insurance_Company_Secondary_Insured_Birthdate, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Insurance_Company_Secondary_Insured_Birthdate %>
+      <%= text_field_tag :displaying_date_Insurance_Company_Secondary_Insured_Birthdate, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Insurance_Company_Secondary_Insured_Birthdate %>
+      <%= f.hidden_field :Insurance_Company_Secondary_Insured_Birthdate %>
     </div>
   </div>
   <div class="control-group">
@@ -1143,10 +1162,13 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :Med_His_Personal_Physician_Date_Of_Last_Visit, 'Date of last visit', :class => 'control-label' %>
+    <%#= f.label :Med_His_Personal_Physician_Date_Of_Last_Visit, 'Date of last visit', :class => 'control-label' %>
+    <%= f.label :displaying_date_Med_His_Personal_Physician_Date_Of_Last_Visit, "Date of last visit", :class => 'control-label' %>
     <div class="controls">
       <%#= f.date_select :Med_His_Personal_Physician_Date_Of_Last_Visit, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%= f.text_field :Med_His_Personal_Physician_Date_Of_Last_Visit, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Med_His_Personal_Physician_Date_Of_Last_Visit %>
+      <%#= f.text_field :Med_His_Personal_Physician_Date_Of_Last_Visit, :class => "james_child_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Med_His_Personal_Physician_Date_Of_Last_Visit %>
+      <%= text_field_tag :displaying_date_Med_His_Personal_Physician_Date_Of_Last_Visit, '', :class => "james_child_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Med_His_Personal_Physician_Date_Of_Last_Visit %>
+      <%= f.hidden_field :Med_His_Personal_Physician_Date_Of_Last_Visit %>
     </div>
   </div>
   <div class="control-group">
@@ -1708,9 +1730,25 @@
   $('.james_child_form_date_selector').datepicker({
     changeMonth:true,
     changeYear:true,
-    dateFormat:'yy-mm-dd',
+    dateFormat:'mm-dd-yy',
     yearRange:'1940:' + new Date().getFullYear()
   });
+
+  var Self_Birthdate = $('#displaying_date_Self_Birthdate').attr('data-value');
+  var Self_General_Dentist_Date_Last_Appointment = $('#displaying_date_Self_General_Dentist_Date_Last_Appointment').attr('data-value');
+  var Mother_Birthdate = $('#displaying_date_Mother_Birthdate').attr('data-value');
+  var Father_Birthdate = $('#displaying_date_Father_Birthdate').attr('data-value');
+  var Insurance_Company_Primary_Insured_Birthdate = $('#displaying_date_Insurance_Company_Primary_Insured_Birthdate').attr('data-value');
+  var Insurance_Company_Secondary_Insured_Birthdate = $('#displaying_date_Insurance_Company_Secondary_Insured_Birthdate').attr('data-value');
+  var Med_His_Personal_Physician_Date_Of_Last_Visit = $('#displaying_date_Med_His_Personal_Physician_Date_Of_Last_Visit').attr('data-value');
+
+  $('#displaying_date_Self_Birthdate').datepicker("setDate", Self_Birthdate ? change_date_format(Self_Birthdate) : '');
+  $('#displaying_date_Self_General_Dentist_Date_Last_Appointment').datepicker("setDate", Self_General_Dentist_Date_Last_Appointment ? change_date_format(Self_General_Dentist_Date_Last_Appointment) : '');
+  $('#displaying_date_Mother_Birthdate').datepicker("setDate", Mother_Birthdate ? change_date_format(Mother_Birthdate) : '');
+  $('#displaying_date_Father_Birthdate').datepicker("setDate", Father_Birthdate ? change_date_format(Father_Birthdate) : '');
+  $('#displaying_date_Insurance_Company_Primary_Insured_Birthdate').datepicker("setDate", Insurance_Company_Primary_Insured_Birthdate ? change_date_format(Insurance_Company_Primary_Insured_Birthdate) : '');
+  $('#displaying_date_Insurance_Company_Secondary_Insured_Birthdate').datepicker("setDate", Insurance_Company_Secondary_Insured_Birthdate ? change_date_format(Insurance_Company_Secondary_Insured_Birthdate) : '');
+  $('#displaying_date_Med_His_Personal_Physician_Date_Of_Last_Visit').datepicker("setDate", Med_His_Personal_Physician_Date_Of_Last_Visit ? change_date_format(Med_His_Personal_Physician_Date_Of_Last_Visit) : '');
 
   function unmask_str() {
     jQuery(function ($) {

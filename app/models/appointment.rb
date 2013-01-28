@@ -7,6 +7,7 @@ class Appointment < ActiveRecord::Base
   validates_format_of :firstname, :lastname, :with => /^[a-zA-Z\d\s\-&"']+$/, :unless => "firstname.blank? or lastname.blank?"
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :unless => "email.blank?"
 
+  attr_accessible :display_appointment_date_time,:firstname, :preferred_name, :lastname, :email, :responsible_party, :location, :appointment_date_time, :appointment_doctor_name
 
  #validate :validate_date
 

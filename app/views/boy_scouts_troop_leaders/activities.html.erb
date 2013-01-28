@@ -3,7 +3,9 @@
   <%= link_to "Activity Consent Forms", permission_forms_boy_scouts_troop_leaders_path %> <strong> | </strong>
   <%= link_to "Roster", roster_boy_scouts_troop_leaders_path %>
 </div>
+
 <div>&nbsp;</div>
+
 <div>
   <p style="margin: 0">Select an Activity</p>
   <%#= debug @boys_scouts_activities%>
@@ -12,11 +14,16 @@
   <%= link_to "Delete This Activity", "#delete_activity_alert_box", :class => "btn btn-danger delete_activity" %> &nbsp;
   <%= link_to "View This Permission Form PDF", @boy_activity.new_record? ? boy_activity_permission_form_pdf_path(:activity_id => 'new') : boy_activity_permission_form_pdf_path(:activity_id => @boy_activity.id), :class => "btn btn-info view_permission_form_btn", :target => '_blank' %>
 </div>
+
 <div class="clear"></div>
+
 <%= form_for @boy_activity, :url => "/create_activity", :html => {:class => 'form-horizontal boy_scouts_activity_form', :multipart => true} do |f| %>
+
   <%= f.hidden_field :id %>
   <%= f.hidden_field :service_provider_id %>
+
   <div class="tabbable tabs-left iforms-tabs-left activity_tabs">
+
   <ul class="nav nav-tabs" id="activity_tab_links">
     <li class="active">
       <%= link_to "Activity", "#activity", "data-toggle" => "tab" %>
@@ -28,6 +35,7 @@
       <%= link_to "Send Notification Email to Parents", "#send_notification_email", "data-toggle" => "tab" %>
     </li>
   </ul>
+
   <div class="tab-content">
   <div class="tab-pane active" id="activity">
     <div class="control-group">
@@ -36,24 +44,37 @@
         <%= f.text_field :activity_name, :placeholder => params[:id] == 'new' ? 'New Activity Name' : '' %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :activity_date_begin, "Date Begin", :class => 'control-label' %>
+
+      <div class="control-group">
+      <%#= f.label :activity_date_begin, "Date Begin", :class => 'control-label' %>
+      <%= f.label :display_activity_date_begin, "Date Begin", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_date_begin, :class => "boy_scout_activity_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_begin %>
+        <%#= f.text_field :activity_date_begin, :class => "boy_scout_activity_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_begin %>
+        <%= text_field_tag :display_activity_date_begin, '', :class => "boy_scout_activity_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.activity_date_begin %>
+        <%= f.hidden_field :activity_date_begin %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :activity_date_end, "Date End", :class => 'control-label' %>
+      <%#= f.label :activity_date_end, "Date End", :class => 'control-label' %>
+      <%= f.label :display_activity_date_end, "Date End", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_date_end, :class => "boy_scout_activity_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_end %>
+        <%#= f.text_field :activity_date_end, :class => "boy_scout_activity_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_date_end %>
+        <%= text_field_tag :display_activity_date_end, '', :class => "boy_scout_activity_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.activity_date_end %>
+        <%= f.hidden_field :activity_date_end %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :activity_signed_permission_due_date, "Signed Permission Form Due Date", :class => 'control-label' %>
+      <%#= f.label :activity_signed_permission_due_date, "Signed Permission Form Due Date", :class => 'control-label' %>
+      <%= f.label :display_activity_date_signed_permission, "Signed Permission Form Due Date ", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :activity_signed_permission_due_date, :class => "boy_scout_activity_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_signed_permission_due_date %>
+        <%#= f.text_field :activity_signed_permission_due_date, :class => "boy_scout_activity_date_selector", :placeholder => "YYYY-MM-DD", "data-value" => f.object.activity_signed_permission_due_date %>
+        <%= text_field_tag :display_activity_date_signed_permission, '', :class => "boy_scout_activity_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.activity_signed_permission_due_date %>
+        <%= f.hidden_field :activity_signed_permission_due_date %>
       </div>
     </div>
+
     <div class="activity_footer_links">
       <%= link_to "#", :class => 'btn btn-primary activity_nav_link', :data_tab_index => "1" do %>
         Next&nbsp;<i class="icon-chevron-right icon-white"></i>

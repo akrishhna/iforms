@@ -1,5 +1,7 @@
 <%= form_for @boy_scouts_permission_form, :url => "/view_boy_scout_permission_form", :html => {:class => 'form-horizontal boy_scout_permission_form', :multipart => true} do |f| %>
+
   <%= f.hidden_field :id %>
+
   <p><strong><%= @boy_scout.first_name %> <%= @boy_scout.middle_name %> <%= @boy_scout.last_name %></strong>, has approval to participate in <strong><%= @activity.activity_name %></strong>.</p>
 
   <div class="control-group">
@@ -13,19 +15,25 @@
       <% end %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :bacf_spcl_considerations_for_restriction, "Special considerations or restrictions", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :bacf_spcl_considerations_for_restriction %>
     </div>
   </div>
+
   <div class="control-group">
-    <%= f.label :bacf_birthdate, 'Birth Date', :class => 'control-label' %>
+    <%#= f.label :bacf_birthdate, 'Birth Date', :class => 'control-label' %>
+    <%= f.label :display_birth_date, "Birth Date", :class => 'control-label' %>
     <div class="controls ">
       <%#= f.date_select :bacf_birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-      <%= f.text_field :bacf_birthdate, :class => "boy_scout_activity_consent_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.bacf_birthdate %>
+      <%#= f.text_field :bacf_birthdate, :class => "boy_scout_activity_consent_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.bacf_birthdate %>
+      <%= text_field_tag :display_birth_date, '', :class => "boy_scout_activity_consent_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.bacf_birthdate %>
+      <%= f.hidden_field :bacf_birthdate %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :bacf_address_1, "Address", :class => 'control-label' %>
     <div class="controls">
@@ -38,6 +46,7 @@
       <%= f.text_field :bacf_address_zip, :placeholder => "Postal / Zip Code" %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :bacf_parent_first_name, " Parent/guardian", :class => 'control-label' %>
     <div class="controls">
@@ -45,6 +54,7 @@
       <%= f.text_field :bacf_parent_last_name, :placeholder => "Last Name", :class => "input-small" %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :bacf_parent_phone_1, "Phone Number", :class => 'control-label' %>
     <div class="controls">
@@ -55,11 +65,13 @@
       <%= f.text_field :bacf_parent_phone_3, :style => "width:40px;", :placeholder => " ####", :size => 4, :maxlength => 4  %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :email, "Email", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email %>
     </div>
   </div>
+
 <% end %>
 

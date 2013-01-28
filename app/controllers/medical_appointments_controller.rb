@@ -29,6 +29,7 @@ class MedicalAppointmentsController < ApplicationController
     @appointment.formname = 'New Patient'
     @appointment.formname = '' if params[:radio_buttons] == 'None'
     @appointment.status = 'Pending'
+
     if @appointment.save
       @user = User.find_by_email(@appointment.email)
       if @user

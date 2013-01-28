@@ -46,11 +46,12 @@ $(function(){
   $(".boy_scout_activity_consent_form_date_selector").datepicker({
     changeMonth:true,
     changeYear:true,
-    dateFormat:'yy-mm-dd',
+    dateFormat:'mm-dd-yy',
     yearRange: '1940:' + new Date().getFullYear()
   });
 
-
+  var birth_date = $('#display_birth_date').attr('data-value');
+  $('#display_birth_date').datepicker("setDate", birth_date ? change_date_format(birth_date) : '');
 
   $('#boy_scouts_activity_consent_form_bacf_address_zip, #boy_scouts_activity_consent_form_bacf_parent_phone_1,' +
     '#boy_scouts_activity_consent_form_bacf_parent_phone_2, #boy_scouts_activity_consent_form_bacf_parent_phone_3').autotab_filter('numeric');

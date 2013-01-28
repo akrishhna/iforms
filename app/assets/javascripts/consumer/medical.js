@@ -8,6 +8,10 @@ $(function () {
     $('input[name=_method]').val('post');
     var field = $(this).attr('name');
     var field_val = $(this).val();
+    if(field.search(/displaying_date/) ==  0){
+      field = $(this).next().attr('name');
+      field_val = $(this).next().val();
+    }
     var params = {'id':id};
     params[field] = field_val;
     $.post('/consumer/medical/medical_patient_form_field_update', params);
@@ -18,9 +22,69 @@ $(function () {
   $(".medical_Patient_form_date_selector").datepicker({
     changeMonth:true,
     changeYear:true,
-    dateFormat:'yy-mm-dd',
+    dateFormat:'mm-dd-yy',
     yearRange:'1940:' + new Date().getFullYear()
   });
+  /* changing display date format*/
+
+  var birth_date = $('#displaying_date_birth_date').attr('data-value');
+  var primary_insurance_birth_date = $('#displaying_date_primary_insurance_birth_date').attr('data-value');
+  var secondary_insurance_birth_date = $('#displaying_date_secondary_insurance_birth_date').attr('data-value');
+  var medical_history_operations_1 = $('#displaying_date_medical_history_operations_1').attr('data-value');
+  var medical_history_operations_2 = $('#displaying_date_medical_history_operations_2').attr('data-value');
+  var medical_history_operations_3 = $('#displaying_date_medical_history_operations_3').attr('data-value');
+  var medical_history_operations_4 = $('#displaying_date_medical_history_operations_4').attr('data-value');
+  var medical_history_operations_5 = $('#displaying_date_medical_history_operations_5').attr('data-value');
+  var medical_history_operations_6 = $('#displaying_date_medical_history_operations_6').attr('data-value');
+  var medical_history_previous_illnesses_1 = $('#displaying_date_medical_history_previous_illnesses_1').attr('data-value');
+  var medical_history_previous_illnesses_2 = $('#displaying_date_medical_history_previous_illnesses_2').attr('data-value');
+  var medical_history_previous_illnesses_3 = $('#displaying_date_medical_history_previous_illnesses_3').attr('data-value');
+  var medical_history_previous_illnesses_4 = $('#displaying_date_medical_history_previous_illnesses_4').attr('data-value');
+  var medical_history_previous_illnesses_5 = $('#displaying_date_medical_history_previous_illnesses_5').attr('data-value');
+  var medical_history_previous_illnesses_6 = $('#displaying_date_medical_history_previous_illnesses_6').attr('data-value');
+  var medical_history_previous_illnesses_7 = $('#displaying_date_medical_history_previous_illnesses_7').attr('data-value');
+  var medical_history_previous_illnesses_8 = $('#displaying_date_medical_history_previous_illnesses_8').attr('data-value');
+  var medical_history_previous_illnesses_9 = $('#displaying_date_medical_history_previous_illnesses_9').attr('data-value');
+  var medical_history_previous_illnesses_10 = $('#displaying_date_medical_history_previous_illnesses_10').attr('data-value');
+  var health_maintenance_bone_density_test = $('#displaying_date_health_maintenance_bone_density_test').attr('data-value');
+  var health_maintenance_skin_cancer_screening = $('#displaying_date_health_maintenance_skin_cancer_screening').attr('data-value');
+  var health_maintenance_test_date = $('#displaying_date_health_maintenance_test_date').attr('data-value');
+  var health_maintenance_most_recent_tetanus_vaccine_booster = $('#displaying_date_health_maintenance_most_recent_tetanus_vaccine_booster').attr('data-value');
+  var health_maintenance_shingles_vaccine = $('#displaying_date_health_maintenance_shingles_vaccine').attr('data-value');
+  var health_maintenance_pneumovax = $('#displaying_date_health_maintenance_pneumovax').attr('data-value');
+  var health_maintenance_flu_vaccine = $('#displaying_date_health_maintenance_flu_vaccine').attr('data-value');
+  var health_maintenance_colonoscopy = $('#displaying_date_health_maintenance_colonoscopy').attr('data-value');
+
+  $('#displaying_date_birth_date').datepicker("setDate", birth_date ? change_date_format(birth_date) : '');
+  $('#displaying_date_primary_insurance_birth_date').datepicker("setDate", primary_insurance_birth_date ? change_date_format(primary_insurance_birth_date) : '');
+  $('#displaying_date_secondary_insurance_birth_date').datepicker("setDate", secondary_insurance_birth_date ? change_date_format(secondary_insurance_birth_date) : '');
+  $('#displaying_date_medical_history_operations_1').datepicker("setDate", medical_history_operations_1 ? change_date_format(medical_history_operations_1) : '');
+  $('#displaying_date_medical_history_operations_2').datepicker("setDate", medical_history_operations_2 ? change_date_format(medical_history_operations_2) : '');
+  $('#displaying_date_medical_history_operations_3').datepicker("setDate", medical_history_operations_3 ? change_date_format(medical_history_operations_3) : '');
+  $('#displaying_date_medical_history_operations_4').datepicker("setDate", medical_history_operations_4 ? change_date_format(medical_history_operations_4) : '');
+  $('#displaying_date_medical_history_operations_5').datepicker("setDate", medical_history_operations_5 ? change_date_format(medical_history_operations_5) : '');
+  $('#displaying_date_medical_history_operations_6').datepicker("setDate", medical_history_operations_6 ? change_date_format(medical_history_operations_6) : '');
+  $('#displaying_date_medical_history_previous_illnesses_1').datepicker("setDate", medical_history_previous_illnesses_1 ? change_date_format(medical_history_previous_illnesses_1) : '');
+  $('#displaying_date_medical_history_previous_illnesses_2').datepicker("setDate", medical_history_previous_illnesses_2 ? change_date_format(medical_history_previous_illnesses_2) : '');
+  $('#displaying_date_medical_history_previous_illnesses_3').datepicker("setDate", medical_history_previous_illnesses_3 ? change_date_format(medical_history_previous_illnesses_3) : '');
+  $('#displaying_date_medical_history_previous_illnesses_4').datepicker("setDate", medical_history_previous_illnesses_4 ? change_date_format(medical_history_previous_illnesses_4) : '');
+  $('#displaying_date_medical_history_previous_illnesses_5').datepicker("setDate", medical_history_previous_illnesses_5 ? change_date_format(medical_history_previous_illnesses_5) : '');
+  $('#displaying_date_medical_history_previous_illnesses_6').datepicker("setDate", medical_history_previous_illnesses_6 ? change_date_format(medical_history_previous_illnesses_6) : '');
+  $('#displaying_date_medical_history_previous_illnesses_7').datepicker("setDate", medical_history_previous_illnesses_7 ? change_date_format(medical_history_previous_illnesses_7) : '');
+  $('#displaying_date_medical_history_previous_illnesses_8').datepicker("setDate", medical_history_previous_illnesses_8 ? change_date_format(medical_history_previous_illnesses_8) : '');
+  $('#displaying_date_medical_history_previous_illnesses_9').datepicker("setDate", medical_history_previous_illnesses_9 ? change_date_format(medical_history_previous_illnesses_9) : '');
+  $('#displaying_date_medical_history_previous_illnesses_10').datepicker("setDate", medical_history_previous_illnesses_10 ? change_date_format(medical_history_previous_illnesses_10) : '');
+  $('#displaying_date_health_maintenance_bone_density_test').datepicker("setDate", health_maintenance_bone_density_test ? change_date_format(health_maintenance_bone_density_test) : '');
+  $('#displaying_date_health_maintenance_skin_cancer_screening').datepicker("setDate", health_maintenance_skin_cancer_screening ? change_date_format(health_maintenance_skin_cancer_screening) : '');
+  $('#displaying_date_health_maintenance_test_date').datepicker("setDate", health_maintenance_colonoscopy ? change_date_format(health_maintenance_colonoscopy) : '');
+  $('#displaying_date_health_maintenance_most_recent_tetanus_vaccine_booster').datepicker("setDate", health_maintenance_most_recent_tetanus_vaccine_booster ? change_date_format(health_maintenance_most_recent_tetanus_vaccine_booster) : '');
+  $('#displaying_date_health_maintenance_shingles_vaccine').datepicker("setDate", health_maintenance_shingles_vaccine ? change_date_format(health_maintenance_shingles_vaccine) : '');
+  $('#displaying_date_health_maintenance_pneumovax').datepicker("setDate", health_maintenance_pneumovax ? change_date_format(health_maintenance_pneumovax) : '');
+  $('#displaying_date_health_maintenance_flu_vaccine').datepicker("setDate", health_maintenance_flu_vaccine ? change_date_format(health_maintenance_flu_vaccine) : '');
+  $('#displaying_date_health_maintenance_colonoscopy').datepicker("setDate", health_maintenance_test_date ? change_date_format(health_maintenance_test_date) : '');
+
+  /* End of changing display date format*/
+
 
   $('.medical_patient_form_nav_link').live('click', function () {
     var tab_index = parseInt($(this).attr('data_tab_index'));

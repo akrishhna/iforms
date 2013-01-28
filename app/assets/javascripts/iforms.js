@@ -71,7 +71,7 @@ $('.karnel_naples_new_patient_billing').live('change', function () {
     $('#iform_billing_details_ssn_1').val('');
     $('#iform_billing_details_ssn_2').val('');
     $('#iform_billing_details_ssn_3').val('');
-    $('#iform_billing_birth_date').val('').attr('disabled', false);
+    $('#displaying_date_billing_birth_date').val('').attr('disabled', false);
   }
   update_all_fields();
 });
@@ -122,7 +122,42 @@ function billing_details_info() {
     $('#iform_billing_details_ssn_1').val($('#iform_ssn_1').val());
     $('#iform_billing_details_ssn_2').val($('#iform_ssn_2').val());
     $('#iform_billing_details_ssn_3').val($('#iform_ssn_3').val());
-    $('#iform_billing_birth_date').val($('#iform_Self_Birthdate').val()).attr('disabled', true);
+    $('#displaying_date_billing_birth_date').val($('#iform_Self_Birthdate').val()).attr('disabled', true);
+  }
+  else {
+    $('.karen_naples_new_patient_billing_details_info').attr('readonly', false);
+    $('#iform_billing_details_first_name').val('');
+    $('#iform_billing_details_last_name').val('');
+    $('#iform_relationship_to_patient').val('');
+    $('#iform_billing_details_address1').val('');
+    $('#iform_billing_details_address2').val('');
+    $('#iform_billing_details_address_city').val('');
+    $('#iform_billing_details_address_state').val('');
+    $('#iform_billing_details_address_postal_code').val('');
+    $('#iform_billing_details_home_phone_1').val('');
+    $('#iform_billing_details_home_phone_2').val('');
+    $('#iform_billing_details_home_phone_3').val('');
+    $('#iform_billing_details_work_phone_1').val('');
+    $('#iform_billing_details_work_phone_2').val('');
+    $('#iform_billing_details_work_phone_3').val('');
+    $('#iform_billing_details_cell_phone_1').val('');
+    $('#iform_billing_details_cell_phone_2').val('');
+    $('#iform_billing_details_cell_phone_3').val('');
+    $('#iform_billing_details_driving_licence_state').val('');
+    $('#iform_billing_details_driving_licence_number').val('');
+    $('#iform_billing_details_employer_name').val('');
+    $('#iform_billing_details_employer_address1').val('');
+    $('#iform_billing_details_employer_address2').val('');
+    $('#iform_billing_details_employer_address_city').val('');
+    $('#iform_billing_details_employer_address_state').val('');
+    $('#iform_billing_details_employer_address_postal_code').val('');
+    $('#iform_billing_details_employer_phone_1').val('');
+    $('#iform_billing_details_employer_phone_2').val('');
+    $('#iform_billing_details_employer_phone_3').val('');
+    $('#iform_billing_details_ssn_1').val('');
+    $('#iform_billing_details_ssn_2').val('');
+    $('#iform_billing_details_ssn_3').val('');
+    $('#displaying_date_billing_birth_date').val('').attr('disabled', false);
   }
 }
 

@@ -250,17 +250,6 @@ class IformsController < ApplicationController
       @iform[:insurance_address_city] = @recent_iform['insurance_address_city']
       @iform[:insurance_address_state] = @recent_iform['insurance_address_state']
       @iform[:insurance_address_zip] = @recent_iform['insurance_address_zip']
-
-      # Physician Tab
-      @iform[:medical_history_physician] = @recent_iform['medical_history_physician']
-      @iform[:medical_history_home_phone_1] = @recent_iform['medical_history_home_phone_1']
-      @iform[:medical_history_home_phone_2] = @recent_iform['medical_history_home_phone_2']
-      @iform[:medical_history_home_phone_3] = @recent_iform['medical_history_home_phone_3']
-      @iform[:medical_history_address_1] = @recent_iform['medical_history_address_1']
-      @iform[:medical_history_address_2] = @recent_iform['medical_history_address_2']
-      @iform[:medical_history_address_city] = @recent_iform['medical_history_address_city']
-      @iform[:medical_history_address_state] = @recent_iform['medical_history_address_state']
-      @iform[:medical_history_address_zip] = @recent_iform['medical_history_address_zip']
     end
     @iform.save(:validate => false)
     @appform.save

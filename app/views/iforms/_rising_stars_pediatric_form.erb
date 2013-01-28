@@ -1,7 +1,5 @@
 <p style="text-align: center;font-size:18px "><%#= session[:formname] %>
 
-
-
   Form for <%= @doctor.firstname %> <%= @doctor.lastname %></p>
 
 <div style="margin: 0 auto;width:80px;">
@@ -78,10 +76,13 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :Self_Birthdate, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_Self_Birthdate, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :Self_Birthdate, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :Self_Birthdate, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
+        <%#= f.text_field :Self_Birthdate, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.Self_Birthdate %>
+        <%= text_field_tag :displaying_date_Self_Birthdate, '', :class => "rising_stars_pediatric_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.Self_Birthdate %>
+        <%= f.hidden_field :Self_Birthdate %>
       </div>
     </div>
 
@@ -178,10 +179,13 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :patient_guardian_father_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :patient_guardian_father_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_patient_guardian_father_birth_date, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :patient_guardian_father_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :patient_guardian_father_birth_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.patient_guardian_father_birth_date %>
+        <%#= f.text_field :patient_guardian_father_birth_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.patient_guardian_father_birth_date %>
+        <%= text_field_tag :displaying_date_patient_guardian_father_birth_date, '', :class => "rising_stars_pediatric_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.patient_guardian_father_birth_date %>
+        <%= f.hidden_field :patient_guardian_father_birth_date %>
       </div>
     </div>
 
@@ -321,10 +325,13 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :patient_guardian_mother_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%#= f.label :patient_guardian_mother_birth_date, 'Birth Date', :class => 'control-label' %>
+      <%= f.label :displaying_date_patient_guardian_mother_birth_date, "Birth Date", :class => 'control-label' %>
       <div class="controls ">
         <%#= f.date_select :patient_guardian_mother_birth_date, :start_year => 1940, :end_year => Date.current.year, :include_blank => true %>
-        <%= f.text_field :patient_guardian_mother_birth_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.patient_guardian_mother_birth_date %>
+        <%#= f.text_field :patient_guardian_mother_birth_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.patient_guardian_mother_birth_date %>
+        <%= text_field_tag :displaying_date_patient_guardian_mother_birth_date, '', :class => "rising_stars_pediatric_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.patient_guardian_mother_birth_date %>
+        <%= f.hidden_field :patient_guardian_mother_birth_date %>
       </div>
     </div>
 
@@ -556,9 +563,12 @@
     </div>
   </div>
   <div class="control-group rising_stars_last_visit">
-    <%= f.label :dental_history_patient_last_visiting_date, 'Last Dental Visit', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :dental_history_patient_last_visiting_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.dental_history_patient_last_visiting_date %>
+    <%#= f.label :dental_history_patient_last_visiting_date, 'Last Dental Visit', :class => 'control-label' %>
+    <%= f.label :displaying_date_dental_history_patient_last_visiting_date, "Last Dental Visit", :class => 'control-label' %>
+        <div class="controls">
+      <%#= f.text_field :dental_history_patient_last_visiting_date, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date (YYYY-MM-DD)', "data-value" => f.object.dental_history_patient_last_visiting_date %>
+      <%= text_field_tag :displaying_date_dental_history_patient_last_visiting_date, '', :class => "rising_stars_pediatric_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.dental_history_patient_last_visiting_date %>
+      <%= f.hidden_field :dental_history_patient_last_visiting_date %>
     </div>
   </div>
   <div class="control-group">
@@ -1397,7 +1407,9 @@
       Date of last seizure
     </td>
     <td colspan="2">
-      <%= f.text_field :medical_history_date_of_last_seizure, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', "data-value" => f.object.medical_history_date_of_last_seizure %>
+      <%#= f.text_field :medical_history_date_of_last_seizure, :class => "rising_stars_pediatric_form_date_selector", :placeholder => 'Date  (YYYY-MM-DD)', "data-value" => f.object.medical_history_date_of_last_seizure %>
+      <%= text_field_tag :displaying_date_medical_history_date_of_last_seizure, '', :class => "rising_stars_pediatric_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.medical_history_date_of_last_seizure %>
+      <%= f.hidden_field :medical_history_date_of_last_seizure %>
     </td>
   </tr>
   </table>
@@ -1612,10 +1624,23 @@
     $('.rising_stars_pediatric_form_date_selector').datepicker({
       changeMonth:true,
       changeYear:true,
-      dateFormat:'yy-mm-dd',
+      dateFormat:'mm-dd-yy',
       yearRange:'1940:' + new Date().getFullYear()
-    })
+    });
+
+    var Self_Birthdate = $('#displaying_date_Self_Birthdate').attr('data-value');
+    var patient_guardian_father_birth_date = $('#displaying_date_patient_guardian_father_birth_date').attr('data-value');
+    var patient_guardian_mother_birth_date = $('#displaying_date_patient_guardian_mother_birth_date').attr('data-value');
+    var dental_history_patient_last_visiting_date = $('#displaying_date_dental_history_patient_last_visiting_date').attr('data-value');
+    var medical_history_date_of_last_seizure =$('#displaying_date_medical_history_date_of_last_seizure').attr('data-value');
+
+    $('#displaying_date_Self_Birthdate').datepicker("setDate", Self_Birthdate ? change_date_format(Self_Birthdate) : '');
+    $('#displaying_date_patient_guardian_father_birth_date').datepicker("setDate", patient_guardian_father_birth_date ? change_date_format(patient_guardian_father_birth_date) : '');
+    $('#displaying_date_patient_guardian_mother_birth_date').datepicker("setDate", patient_guardian_mother_birth_date ? change_date_format(patient_guardian_mother_birth_date) : '');
+    $('#displaying_date_dental_history_patient_last_visiting_date').datepicker("setDate", dental_history_patient_last_visiting_date ? change_date_format(dental_history_patient_last_visiting_date) : '');
+    $('#displaying_date_medical_history_date_of_last_seizure').datepicker("setDate", medical_history_date_of_last_seizure ? change_date_format(medical_history_date_of_last_seizure) : '');
   });
+
 
   if ($('.rising_stars_first_tim_visit:checked').val() == 'No') {
     $('.rising_stars_last_visit').show();
