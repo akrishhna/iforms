@@ -1,8 +1,8 @@
 <div class="index" xmlns="http://www.w3.org/1999/html">
   <div class="well">
     Appointment Date : <%= text_field_tag :dental_appointment_date, "", :class => "appointments_date_selector",:style => 'margin:0' %> &nbsp;
-    <%= label_tag "checkboxs", :class => 'checkbox inline' do %>
-      <%= check_box_tag :all_dental_appointments, 1, @check_show_all, :class => "show_all", :style => "margin-bottom: 7px;width:18px" %>&nbsp;Show
+    <%= label_tag "checkboxs", :class => 'checkbox inline', :styles => "width:150px" do %>
+      <%= check_box_tag :all_dental_appointments, 1, @check_show_all, :class => "show_all", :style => "margin-bottom: 7px" %>&nbsp;Show
       All Appointments
     <% end %>
   </div>
