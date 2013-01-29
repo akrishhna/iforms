@@ -445,15 +445,15 @@
     <div class="control-group">
       <%= f.label :insurance_insured, 'Insured', :class => 'control-label' %>
       <div class="controls">
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio' do %>
           <%= f.radio_button :insurance_insured, "Father", :class => 'rising_stars_insured' %>
           <span id="father_insurance_insured">Father</span>
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio' do %>
           <%= f.radio_button :insurance_insured, "Mother", :class => 'rising_stars_insured' %>
           <span id="mother_insurance_insured">Mother</span>
         <% end %>
-        <%= label_tag "radio_buttons", :class => 'radio inline' do %>
+        <%= label_tag "radio_buttons", :class => 'radio' do %>
           <%= f.radio_button :insurance_insured, "Other", :class => 'rising_stars_insured' %>Other
         <% end %>
       </div>
