@@ -28,7 +28,14 @@
   if (user_service['expiry_date']) {
     date = change_date_format(user_service['expiry_date'])
   } else {
-    date = (new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()
+    var date = new Date();
+      var year = date.getFullYear();
+      var month = (date.getMonth() + 1);
+      var today_date = date.getDate();
+      if (month <= 9) {
+        month = '0' + month
+      }
+    set_date = month + '-' + today_date + '-' + year
   }
 
   $('.expiry_date_selector').datepicker({
@@ -36,7 +43,7 @@
     changeYear:true,
     dateFormat:'mm-dd-yy',
     yearRange:'1940:' + new Date().getFullYear()
-  }).datepicker("setDate", date);
+  }).datepicker("setDate", set_date);
 
   $('#expiry_date').val(set_default_date_format($('#displaying_date_expiry_date').val()));
 
