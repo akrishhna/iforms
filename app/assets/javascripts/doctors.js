@@ -14,18 +14,18 @@ $(function () {
 
   /* redirecting url with today date */
 
-  $(window).load(function(){
-    if(params['appointment_date'] == undefined){
-      var date = new Date();
-      var year = date.getFullYear();
-      var month = (date.getMonth() + 1);
-      var today_date = date.getDate();
-      if (month <= 9){
-        month = '0' + month
-      }
-      window.location = '/doctor/appointments?appointment_date='+ year + '-' + month + '-' + today_date
-    }
-  });
+//  $(window).load(function(){
+//    if(params['appointment_date'] == undefined){
+//      var date = new Date();
+//      var year = date.getFullYear();
+//      var month = (date.getMonth() + 1);
+//      var today_date = date.getDate();
+//      if (month <= 9){
+//        month = '0' + month
+//      }
+//      window.location = '/doctor/appointments?appointment_date='+ year + '-' + month + '-' + today_date
+//    }
+//  });
   /* End of redirecting url with today date */
 
   /* Date Picker*/

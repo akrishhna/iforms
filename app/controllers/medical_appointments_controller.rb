@@ -41,7 +41,13 @@ class MedicalAppointmentsController < ApplicationController
       @appointment.medical_patient_forms.build({:service_provider_id => @appointment.service_provider_id, :doctor_user_id => @appointment.doctor_user_id, :patient_user_id => @appointment.patient_user_id})
       @appointment.save
       Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
-      redirect_to :medical_appointments, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
+     # redirect_to :medical_appointments, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
+      year =  Date.today.year.to_s
+      month = Date.today.month.to_s
+      month = '0' + month if month < "10"
+      day = Date.today.day.to_s
+      appointment_date = year + '-' + month + '-' + day
+      redirect_to "/medical_appointments?appointment_date=#{appointment_date}", :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
     else
       render :new, :notice => 'Something wrong plese try again'
     end
@@ -59,7 +65,13 @@ class MedicalAppointmentsController < ApplicationController
     @appointment.timesent = Time.now
     if @appointment.update_attributes(params[:medical_appointment])
       Notifier.capital_medical_clinic_appointment_confirmation_notification(@appointment, @doctor, session[:user_service_provider]).deliver
-      redirect_to :medical_appointments
+      #redirect_to :medical_appointments
+      year =  Date.today.year.to_s
+      month = Date.today.month.to_s
+      month = '0' + month if month < "10"
+      day = Date.today.day.to_s
+      appointment_date = year + '-' + month + '-' + day
+      redirect_to "/medical_appointments?appointment_date=#{appointment_date}", :notice => "Appointment details resent successfully to #{@appointment.email}"
     else
       render :new, :notice => 'Something wrong plese try again'
     end

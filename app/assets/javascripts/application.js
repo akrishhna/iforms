@@ -56,29 +56,35 @@ $(document).ready(function () {
 
   // User service provides selection
   $('select#user_service_provider_list').change(function () {
+
+    var date = new Date();
+      var year = date.getFullYear();
+      var month = (date.getMonth() + 1);
+      var today_date = date.getDate();
+      if (month <= 9) {
+        month = '0' + month
+      }
+    var appointment_date = year + '-' + month + '-' + today_date;
+
     if ($(this).val() == 1) {
-      window.location = '/doctor/appointments?sp_id=1'
+      window.location = '/doctor/appointments?sp_id=1' + '&appointment_date=' + appointment_date
     }
+    else if ($(this).val() == 4) {
+      window.location = '/doctor/appointments?sp_id=4' + '&appointment_date=' + appointment_date
+    }
+    else if ($(this).val() == 7) {
+      window.location = '/doctor/appointments?sp_id=7' + '&appointment_date=' + appointment_date
+    }
+
+    else if ($(this).val() == 5) {
+      window.location = '/medical_appointments?sp_id=5' + '&appointment_date=' + appointment_date
+    }
+
     else if ($(this).val() == 2) {
       window.location = '/girl_scouts_troop_leaders?sp_id=2'
     }
     else if ($(this).val() == 3) {
       window.location = '/girl_scouts_troop_leaders?sp_id=3'
-    }
-    else if ($(this).val() == 4) {
-      window.location = '/doctor/appointments?sp_id=4'
-    }
-    else if ($(this).val() == 5) {
-      window.location = '/medical_appointments?sp_id=5'
-    }
-    else if ($(this).val() == 0) {
-      window.location = '/consumer'
-    }
-    else if ($(this).val() == 6) {
-      window.location = '/boy_scouts_troop_leaders?sp_id=6'
-    }
-    else if ($(this).val() == 7) {
-      window.location = '/doctor/appointments?sp_id=7'
     }
     else if ($(this).val() == 8) {
       window.location = '/girl_scouts_troop_leaders?sp_id=8'
@@ -94,6 +100,14 @@ $(document).ready(function () {
     }
     else if ($(this).val() == 12) {
       window.location = '/girl_scouts_troop_leaders?sp_id=12'
+    }
+
+    else if ($(this).val() == 6) {
+      window.location = '/boy_scouts_troop_leaders?sp_id=6'
+    }
+
+    else if ($(this).val() == 0) {
+      window.location = '/consumer'
     }
     else {
       window.location = '/'

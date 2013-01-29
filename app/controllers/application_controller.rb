@@ -22,14 +22,21 @@ class ApplicationController < ActionController::Base
     #  (current_user.patients.first.firstname + ' ' + current_user.patients.first.lastname) rescue 'User'
     #end
     service_provider = current_user.service_providers.first
+
     if service_provider.nil?
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
+
     elsif service_provider.id == 1 || service_provider.id == 4 || service_provider.id == 5 || service_provider.id == 7
       (current_user.doctors.first.firstname + ' ' + current_user.doctors.first.lastname) rescue 'Doctor'
+
+
     elsif service_provider.id == 2 || service_provider.id == 3 || service_provider.id == 8 || service_provider.id == 9 || service_provider.id == 10 || service_provider.id == 11 || service_provider.id == 12
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
+
+
     elsif service_provider.id == 6
       (current_user.girl_scout_troop_leader_profile.first_name + ' ' + current_user.girl_scout_troop_leader_profile.last_name) rescue 'Troop Leader'
+
     else
       (current_user.profile.first_name + ' ' + current_user.profile.last_name) rescue 'User'
     end
@@ -89,21 +96,28 @@ class ApplicationController < ActionController::Base
   end
 
   def homepage_url
+    year = Date.today.year.to_s
+    month = Date.today.month.to_s
+    month = '0' + month if month < "10"
+    day = Date.today.day.to_s
+    appointment_date = year + '-' + month + '-' + day
+
     return @homepage_url if defined?(@homepage_url)
+
     if session[:user_service_provider] == 1
-      @homepage_url = '/doctor/appointments?sp_id=1'
+      @homepage_url = '/doctor/appointments?sp_id=1' + '&appointment_date=' + appointment_date
+    elsif session[:user_service_provider] == 4
+      @homepage_url = '/doctor/appointments?sp_id=4' + '&appointment_date=' + appointment_date
+    elsif session[:user_service_provider] == 7
+      @homepage_url = '/doctor/appointments?sp_id=7' + '&appointment_date=' + appointment_date
+
+    elsif session[:user_service_provider] == 5
+      @homepage_url = '/medical_appointments?sp_id=5' + '&appointment_date=' + appointment_date
+
     elsif session[:user_service_provider] == 2
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=2'
     elsif session[:user_service_provider] == 3
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=3'
-    elsif session[:user_service_provider] == 4
-      @homepage_url = '/doctor/appointments?sp_id=4'
-    elsif session[:user_service_provider] == 5
-      @homepage_url = '/medical_appointments?sp_id=5'
-    elsif session[:user_service_provider] == 6
-      @homepage_url = '/boy_scouts_troop_leaders?sp_id=6'
-    elsif session[:user_service_provider] == 7
-      @homepage_url = '/doctor/appointments?sp_id=7'
     elsif session[:user_service_provider] == 8
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=8'
     elsif session[:user_service_provider] == 9
@@ -114,6 +128,10 @@ class ApplicationController < ActionController::Base
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=11'
     elsif session[:user_service_provider] == 12
       @homepage_url = '/girl_scouts_troop_leaders?sp_id=12'
+
+    elsif session[:user_service_provider] == 6
+      @homepage_url = '/boy_scouts_troop_leaders?sp_id=6'
+
     elsif session[:user_service_provider] == 0
       @homepage_url = '/consumer'
     else
@@ -154,20 +172,20 @@ class ApplicationController < ActionController::Base
 
     smpt_options = {
       '1' => {
-        :address   => "aa",
-        :port      => "aaa",
-        :domain    => "aaaa",
+        :address => "aa",
+        :port => "aaa",
+        :domain => "aaaa",
         :authentication => :plain,
         :user_name => "aaaa",
-        :password  => "aaaa"
+        :password => "aaaa"
       },
       '4' => {
-        :address   => "smtp.gmail.com",
-        :port      => 587,
-        :domain    => "gmail.com",
+        :address => "smtp.gmail.com",
+        :port => 587,
+        :domain => "gmail.com",
         :authentication => :plain,
         :user_name => "dr.karen.naples.dds.pa.ifor.ms@gmail.com",
-        :password  => "CqT4mMal"
+        :password => "CqT4mMal"
       }
     }
 

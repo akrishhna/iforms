@@ -2,7 +2,14 @@ class DeviserolesController < ApplicationController
   before_filter :authenticate_user!, :only => ["index"]
 
   def index
+    year =  Date.today.year.to_s
+    month = Date.today.month.to_s
+    month = '0' + month if month < "10"
+    day = Date.today.day.to_s
+    appointment_date = year + '-' + month + '-' + day
+
     @service_provider = current_user.service_providers.where('user_service_providers.status=?', true).first
+
     if @service_provider.nil?
       @profile = Profile.find_by_user_id(current_user.id)
       if @profile.nil?
@@ -16,7 +23,7 @@ class DeviserolesController < ApplicationController
       if @doctor.nil?
         redirect_to "/doctors/new?sp_id=#{@service_provider.id}"
       else
-        redirect_to "/doctor/appointments?sp_id=#{@service_provider.id}"
+        redirect_to "/doctor/appointments?sp_id=#{@service_provider.id}" + "&appointment_date=#{appointment_date}"
       end
 
     elsif @service_provider.id == 2 || @service_provider.id == 3 || @service_provider.id == 8 || @service_provider.id == 9 || @service_provider.id == 10 || @service_provider.id == 1 || @service_provider.id == 12
