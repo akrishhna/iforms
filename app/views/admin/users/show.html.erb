@@ -30,8 +30,8 @@
           <%= user_service.status ? "In Active" : "Active" %>
         <% end %>
       </td>
-      <td><%= user_service.created_at.strftime("%Y-%m-%d") %></td>
-      <td><%= user_service.expiry_date %></td>
+      <td><%= user_service.created_at.strftime("%m-%d-%Y") rescue "" %></td>
+      <td><%= user_service.expiry_date.strftime("%m-%d-%Y")  rescue "" %></td>
       <td>
         <%#= link_to 'Extend',extend_service_admin_users_path(:service_id => user_service.id),:class => 'extend_service btn btn-primary fancybox.ajax' %>
       <%= link_to 'Extend','/admin/users/extend_service?service_id='+user_service.id.to_s,:class => 'extend_service btn btn-primary fancybox.ajax' %>
@@ -52,9 +52,12 @@
       </div>
     </div>
     <div class="control-group">
-      <%= label_tag :new_service_expiry_date, "Expiry Date", :class => 'control-label' %>
+      <%#= label_tag :new_service_expiry_date, "Expiry Date", :class => 'control-label' %>
+      <%= label_tag :displaying_date_new_service_expiry_date, "Expiry Date", :class => 'control-label' %>
       <div class="controls">
-        <%= text_field_tag :new_service_expiry_date,"", :class => "new_service_expiry_date_selector", :placeholder => "YYYY-MM-DD" %>
+        <%#= text_field_tag :new_service_expiry_date,"", :class => "new_service_expiry_date_selector", :placeholder => "MM-DD-YYYY" %>
+        <%= text_field_tag :displaying_date_new_service_expiry_date, '', :class => "new_service_expiry_date_selector admin_display_date", :placeholder => "MM-DD-YYYY" %>
+        <%= hidden_field_tag :new_service_expiry_date %>
       </div>
     </div>
     <div class="actions">
@@ -62,3 +65,12 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  $('.new_service_expiry_date_selector').datepicker({
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'mm-dd-yy',
+    yearRange:'1940:' + new Date().getFullYear()
+  });
+</script>

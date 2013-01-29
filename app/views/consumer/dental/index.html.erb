@@ -23,7 +23,7 @@
       changeMonth: true,
       changeYear: true,
       yearRange:'1940:' + new Date().getFullYear()
-    }).datepicker("option", "dateFormat", "yy-mm-dd");
+    }).datepicker("option", "dateFormat", "mm-dd-yy");
   });
 
   if($('#all_dental_appointments').is(':checked') ==  false) {
@@ -31,7 +31,7 @@
       changeMonth: true,
       changeYear: true,
       yearRange:'1940:' + new Date().getFullYear()
-    }).datepicker('setDate', selected_date);
+    }).datepicker('setDate', selected_date ? change_date_format(selected_date) : '');
     if(selected_date == ''){
       $('#all_dental_appointments').prop('checked', true);//added extra for checkbox checked
     }
@@ -54,13 +54,13 @@
         changeMonth: true,
         changeYear: true,
         yearRange:'1940:' + new Date().getFullYear()
-      }).datepicker("setDate", selected_date);
+      }).datepicker("setDate", selected_date ? change_date_format(selected_date) : '');
     }
     load_dental_appointments();
   });
 
   function load_dental_appointments() {
-    var date = $('#dental_appointment_date').val();
+    var date = $('#dental_appointment_date').val() ? set_default_date_format($('#dental_appointment_date').val()) : '';
     var show_all = $('#all_dental_appointments').is(':checked');
     $('#dental').load('/consumer/dental?appointment_date=' + date + '&show_all=' + show_all);
   }

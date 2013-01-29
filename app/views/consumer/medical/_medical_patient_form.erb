@@ -39,7 +39,7 @@
       <%= link_to "Review Of Systems", '#review_of_systems', "data-toggle" => "tab" %>
     </li>
     <li>
-      <%= link_to "Health Maintenance", '#health_maintenance', "data-toggle" => "tab" %>
+      <%= link_to "Health Maintenance", '#health_maintenance', "data-toggle" => "tab", :id => 'health_maintenance_tab' %>
     </li>
     <li>
       <%= link_to "Submit Form To Doctor", '#submit_form_to_doctor', "data-toggle" => "tab" %>
@@ -1750,27 +1750,39 @@
     </div>
     <div class="only_for_female">
       <div class="control-group">
-        <%= f.label :health_maintenance_most_recent_mammogram, ' Most Recent Mammogram', :class => 'control-label' %>
+        <%#= f.label :health_maintenance_most_recent_mammogram, ' Most Recent Mammogram', :class => 'control-label' %>
+        <%= f.label :displaying_date_health_maintenance_most_recent_mammogram, "Most Recent Mammogram", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :health_maintenance_most_recent_mammogram, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_mammogram %>
+          <%#= f.text_field :health_maintenance_most_recent_mammogram, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_mammogram %>
+          <%= text_field_tag :displaying_date_health_maintenance_most_recent_mammogram, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_most_recent_mammogram %>
+          <%= f.hidden_field :health_maintenance_most_recent_mammogram %>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :health_maintenance_most_recent_pap_smear, ' Most Recent Pap Smear ', :class => 'control-label' %>
+        <%#= f.label :health_maintenance_most_recent_pap_smear, ' Most Recent Pap Smear ', :class => 'control-label' %>
+        <%= f.label :displaying_date_health_maintenance_most_recent_pap_smear, "Most Recent Pap Smear ", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :health_maintenance_most_recent_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_pap_smear %>
+          <%#= f.text_field :health_maintenance_most_recent_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_most_recent_pap_smear %>
+          <%= text_field_tag :displaying_date_health_maintenance_most_recent_pap_smear, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_most_recent_pap_smear %>
+          <%= f.hidden_field :health_maintenance_most_recent_pap_smear %>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :health_maintenance_abnormal_pap_smear, ' Abnormal Pap Smear ', :class => 'control-label' %>
+        <%#= f.label :health_maintenance_abnormal_pap_smear, ' Abnormal Pap Smear ', :class => 'control-label' %>
+        <%= f.label :displaying_date_health_maintenance_abnormal_pap_smear, "Abnormal Pap Smear ", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :health_maintenance_abnormal_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_abnormal_pap_smear %>
+          <%#= f.text_field :health_maintenance_abnormal_pap_smear, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_abnormal_pap_smear %>
+          <%= text_field_tag :displaying_date_health_maintenance_abnormal_pap_smear, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_abnormal_pap_smear %>
+          <%= f.hidden_field :health_maintenance_abnormal_pap_smear %>
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :health_maintenance_hysterectomy, ' Hysterectomy ', :class => 'control-label' %>
+        <%#= f.label :health_maintenance_hysterectomy, ' Hysterectomy ', :class => 'control-label' %>
+        <%= f.label :displaying_date_health_maintenance_hysterectomy, "Hysterectomy ", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :health_maintenance_hysterectomy, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_hysterectomy %>
+          <%#= f.text_field :health_maintenance_hysterectomy, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_hysterectomy %>
+          <%= text_field_tag :displaying_date_health_maintenance_hysterectomy, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_hysterectomy %>
+          <%= f.hidden_field :health_maintenance_hysterectomy %>
         </div>
       </div>
       <div class="control-group">
@@ -1782,9 +1794,12 @@
     </div>
     <div class="only_for_male">
       <div class="control-group">
-        <%= f.label :health_maintenance_digital_rectal_exam_and_psa_checked, 'Digital Rectal Exam and PSA Checked', :class => 'control-label' %>
+        <%#= f.label :health_maintenance_digital_rectal_exam_and_psa_checked, 'Digital Rectal Exam and PSA Checked', :class => 'control-label' %>
+        <%= f.label :displaying_date_health_maintenance_digital_rectal_exam_and_psa_checked, "Digital Rectal Exam and PSA Checked ", :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :health_maintenance_digital_rectal_exam_and_psa_checked, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_digital_rectal_exam_and_psa_checked %>
+          <%#= f.text_field :health_maintenance_digital_rectal_exam_and_psa_checked, :class => "medical_Patient_form_date_selector", :placeholder => 'YYYY-MM-DD', "data-value" => f.object.health_maintenance_digital_rectal_exam_and_psa_checked %>
+          <%= text_field_tag :displaying_date_health_maintenance_digital_rectal_exam_and_psa_checked, '', :class => "medical_Patient_form_date_selector display_date", :placeholder => "MM-DD-YYYY", "data-value" => f.object.health_maintenance_digital_rectal_exam_and_psa_checked %>
+          <%= f.hidden_field :health_maintenance_digital_rectal_exam_and_psa_checked %>
         </div>
       </div>
     </div>

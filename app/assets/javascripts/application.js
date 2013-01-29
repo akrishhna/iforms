@@ -46,6 +46,11 @@ $(document).ready(function () {
     $(this).next().val(date);
   });
 
+  $('.admin_display_date').live('change',function () {
+    var date = set_default_date_format($(this).val());
+    $(this).next().val(date);
+  });
+
   /* End of changing date format */
 
 

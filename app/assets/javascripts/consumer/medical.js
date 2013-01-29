@@ -8,7 +8,7 @@ $(function () {
     $('input[name=_method]').val('post');
     var field = $(this).attr('name');
     var field_val = $(this).val();
-    if(field.search(/displaying_date/) ==  0){
+    if (field.search(/displaying_date/) == 0) {
       field = $(this).next().attr('name');
       field_val = $(this).next().val();
     }
@@ -54,6 +54,11 @@ $(function () {
   var health_maintenance_pneumovax = $('#displaying_date_health_maintenance_pneumovax').attr('data-value');
   var health_maintenance_flu_vaccine = $('#displaying_date_health_maintenance_flu_vaccine').attr('data-value');
   var health_maintenance_colonoscopy = $('#displaying_date_health_maintenance_colonoscopy').attr('data-value');
+  var health_maintenance_most_recent_mammogram = $('#displaying_date_health_maintenance_most_recent_mammogram').attr('data-value');
+  var health_maintenance_most_recent_pap_smear = $('#displaying_date_health_maintenance_most_recent_pap_smear').attr('data-value');
+  var health_maintenance_abnormal_pap_smear = $('#displaying_date_health_maintenance_abnormal_pap_smear').attr('data-value');
+  var health_maintenance_hysterectomy = $('#displaying_date_health_maintenance_hysterectomy').attr('data-value');
+  var health_maintenance_digital_rectal_exam_and_psa_checked = $('#displaying_date_health_maintenance_digital_rectal_exam_and_psa_checked').attr('data-value');
 
   $('#displaying_date_birth_date').datepicker("setDate", birth_date ? change_date_format(birth_date) : '');
   $('#displaying_date_primary_insurance_birth_date').datepicker("setDate", primary_insurance_birth_date ? change_date_format(primary_insurance_birth_date) : '');
@@ -76,12 +81,17 @@ $(function () {
   $('#displaying_date_medical_history_previous_illnesses_10').datepicker("setDate", medical_history_previous_illnesses_10 ? change_date_format(medical_history_previous_illnesses_10) : '');
   $('#displaying_date_health_maintenance_bone_density_test').datepicker("setDate", health_maintenance_bone_density_test ? change_date_format(health_maintenance_bone_density_test) : '');
   $('#displaying_date_health_maintenance_skin_cancer_screening').datepicker("setDate", health_maintenance_skin_cancer_screening ? change_date_format(health_maintenance_skin_cancer_screening) : '');
-  $('#displaying_date_health_maintenance_test_date').datepicker("setDate", health_maintenance_colonoscopy ? change_date_format(health_maintenance_colonoscopy) : '');
+  $('#displaying_date_health_maintenance_test_date').datepicker("setDate", health_maintenance_test_date ? change_date_format(health_maintenance_test_date) : '');
   $('#displaying_date_health_maintenance_most_recent_tetanus_vaccine_booster').datepicker("setDate", health_maintenance_most_recent_tetanus_vaccine_booster ? change_date_format(health_maintenance_most_recent_tetanus_vaccine_booster) : '');
   $('#displaying_date_health_maintenance_shingles_vaccine').datepicker("setDate", health_maintenance_shingles_vaccine ? change_date_format(health_maintenance_shingles_vaccine) : '');
   $('#displaying_date_health_maintenance_pneumovax').datepicker("setDate", health_maintenance_pneumovax ? change_date_format(health_maintenance_pneumovax) : '');
   $('#displaying_date_health_maintenance_flu_vaccine').datepicker("setDate", health_maintenance_flu_vaccine ? change_date_format(health_maintenance_flu_vaccine) : '');
-  $('#displaying_date_health_maintenance_colonoscopy').datepicker("setDate", health_maintenance_test_date ? change_date_format(health_maintenance_test_date) : '');
+  $('#displaying_date_health_maintenance_colonoscopy').datepicker("setDate", health_maintenance_colonoscopy ? change_date_format(health_maintenance_colonoscopy) : '');
+  $('#displaying_date_health_maintenance_most_recent_mammogram').datepicker("setDate", health_maintenance_most_recent_mammogram ? change_date_format(health_maintenance_most_recent_mammogram) : '');
+  $('#displaying_date_health_maintenance_most_recent_pap_smear').datepicker("setDate", health_maintenance_most_recent_pap_smear ? change_date_format(health_maintenance_most_recent_pap_smear) : '');
+  $('#displaying_date_health_maintenance_abnormal_pap_smear').datepicker("setDate", health_maintenance_abnormal_pap_smear ? change_date_format(health_maintenance_abnormal_pap_smear) : '');
+  $('#displaying_date_health_maintenance_hysterectomy').datepicker("setDate", health_maintenance_hysterectomy ? change_date_format(health_maintenance_hysterectomy) : '');
+  $('#displaying_date_health_maintenance_digital_rectal_exam_and_psa_checked').datepicker("setDate", health_maintenance_digital_rectal_exam_and_psa_checked ? change_date_format(health_maintenance_digital_rectal_exam_and_psa_checked) : '');
 
   /* End of changing display date format*/
 
@@ -160,6 +170,19 @@ $(function () {
   $('.only_for_female').hide();
 
   $('.medical_patient_form_gender').live('change', function () {
+    if ($('.medical_patient_form_gender:checked').val() == "Male") {
+      $('.review_of_sym_sexual_difficulty').show();
+      $('.only_for_male').show();
+      $('.only_for_female').hide();
+    } else {
+      $('#medical_patient_form_review_of_sym_sexual_difficulty_achieving_and_maintaining').attr('checked', false);
+      $('.review_of_sym_sexual_difficulty').hide();
+      $('.only_for_male').hide();
+      $('.only_for_female').show();
+    }
+  });
+
+  $('#health_maintenance_tab').live('click', function () {
     if ($('.medical_patient_form_gender:checked').val() == "Male") {
       $('.review_of_sym_sexual_difficulty').show();
       $('.only_for_male').show();
