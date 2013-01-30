@@ -1,5 +1,18 @@
 $(function () {
 
+  $(window).load(function(){
+    if(params['appointment_date'] == undefined){
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = (date.getMonth() + 1);
+      var today_date = date.getDate();
+      if (month <= 9){
+        month = '0' + month
+      }
+      window.location = '/medical_appointments?appointment_date='+ year + '-' + month + '-' + today_date
+    }
+  });
+
   if ($('div[data-page-controller=medical_appointments][data-page-action=edit]').size()) {
     var date_time = appointment["appointment_date_time"];
     var date = date_time.split('T')[0];
