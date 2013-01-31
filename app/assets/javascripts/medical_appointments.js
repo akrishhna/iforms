@@ -3,9 +3,20 @@ var appointment_date = '';
 var month = parseInt(new Date().getMonth()) + 1;
 var date_value = (month < 10 ? '0' + month : month) + '-' + new Date().getDate() + '-' + new Date().getFullYear();
 var time_hours = (new Date().getHours() > 11) ? (new Date().getHours() - 12) : new Date().getHours();
-var time_min = new Date().getMinutes();
+var minutes = new Date().getMinutes();
+var time_min = '';// new Date().getMinutes();
 var am_pm = (new Date().getHours() > 11) ? 'pm' : 'am';
 var today_date = '';
+
+if (minutes % 5 == 0) {
+  time_min = minutes
+} else {
+  minutes = parseInt(minutes / 5);
+  time_min = (minutes * 5) + 5;
+  if (minutes != 11 && am_pm == 'pm') {
+    time_min = minutes;//new Date().getMinutes();
+  }
+}
 
 if (params['appointment_date'] != undefined) {
   appointment_date = change_date_format(params['appointment_date']);
@@ -41,7 +52,7 @@ $(function () {
 
   /* changing Date to original format before create appointment */
 
-  $('.appointment_form_submit').live('click',function(){
+  $('.appointment_form_submit').live('click', function () {
     var selected_date = $('#display_appointment_date_time').val().split(' ');
     var date = set_default_date_format(selected_date[0]);
     var time = selected_date[1] + ' ' + selected_date[2];

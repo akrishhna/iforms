@@ -3,9 +3,21 @@
 var month = parseInt(new Date().getMonth()) + 1;
 var date_value = (month < 10 ? '0' + month : month) + '-' + new Date().getDate() + '-' + new Date().getFullYear();
 var time_hours = (new Date().getHours() > 11) ? (new Date().getHours() - 12) : new Date().getHours();
-var time_min = new Date().getMinutes();
+var minutes = new Date().getMinutes();
+var time_min = '';
 var am_pm = (new Date().getHours() > 11) ? 'pm' : 'am';
 var today_date = '';
+
+if (minutes % 5 == 0) {
+  time_min = minutes
+}
+else {
+  minutes = parseInt(minutes / 5);
+  time_min = (minutes * 5) + 5;
+  if (minutes != 11 && am_pm == 'pm') {
+    time_min = minutes;//new Date().getMinutes();
+  }
+}
 
 if (new Date().getHours() == '12') {
   time_hours = '12'
