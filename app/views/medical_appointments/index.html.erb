@@ -43,13 +43,13 @@
           <td><%= appointment.email %></td>
           <% if appointment.formname.blank? %>
             <td></td>
-            <td><%= appointment.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+            <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
             <td><%= @timesent %></td>
             <td></td>
             <td><%= link_to "Resend", edit_medical_appointment_path(appointment) %></td>
           <% else %>
             <td><%= appointment.formname %></td>
-            <td><%= appointment.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+            <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
             <td><%= @timesent %></td>
             <% if appointment.status == "Submitted" || appointment.status == "Updated" %>
               <td><%= appointment.timereceived.to_datetime.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>

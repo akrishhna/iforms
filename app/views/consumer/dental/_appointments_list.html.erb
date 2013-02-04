@@ -34,14 +34,14 @@
         <td><%= i.doctorname %></td>
         <% if i.formname.blank? %>
           <td></td>
-          <td><%= i.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= i.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
           <td><%= @timesent %></td>
           <td></td>
           <td></td>
           <td></td>
         <% else %>
           <td><%= i.formname == 'Rising Stars Pediatric Dentistry' ? 'New Patient' : i.formname  %></td>
-          <td><%= i.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= i.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
           <td><%= @timesent %></td>
           <% @appformjoins = Appformjoin.where("appointment_id = ? and patient_user_id = ?", i, current_user.id).limit(1) %>
           <% if @appformjoins == [] %>

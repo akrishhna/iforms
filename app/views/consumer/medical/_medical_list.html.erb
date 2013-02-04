@@ -42,7 +42,7 @@
 
           <td></td>
 
-          <td><%= appointment.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
 
           <td><%= @timesent %></td>
 
@@ -56,7 +56,7 @@
 
           <td><%= appointment.formname %></td>
 
-          <td><%= appointment.appointment_date_time.in_time_zone(set_time_zone).strftime("%m-%d-%Y %I:%M %p") %></td>
+          <td><%= appointment.appointment_date_time.strftime("%m-%d-%Y %I:%M %p") %></td>
 
           <td><%= @timesent %></td>
 
