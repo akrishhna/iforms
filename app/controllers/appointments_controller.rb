@@ -72,8 +72,9 @@ class AppointmentsController < ApplicationController
           #format.html { redirect_to(doctors_path, :id => nil, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}") }
           year =  Date.today.year.to_s
           month = Date.today.month.to_s
-          month = '0' + month if month < "10"
+          month = '0' + month if month.to_i < 10
           day = Date.today.day.to_s
+          day = '0' + day if day.to_i < 10
           appointment_date = year + '-' + month + '-' + day
           format.html { redirect_to("/doctor/appointments?appointment_date=#{appointment_date}", :id => nil, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}") }
           format.xml { render :xml => @appointment, :status => :created, :location => @appointment }
@@ -148,8 +149,9 @@ class AppointmentsController < ApplicationController
        # format.html { redirect_to(doctors_path, :notice => 'Appointment details resent successfully.') }
         year =  Date.today.year.to_s
         month = Date.today.month.to_s
-        month = '0' + month if month < "10"
+        month = '0' + month if month.to_i < 10
         day = Date.today.day.to_s
+        day = '0' + day if day.to_i < 10
         appointment_date = year + '-' + month + '-' + day
         format.html { redirect_to("/doctor/appointments?appointment_date=#{appointment_date}", :id => nil, :notice => "Appointment details resent successfully to #{@appointment.email}") }
 

@@ -14,8 +14,8 @@ if (minutes % 5 == 0) {
 else {
   minutes = parseInt(minutes / 5);
   time_min = (minutes * 5) + 5;
-  if (minutes != 11 && am_pm == 'pm') {
-    time_min = minutes;//new Date().getMinutes();
+  if (minutes == 11 && am_pm == 'pm') {
+    time_min = minutes;
   }
 }
 

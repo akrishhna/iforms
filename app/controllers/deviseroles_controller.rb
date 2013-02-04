@@ -4,8 +4,9 @@ class DeviserolesController < ApplicationController
   def index
     year =  Date.today.year.to_s
     month = Date.today.month.to_s
-    month = '0' + month if month < "10"
+    month = '0' + month if month.to_i < 10
     day = Date.today.day.to_s
+    day = '0' + day if day.to_i < 10
     appointment_date = year + '-' + month + '-' + day
 
     @service_provider = current_user.service_providers.where('user_service_providers.status=?', true).first

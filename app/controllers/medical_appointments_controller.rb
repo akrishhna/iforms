@@ -44,8 +44,9 @@ class MedicalAppointmentsController < ApplicationController
      # redirect_to :medical_appointments, :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
       year =  Date.today.year.to_s
       month = Date.today.month.to_s
-      month = '0' + month if month < "10"
+      month = '0' + month if month.to_i < 10
       day = Date.today.day.to_s
+      day = '0' + day if day.to_i < 10
       appointment_date = year + '-' + month + '-' + day
       redirect_to "/medical_appointments?appointment_date=#{appointment_date}", :notice => "Appointment confirmation email sent successfully to #{@appointment.email}"
     else

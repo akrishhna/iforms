@@ -10,7 +10,7 @@ $(function () {
     return false;
   });
 
-  $('.boy_scout_name, .boy_scout_parent_name, .boy_scout_email').live('blur', function () {
+  $('.boy_scout_name, .boy_scout_parent_name, .boy_scout_email').live('change', function () {
     var row_index = $(this).parents('tr').attr('data_row_number');
     var id = $('#id_' + row_index).val();
     var boy_scout_first_name = $('#first_name_' + row_index).val();

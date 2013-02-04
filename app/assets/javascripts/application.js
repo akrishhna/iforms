@@ -16,7 +16,7 @@ $(document).ready(function () {
   $("#dd_dd").formToWizard({ submitButton:'step_submit' });
 
   //auto saving the iform data changes
-  $('form#dd_dd input, form#dd_dd select').live('change',function () {
+  $('form#dd_dd input, form#dd_dd select').live('change', function () {
     var iform_id = $('#iform_id').val();
     if (iform_id == '' || iform_id == undefined) {
       return false;
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     var field = $(this).attr('name');
     var field_val = $(this).val();
-    if(field.search(/displaying_date/) ==  0){
+    if (field.search(/displaying_date/) == 0) {
       field = $(this).next().attr('name');
       field_val = $(this).next().val();
     }
@@ -46,7 +46,7 @@ $(document).ready(function () {
     $(this).next().val(date);
   });
 
-  $('.admin_display_date').live('change',function () {
+  $('.admin_display_date').live('change', function () {
     var date = set_default_date_format($(this).val());
     $(this).next().val(date);
   });
@@ -58,12 +58,17 @@ $(document).ready(function () {
   $('select#user_service_provider_list').change(function () {
 
     var date = new Date();
-      var year = date.getFullYear();
-      var month = (date.getMonth() + 1);
-      var today_date = date.getDate();
-      if (month <= 9) {
-        month = '0' + month
-      }
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1);
+    var today_date = date.getDate();
+
+    if (month <= 9) {
+      month = '0' + month
+    }
+    if (today_date <= 9) {
+      today_date = '0' + today_date
+    }
+
     var appointment_date = year + '-' + month + '-' + today_date;
 
     if ($(this).val() == 1) {
