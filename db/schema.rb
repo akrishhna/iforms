@@ -1066,14 +1066,6 @@ ActiveRecord::Schema.define(:version => 20121126063800) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "role"
-    t.string   "description"
-    t.boolean  "disabled",    :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-  end
-
   create_table "service_providers", :force => true do |t|
     t.string   "name"
     t.string   "title"
@@ -1088,23 +1080,6 @@ ActiveRecord::Schema.define(:version => 20121126063800) do
     t.string   "useremail_afterupdate",  :null => false
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
-  end
-
-  create_table "static_data", :force => true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.string   "data_type"
-    t.integer  "data_order"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "user_roles", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.boolean  "deleted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "user_service_providers", :force => true do |t|
@@ -1132,10 +1107,10 @@ ActiveRecord::Schema.define(:version => 20121126063800) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                                   :null => false
     t.datetime "updated_at",                                                   :null => false
-    t.string   "password_salt"
     t.string   "role",                                  :default => "patient", :null => false
-    t.string   "username"
     t.string   "edit_confirmed"
+    t.string   "password_salt"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
